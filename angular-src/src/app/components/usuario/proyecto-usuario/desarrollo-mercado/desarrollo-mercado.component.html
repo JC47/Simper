@@ -1,0 +1,316 @@
+
+
+
+<div class="row">
+  <div class="col-4 offset-1">
+    <h3 class="col-12 text-center">Zonas a Desarrollar</h3>
+    <hr>
+    <div class="col-12" style="overflow-y:scroll;height:550px">
+      <div class="card" *ngFor="let zona of productosZonaSinDesarrollar">
+        <div class="card-block">
+          <div class="row">
+            <img  src="assets/img/zone.png" style="height:40px;margin-left:20px;">
+            <div class="col-6">
+              <h4 class="card-title">{{zona.nombreZona}}</h4>
+            </div>
+
+          </div>
+          <div class="card-footer" style="margin-top:20px;">
+            <div class="col-12" *ngFor="let producto of zona.productosSinDes"
+            style="height:110px;" class="card"
+            (click)="selectProductoAdd(producto,zona.idZona)"
+            [ngClass]="{'resaltar':selecciona(producto,zona.idZona) }">
+            <div class="row" >
+              <img src="assets/img/box.png"
+              style="height:60px;margin-left:30px;margin-top:20px" >
+              <div class="col-9" style="margin-top:14px">
+                <h5>{{getNameById(producto)}}</h5>
+                <h6>Costo de Desarrollo: <br><b>{{ getCosto(zona.idZona,producto) | currency:'USD':true }}</b></h6>
+                <h6>Tiempo de Desarrollo: {{getTiempo(zona.idZona,producto)}}</h6>
+              </div>
+            </div>
+            </div>
+
+          </div>
+        </div>
+    </div>
+
+
+
+  </div>
+  </div>
+
+
+
+<div class="col-2">
+  <button type="button" class="offset-1 col-10 btn btn-primary "
+  style="margin-top:130px"
+  (click)="openConf=true"><i class="material-icons">keyboard_arrow_right</i></button>
+
+
+</div>
+
+<div class="col-4">
+  <div class="row">
+    <h3 class="col-12 text-center">Zonas Desarrolladas</h3>
+    <hr>
+    <hr>
+    <div class="col-12" style="height:250px; overflow-y:scroll;overflow-x:hidden">
+      <!-- <div class="card" *ngFor="let zona of productosZonaDesarrollados">
+        <div class="card-block">
+          <div class="row">
+            <img  src="assets/img/zone.png" style="height:40px;margin-left:10px;">
+            <div class="col-6">
+              <h4 class="card-title">{{zona.nombreZona}}</h4>
+            </div>
+
+          </div>
+          <div class="card-footer" style="margin-top:20px;">
+            <div class="col-12" *ngFor="let producto of zona.productosDes" style="height:50px">
+            <div class="row">
+              <img src="assets/img/box.png" style="height:35px;margin-left:10px;margin-top:6px">
+              <div class="col-6" style="margin-top:14px">
+                <h5>{{getNameById(producto)}}</h5>
+              </div>
+            </div>
+            </div>
+
+          </div>
+        </div>
+    </div> -->
+    <div class="card" *ngFor="let zona of productosZonaDesarrollados">
+      <div class="card-block">
+        <div class="row">
+          <img  src="assets/img/zone.png" style="height:40px;margin-left:20px;">
+          <div class="col-6">
+            <h4 class="card-title">{{zona.nombreZona}}</h4>
+          </div>
+        </div>
+        <div class="card-footer" style="margin-top:20px;">
+          <div class="col-12" *ngFor="let producto of zona.productosDes"
+          style="height:110px;" class="card"
+          (click)="selectProductoAdd(producto,zona.idZona)">
+          <div class="row" >
+            <img src="assets/img/box.png"
+            style="height:60px;margin-left:30px;margin-top:20px" >
+            <div class="col-9" style="margin-top:14px">
+              <h5>{{getNameById(producto)}}</h5>
+              <h6>Costo de Desarrollo: <br><b>{{ getCosto(zona.idZona,producto) | currency:'USD':true }}</b></h6>
+              <h6>Tiempo de Desarrollo: {{getTiempo(zona.idZona,producto)}}</h6>
+            </div>
+          </div>
+          </div>
+
+        </div>
+      </div>
+  </div>
+    </div>
+
+
+
+  </div>
+
+  <div class="row" style="margin-top:50px;" >
+    <h3 class="col-12 text-center">Zonas en Desarrollo</h3>
+    <hr>
+    <br>
+    <div class="col-12" style="height:250px; overflow-y:scroll;overflow-x:hidden">
+      <!-- <div class="card" *ngFor="let zona of productosZonaEnDesarrollo">
+        <div class="card-block">
+          <div class="row">
+            <img  src="assets/img/zone.png" style="height:40px;margin-left:10px;">
+            <div class="col-6">
+              <h4 class="card-title">{{zona.nombreZona}}</h4>
+            </div>
+
+          </div>
+          <div class="card-footer" style="margin-top:20px;">
+            <div class="col-12" *ngFor="let producto of zona.productosEnDes" style="height:50px">
+            <div class="row">
+              <img src="assets/img/box.png" style="height:35px;margin-left:10px;margin-top:6px" alt="">
+              <div class="col-6" style="margin-top:14px">
+                <h5>{{getNameById(producto)}}</h5>
+              </div>
+              <button type="button" (click)="confPago(zona.idZona,producto)" class="btn btn-primary">Pagar</button>
+            </div>
+            </div>
+
+          </div>
+        </div>
+    </div> -->
+
+    <div class="card" *ngFor="let zona of productosZonaEnDesarrollo">
+      <div class="card-block">
+        <div class="row">
+          <img  src="assets/img/zone.png" style="height:40px;margin-left:20px;">
+          <div class="col-6">
+            <h4 class="card-title">{{zona.nombreZona}}</h4>
+          </div>
+        </div>
+        <div class="card-footer" style="margin-top:20px;">
+          <div class="col-12" *ngFor="let producto of zona.productosEnDes"
+          style="height:110px;" class="card">
+          <div class="row align-items-center" >
+            <img src="assets/img/box.png"
+            style="height:60px;margin-left:30px" >
+            <div class="col-6" style="margin-top:14px">
+              <h5>{{getNameById(producto.idProducto)}}</h5>
+              <h6>Pago de Desarrollo: <br><b>{{ getCosto(zona.idZona,producto.idProducto) | currency:'USD':true }}</b></h6>
+              <h6>Periodos de Desarrollo: {{getTiempo(zona.idZona,producto.idProducto)}}</h6>
+            </div>
+
+
+              <button type="button" (click)="confPagoF(zona.idZona,producto.idProducto,zona.nombreZona)"
+              class="btn btn-primary col-2" style="height:85px;"
+              [disabled]="validaPago(producto)">Pagar</button>
+
+          </div>
+          </div>
+
+        </div>
+      </div>
+  </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+</div>
+
+
+<div bsModal #modalConfDes="bs-modal" class="modal fade"
+tabindex="-1" role="dialog"
+style="z-index:100000">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class=" col-12 text-center">Confirmación</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row text-center">
+          ¿Estas seguro que deseas desarrollar el producto X en la zona X?
+          <br>
+        </div>
+        <br>
+        <div class="row">
+          <button type="button" class="btn btn-danger offset-2 col-3"  (click)="desarrollaZona(productoSelectedAdd)">Si</button>
+          <button type="button" class="btn btn-primary offset-2 col-3" (click)="modalConfDes.hide()">No</button>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div bsModal #modalConfPago="bs-modal" class="modal fade"
+tabindex="-1" role="dialog"
+style="z-index:100000">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class=" col-12 text-center">Confirmación</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row text-center">
+          ¿Estas seguro que deseas desarrollar el producto X en la zona X?
+          <br>
+        </div>
+        <br>
+        <div class="row">
+          <button type="button" class="btn btn-danger offset-2 col-3"  (click)="pagarDesarrollo()">Si</button>
+          <button type="button" class="btn btn-primary offset-2 col-3" (click)="modalConfPago.hide()">No</button>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<ngl-modal header="Confirmación"  [(open)]="openConf" size="x-small" directional="false">
+
+  <div body>
+    <div class="col-12 text-center container">
+      <h5 style="margin-bottom:30px">¿Estas seguro que deseas empezar a desarrollar "{{getNameById(productoSelectedAdd.idProducto)}}" en la zona "{{productoSelectedAdd.nombreZona}}"?</h5>
+      <div class="row">
+        <div class="col-4 offset-2">
+          <img  src="assets/img/zone.png" class="img-fluid">
+        </div>
+        <div class="col-5 ">
+          <p>
+          <h5 class="text-left"><b>Costo Total: </b>{{ getCosto(productoSelectedAdd.idZona,productoSelectedAdd.idProducto)  * getTiempo(productoSelectedAdd.idZona,productoSelectedAdd.idProducto) | currency:'USD':true }}</h5>
+          <p>
+          <h5 class="text-left"><b>Costo por Periodo: </b>{{getCosto(productoSelectedAdd.idZona,productoSelectedAdd.idProducto)}}</h5>
+          <p>
+          <h5 class="text-left"><b>Tiempo de Desarrollo: </b>{{getTiempo(productoSelectedAdd.idZona,productoSelectedAdd.idProducto)}}</h5>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+
+  <ng-template ngl-modal-footer>
+  <button class="btn btn-danger" (click)="openConf=false">Cancel</button>
+  <button class="btn btn-primary" (click)="desarrollaZona(productoSelectedAdd)">Comenzar Desarrollo</button>
+</ng-template>
+  </ngl-modal>
+
+
+
+  <ngl-modal header="Confirmación"  [(open)]="openPago" size="x-small" directional="false">
+
+    <div body>
+      <div class="col-12 text-center container">
+        <h5 style="margin-bottom:30px">¿Estas seguro que deseas pagar el desarrollo de "{{getNameById(productoSelectedPago.idProducto)}}" en la zona "{{productoSelectedPago.nombreZona}}"?</h5>
+        <div class="row">
+          <div class="col-4 offset-2">
+            <img  src="assets/img/zone.png" class="img-fluid">
+          </div>
+          <div class="col-5 ">
+            <p>
+            <h5 class="text-left"><b>Costo Total: </b>{{ getCosto(productoSelectedPago.idZona,productoSelectedPago.idProducto)  * getTiempo(productoSelectedPago.idZona,productoSelectedPago.idProducto) | currency:'USD':true }}</h5>
+            <p>
+            <h5 class="text-left"><b>Costo por Periodo: </b>{{getCosto(productoSelectedPago.idZona,productoSelectedPago.idProducto)}}</h5>
+            <p>
+            <h5 class="text-left"><b>Tiempo de Desarrollo: </b>{{getTiempo(productoSelectedPago.idZona,productoSelectedPago.idProducto)}}</h5>
+          </div>
+        </div>
+        <br>
+      </div>
+    </div>
+
+    <ng-template ngl-modal-footer>
+    <button class="btn btn-danger" (click)="openConf=false">Cancel</button>
+    <button class="btn btn-primary" (click)="pagarDesarrollo()">Pagar Desarrollo</button>
+  </ng-template>
+    </ngl-modal>
+
+
+
+  <ngl-modal  [(open)]="openLoad" size="small" directional="false">
+    <div body>
+          <h2 class="col-12 text-center">Iniciando Desarrollo del Mercado</h2>
+      <h6 class="col-12 text-center">Realizando Operación</h6>
+      <div style="position:relative; height:6.25rem; z-index:0;">
+        <ngl-spinner size="large" type="brand"></ngl-spinner>
+      </div>
+
+    </div>
+    </ngl-modal>
+
+    <ngl-modal  [(open)]="openLoadPago" size="small" directional="false">
+      <div body>
+            <h2 class="col-12 text-center">Pagando Desarrollo</h2>
+        <h6 class="col-12 text-center">Realizando Operación</h6>
+        <div style="position:relative; height:6.25rem; z-index:0;">
+          <ngl-spinner size="large" type="brand"></ngl-spinner>
+        </div>
+
+      </div>
+      </ngl-modal>

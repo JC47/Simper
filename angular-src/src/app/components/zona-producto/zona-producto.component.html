@@ -1,0 +1,186 @@
+<div class=" col-12" style="margin-left:60px">
+  <h1  class="text-center" ngModel="top">Demanda de Productos por Zona</h1>
+  <hr>
+  <div class="row" *ngFor="let zona of zonas; let i=index">
+
+    <div class="mb-3 card card-outline-primary col-11 text-center " >
+
+        <blockquote class="card-blockquote" style="margin-top:30px">
+          <h1>{{zona.nombreZona}}</h1>
+        </blockquote>
+
+        <div class="row" style="margin-bottom:30px;margin-top:30px">
+
+            <div class="col-6" >
+              <nvd3 [options]="options" [data]="graficas[i]"></nvd3>
+            </div>
+
+            <div class="col-6" >
+              <div style="height:480px;overflow-y:scroll;overflow-x:hidden;margin-left:30px;padding-left:30px;">
+                <div class="row" *ngFor="let producto of zona.productos" style="margin-bottom:30px"
+                (click)="selectProductoScroll(top)">
+
+                  <table class="table table-responsive table-sm " >
+                    <thead>
+
+
+                      <tr>
+                        <th>Periodo</th>
+                        <th *ngFor="let periodo of producto.periodos" class="text-center table-info">{{periodo.numPeriodo}}</th>
+                      </tr>
+
+                    </thead>
+
+
+
+                    <tr>
+                      <th>{{getNameById(producto.idProducto)}}</th>
+                      <th *ngFor="let periodo of producto.periodos" class="text-center">{{periodo.cantidad}}</th>
+                    </tr>
+
+                    <tr>
+                      <th></th>
+                      <th *ngFor="let periodo of producto.periodos">
+                        <button type="button" class="btn btn-primary text-center"
+                        (click)="openModalPeriodoEdit(zona.idZona,producto.idProducto,periodo.numPeriodo,periodo.cantidad)">
+                          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </button></th>
+
+                    </tr>
+
+
+                  </table>
+                  <button type="button" class="btn btn-danger offset-1 col-4" (click)="borraPeriodo(zona.idZona,producto.idProducto,numPeriodo)" >Eliminar</button>
+                  <button type="button" class="btn btn-success offset-2 col-4" (click)="openModalPeriodo(zona.idZona,producto.idProducto)" >Agregar</button>
+                </div>
+
+              </div>
+
+            </div>
+
+
+        </div>
+  </div>
+
+</div>
+
+
+
+<div bsModal #modalPeriodoNew="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class=" "></h4>
+      </div>
+      <div class="modal-body">
+        <h2 class="text-center">Agrega Periodo</h2>
+        <br>
+        <form [formGroup]="formPeriodoNew" (ngSubmit)="agregaPeriodo(formPeriodoNew.value)" class="offset-1"  >
+
+          <input class="form-control"
+                 type="text"
+                 formControlName="idProducto" hidden>
+
+                 <input class="form-control"
+                        type="text"
+                        formControlName="idZona"  hidden>
+
+
+
+                        <div class="form-group row text-center" >
+                          <label class="col-5 col-form-label">Cantidad Demandanda</label>
+                          <div class="col-6 has-success"
+                          [ngClass]="{'has-danger': !formPeriodoNew.get('cantidad').valid}">
+
+
+                            <input class="form-control"
+                                   type="number"
+                                   formControlName="cantidad" >
+                                   <div class="form-control-feedback" style="font-size:10px;"
+                                   *ngIf="!formPeriodoNew.controls['cantidad'].valid">
+                                     La cantidad es reuqerida
+                                   </div>
+                          </div>
+                        </div>
+
+                        <div class="modal-footer">
+                          <button type="submit" class="btn btn-outline-success"  [disabled]="!formPeriodoNew.valid">
+                            Guardar
+                          </button>
+
+                          <button  type="button" class="btn btn-outline-danger" (click)="modalPeriodoNew.hide()">
+                          Cancelar
+                          </button>
+
+                        </div>
+
+        </form>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div bsModal #modalPeriodoEdit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class=" "></h4>
+      </div>
+      <div class="modal-body">
+        <h2 class="text-center">Agrega Periodo</h2>
+        <br>
+        <form [formGroup]="formPeriodoEdit" (ngSubmit)="editaPeriodo(formPeriodoEdit.value)" class="offset-1"  >
+
+          <input class="form-control"
+                 type="text"
+                 formControlName="idProducto" hidden>
+
+                 <input class="form-control"
+                        type="text"
+                        formControlName="idZona"  hidden>
+
+
+
+                        <div class="form-group row text-center" >
+                          <label class="col-5 col-form-label">Cantidad Demandanda</label>
+                          <div class="col-6 has-success"
+                          [ngClass]="{'has-danger': !formPeriodoEdit.get('cantidad').valid}">
+
+
+                            <input class="form-control"
+                                   type="number"
+                                   formControlName="cantidad" >
+                                   <div class="form-control-feedback" style="font-size:10px;"
+                                   *ngIf="!formPeriodoEdit.controls['cantidad'].valid">
+                                     La cantidad es reuqerida
+                                   </div>
+                          </div>
+                        </div>
+
+                        <div class="modal-footer">
+                          <button type="submit" class="btn btn-outline-success"  [disabled]="!formPeriodoEdit.valid">
+                            Guardar
+                          </button>
+
+                          <button  type="button" class="btn btn-outline-danger" (click)="modalPeriodoEdit.hide()">
+                          Cancelar
+                          </button>
+
+                        </div>
+
+        </form>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

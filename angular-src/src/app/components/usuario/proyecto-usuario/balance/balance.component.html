@@ -1,0 +1,66 @@
+  <div style="z-index:10000;color:white;position:fixed; margin-top:-93px; margin-left:15%">
+    <h4 class=" text-center">Periodo Corriendo: {{periodo}}</h4>
+  </div>
+
+  <button type="button" class="btn btn-success" (click)="openConf=true"
+  style="z-index:10000;color:white;position:fixed; margin-top:-97px; margin-left:30%">Cerrar Periodo</button>
+  <button  type="button" class="btn btn-info" (click)="openBalances()"
+  style="z-index:1000000;color:white;position:fixed; margin-top:-97px; margin-left:40%">Periodos Anteriores</button>
+
+  <div bsModal #modalPeriodos="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+  style="z-index:100000">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">Periodos</h2>
+        </div>
+        <div class="modal-body">
+          <div class="list-group" >
+            <a class="list-group-item list-group-item-action " *ngFor="let p of periodos" (click)="transicion(p.numero)">{{p.nombre}}</a>
+          </div>
+              <div class="modal-footer">
+                <button  type="button" class="btn btn-outline-danger" (click)="modalPeriodos.hide()">
+                Cancelar
+                </button>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ngl-modal header="Confirmación"  [(open)]="openConf" size="x-small" directional="false">
+      <div body>
+        <div class="col-12 text-center container">
+          <h2 style="margin-bottom:30px">¿Esta seguro que deseas cerrar el periodo actual ?</h2>
+        </div>
+      </div>
+
+      <ng-template ngl-modal-footer>
+      <button class="btn btn-danger" (click)="openConf=false">Cancel</button>
+      <button class="btn btn-primary" (click)="pasarPeriodo()">Cerrar Periodo</button>
+      </ng-template>
+    </ngl-modal>
+
+
+    <ngl-modal header="Confirmación"  [(open)]="openBien" size="x-small" directional="false">
+      <div body>
+        <div class="col-12 text-center container">
+          <h2 style="margin-bottom:30px">Ha cerrado periodo satisfactoriamente</h2>
+        </div>
+      </div>
+
+      <ng-template ngl-modal-footer>
+      <button class="btn btn-primary" (click)="modalPasarPeriodo()">Aceptar</button>
+      </ng-template>
+    </ngl-modal>
+
+
+    <ngl-modal  [(open)]="openLoad" size="small" directional="false">
+      <div body>
+        <h1 class="col-12 text-center" >Cerrando Periodo</h1>
+        <h5 class="col-12 text-center">Realzando Operacion</h5>
+        <div style="position:relative; height:6.25rem; z-index:0;">
+          <ngl-spinner size="large" type="brand"></ngl-spinner>
+        </div>
+      </div>
+    </ngl-modal>

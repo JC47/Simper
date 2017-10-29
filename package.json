@@ -1,0 +1,30 @@
+{
+  "name": "mean1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "bcryptjs": "2.4.3",
+    "bluebird": "3.5.0",
+    "body-parser": "1.17.2",
+    "cors": "2.8.4",
+    "d3": "^4.10.2",
+    "express": "4.15.4",
+    "express-myconnection": "1.0.4",
+    "express-validator": "4.1.1",
+    "jsonwebtoken": "7.4.1",
+    "mysql": "2.14.1",
+    "ng2-currency-mask": "^4.3.4",
+    "passport": "0.3.2",
+    "passport-jwt": "2.2.1"
+  },
+  "author": "Javier Calette",
+  "license": "ISC",
+  "devDependencies": {
+    "@angular/cli": "^1.4.3"
+  }
+}

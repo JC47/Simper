@@ -1,0 +1,19 @@
+.resaltar{
+  background-color:#408AB4;
+  border-color: black;
+}
+
+.resaltarLess{
+  background-color:#FF895D;
+  border-color: black;
+}
+
+
+.sma{
+  font-size: 15px
+}
+
+
+.letra-resaltar{
+  color:white;
+}

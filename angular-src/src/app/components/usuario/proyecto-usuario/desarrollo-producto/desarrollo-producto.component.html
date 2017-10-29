@@ -1,0 +1,201 @@
+<div class="row">
+  <div class="col-4 offset-1">
+      <h3 class="text-center">Desarrollo de Productos</h3>
+      <hr>
+
+      <div class="col-12" style="height:550px; overflow-y:scroll;overflow-x:hidden">
+        <div class="card" *ngFor="let producto of productosSinDesarrollar" (click)="selectProducto(producto)"
+        [ngClass]="{'resaltar':producto.idProducto==this.productoSelectedAdd.idProducto}">
+          <div class="card-block"
+          [ngClass]="{'letra-resaltar':producto.idProducto==this.productoSelectedAdd.idProducto}">
+            <div class="row">
+              <img  src="assets/img/box.png" style="height:70px;margin-left:10px;">
+
+              <div class="col-8">
+                <h4 class="card-title">{{producto.nombreProd}}</h4>
+                <h6 class="card-subtitle">Costo por periodo: <b>{{ producto.costoDes | currency:'USD':true }}</b> </h6>
+                <h6 class="card-subtitle" style="margin-top:5px">Tiempo de desarrollo: {{producto.tiempoDes}}</h6>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+
+  <div class="col-2">
+    <button type="button" class="btn btn-primary col-10 offset-1" style="margin-top:300px;"
+    (click)="openConf=true"><i class="material-icons">keyboard_arrow_right</i></button>
+  </div>
+
+  <div class=" col-4">
+    <h3 style="text-center col-12">Productos Desarrollados</h3>
+    <hr>
+    <div class="row" >
+      <div class="col-12" style="height:250px; overflow-y:scroll;overflow-x:hidden">
+
+        <!-- <div class="card" *ngFor="let producto of productosDesarollados">
+          <div class="card-block">
+            <div class="row">
+              <img  src="assets/img/box.png" style="height:40px;margin-left:10px;">
+
+              <div class="col-6" style="margin-top:20px">
+                <h4 class="card-title">{{producto.nombreProd}}</h4>
+              </div>
+
+            </div>
+          </div>
+        </div> -->
+        <div class="card" *ngFor="let producto of productosDesarollados">
+          <div class="card-block">
+            <div class="row">
+              <img  src="assets/img/box.png" style="height:70px;margin-left:10px;">
+
+              <div class="col-8">
+                <h4 class="card-title">{{producto.nombreProd}}</h4>
+                <h6 class="card-subtitle">Costo total: <b>{{ producto.costoDes * producto.tiempoDes | currency:'USD':true }}</b> </h6>
+                <h6 class="card-subtitle" style="margin-top:5px">Tiempo de desarrollo: {{producto.tiempoDes}}</h6>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row" style="margin-top:20px;">
+      <h2 class="text-center col-12">Productos en Desarrollo</h2>
+      <hr>
+      <div class="col-12" style="height:250px; overflow-y:scroll;overflow-x:hidden">
+        <!-- <div class="card" *ngFor="let producto of productosEnDesarrollo">
+          <div class="card-block">
+            <div class="row">
+              <img  src="assets/img/box.png" style="height:40px;margin-left:10px;">
+
+              <div class="col-6">
+                <h4 class="card-title">{{producto.nombreProd}}</h4>
+              </div>
+
+              <button type="button" (click)="confPago(producto.idProducto,producto.costoDes)"
+              class="btn btn-primary" [disabled]="revisaPeriodo(producto)">Pagar</button>
+
+
+            </div>
+          </div>
+        </div> -->
+        <div class="card" *ngFor="let producto of productosEnDesarrollo">
+          <div class="card-block">
+            <div class="row">
+              <img  src="assets/img/box.png" style="height:70px;margin-left:10px;margin-top:10px">
+
+              <div class="col-7">
+                <h4 class="card-title">{{producto.nombreProd}}</h4>
+                <h6 class="card-subtitle">Costo: <b>{{ producto.costoDes | currency:'USD':true }}</b> </h6>
+                <h6 class="card-subtitle" style="margin-top:5px">Tiempo de desarrollo: {{producto.tiempoDes}}</h6>
+                <h6 class="card-subtitle" style="margin-top:5px">Tiempo desarrollado: {{producto.periodosDes}}</h6>
+
+              </div>
+
+              <button type="button" (click)="confPago(producto)"
+              class="btn btn-primary" [disabled]="revisaPeriodo(producto)">Pagar</button>
+
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<ngl-modal header="Confirmación"  [(open)]="openConf" size="x-small" directional="false">
+
+  <div body>
+    <div class="col-12 text-center container">
+      <h5 style="margin-bottom:30px">¿Estas seguro que deseas empezar a desarrollar "{{productoSelectedAdd.nombreProd}}"?</h5>
+      <div class="row">
+        <div class="col-4 offset-2">
+          <img  src="assets/img/box.png" class="img-fluid">
+        </div>
+        <div class="col-5 ">
+          <p>
+          <h5 class="text-left"><b>Costo Total: </b>{{ productoSelectedAdd.costoDes * productoSelectedAdd.tiempoDes | currency:'USD':true }}</h5>
+          <p>
+          <h5 class="text-left"><b>Costo por Periodo: </b>{{productoSelectedAdd.costoDes}}</h5>
+          <p>
+          <h5 class="text-left"><b>Tiempo de Desarrollo: </b>{{productoSelectedAdd.tiempoDes}}</h5>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+
+  <ng-template ngl-modal-footer>
+  <button class="btn btn-danger" (click)="openConf=false">Cancel</button>
+  <button class="btn btn-primary" (click)="desarrollar()">Comenzar Desarrollo</button>
+</ng-template>
+  </ngl-modal>
+
+
+  <ngl-modal header="Confirmación"  [(open)]="openPago" size="x-small" directional="false">
+
+    <div body>
+      <div class="col-12 text-center container">
+        <h5 style="margin-bottom:30px">¿Estas seguro que deseas realizar el pago de "{{productoSelectedPago.nombreProd}}"?</h5>
+        <div class="row">
+          <div class="col-4 offset-2">
+            <img  src="assets/img/box.png" class="img-fluid">
+          </div>
+          <div class="col-5 ">
+            <p>
+            <h5 class="text-left"><b>Costo de Pago: </b>{{ productoSelectedPago.costoDes | currency:'USD':true }}</h5>
+            <p>
+            <h5 class="text-left"><b>Periodo de Desarrollo:<br> </b>{{productoSelectedPago.periodosDes + 1}} de {{productoSelectedPago.tiempoDes}} periodos</h5>
+            <p>
+          </div>
+        </div>
+        <div class="row">
+
+        </div>
+        <br>
+      </div>
+    </div>
+
+    <ng-template ngl-modal-footer>
+    <button class="btn btn-danger" (click)="openPago=false">Cancel</button>
+    <button class="btn btn-primary" (click)="pagarDesarrollo()">Realizar Pago</button>
+  </ng-template>
+    </ngl-modal>
+
+
+
+  <ngl-modal  [(open)]="openLoad" size="small" directional="false">
+    <div body>
+          <h2 class="col-12 text-center">Iniciando Desarrollo de Producto</h2>
+      <h6 class="col-12 text-center">Realizando Operación</h6>
+      <div style="position:relative; height:6.25rem; z-index:0;">
+        <ngl-spinner size="large" type="brand"></ngl-spinner>
+      </div>
+
+    </div>
+    </ngl-modal>
+
+
+
+    <ngl-modal  [(open)]="openLoadPago" size="small" directional="false">
+      <div body>
+            <h2 class="col-12 text-center">Realizando Pago de Desarrollo</h2>
+        <h6 class="col-12 text-center">Realizando Operación</h6>
+        <div style="position:relative; height:6.25rem; z-index:0;">
+          <ngl-spinner size="large" type="brand"></ngl-spinner>
+        </div>
+
+      </div>
+      </ngl-modal>

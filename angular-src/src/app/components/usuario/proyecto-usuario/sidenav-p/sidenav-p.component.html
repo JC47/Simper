@@ -1,0 +1,59 @@
+<div class="nav-side-menu">
+    <div class="brand">Proyecto
+      <button type="button" class="btn btn-danger" style="position:fixed; margin-left:4.1%;height:50px" (click)="verProyectos()"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+    </div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+        <div class="menu-list">
+            <ul id="menu-content" class="menu-content collapse out">
+
+                <li [routerLink]="['home']">
+                  <a >
+                  <i class="fa fa-tachometer fa-lg"></i> Valores iniciales
+                  </a>
+                </li>
+
+                <li [routerLink]="">
+                  <a >
+                  <i class="fa fa-line-chart fa-lg"></i> Demanda potencial
+                  </a>
+                </li>
+
+                <li data-toggle="collapse" data-target="#service" class="collapsed">
+                  <a href="#"><i class="fa fa-database fa-lg"></i> Toma de decisiones<span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="service">
+                  <li [routerLink]="['produccion']" routerLinkActive="active">
+                     <a>
+                      <i class="fa fa-cubes fa-lg"></i>  Producción
+                     </a>
+                  </li>
+                  <li [routerLink]="['compraMaquinaria']" routerLinkActive="active">
+                     <a >
+                     <i class="fa fa-shopping-cart fa-lg"></i> Compra de Maquinaria
+                     </a>
+                   </li>
+                   <li [routerLink]="['desarrolloProducto']" routerLinkActive="active">
+                      <a >
+                      <i class="fa fa-flask fa-lg"></i> Desarrollo de Productos
+                      </a>
+                    </li>
+                   <li [routerLink]="['desarrolloMercado']" routerLinkActive="active">
+                      <a >
+                      <i class="fa fa-map-marker fa-lg"></i> Desarrollo de mercado
+                      </a>
+                    </li>
+                </ul>
+
+                <li data-toggle="collapse" data-target="#service2" class="collapsed">
+                  <a href="#"><i class="fa fa-list-alt fa-lg"></i> Resultados del periodo<span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="service2">
+                  <li [routerLink]="['balance_inicial']" >Balance Inicial</li>
+                  <li [routerLink]="['operacion']" >Resultados Operacion</li>
+                  <li [routerLink]="['estadoResultados']">Estado de Resultados</li>
+                  <li [routerLink]="['balance_final']">Balance Final</li>
+                </ul>
+            </ul>
+     </div>
+</div>

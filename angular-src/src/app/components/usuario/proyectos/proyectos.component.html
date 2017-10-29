@@ -1,0 +1,238 @@
+
+
+<div style="margin-top:90px" class="container">
+  <div class="section" style="margin-bottom:50px;">
+    <h1 class="text-center">Proyectos</h1>
+    <hr>
+    <div class="text-center" *ngFor="let alert of alerts" style="z-index:10000;width:100%; ">
+      <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout"><h3>{{ alert.msg }}</h3></alert>
+    </div>
+  </div>
+
+
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-6" *ngFor="let proyecto of proyectos">
+        <div class="card card-inverse card-primary mb-3 text-center col-10 offser-1">
+          <div class="card-block">
+            <img src="assets/img/presentation.png" class="col-6">
+            <blockquote class="card-blockquote">
+              <br>
+              <h1>{{proyecto.nombreProyecto}}</h1>
+              <h6>Fecha de Creación: {{proyecto.fechaCreacion}}</h6>
+
+              <button type="button" class="btn btn-success" (click)="entrarProyecto(proyecto.idProyecto)">Entrar a Proyecto</button>
+              <div class="row" style="margin-top:20px">
+                <button type="button" class="btn btn-secondary offset-1 col-4" (click)="openEdit(proyecto)">Edita</button>
+                <button type="button" class="btn btn-danger offset-2 col-4" (click)="confDelete(proyecto)">Elimina</button>
+              </div>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </div>
+
+
+
+  <div bsModal #modalEdit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class=" ">Edita Proyecto</h4>
+        </div>
+        <div class="modal-body">
+
+          <form [formGroup]="editForm" (ngSubmit)="modificaProyecto(editForm.value)" class="offset-1"  >
+
+              <div class="form-group" hidden>
+                <label class="col-2 col-form-label">id:</label>
+                <div class="col-2">
+
+                  <input class="form-control"
+                  type="text"
+                  placeholder="id"
+                  formControlName="idProyecto">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-5 col-form-label">Nombre</label>
+                <div class="col-6">
+
+                  <input class="form-control"
+                  type="text"
+                  formControlName="nombreProyecto">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-5 col-form-label">Fecha de Creación</label>
+                <div class="col-6">
+
+                  <input class="form-control"
+                  type="text"
+                  formControlName="fechaCreacion"
+                  disabled>
+                </div>
+              </div>
+
+              <div class="form-group row" hidden>
+                <label class="col-5 col-form-label">Fecha de Creación</label>
+                <div class="col-6">
+
+                  <input class="form-control"
+                  type="text"
+                  formControlName="Usuario_idUsuario"
+                  disabled>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-outline-success">
+                  Guardar
+                </button>
+
+                <button  type="button" class="btn btn-outline-danger" (click)="modalEdit.hide()" >
+                  Cancelar
+                </button>
+
+              </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" (click)="openNew()" class="btn btn-warning btn-floating">Agregar</button>
+
+  <div bsModal #modalNew="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class=" ">Edita Proyecto</h4>
+        </div>
+        <div class="modal-body">
+
+          <form [formGroup]="newForm" (ngSubmit)="agregaProyecto(newForm.value)" class="offset-1"  >
+
+              <div class="form-group" hidden>
+                <label class="col-2 col-form-label">id:</label>
+                <div class="col-2">
+
+                  <input class="form-control"
+                  type="text"
+                  placeholder="id"
+                  formControlName="idProyecto">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-5 col-form-label">Nombre</label>
+                <div class="col-6">
+
+                  <input class="form-control"
+                  type="text"
+                  formControlName="nombreProyecto">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-5 col-form-label">Fecha de Creación</label>
+                <div class="col-6">
+
+                  <input class="form-control"
+                  type="text"
+                  formControlName="fechaCreacion"
+                  disabled>
+                </div>
+              </div>
+
+              <div class="form-group row" hidden>
+                <label class="col-5 col-form-label">Fecha de Creación</label>
+                <div class="col-6">
+
+                  <input class="form-control"
+                  type="text"
+                  formControlName="Usuario_idUsuario"
+                  disabled>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-outline-success">
+                  Guardar
+                </button>
+
+                <button  type="button" class="btn btn-outline-danger" (click)="modalNew.hide()" >
+                  Cancelar
+                </button>
+
+              </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<div bsModal #modalConf="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="">Confirmación</h4>
+      </div>
+      <div class="modal-body center-block text-center">
+
+
+        <div class="row text-center offset-1">
+          Datos listos
+          <br>
+        </div>
+        <br>
+        <div class="row">
+          <button type="button" class="btn btn-danger offset-4 col-4" (click)="entrarP()" >Aceptar</button>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #modalConfDelete="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class=" ">Confirmación</h4>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="row text-center">
+          ¿Estas seguro que deseas eliminar el proyecto ?
+          <br>
+          <br>
+          Todo el progreso se perderá
+        </div>
+        <br>
+        <div class="row">
+          <button type="button" class="btn btn-danger offset-2 col-3" (click)=eliminaProyecto(proyectoDelete.idProyecto)>Si</button>
+          <button type="button" class="btn btn-primary offset-2 col-3" (click)="confModalDelete.hide()">No</button>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

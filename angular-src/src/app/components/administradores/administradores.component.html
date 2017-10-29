@@ -1,0 +1,316 @@
+
+
+
+<div class="container">
+  <div class="row">
+    <h2 class="text-center col-2 offset-5 ">Administradores</h2>
+    <button type="button" (click)="openNew()" class="btn btn-warning col-1 offset-4">Agregar</button>
+
+  </div>
+
+  <hr>
+  <div class="text-center" *ngFor="let alert of alerts" style="z-index:10000;width:100%; ">
+    <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout"><h3>{{ alert.msg }}</h3></alert>
+  </div>
+</div>
+
+<div class="container" style="height:1000px;overflow-y:scroll ">
+
+
+<!--++++++++++++++++++++++++++++++   Tarjeta de Administrador    +++++++++++++++++++++++++++++++++++-->
+
+
+<div class="card-columns" >
+  <div class="card" *ngFor="let admin of administradores">
+    <div class="card-block">
+      <div class="row">
+        <img class="" src="assets/img/user.png" alt="Card image cap" style="height:100px">
+        <div class="col-8">
+          <h4 class="card-title">{{admin.nombreAdmin}} {{admin.apPat}}</h4>
+          Usuario: {{admin.user}} <br>
+          Contraseña:{{admin.contra}}
+        </div>
+      </div>
+
+
+    </div>
+    <div class="card-footer">
+      <div  class="btn btn-primary offset-1 col-4" (click)="openEdit(admin)">Editar</div>
+      <button type="button" class="btn btn-danger offset-1 col-4" (click)="confDelete(admin)" >Eliminar</button>
+    </div>
+  </div>
+
+</div>
+
+
+<!--- +++++++++++++++++++++++++++ Formulario para agregar +++++++++++++++++++++++++++++++++++++++++ -->
+<div ngDraggable bsModal  #modalNew="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title col-12 text-center">Agregar Administrador</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="newForm" (ngSubmit)="guarda(newForm.value)"  >
+
+            <div class="form-group row text-center" >
+              <label class="col-5 col-form-label">Nombre</label>
+              <div class="col-6 has-success"
+              [ngClass]="{'has-danger': !newForm.get('nombreAdmin').valid}">
+
+
+                <input class="form-control"
+                       type="text"
+                       formControlName="nombreAdmin" >
+                       <div class="form-control-feedback" style="font-size:10px;"
+                       *ngIf="!newForm.controls['nombreAdmin'].valid">
+                         El nombre es requerido
+                       </div>
+              </div>
+            </div>
+
+
+
+            <div class="form-group row text-center" >
+              <label class="col-5 col-form-label">Apellido Paterno</label>
+              <div class="col-6 has-success"
+              [ngClass]="{'has-danger': !newForm.get('apPat').valid}">
+
+
+                <input class="form-control"
+                       type="text"
+                       formControlName="apPat" >
+                       <div class="form-control-feedback" style="font-size:10px;"
+                       *ngIf="!newForm.controls['apPat'].valid">
+                         El apellido es requerido
+                       </div>
+              </div>
+            </div>
+
+
+          <div class="form-group row text-center" >
+            <label class="col-5 col-form-label">Apellido Materno</label>
+            <div class="col-6 has-success"
+            [ngClass]="{'has-danger': !newForm.get('apMat').valid}">
+
+
+              <input class="form-control"
+                     type="text"
+                     formControlName="apMat" >
+                     <div class="form-control-feedback" style="font-size:10px;"
+                     *ngIf="!newForm.controls['apMat'].valid">
+                       El apellido es requerido
+                     </div>
+            </div>
+          </div>
+
+
+
+          <div class="form-group row text-center" >
+            <label class="col-5 col-form-label">Nombre de usuario</label>
+            <div class="col-6 has-success"
+            [ngClass]="{'has-danger': !newForm.get('user').valid}">
+
+
+              <input class="form-control"
+                     type="text"
+                     formControlName="user" >
+                     <div class="form-control-feedback" style="font-size:10px;"
+                     *ngIf="!newForm.controls['user'].valid">
+                       El nombre es requerido
+                     </div>
+            </div>
+          </div>
+
+
+
+          <div class="form-group row text-center" >
+            <label class="col-5 col-form-label">Contraseña</label>
+            <div class="col-6 has-success"
+            [ngClass]="{'has-danger': !newForm.get('contra').valid}">
+
+
+              <input class="form-control"
+                     type="text"
+                     formControlName="contra" >
+                     <div class="form-control-feedback" style="font-size:10px;"
+                     *ngIf="!newForm.controls['contra'].valid">
+                       La contraseña es requerida
+                     </div>
+            </div>
+          </div>
+
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-outline-success" [disabled]="!newForm.valid" >
+                  Guardar
+                </button>
+
+                <button  type="button" class="btn btn-outline-danger" (click)="modalNew.hide()">
+                Cancelar
+                </button>
+
+              </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--- Boton de Acción de Formulario de Edición--->
+
+
+
+<!--- Modal de edición +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+<div bsModal #modalEdit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-center col-12">Editar Administrador</h4>
+      </div>
+      <div class="modal-body">
+
+        <form [formGroup]="editForm" (ngSubmit)="editaAdmin(editForm.value)"  >
+
+
+
+              <div class="form-group row" hidden>
+                <label class="col-6 col-form-label">id</label>
+                <div class="col-8">
+
+                  <input class="form-control"
+                         type="text"
+                         placeholder="Nombre de Usuario"
+                         formControlName="idAdministrador">
+                </div>
+              </div>
+
+              <div class="form-group row text-center" >
+                <label class="col-5 col-form-label">Nombre</label>
+                <div class="col-6 has-success"
+                [ngClass]="{'has-danger': !editForm.get('nombreAdmin').valid}">
+
+
+                  <input class="form-control"
+                         type="text"
+                         formControlName="nombreAdmin" >
+                         <div class="form-control-feedback" style="font-size:10px;"
+                         *ngIf="!editForm.controls['nombreAdmin'].valid">
+                           El nombre es requerido
+                         </div>
+                </div>
+              </div>
+
+
+
+              <div class="form-group row text-center" >
+                <label class="col-5 col-form-label">Apellido Paterno</label>
+                <div class="col-6 has-success"
+                [ngClass]="{'has-danger': !editForm.get('apPat').valid}">
+
+
+                  <input class="form-control"
+                         type="text"
+                         formControlName="apPat" >
+                         <div class="form-control-feedback" style="font-size:10px;"
+                         *ngIf="!editForm.controls['apPat'].valid">
+                           El apellido es requerido
+                         </div>
+                </div>
+              </div>
+
+
+            <div class="form-group row text-center" >
+              <label class="col-5 col-form-label">Apellido Materno</label>
+              <div class="col-6 has-success"
+              [ngClass]="{'has-danger': !editForm.get('apMat').valid}">
+
+
+                <input class="form-control"
+                       type="text"
+                       formControlName="apMat" >
+                       <div class="form-control-feedback" style="font-size:10px;"
+                       *ngIf="!editForm.controls['apMat'].valid">
+                         El apellido es requerido
+                       </div>
+              </div>
+            </div>
+
+
+
+            <div class="form-group row text-center" >
+              <label class="col-5 col-form-label">Nombre de usuario</label>
+              <div class="col-6 has-success"
+              [ngClass]="{'has-danger': !editForm.get('user').valid}">
+
+
+                <input class="form-control"
+                       type="text"
+                       formControlName="user" >
+                       <div class="form-control-feedback" style="font-size:10px;"
+                       *ngIf="!editForm.controls['user'].valid">
+                         El nombre es requerido
+                       </div>
+              </div>
+            </div>
+
+
+
+            <div class="form-group row text-center" >
+              <label class="col-5 col-form-label">Contraseña</label>
+              <div class="col-6 has-success"
+              [ngClass]="{'has-danger': !editForm.get('contra').valid}">
+
+
+                <input class="form-control"
+                       type="text"
+                       formControlName="contra" >
+                       <div class="form-control-feedback" style="font-size:10px;"
+                       *ngIf="!editForm.controls['contra'].valid">
+                         La contraseña es requerida
+                       </div>
+              </div>
+            </div>
+
+
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-outline-success" [disabled]="!editForm.valid" >
+                  Guardar
+                </button>
+
+                <button  type="button" class="btn btn-outline-danger" (click)="modalEdit.hide()">
+                Cancelar
+                </button>
+              </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div bsModal #modalConfDelete="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="col-12 text-center ">Confirmación</h4>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="row text-center">
+          ¿Estas seguro que deseas eliminar el administrador "{{adminDelete.nombreAdmin}}" ?
+          <br>
+        </div>
+        <br>
+        <div class="row">
+          <button type="button" class="btn btn-danger offset-2 col-3"  (click)="eliminaAdmin(adminDelete.idAdministrador)">Si</button>
+          <button type="button" class="btn btn-primary offset-2 col-3" (click)="modalConfDelete.hide()">No</button>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>

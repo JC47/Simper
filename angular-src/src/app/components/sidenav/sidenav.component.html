@@ -1,0 +1,73 @@
+<div class="nav-side-menu">
+    <div class="brand">Panel de Administración</div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+        <div class="menu-list">
+
+            <ul id="menu-content" class="menu-content collapse out">
+              <!-- <li [routerLink]="['home']">
+                 <a >
+                 <i class="fa fa-home fa-lg"></i>Home
+                 </a>
+               </li>
+ -->
+
+
+
+
+                <li data-toggle="collapse" data-target="#users" class="collapsed">
+                  <a href="#"><i class="fa fa-navicon fa-lg" routerLinkActive="active"></i>Administración de Usuarios<span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="users">
+                  <li [routerLink]="['administradores']" >Administradores</li>
+                  <li [routerLink]="['usuarios']">Usuarios</li>
+
+                </ul>
+
+
+                <li [routerLink]="['productos']" routerLinkActive="active">
+                   <a >
+                   <i class="fa fa-shopping-cart fa-lg"></i> Productos
+                   </a>
+                 </li>
+
+                 <li [routerLink]="['maquinarias']">
+                    <a >
+                    <i class="fa fa-briefcase fa-lg"></i> Maquinarias
+                    </a>
+                  </li>
+
+
+                   <li [routerLink]="['creditos']">
+                      <a >
+                      <i class="fa fa-credit-card fa-lg"></i> Creditos
+                      </a>
+                    </li>
+
+                    <li data-toggle="collapse" data-target="#service" class="collapsed">
+                      <a href="#"><i class="fa fa-globe fa-lg"></i>Mercado<span class="arrow"></span></a>
+                    </li>
+                    <ul class="sub-menu collapse" id="service">
+                      <li [routerLink]="['zonas']" ><i class="fa fa-globe fa-lg"></i> Zonas de Demanda</li>
+                      <li [routerLink]="['demandas']">Demanda potencial por Zona</li>
+
+                    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </ul>
+     </div>
+</div>

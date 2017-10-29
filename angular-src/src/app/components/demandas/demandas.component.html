@@ -1,0 +1,466 @@
+<div class="container">
+  <h2 class="text-center">Zonas</h2>
+  <hr>
+  <div class="text-center" *ngFor="let alert of alerts" style="z-index:10000;width:100%; ">
+    <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout"><h3>{{ alert.msg }}</h3></alert>
+  </div>
+</div>
+
+
+
+<div class="container">
+  <div class="card-columns" >
+    <div class="card" *ngFor="let zona of zonas ">
+
+      <div class="card-block">
+        <div class="row">
+          <img src="assets/img/zone.png" style="height:80px;margin-left:30px;margin-bottom:20px;" >
+          <div class="col-7">
+            <h4 class="card-title">{{zona.nombreZona}}</h4>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div  class="btn btn-primary offset-1 col-4" (click)="openEdit(zona)">Editar</div>
+          <button type="button" class="btn btn-danger col-5 offset-1" (click)="confDelete(zona)">Eliminar</button>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+<div bsModal #modalConfDelete="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="col-12 text-center ">Confirmación</h4>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="row text-center">
+          ¿Estas seguro que deseas eliminar la Zona ?
+          <br>
+        </div>
+        <br>
+        <div class="row">
+          <button type="button" class="btn btn-danger offset-2 col-3"  (click)="eliminaZona(zonaDelete.idZona)">Si</button>
+          <button type="button" class="btn btn-primary offset-2 col-3" (click)="modalConfDelete.hide()">No</button>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!--- Boton para abrir formulario par agregar nueva maquinaria -->
+
+<button type="button" (click)="openNew()" class="btn btn-success btn-floating">Agregar</button>
+<p>
+  <!-- <div [routerLink]="['zonas','demandas']">
+    <button type="button" class="btn btn-warning btn-floating">Editar Zonas</button>
+  </div>
+ -->
+
+<!-- Formulario para agregar un nuevo producto -->
+
+<!-- <ng-template #newModal let-c="close" let-d="dismiss"  >
+  <div class="modal-header">
+    <h4 class="modal-title">Agregar Maquinaria</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+
+
+
+
+      </div>
+
+</ng-template> -->
+
+
+<div ngDraggable bsModal #modalNew="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="col-12 text-center">Agrega Zona de Demanda</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="newForm" (ngSubmit)="guardaZona(newForm.value)" class="offset-1"  >
+
+
+          <div class="form-group row text-center" >
+            <label class="col-12 col-form-label text-center">Nombre</label>
+            <div class="col-6 has-success"
+            [ngClass]="{'has-danger': !newForm.get('nombreZona').valid}">
+
+
+              <input class="form-control"
+                     type="text"
+                     formControlName="nombreZona" >
+                     <div class="form-control-feedback" style="font-size:10px;"
+                     *ngIf="!newForm.controls['nombreZona'].valid">
+                       El nombre es requerido
+                     </div>
+            </div>
+          </div>
+
+            <!-- <div class="form-group row">
+              <label class="col-7 col-form-label text-center">Nombre Zona</label>
+              <div class="col-4">
+
+                <input class="form-control"
+                       type="text"
+                       placeholder="Nombre"
+                       formControlName="nombreZona">
+              </div>
+            </div> -->
+
+          <div class="col-11">
+            <b>Productos Demandados:</b>
+              <hr>
+            <div formArrayName="productos">
+              <div *ngFor="let producto of newForm.controls.productos.controls; let i=index" class="form-control" style="margin-top:15px">
+
+                  <div class="" [formGroupName]="i">
+
+
+
+                    <div class="form-group row">
+                        <button type="button" class="btn btn-danger row" (click)="deleteProducto(i,newForm)">X</button>
+                      <hr>
+                      <label class="col-4 col-form-label text-center offset-1">Producto: {{i+1}}</label>
+                      <div class="col-6" >
+                        <select formControlName="Producto_idProducto" class="form-control" valueChanges="evento()">
+                          <option *ngFor="let producto of productos" value={{producto.idProducto}}>{{producto.nombreProd}}</option>
+                        </select>
+
+                        <div class="form-control-feedback text-center " style="font-size:10px;"
+                        [ngClass]="{'has-danger': validaCampo(i,'Producto_idProducto')}"
+                        *ngIf="validaCampo(i,'Producto_idProducto')">
+                          Debes seleccionar un producto
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="form-group row text-center">
+                      <label class="col-5 col-form-label">Costo Desarrollo</label>
+
+                      <div class="input-group col-6 has-success"
+                      [ngClass]="{'has-danger': validaCampo(i,'costoDes')}">
+                        <span class="input-group-addon">$</span>
+                        <input currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }"
+                        class="form-control"
+                        formControlName="costoDes">
+
+                      </div>
+
+                      <div class="form-control-feedback offset-5 text-center col-6"
+                      style="font-size:10px;" [ngClass]="{'has-danger': validaCampo(i,'costoDes')}"
+                      *ngIf="validaCampo(i,'costoDes')">
+                        El costo es requerido
+                      </div>
+
+
+                    </div>
+
+
+                    <div class="form-group row text-center">
+                      <label class="col-5 col-form-label">Tiempo de Desarrollo</label>
+
+                      <div class="input-group col-6 has-success"
+                      [ngClass]="{'has-danger': validaCampo(i,'tiempoDes')}">
+                        <span class="input-group-addon">$</span>
+                        <input currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }"
+                        class="form-control"
+                        formControlName="tiempoDes">
+
+                      </div>
+
+                      <div class="form-control-feedback offset-5 text-center col-6"
+                      style="font-size:10px;" [ngClass]="{'has-danger': validaCampo(i,'tiempoDes')}"
+                      *ngIf="validaCampo(i,'tiempoDes')">
+                        El costo es requerido
+                      </div>
+
+
+                    </div>
+
+
+<!--
+                      <div class="form-group row">
+                        <label class="col-5 col-form-label offset-1 text-center">Tiempo Desarrollo</label>
+                        <div class="input-group  col-5">
+                          <span class="input-group-addon">$</span>
+                          <input type="text" class="form-control" formControlName="tiempoDes">
+                        </div>
+                      </div> -->
+
+
+                      <!-- <input type="text" formControlName="tiempoDes"> -->
+
+
+
+                </div>
+              </div>
+              <div class="row"  *ngIf="repetido" style="margin-top:20px;">
+                <div class="col-12 text-center" style="color:red">
+                  No puedes agregar productos repetidos
+                </div>
+
+              </div>
+            </div>
+            <div class="row" style="margin-top:20px; margin-bottom:20px;">
+              <button type="button" class=" btn btn-primary" (click)="inputProducto(newForm)">Agregar</button>
+
+            </div>
+
+          </div>
+
+
+
+
+
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-outline-success" [disabled]="!newForm.valid"   >
+                  Guardar
+                </button>
+
+                <button  type="button" class="btn btn-outline-danger" (click)="modalNew.hide()">
+                Cancelar
+                </button>
+
+              </div>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- <ng-template #editModal let-c="close" let-d="dismiss"  >
+  <div class="modal-header">
+    <h4 class="modal-title">Agregar Maquinaria</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+
+
+
+      </div>
+
+</ng-template> -->
+
+
+
+<div ngDraggable bsModal #modalEdit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="col-12 text-center">Edita Zona de Demanda</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editForm" (ngSubmit)="editaZona(editForm.value)"  >
+
+
+            <div class="form-group row" hidden="">
+              <label class="col-5 col-form-label offset-1" >Id:</label>
+              <div class="col-5">
+
+                <input class="form-control"
+                       type="text"
+                       placeholder="id"
+                       formControlName="idZona">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-5 col-form-label offset-1">Nombre Zona</label>
+              <div class="col-5">
+
+                <input class="form-control"
+                       type="text"
+                       placeholder="Nombre"
+                       formControlName="nombreZona">
+              </div>
+            </div>
+
+
+
+
+        <div class="form-control"><b>Productos Demandados:</b>
+          <hr>
+          <div formArrayName="productos">
+            <div *ngFor="let producto of editForm.controls.productos.controls; let i=index" >
+
+
+                <div class="form-group row" [formGroupName]="i">
+                  <label class="col-3 col-form-label text-center">
+                    <h6>
+                      {{getNameById(producto.controls['Producto_idProducto'].value)}}
+                    </h6>
+                  </label>
+                  <button type="button" class="btn btn-primary col-3 offset-1" (click)="openEditProd(producto,editForm.controls['idZona'].value)">Editar</button>
+                    <button type="button" class="btn btn-danger col-3 offset-1" (click)="eliminaProducto(producto.controls['Producto_idProducto'].value, editForm.controls['idZona'].value,i)" >Eliminar</button>
+
+              </div>
+
+            </div>
+
+
+          </div>
+        </div>
+        <br>
+
+          <div class="form-group row">
+              <!-- <div class="offset-1 col-6">
+                <select class="form-control" [(ngModel)]="preSelected" [ngModelOptions]="{standalone: true}">
+                  <option *ngFor="let producto of productos" [value]="producto.idProducto">{{producto.nombreProd}}</option>
+                </select>
+          </div> -->
+
+          <div class="col-6 offset-1" >
+            <select  class="form-control" [(ngModel)]="preSelected" [ngModelOptions]="{standalone: true}">
+              <option *ngFor="let producto of productos" [value]="producto.idProducto">{{producto.nombreProd}}</option>
+            </select>
+
+            <div class="form-control-feedback text-center " style="font-size:10px;"
+            [ngClass]="{'has-danger': preSelected==null}"
+            *ngIf="preSelected==null">
+              Debes seleccionar un producto
+            </div>
+          </div>
+          <button type="button" class=" btn btn-primary col-3" (click)="agregaProd(editForm.get('idZona').value,preSelected,0,0)" [disabled]="preSelected==null">Agregar</button>
+          </div>
+
+
+
+
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-outline-success" >
+                  Guardar
+                </button>
+
+                <button  type="button" class="btn btn-outline-danger" (click)="cerrarEdit()">
+                Cancelar
+                </button>
+
+              </div>
+        </form>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--///////////////////////////////////////// Modal para editar un producto/////////////////////////////////////////7 -->
+
+<div bsModal #modalEditProd="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="col-12 text-center">Edita Producto de Zona</h4>
+      </div>
+      <div class="modal-body">
+
+        <form [formGroup]="productoZona" (ngSubmit)="guardaProductoZona(productoZona.value)" class="offset-1"  >
+
+          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
+          formControlName="idZona" hidden>
+
+          <div class="form-group row text-center" >
+            <label class="col-7 col-form-label">Costo de Desarrollo</label>
+
+            <div class="input-group col-4 has-success " [ngClass]="{'has-danger': !productoZona.get('costoDes').valid}">
+                <span class="input-group-addon">$</span>
+                <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
+                formControlName="costoDes">
+
+
+
+            </div>
+            <div class="form-control-feedback offset-7 text-center col-4" style="font-size:10px;"
+            [ngClass]="{'has-danger': !productoZona.get('costoDes').valid}"
+            *ngIf="!productoZona.controls['costoDes'].valid">
+              El costo es requerido
+            </div>
+
+
+
+          </div>
+
+          <div class="form-group row text-center" >
+            <label class="col-7 col-form-label">Tiempo Desarrollo</label>
+
+            <div class="input-group col-4 has-success " [ngClass]="{'has-danger': !productoZona.get('tiempoDes').valid}">
+                <span class="input-group-addon">$</span>
+                <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
+                formControlName="tiempoDes">
+
+
+
+            </div>
+            <div class="form-control-feedback offset-7 text-center col-4" style="font-size:10px;"
+            [ngClass]="{'has-danger': !productoZona.get('costoDes').valid}"
+            *ngIf="!productoZona.controls['tiempoDes'].valid">
+              El costo es requerido
+            </div>
+
+
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-outline-success" [disabled]="!productoZona.valid">
+              Guardar
+            </button>
+
+            <button  type="button" class="btn btn-outline-danger" (click)="modalEditProd.hide()">
+            Cancelar
+            </button>
+
+          </div>
+
+
+        </form>
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

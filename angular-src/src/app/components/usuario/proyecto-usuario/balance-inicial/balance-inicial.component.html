@@ -1,0 +1,184 @@
+<h3 class="text-center">Balance General</h3>
+
+<table class="table table-hover  table-responsive offset-3" *ngFor="let balance of balanceInicial">
+  <thead>
+    <tr>
+      <th colspan="6" class="text-center">Posición Financiera Final</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="thead-inverse">
+      <th colspan="4" class="text-center bg-primary">A menos de un año</th>
+      <th colspan="2" class="text-center bg-warning">A menos de un año</th>
+    </tr>
+    <tr>
+      <td>Caja Bancos</td>
+      <td colspan="3" class="text-right">{{balance.cajaBancos|currency:'USD':true:'1.0-0'}}</td>
+      <td>IVA por enterar</td>
+      <td>{{balance.IVAPorEnterar | currency:'USD':true}}</td>
+    </tr>
+
+    <tr>
+      <td>Cuentas por Cobrar</td>
+      <td colspan="3" class="text-right">{{balance.cuentasPorCobrar |currency:'USD':true:'1.0-0'}}</td>
+      <td>Impuestos por Pagar</td>
+      <td class="text-right">{{balance.imptosPorPagar |currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <td>IVA Acreditable</td>
+      <td colspan="3" class="text-right"> {{balance.IVAAcreditable |currency:'USD':true:'1.0-0'}}</td>
+      <td>Proveedores</td>
+      <td class="text-right">{{balance.proveedores |currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <td>Almacen de Articulo Terminado</td>
+      <td colspan="3" class="text-right">{{balance.almacenArtTerm|currency:'USD':true:'1.0-0' }}</td>
+      <td>PTU por Pagar</td>
+      <td class="text-right">{{balance.PTUPorPagar |currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <td>Alamacén de Materiales</td>
+      <td colspan="3" class="text-right">{{balance.almacenMateriales |currency:'USD':true:'1.0-0'}}</td>
+      <td>Préstamos Bancarios</td>
+      <td class="text-right">{{balance.prestamosMenosAnio|currency:'USD':true:'1.0-0' }}</td>
+    </tr>
+
+    <tr>
+      <th class="text-center">TOTAL</th>
+      <td colspan="3" class="text-right">{{balance.cajaBancos + balance.cuentasPorCobrar + balance.IVAAcreditable
+          + balance.almacenArtTerm + balance.almacenMateriales |currency:'USD':true:'1.0-0' }}</td>
+      <th class="text-center">TOTAL</th>
+      <td class="text-right">{{balance.IVAPorEnterar + balance.imptosPorPagar + balance.proveedores + balance.PTUPorPagar + balance.prestamosMenosAnio |currency:'USD':true:'1.0-0' }}</td>
+    </tr>
+
+    <tr class="thead-inverse">
+      <th class="text-center bg-primary" colspan="4">A más de un año</th>
+      <th class="text-center bg-warning">A más de un año</th>
+
+    </tr>
+
+    <tr class="thead-inverse">
+      <th class="text-center bg-success"></th>
+      <th class="text-center bg-success">I.O.</th>
+      <th class="text-center bg-success">Dep. Acum</th>
+      <th class="text-center bg-success">Neto</th>
+    </tr>
+
+
+    <tr>
+      <td>Terrenos</td>
+      <td class="text-right">{{balance.terreno |currency:'USD':true:'1.0-0' }}</td>
+      <td class="text-right">{{balance.depTerreno |currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right">{{balance.terreno - balance.depTerreno |currency:'USD':true:'1.0-0' }}</td>
+      <td>Prestamos Totales</td>
+      <td class="text-right">{{balance.prestamosMasAnio |currency:'USD':true:'1.0-0' }}</td>
+    </tr>
+
+    <tr>
+      <td>Edificios e Instalaciones</td>
+      <td class="text-right">{{balance.edifInsta |currency:'USD':true:'1.0-0' }}</td>
+      <td class="text-right">{{balance.depEdif |currency:'USD':true:'1.0-0' }}</td>
+      <td class="text-right">{{balance.edifInsta - balance.depEdif |currency:'USD':true:'1.0-0' }}</td>
+      <td colspan="2"></td>
+    </tr>
+
+    <tr>
+      <td>Maquinaria y Equipo</td>
+      <td class="text-right">{{balance.maqEquipo |currency:'USD':true:'1.0-0' }}</td>
+      <td class="text-right">{{balance.depMaqEquipo |currency:'USD':true:'1.0-0' }}</td>
+      <td class="text-right">{{balance.maqEquipo - balance.depMaqEquipo |currency:'USD':true:'1.0-0'}}</td>
+      <td colspan="2"></td>
+    </tr>
+
+    <tr>
+      <td>Muebles y Enseres</td>
+      <td class="text-right">{{balance.mueblesEnseres |currency:'USD':true:'1.0-0' }}</td>
+      <td class="text-right">{{balance.depMueblesEnseres |currency:'USD':true:'1.0-0' }}</td>
+      <td class="text-right">{{balance.mueblesEnseres - balance.depMueblesEnseres |currency:'USD':true:'1.0-0'}}</td>
+      <td colspan="2"></td>
+    </tr>
+
+    <tr>
+      <td>Equipo de Transporte</td>
+      <td class="text-right">{{balance.eqTrans|currency:'USD':true:'1.0-0' }}</td>
+      <td class="text-right">{{balance.depEqTrans |currency:'USD':true:'1.0-0' }}</td>
+      <td class="text-right">{{balance.eqTrans - balance.depEqTrans |currency:'USD':true:'1.0-0' }}</td>
+      <td colspan="2"></td>
+    </tr>
+
+    <tr>
+      <th class="text-center">TOTAL</th>
+      <td></td>
+      <td></td>
+      <td class="text-right">{{balance.terreno + balance.edifInsta + balance.mueblesEnseres + balance.eqTrans + balance.maqEquipo - balance.depMaqEquipo - balance.depEdif - balance.depMueblesEnseres -balance.depEqTrans |currency:'USD':true:'1.0-0' }}</td>
+      <th class="text-center">TOTAL</th>
+      <td class="text-right">{{balance.prestamosMasAnio |currency:'USD':true:'1.0-0' }}</td>
+    </tr>
+
+    <tr>
+      <th colspan="4" class="text-center">De Aplicación Diferida</th>
+      <th class="text-center" colspan="2">Con los Accionistas</th>
+    </tr>
+
+    <tr>
+      <td>Pagos Hechos por anticipado</td>
+      <td colspan="3" class="text-right">{{balance.pagosAnticipado|currency:'USD':true:'1.0-0' }}</td>
+      <td>Capital Social</td>
+      <td class="text-right">{{balance.capitalSocial |currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <td>Gastos por Amortizar</td>
+      <td colspan="3" class="text-right">{{balance.gastosAmortizacion  |currency:'USD':true:'1.0-0'}}</td>
+      <td>Reserva legal</td>
+      <td class="text-right">{{balance.reservaLegal  |currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <td colspan="4"></td>
+      <td>Utilidad Acumulada</td>
+      <td class="text-right">{{balance.utilidadAcum  |currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <td colspan="4"></td>
+      <td >Utilidad del Ejercicio</td>
+      <td class="text-right">{{balance.utilidadEjercicio  |currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <th class="text-center">TOTAL</th>
+      <td colspan="3" class="text-right">{{balance.pagosAnticipado + balance.gastosAmortizacion |currency:'USD':true:'1.0-0'}}</td>
+      <th class="text-center">TOTAL</th>
+      <td class="text-right">{{balance.capitalSocial + balance.reservaLegal + balance.utilidadAcum + balance.utilidadEjercicio  |currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+
+    <tr>
+      <th >Suma de los Derechos</th>
+      <td colspan="3" class="text-right">{{balance.pagosAnticipado + balance.gastosAmortizacion + balance.terreno
+        + balance.edifInsta + balance.mueblesEnseres + balance.eqTrans + balance.maqEquipo
+        + balance.cajaBancos + balance.cuentasPorCobrar + balance.IVAAcreditable + balance.almacenArtTerm
+        + balance.almacenMateriales - balance.depMaqEquipo - balance.depEdif - balance.depMueblesEnseres -balance.depEqTrans  |currency:'USD':true:'1.0-0'}}</td>
+      <td>Suma de las Obligaciones</td>
+      <td class="text-right">{{balance.IVAPorEnterar + balance.imptosPorPagar + balance.proveedores + balance.PTUPorPagar
+        + balance.prestamosMenosAnio + balance.prestamosMasAnio + balance.capitalSocial + balance.reservaLegal
+        + balance.utilidadAcum + balance.utilidadEjercicio  |currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <th>Diferencia</th>
+      <td colspan="3" class="text-right">{{(balance.pagosAnticipado + balance.gastosAmortizacion + balance.terreno
+        + balance.edifInsta + balance.mueblesEnseres + balance.eqTrans + balance.maqEquipo
+        + balance.cajaBancos + balance.cuentasPorCobrar + balance.IVAAcreditable + balance.almacenArtTerm
+        + balance.almacenMateriales) - (balance.IVAPorEnterar + balance.imptosPorPagar + balance.proveedores + balance.PTUPorPagar
+          + balance.prestamosMenosAnio + balance.prestamosMasAnio + balance.capitalSocial + balance.reservaLegal
+          + balance.utilidadAcum + balance.utilidadEjercicio) - balance.depMaqEquipo - balance.depEdif - balance.depMueblesEnseres -balance.depEqTrans  |currency:'USD':true:'1.0-0'}}</td>
+      <td colspan="2"></td>
+    </tr>
+
+  </tbody>
+</table>
