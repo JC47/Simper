@@ -25,6 +25,7 @@
   "author": "Javier Calette",
   "license": "ISC",
   "devDependencies": {
-    "@angular/cli": "^1.4.3"
+    "@angular/cli": "^1.4.9",
+    "@angular/compiler-cli": "^4.4.6"
   }
 }
