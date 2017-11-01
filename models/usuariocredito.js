@@ -9,7 +9,7 @@ module.exports.addUsuarioCredito = function (dato) {
 }
 
 module.exports.getUsuarioCreditoByIdUsuario = function (idUsuario) {
-  var query = "select * from usuariocredito where idUsuario = "+idUsuario+" ";
+  var query = "select * from usuariocredito inner join credito on usuariocredito.idCredito = credito.idCredito and usuariocredito.idUsuario = "+idUsuario+" ";
   return querySql(query);
 }
 

@@ -1,0 +1,27 @@
+<div class="container" style="overflow:scroll; height:550px;">
+
+  <div class="card-columns" >
+    <div class="card" *ngFor="let credito of creditosU">
+
+      <div class="card-block">
+        <div class="row">
+          <img  src="assets/img/credit.png"  style="height:100px;margin-left:30px">
+
+          <div class="col-7">
+            <h4 class="card-title">{{credito.nombreCredito}}</h4>
+            <p class="card-text">
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="card-footer">
+          <div  class="btn btn-primary  offset-1 col-4" (click)="openEdit(credito)" >Editar</div>
+          <button type="button" class="btn btn-danger col-5 offset-1" (click)="confDelete(credito)" >Eliminar</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

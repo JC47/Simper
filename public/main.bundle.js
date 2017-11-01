@@ -130,20 +130,21 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__components_home_home_component__ = __webpack_require__("../../../../../src/app/components/home/home.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__components_usuario_proyectos_proyectos_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyectos/proyectos.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__components_administradores_administradores_component__ = __webpack_require__("../../../../../src/app/components/administradores/administradores.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_53__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_54_ng_lightning_ng_lightning__ = __webpack_require__("../../../../ng-lightning/ng-lightning.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_55__components_usuario_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/usuario.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__components_usuario_navbar_usuario_navbar_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/navbar-usuario/navbar-usuario.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_57__components_usuario_proyecto_usuario_proyecto_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/proyecto-usuario.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_58__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_59__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-inicial/balance-inicial.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_60__components_usuario_proyecto_usuario_balance_final_balance_final_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-final/balance-final.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_61__components_usuario_proyecto_usuario_balance_home_balance_home_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_62__components_usuario_proyecto_usuario_operacion_operacion_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/operacion/operacion.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_63_d3__ = __webpack_require__("../../../../d3/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_64_nvd3__ = __webpack_require__("../../../../nvd3/build/nv.d3.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_64_nvd3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_64_nvd3__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_65__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_53__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_54__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_55_ng_lightning_ng_lightning__ = __webpack_require__("../../../../ng-lightning/ng-lightning.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__components_usuario_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/usuario.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_57__components_usuario_navbar_usuario_navbar_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/navbar-usuario/navbar-usuario.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_58__components_usuario_proyecto_usuario_proyecto_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/proyecto-usuario.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_59__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_60__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-inicial/balance-inicial.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_61__components_usuario_proyecto_usuario_balance_final_balance_final_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-final/balance-final.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_62__components_usuario_proyecto_usuario_balance_home_balance_home_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_63__components_usuario_proyecto_usuario_operacion_operacion_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/operacion/operacion.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_64_d3__ = __webpack_require__("../../../../d3/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_65_nvd3__ = __webpack_require__("../../../../nvd3/build/nv.d3.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_65_nvd3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_65_nvd3__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_66__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -222,6 +223,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var AppModule = (function () {
     function AppModule() {
     }
@@ -232,7 +234,7 @@ AppModule = __decorate([
         declarations: [
             __WEBPACK_IMPORTED_MODULE_36__app_component__["a" /* AppComponent */],
             __WEBPACK_IMPORTED_MODULE_42__components_navbar_navbar_component__["a" /* NavbarComponent */],
-            __WEBPACK_IMPORTED_MODULE_53__components_login_login_component__["a" /* LoginComponent */],
+            __WEBPACK_IMPORTED_MODULE_54__components_login_login_component__["a" /* LoginComponent */],
             __WEBPACK_IMPORTED_MODULE_44__components_sidenav_sidenav_component__["a" /* SidenavComponent */],
             __WEBPACK_IMPORTED_MODULE_43__components_usuario_proyecto_usuario_balance_balance_component__["a" /* BalanceComponent */],
             __WEBPACK_IMPORTED_MODULE_37__components_zona_producto_zona_producto_component__["a" /* ZonaProductoComponent */],
@@ -248,15 +250,16 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_41__components_usuario_proyecto_usuario_compra_maquinaria_compra_maquinaria_component__["a" /* CompraMaquinariaComponent */],
             __WEBPACK_IMPORTED_MODULE_50__components_home_home_component__["a" /* HomeComponent */],
             __WEBPACK_IMPORTED_MODULE_52__components_administradores_administradores_component__["a" /* AdministradoresComponent */],
-            __WEBPACK_IMPORTED_MODULE_55__components_usuario_usuario_component__["a" /* UsuarioComponent */],
-            __WEBPACK_IMPORTED_MODULE_56__components_usuario_navbar_usuario_navbar_usuario_component__["a" /* NavbarUsuarioComponent */],
-            __WEBPACK_IMPORTED_MODULE_57__components_usuario_proyecto_usuario_proyecto_usuario_component__["a" /* ProyectoUsuarioComponent */],
-            __WEBPACK_IMPORTED_MODULE_58__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__["a" /* SidenavPComponent */],
-            __WEBPACK_IMPORTED_MODULE_59__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__["a" /* BalanceInicialComponent */],
-            __WEBPACK_IMPORTED_MODULE_60__components_usuario_proyecto_usuario_balance_final_balance_final_component__["a" /* BalanceFinalComponent */],
-            __WEBPACK_IMPORTED_MODULE_61__components_usuario_proyecto_usuario_balance_home_balance_home_component__["a" /* BalanceHomeComponent */],
-            __WEBPACK_IMPORTED_MODULE_62__components_usuario_proyecto_usuario_operacion_operacion_component__["a" /* OperacionComponent */],
-            __WEBPACK_IMPORTED_MODULE_65__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__["a" /* EstadoResultadosComponent */],
+            __WEBPACK_IMPORTED_MODULE_56__components_usuario_usuario_component__["a" /* UsuarioComponent */],
+            __WEBPACK_IMPORTED_MODULE_57__components_usuario_navbar_usuario_navbar_usuario_component__["a" /* NavbarUsuarioComponent */],
+            __WEBPACK_IMPORTED_MODULE_58__components_usuario_proyecto_usuario_proyecto_usuario_component__["a" /* ProyectoUsuarioComponent */],
+            __WEBPACK_IMPORTED_MODULE_59__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__["a" /* SidenavPComponent */],
+            __WEBPACK_IMPORTED_MODULE_60__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__["a" /* BalanceInicialComponent */],
+            __WEBPACK_IMPORTED_MODULE_61__components_usuario_proyecto_usuario_balance_final_balance_final_component__["a" /* BalanceFinalComponent */],
+            __WEBPACK_IMPORTED_MODULE_62__components_usuario_proyecto_usuario_balance_home_balance_home_component__["a" /* BalanceHomeComponent */],
+            __WEBPACK_IMPORTED_MODULE_63__components_usuario_proyecto_usuario_operacion_operacion_component__["a" /* OperacionComponent */],
+            __WEBPACK_IMPORTED_MODULE_66__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__["a" /* EstadoResultadosComponent */],
+            __WEBPACK_IMPORTED_MODULE_53__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__["a" /* FinanciamientoComponent */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_8_angular2_flash_messages__["FlashMessagesModule"],
@@ -268,7 +271,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_9_ngx_bootstrap_tabs__["a" /* TabsModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_13__app_routes__["a" /* app_routing */],
             __WEBPACK_IMPORTED_MODULE_11_ng2_currency_mask__["CurrencyMaskModule"],
-            __WEBPACK_IMPORTED_MODULE_54_ng_lightning_ng_lightning__["a" /* NglModule */].forRoot(),
+            __WEBPACK_IMPORTED_MODULE_55_ng_lightning_ng_lightning__["a" /* NglModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_6_ngx_bootstrap__["c" /* AccordionModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_6_ngx_bootstrap__["d" /* PaginationModule */].forRoot(),
@@ -2969,6 +2972,73 @@ EstadoResultadosComponent = __decorate([
 
 /***/ }),
 
+/***/ "../../../../../src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\" style=\"overflow:scroll; height:550px;\">\n\n  <div class=\"card-columns\" >\n    <div class=\"card\" *ngFor=\"let credito of creditosU\">\n\n      <div class=\"card-block\">\n        <div class=\"row\">\n          <img  src=\"assets/img/credit.png\"  style=\"height:100px;margin-left:30px\">\n\n          <div class=\"col-7\">\n            <h4 class=\"card-title\">{{credito.nombreCredito}}</h4>\n            <p class=\"card-text\">\n            </p>\n\n          </div>\n\n        </div>\n\n        <div class=\"card-footer\">\n          <div  class=\"btn btn-primary  offset-1 col-4\" (click)=\"openEdit(credito)\" >Editar</div>\n          <button type=\"button\" class=\"btn btn-danger col-5 offset-1\" (click)=\"confDelete(credito)\" >Eliminar</button>\n\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_usuario_credito_service__ = __webpack_require__("../../../../../src/app/services/usuario-credito.service.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FinanciamientoComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var FinanciamientoComponent = (function () {
+    function FinanciamientoComponent(_usuarioCreditoSerivice) {
+        this._usuarioCreditoSerivice = _usuarioCreditoSerivice;
+        this.creditosU = [];
+        this.creditosU = this._usuarioCreditoSerivice.returnCreditosU(localStorage.getItem('idUsuario'));
+    }
+    FinanciamientoComponent.prototype.ngOnInit = function () {
+    };
+    return FinanciamientoComponent;
+}());
+FinanciamientoComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-financiamiento',
+        template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_usuario_credito_service__["a" /* UsuarioCreditoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_usuario_credito_service__["a" /* UsuarioCreditoService */]) === "function" && _a || Object])
+], FinanciamientoComponent);
+
+var _a;
+//# sourceMappingURL=financiamiento.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/operacion/operacion.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3273,7 +3343,9 @@ ProyectoUsuarioComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__balance_home_balance_home_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__operacion_operacion_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/operacion/operacion.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__estado_resultados_estado_resultados_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__financiamiento_financiamiento_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PROYECTO_ROUTES; });
+
 
 
 
@@ -3290,6 +3362,7 @@ var PROYECTO_ROUTES = [
     { path: 'desarrolloMercado', component: __WEBPACK_IMPORTED_MODULE_0__desarrollo_mercado_desarrollo_mercado_component__["a" /* DesarrolloMercadoComponent */] },
     { path: 'produccion', component: __WEBPACK_IMPORTED_MODULE_2__venta_productos_venta_productos_component__["a" /* VentaProductosComponent */] },
     { path: 'operacion', component: __WEBPACK_IMPORTED_MODULE_7__operacion_operacion_component__["a" /* OperacionComponent */] },
+    { path: 'financiamiento', component: __WEBPACK_IMPORTED_MODULE_9__financiamiento_financiamiento_component__["a" /* FinanciamientoComponent */] },
     { path: 'home', component: __WEBPACK_IMPORTED_MODULE_6__balance_home_balance_home_component__["a" /* BalanceHomeComponent */] },
     { path: 'balance_inicial', component: __WEBPACK_IMPORTED_MODULE_4__balance_inicial_balance_inicial_component__["a" /* BalanceInicialComponent */] },
     { path: 'balance_final', component: __WEBPACK_IMPORTED_MODULE_5__balance_final_balance_final_component__["a" /* BalanceFinalComponent */] },
@@ -3320,7 +3393,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"nav-side-menu\">\n    <div class=\"brand\">Proyecto\n      <button type=\"button\" class=\"btn btn-danger\" style=\"position:fixed; margin-left:4.1%;height:50px\" (click)=\"verProyectos()\"><i class=\"fa fa-sign-out\" aria-hidden=\"true\"></i></button>\n    </div>\n    <i class=\"fa fa-bars fa-2x toggle-btn\" data-toggle=\"collapse\" data-target=\"#menu-content\"></i>\n\n        <div class=\"menu-list\">\n            <ul id=\"menu-content\" class=\"menu-content collapse out\">\n\n                <li [routerLink]=\"['home']\">\n                  <a >\n                  <i class=\"fa fa-tachometer fa-lg\"></i> Valores iniciales\n                  </a>\n                </li>\n\n                <li [routerLink]=\"\">\n                  <a >\n                  <i class=\"fa fa-line-chart fa-lg\"></i> Demanda potencial\n                  </a>\n                </li>\n\n                <li data-toggle=\"collapse\" data-target=\"#service\" class=\"collapsed\">\n                  <a href=\"#\"><i class=\"fa fa-database fa-lg\"></i> Toma de decisiones<span class=\"arrow\"></span></a>\n                </li>\n                <ul class=\"sub-menu collapse\" id=\"service\">\n                  <li [routerLink]=\"['produccion']\" routerLinkActive=\"active\">\n                     <a>\n                      <i class=\"fa fa-cubes fa-lg\"></i>  Producción\n                     </a>\n                  </li>\n                  <li [routerLink]=\"['compraMaquinaria']\" routerLinkActive=\"active\">\n                     <a >\n                     <i class=\"fa fa-shopping-cart fa-lg\"></i> Compra de Maquinaria\n                     </a>\n                   </li>\n                   <li [routerLink]=\"['desarrolloProducto']\" routerLinkActive=\"active\">\n                      <a >\n                      <i class=\"fa fa-flask fa-lg\"></i> Desarrollo de Productos\n                      </a>\n                    </li>\n                   <li [routerLink]=\"['desarrolloMercado']\" routerLinkActive=\"active\">\n                      <a >\n                      <i class=\"fa fa-map-marker fa-lg\"></i> Desarrollo de mercado\n                      </a>\n                    </li>\n                </ul>\n\n                <li data-toggle=\"collapse\" data-target=\"#service2\" class=\"collapsed\">\n                  <a href=\"#\"><i class=\"fa fa-list-alt fa-lg\"></i> Resultados del periodo<span class=\"arrow\"></span></a>\n                </li>\n                <ul class=\"sub-menu collapse\" id=\"service2\">\n                  <li [routerLink]=\"['balance_inicial']\" >Balance Inicial</li>\n                  <li [routerLink]=\"['operacion']\" >Resultados Operacion</li>\n                  <li [routerLink]=\"['estadoResultados']\">Estado de Resultados</li>\n                  <li [routerLink]=\"['balance_final']\">Balance Final</li>\n                </ul>\n            </ul>\n     </div>\n</div>\n"
+module.exports = "<div class=\"nav-side-menu\">\n    <div class=\"brand\">Proyecto\n      <button type=\"button\" class=\"btn btn-danger\" style=\"position:fixed; margin-left:4.1%;height:50px\" (click)=\"verProyectos()\"><i class=\"fa fa-sign-out\" aria-hidden=\"true\"></i></button>\n    </div>\n    <i class=\"fa fa-bars fa-2x toggle-btn\" data-toggle=\"collapse\" data-target=\"#menu-content\"></i>\n\n        <div class=\"menu-list\">\n            <ul id=\"menu-content\" class=\"menu-content collapse out\">\n\n                <li [routerLink]=\"['home']\">\n                  <a >\n                  <i class=\"fa fa-tachometer fa-lg\"></i> Valores iniciales\n                  </a>\n                </li>\n\n                <li [routerLink]=\"\">\n                  <a >\n                  <i class=\"fa fa-line-chart fa-lg\"></i> Demanda potencial\n                  </a>\n                </li>\n\n                <li [routerLink]=\"['produccion']\" routerLinkActive=\"active\">\n                   <a>\n                    <i class=\"fa fa-cubes fa-lg\"></i>  Decisiones de Producción\n                   </a>\n                </li>\n\n                <li data-toggle=\"collapse\" data-target=\"#service\" class=\"collapsed\">\n                  <a href=\"#\"><i class=\"fa fa-database fa-lg\"></i> Decisiones de Crecimiento<span class=\"arrow\"></span></a>\n                </li>\n                <ul class=\"sub-menu collapse\" id=\"service\">\n\n                  <li [routerLink]=\"['compraMaquinaria']\" routerLinkActive=\"active\">\n                     <a >\n                     <i class=\"fa fa-shopping-cart fa-lg\"></i> Compra de Maquinaria\n                     </a>\n                   </li>\n                   <li [routerLink]=\"['desarrolloProducto']\" routerLinkActive=\"active\">\n                      <a >\n                      <i class=\"fa fa-flask fa-lg\"></i> Desarrollo de Productos\n                      </a>\n                    </li>\n                   <li [routerLink]=\"['desarrolloMercado']\" routerLinkActive=\"active\">\n                      <a >\n                      <i class=\"fa fa-map-marker fa-lg\"></i> Desarrollo de mercados\n                      </a>\n                    </li>\n                </ul>\n\n                <li [routerLink]=\"['financiamiento']\" routerLinkActive=\"active\">\n                   <a>\n                    <i class=\"fa fa-credit-card fa-lg\"></i>  Decisiones de Finaciamiento\n                   </a>\n                </li>\n\n                <li data-toggle=\"collapse\" data-target=\"#service2\" class=\"collapsed\">\n                  <a href=\"#\"><i class=\"fa fa-list-alt fa-lg\"></i> Resultados del periodo<span class=\"arrow\"></span></a>\n                </li>\n                <ul class=\"sub-menu collapse\" id=\"service2\">\n                  <li [routerLink]=\"['balance_inicial']\" >Balance Inicial</li>\n                  <li [routerLink]=\"['operacion']\" >Resultados Operacion</li>\n                  <li [routerLink]=\"['estadoResultados']\">Estado de Resultados</li>\n                  <li [routerLink]=\"['balance_final']\">Balance Final</li>\n                </ul>\n            </ul>\n     </div>\n</div>\n"
 
 /***/ }),
 
