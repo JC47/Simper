@@ -108,9 +108,20 @@ comprar(){
     }
     this._CompraMaquinariaService.compraMaquinaria(x,y);
 
+  }
 
-
-
+  regresar(){
+    var x = {
+      Maquinaria_idMaquinaria:this.maqSelectedLess.idMaquinaria,
+      Proyectos_idProyecto:parseInt(localStorage.getItem('idProyecto'))
+    }
+    var y = {
+      Balance_numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo')),
+      Proyectos_idProyecto:parseInt(localStorage.getItem('idProyecto')),
+      costo:this.maqSelectedLess.costo,
+      dep:this.maqSelectedLess.depAcum
+    }
+    this._CompraMaquinariaService.regresarMaquinaria(x,y);
   }
 
 
