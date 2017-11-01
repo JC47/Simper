@@ -147,7 +147,7 @@ router.post('/undo', (req, res, next) => {
 
     if(x.compraMaquinaria > 0){
       x.compraMaquinaria = x.compraMaquinaria - cm;
-      x.IVACompraMaq = + ivaMaq;
+      x.IVACompraMaq = x.IVACompraMaq + ivaMaq;
       x.costoTransformacionMaq = x.costoTransformacionMaq - depM;
     }
     return auxiliar.setAuxiliar(numeroPeriodo,idProyecto,x);
