@@ -4,6 +4,7 @@ const Promise = require("bluebird");
 const prestamo = require('../models/prestamo');
 const array = [];
 var aux=0;
+var iteraciones=0;
 
 //MODIFICAR CON EL NUEVO OBJETO QUE SE CREARÁ PARA CADA UNA DE LAS CONSULTAS DE CREDITO
 router.get('/', (req, res, next) => {
@@ -163,6 +164,7 @@ var pagoT = [];
 var TIR;
 var pagoAnticipado;
 var pagoTotal;
+var anticipo;
 
 Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCredito),
   function(pagoanticipado, pagoscreditos) {
@@ -186,13 +188,24 @@ for (var i = 0; i < pagoT.length; i++) {
 }
 return console.log("ok");
   })
+  //sirve para insertar la cantidad a descontar si existe un pago anticipado en el credito pedido
+  //se registra en creditobalance: anticipo
+  .then(function () {
+    if (pagoAnticipado==1) {
+       anticipo = 0;
+    }else {
+       anticipo = monto*((pagoAnticipado)/(100));
+    }
+    return console.log("ok");
+  })
   //solo sirve para insertar en creditobalance
   .then(function () {
     var json = {
       "credito_idCredito":idCredito,
       "Proyectos_idProyecto":idProyecto,
       "numeroPeriodo":numeroPeriodo,
-      "monto":monto
+      "monto":monto,
+      "anticipo": anticipo
     }
     return prestamo.addCreditoBalance(json);
   })
@@ -271,6 +284,7 @@ router.post('/veramortizacion', (req, res, next) => {
   var TIR;
   var pagoAnticipado;
   var pagoTotal;
+
 
   Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCredito),prestamo.getMonto(idCredito,idProyecto,numeroPeriodo),
     function(pagoanticipado, pagoscreditos, credito) {
@@ -398,10 +412,11 @@ function amortizacion(TIR,capital,pagoT,monto,pagoTotal) {
 
   toJSON(json)
 
-  while (saldo>0) {
-    aux = aux + 1;
-    capital = saldo;
-    amortizacion(TIR,capital,pagoT,monto,pagoTotal);
+  while (pagoTotal.length>iteraciones) {
+  iteraciones = iteraciones + 1;
+  aux = aux + 1;
+  capital = saldo;
+  amortizacion(TIR,capital,pagoT,monto,pagoTotal);
   }
   return array;
 }
