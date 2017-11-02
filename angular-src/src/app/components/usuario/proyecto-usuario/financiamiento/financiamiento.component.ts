@@ -20,15 +20,17 @@ export class FinanciamientoComponent implements OnInit {
     this.creditos=this._creditoService.returnCreditosU(localStorage.getItem('idUsuario'));
     this.solicitudForm= new FormGroup({
       'monto':new FormControl('',Validators.required),
+      'idCredito':new FormControl('',Validators.required)
     });
   }
 
   selectCredito(credito){
+    this.solicitudForm.controls['idCredito'].setValue(credito.idCredito)
     this.openModalConf=true;
     this.creditoSelected=credito;
   }
   solicitaCredito(cantidad){
-    console.log(cantidad.monto)    
+    console.log(cantidad.monto)
   }
 
   ngOnInit() {

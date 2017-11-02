@@ -42,7 +42,7 @@
       </div>
 
         <form [formGroup]="solicitudForm" (ngSubmit)="solicitaCredito(solicitudForm.value)"  class="offset-1" >
-
+          <input type="number" formControlName="idCredito" hidden="true">
           <div class="form-group row text-center" >
             <label class="col-5 col-form-label">Monto a Solicitar:  </label>
 
