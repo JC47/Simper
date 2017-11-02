@@ -108,9 +108,26 @@ comprar(){
     }
     this._CompraMaquinariaService.compraMaquinaria(x,y);
 
+  }
 
-
-
+  regresar(){
+    if(this.maqSelectedLess.Balance_numeroPeriodo == parseInt(localStorage.getItem('numeroPeriodo'))){
+      var x = {
+        Maquinaria_idMaquinaria:this.maqSelectedLess.idMaquinaria,
+        Proyectos_idProyecto:parseInt(localStorage.getItem('idProyecto'))
+      }
+      var y = {
+        Balance_numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo')),
+        Proyectos_idProyecto:parseInt(localStorage.getItem('idProyecto')),
+        costo:this.maqSelectedLess.costo,
+        dep:this.maqSelectedLess.depAcum
+      }
+      this.maquinasCompradas = this._CompraMaquinariaService.regresarMaquinaria(x,y);
+      console.log(this.maquinasCompradas);
+    }
+    else{
+      alert("No puedes regresar esa maquinaria");
+    }
   }
 
 

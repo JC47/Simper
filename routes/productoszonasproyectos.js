@@ -40,8 +40,6 @@ router.post('/pagardesarrollozona', (req, res, next) => {
 
   var ultimoPeriodo = req.body.ultimoPeriodoDes;
 
-  console.log(req.body);
-
   Promise.join(productoZonaProyecto.getTiempoDesZona(idZona,idProducto),
     productoZonaProyecto.getPeriodosDesProductoZonaProyecto(idProyecto,idProducto,idUsuario,idZona),
     function(tiempo, periodo) {

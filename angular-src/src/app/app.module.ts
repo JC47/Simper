@@ -64,6 +64,7 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProyectosComponent} from './components/usuario/proyectos/proyectos.component';
 import { AdministradoresComponent } from './components/administradores/administradores.component';
+import { FinanciamientoComponent } from './components/usuario/proyecto-usuario/financiamiento/financiamiento.component';
 import { ChartModule } from 'angular2-highcharts';
 import {LoginComponent} from './components/login/login.component';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
@@ -111,6 +112,7 @@ import { EstadoResultadosComponent } from './components/usuario/proyecto-usuario
     BalanceHomeComponent,
     OperacionComponent,
     EstadoResultadosComponent,
+    FinanciamientoComponent,
   ],
   imports: [
     FlashMessagesModule,

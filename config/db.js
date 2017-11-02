@@ -4,7 +4,6 @@ var Promise = require("bluebird");
 Promise.promisifyAll(mysql);
 Promise.promisifyAll(require("mysql/lib/Connection").prototype);
 Promise.promisifyAll(require("mysql/lib/Pool").prototype);
-//Conexion Global
 
 var pool = mysql.createPool({
     host: 'us-cdbr-iron-east-05.cleardb.net',
