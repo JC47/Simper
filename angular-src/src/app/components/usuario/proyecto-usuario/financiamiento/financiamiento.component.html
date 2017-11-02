@@ -1,27 +1,81 @@
-<div class="container" style="overflow:scroll; height:550px;">
+<div class="container" style="overflow:scroll; height:1000px;">
 
   <div class="card-columns" >
-    <div class="card" *ngFor="let credito of creditosU">
+    <div class="card" *ngFor="let credito of creditos">
 
       <div class="card-block">
         <div class="row">
-          <img  src="assets/img/credit.png"  style="height:100px;margin-left:30px">
+          <div class="col-4">
+            <img  src="assets/img/credit.png" class=" img-fluid"  style="margin-left:30px">
 
-          <div class="col-7">
-            <h4 class="card-title">{{credito.nombreCredito}}</h4>
-            <p class="card-text">
-            </p>
+          </div>
+
+          <div class="col-8">
+            <h4 class="card-title" style="margin-bottom:15px">{{credito.nombreCredito}}</h4>
+            <h6 class="card-subtitle" style="margin-bottom:15px">Monto Máximo: {{credito.montoMax| currency:'USD':true }}</h6>
+            <h6 class="card-subtitle" style="margin-bottom:15px">Monto Minimo: {{credito.montoMin}}</h6>
+            <h6 class="card-subtitle" style="margin-bottom:15px">Descripción: {{credito.pago}}</h6>
 
           </div>
 
         </div>
 
         <div class="card-footer">
-          <div  class="btn btn-primary  offset-1 col-4" (click)="openEdit(credito)" >Editar</div>
-          <button type="button" class="btn btn-danger col-5 offset-1" (click)="confDelete(credito)" >Eliminar</button>
+          <div  class="btn btn-primary  offset-1 col-10" (click)="selectCredito(credito)" >Solicitar</div>
+          <button type="button" class="btn btn-danger col-10 offset-1">Cancelar</button>
 
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+
+<ngl-modal header="Confirmación"  [(open)]="openModalConf" size="x-small" directional="false">
+
+  <div body>
+    <div class="col-12 text-center container">
+      <h5 style="margin-bottom:30px">Ingresa la cantidad del credito que se desea solicitar</h5>
+      <div class="row">
+
+      </div>
+
+        <form [formGroup]="solicitudForm" (ngSubmit)="solicitaCredito(solicitudForm.value)"  class="offset-1" >
+
+          <div class="form-group row text-center" >
+            <label class="col-5 col-form-label">Monto a Solicitar:  </label>
+
+            <div class="input-group col-6 has-success " [ngClass]="{'has-danger': !solicitudForm.get('monto').valid}">
+                <span class="input-group-addon">$</span>
+                <input currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }" class="form-control" aria-label="Amount (to the nearest dollar)"
+                formControlName="monto">
+
+
+
+            </div>
+            <div class="form-control-feedback offset-5 text-center col-6" style="font-size:10px;"
+            [ngClass]="{'has-danger': !solicitudForm.get('monto').valid}" *ngIf="!solicitudForm.controls['monto'].valid">
+              El costo es requerido
+            </div>
+
+
+
+          </div>
+
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary offset-2 col-4" >Solicitar</button>
+            <button class="btn btn-danger offset-1 col-4" (click)="openModalConf=false">Cancel</button>
+
+          </div>
+
+          </form>
+
+
+      <br>
+    </div>
+  </div>
+
+
+
+  </ngl-modal>
