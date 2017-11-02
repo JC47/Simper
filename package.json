@@ -16,6 +16,7 @@
     "express": "4.15.4",
     "express-myconnection": "1.0.4",
     "express-validator": "4.1.1",
+    "financejs": "^4.1.0",
     "jsonwebtoken": "7.4.1",
     "mysql": "2.14.1",
     "ng2-currency-mask": "^4.3.4",
