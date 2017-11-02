@@ -107,3 +107,23 @@ module.exports.getMonto = function (idCredito,idProyecto,numPeriodo) {
   var query = "select monto from creditobalance where credito_idCredito = "+idCredito+" and Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo = "+numPeriodo+" ";
   return querySql(query);
 }
+
+module.exports.eliminarAmortizacion = function(idCredito,idProyecto){
+  var query = "delete from amortizacion where Proyecto_idProyecto = " +idProyecto+" and idCredito = " +idCredito+ " ";
+  return querySql(query);
+}
+
+module.exports.getFinanciamientos = function(idProyecto,numeroPeriodo){
+  var query = "select  * from creditobalance where numeroPeriodo = "+numeroPeriodo+" and Proyectos_idProyecto = "+idProyecto+"";
+  return querySql(query);
+}
+
+module.exports.getFinanEspecifico = function(idProyecto,numeroPeriodo,idCredito){
+  var query = "select  * from creditobalance where numeroPeriodo = "+numeroPeriodo+" and Proyectos_idProyecto = "+idProyecto+" and credito_idCredito = " +idCredito+ "";
+  return querySql(query);
+}
+
+module.exports.updateCreditoBalance = function(json,idProyecto,numeroPeriodo,idCredito){
+  var query = "update creditobalance set ? numeroPeriodo = "+numeroPeriodo+" and Proyectos_idProyecto = "+idProyecto+" and credito_idCredito = " +idCredito+ "";
+  return querySql(query,json)
+}

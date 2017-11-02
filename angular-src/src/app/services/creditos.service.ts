@@ -20,7 +20,7 @@ export class CreditosService {
    }
 
    getCreditos(){
-     return this.http.get('prestamo/').map(res => res.json());
+     return this.http.get('prestamo/getcredito').map(res => res.json());
    }
 
   setCreditos(credito:credito){

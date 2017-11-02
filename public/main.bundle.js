@@ -1154,7 +1154,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"background-image:url('assets/img/fondo1.jpeg');background-attachment: fixed;background-size:cover;\r\noverflow:hidden; margin-top:80px;height:600px\">\r\n  <!-- <div class=\"container\" style=\"margin-top:120px;\"> -->\r\n          <!-- <div class=\"card card-container\">\r\n              <img id=\"profile-img\" class=\"profile-img-card\" src=\"//ssl.gstatic.com/accounts/ui/avatar_2x.png\" />\r\n              <p id=\"profile-name\" class=\"profile-name-card\"></p>\r\n              <form class=\"form-signin\" [formGroup]=\"login\" (ngSubmit)=\"onLoginSubmit()\">\r\n                  <span id=\"reauth-email\" class=\"reauth-email\"></span>\r\n                  <input type=\"text\" class=\"form-control\" placeholder=\"Nombre de Usuario\" formControlName=\"username\" required autofocus>\r\n                  <input type=\"password\" class=\"form-control\" placeholder=\"Contraseña\" formControlName=\"password\" required>\r\n                    <button class=\"btn btn-lg btn-primary btn-block btn-signin\" type=\"submit\">Entrar</button>\r\n              </form>\r\n          </div> -->\r\n\r\n          <h1 style=\"margin-top:60px;color:#005689\">MVision y Sensibilidad en los Negocios</h1>\r\n          <div class=\"login-form\" >\r\n     <img src=\"assets/img/perfil.jpg\" class=\"img-log\" alt=\"\">\r\n     <form [formGroup]=\"login\" (ngSubmit)=\"onLoginSubmit()\">\r\n       <div class=\"form-group \">\r\n         <input type=\"text\" class=\"form-control\" placeholder=\"Usuario \" formControlName=\"username\"\r\n         [ngClass]=\"{'wrong-entry':!validUser}\">\r\n\r\n       </div>\r\n       <div class=\"form-group log-status\">\r\n         <input type=\"password\" class=\"form-control\" placeholder=\"Contraseña\" formControlName=\"password\"\r\n         [ngClass]=\"{'wrong-entry':!validPass}\">\r\n       </div>\r\n        <span *ngIf=\"!validPass\" class=\"alert\">Contraseña Incorrecta</span>\r\n        <span *ngIf=\"!validUser\" class=\"alert\">Usuario Incorrecto</span>\r\n       <button type=\"submit\" class=\"log-btn\" >Entrar</button>\r\n     </form>\r\n\r\n\r\n\r\n   </div>\r\n\r\n\r\n\r\n\r\n\r\n</div>\r\n"
+module.exports = "<div style=\"background-image:url('assets/img/fondo1.jpeg');background-attachment: fixed;background-size:cover;\r\noverflow:hidden; margin-top:80px;height:600px\">\r\n  <!-- <div class=\"container\" style=\"margin-top:120px;\"> -->\r\n          <!-- <div class=\"card card-container\">\r\n              <img id=\"profile-img\" class=\"profile-img-card\" src=\"//ssl.gstatic.com/accounts/ui/avatar_2x.png\" />\r\n              <p id=\"profile-name\" class=\"profile-name-card\"></p>\r\n              <form class=\"form-signin\" [formGroup]=\"login\" (ngSubmit)=\"onLoginSubmit()\">\r\n                  <span id=\"reauth-email\" class=\"reauth-email\"></span>\r\n                  <input type=\"text\" class=\"form-control\" placeholder=\"Nombre de Usuario\" formControlName=\"username\" required autofocus>\r\n                  <input type=\"password\" class=\"form-control\" placeholder=\"Contraseña\" formControlName=\"password\" required>\r\n                    <button class=\"btn btn-lg btn-primary btn-block btn-signin\" type=\"submit\">Entrar</button>\r\n              </form>\r\n          </div> -->\r\n\r\n          <h1 style=\"margin-top:60px;color:#005689\">Vision y Sensibilidad en los Negocios</h1>\r\n          <div class=\"login-form\" >\r\n     <img src=\"assets/img/perfil.jpg\" class=\"img-log\" alt=\"\">\r\n     <form [formGroup]=\"login\" (ngSubmit)=\"onLoginSubmit()\">\r\n       <div class=\"form-group \">\r\n         <input type=\"text\" class=\"form-control\" placeholder=\"Usuario \" formControlName=\"username\"\r\n         [ngClass]=\"{'wrong-entry':!validUser}\">\r\n\r\n       </div>\r\n       <div class=\"form-group log-status\">\r\n         <input type=\"password\" class=\"form-control\" placeholder=\"Contraseña\" formControlName=\"password\"\r\n         [ngClass]=\"{'wrong-entry':!validPass}\">\r\n       </div>\r\n        <span *ngIf=\"!validPass\" class=\"alert\">Contraseña Incorrecta</span>\r\n        <span *ngIf=\"!validUser\" class=\"alert\">Usuario Incorrecto</span>\r\n       <button type=\"submit\" class=\"log-btn\" >Entrar</button>\r\n     </form>\r\n\r\n\r\n\r\n   </div>\r\n\r\n\r\n\r\n\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1210,7 +1210,7 @@ var LoginComponent = (function () {
             }
             else {
                 if (data.msg == 'Usuario No Encontrado') {
-                    _this.validUser = false;
+                    _this.validUser = true;
                     _this.validPass = true;
                     _this.authService.authenticateUsuario(datos).subscribe(function (data) {
                         if (data.success) {
@@ -1221,15 +1221,20 @@ var LoginComponent = (function () {
                             _this.router.navigate(['/Usuario']);
                         }
                         else {
-                            // alert(data.msg);
-                            //this.router.navigate(['login']);
+                            if (data.msg == "Usuario No Encontrado") {
+                                _this.validPass = true;
+                                _this.validUser = false;
+                            }
+                            else {
+                                _this.validPass = false;
+                                _this.validUser = true;
+                            }
                         }
                     });
                 }
                 else {
                     _this.validPass = false;
                     _this.validUser = true;
-                    // alert(data.msg);
                 }
             }
         });
@@ -5351,7 +5356,7 @@ var CreditosService = (function () {
         return this.creditos;
     };
     CreditosService.prototype.getCreditos = function () {
-        return this.http.get('prestamo/').map(function (res) { return res.json(); });
+        return this.http.get('prestamo/getcredito').map(function (res) { return res.json(); });
     };
     CreditosService.prototype.setCreditos = function (credito) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
@@ -6872,6 +6877,18 @@ var UsuarioCreditoService = (function () {
             'Content-Type': 'application/json'
         });
         return this.http.post('usuarioscreditos/delete/', credito, headers).map(function (res) { return res.json(); });
+    };
+    UsuarioCreditoService.prototype.solicitarCredito = function (x) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        return this.http.post('prestamo/amortizacioncreditobalance/', x, headers).map(function (res) { return res.json(); });
+    };
+    UsuarioCreditoService.prototype.eliminarCredito = function (x) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        return this.http.post('prestamo/deletecreditobalance/', x, headers).map(function (res) { return res.json(); });
     };
     return UsuarioCreditoService;
 }());

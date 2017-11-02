@@ -55,4 +55,18 @@ export class UsuarioCreditoService {
     return this.http.post('usuarioscreditos/delete/',credito,headers).map(res => res.json());
   }
 
+  solicitarCredito(x){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    return this.http.post('prestamo/amortizacioncreditobalance/',x,headers).map(res => res.json());
+  }
+
+  eliminarCredito(x){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    return this.http.post('prestamo/deletecreditobalance/',x,headers).map(res => res.json());
+  }
+
 }
