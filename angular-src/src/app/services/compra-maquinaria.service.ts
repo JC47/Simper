@@ -51,15 +51,17 @@ export class CompraMaquinariaService {
   }
 
   regresarMaquinaria(x,y){
-    this.vuelta(x).subscribe(data => {
-      console.log("Vuelta",data)
-      for(let key$ in data.datos){
-        this.maquinasCompradas[key$] = data.datos[key$];
-      }
-    });
     this.undo(y).subscribe(data => {
       console.log("Undo",data)
     });
+    var maqC = [];
+    this.vuelta(x).subscribe(data => {
+      console.log("Vuelta",data)
+      for(let key$ in data.datos){
+        maqC.push(data.datos[key$]);
+      }
+    });
+    return maqC;
   }
 
   cobrar(x){

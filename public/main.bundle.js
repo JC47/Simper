@@ -2511,17 +2511,23 @@ var CompraMaquinariaComponent = (function () {
         this._CompraMaquinariaService.compraMaquinaria(x, y);
     };
     CompraMaquinariaComponent.prototype.regresar = function () {
-        var x = {
-            Maquinaria_idMaquinaria: this.maqSelectedLess.idMaquinaria,
-            Proyectos_idProyecto: parseInt(localStorage.getItem('idProyecto'))
-        };
-        var y = {
-            Balance_numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')),
-            Proyectos_idProyecto: parseInt(localStorage.getItem('idProyecto')),
-            costo: this.maqSelectedLess.costo,
-            dep: this.maqSelectedLess.depAcum
-        };
-        this._CompraMaquinariaService.regresarMaquinaria(x, y);
+        if (this.maqSelectedLess.Balance_numeroPeriodo == parseInt(localStorage.getItem('numeroPeriodo'))) {
+            var x = {
+                Maquinaria_idMaquinaria: this.maqSelectedLess.idMaquinaria,
+                Proyectos_idProyecto: parseInt(localStorage.getItem('idProyecto'))
+            };
+            var y = {
+                Balance_numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')),
+                Proyectos_idProyecto: parseInt(localStorage.getItem('idProyecto')),
+                costo: this.maqSelectedLess.costo,
+                dep: this.maqSelectedLess.depAcum
+            };
+            this.maquinasCompradas = this._CompraMaquinariaService.regresarMaquinaria(x, y);
+            console.log(this.maquinasCompradas);
+        }
+        else {
+            alert("No puedes regresar esa maquinaria");
+        }
     };
     return CompraMaquinariaComponent;
 }());
@@ -5140,16 +5146,17 @@ var CompraMaquinariaService = (function () {
         });
     };
     CompraMaquinariaService.prototype.regresarMaquinaria = function (x, y) {
-        var _this = this;
-        this.vuelta(x).subscribe(function (data) {
-            console.log("Vuelta", data);
-            for (var key$ in data.datos) {
-                _this.maquinasCompradas[key$] = data.datos[key$];
-            }
-        });
         this.undo(y).subscribe(function (data) {
             console.log("Undo", data);
         });
+        var maqC = [];
+        this.vuelta(x).subscribe(function (data) {
+            console.log("Vuelta", data);
+            for (var key$ in data.datos) {
+                maqC.push(data.datos[key$]);
+            }
+        });
+        return maqC;
     };
     CompraMaquinariaService.prototype.cobrar = function (x) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
