@@ -1,7 +1,78 @@
-<div class="container">
+<div class="">
 <div class="row">
 
-      <div class="col-4">
+  <div class="card card-outline-primary col-7 text-center">
+    <div class="card-block">
+      <blockquote class="card-blockquote">
+        <div class="card-header">
+          <h3 class="col-lg-12 col-sm-12 col-md-12  text-center">Demanda Potencial del Periodo </h3>
+        </div>
+        <div class="row">
+          <div class="col-lg-8 col-sm-12 ">
+            <ngx-charts-bar-horizontal
+                  [scheme]="colorScheme"
+                  [results]="single"
+                  gradient="false"
+                  xAxis="true"
+                  yAxis="true"
+                  showXAxisLabel="true"
+                  showYAxisLabel="true"
+                  xAxisLabel="Demnada Potencial"
+                  yAxisLabel="Productos">
+                </ngx-charts-bar-horizontal>
+          </div>
+
+          <div class="col-lg-4 col-sm-8 ">
+            <table class="table table-responsive" style="margin-top:10px">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Productos</th>
+        <th>Zona 1</th>
+        <th>Zona 2</th>
+        <th>Zona 3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>Producto 1</th>
+        <th>18,000</th>
+        <td>20,000</td>
+        <td>5,000</td>
+      </tr>
+      <tr>
+        <th>Producto 2</th>
+        <th>18,000</th>
+        <td>20,000</td>
+        <td>5,000</td>
+      </tr>
+      <tr>
+        <th>Producto 3</th>
+        <th>18,000</th>
+        <td>20,000</td>
+        <td>5,000</td>
+      </tr>
+      <tr>
+        <th>Producto 4</th>
+        <th>18,000</th>
+        <td>20,000</td>
+        <td>5,000</td>
+      </tr>
+    </tbody>
+  </table>
+
+          </div>
+
+        </div>
+
+
+
+      </blockquote>
+    </div>
+  </div>
+
+
+
+      <!-- <div class="col-4">
         <div class="card card-inverse card-success mb-3 text-center">
           <div class="card-block">
             <blockquote class="card-blockquote">
@@ -77,13 +148,46 @@
                         </blockquote>
                       </div>
                     </div>
+          </div> -->
+
+          <div class="col-lg-5">
+            <div class="card card-outline-secondary mb-3 text-center">
+  <div class="card-block">
+    <blockquote class="card-blockquote">
+      <div class="card-header">
+            <h3 class="col-12 text-center">Capacidad Instalada</h3>
+      </div>
+
+<div class="col-12">
+  <ngx-charts-bar-horizontal
+        [view]="view"
+        [scheme]="colorScheme2"
+        [results]="single2"
+        gradient="false"
+        xAxis="true"
+        yAxis="true"
+        showXAxisLabel="true"
+        showYAxisLabel="true"
+        xAxisLabel="Demnada Potencial"
+        yAxisLabel="Productos">
+      </ngx-charts-bar-horizontal>
+</div>
+
+
+
+    </blockquote>
+  </div>
+</div>
           </div>
+
+
+
 
           <div class="col-6" style="margin-top:30px">
             <ngl-tabs [(selected)]="selectedTabProd" type="scoped">
 
               <ng-template ngl-tab heading="Productos Desarrollados">
-                Productos Desarrollados
+
               </ng-template>
 
               <ng-template ngl-tab heading="Productos en Desarrollo">
@@ -110,6 +214,9 @@
             </ngl-tabs>
 
           </div>
+
+
+
 
 
 
