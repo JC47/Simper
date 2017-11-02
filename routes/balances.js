@@ -70,11 +70,14 @@ router.post('/final', (req, res, next) => {
     var ISRCajaBancos = 0;
     var imptsPorPagar = 0;
     if(utilidadEjercicio > 0){
-      ISR = utilidadEjercicio * .34;
-      PTU = utilidadEjercicio * .10;
-      imptsPorPagar = (ISR/12);
-      ISRCajaBancos = imptsPorPagar * 11;
-      utilidadEjercicio = utilidadEjercicio - ISR - PTU;
+      var utilidadVerdadera = utilidadEjercicio - utlidadAcumulada;
+      if(utilidadVerdadera > 0){
+        ISR = utilidadVerdadera * .34;
+        PTU = utilidadVerdadera * .10;
+        imptsPorPagar = (ISR/12);
+        ISRCajaBancos = imptsPorPagar * 11;
+        utilidadEjercicio = utilidadEjercicio - ISR - PTU;
+      }
     }
 
     var cobroPorVentasCajaBancos = cuentasPorCobrar * 11;

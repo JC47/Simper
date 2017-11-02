@@ -480,6 +480,7 @@
           <button type="button" class="list-group-item list-group-item-action" (click)="openMaqInit()">Maquinaria Existente</button>
           <button type="button" class="list-group-item list-group-item-action" (click)="openModalProdInit()">Productos Existentes</button>
           <button type="button" class="list-group-item list-group-item-action" (click)="openModalZonaInit()">Zonas Existentes</button>
+          <button type="button" class="list-group-item list-group-item-action" (click)="openModalCreditosInit()">Financiamientos</button>
         </div>
 
 
@@ -1129,7 +1130,7 @@
 </div>
 </div>
 
-
+<!--Modal de asignacion de Productos-->
 <div bsModal #modalProdInit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -1158,24 +1159,6 @@
           </div>
         </div>
 
-
-
-          <!-- <div class="list-group col-5" style="margin-top:10px">
-            <span class="text-center" style="margin-bottom:20px;"><h3>Productos Asignados</h3></span>
-            <a class="list-group-item list-group-item-action  align-items-start active" *ngFor="let producto of productosU">
-              <div class="d-flex w-100 justify-content-between">
-                <h4 class="mb-2 col-6">{{getNameById(producto.idProducto)}}</h4>
-                <button type="button" class="btn btn-danger" (click)="eliminaProducto(producto)">Eliminar</button>
-
-
-              </div>
-
-              <small class="mb-1"></small>
-            </a>
-
-
-
-          </div> -->
           <div class="list-group col-5" style="margin-top:10px">
             <span class="text-center" style="margin-bottom:10px;"><h3>Productos Existentes</h3></span>
           <div class="card" *ngFor="let producto of productosU">
@@ -1208,6 +1191,71 @@
   </div>
 </div>
 </div>
+
+<!--Modal de asignacion de creditos-->
+
+<div bsModal #modalCreditosInit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="col-12 text-center">Asignación de tipos de financiamiento</h2>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="list-group col-5 offset-1" style="margin-top:10px">
+          <span class="text-center" style="margin-bottom:10px;"><h3>Creditos</h3></span>
+          <div class="card" *ngFor="let credito of creditos">
+            <div class="card-block">
+              <div class="row">
+                <img  src="assets/img/credit.png" style="height:40px;margin-left:10px;">
+
+                <div class="col-6">
+                  <h4 class="card-title">{{credito.nombreCredito}}</h4>
+                </div>
+                <div class="col-3 ">
+                  <button type="button" class="btn btn-success" (click)="agregarCredito(credito)"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+          <div class="list-group col-5" style="margin-top:10px">
+            <span class="text-center" style="margin-bottom:10px;"><h3>Creditos Asignados</h3></span>
+          <div class="card" *ngFor="let credito of creditosU">
+            <div class="card-block">
+              <div class="row">
+                <div class="col-3 ">
+                  <button type="button" class="btn btn-danger" (click)="eliminaCredito(credito)"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                </div>
+                <div class="col-7">
+                  <h4 class="card-title text-right">{{getNameByIdCredito(credito.idCredito)}}</h4>
+                </div>
+                <img  src="assets/img/credit.png" style="height:40px;">
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        </div>
+
+
+
+      <div class="modal-footer">
+        <button  type="button" class="btn btn-outline-danger" (click)="modalCreditosInit.hide()">
+        Salir
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!--Modal de que no cuadran los valores del balance-->
 
 <div bsModal #modalErrBalance="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">

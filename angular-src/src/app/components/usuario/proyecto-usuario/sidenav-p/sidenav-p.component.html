@@ -19,15 +19,17 @@
                   </a>
                 </li>
 
+                <li [routerLink]="['produccion']" routerLinkActive="active">
+                   <a>
+                    <i class="fa fa-cubes fa-lg"></i>  Decisiones de Producción
+                   </a>
+                </li>
+
                 <li data-toggle="collapse" data-target="#service" class="collapsed">
-                  <a href="#"><i class="fa fa-database fa-lg"></i> Toma de decisiones<span class="arrow"></span></a>
+                  <a href="#"><i class="fa fa-database fa-lg"></i> Decisiones de Crecimiento<span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse" id="service">
-                  <li [routerLink]="['produccion']" routerLinkActive="active">
-                     <a>
-                      <i class="fa fa-cubes fa-lg"></i>  Producción
-                     </a>
-                  </li>
+
                   <li [routerLink]="['compraMaquinaria']" routerLinkActive="active">
                      <a >
                      <i class="fa fa-shopping-cart fa-lg"></i> Compra de Maquinaria
@@ -40,10 +42,16 @@
                     </li>
                    <li [routerLink]="['desarrolloMercado']" routerLinkActive="active">
                       <a >
-                      <i class="fa fa-map-marker fa-lg"></i> Desarrollo de mercado
+                      <i class="fa fa-map-marker fa-lg"></i> Desarrollo de mercados
                       </a>
                     </li>
                 </ul>
+
+                <li [routerLink]="['financiamiento']" routerLinkActive="active">
+                   <a>
+                    <i class="fa fa-credit-card fa-lg"></i>  Decisiones de Finaciamiento
+                   </a>
+                </li>
 
                 <li data-toggle="collapse" data-target="#service2" class="collapsed">
                   <a href="#"><i class="fa fa-list-alt fa-lg"></i> Resultados del periodo<span class="arrow"></span></a>

@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild} from '@angular/core';
 import {UsuariosService} from '../../services/usuarios.service';
 import {AdministradoresService} from '../../services/administradores.service';
 import { AuthService} from '../../services/auth.service';
+import {CreditosService} from '../../services/creditos.service';
+import {UsuarioCreditoService} from '../../services/usuario-credito.service';
 import {usuario, admin} from '../../app.interfaces';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -23,6 +25,7 @@ import {UsuarioMaquinariaService} from '../../services/usuario-maquinaria.servic
 export class UsuariosComponent implements OnInit {
   @ViewChild('modalProdInit') public modalProdInit:ModalDirective;
   @ViewChild('modalEdit') public modalEdit:ModalDirective;
+  @ViewChild('modalCreditosInit') public modalCreditosInit:ModalDirective;
   @ViewChild('modalVars') public modalVars:ModalDirective;
   @ViewChild('modalNew') public modalNew:ModalDirective;
   @ViewChild('modalConfDelete') public modalConfDelete:ModalDirective;
@@ -60,9 +63,11 @@ export class UsuariosComponent implements OnInit {
   maquinas:any;
   productos:any;
   zonas:any;
+  creditos:any;
   maquinariaU:any;
   productosU:any;
   zonasU:any;
+  creditosU:any;
   newForm:FormGroup;
   editForm:FormGroup;
   variablesForm:FormGroup;
@@ -76,6 +81,8 @@ export class UsuariosComponent implements OnInit {
   constructor(private _usuariosService:UsuariosService,private modalService: NgbModal,
               private authService: AuthService,
               private _usuarioProductoService:UsuarioProductoService,
+              private _creditosService:CreditosService,
+              private _usuarioCreditoService:UsuarioCreditoService,
               private _administradoresService:AdministradoresService,
               private _productoService:ProductoService,
               private _usuarioMaquinariaService:UsuarioMaquinariaService,
@@ -172,7 +179,7 @@ export class UsuariosComponent implements OnInit {
       if(usuario.nombreUsuario+" "+usuario.apPat+" "+usuario.apMat==user.nombreUsuario+" "+user.apPat+" "+user.apMat){
         return true
       }
-    
+
     }
   }
 
@@ -294,9 +301,11 @@ export class UsuariosComponent implements OnInit {
     this.productos = this._productoService.returnProductos();
     this.maquinas=this._maquinariaService.returnMaquinas();
     this.zonas=this._zonasService.returnZonas();
+    this.creditos = this._creditosService.establecerValores();
     this.maquinariaU = this._usuarioMaquinariaService.returnMaquinariasU(usuario.idUsuario);
     this.zonasU = this._usuarioZonaService.returnZonasU(usuario.idUsuario);
     this.productosU = this._usuarioProductoService.returnProductosU(usuario.idUsuario);
+    this.creditosU = this._usuarioCreditoService.returnCreditosU(usuario.idUsuario);
     this.modalVars.show();
     this.userSelected=usuario;
   }
@@ -337,6 +346,15 @@ export class UsuariosComponent implements OnInit {
       idProducto:producto.idProducto
     }
     this._usuarioProductoService.insertar(y);
+  }
+
+  agregarCredito(credito){
+    var z = {
+      idUsuario:this.userSelected.idUsuario,
+      idAdministrador:localStorage.getItem('idAdmin'),
+      idCredito:credito.idCredito
+    }
+    this._usuarioCreditoService.insertar(z);
   }
 
   balanceCero(data){
@@ -411,6 +429,10 @@ export class UsuariosComponent implements OnInit {
     this.modalZonaInit.show();
   }
 
+  openModalCreditosInit(){
+    this.modalCreditosInit.show();
+  }
+
   eliminaMaquinaria(maquinaria){
     this._usuarioMaquinariaService.deleteMaquinaria(maquinaria).subscribe();
   }
@@ -421,6 +443,10 @@ export class UsuariosComponent implements OnInit {
 
   eliminaProducto(producto){
     this._usuarioProductoService.eliminar(producto);
+  }
+
+  eliminaCredito(credito){
+    this._usuarioCreditoService.eliminar(credito);
   }
 
   getNameByIdMaq(id){
@@ -435,6 +461,14 @@ export class UsuariosComponent implements OnInit {
     for(let maq of this.zonas){
       if(maq.idZona==id)
        return maq.nombreZona;
+    }
+    return "id no encontrado";
+  }
+
+  getNameByIdCredito(id){
+    for(let maq of this.creditos){
+      if(maq.idCredito==id)
+       return maq.nombreCredito;
     }
     return "id no encontrado";
   }

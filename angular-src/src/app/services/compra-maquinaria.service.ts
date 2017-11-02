@@ -50,6 +50,20 @@ export class CompraMaquinariaService {
     });
   }
 
+  regresarMaquinaria(x,y){
+    this.undo(y).subscribe(data => {
+      console.log("Undo",data)
+    });
+    var maqC = [];
+    this.vuelta(x).subscribe(data => {
+      console.log("Vuelta",data)
+      for(let key$ in data.datos){
+        maqC.push(data.datos[key$]);
+      }
+    });
+    return maqC;
+  }
+
   cobrar(x){
     let headers = new Headers({
       'Content-Type':'application/json'
@@ -72,4 +86,17 @@ export class CompraMaquinariaService {
     return this.http.post('maquinariacomprada/asignar/', x, {headers}).map( res => res.json());
   }
 
+  vuelta(x){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    return this.http.post('maquinariacomprada/vuelta/', x, {headers}).map( res => res.json());
+  }
+
+  undo(x){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    return this.http.post('maquinariacomprada/undo/', x, {headers}).map( res => res.json());
+  }
 }
