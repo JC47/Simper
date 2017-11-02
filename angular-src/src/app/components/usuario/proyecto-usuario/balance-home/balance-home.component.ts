@@ -20,6 +20,32 @@ export class BalanceHomeComponent implements OnInit {
   balanceFinal:any;
   selectedTabProd:any="Productos en Desarrollo";
   selectedTabZona:any="Zonas en Desarrollo";
+
+  view: any[] = [300];
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Country';
+  showYAxisLabel = true;
+  single: any[];
+    single2: any[];
+  multi: any[];
+  yAxisLabel = 'Population';
+  colorScheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  };
+
+  colorScheme2 = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  };
+
+
+
+
+
+
   constructor(private _desarrolloProducto:DesarrolloProductoService,
               private _desarrolloZonaService:DesarrolloZonaService,
               private _CompraMaquinariaService:CompraMaquinariaService,
@@ -52,45 +78,102 @@ export class BalanceHomeComponent implements OnInit {
       }
     };
 
-    this.data = [
-      {
-        key: "Cumulative Return",
-        values: [
-          {
-            "label" : "Producto X" ,
-            "value" : 20
-          } ,
-          {
-            "label" : "Producto c" ,
-            "value" : 30
-          } ,
-          {
-            "label" : "Producto B" ,
-            "value" : 50
-          } ,
-          {
-            "label" : "Producto A" ,
-            "value" : 20
-          } ,
-          {
-            "label" : "Producto Z" ,
-            "value" : 30
-          } ,
-          {
-            "label" : "Producto l" ,
-            "value" : 10
-          } ,
-          {
-            "label" : "Producto Q" ,
-            "value" : 50
-          } ,
-          {
-            "label" : "Producto R" ,
-            "value" : 30
-          }
-        ]
-      }
-    ];
+    this.single = [
+  {
+    "name": "Germany",
+    "value": 8940000
+  },
+  {
+    "name": "USA",
+    "value": 5000000
+  },
+  {
+    "name": "France",
+    "value": 7200000
+  },
+  {
+    "name": "Mexico",
+    "value": 7200000
+  },
+  {
+    "name": "U",
+    "value": 5000000
+  },
+  {
+    "name": "Uru",
+    "value": 7200000
+  }
+
+];
+
+
+this.single2 = [
+{
+"name": "Producto 1",
+"value": 8940000
+},
+{
+"name": "Producto 2",
+"value": 5000000
+},
+{
+"name": "Producto 3",
+"value": 7200000
+},
+{
+"name": "Producto 4",
+"value": 7200000
+},
+{
+"name": "Producto 5",
+"value": 5000000
+},
+{
+"name": "Producto 6",
+"value": 7200000
+}
+
+];
+
+    // this.data = [
+    //   {
+    //     key: "Cumulative Return",
+    //     values: [
+    //       {
+    //         "label" : "Producto X" ,
+    //         "value" : 20
+    //       } ,
+    //       {
+    //         "label" : "Producto c" ,
+    //         "value" : 30
+    //       } ,
+    //       {
+    //         "label" : "Producto B" ,
+    //         "value" : 50
+    //       } ,
+    //       {
+    //         "label" : "Producto A" ,
+    //         "value" : 20
+    //       } ,
+    //       {
+    //         "label" : "Producto Z" ,
+    //         "value" : 30
+    //       } ,
+    //       {
+    //         "label" : "Producto l" ,
+    //         "value" : 10
+    //       } ,
+    //       {
+    //         "label" : "Producto Q" ,
+    //         "value" : 50
+    //       } ,
+    //       {
+    //         "label" : "Producto R" ,
+    //         "value" : 30
+    //       }
+    //     ]
+    //   }
+    // ];
   }
 
   ngOnInit() {

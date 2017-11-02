@@ -15,6 +15,9 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { AngularDraggableModule } from 'angular2-draggable';
+import { NG2D3Module } from 'ng2d3';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
+
 //Rutas
 import {app_routing} from './app.routes'
 
@@ -115,7 +118,10 @@ import { EstadoResultadosComponent } from './components/usuario/proyecto-usuario
     FlashMessagesModule,
     BrowserModule,
     NvD3Module,
+    NG2D3Module,
+    BrowserAnimationsModule,
     AngularDraggableModule,
+    NgxChartsModule,
     ModalModule.forRoot(),
     AlertModule.forRoot(),
     TabsModule.forRoot(),
