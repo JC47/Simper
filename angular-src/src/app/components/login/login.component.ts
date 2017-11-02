@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/Administrador']);
       } else {
         if(data.msg == 'Usuario No Encontrado'){
-          this.validUser=false;
+          this.validUser=true;
           this.validPass=true;
           this.authService.authenticateUsuario(datos).subscribe( data => {
             if(data.success){
@@ -58,16 +58,20 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/Usuario']);
             }
             else{
-
-              // alert(data.msg);
-              //this.router.navigate(['login']);
+              if(data.msg == "Usuario No Encontrado"){
+                this.validPass = true;
+                this.validUser = false;
+              }
+              else{
+                this.validPass = false;
+                this.validUser = true;
+              }
             }
           });
         }
         else{
-        this.validPass=false;
-        this.validUser=true;
-        // alert(data.msg);
+          this.validPass = false;
+          this.validUser = true;
         }
       }
     });

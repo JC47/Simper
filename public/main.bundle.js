@@ -87,7 +87,6 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ngx_bootstrap_tabs__ = __webpack_require__("../../../../ngx-bootstrap/tabs/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ng2_nvd3__ = __webpack_require__("../../../../ng2-nvd3/build/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ng2_nvd3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_ng2_nvd3__);
-<<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__angular_platform_browser_animations__ = __webpack_require__("../../../platform-browser/@angular/platform-browser/animations.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ng2_currency_mask__ = __webpack_require__("../../../../ng2-currency-mask/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ng2_currency_mask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_ng2_currency_mask__);
@@ -136,80 +135,21 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_53__components_home_home_component__ = __webpack_require__("../../../../../src/app/components/home/home.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_54__components_usuario_proyectos_proyectos_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyectos/proyectos.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_55__components_administradores_administradores_component__ = __webpack_require__("../../../../../src/app/components/administradores/administradores.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_57_ng_lightning_ng_lightning__ = __webpack_require__("../../../../ng-lightning/ng-lightning.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_58__components_usuario_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/usuario.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_59__components_usuario_navbar_usuario_navbar_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/navbar-usuario/navbar-usuario.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_60__components_usuario_proyecto_usuario_proyecto_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/proyecto-usuario.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_61__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_62__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-inicial/balance-inicial.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_63__components_usuario_proyecto_usuario_balance_final_balance_final_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-final/balance-final.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_64__components_usuario_proyecto_usuario_balance_home_balance_home_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_65__components_usuario_proyecto_usuario_operacion_operacion_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/operacion/operacion.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_66_d3__ = __webpack_require__("../../../../d3/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_67_nvd3__ = __webpack_require__("../../../../nvd3/build/nv.d3.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_67_nvd3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_67_nvd3__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_68__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.ts");
-=======
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ng2_currency_mask__ = __webpack_require__("../../../../ng2-currency-mask/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ng2_currency_mask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_ng2_currency_mask__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_angular2_draggable__ = __webpack_require__("../../../../angular2-draggable/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__app_routes__ = __webpack_require__("../../../../../src/app/app.routes.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__services_auxiliar_service__ = __webpack_require__("../../../../../src/app/services/auxiliar.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__services_compra_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/compra-maquinaria.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__services_desarrollo_zona_service__ = __webpack_require__("../../../../../src/app/services/desarrollo-zona.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__services_administradores_service__ = __webpack_require__("../../../../../src/app/services/administradores.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__services_usuarios_service__ = __webpack_require__("../../../../../src/app/services/usuarios.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__services_graficas_service__ = __webpack_require__("../../../../../src/app/services/graficas.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__services_resultados_operacion_service__ = __webpack_require__("../../../../../src/app/services/resultados-operacion.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__services_usuario_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/usuario-maquinaria.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__services_usuario_credito_service__ = __webpack_require__("../../../../../src/app/services/usuario-credito.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__services_usuario_producto_service__ = __webpack_require__("../../../../../src/app/services/usuario-producto.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__services_usuario_zona_service__ = __webpack_require__("../../../../../src/app/services/usuario-zona.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__services_desarrollo_producto_service__ = __webpack_require__("../../../../../src/app/services/desarrollo-producto.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__services_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/maquinaria.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__services_producto_service__ = __webpack_require__("../../../../../src/app/services/producto.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__services_creditos_service__ = __webpack_require__("../../../../../src/app/services/creditos.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__services_zonas_service__ = __webpack_require__("../../../../../src/app/services/zonas.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__services_operacion_service__ = __webpack_require__("../../../../../src/app/services/operacion.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__services_balance_service__ = __webpack_require__("../../../../../src/app/services/balance.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__services_resultados_service__ = __webpack_require__("../../../../../src/app/services/resultados.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__components_zona_producto_zona_producto_component__ = __webpack_require__("../../../../../src/app/components/zona-producto/zona-producto.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__components_usuario_proyecto_usuario_desarrollo_mercado_desarrollo_mercado_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/desarrollo-mercado/desarrollo-mercado.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_usuario_proyecto_usuario_desarrollo_producto_desarrollo_producto_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/desarrollo-producto/desarrollo-producto.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_usuario_proyecto_usuario_venta_productos_venta_productos_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/venta-productos/venta-productos.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_usuario_proyecto_usuario_compra_maquinaria_compra_maquinaria_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/compra-maquinaria/compra-maquinaria.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__components_navbar_navbar_component__ = __webpack_require__("../../../../../src/app/components/navbar/navbar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__components_usuario_proyecto_usuario_balance_balance_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance/balance.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__components_sidenav_sidenav_component__ = __webpack_require__("../../../../../src/app/components/sidenav/sidenav.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__components_productos_productos_component__ = __webpack_require__("../../../../../src/app/components/productos/productos.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__components_maquinarias_maquinarias_component__ = __webpack_require__("../../../../../src/app/components/maquinarias/maquinarias.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__components_creditos_creditos_component__ = __webpack_require__("../../../../../src/app/components/creditos/creditos.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__components_demandas_demandas_component__ = __webpack_require__("../../../../../src/app/components/demandas/demandas.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__components_usuarios_usuarios_component__ = __webpack_require__("../../../../../src/app/components/usuarios/usuarios.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__components_home_home_component__ = __webpack_require__("../../../../../src/app/components/home/home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__components_usuario_proyectos_proyectos_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyectos/proyectos.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__components_administradores_administradores_component__ = __webpack_require__("../../../../../src/app/components/administradores/administradores.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_53__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_54__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_55_ng_lightning_ng_lightning__ = __webpack_require__("../../../../ng-lightning/ng-lightning.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__components_usuario_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/usuario.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_57__components_usuario_navbar_usuario_navbar_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/navbar-usuario/navbar-usuario.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_58__components_usuario_proyecto_usuario_proyecto_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/proyecto-usuario.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_59__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_60__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-inicial/balance-inicial.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_61__components_usuario_proyecto_usuario_balance_final_balance_final_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-final/balance-final.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_62__components_usuario_proyecto_usuario_balance_home_balance_home_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_63__components_usuario_proyecto_usuario_operacion_operacion_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/operacion/operacion.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_64_d3__ = __webpack_require__("../../../../d3/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_65_nvd3__ = __webpack_require__("../../../../nvd3/build/nv.d3.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_65_nvd3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_65_nvd3__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_66__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.ts");
->>>>>>> f3239dea20c9cfcea84276146e4ba71f1708acd9
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_57__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_58_ng_lightning_ng_lightning__ = __webpack_require__("../../../../ng-lightning/ng-lightning.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_59__components_usuario_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/usuario.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_60__components_usuario_navbar_usuario_navbar_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/navbar-usuario/navbar-usuario.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_61__components_usuario_proyecto_usuario_proyecto_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/proyecto-usuario.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_62__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_63__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-inicial/balance-inicial.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_64__components_usuario_proyecto_usuario_balance_final_balance_final_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-final/balance-final.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_65__components_usuario_proyecto_usuario_balance_home_balance_home_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_66__components_usuario_proyecto_usuario_operacion_operacion_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/operacion/operacion.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_67_d3__ = __webpack_require__("../../../../d3/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_68_nvd3__ = __webpack_require__("../../../../nvd3/build/nv.d3.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_68_nvd3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_68_nvd3__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_69__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -300,10 +240,9 @@ var AppModule = (function () {
 AppModule = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
         declarations: [
-<<<<<<< HEAD
             __WEBPACK_IMPORTED_MODULE_39__app_component__["a" /* AppComponent */],
             __WEBPACK_IMPORTED_MODULE_45__components_navbar_navbar_component__["a" /* NavbarComponent */],
-            __WEBPACK_IMPORTED_MODULE_56__components_login_login_component__["a" /* LoginComponent */],
+            __WEBPACK_IMPORTED_MODULE_57__components_login_login_component__["a" /* LoginComponent */],
             __WEBPACK_IMPORTED_MODULE_47__components_sidenav_sidenav_component__["a" /* SidenavComponent */],
             __WEBPACK_IMPORTED_MODULE_46__components_usuario_proyecto_usuario_balance_balance_component__["a" /* BalanceComponent */],
             __WEBPACK_IMPORTED_MODULE_40__components_zona_producto_zona_producto_component__["a" /* ZonaProductoComponent */],
@@ -319,45 +258,16 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_44__components_usuario_proyecto_usuario_compra_maquinaria_compra_maquinaria_component__["a" /* CompraMaquinariaComponent */],
             __WEBPACK_IMPORTED_MODULE_53__components_home_home_component__["a" /* HomeComponent */],
             __WEBPACK_IMPORTED_MODULE_55__components_administradores_administradores_component__["a" /* AdministradoresComponent */],
-            __WEBPACK_IMPORTED_MODULE_58__components_usuario_usuario_component__["a" /* UsuarioComponent */],
-            __WEBPACK_IMPORTED_MODULE_59__components_usuario_navbar_usuario_navbar_usuario_component__["a" /* NavbarUsuarioComponent */],
-            __WEBPACK_IMPORTED_MODULE_60__components_usuario_proyecto_usuario_proyecto_usuario_component__["a" /* ProyectoUsuarioComponent */],
-            __WEBPACK_IMPORTED_MODULE_61__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__["a" /* SidenavPComponent */],
-            __WEBPACK_IMPORTED_MODULE_62__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__["a" /* BalanceInicialComponent */],
-            __WEBPACK_IMPORTED_MODULE_63__components_usuario_proyecto_usuario_balance_final_balance_final_component__["a" /* BalanceFinalComponent */],
-            __WEBPACK_IMPORTED_MODULE_64__components_usuario_proyecto_usuario_balance_home_balance_home_component__["a" /* BalanceHomeComponent */],
-            __WEBPACK_IMPORTED_MODULE_65__components_usuario_proyecto_usuario_operacion_operacion_component__["a" /* OperacionComponent */],
-            __WEBPACK_IMPORTED_MODULE_68__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__["a" /* EstadoResultadosComponent */],
-=======
-            __WEBPACK_IMPORTED_MODULE_36__app_component__["a" /* AppComponent */],
-            __WEBPACK_IMPORTED_MODULE_42__components_navbar_navbar_component__["a" /* NavbarComponent */],
-            __WEBPACK_IMPORTED_MODULE_54__components_login_login_component__["a" /* LoginComponent */],
-            __WEBPACK_IMPORTED_MODULE_44__components_sidenav_sidenav_component__["a" /* SidenavComponent */],
-            __WEBPACK_IMPORTED_MODULE_43__components_usuario_proyecto_usuario_balance_balance_component__["a" /* BalanceComponent */],
-            __WEBPACK_IMPORTED_MODULE_37__components_zona_producto_zona_producto_component__["a" /* ZonaProductoComponent */],
-            __WEBPACK_IMPORTED_MODULE_45__components_productos_productos_component__["a" /* ProductosComponent */],
-            __WEBPACK_IMPORTED_MODULE_46__components_maquinarias_maquinarias_component__["a" /* MaquinariasComponent */],
-            __WEBPACK_IMPORTED_MODULE_51__components_usuario_proyectos_proyectos_component__["a" /* ProyectosComponent */],
-            __WEBPACK_IMPORTED_MODULE_47__components_creditos_creditos_component__["a" /* CreditosComponent */],
-            __WEBPACK_IMPORTED_MODULE_48__components_demandas_demandas_component__["a" /* DemandasComponent */],
-            __WEBPACK_IMPORTED_MODULE_49__components_usuarios_usuarios_component__["a" /* UsuariosComponent */],
-            __WEBPACK_IMPORTED_MODULE_38__components_usuario_proyecto_usuario_desarrollo_mercado_desarrollo_mercado_component__["a" /* DesarrolloMercadoComponent */],
-            __WEBPACK_IMPORTED_MODULE_39__components_usuario_proyecto_usuario_desarrollo_producto_desarrollo_producto_component__["a" /* DesarrolloProductoComponent */],
-            __WEBPACK_IMPORTED_MODULE_40__components_usuario_proyecto_usuario_venta_productos_venta_productos_component__["a" /* VentaProductosComponent */],
-            __WEBPACK_IMPORTED_MODULE_41__components_usuario_proyecto_usuario_compra_maquinaria_compra_maquinaria_component__["a" /* CompraMaquinariaComponent */],
-            __WEBPACK_IMPORTED_MODULE_50__components_home_home_component__["a" /* HomeComponent */],
-            __WEBPACK_IMPORTED_MODULE_52__components_administradores_administradores_component__["a" /* AdministradoresComponent */],
-            __WEBPACK_IMPORTED_MODULE_56__components_usuario_usuario_component__["a" /* UsuarioComponent */],
-            __WEBPACK_IMPORTED_MODULE_57__components_usuario_navbar_usuario_navbar_usuario_component__["a" /* NavbarUsuarioComponent */],
-            __WEBPACK_IMPORTED_MODULE_58__components_usuario_proyecto_usuario_proyecto_usuario_component__["a" /* ProyectoUsuarioComponent */],
-            __WEBPACK_IMPORTED_MODULE_59__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__["a" /* SidenavPComponent */],
-            __WEBPACK_IMPORTED_MODULE_60__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__["a" /* BalanceInicialComponent */],
-            __WEBPACK_IMPORTED_MODULE_61__components_usuario_proyecto_usuario_balance_final_balance_final_component__["a" /* BalanceFinalComponent */],
-            __WEBPACK_IMPORTED_MODULE_62__components_usuario_proyecto_usuario_balance_home_balance_home_component__["a" /* BalanceHomeComponent */],
-            __WEBPACK_IMPORTED_MODULE_63__components_usuario_proyecto_usuario_operacion_operacion_component__["a" /* OperacionComponent */],
-            __WEBPACK_IMPORTED_MODULE_66__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__["a" /* EstadoResultadosComponent */],
-            __WEBPACK_IMPORTED_MODULE_53__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__["a" /* FinanciamientoComponent */],
->>>>>>> f3239dea20c9cfcea84276146e4ba71f1708acd9
+            __WEBPACK_IMPORTED_MODULE_59__components_usuario_usuario_component__["a" /* UsuarioComponent */],
+            __WEBPACK_IMPORTED_MODULE_60__components_usuario_navbar_usuario_navbar_usuario_component__["a" /* NavbarUsuarioComponent */],
+            __WEBPACK_IMPORTED_MODULE_61__components_usuario_proyecto_usuario_proyecto_usuario_component__["a" /* ProyectoUsuarioComponent */],
+            __WEBPACK_IMPORTED_MODULE_62__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__["a" /* SidenavPComponent */],
+            __WEBPACK_IMPORTED_MODULE_63__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__["a" /* BalanceInicialComponent */],
+            __WEBPACK_IMPORTED_MODULE_64__components_usuario_proyecto_usuario_balance_final_balance_final_component__["a" /* BalanceFinalComponent */],
+            __WEBPACK_IMPORTED_MODULE_65__components_usuario_proyecto_usuario_balance_home_balance_home_component__["a" /* BalanceHomeComponent */],
+            __WEBPACK_IMPORTED_MODULE_66__components_usuario_proyecto_usuario_operacion_operacion_component__["a" /* OperacionComponent */],
+            __WEBPACK_IMPORTED_MODULE_69__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__["a" /* EstadoResultadosComponent */],
+            __WEBPACK_IMPORTED_MODULE_56__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__["a" /* FinanciamientoComponent */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_8_angular2_flash_messages__["FlashMessagesModule"],
@@ -370,15 +280,9 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_6_ngx_bootstrap__["a" /* ModalModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_6_ngx_bootstrap__["b" /* AlertModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_9_ngx_bootstrap_tabs__["a" /* TabsModule */].forRoot(),
-<<<<<<< HEAD
             __WEBPACK_IMPORTED_MODULE_16__app_routes__["a" /* app_routing */],
             __WEBPACK_IMPORTED_MODULE_12_ng2_currency_mask__["CurrencyMaskModule"],
-            __WEBPACK_IMPORTED_MODULE_57_ng_lightning_ng_lightning__["a" /* NglModule */].forRoot(),
-=======
-            __WEBPACK_IMPORTED_MODULE_13__app_routes__["a" /* app_routing */],
-            __WEBPACK_IMPORTED_MODULE_11_ng2_currency_mask__["CurrencyMaskModule"],
-            __WEBPACK_IMPORTED_MODULE_55_ng_lightning_ng_lightning__["a" /* NglModule */].forRoot(),
->>>>>>> f3239dea20c9cfcea84276146e4ba71f1708acd9
+            __WEBPACK_IMPORTED_MODULE_58_ng_lightning_ng_lightning__["a" /* NglModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_6_ngx_bootstrap__["c" /* AccordionModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_6_ngx_bootstrap__["d" /* PaginationModule */].forRoot(),
@@ -1250,7 +1154,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"background-image:url('assets/img/fondo1.jpeg');background-attachment: fixed;background-size:cover;\r\noverflow:hidden; margin-top:80px;height:600px\">\r\n  <!-- <div class=\"container\" style=\"margin-top:120px;\"> -->\r\n          <!-- <div class=\"card card-container\">\r\n              <img id=\"profile-img\" class=\"profile-img-card\" src=\"//ssl.gstatic.com/accounts/ui/avatar_2x.png\" />\r\n              <p id=\"profile-name\" class=\"profile-name-card\"></p>\r\n              <form class=\"form-signin\" [formGroup]=\"login\" (ngSubmit)=\"onLoginSubmit()\">\r\n                  <span id=\"reauth-email\" class=\"reauth-email\"></span>\r\n                  <input type=\"text\" class=\"form-control\" placeholder=\"Nombre de Usuario\" formControlName=\"username\" required autofocus>\r\n                  <input type=\"password\" class=\"form-control\" placeholder=\"Contraseña\" formControlName=\"password\" required>\r\n                    <button class=\"btn btn-lg btn-primary btn-block btn-signin\" type=\"submit\">Entrar</button>\r\n              </form>\r\n          </div> -->\r\n\r\n          <h1 style=\"margin-top:60px;color:#005689\">MVision y Sensibilidad en los Negocios</h1>\r\n          <div class=\"login-form\" >\r\n     <img src=\"assets/img/perfil.jpg\" class=\"img-log\" alt=\"\">\r\n     <form [formGroup]=\"login\" (ngSubmit)=\"onLoginSubmit()\">\r\n       <div class=\"form-group \">\r\n         <input type=\"text\" class=\"form-control\" placeholder=\"Usuario \" formControlName=\"username\"\r\n         [ngClass]=\"{'wrong-entry':!validUser}\">\r\n\r\n       </div>\r\n       <div class=\"form-group log-status\">\r\n         <input type=\"password\" class=\"form-control\" placeholder=\"Contraseña\" formControlName=\"password\"\r\n         [ngClass]=\"{'wrong-entry':!validPass}\">\r\n       </div>\r\n        <span *ngIf=\"!validPass\" class=\"alert\">Contraseña Incorrecta</span>\r\n        <span *ngIf=\"!validUser\" class=\"alert\">Usuario Incorrecto</span>\r\n       <button type=\"submit\" class=\"log-btn\" >Entrar</button>\r\n     </form>\r\n\r\n\r\n\r\n   </div>\r\n\r\n\r\n\r\n\r\n\r\n</div>\r\n"
+module.exports = "<div style=\"background-image:url('assets/img/fondo1.jpeg');background-attachment: fixed;background-size:cover;\r\noverflow:hidden; margin-top:80px;height:600px\">\r\n  <!-- <div class=\"container\" style=\"margin-top:120px;\"> -->\r\n          <!-- <div class=\"card card-container\">\r\n              <img id=\"profile-img\" class=\"profile-img-card\" src=\"//ssl.gstatic.com/accounts/ui/avatar_2x.png\" />\r\n              <p id=\"profile-name\" class=\"profile-name-card\"></p>\r\n              <form class=\"form-signin\" [formGroup]=\"login\" (ngSubmit)=\"onLoginSubmit()\">\r\n                  <span id=\"reauth-email\" class=\"reauth-email\"></span>\r\n                  <input type=\"text\" class=\"form-control\" placeholder=\"Nombre de Usuario\" formControlName=\"username\" required autofocus>\r\n                  <input type=\"password\" class=\"form-control\" placeholder=\"Contraseña\" formControlName=\"password\" required>\r\n                    <button class=\"btn btn-lg btn-primary btn-block btn-signin\" type=\"submit\">Entrar</button>\r\n              </form>\r\n          </div> -->\r\n\r\n          <h1 style=\"margin-top:60px;color:#005689\">Vision y Sensibilidad en los Negocios</h1>\r\n          <div class=\"login-form\" >\r\n     <img src=\"assets/img/perfil.jpg\" class=\"img-log\" alt=\"\">\r\n     <form [formGroup]=\"login\" (ngSubmit)=\"onLoginSubmit()\">\r\n       <div class=\"form-group \">\r\n         <input type=\"text\" class=\"form-control\" placeholder=\"Usuario \" formControlName=\"username\"\r\n         [ngClass]=\"{'wrong-entry':!validUser}\">\r\n\r\n       </div>\r\n       <div class=\"form-group log-status\">\r\n         <input type=\"password\" class=\"form-control\" placeholder=\"Contraseña\" formControlName=\"password\"\r\n         [ngClass]=\"{'wrong-entry':!validPass}\">\r\n       </div>\r\n        <span *ngIf=\"!validPass\" class=\"alert\">Contraseña Incorrecta</span>\r\n        <span *ngIf=\"!validUser\" class=\"alert\">Usuario Incorrecto</span>\r\n       <button type=\"submit\" class=\"log-btn\" >Entrar</button>\r\n     </form>\r\n\r\n\r\n\r\n   </div>\r\n\r\n\r\n\r\n\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1306,7 +1210,7 @@ var LoginComponent = (function () {
             }
             else {
                 if (data.msg == 'Usuario No Encontrado') {
-                    _this.validUser = false;
+                    _this.validUser = true;
                     _this.validPass = true;
                     _this.authService.authenticateUsuario(datos).subscribe(function (data) {
                         if (data.success) {
@@ -1317,15 +1221,20 @@ var LoginComponent = (function () {
                             _this.router.navigate(['/Usuario']);
                         }
                         else {
-                            // alert(data.msg);
-                            //this.router.navigate(['login']);
+                            if (data.msg == "Usuario No Encontrado") {
+                                _this.validPass = true;
+                                _this.validUser = false;
+                            }
+                            else {
+                                _this.validPass = false;
+                                _this.validUser = true;
+                            }
                         }
                     });
                 }
                 else {
                     _this.validPass = false;
                     _this.validUser = true;
-                    // alert(data.msg);
                 }
             }
         });
@@ -2111,11 +2020,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.html":
 /***/ (function(module, exports) {
 
-<<<<<<< HEAD
 module.exports = "<div class=\"\">\r\n<div class=\"row\">\r\n\r\n  <div class=\"card card-outline-primary col-7 text-center\">\r\n    <div class=\"card-block\">\r\n      <blockquote class=\"card-blockquote\">\r\n        <div class=\"card-header\">\r\n          <h3 class=\"col-lg-12 col-sm-12 col-md-12  text-center\">Demanda Potencial del Periodo </h3>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-lg-8 col-sm-12 \">\r\n            <ngx-charts-bar-horizontal\r\n                  [scheme]=\"colorScheme\"\r\n                  [results]=\"single\"\r\n                  gradient=\"false\"\r\n                  xAxis=\"true\"\r\n                  yAxis=\"true\"\r\n                  showXAxisLabel=\"true\"\r\n                  showYAxisLabel=\"true\"\r\n                  xAxisLabel=\"Demnada Potencial\"\r\n                  yAxisLabel=\"Productos\">\r\n                </ngx-charts-bar-horizontal>\r\n          </div>\r\n\r\n          <div class=\"col-lg-4 col-sm-8 \">\r\n            <table class=\"table table-responsive\" style=\"margin-top:10px\">\r\n    <thead class=\"thead-inverse\">\r\n      <tr>\r\n        <th>Productos</th>\r\n        <th>Zona 1</th>\r\n        <th>Zona 2</th>\r\n        <th>Zona 3</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <th>Producto 1</th>\r\n        <th>18,000</th>\r\n        <td>20,000</td>\r\n        <td>5,000</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Producto 2</th>\r\n        <th>18,000</th>\r\n        <td>20,000</td>\r\n        <td>5,000</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Producto 3</th>\r\n        <th>18,000</th>\r\n        <td>20,000</td>\r\n        <td>5,000</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Producto 4</th>\r\n        <th>18,000</th>\r\n        <td>20,000</td>\r\n        <td>5,000</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n\r\n          </div>\r\n\r\n        </div>\r\n\r\n\r\n\r\n      </blockquote>\r\n    </div>\r\n  </div>\r\n\r\n\r\n\r\n      <!-- <div class=\"col-4\">\r\n        <div class=\"card card-inverse card-success mb-3 text-center\">\r\n          <div class=\"card-block\">\r\n            <blockquote class=\"card-blockquote\">\r\n              <div class=\"card-subtitle\" style=\"font-size:20px\">\r\n                Efectivo Total\r\n              </div>\r\n              <div class=\"card-title\" style=\"font-size:40px\">\r\n                {{balanceFinal[0].cajaBancos | currency:'USD':true:'1.0-0'}}\r\n              </div>\r\n\r\n            </blockquote>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"col-4\">\r\n            <div class=\"card card-inverse card-danger text-center\">\r\n              <div class=\"card-block\">\r\n                <blockquote class=\"card-blockquote\">\r\n                  <div class=\"card-subtitle\" style=\"font-size:20px\">\r\n                    Pago de Credito del Periodo\r\n                  </div>\r\n                  <div class=\"card-title\" style=\"font-size:40px\">\r\n                    $1,000,000,000\r\n                  </div>\r\n                </blockquote>\r\n              </div>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"col-8\">\r\n          <div class=\"card card-inverse card-primary text-center\">\r\n            <div class=\"card-block\">\r\n              <div class=\"card-header\">\r\n                <h4 class=\"col-12 text-center\">Capacidad de Producción</h4>\r\n              </div>\r\n              <blockquote class=\"card-blockquote\">\r\n\r\n                <div class=\"col-12\" >\r\n                  <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\r\n                </div>\r\n              </blockquote>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n\r\n      <div class=\"col-4\">\r\n\r\n                    <div class=\"card card-inverse card-danger text-center\" style=\"height:550px\">\r\n                      <div class=\"card-block\">\r\n                        <div class=\"card-header\">\r\n                          <h4 class=\"col-12 text-center\">Maquinas Compradas</h4>\r\n                        </div>\r\n                        <blockquote class=\"card-blockquote\">\r\n                          <div class=\"col-12\" *ngFor=\"let maquina of maquinasCompradas\"\r\n                          style=\"background-color:#007CB9;margin-top:10px; padding-top:5px;border-radius:20px\">\r\n                            <div class=\"row align-items-center\" >\r\n                              <div class=\"col-3\">\r\n                                <img  src=\"assets/img/box.png\" class=\"img-fluid \">\r\n                              </div>\r\n                              <div class=\"col-9\">\r\n                                <div class=\"row\">\r\n                                  <h4 class=\"text-left col-12\">{{maquina.nombreMaq}}</h4>\r\n                                  <h5 class=\"text-left col-12\">Producción: {{maquina.cantidadProd}}u</h5>\r\n                                </div>\r\n                              </div>\r\n                            </div>\r\n\r\n\r\n\r\n                          </div>\r\n                        </blockquote>\r\n                      </div>\r\n                    </div>\r\n          </div> -->\r\n\r\n          <div class=\"col-lg-5\">\r\n            <div class=\"card card-outline-secondary mb-3 text-center\">\r\n  <div class=\"card-block\">\r\n    <blockquote class=\"card-blockquote\">\r\n      <div class=\"card-header\">\r\n            <h3 class=\"col-12 text-center\">Capacidad Instalada</h3>\r\n      </div>\r\n\r\n<div class=\"col-12\">\r\n  <ngx-charts-bar-horizontal\r\n        [view]=\"view\"\r\n        [scheme]=\"colorScheme2\"\r\n        [results]=\"single2\"\r\n        gradient=\"false\"\r\n        xAxis=\"true\"\r\n        yAxis=\"true\"\r\n        showXAxisLabel=\"true\"\r\n        showYAxisLabel=\"true\"\r\n        xAxisLabel=\"Demnada Potencial\"\r\n        yAxisLabel=\"Productos\">\r\n      </ngx-charts-bar-horizontal>\r\n</div>\r\n\r\n\r\n\r\n    </blockquote>\r\n  </div>\r\n</div>\r\n          </div>\r\n\r\n\r\n\r\n\r\n          <div class=\"col-6\" style=\"margin-top:30px\">\r\n            <ngl-tabs [(selected)]=\"selectedTabProd\" type=\"scoped\">\r\n\r\n              <ng-template ngl-tab heading=\"Productos Desarrollados\">\r\n\r\n              </ng-template>\r\n\r\n              <ng-template ngl-tab heading=\"Productos en Desarrollo\">\r\n                Productos en Desarrollo\r\n              </ng-template>\r\n\r\n\r\n            </ngl-tabs>\r\n\r\n          </div>\r\n\r\n          <div class=\"col-6\" style=\"margin-top:30px\">\r\n            <ngl-tabs [(selected)]=\"selectedTabZona\" type=\"scoped\">\r\n\r\n              <ng-template ngl-tab heading=\"Zonas Desarrolladas\">\r\n                You have  details.\r\n              </ng-template>\r\n\r\n              <ng-template ngl-tab heading=\"Zonas en Desarrollo\">\r\n                You have  details.\r\n              </ng-template>\r\n\r\n\r\n            </ngl-tabs>\r\n\r\n          </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n  </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n</div>\r\n"
-=======
-module.exports = "<div class=\"container\">\n<div class=\"row\">\n\n      <div class=\"col-4\">\n        <div class=\"card card-inverse card-success mb-3 text-center\">\n          <div class=\"card-block\">\n            <blockquote class=\"card-blockquote\">\n              <div class=\"card-subtitle\" style=\"font-size:20px\">\n                Efectivo Total\n              </div>\n              <div class=\"card-title\" style=\"font-size:40px\">\n                {{balanceFinal[0].cajaBancos | currency:'USD':true:'1.0-0'}}\n              </div>\n\n            </blockquote>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"col-4\">\n            <div class=\"card card-inverse card-danger text-center\">\n              <div class=\"card-block\">\n                <blockquote class=\"card-blockquote\">\n                  <div class=\"card-subtitle\" style=\"font-size:20px\">\n                    Pago de Credito del Periodo\n                  </div>\n                  <div class=\"card-title\" style=\"font-size:40px\">\n                    $1,000,000,000\n                  </div>\n                </blockquote>\n              </div>\n            </div>\n        </div>\n\n        <div class=\"col-8\">\n          <div class=\"card card-inverse card-primary text-center\">\n            <div class=\"card-block\">\n              <div class=\"card-header\">\n                <h4 class=\"col-12 text-center\">Capacidad de Producción</h4>\n              </div>\n              <blockquote class=\"card-blockquote\">\n\n                <div class=\"col-12\" >\n                  <nvd3 [options]=\"options\" [data]=\"data\"></nvd3>\n                </div>\n              </blockquote>\n            </div>\n          </div>\n\n        </div>\n\n      <div class=\"col-4\">\n\n                    <div class=\"card card-inverse card-danger text-center\" style=\"height:550px\">\n                      <div class=\"card-block\">\n                        <div class=\"card-header\">\n                          <h4 class=\"col-12 text-center\">Maquinas Compradas</h4>\n                        </div>\n                        <blockquote class=\"card-blockquote\">\n                          <div class=\"col-12\" *ngFor=\"let maquina of maquinasCompradas\"\n                          style=\"background-color:#007CB9;margin-top:10px; padding-top:5px;border-radius:20px\">\n                            <div class=\"row align-items-center\" >\n                              <div class=\"col-3\">\n                                <img  src=\"assets/img/box.png\" class=\"img-fluid \">\n                              </div>\n                              <div class=\"col-9\">\n                                <div class=\"row\">\n                                  <h4 class=\"text-left col-12\">{{maquina.nombreMaq}}</h4>\n                                  <h5 class=\"text-left col-12\">Producción: {{maquina.cantidadProd}}u</h5>\n                                </div>\n                              </div>\n                            </div>\n\n\n\n                          </div>\n                        </blockquote>\n                      </div>\n                    </div>\n          </div>\n\n          <div class=\"col-6\" style=\"margin-top:30px\">\n            <ngl-tabs [(selected)]=\"selectedTabProd\" type=\"scoped\">\n\n              <ng-template ngl-tab heading=\"Productos Desarrollados\">\n                Productos Desarrollados\n              </ng-template>\n\n              <ng-template ngl-tab heading=\"Productos en Desarrollo\">\n                Productos en Desarrollo\n              </ng-template>\n\n\n            </ngl-tabs>\n\n          </div>\n\n          <div class=\"col-6\" style=\"margin-top:30px\">\n            <ngl-tabs [(selected)]=\"selectedTabZona\" type=\"scoped\">\n\n              <ng-template ngl-tab heading=\"Zonas Desarrolladas\">\n                You have  details.\n              </ng-template>\n\n              <ng-template ngl-tab heading=\"Zonas en Desarrollo\">\n                You have  details.\n              </ng-template>\n\n\n            </ngl-tabs>\n\n          </div>\n\n\n\n  </div>\n\n\n\n\n\n\n\n</div>\n"
->>>>>>> f3239dea20c9cfcea84276146e4ba71f1708acd9
 
 /***/ }),
 
@@ -3500,11 +3405,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-<<<<<<< HEAD
 exports.push([module.i, ".mainPage{\r\n  padding-left:320px;\r\n  padding-top: 110px;\r\n  overflow: hidden;\r\n}\r\n", ""]);
-=======
-exports.push([module.i, ".mainPage{\n  padding-left: 22%;\n  padding-top: 110px;\n  overflow: hidden;\n}\n", ""]);
->>>>>>> f3239dea20c9cfcea84276146e4ba71f1708acd9
 
 // exports
 
@@ -3607,11 +3508,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-<<<<<<< HEAD
 exports.push([module.i, ".nav-side-menu {\r\n  overflow: auto;\r\n  font-family: verdana;\r\n  font-size: 15px;\r\n  font-weight: 200;\r\n  background-color: #408AB4 ;\r\n  position: fixed;\r\n  top: 0px;\r\n  width: 300px;\r\n  height: 100%;\r\n  color: #e1ffff;\r\n  margin-top: 110px;\r\n}\r\n.nav-side-menu .brand {\r\n  background-color: #34699A;\r\n  line-height: 50px;\r\n  display: block;\r\n  text-align: center;\r\n  font-size: 14px;\r\n}\r\n.nav-side-menu .toggle-btn {\r\n  display: none;\r\n}\r\n.nav-side-menu ul,\r\n.nav-side-menu li {\r\n  list-style: none;\r\n  padding: 0px;\r\n  margin: 0px;\r\n  line-height: 70px;\r\n  cursor: pointer;\r\n  /*\r\n    .collapsed{\r\n       .arrow:before{\r\n                 font-family: FontAwesome;\r\n                 content: \"\\f053\";\r\n                 display: inline-block;\r\n                 padding-left:10px;\r\n                 padding-right: 10px;\r\n                 vertical-align: middle;\r\n                 float:right;\r\n            }\r\n     }\r\n*/\r\n}\r\n.nav-side-menu ul :not(collapsed) .arrow:before,\r\n.nav-side-menu li :not(collapsed) .arrow:before {\r\n  font-family: FontAwesome;\r\n  content: \"\\F078\";\r\n  display: inline-block;\r\n  padding-left: 10px;\r\n  padding-right: 10px;\r\n  vertical-align: middle;\r\n  float: right;\r\n}\r\n.nav-side-menu ul .active,\r\n.nav-side-menu li .active {\r\n  border-left: 3px solid #d19b3d;\r\n  background-color: #4f5b69;\r\n}\r\n.nav-side-menu ul .sub-menu li.active,\r\n.nav-side-menu li .sub-menu li.active {\r\n  color: #d19b3d;\r\n}\r\n.nav-side-menu ul .sub-menu li.active a,\r\n.nav-side-menu li .sub-menu li.active a {\r\n  color: #d19b3d;\r\n}\r\n\r\n.active{\r\n  background-color: gray;\r\n}\r\n\r\n.nav-side-menu ul .sub-menu li,\r\n.nav-side-menu li .sub-menu li {\r\n  background-color: #181c20;\r\n  border: none;\r\n  line-height: 28px;\r\n  border-bottom: 1px solid #23282e;\r\n  margin-left: 0px;\r\n}\r\n.nav-side-menu ul .sub-menu li:hover,\r\n.nav-side-menu li .sub-menu li:hover {\r\n  background-color:#65C6C4;\r\n}\r\n.nav-side-menu ul .sub-menu li:before,\r\n.nav-side-menu li .sub-menu li:before {\r\n  font-family: FontAwesome;\r\n  content: \"\\F105\";\r\n  display: inline-block;\r\n  padding-left: 10px;\r\n  padding-right: 10px;\r\n  vertical-align: middle;\r\n}\r\n.nav-side-menu li {\r\n  padding-left: 0px;\r\n  border-left: 3px solid #2e353d;\r\n  border-bottom: 1px solid #23282e;\r\n}\r\n.nav-side-menu li a {\r\n  text-decoration: none;\r\n  color: #e1ffff;\r\n}\r\n.nav-side-menu li a i {\r\n  padding-left: 10px;\r\n  width: 20px;\r\n  padding-right: 20px;\r\n}\r\n.nav-side-menu li:hover {\r\n  border-left: 3px solid #77ABB7;\r\n  background-color: #4f5b69;\r\n  transition: all 1s ease;\r\n}\r\n@media (max-width: 767px) {\r\n  .nav-side-menu {\r\n    position: relative;\r\n    width: 100%;\r\n    margin-bottom: 10px;\r\n  }\r\n  .nav-side-menu .toggle-btn {\r\n    display: block;\r\n    cursor: pointer;\r\n    position: absolute;\r\n    right: 10px;\r\n    top: 10px;\r\n    z-index: 9000 !important;\r\n    padding: 3px;\r\n    background-color: #ffffff;\r\n    color: #000;\r\n    width: 40px;\r\n    text-align: center;\r\n  }\r\n  .brand {\r\n    text-align: left !important;\r\n    font-size: 22px;\r\n    padding-left: 20px;\r\n    line-height: 50px !important;\r\n  }\r\n}\r\n@media (min-width: 767px) {\r\n  .nav-side-menu .menu-list .menu-content {\r\n    display: block;\r\n  }\r\n}\r\nbody {\r\n  margin: 0px;\r\n  padding: 0px;\r\n}\r\n", ""]);
-=======
-exports.push([module.i, ".nav-side-menu {\n  overflow: auto;\n  font-family: verdana;\n  font-size: 15px;\n  font-weight: 200;\n  background-color: #408AB4 ;\n  position: fixed;\n  top: 0px;\n  width: 22%;\n  height: 100%;\n  color: #e1ffff;\n  margin-top: 110px;\n}\n.nav-side-menu .brand {\n  background-color: #34699A;\n  line-height: 50px;\n  display: block;\n  text-align: center;\n  font-size: 14px;\n}\n.nav-side-menu .toggle-btn {\n  display: none;\n}\n.nav-side-menu ul,\n.nav-side-menu li {\n  list-style: none;\n  padding: 0px;\n  margin: 0px;\n  line-height: 70px;\n  cursor: pointer;\n  /*\n    .collapsed{\n       .arrow:before{\n                 font-family: FontAwesome;\n                 content: \"\\f053\";\n                 display: inline-block;\n                 padding-left:10px;\n                 padding-right: 10px;\n                 vertical-align: middle;\n                 float:right;\n            }\n     }\n*/\n}\n.nav-side-menu ul :not(collapsed) .arrow:before,\n.nav-side-menu li :not(collapsed) .arrow:before {\n  font-family: FontAwesome;\n  content: \"\\F078\";\n  display: inline-block;\n  padding-left: 10px;\n  padding-right: 10px;\n  vertical-align: middle;\n  float: right;\n}\n.nav-side-menu ul .active,\n.nav-side-menu li .active {\n  border-left: 3px solid #d19b3d;\n  background-color: #4f5b69;\n}\n.nav-side-menu ul .sub-menu li.active,\n.nav-side-menu li .sub-menu li.active {\n  color: #d19b3d;\n}\n.nav-side-menu ul .sub-menu li.active a,\n.nav-side-menu li .sub-menu li.active a {\n  color: #d19b3d;\n}\n\n.active{\n  background-color: gray;\n}\n\n.nav-side-menu ul .sub-menu li,\n.nav-side-menu li .sub-menu li {\n  background-color: #181c20;\n  border: none;\n  line-height: 28px;\n  border-bottom: 1px solid #23282e;\n  margin-left: 0px;\n}\n.nav-side-menu ul .sub-menu li:hover,\n.nav-side-menu li .sub-menu li:hover {\n  background-color:#65C6C4;\n}\n.nav-side-menu ul .sub-menu li:before,\n.nav-side-menu li .sub-menu li:before {\n  font-family: FontAwesome;\n  content: \"\\F105\";\n  display: inline-block;\n  padding-left: 10px;\n  padding-right: 10px;\n  vertical-align: middle;\n}\n.nav-side-menu li {\n  padding-left: 0px;\n  border-left: 3px solid #2e353d;\n  border-bottom: 1px solid #23282e;\n}\n.nav-side-menu li a {\n  text-decoration: none;\n  color: #e1ffff;\n}\n.nav-side-menu li a i {\n  padding-left: 10px;\n  width: 20px;\n  padding-right: 20px;\n}\n.nav-side-menu li:hover {\n  border-left: 3px solid #77ABB7;\n  background-color: #4f5b69;\n  transition: all 1s ease;\n}\n@media (max-width: 767px) {\n  .nav-side-menu {\n    position: relative;\n    width: 100%;\n    margin-bottom: 10px;\n  }\n  .nav-side-menu .toggle-btn {\n    display: block;\n    cursor: pointer;\n    position: absolute;\n    right: 10px;\n    top: 10px;\n    z-index: 9000 !important;\n    padding: 3px;\n    background-color: #ffffff;\n    color: #000;\n    width: 40px;\n    text-align: center;\n  }\n  .brand {\n    text-align: left !important;\n    font-size: 22px;\n    padding-left: 20px;\n    line-height: 50px !important;\n  }\n}\n@media (min-width: 767px) {\n  .nav-side-menu .menu-list .menu-content {\n    display: block;\n  }\n}\nbody {\n  margin: 0px;\n  padding: 0px;\n}\n", ""]);
->>>>>>> f3239dea20c9cfcea84276146e4ba71f1708acd9
 
 // exports
 
@@ -4045,11 +3942,7 @@ var _a, _b, _c, _d, _e, _f;
 /***/ "../../../../../src/app/components/usuario/usuario.component.html":
 /***/ (function(module, exports) {
 
-<<<<<<< HEAD
 module.exports = "<app-navbar-usuario></app-navbar-usuario>\r\n<div>\r\n<router-outlet style=\"margin-left:90px;\"></router-outlet>\r\n</div>\r\n"
-=======
-module.exports = "<app-navbar-usuario></app-navbar-usuario>\n<div>\n<router-outlet style=\"margin-left:100px;\"></router-outlet>\n</div>\n"
->>>>>>> f3239dea20c9cfcea84276146e4ba71f1708acd9
 
 /***/ }),
 
@@ -5451,7 +5344,7 @@ var CreditosService = (function () {
         return this.creditos;
     };
     CreditosService.prototype.getCreditos = function () {
-        return this.http.get('prestamo/').map(function (res) { return res.json(); });
+        return this.http.get('prestamo/getcredito').map(function (res) { return res.json(); });
     };
     CreditosService.prototype.setCreditos = function (credito) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
@@ -6972,6 +6865,18 @@ var UsuarioCreditoService = (function () {
             'Content-Type': 'application/json'
         });
         return this.http.post('usuarioscreditos/delete/', credito, headers).map(function (res) { return res.json(); });
+    };
+    UsuarioCreditoService.prototype.solicitarCredito = function (x) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        return this.http.post('prestamo/amortizacioncreditobalance/', x, headers).map(function (res) { return res.json(); });
+    };
+    UsuarioCreditoService.prototype.eliminarCredito = function (x) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        return this.http.post('prestamo/deletecreditobalance/', x, headers).map(function (res) { return res.json(); });
     };
     return UsuarioCreditoService;
 }());
