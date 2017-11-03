@@ -69,4 +69,53 @@ export class UsuarioCreditoService {
     return this.http.post('prestamo/deletecreditobalance/',x,headers).map(res => res.json());
   }
 
+  visualizarTabla(idCredito){
+    var x = {
+      idCredito:idCredito,
+      idProyecto:parseInt(localStorage.getItem('idProyecto')),
+      numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo'))
+    }
+    var tabla = [];
+    this.verTabla(x).subscribe(data => {
+      console.log("Consulta Tabla",data.success,data.datos)
+      for(let i = 0; i < (data.datos.length-1); i++){
+        tabla.push(data.datos[i]);
+      }
+    });
+    return tabla
+  }
+
+  verTabla(x){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    return this.http.post('prestamo/veramortizacion/',x,headers).map(res => res.json());
+  }
+
+  verPagosR(x){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    return this.http.post('prestamo/getAmortizacion/',x,headers).map(res => res.json());
+  }
+
+  verPagosP(idCredito){
+    var x = {
+      idCredito:idCredito,
+      idProyecto:parseInt(localStorage.getItem('idProyecto'))
+    };
+    var tabla = [];
+    this.verPagosR(x).subscribe( data=> {
+      console.log("Consulta Tabla 2",data.success,data.datos)
+      for(let i in data.datos){
+        if(data.datos[i].numeroPeriodo > parseInt(localStorage.getItem('numeroPeriodo'))){
+          tabla.push(data.datos[i]);
+        }
+      }
+    });
+    return tabla;
+  }
+
+
+
 }

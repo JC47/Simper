@@ -80,7 +80,9 @@ export class BalanceComponent implements OnInit {
       cajaBancosFinal += b.cajaBancos;
     }
     if(cajaBancosFinal < 0){
-      alert("Necesitas un prestamo")
+      this.openConf=false;
+      alert("Necesitas un prestamo");
+      this.router.navigate(['Usuario/proyecto/financiamiento']);
     }
     else{
       this.openConf=false;

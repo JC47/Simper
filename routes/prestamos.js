@@ -122,6 +122,32 @@ router.get('/getcredito', (req, res, next) => {
   });
 });
 
+router.post('/getAmortizacion', (req,res,next) => {
+  var idCredito = req.body.idCredito;
+  var idProyecto = req.body.idProyecto;
+
+  Promise.resolve().then(function(){
+    return prestamo.getAmortizacion(idProyecto,idCredito);
+  }).then(function(rows){
+    res.json({success:true,datos:rows,msg:"Bien"});
+  }).catch(function(err){
+    console.error("got error: " + err);
+    res.json({success:false, msg:"No sirve"});
+  });
+});
+
+router.get('/getCreditosBalance/:idProyecto', (req,res,next) => {
+
+  Promise.resolve().then(function(){
+    return prestamo.getCreditosBalance(req.params.idProyecto);
+  }).then(function(rows){
+    res.json({success:true,datos:rows,msg:"Bien"});
+  }).catch(function(err){
+    console.error("got error: " + err);
+    res.json({success:false, msg:"No sirve"});
+  });
+});
+
 // amortizacion y creditobalance
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.post('/amortizacioncreditobalance', (req, res, next) => {
@@ -144,6 +170,7 @@ var anticipo;
 
 Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCredito),
             prestamo.getFinanEspecifico(idProyecto,numeroPeriodo,idCredito),function(pagoanticipado,pagoscreditos,financiamiento) {
+    console.log("consulta defectuosa",financiamiento);
      fina = financiamiento;
      pagoAnticipado = pagoanticipado[0].pagoAnticipado;
      pagoTotal = pagoscreditos;
@@ -198,9 +225,9 @@ Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCr
   })
   .then(function () {
     console.log("pagoAnticipado: "+pagoAnticipado);
-for (var i = 0; i < pagoTotal.length; i++) {
-  console.log("pagoTotal: "+pagoTotal[i].pagosCredito);
-}
+    for (var i = 0; i < pagoTotal.length; i++) {
+      console.log("pagoTotal: "+pagoTotal[i].pagosCredito);
+    }
    return porcentajesPagos(monto,pagoAnticipado,pagoTotal);
   })
   .then(function (pagosTotales) {
@@ -271,6 +298,7 @@ router.post('/veramortizacion', (req, res, next) => {
     function(pagoanticipado, pagoscreditos, credito) {
        pagoAnticipado = pagoanticipado[0].pagoAnticipado;
        pagoTotal = pagoscreditos;
+       console.log("Monto",credito);
        monto = credito[0].monto;
       //Valores Iniciales para CAPITAL
         if (pagoAnticipado==1) {//Es 1 cuando no existen pagos anticipados
