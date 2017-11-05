@@ -78,7 +78,7 @@ export class UsuarioCreditoService {
     var tabla = [];
     this.verTabla(x).subscribe(data => {
       console.log("Consulta Tabla",data.success,data.datos)
-      for(let i = 0; i < (data.datos.length-1); i++){
+      for(let i = 0; i < (data.datos.length); i++){
         tabla.push(data.datos[i]);
       }
     });
