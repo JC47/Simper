@@ -245,21 +245,14 @@ Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCr
   })
   .then(function (json) {
     return prestamo.addAmortizacion(numeroPeriodo,idProyecto,idCredito,json);
-<<<<<<< HEAD
   }).then(function(){
     return prestamo.getFinanciamientos(idProyecto,numeroPeriodo);
-  }).then(function(rows){
-  res.json({success: true,  msg:"Operacion exitosa", datos:rows});
-
-=======
   })
-
 .then(function(){
   res.json({success: true,  msg:"Operacion exitosa"});
   array.length=0;
   pagoT.length=0;
   aux=0;
->>>>>>> prestamos
 })
 .catch(function (err) {
   console.error("got error: " + err);
