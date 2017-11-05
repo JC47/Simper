@@ -3191,12 +3191,12 @@ var FinanciamientoComponent = (function () {
         this._creditoService.eliminarCredito(x).subscribe(function (data) { console.log(2, data); });
     };
     FinanciamientoComponent.prototype.verAmortizacion = function (idCredito) {
-        this.tablaA = this._creditoService.visualizarTabla(idCredito);
         this.openTablaAmort = true;
+        this.tablaA = this._creditoService.visualizarTabla(idCredito);
     };
     FinanciamientoComponent.prototype.verPagos = function (idCredito) {
-        this.tablaPagos = this._creditoService.verPagosP(idCredito);
         this.openPagos = true;
+        this.tablaPagos = this._creditoService.verPagosP(idCredito);
     };
     FinanciamientoComponent.prototype.ngOnInit = function () {
     };
