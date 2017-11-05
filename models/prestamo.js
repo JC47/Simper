@@ -29,8 +29,8 @@ module.exports.getLastIdCredito = function () {
 
 module.exports.addPagoCredito = function (lastIdCredito,pagosCredito) {
   for (var i = 0; i < pagosCredito.length; i++) {
-    var query = "insert into pagocredito set idCredito = "+lastIdCredito+", pagosCredito = "+pagosCredito[i]+" ";
-    querySql(query);
+    //var query = "insert into pagocredito set idCredito = "+lastIdCredito+", pagosCredito = "+pagosCredito[i]+" ";
+    querySql("insert into pagocredito set idCredito = "+lastIdCredito+", pagosCredito = "+pagosCredito[i]+" ");
   }
   return console.log("Insertado pagocredito");
 }
@@ -88,9 +88,9 @@ var count;
     var numP = numeroPeriodo;
     count = numP + i;
     numP = count;
-    var query = "insert into amortizacion set numeroPeriodo = "+numP+" ,Proyecto_idProyecto = "+idProyecto+", idCredito = "+idCredito+", pagoCapital = "+json[i-1].pagoCapital+" ,intereses = "+json[i-1].interes+" ";
-    console.log("NUMP : "+numP);
-    querySql(query);
+    //var query = "insert into amortizacion set numeroPeriodo = "+numP+" ,Proyecto_idProyecto = "+idProyecto+", idCredito = "+idCredito+", pagoCapital = "+json[i-1].pagoCapital+" ,intereses = "+json[i-1].interes+" ";
+    //console.log("NUMP : "+numP);
+    querySql("insert into amortizacion set numeroPeriodo = "+numP+" ,Proyecto_idProyecto = "+idProyecto+", idCredito = "+idCredito+", pagoCapital = "+json[i-1].pagoCapital+" ,intereses = "+json[i-1].interes+"");
     numP = 0;
   }
   return console.log("Insertado");

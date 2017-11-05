@@ -3,6 +3,7 @@ const router = express.Router();
 const Promise = require("bluebird");
 const prestamo = require('../models/prestamo');
 const array = [];
+//var pagoT = [];
 var aux=0;
 var iteraciones=0;
 
@@ -225,8 +226,8 @@ for (var i = 0; i < pagoTotal.length; i++) {
   })
   .then(function () {
     console.log("TIR: "+ TIR);
+    aux=0;
     return amortizacion(TIR,capital,pagoT,monto,pagoTotal);
-            array.length=0;
   })
   .then(function (json) {
     return prestamo.addAmortizacion(numeroPeriodo,idProyecto,idCredito,json);
@@ -234,7 +235,9 @@ for (var i = 0; i < pagoTotal.length; i++) {
 
 .then(function(){
   res.json({success: true,  msg:"Operacion exitosa"});
-
+  array.length=0;
+  pagoT.length=0;
+  aux=0;
 })
 .catch(function (err) {
   console.error("got error: " + err);
@@ -322,15 +325,18 @@ router.post('/veramortizacion', (req, res, next) => {
        console.log("pagosTotales: "+pagosTotales[i]);
        }
       TIR = IRR(pagosTotales);
-      return console.log("hola");;
+      return console.log("hola");
     })
     .then(function () {
       console.log("TIR: "+ TIR);
+      aux=0;
       return amortizacion(TIR,capital,pagoT,monto,pagoTotal);
     })
   .then(function(data){
     res.json({success: true, datos: data, msg:"Operacion exitosa"});
     array.length=0;
+    pagoT.length=0;
+    aux=0;
   })
   .catch(function (err) {
     console.error("got error: " + err);
@@ -384,6 +390,11 @@ function porcentajesPagos(monto,pagoAnticipado,pagoTotal) {
 
 function amortizacion(TIR,capital,pagoT,monto,pagoTotal) {
 
+for (var i = 0; i < pagoT.length; i++) {
+  console.log("aux: "+aux);
+  console.log( "i: "+i);
+  console.log("pagoT[i]: "+pagoT[i]);
+}
   var capital2 = Math.round(capital);
 
   interes = (capital*TIR);
@@ -412,7 +423,8 @@ function amortizacion(TIR,capital,pagoT,monto,pagoTotal) {
 
   toJSON(json)
 
-  while (pagoTotal.length>iteraciones) {
+  if (/*pagoTotal.length>iteraciones*/saldo2>0/*capital2>saldo2*/) {
+    console.log("saldo2: "+saldo2);
   iteraciones = iteraciones + 1;
   aux = aux + 1;
   capital = saldo;
