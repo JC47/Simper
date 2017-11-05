@@ -300,6 +300,7 @@ router.post('/veramortizacion', (req, res, next) => {
 
   Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCredito),prestamo.getMonto(idCredito,idProyecto,numeroPeriodo),
     function(pagoanticipado, pagoscreditos, credito) {
+      console.log("pagoanticipado: "+pagoanticipado.pagoAnticipado);
        pagoAnticipado = pagoanticipado[0].pagoAnticipado;
        pagoTotal = pagoscreditos;
        console.log("Monto",credito);
