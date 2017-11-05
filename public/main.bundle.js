@@ -6936,7 +6936,7 @@ var UsuarioCreditoService = (function () {
         var tabla = [];
         this.verTabla(x).subscribe(function (data) {
             console.log("Consulta Tabla", data.success, data.datos);
-            for (var i = 0; i < (data.datos.length - 1); i++) {
+            for (var i in data.datos) {
                 tabla.push(data.datos[i]);
             }
         });
