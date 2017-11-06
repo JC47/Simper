@@ -59,13 +59,13 @@ export class FinanciamientoComponent implements OnInit {
   }
 
   verAmortizacion(idCredito){
-    this.tablaA = this._creditoService.visualizarTabla(idCredito);
     this.openTablaAmort = true;
+    this.tablaA = this._creditoService.visualizarTabla(idCredito);
   }
 
   verPagos(idCredito){
-    this.tablaPagos = this._creditoService.verPagosP(idCredito);
     this.openPagos = true;
+    this.tablaPagos = this._creditoService.verPagosP(idCredito);
   }
 
   ngOnInit() {
