@@ -1,4 +1,4 @@
-//PRESTAMO.JS
+//prestamo.js CALETTE
 
 const db = require('../config/db');
 const querySql = db.querySql;
@@ -107,5 +107,40 @@ module.exports.deleteCreditoBalance = function (idCredito,idProyecto,numeroPerio
 
 module.exports.getMonto = function (idCredito,idProyecto,numPeriodo) {
   var query = "select monto from creditobalance where credito_idCredito = "+idCredito+" and Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo = "+numPeriodo+" ";
+  return querySql(query);
+}
+
+module.exports.eliminarAmortizacion = function(idCredito,idProyecto){
+  var query = "delete from amortizacion where Proyecto_idProyecto = " +idProyecto+" and idCredito = " +idCredito+ " ";
+  return querySql(query);
+}
+
+module.exports.getFinanciamientos = function(idProyecto,numeroPeriodo){
+  var query = "select  * from creditobalance where numeroPeriodo = "+numeroPeriodo+" and Proyectos_idProyecto = "+idProyecto+"";
+  return querySql(query);
+}
+
+module.exports.getFinanEspecifico = function(idProyecto,numeroPeriodo,idCredito){
+  var query = "select  * from creditobalance where numeroPeriodo = "+numeroPeriodo+" and Proyectos_idProyecto = "+idProyecto+" and credito_idCredito = " +idCredito+ "";
+  return querySql(query);
+}
+
+module.exports.updateCreditoBalance = function(json,idProyecto,numeroPeriodo,idCredito){
+  var query = "update creditobalance set ? where numeroPeriodo = "+numeroPeriodo+" and Proyectos_idProyecto = "+idProyecto+" and credito_idCredito = " +idCredito+ "";
+  return querySql(query,json)
+}
+
+module.exports.getPagos = function(idProyecto,numeroPeriodo){
+  var query = "select * from amortizacion where Proyecto_idProyecto = " +idProyecto+" and numeroPeriodo = " +numeroPeriodo+ "";
+  return querySql(query);
+}
+
+module.exports.getAmortizacion = function(idProyecto,idCredito){
+  var query = "select * from amortizacion where Proyecto_idProyecto = " +idProyecto+ " and idCredito = " +idCredito+"";
+  return querySql(query);
+}
+
+module.exports.getCreditosBalance = function(idProyecto){
+  var query = "select * from creditobalance where Proyectos_idProyecto = " +idProyecto+ "";
   return querySql(query);
 }
