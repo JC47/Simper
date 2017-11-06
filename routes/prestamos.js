@@ -1,3 +1,4 @@
+//PRESTAMOS.JS
 const express = require('express');
 const router = express.Router();
 const Promise = require("bluebird");
@@ -18,7 +19,12 @@ router.get('/', (req, res, next) => {
   })
   .catch(function (err) {
     console.error("got error: " + err);
-    res.json({success:false, msg:"No sirve"});
+    if (err instanceof Error) {
+      res.status(400).send("Error general");
+      console.log(err);
+    } else {
+      res.status(200).json({ "code": 1000, "message": err });
+    }
   });
 });
 
@@ -55,7 +61,12 @@ router.post('/addcredito', (req, res, next) => {
   })
   .catch(function (err) {
     console.error("got error: " + err);
-    res.json({success:false, msg:"No sirve"});
+    if (err instanceof Error) {
+      res.status(400).send("Error general");
+      console.log(err);
+    } else {
+      res.status(200).json({ "code": 1000, "message": err });
+    }
   });
 });
 
@@ -74,7 +85,12 @@ router.post('/deletecredito/:idCredito', (req, res, next) => {
   })
   .catch(function (err) {
     console.error("got error: " + err);
-    res.json({success:false, msg:"No sirve"});
+    if (err instanceof Error) {
+      res.status(400).send("Error general");
+      console.log(err);
+    } else {
+      res.status(200).json({ "code": 1000, "message": err });
+    }
   });
 });
 //PENDIENTE
@@ -104,7 +120,12 @@ router.post('/modifycredito', (req, res, next) => {
   })
   .catch(function (err) {
     console.error("got error: " + err);
-    res.json({success:false, msg:"No sirve"});
+    if (err instanceof Error) {
+      res.status(400).send("Error general");
+      console.log(err);
+    } else {
+      res.status(200).json({ "code": 1000, "message": err });
+    }
   });
 });
 
@@ -119,33 +140,12 @@ router.get('/getcredito', (req, res, next) => {
   })
   .catch(function (err) {
     console.error("got error: " + err);
-    res.json({success:false, msg:"No sirve"});
-  });
-});
-
-router.post('/getAmortizacion', (req,res,next) => {
-  var idCredito = req.body.idCredito;
-  var idProyecto = req.body.idProyecto;
-
-  Promise.resolve().then(function(){
-    return prestamo.getAmortizacion(idProyecto,idCredito);
-  }).then(function(rows){
-    res.json({success:true,datos:rows,msg:"Bien"});
-  }).catch(function(err){
-    console.error("got error: " + err);
-    res.json({success:false, msg:"No sirve"});
-  });
-});
-
-router.get('/getCreditosBalance/:idProyecto', (req,res,next) => {
-
-  Promise.resolve().then(function(){
-    return prestamo.getCreditosBalance(req.params.idProyecto);
-  }).then(function(rows){
-    res.json({success:true,datos:rows,msg:"Bien"});
-  }).catch(function(err){
-    console.error("got error: " + err);
-    res.json({success:false, msg:"No sirve"});
+    if (err instanceof Error) {
+      res.status(400).send("Error general");
+      console.log(err);
+    } else {
+      res.status(200).json({ "code": 1000, "message": err });
+    }
   });
 });
 
@@ -157,7 +157,6 @@ var idCredito = req.body.idCredito;
 var idProyecto = req.body.idProyecto;
 var numeroPeriodo = req.body.numeroPeriodo;
 var monto = req.body.monto;
-var fina;
 var interes;
 var pago;
 var saldo;
@@ -170,9 +169,7 @@ var pagoTotal;
 var anticipo;
 
 Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCredito),
-            prestamo.getFinanEspecifico(idProyecto,numeroPeriodo,idCredito),function(pagoanticipado,pagoscreditos,financiamiento) {
-    console.log("consulta defectuosa",financiamiento);
-     fina = financiamiento;
+  function(pagoanticipado, pagoscreditos) {
      pagoAnticipado = pagoanticipado[0].pagoAnticipado;
      pagoTotal = pagoscreditos;
     //Valores Iniciales para CAPITAL
@@ -182,21 +179,16 @@ Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCr
           var pagoAntPorc = (pagoAnticipado)/(100);
           capital = monto - monto*pagoAntPorc;
       }
-      //Valores Iniciales para porcentajes de pagos totales
+    //Valores Iniciales para porcentajes de pagos totales
 
-      for (var i = 0; i < pagoTotal.length; i++) {
-        pagoT.push(monto*((pagoTotal[i].pagosCredito)/(100)));
-      }
+    for (var i = 0; i < pagoTotal.length; i++) {
+      pagoT.push(monto*((pagoTotal[i].pagosCredito)/(100)));
+    }
 
-      for (var i = 0; i < pagoT.length; i++) {
-            console.log("pagoT: "+pagoT[i]);
-      }
-      if(financiamiento.length > 0){
-        return prestamo.eliminarAmortizacion(idCredito,idProyecto);
-      }
-      else{
-        return console.log("ok");
-      }
+for (var i = 0; i < pagoT.length; i++) {
+      console.log("pagoT: "+pagoT[i]);
+}
+return console.log("ok");
   })
   //sirve para insertar la cantidad a descontar si existe un pago anticipado en el credito pedido
   //se registra en creditobalance: anticipo
@@ -217,18 +209,13 @@ Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCr
       "monto":monto,
       "anticipo": anticipo
     }
-    if(fina.length > 0){
-      return prestamo.updateCreditoBalance(json,idProyecto,numeroPeriodo,idCredito);
-    }
-    else{
-      return prestamo.addCreditoBalance(json);
-    }
+    return prestamo.addCreditoBalance(json);
   })
   .then(function () {
     console.log("pagoAnticipado: "+pagoAnticipado);
-    for (var i = 0; i < pagoTotal.length; i++) {
-      console.log("pagoTotal: "+pagoTotal[i].pagosCredito);
-    }
+for (var i = 0; i < pagoTotal.length; i++) {
+  console.log("pagoTotal: "+pagoTotal[i].pagosCredito);
+}
    return porcentajesPagos(monto,pagoAnticipado,pagoTotal);
   })
   .then(function (pagosTotales) {
@@ -245,9 +232,8 @@ Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCr
   })
   .then(function (json) {
     return prestamo.addAmortizacion(numeroPeriodo,idProyecto,idCredito,json);
-  }).then(function(){
-    return prestamo.getFinanciamientos(idProyecto,numeroPeriodo);
   })
+
 .then(function(){
   res.json({success: true,  msg:"Operacion exitosa"});
   array.length=0;
@@ -256,7 +242,12 @@ Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCr
 })
 .catch(function (err) {
   console.error("got error: " + err);
-  res.json({success:false, msg:"No sirve"});
+  if (err instanceof Error) {
+    res.status(400).send("Error general");
+    console.log(err);
+  } else {
+    res.status(200).json({ "code": 1000, "message": err });
+    }
   });
 });
 
@@ -267,17 +258,18 @@ router.post('/deletecreditobalance', (req, res, next) => {
   Promise.resolve()
   .then(function () {
       return prestamo.deleteCreditoBalance(idCredito,idProyecto,numeroPeriodo);
-  }).then(function(){
-    return prestamo.eliminarAmortizacion(idCredito,idProyecto);
-  }).then(function(){
-    return prestamo.getFinanciamientos(idProyecto,numeroPeriodo);
   })
   .then(function(data){
     res.json({success: true, datos: data, msg:"Operacion exitosa"});
   })
   .catch(function (err) {
     console.error("got error: " + err);
-    res.json({success:false, msg:"No sirve"});
+    if (err instanceof Error) {
+      res.status(400).send("Error general");
+      console.log(err);
+    } else {
+      res.status(200).json({ "code": 1000, "message": err });
+    }
   });
 });
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -303,7 +295,6 @@ router.post('/veramortizacion', (req, res, next) => {
       console.log("pagoanticipado: "+pagoanticipado.pagoAnticipado);
        pagoAnticipado = pagoanticipado[0].pagoAnticipado;
        pagoTotal = pagoscreditos;
-       console.log("Monto",credito);
        monto = credito[0].monto;
       //Valores Iniciales para CAPITAL
         if (pagoAnticipado==1) {//Es 1 cuando no existen pagos anticipados
@@ -351,7 +342,12 @@ router.post('/veramortizacion', (req, res, next) => {
   })
   .catch(function (err) {
     console.error("got error: " + err);
-    res.json({success:false, msg:"No sirve"});
+    if (err instanceof Error) {
+      res.status(400).send("Error general");
+      console.log(err);
+    } else {
+      res.status(200).json({ "code": 1000, "message": err });
+    }
   });
 });
 
@@ -469,7 +465,6 @@ function jsonCredito(credito,idscreditos,pagoscreditos) {
         var json = {
           "idCredito":credito[i].idCredito,
           "nombreCredito":credito[i].nombreCredito,
-          "pago":credito[i].pago,
           "montoMin":credito[i].montoMin,
           "montoMax":credito[i].montoMax,
           "pagoAnticipado":credito[i].pagoAnticipado,
