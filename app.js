@@ -12,6 +12,7 @@ const app = express();
 //otro comentario de prueba hola Melo
 
 const proyectos = require('./routes/proyectos');
+const variables = require('./routes/variables');
 const auxiliares = require('./routes/auxiliares');
 const productos = require('./routes/productos');
 const prestamos = require('./routes/prestamos');
@@ -49,6 +50,7 @@ app.use(passport.session());
 require('./config/passport')(passport);
 
 app.use('/producto', productos);
+app.use('/variable', variables);
 app.use('/usuariosmaquinarias',usuariosmaquinarias);
 app.use('/usuariosproductos',usuariosproductos);
 app.use('/usuarioscreditos',usuarioscreditos);
