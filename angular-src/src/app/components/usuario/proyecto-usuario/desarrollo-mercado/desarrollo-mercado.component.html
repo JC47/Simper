@@ -95,9 +95,11 @@
           <div class="col-12" *ngFor="let producto of zona.productosDes"
           style="height:110px;" class="card"
           (click)="selectProductoAdd(producto,zona.idZona)">
-          <div class="row" >
-            <img src="assets/img/box.png"
-            style="height:60px;margin-left:30px;margin-top:20px" >
+          <div class="row align-items-center" >
+            <div class="col-3">
+              <img src="assets/img/box.png" class="img-fluid align-middle"
+              style="margin-left:10px" >
+            </div>
             <div class="col-9" style="margin-top:14px">
               <h5>{{getNameById(producto)}}</h5>
               <h6>Costo de Desarrollo: <br><b>{{ getCosto(zona.idZona,producto) | currency:'USD':true }}</b></h6>
@@ -156,18 +158,18 @@
           <div class="col-12" *ngFor="let producto of zona.productosEnDes"
           style="height:110px;" class="card">
           <div class="row align-items-center" >
-            <img src="assets/img/box.png"
-            style="height:60px;margin-left:30px" >
-            <div class="col-6" style="margin-top:14px">
+
+              <button type="button" (click)="confPagoF(zona.idZona,producto.idProducto,zona.nombreZona)"
+              class="btn btn-primary col-3" [disabled]="validaPago(producto)">Pagar</button>
+
+            <div class="col-9" style="margin-top:14px">
               <h5>{{getNameById(producto.idProducto)}}</h5>
               <h6>Pago de Desarrollo: <br><b>{{ getCosto(zona.idZona,producto.idProducto) | currency:'USD':true }}</b></h6>
               <h6>Periodos de Desarrollo: {{getTiempo(zona.idZona,producto.idProducto)}}</h6>
             </div>
 
 
-              <button type="button" (click)="confPagoF(zona.idZona,producto.idProducto,zona.nombreZona)"
-              class="btn btn-primary col-2" style="height:85px;"
-              [disabled]="validaPago(producto)">Pagar</button>
+
 
           </div>
           </div>
