@@ -2,7 +2,7 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import {OperacionService} from '../../../../services/operacion.service';
 import {ProductoService} from '../../../../services/producto.service';
 import {ZonasService} from '../../../../services/zonas.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators,FormArray} from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -33,12 +33,13 @@ export class VentaProductosComponent implements OnInit {
   openConfAlmacen:boolean=false;
 
   ventas:any;
+  vendeForm:FormGroup[]=[];
 
   vendiendo:boolean=false;
   produciendo:boolean=false;
   openConf:boolean=false;
   openLoad:boolean=false;
-
+  formsVentas:FormArray[]=[];
 
   @ViewChild('modalProgressVenta') public modalProgressVenta:ModalDirective;
 
@@ -49,6 +50,12 @@ export class VentaProductosComponent implements OnInit {
     this.productos=this._productoService.returnProductos();
     this.productosOperacion = this._operacionService.returnProductosOperacion();
     this.ventas=this._operacionService.returnAllOperaciones();
+    console.log(this.productosOperacion);
+
+
+
+
+
 
 
     this.ventasForm=new FormGroup({
@@ -63,10 +70,37 @@ export class VentaProductosComponent implements OnInit {
 
 
 
+    console.log(this.formsVentas);
+    setTimeout(() => {
+      for(let producto of this.productosOperacion){
+        console.log(producto)
+        this.vendeForm.push(
+          new FormGroup({
+            idZona:new FormControl('6')
+          })
+        )
+        // console.log(producto);
+        // let array:FormControl[]=[];
+        // console.log(producto)
+        // for(let zona of producto.zonas){
+        //   array.push(new FormControl(''))
+        // }
+        // this.formsVentas.push(new FormArray(array))
+
+      }
+      console.log(this.vendeForm)
+
+
+
+   }, 500);
+
+
   }
 
   ngOnInit() {
     console.log(this.ventas);
+
+
   }
 
   progressVenta(){
