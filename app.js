@@ -31,6 +31,7 @@ const usuariosmaquinarias = require('./routes/usuariosmaquinarias');
 const usuariosproductos = require('./routes/usuariosproductos');
 const usuariosproductoszonas = require('./routes/usuariosproductoszonas');
 const operaciones = require('./routes/operaciones');
+const dashboards = require('./routes/dashboards');
 
 const port = process.env.PORT || 8080;
 
@@ -69,6 +70,7 @@ app.use('/notificacion', notificaciones);
 app.use('/proyecto', proyectos);
 app.use('/maquinaria', maquinarias);
 app.use('/operacion', operaciones);
+app.use('/dashboard', dashboards)
 
 app.get('/', (req, res)=> {
   res.send("Invalid Endpoint");
