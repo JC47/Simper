@@ -50,7 +50,7 @@ app.use(passport.session());
 require('./config/passport')(passport);
 
 app.use('/producto', productos);
-app.use('/variable', variables);
+//app.use('/variable', variables);
 app.use('/usuariosmaquinarias',usuariosmaquinarias);
 app.use('/usuariosproductos',usuariosproductos);
 app.use('/usuarioscreditos',usuarioscreditos);
