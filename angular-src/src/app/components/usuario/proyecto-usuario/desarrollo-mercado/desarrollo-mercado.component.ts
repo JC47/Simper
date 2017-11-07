@@ -41,7 +41,8 @@ export class DesarrolloMercadoComponent implements OnInit {
     this.productosZonaDesarrollados = this._desarrolloZonaService.returnProductosDeZonaDesarrollados();
     this.productoSelectedAdd={
       idZona:null,
-      idProducto:null
+      idProducto:null,
+      nombreZona:null
     }
 
     this.productoSelectedPago={
@@ -96,7 +97,7 @@ export class DesarrolloMercadoComponent implements OnInit {
       return false
   }
 
-  
+
 
   getCosto(idZona,idProducto){
     for(let zona of this.zonas){
@@ -182,11 +183,12 @@ export class DesarrolloMercadoComponent implements OnInit {
   }
 
 
-  selectProductoAdd(idProducto,idZona){
+  selectProductoAdd(idProducto,idZona,nombreZona){
 
     this.productoSelectedAdd={
       idProducto:idProducto,
-      idZona:idZona
+      idZona:idZona,
+      nombreZona:nombreZona
     };
       console.log(this.productoSelectedAdd);
   }

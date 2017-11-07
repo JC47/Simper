@@ -9,8 +9,10 @@
       <div class="card" *ngFor="let zona of productosZonaSinDesarrollar">
         <div class="card-block">
           <div class="row">
-            <img  src="assets/img/zone.png" style="height:40px;margin-left:20px;">
-            <div class="col-6">
+            <div class="col-3">
+                <img class="img-fluid"  src="assets/img/zone.png" style="margin-left:10px;">
+            </div>
+            <div class="col-9">
               <h4 class="card-title">{{zona.nombreZona}}</h4>
             </div>
 
@@ -18,11 +20,14 @@
           <div class="card-footer" style="margin-top:20px;">
             <div class="col-12" *ngFor="let producto of zona.productosSinDes"
             style="height:110px;" class="card"
-            (click)="selectProductoAdd(producto,zona.idZona)"
+            (click)="selectProductoAdd(producto,zona.idZona,zona.nombreZona)"
             [ngClass]="{'resaltar':selecciona(producto,zona.idZona) }">
-            <div class="row" >
-              <img src="assets/img/box.png"
-              style="height:60px;margin-left:30px;margin-top:20px" >
+            <div class="row align-items-center" >
+              <div class="col-3">
+                <img src="assets/img/box.png" class="img-fluid align-middle"
+                style="margin-left:10px" >
+              </div>
+
               <div class="col-9" style="margin-top:14px">
                 <h5>{{getNameById(producto)}}</h5>
                 <h6>Costo de Desarrollo: <br><b>{{ getCosto(zona.idZona,producto) | currency:'USD':true }}</b></h6>
@@ -180,56 +185,9 @@
 </div>
 
 
-<div bsModal #modalConfDes="bs-modal" class="modal fade"
-tabindex="-1" role="dialog"
-style="z-index:100000">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class=" col-12 text-center">Confirmación</h4>
-      </div>
-      <div class="modal-body">
-        <div class="row text-center">
-          ¿Estas seguro que deseas adquirir el credito {{creditoSelected.nombreCredito}}?
-          <br>
-        </div>
-        <br>
-        <div class="row">
-          <button type="button" class="btn btn-danger offset-2 col-3"  (click)="desarrollaZona(productoSelectedAdd)">Si</button>
-          <button type="button" class="btn btn-primary offset-2 col-3" (click)="modalConfDes.hide()">No</button>
-        </div>
 
 
-      </div>
-    </div>
-  </div>
-</div>
 
-
-<div bsModal #modalConfPago="bs-modal" class="modal fade"
-tabindex="-1" role="dialog"
-style="z-index:100000">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class=" col-12 text-center">Confirmación</h4>
-      </div>
-      <div class="modal-body">
-        <div class="row text-center">
-          ¿Estas seguro que deseas desarrollar el producto X en la zona X?
-          <br>
-        </div>
-        <br>
-        <div class="row">
-          <button type="button" class="btn btn-danger offset-2 col-3"  (click)="pagarDesarrollo()">Si</button>
-          <button type="button" class="btn btn-primary offset-2 col-3" (click)="modalConfPago.hide()">No</button>
-        </div>
-
-
-      </div>
-    </div>
-  </div>
-</div>
 
 
 
