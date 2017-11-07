@@ -57,11 +57,11 @@ export class CompraMaquinariaComponent implements OnInit {
     console.log(this.maquinasCompradas)
     setTimeout(() => {
      this.maqSelectedAdd=this.maquinas[0];
-   }, 200);
+   }, 900);
 
    setTimeout(() => {
     this.maqSelectedLess=this.maquinasCompradas[0];
-  }, 400);
+  }, 800);
     console.log(this.maqSelectedAdd);
   }
 
