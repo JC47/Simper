@@ -69,11 +69,8 @@ app.use('/notificacion', notificaciones);
 app.use('/proyecto', proyectos);
 app.use('/maquinaria', maquinarias);
 app.use('/operacion', operaciones);
-<<<<<<< HEAD
 app.use('/variable', variables);
-=======
 app.use('/dashboard', dashboards)
->>>>>>> 830dea564cc937c2976e24b12fbcc2b93abfb3da
 
 app.get('/', (req, res)=> {
   res.send("Invalid Endpoint");
