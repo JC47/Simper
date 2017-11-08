@@ -11,9 +11,9 @@ var pool = mysql.createPool({
     password: '966fbda0',
     database: 'heroku_7be18966ed8d82e'
 });
-
-//Conexion Local
 /*
+//Conexion Local
+
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
