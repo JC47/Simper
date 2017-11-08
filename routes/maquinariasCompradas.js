@@ -165,10 +165,10 @@ router.post('/cobrar', (req, res, next) => {
   var numeroPeriodo = req.body.Balance_numeroPeriodo;
   var idProyecto = req.body.Proyectos_idProyecto;
   Promise.join(auxiliar.getAuxiliar(numeroPeriodo, idProyecto), variable.getIVA(), function(rows,variableIVA){
-    console.log(variableIVA);
+    var IVA = variableIVA[0].valor
     var costo = req.body.costo;
     var dep = req.body.dep;
-    var ivaMaq = costo*.15;
+    var ivaMaq = costo*IVA;
     var depM = costo*(dep/100);
     var cm = costo + ivaMaq;
     var ivaMensual = ivaMaq/12;

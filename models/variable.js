@@ -17,26 +17,26 @@ module.exports.getVariables = function(){
 }
 
 module.exports.getIVA = function(){
-  var sql = "select valor from variable where concepto = IVA";
+  var sql = "select valor from variable where concepto = 'IVA'";
   return querySql(sql);
 }
 
 module.exports.getPTU = function(){
-  var sql = "select valor from variable where concepto = PTU";
+  var sql = "select valor from variable where concepto = 'PTU'";
   return querySql(sql);
 }
 
 module.exports.getISR = function(){
-  var sql = "select valor from variable where concepto = ISR";
+  var sql = "select valor from variable where concepto = 'ISR'";
   return querySql(sql);
 }
 
 module.exports.getClientes = function(){
-  var sql = "select valor from variable where concepto = Clientes";
+  var sql = "select valor from variable where concepto = 'Clientes'";
   return querySql(sql);
 }
 
 module.exports.getProveedores = function(){
-  var sql = "select valor from variable where concepto = Proveedores";
+  var sql = "select valor from variable where concepto = 'Proveedores'";
   return querySql(sql);
 }

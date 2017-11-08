@@ -1,28 +1,47 @@
 <div class="">
 <div class="row">
 
-  <div class="card card-outline-primary col-7 text-center">
+
+
+  <div class="col-5" style="height:250px">
+    <ngx-charts-advanced-pie-chart
+      [scheme]="colorScheme"
+      [results]="single"
+      gradient="true">
+    </ngx-charts-advanced-pie-chart>
+  </div>
+
+
+  <div class="col-5 offset-1">
+    <ngx-charts-advanced-pie-chart
+      [scheme]="colorScheme"
+      [results]="single"
+      gradient="true">
+    </ngx-charts-advanced-pie-chart>
+  </div>
+
+  <div class="card card-outline-primary col-7 text-center" style="height:300px">
     <div class="card-block">
       <blockquote class="card-blockquote">
         <div class="card-header">
-          <h3 class="col-lg-12 col-sm-12 col-md-12  text-center">Demanda Potencial del Periodo </h3>
+          <h5 class="col-lg-12 col-sm-12 col-md-12  text-center">Demanda Potencial del Periodo </h5>
         </div>
         <div class="row">
-          <div class="col-lg-8 col-sm-12 ">
+          <div class="col-lg-7 col-sm-12 " style="height:200px;">
             <ngx-charts-bar-horizontal
                   [scheme]="colorScheme"
-                  [results]="single"
-                  gradient="false"
+                  [results]="demandasGraf"
                   xAxis="true"
                   yAxis="true"
                   showXAxisLabel="true"
+                  roundDomains="true"
                   showYAxisLabel="true"
                   xAxisLabel="Demnada Potencial"
                   yAxisLabel="Productos">
                 </ngx-charts-bar-horizontal>
           </div>
 
-          <div class="col-lg-4 col-sm-8 ">
+          <div class="col-lg-5 col-sm-8 " style="height:200px; overflow-y:scroll">
             <table class="table table-responsive" style="margin-top:10px">
     <thead class="thead-inverse">
       <tr>
@@ -72,97 +91,21 @@
 
 
 
-      <!-- <div class="col-4">
-        <div class="card card-inverse card-success mb-3 text-center">
-          <div class="card-block">
-            <blockquote class="card-blockquote">
-              <div class="card-subtitle" style="font-size:20px">
-                Efectivo Total
-              </div>
-              <div class="card-title" style="font-size:40px">
-                {{balanceFinal[0].cajaBancos | currency:'USD':true:'1.0-0'}}
-              </div>
 
-            </blockquote>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-4">
-            <div class="card card-inverse card-danger text-center">
-              <div class="card-block">
-                <blockquote class="card-blockquote">
-                  <div class="card-subtitle" style="font-size:20px">
-                    Pago de Credito del Periodo
-                  </div>
-                  <div class="card-title" style="font-size:40px">
-                    $1,000,000,000
-                  </div>
-                </blockquote>
-              </div>
-            </div>
-        </div>
-
-        <div class="col-8">
-          <div class="card card-inverse card-primary text-center">
-            <div class="card-block">
-              <div class="card-header">
-                <h4 class="col-12 text-center">Capacidad de Producción</h4>
-              </div>
-              <blockquote class="card-blockquote">
-
-                <div class="col-12" >
-                  <nvd3 [options]="options" [data]="data"></nvd3>
-                </div>
-              </blockquote>
-            </div>
-          </div>
-
-        </div>
-
-      <div class="col-4">
-
-                    <div class="card card-inverse card-danger text-center" style="height:550px">
-                      <div class="card-block">
-                        <div class="card-header">
-                          <h4 class="col-12 text-center">Maquinas Compradas</h4>
-                        </div>
-                        <blockquote class="card-blockquote">
-                          <div class="col-12" *ngFor="let maquina of maquinasCompradas"
-                          style="background-color:#007CB9;margin-top:10px; padding-top:5px;border-radius:20px">
-                            <div class="row align-items-center" >
-                              <div class="col-3">
-                                <img  src="assets/img/box.png" class="img-fluid ">
-                              </div>
-                              <div class="col-9">
-                                <div class="row">
-                                  <h4 class="text-left col-12">{{maquina.nombreMaq}}</h4>
-                                  <h5 class="text-left col-12">Producción: {{maquina.cantidadProd}}u</h5>
-                                </div>
-                              </div>
-                            </div>
-
-
-
-                          </div>
-                        </blockquote>
-                      </div>
-                    </div>
-          </div> -->
 
           <div class="col-lg-5">
-            <div class="card card-outline-secondary mb-3 text-center">
+            <div class="card card-outline-secondary mb-3 text-center" style="height:300px">
   <div class="card-block">
     <blockquote class="card-blockquote">
       <div class="card-header">
-            <h3 class="col-12 text-center">Capacidad Instalada</h3>
+            <h5 class="col-12 text-center">Capacidad Instalada</h5>
       </div>
 
-<div class="col-12">
+<div class="col-12" style="height:200px">
   <ngx-charts-bar-horizontal
-        [view]="view"
+
         [scheme]="colorScheme2"
-        [results]="single2"
+        [results]="maquinariasGraf"
         gradient="false"
         xAxis="true"
         yAxis="true"
@@ -181,39 +124,120 @@
           </div>
 
 
+          <div class="col-4" >
+            <div class="card card-outline-secondary mb-3 text-center"
+            style="height:250px;overflow:hidden">
+              <div class="card-block">
+                <blockquote class="card-blockquote">
+                  <div class="card-header">
+                    <h5 class="col-12 text-center">Productos Desarrollados</h5>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="row" style="overflow-y:scroll;oveflow-x:hidden; height:200px">
+                      <div class="col-6" *ngFor="let producto of productosDesGraf">
+                        <ngx-charts-pie-grid
+                        [scheme]="colorScheme"
+                        [results]="producto.graf"
+                        [designatedTotal]="producto.max">
+                        </ngx-charts-pie-grid>
+
+                      </div>
+
+                    </div>
+
+                  </div>
 
 
-          <div class="col-6" style="margin-top:30px">
-            <ngl-tabs [(selected)]="selectedTabProd" type="scoped">
-
-              <ng-template ngl-tab heading="Productos Desarrollados">
-
-              </ng-template>
-
-              <ng-template ngl-tab heading="Productos en Desarrollo">
-                Productos en Desarrollo
-              </ng-template>
 
 
-            </ngl-tabs>
+
+
+                </blockquote>
+              </div>
+            </div>
+
+
+
+
+
+
+
 
           </div>
 
-          <div class="col-6" style="margin-top:30px">
-            <ngl-tabs [(selected)]="selectedTabZona" type="scoped">
-
-              <ng-template ngl-tab heading="Zonas Desarrolladas">
-                You have  details.
-              </ng-template>
-
-              <ng-template ngl-tab heading="Zonas en Desarrollo">
-                You have  details.
-              </ng-template>
 
 
-            </ngl-tabs>
+
+
+
+
+
+
+
+          <div class="col-4" >
+            <div class="card card-outline-secondary mb-3 text-center"
+            style="height:250px;overflow:hidden" >
+              <div class="card-block">
+                <blockquote class="card-blockquote">
+                  <div class="card-header">
+                    <h5 class="col-12 text-center">Opciones de Desarrollo de Productos</h5>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="row" style="overflow-y:scroll; height:200px;oveflow-x:visible">
+                      <div class="col-6" *ngFor="let producto of productosSinDesGraf" >
+                        <ngx-charts-pie-grid
+
+                        [scheme]="colorScheme"
+                        [results]="producto.graf"
+                        [designatedTotal]="producto.max">
+                        </ngx-charts-pie-grid>
+
+                      </div>
+                    </div>
+
+                  </div>
+                </blockquote>
+              </div>
+            </div>
+  </div>
+
+
+  <div class="col-4" >
+    <div class="card card-outline-secondary mb-3 text-center"
+    style="height:250px;overflow:hidden">
+      <div class="card-block">
+        <blockquote class="card-blockquote">
+          <div class="card-header">
+            <h5 class="col-12 text-center">Productos en Desarrollo</h5>
+          </div>
+
+          <div class="col-12">
+            <div class="row" style="overflow-y:scroll;oveflow-x:hidden; height:200px">
+              <div class="col-6" *ngFor="let producto of productosEnDesGraf">
+                <ngx-charts-pie-grid
+                [scheme]="colorScheme"
+                [results]="producto.graf"
+                [designatedTotal]="producto.max">
+                </ngx-charts-pie-grid>
+
+              </div>
+
+            </div>
 
           </div>
+
+
+
+
+
+
+        </blockquote>
+      </div>
+    </div>
+
+
 
 
 
@@ -221,6 +245,175 @@
 
 
   </div>
+
+
+
+  <div class="col-4" >
+    <div class="card card-outline-secondary mb-3 text-center"
+    style="height:250px;overflow:hidden" >
+      <div class="card-block">
+        <blockquote class="card-blockquote">
+          <div class="card-header">
+            <h5 class="col-12 text-center">Mercados Desarrollados</h5>
+          </div>
+
+          <div class="col-12">
+            <div class="row" style="overflow-y:scroll; height:200px;oveflow-x:visible">
+              <div class="col-6" >
+                <ngx-charts-pie-grid
+
+                [scheme]="colorScheme"
+                [results]="single3"
+                designatedTotal="2000000">
+                </ngx-charts-pie-grid>
+
+              </div>
+
+              <div class="col-6" style="height:auto">
+
+
+                <ngx-charts-pie-grid
+
+                [scheme]="colorScheme"
+                [results]="single3"
+                designatedTotal="2000000">
+                </ngx-charts-pie-grid>
+
+              </div>
+
+              <div class="col-6" style="height:auto">
+
+
+                <ngx-charts-pie-grid
+
+                [scheme]="colorScheme"
+                [results]="single3"
+                designatedTotal="2000000">
+                </ngx-charts-pie-grid>
+
+              </div>
+            </div>
+
+          </div>
+        </blockquote>
+      </div>
+    </div>
+</div>
+
+
+<div class="col-4" >
+  <div class="card card-outline-secondary mb-3 text-center"
+  style="height:250px;overflow:hidden" >
+    <div class="card-block">
+      <blockquote class="card-blockquote">
+        <div class="card-header">
+          <h5 class="col-12 text-center">Opciones de Desarrollo de Mercado</h5>
+        </div>
+
+        <div class="col-12">
+          <div class="row" style="overflow-y:scroll; height:200px;oveflow-x:visible">
+            <div class="col-6" >
+              <ngx-charts-pie-grid
+
+              [scheme]="colorScheme"
+              [results]="single3"
+              designatedTotal="2000000">
+              </ngx-charts-pie-grid>
+
+            </div>
+
+            <div class="col-6" style="height:auto">
+
+
+              <ngx-charts-pie-grid
+
+              [scheme]="colorScheme"
+              [results]="single3"
+              designatedTotal="2000000">
+              </ngx-charts-pie-grid>
+
+            </div>
+
+            <div class="col-6" style="height:auto">
+
+
+              <ngx-charts-pie-grid
+
+              [scheme]="colorScheme"
+              [results]="single3"
+              designatedTotal="2000000">
+              </ngx-charts-pie-grid>
+
+            </div>
+          </div>
+
+        </div>
+      </blockquote>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="col-4" >
+  <div class="card card-outline-secondary mb-3 text-center"
+  style="height:250px;overflow:hidden" >
+    <div class="card-block">
+      <blockquote class="card-blockquote">
+        <div class="card-header">
+          <h5 class="col-12 text-center">Mercados en Desarrollo</h5>
+        </div>
+
+        <div class="col-12">
+          <div class="row" style="overflow-y:scroll; height:200px;oveflow-x:visible">
+            <div class="col-6" >
+              <ngx-charts-pie-grid
+
+              [scheme]="colorScheme"
+              [results]="single3"
+              designatedTotal="2000000">
+              </ngx-charts-pie-grid>
+
+            </div>
+
+            <div class="col-6" style="height:auto">
+
+
+              <ngx-charts-pie-grid
+
+              [scheme]="colorScheme"
+              [results]="single3"
+              designatedTotal="2000000">
+              </ngx-charts-pie-grid>
+
+            </div>
+
+            <div class="col-6" style="height:auto">
+
+
+              <ngx-charts-pie-grid
+
+              [scheme]="colorScheme"
+              [results]="single3"
+              designatedTotal="2000000">
+              </ngx-charts-pie-grid>
+
+            </div>
+          </div>
+
+        </div>
+      </blockquote>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+          </div>
+
+
 
 
 
