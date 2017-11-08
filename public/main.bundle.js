@@ -2039,11 +2039,11 @@ module.exports = "<div class=\"\">\r\n<div class=\"row\">\r\n\r\n\r\n\r\n  <div 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_desarrollo_producto_service__ = __webpack_require__("../../../../../src/app/services/desarrollo-producto.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_desarrollo_zona_service__ = __webpack_require__("../../../../../src/app/services/desarrollo-zona.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_compra_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/compra-maquinaria.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_producto_service__ = __webpack_require__("../../../../../src/app/services/producto.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_resultados_service__ = __webpack_require__("../../../../../src/app/services/resultados.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_dashboard_service__ = __webpack_require__("../../../../../src/app/services/dashboard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_compra_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/compra-maquinaria.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_producto_service__ = __webpack_require__("../../../../../src/app/services/producto.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_resultados_service__ = __webpack_require__("../../../../../src/app/services/resultados.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_dashboard_service__ = __webpack_require__("../../../../../src/app/services/dashboard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_zona_service__ = __webpack_require__("../../../../../src/app/services/desarrollo-zona.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BalanceHomeComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2070,6 +2070,8 @@ var BalanceHomeComponent = (function () {
         this._productosService = _productosService;
         this._resultadosService = _resultadosService;
         this._dash = _dash;
+        this.productosZonaSinDesarrollar = [];
+        this.productosZonaEnDesarrollo = [];
         this.productosZonaDesarrollados = [];
         this.productos = new Array();
         this.demandasGraf = [];
@@ -2097,6 +2099,9 @@ var BalanceHomeComponent = (function () {
         this.productosSinDesarrollar = this._desarrolloProducto.returnProductosSinDesarrollar();
         this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
         this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
+        this.productosZonaSinDesarrollar = this._desarrolloZonaService.returnProductosDeZonaSinDesarrollar();
+        this.productosZonaEnDesarrollo = this._desarrolloZonaService.returnProductosDeZonaEnDesarrollo();
+        this.productosZonaDesarrollados = this._desarrolloZonaService.returnProductosDeZonaDesarrollados();
         this.demandas = this._dash.returnDemandas();
         this.maquinarias = this._dash.returnMaquinarias();
         console.log(this.demandas, this.maquinarias);
@@ -2250,6 +2255,10 @@ var BalanceHomeComponent = (function () {
         }
         return data;
     };
+    BalanceHomeComponent.prototype.grafDemandaDes = function () { };
+    BalanceHomeComponent.prototype.grafDemandaEnDes = function () { };
+    BalanceHomeComponent.prototype.grafDemandaSinDes = function () {
+    };
     BalanceHomeComponent.prototype.grafProdDes = function (productos) {
         var data = [];
         console.log(productos);
@@ -2282,7 +2291,7 @@ BalanceHomeComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_producto_service__["a" /* ProductoService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_resultados_service__["a" /* ResultadosService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_dashboard_service__["a" /* DashboardService */]) === "function" && _f || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_producto_service__["a" /* ProductoService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_resultados_service__["a" /* ResultadosService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_dashboard_service__["a" /* DashboardService */]) === "function" && _f || Object])
 ], BalanceHomeComponent);
 
 var _a, _b, _c, _d, _e, _f;
