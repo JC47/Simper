@@ -45,7 +45,12 @@ import {OperacionService} from './services/operacion.service';
 import {BalanceService} from './services/balance.service';
 import {ProyectosService} from './services/proyectos.service';
 import {ResultadosService} from './services/resultados.service';
+<<<<<<< HEAD
 import {DashboardService} from './services/dashboard.service';
+=======
+import {VariablesService} from './services/variables.service';
+
+>>>>>>> 0eb9310399e7ecb8f6eb5cad531906c7dd1f73f1
 //Componentes
 import { AppComponent } from './app.component';
 import { ZonaProductoComponent } from './components/zona-producto/zona-producto.component';
@@ -82,6 +87,7 @@ declare var require : any;
 import 'd3';
 import 'nvd3';
 import { EstadoResultadosComponent } from './components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component';
+import { VariablesComponent } from './components/variables/variables.component';
 
 @NgModule({
   declarations: [
@@ -113,6 +119,7 @@ import { EstadoResultadosComponent } from './components/usuario/proyecto-usuario
     OperacionComponent,
     EstadoResultadosComponent,
     FinanciamientoComponent,
+    VariablesComponent,
   ],
   imports: [
     FlashMessagesModule,
@@ -146,7 +153,11 @@ import { EstadoResultadosComponent } from './components/usuario/proyecto-usuario
               BalanceService,
               UsuarioCreditoService,
               DesarrolloZonaService,
+<<<<<<< HEAD
               DashboardService,
+=======
+              VariablesService,
+>>>>>>> 0eb9310399e7ecb8f6eb5cad531906c7dd1f73f1
               ResultadosService,
               AuxiliarService,
               CompraMaquinariaService,
