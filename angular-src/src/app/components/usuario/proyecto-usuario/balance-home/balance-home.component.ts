@@ -12,8 +12,7 @@ import {DashboardService} from '../../../../services/dashboard.service';
   styleUrls: ['./balance-home.component.css']
 })
 export class BalanceHomeComponent implements OnInit {
-  maquinasCompradas:any[]=[];
-  productosDesarollados:any[] = [];
+
   productosZonaDesarrollados:any[] =[];
   productos = new Array();
   options:any;
@@ -44,7 +43,10 @@ export class BalanceHomeComponent implements OnInit {
 
   single3:any;
   single4:any;
-
+  productosDesarollados:any[] = [];
+  productosEnDesarrollo:any[] = [];
+  productosSinDesarrollar:any[] = [];
+  productosDesGraf:any;
 
 
 
@@ -56,8 +58,15 @@ export class BalanceHomeComponent implements OnInit {
               private _productosService:ProductoService,
               private _resultadosService:ResultadosService,
               private _dash:DashboardService) {
+    this.productosSinDesarrollar = this._desarrolloProducto.returnProductosSinDesarrollar();
+    this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
+    this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
+    setTimeout(()=>{
+      this.grafProd(this.productosEnDesarrollo);
+    }, 2000)
 
     this._dash.returnDemandas();
+    console.log(this.productosDesarollados,this.productosEnDesarrollo,this.productosSinDesarrollar)
 
 
     this.single = [
@@ -144,11 +153,24 @@ this.single4 = [
   }
 
   ngOnInit() {
-    this.productos = this._productosService.returnProductos();
-    this.maquinasCompradas = this._CompraMaquinariaService.returnMaquinasCompradas();
-    this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
-    this.productosZonaDesarrollados = this._desarrolloZonaService.returnProductosDeZonaDesarrollados();
-    this.balanceFinal = this._resultadosService.getBalanceFinal();
+
+  }
+
+  grafProd(productos){
+    let data:any=[]
+
+    for(let producto of productos){
+      data.push({
+        graf:[{
+          "name":producto.nombreProd,
+          "value":producto.periodosDes
+        }],
+        max:producto.tiempoDes
+      })
+    }
+
+    console.log(data);
+
   }
 
   getNameById(id:number){
