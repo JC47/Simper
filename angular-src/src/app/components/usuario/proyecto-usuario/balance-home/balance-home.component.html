@@ -30,7 +30,7 @@
           <div class="col-lg-7 col-sm-12 " style="height:200px;">
             <ngx-charts-bar-horizontal
                   [scheme]="colorScheme"
-                  [results]="single"
+                  [results]="demandasGraf"
                   xAxis="true"
                   yAxis="true"
                   showXAxisLabel="true"
@@ -105,7 +105,7 @@
   <ngx-charts-bar-horizontal
 
         [scheme]="colorScheme2"
-        [results]="single2"
+        [results]="maquinariasGraf"
         gradient="false"
         xAxis="true"
         yAxis="true"
@@ -124,70 +124,26 @@
           </div>
 
 
-
-
-          <div class="col-4">
-            <div class="card card-outline-secondary mb-3 text-center"
-            style="height:250px">
-              <div class="card-block">
-                <blockquote class="card-blockquote">
-                  <div class="card-header">
-                    <h5 class="col-12 text-center">Productos Desarrollados</h5>
-                  </div>
-                  <div class="col-12" style="overflow-y:scroll">
-
-                  </div>
-
-
-                </blockquote>
-              </div>
-            </div>
-          </div>
-
           <div class="col-4" >
             <div class="card card-outline-secondary mb-3 text-center"
             style="height:250px;overflow:hidden">
               <div class="card-block">
                 <blockquote class="card-blockquote">
                   <div class="card-header">
-                    <h5 class="col-12 text-center">Productos en Desarrollo</h5>
+                    <h5 class="col-12 text-center">Productos Desarrollados</h5>
                   </div>
 
                   <div class="col-12">
                     <div class="row" style="overflow-y:scroll;oveflow-x:hidden; height:200px">
-                      <div class="col-6" >
+                      <div class="col-6" *ngFor="let producto of productosDesGraf">
                         <ngx-charts-pie-grid
-
                         [scheme]="colorScheme"
-                        [results]="single3"
-                        designatedTotal="2000000">
+                        [results]="producto.graf"
+                        [designatedTotal]="producto.max">
                         </ngx-charts-pie-grid>
 
                       </div>
 
-                      <div class="col-6" style="height:auto">
-
-
-                        <ngx-charts-pie-grid
-
-                        [scheme]="colorScheme"
-                        [results]="single3"
-                        designatedTotal="2000000">
-                        </ngx-charts-pie-grid>
-
-                      </div>
-
-                      <div class="col-6" style="height:auto">
-
-
-                        <ngx-charts-pie-grid
-
-                        [scheme]="colorScheme"
-                        [results]="single3"
-                        designatedTotal="2000000">
-                        </ngx-charts-pie-grid>
-
-                      </div>
                     </div>
 
                   </div>
@@ -209,6 +165,7 @@
 
 
           </div>
+
 
 
 
@@ -224,41 +181,17 @@
               <div class="card-block">
                 <blockquote class="card-blockquote">
                   <div class="card-header">
-                    <h5 class="col-12 text-center">Productos en Desarrollo</h5>
+                    <h5 class="col-12 text-center">Opciones de Desarrollo de Productos</h5>
                   </div>
 
                   <div class="col-12">
                     <div class="row" style="overflow-y:scroll; height:200px;oveflow-x:visible">
-                      <div class="col-6" >
+                      <div class="col-6" *ngFor="let producto of productosSinDesGraf" >
                         <ngx-charts-pie-grid
 
                         [scheme]="colorScheme"
-                        [results]="single3"
-                        designatedTotal="2000000">
-                        </ngx-charts-pie-grid>
-
-                      </div>
-
-                      <div class="col-6" style="height:auto">
-
-
-                        <ngx-charts-pie-grid
-
-                        [scheme]="colorScheme"
-                        [results]="single3"
-                        designatedTotal="2000000">
-                        </ngx-charts-pie-grid>
-
-                      </div>
-
-                      <div class="col-6" style="height:auto">
-
-
-                        <ngx-charts-pie-grid
-
-                        [scheme]="colorScheme"
-                        [results]="single3"
-                        designatedTotal="2000000">
+                        [results]="producto.graf"
+                        [designatedTotal]="producto.max">
                         </ngx-charts-pie-grid>
 
                       </div>
@@ -268,6 +201,49 @@
                 </blockquote>
               </div>
             </div>
+  </div>
+
+
+  <div class="col-4" >
+    <div class="card card-outline-secondary mb-3 text-center"
+    style="height:250px;overflow:hidden">
+      <div class="card-block">
+        <blockquote class="card-blockquote">
+          <div class="card-header">
+            <h5 class="col-12 text-center">Productos en Desarrollo</h5>
+          </div>
+
+          <div class="col-12">
+            <div class="row" style="overflow-y:scroll;oveflow-x:hidden; height:200px">
+              <div class="col-6" *ngFor="let producto of productosEnDesGraf">
+                <ngx-charts-pie-grid
+                [scheme]="colorScheme"
+                [results]="producto.graf"
+                [designatedTotal]="producto.max">
+                </ngx-charts-pie-grid>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+
+
+
+        </blockquote>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
   </div>
 
 

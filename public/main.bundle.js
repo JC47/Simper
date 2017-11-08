@@ -2029,7 +2029,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"\">\r\n<div class=\"row\">\r\n\r\n\r\n\r\n  <div class=\"col-5\" style=\"height:250px\">\r\n    <ngx-charts-advanced-pie-chart\r\n      [scheme]=\"colorScheme\"\r\n      [results]=\"single\"\r\n      gradient=\"true\">\r\n    </ngx-charts-advanced-pie-chart>\r\n  </div>\r\n\r\n\r\n  <div class=\"col-5 offset-1\">\r\n    <ngx-charts-advanced-pie-chart\r\n      [scheme]=\"colorScheme\"\r\n      [results]=\"single\"\r\n      gradient=\"true\">\r\n    </ngx-charts-advanced-pie-chart>\r\n  </div>\r\n\r\n  <div class=\"card card-outline-primary col-7 text-center\" style=\"height:300px\">\r\n    <div class=\"card-block\">\r\n      <blockquote class=\"card-blockquote\">\r\n        <div class=\"card-header\">\r\n          <h5 class=\"col-lg-12 col-sm-12 col-md-12  text-center\">Demanda Potencial del Periodo </h5>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-lg-7 col-sm-12 \" style=\"height:200px;\">\r\n            <ngx-charts-bar-horizontal\r\n                  [scheme]=\"colorScheme\"\r\n                  [results]=\"single\"\r\n                  xAxis=\"true\"\r\n                  yAxis=\"true\"\r\n                  showXAxisLabel=\"true\"\r\n                  roundDomains=\"true\"\r\n                  showYAxisLabel=\"true\"\r\n                  xAxisLabel=\"Demnada Potencial\"\r\n                  yAxisLabel=\"Productos\">\r\n                </ngx-charts-bar-horizontal>\r\n          </div>\r\n\r\n          <div class=\"col-lg-5 col-sm-8 \" style=\"height:200px; overflow-y:scroll\">\r\n            <table class=\"table table-responsive\" style=\"margin-top:10px\">\r\n    <thead class=\"thead-inverse\">\r\n      <tr>\r\n        <th>Productos</th>\r\n        <th>Zona 1</th>\r\n        <th>Zona 2</th>\r\n        <th>Zona 3</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <th>Producto 1</th>\r\n        <th>18,000</th>\r\n        <td>20,000</td>\r\n        <td>5,000</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Producto 2</th>\r\n        <th>18,000</th>\r\n        <td>20,000</td>\r\n        <td>5,000</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Producto 3</th>\r\n        <th>18,000</th>\r\n        <td>20,000</td>\r\n        <td>5,000</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Producto 4</th>\r\n        <th>18,000</th>\r\n        <td>20,000</td>\r\n        <td>5,000</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n\r\n          </div>\r\n\r\n        </div>\r\n\r\n\r\n\r\n      </blockquote>\r\n    </div>\r\n  </div>\r\n\r\n\r\n\r\n\r\n\r\n          <div class=\"col-lg-5\">\r\n            <div class=\"card card-outline-secondary mb-3 text-center\" style=\"height:300px\">\r\n  <div class=\"card-block\">\r\n    <blockquote class=\"card-blockquote\">\r\n      <div class=\"card-header\">\r\n            <h5 class=\"col-12 text-center\">Capacidad Instalada</h5>\r\n      </div>\r\n\r\n<div class=\"col-12\" style=\"height:200px\">\r\n  <ngx-charts-bar-horizontal\r\n\r\n        [scheme]=\"colorScheme2\"\r\n        [results]=\"single2\"\r\n        gradient=\"false\"\r\n        xAxis=\"true\"\r\n        yAxis=\"true\"\r\n        showXAxisLabel=\"true\"\r\n        showYAxisLabel=\"true\"\r\n        xAxisLabel=\"Demnada Potencial\"\r\n        yAxisLabel=\"Productos\">\r\n      </ngx-charts-bar-horizontal>\r\n</div>\r\n\r\n\r\n\r\n    </blockquote>\r\n  </div>\r\n</div>\r\n          </div>\r\n\r\n\r\n\r\n\r\n          <div class=\"col-4\">\r\n            <div class=\"card card-outline-secondary mb-3 text-center\"\r\n            style=\"height:250px\">\r\n              <div class=\"card-block\">\r\n                <blockquote class=\"card-blockquote\">\r\n                  <div class=\"card-header\">\r\n                    <h5 class=\"col-12 text-center\">Productos Desarrollados</h5>\r\n                  </div>\r\n                  <div class=\"col-12\" style=\"overflow-y:scroll\">\r\n\r\n                  </div>\r\n\r\n\r\n                </blockquote>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"col-4\" >\r\n            <div class=\"card card-outline-secondary mb-3 text-center\"\r\n            style=\"height:250px;overflow:hidden\">\r\n              <div class=\"card-block\">\r\n                <blockquote class=\"card-blockquote\">\r\n                  <div class=\"card-header\">\r\n                    <h5 class=\"col-12 text-center\">Productos en Desarrollo</h5>\r\n                  </div>\r\n\r\n                  <div class=\"col-12\">\r\n                    <div class=\"row\" style=\"overflow-y:scroll;oveflow-x:hidden; height:200px\">\r\n                      <div class=\"col-6\" >\r\n                        <ngx-charts-pie-grid\r\n\r\n                        [scheme]=\"colorScheme\"\r\n                        [results]=\"single3\"\r\n                        designatedTotal=\"2000000\">\r\n                        </ngx-charts-pie-grid>\r\n\r\n                      </div>\r\n\r\n                      <div class=\"col-6\" style=\"height:auto\">\r\n\r\n\r\n                        <ngx-charts-pie-grid\r\n\r\n                        [scheme]=\"colorScheme\"\r\n                        [results]=\"single3\"\r\n                        designatedTotal=\"2000000\">\r\n                        </ngx-charts-pie-grid>\r\n\r\n                      </div>\r\n\r\n                      <div class=\"col-6\" style=\"height:auto\">\r\n\r\n\r\n                        <ngx-charts-pie-grid\r\n\r\n                        [scheme]=\"colorScheme\"\r\n                        [results]=\"single3\"\r\n                        designatedTotal=\"2000000\">\r\n                        </ngx-charts-pie-grid>\r\n\r\n                      </div>\r\n                    </div>\r\n\r\n                  </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n                </blockquote>\r\n              </div>\r\n            </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n          </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n          <div class=\"col-4\" >\r\n            <div class=\"card card-outline-secondary mb-3 text-center\"\r\n            style=\"height:250px;overflow:hidden\" >\r\n              <div class=\"card-block\">\r\n                <blockquote class=\"card-blockquote\">\r\n                  <div class=\"card-header\">\r\n                    <h5 class=\"col-12 text-center\">Productos en Desarrollo</h5>\r\n                  </div>\r\n\r\n                  <div class=\"col-12\">\r\n                    <div class=\"row\" style=\"overflow-y:scroll; height:200px;oveflow-x:visible\">\r\n                      <div class=\"col-6\" >\r\n                        <ngx-charts-pie-grid\r\n\r\n                        [scheme]=\"colorScheme\"\r\n                        [results]=\"single3\"\r\n                        designatedTotal=\"2000000\">\r\n                        </ngx-charts-pie-grid>\r\n\r\n                      </div>\r\n\r\n                      <div class=\"col-6\" style=\"height:auto\">\r\n\r\n\r\n                        <ngx-charts-pie-grid\r\n\r\n                        [scheme]=\"colorScheme\"\r\n                        [results]=\"single3\"\r\n                        designatedTotal=\"2000000\">\r\n                        </ngx-charts-pie-grid>\r\n\r\n                      </div>\r\n\r\n                      <div class=\"col-6\" style=\"height:auto\">\r\n\r\n\r\n                        <ngx-charts-pie-grid\r\n\r\n                        [scheme]=\"colorScheme\"\r\n                        [results]=\"single3\"\r\n                        designatedTotal=\"2000000\">\r\n                        </ngx-charts-pie-grid>\r\n\r\n                      </div>\r\n                    </div>\r\n\r\n                  </div>\r\n                </blockquote>\r\n              </div>\r\n            </div>\r\n  </div>\r\n\r\n\r\n\r\n  <div class=\"col-4\" >\r\n    <div class=\"card card-outline-secondary mb-3 text-center\"\r\n    style=\"height:250px;overflow:hidden\" >\r\n      <div class=\"card-block\">\r\n        <blockquote class=\"card-blockquote\">\r\n          <div class=\"card-header\">\r\n            <h5 class=\"col-12 text-center\">Mercados Desarrollados</h5>\r\n          </div>\r\n\r\n          <div class=\"col-12\">\r\n            <div class=\"row\" style=\"overflow-y:scroll; height:200px;oveflow-x:visible\">\r\n              <div class=\"col-6\" >\r\n                <ngx-charts-pie-grid\r\n\r\n                [scheme]=\"colorScheme\"\r\n                [results]=\"single3\"\r\n                designatedTotal=\"2000000\">\r\n                </ngx-charts-pie-grid>\r\n\r\n              </div>\r\n\r\n              <div class=\"col-6\" style=\"height:auto\">\r\n\r\n\r\n                <ngx-charts-pie-grid\r\n\r\n                [scheme]=\"colorScheme\"\r\n                [results]=\"single3\"\r\n                designatedTotal=\"2000000\">\r\n                </ngx-charts-pie-grid>\r\n\r\n              </div>\r\n\r\n              <div class=\"col-6\" style=\"height:auto\">\r\n\r\n\r\n                <ngx-charts-pie-grid\r\n\r\n                [scheme]=\"colorScheme\"\r\n                [results]=\"single3\"\r\n                designatedTotal=\"2000000\">\r\n                </ngx-charts-pie-grid>\r\n\r\n              </div>\r\n            </div>\r\n\r\n          </div>\r\n        </blockquote>\r\n      </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n<div class=\"col-4\" >\r\n  <div class=\"card card-outline-secondary mb-3 text-center\"\r\n  style=\"height:250px;overflow:hidden\" >\r\n    <div class=\"card-block\">\r\n      <blockquote class=\"card-blockquote\">\r\n        <div class=\"card-header\">\r\n          <h5 class=\"col-12 text-center\">Opciones de Desarrollo de Mercado</h5>\r\n        </div>\r\n\r\n        <div class=\"col-12\">\r\n          <div class=\"row\" style=\"overflow-y:scroll; height:200px;oveflow-x:visible\">\r\n            <div class=\"col-6\" >\r\n              <ngx-charts-pie-grid\r\n\r\n              [scheme]=\"colorScheme\"\r\n              [results]=\"single3\"\r\n              designatedTotal=\"2000000\">\r\n              </ngx-charts-pie-grid>\r\n\r\n            </div>\r\n\r\n            <div class=\"col-6\" style=\"height:auto\">\r\n\r\n\r\n              <ngx-charts-pie-grid\r\n\r\n              [scheme]=\"colorScheme\"\r\n              [results]=\"single3\"\r\n              designatedTotal=\"2000000\">\r\n              </ngx-charts-pie-grid>\r\n\r\n            </div>\r\n\r\n            <div class=\"col-6\" style=\"height:auto\">\r\n\r\n\r\n              <ngx-charts-pie-grid\r\n\r\n              [scheme]=\"colorScheme\"\r\n              [results]=\"single3\"\r\n              designatedTotal=\"2000000\">\r\n              </ngx-charts-pie-grid>\r\n\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </blockquote>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n<div class=\"col-4\" >\r\n  <div class=\"card card-outline-secondary mb-3 text-center\"\r\n  style=\"height:250px;overflow:hidden\" >\r\n    <div class=\"card-block\">\r\n      <blockquote class=\"card-blockquote\">\r\n        <div class=\"card-header\">\r\n          <h5 class=\"col-12 text-center\">Mercados en Desarrollo</h5>\r\n        </div>\r\n\r\n        <div class=\"col-12\">\r\n          <div class=\"row\" style=\"overflow-y:scroll; height:200px;oveflow-x:visible\">\r\n            <div class=\"col-6\" >\r\n              <ngx-charts-pie-grid\r\n\r\n              [scheme]=\"colorScheme\"\r\n              [results]=\"single3\"\r\n              designatedTotal=\"2000000\">\r\n              </ngx-charts-pie-grid>\r\n\r\n            </div>\r\n\r\n            <div class=\"col-6\" style=\"height:auto\">\r\n\r\n\r\n              <ngx-charts-pie-grid\r\n\r\n              [scheme]=\"colorScheme\"\r\n              [results]=\"single3\"\r\n              designatedTotal=\"2000000\">\r\n              </ngx-charts-pie-grid>\r\n\r\n            </div>\r\n\r\n            <div class=\"col-6\" style=\"height:auto\">\r\n\r\n\r\n              <ngx-charts-pie-grid\r\n\r\n              [scheme]=\"colorScheme\"\r\n              [results]=\"single3\"\r\n              designatedTotal=\"2000000\">\r\n              </ngx-charts-pie-grid>\r\n\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </blockquote>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n          </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n</div>\r\n"
+module.exports = "<div class=\"\">\r\n<div class=\"row\">\r\n\r\n\r\n\r\n  <div class=\"col-5\" style=\"height:250px\">\r\n    <ngx-charts-advanced-pie-chart\r\n      [scheme]=\"colorScheme\"\r\n      [results]=\"single\"\r\n      gradient=\"true\">\r\n    </ngx-charts-advanced-pie-chart>\r\n  </div>\r\n\r\n\r\n  <div class=\"col-5 offset-1\">\r\n    <ngx-charts-advanced-pie-chart\r\n      [scheme]=\"colorScheme\"\r\n      [results]=\"single\"\r\n      gradient=\"true\">\r\n    </ngx-charts-advanced-pie-chart>\r\n  </div>\r\n\r\n  <div class=\"card card-outline-primary col-7 text-center\" style=\"height:300px\">\r\n    <div class=\"card-block\">\r\n      <blockquote class=\"card-blockquote\">\r\n        <div class=\"card-header\">\r\n          <h5 class=\"col-lg-12 col-sm-12 col-md-12  text-center\">Demanda Potencial del Periodo </h5>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-lg-7 col-sm-12 \" style=\"height:200px;\">\r\n            <ngx-charts-bar-horizontal\r\n                  [scheme]=\"colorScheme\"\r\n                  [results]=\"demandasGraf\"\r\n                  xAxis=\"true\"\r\n                  yAxis=\"true\"\r\n                  showXAxisLabel=\"true\"\r\n                  roundDomains=\"true\"\r\n                  showYAxisLabel=\"true\"\r\n                  xAxisLabel=\"Demnada Potencial\"\r\n                  yAxisLabel=\"Productos\">\r\n                </ngx-charts-bar-horizontal>\r\n          </div>\r\n\r\n          <div class=\"col-lg-5 col-sm-8 \" style=\"height:200px; overflow-y:scroll\">\r\n            <table class=\"table table-responsive\" style=\"margin-top:10px\">\r\n    <thead class=\"thead-inverse\">\r\n      <tr>\r\n        <th>Productos</th>\r\n        <th>Zona 1</th>\r\n        <th>Zona 2</th>\r\n        <th>Zona 3</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <th>Producto 1</th>\r\n        <th>18,000</th>\r\n        <td>20,000</td>\r\n        <td>5,000</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Producto 2</th>\r\n        <th>18,000</th>\r\n        <td>20,000</td>\r\n        <td>5,000</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Producto 3</th>\r\n        <th>18,000</th>\r\n        <td>20,000</td>\r\n        <td>5,000</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Producto 4</th>\r\n        <th>18,000</th>\r\n        <td>20,000</td>\r\n        <td>5,000</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n\r\n          </div>\r\n\r\n        </div>\r\n\r\n\r\n\r\n      </blockquote>\r\n    </div>\r\n  </div>\r\n\r\n\r\n\r\n\r\n\r\n          <div class=\"col-lg-5\">\r\n            <div class=\"card card-outline-secondary mb-3 text-center\" style=\"height:300px\">\r\n  <div class=\"card-block\">\r\n    <blockquote class=\"card-blockquote\">\r\n      <div class=\"card-header\">\r\n            <h5 class=\"col-12 text-center\">Capacidad Instalada</h5>\r\n      </div>\r\n\r\n<div class=\"col-12\" style=\"height:200px\">\r\n  <ngx-charts-bar-horizontal\r\n\r\n        [scheme]=\"colorScheme2\"\r\n        [results]=\"maquinariasGraf\"\r\n        gradient=\"false\"\r\n        xAxis=\"true\"\r\n        yAxis=\"true\"\r\n        showXAxisLabel=\"true\"\r\n        showYAxisLabel=\"true\"\r\n        xAxisLabel=\"Demnada Potencial\"\r\n        yAxisLabel=\"Productos\">\r\n      </ngx-charts-bar-horizontal>\r\n</div>\r\n\r\n\r\n\r\n    </blockquote>\r\n  </div>\r\n</div>\r\n          </div>\r\n\r\n\r\n          <div class=\"col-4\" >\r\n            <div class=\"card card-outline-secondary mb-3 text-center\"\r\n            style=\"height:250px;overflow:hidden\">\r\n              <div class=\"card-block\">\r\n                <blockquote class=\"card-blockquote\">\r\n                  <div class=\"card-header\">\r\n                    <h5 class=\"col-12 text-center\">Productos Desarrollados</h5>\r\n                  </div>\r\n\r\n                  <div class=\"col-12\">\r\n                    <div class=\"row\" style=\"overflow-y:scroll;oveflow-x:hidden; height:200px\">\r\n                      <div class=\"col-6\" *ngFor=\"let producto of productosDesGraf\">\r\n                        <ngx-charts-pie-grid\r\n                        [scheme]=\"colorScheme\"\r\n                        [results]=\"producto.graf\"\r\n                        [designatedTotal]=\"producto.max\">\r\n                        </ngx-charts-pie-grid>\r\n\r\n                      </div>\r\n\r\n                    </div>\r\n\r\n                  </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n                </blockquote>\r\n              </div>\r\n            </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n          </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n          <div class=\"col-4\" >\r\n            <div class=\"card card-outline-secondary mb-3 text-center\"\r\n            style=\"height:250px;overflow:hidden\" >\r\n              <div class=\"card-block\">\r\n                <blockquote class=\"card-blockquote\">\r\n                  <div class=\"card-header\">\r\n                    <h5 class=\"col-12 text-center\">Opciones de Desarrollo de Productos</h5>\r\n                  </div>\r\n\r\n                  <div class=\"col-12\">\r\n                    <div class=\"row\" style=\"overflow-y:scroll; height:200px;oveflow-x:visible\">\r\n                      <div class=\"col-6\" *ngFor=\"let producto of productosSinDesGraf\" >\r\n                        <ngx-charts-pie-grid\r\n\r\n                        [scheme]=\"colorScheme\"\r\n                        [results]=\"producto.graf\"\r\n                        [designatedTotal]=\"producto.max\">\r\n                        </ngx-charts-pie-grid>\r\n\r\n                      </div>\r\n                    </div>\r\n\r\n                  </div>\r\n                </blockquote>\r\n              </div>\r\n            </div>\r\n  </div>\r\n\r\n\r\n  <div class=\"col-4\" >\r\n    <div class=\"card card-outline-secondary mb-3 text-center\"\r\n    style=\"height:250px;overflow:hidden\">\r\n      <div class=\"card-block\">\r\n        <blockquote class=\"card-blockquote\">\r\n          <div class=\"card-header\">\r\n            <h5 class=\"col-12 text-center\">Productos en Desarrollo</h5>\r\n          </div>\r\n\r\n          <div class=\"col-12\">\r\n            <div class=\"row\" style=\"overflow-y:scroll;oveflow-x:hidden; height:200px\">\r\n              <div class=\"col-6\" *ngFor=\"let producto of productosEnDesGraf\">\r\n                <ngx-charts-pie-grid\r\n                [scheme]=\"colorScheme\"\r\n                [results]=\"producto.graf\"\r\n                [designatedTotal]=\"producto.max\">\r\n                </ngx-charts-pie-grid>\r\n\r\n              </div>\r\n\r\n            </div>\r\n\r\n          </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n        </blockquote>\r\n      </div>\r\n    </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n  </div>\r\n\r\n\r\n\r\n  <div class=\"col-4\" >\r\n    <div class=\"card card-outline-secondary mb-3 text-center\"\r\n    style=\"height:250px;overflow:hidden\" >\r\n      <div class=\"card-block\">\r\n        <blockquote class=\"card-blockquote\">\r\n          <div class=\"card-header\">\r\n            <h5 class=\"col-12 text-center\">Mercados Desarrollados</h5>\r\n          </div>\r\n\r\n          <div class=\"col-12\">\r\n            <div class=\"row\" style=\"overflow-y:scroll; height:200px;oveflow-x:visible\">\r\n              <div class=\"col-6\" >\r\n                <ngx-charts-pie-grid\r\n\r\n                [scheme]=\"colorScheme\"\r\n                [results]=\"single3\"\r\n                designatedTotal=\"2000000\">\r\n                </ngx-charts-pie-grid>\r\n\r\n              </div>\r\n\r\n              <div class=\"col-6\" style=\"height:auto\">\r\n\r\n\r\n                <ngx-charts-pie-grid\r\n\r\n                [scheme]=\"colorScheme\"\r\n                [results]=\"single3\"\r\n                designatedTotal=\"2000000\">\r\n                </ngx-charts-pie-grid>\r\n\r\n              </div>\r\n\r\n              <div class=\"col-6\" style=\"height:auto\">\r\n\r\n\r\n                <ngx-charts-pie-grid\r\n\r\n                [scheme]=\"colorScheme\"\r\n                [results]=\"single3\"\r\n                designatedTotal=\"2000000\">\r\n                </ngx-charts-pie-grid>\r\n\r\n              </div>\r\n            </div>\r\n\r\n          </div>\r\n        </blockquote>\r\n      </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n<div class=\"col-4\" >\r\n  <div class=\"card card-outline-secondary mb-3 text-center\"\r\n  style=\"height:250px;overflow:hidden\" >\r\n    <div class=\"card-block\">\r\n      <blockquote class=\"card-blockquote\">\r\n        <div class=\"card-header\">\r\n          <h5 class=\"col-12 text-center\">Opciones de Desarrollo de Mercado</h5>\r\n        </div>\r\n\r\n        <div class=\"col-12\">\r\n          <div class=\"row\" style=\"overflow-y:scroll; height:200px;oveflow-x:visible\">\r\n            <div class=\"col-6\" >\r\n              <ngx-charts-pie-grid\r\n\r\n              [scheme]=\"colorScheme\"\r\n              [results]=\"single3\"\r\n              designatedTotal=\"2000000\">\r\n              </ngx-charts-pie-grid>\r\n\r\n            </div>\r\n\r\n            <div class=\"col-6\" style=\"height:auto\">\r\n\r\n\r\n              <ngx-charts-pie-grid\r\n\r\n              [scheme]=\"colorScheme\"\r\n              [results]=\"single3\"\r\n              designatedTotal=\"2000000\">\r\n              </ngx-charts-pie-grid>\r\n\r\n            </div>\r\n\r\n            <div class=\"col-6\" style=\"height:auto\">\r\n\r\n\r\n              <ngx-charts-pie-grid\r\n\r\n              [scheme]=\"colorScheme\"\r\n              [results]=\"single3\"\r\n              designatedTotal=\"2000000\">\r\n              </ngx-charts-pie-grid>\r\n\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </blockquote>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n<div class=\"col-4\" >\r\n  <div class=\"card card-outline-secondary mb-3 text-center\"\r\n  style=\"height:250px;overflow:hidden\" >\r\n    <div class=\"card-block\">\r\n      <blockquote class=\"card-blockquote\">\r\n        <div class=\"card-header\">\r\n          <h5 class=\"col-12 text-center\">Mercados en Desarrollo</h5>\r\n        </div>\r\n\r\n        <div class=\"col-12\">\r\n          <div class=\"row\" style=\"overflow-y:scroll; height:200px;oveflow-x:visible\">\r\n            <div class=\"col-6\" >\r\n              <ngx-charts-pie-grid\r\n\r\n              [scheme]=\"colorScheme\"\r\n              [results]=\"single3\"\r\n              designatedTotal=\"2000000\">\r\n              </ngx-charts-pie-grid>\r\n\r\n            </div>\r\n\r\n            <div class=\"col-6\" style=\"height:auto\">\r\n\r\n\r\n              <ngx-charts-pie-grid\r\n\r\n              [scheme]=\"colorScheme\"\r\n              [results]=\"single3\"\r\n              designatedTotal=\"2000000\">\r\n              </ngx-charts-pie-grid>\r\n\r\n            </div>\r\n\r\n            <div class=\"col-6\" style=\"height:auto\">\r\n\r\n\r\n              <ngx-charts-pie-grid\r\n\r\n              [scheme]=\"colorScheme\"\r\n              [results]=\"single3\"\r\n              designatedTotal=\"2000000\">\r\n              </ngx-charts-pie-grid>\r\n\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </blockquote>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n          </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2071,9 +2071,9 @@ var BalanceHomeComponent = (function () {
         this._resultadosService = _resultadosService;
         this._dash = _dash;
         this.productosZonaDesarrollados = [];
-        this.demanda = [];
-        this.maquinas = [];
         this.productos = new Array();
+        this.demandasGraf = [];
+        this.maquinariasGraf = [];
         this.selectedTabProd = "Productos en Desarrollo";
         this.selectedTabZona = "Zonas en Desarrollo";
         this.view = [700, 400];
@@ -2091,20 +2091,26 @@ var BalanceHomeComponent = (function () {
         this.colorScheme2 = {
             domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
         };
-<<<<<<< HEAD
         this.productosDesarollados = [];
         this.productosEnDesarrollo = [];
         this.productosSinDesarrollar = [];
         this.productosSinDesarrollar = this._desarrolloProducto.returnProductosSinDesarrollar();
         this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
         this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
+        this.demandas = this._dash.returnDemandas();
+        this.maquinarias = this._dash.returnMaquinarias();
+        console.log(this.demandas, this.maquinarias);
+        console.log(this.productosSinDesarrollar);
         setTimeout(function () {
-            _this.grafProd(_this.productosEnDesarrollo);
-        }, 2000);
-        this._dash.returnDemandas();
-        console.log(this.productosDesarollados, this.productosEnDesarrollo, this.productosSinDesarrollar);
-=======
->>>>>>> 86d068de3a1883f63e22bbbde48f3dc058d2d21b
+            _this.productosEnDesGraf = _this.grafProd(_this.productosEnDesarrollo);
+            console.log(_this.productosDesGraf);
+            _this.productosSinDesGraf = _this.grafProdSin(_this.productosSinDesarrollar);
+            console.log(_this.productosSinDesGraf);
+            _this.productosDesGraf = _this.grafProdDes(_this.productosDesarollados);
+            _this.demandasGraf = _this.getGrafDemanda(_this.demandas);
+            _this.maquinariasGraf = _this.getGrafMaquinaria(_this.maquinarias);
+            console.log("Grafica maq", _this.maquinariasGraf);
+        }, 1000);
         this.single = [
             {
                 "name": "Germany",
@@ -2179,12 +2185,13 @@ var BalanceHomeComponent = (function () {
         ];
     }
     BalanceHomeComponent.prototype.ngOnInit = function () {
-<<<<<<< HEAD
     };
     BalanceHomeComponent.prototype.grafProd = function (productos) {
         var data = [];
+        console.log(productos);
         for (var _i = 0, productos_1 = productos; _i < productos_1.length; _i++) {
             var producto = productos_1[_i];
+            console.log(producto);
             data.push({
                 graf: [{
                         "name": producto.nombreProd,
@@ -2193,18 +2200,71 @@ var BalanceHomeComponent = (function () {
                 max: producto.tiempoDes
             });
         }
-        console.log(data);
-=======
-        this.productos = this._productosService.returnProductos();
-        this.maquinasCompradas = this._CompraMaquinariaService.returnMaquinasCompradas();
-        this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
-        this.productosZonaDesarrollados = this._desarrolloZonaService.returnProductosDeZonaDesarrollados();
-        this.balanceFinal = this._resultadosService.getBalanceFinal();
-        this.demanda = this._dash.returnDemandas();
-        console.log("Componente Demanda", this.demanda);
-        this.maquinas = this._dash.returnMaquinarias();
-        console.log("Componente Maquinas", this.maquinas);
->>>>>>> 86d068de3a1883f63e22bbbde48f3dc058d2d21b
+        return data;
+    };
+    BalanceHomeComponent.prototype.grafProdSin = function (productos) {
+        var data = [];
+        console.log(productos);
+        for (var _i = 0, productos_2 = productos; _i < productos_2.length; _i++) {
+            var producto = productos_2[_i];
+            console.log(producto);
+            data.push({
+                graf: [{
+                        "name": producto.nombreProd,
+                        "value": 0
+                    }],
+                max: producto.tiempoDes
+            });
+        }
+        return data;
+    };
+    BalanceHomeComponent.prototype.getGrafDemanda = function (demandas) {
+        var data = [];
+        for (var _i = 0, demandas_1 = demandas; _i < demandas_1.length; _i++) {
+            var prod = demandas_1[_i];
+            var demandaTotal = 0;
+            for (var _a = 0, _b = prod.zonas; _a < _b.length; _a++) {
+                var zona = _b[_a];
+                demandaTotal = demandaTotal + zona.demanda;
+            }
+            data.push({
+                "name": prod.idProducto,
+                "value": demandaTotal
+            });
+        }
+        return data;
+    };
+    BalanceHomeComponent.prototype.getGrafMaquinaria = function (productos) {
+        var data = [];
+        for (var _i = 0, productos_3 = productos; _i < productos_3.length; _i++) {
+            var prod = productos_3[_i];
+            var produccionTotal = 0;
+            for (var _a = 0, _b = prod.maquinas; _a < _b.length; _a++) {
+                var maquina = _b[_a];
+                produccionTotal = produccionTotal + maquina.cantidad;
+            }
+            data.push({
+                "name": prod.idProducto,
+                "value": produccionTotal
+            });
+        }
+        return data;
+    };
+    BalanceHomeComponent.prototype.grafProdDes = function (productos) {
+        var data = [];
+        console.log(productos);
+        for (var _i = 0, productos_4 = productos; _i < productos_4.length; _i++) {
+            var producto = productos_4[_i];
+            console.log(producto);
+            data.push({
+                graf: [{
+                        "name": producto.nombreProd,
+                        "value": producto.tiempoDes
+                    }],
+                max: producto.tiempoDes
+            });
+        }
+        return data;
     };
     BalanceHomeComponent.prototype.getNameById = function (id) {
         for (var _i = 0, _a = this.productos; _i < _a.length; _i++) {
