@@ -51,7 +51,6 @@ app.use(passport.session());
 require('./config/passport')(passport);
 
 app.use('/producto', productos);
-//app.use('/variable', variables);
 app.use('/usuariosmaquinarias',usuariosmaquinarias);
 app.use('/usuariosproductos',usuariosproductos);
 app.use('/usuarioscreditos',usuarioscreditos);
@@ -70,6 +69,7 @@ app.use('/notificacion', notificaciones);
 app.use('/proyecto', proyectos);
 app.use('/maquinaria', maquinarias);
 app.use('/operacion', operaciones);
+app.use('/variable', variables);
 app.use('/dashboard', dashboards)
 
 app.get('/', (req, res)=> {

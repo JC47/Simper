@@ -25,15 +25,21 @@
                 </ul>
 
 
+                <li [routerLink]="['variables']" routerLinkActive="active">
+                   <a >
+                   <i class="fa fa-calendar fa-lg"></i> Variables
+                   </a>
+                 </li>
+
                 <li [routerLink]="['productos']" routerLinkActive="active">
                    <a >
-                   <i class="fa fa-shopping-cart fa-lg"></i> Productos
+                   <i class="fa fa-cube fa-lg"></i> Productos
                    </a>
                  </li>
 
                  <li [routerLink]="['maquinarias']">
                     <a >
-                    <i class="fa fa-briefcase fa-lg"></i> Maquinarias
+                    <i class="fa fa-cogs fa-lg"></i> Maquinarias
                     </a>
                   </li>
 
@@ -48,8 +54,8 @@
                       <a href="#"><i class="fa fa-globe fa-lg"></i>Mercado<span class="arrow"></span></a>
                     </li>
                     <ul class="sub-menu collapse" id="service">
-                      <li [routerLink]="['zonas']" ><i class="fa fa-globe fa-lg"></i> Zonas de Demanda</li>
-                      <li [routerLink]="['demandas']">Demanda potencial por Zona</li>
+                      <li [routerLink]="['zonas']" ><i class="fa fa-map-marker fa-lg"></i> Zonas de Demanda</li>
+                      <li [routerLink]="['demandas']"><i class="fa fa-area-chart fa-lg"></i> Demanda potencial por Zona</li>
 
                     </ul>
 

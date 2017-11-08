@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Promise = require("bluebird");
+const variable = require("../models/variable");
 const maquinariaComprada = require('../models/maquinariaComprada');
 const auxiliar = require('../models/auxiliar');
 
@@ -163,9 +164,8 @@ router.post('/undo', (req, res, next) => {
 router.post('/cobrar', (req, res, next) => {
   var numeroPeriodo = req.body.Balance_numeroPeriodo;
   var idProyecto = req.body.Proyectos_idProyecto;
-  Promise.resolve().then(function () {
-    return auxiliar.getAuxiliar(numeroPeriodo, idProyecto);
-  }).then( function (rows) {
+  Promise.join(auxiliar.getAuxiliar(numeroPeriodo, idProyecto), variable.getIVA(), function(rows,variableIVA){
+    console.log(variableIVA);
     var costo = req.body.costo;
     var dep = req.body.dep;
     var ivaMaq = costo*.15;

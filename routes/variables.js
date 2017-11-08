@@ -44,3 +44,5 @@ router.get('/', (req, res, next) => {
     res.json({msg:"Algo salió mal"});
   });
 });
+
+module.exports = router;

@@ -6,8 +6,10 @@ import {UsuariosComponent} from '../usuarios/usuarios.component';
 import {CreditosComponent} from '../creditos/creditos.component';
 import {ZonaProductoComponent} from '../zona-producto/zona-producto.component';
 import {AdministradoresComponent} from '../administradores/administradores.component';
+import {VariablesComponent} from '../variables/variables.component';
 
 export const ADMIN_ROUTES: Routes = [
+  { path:'variables', component:VariablesComponent},
   { path: 'productos', component:ProductosComponent },
   { path: 'maquinarias', component:MaquinariasComponent },
   { path: 'usuarios', component:UsuariosComponent },
