@@ -142,7 +142,7 @@ for (var j = 0; j < repIdProductos.length; j++) {
   for (var k = 0; k < (repIdProductos[j]); k++) {
     var json = {
       "idMaquinaria":maquinariasproyectos[aux2].Maquinaria_idMaquinaria,
-      "cantidad":maquinariasproyectos[aux2].Cantidad
+      "cantidadProd":maquinariasproyectos[aux2].cantidadProd
     }
     maquinariaProd[j]['maquinas'].push(json);
    aux2 = aux2 + 1;
