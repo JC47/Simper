@@ -15,6 +15,8 @@ export class BalanceHomeComponent implements OnInit {
   maquinasCompradas:any[]=[];
   productosDesarollados:any[] = [];
   productosZonaDesarrollados:any[] =[];
+  demanda = [];
+  maquinas = [];
   productos = new Array();
   options:any;
   data:any;
@@ -56,8 +58,6 @@ export class BalanceHomeComponent implements OnInit {
               private _productosService:ProductoService,
               private _resultadosService:ResultadosService,
               private _dash:DashboardService) {
-
-    this._dash.returnDemandas();
 
 
     this.single = [
@@ -149,6 +149,10 @@ this.single4 = [
     this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
     this.productosZonaDesarrollados = this._desarrolloZonaService.returnProductosDeZonaDesarrollados();
     this.balanceFinal = this._resultadosService.getBalanceFinal();
+    this.demanda = this._dash.returnDemandas();
+    console.log("Componente Demanda",this.demanda)
+    this.maquinas = this._dash.returnMaquinarias();
+    console.log("Componente Maquinas",this.maquinas)
   }
 
   getNameById(id:number){

@@ -118,11 +118,7 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__services_balance_service__ = __webpack_require__("../../../../../src/app/services/balance.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__services_resultados_service__ = __webpack_require__("../../../../../src/app/services/resultados.service.ts");
-<<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__services_dashboard_service__ = __webpack_require__("../../../../../src/app/services/dashboard.service.ts");
-=======
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__services_variables_service__ = __webpack_require__("../../../../../src/app/services/variables.service.ts");
->>>>>>> 0eb9310399e7ecb8f6eb5cad531906c7dd1f73f1
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_zona_producto_zona_producto_component__ = __webpack_require__("../../../../../src/app/components/zona-producto/zona-producto.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__components_usuario_proyecto_usuario_desarrollo_mercado_desarrollo_mercado_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/desarrollo-mercado/desarrollo-mercado.component.ts");
@@ -155,10 +151,7 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_69_nvd3__ = __webpack_require__("../../../../nvd3/build/nv.d3.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_69_nvd3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_69_nvd3__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_70__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.ts");
-<<<<<<< HEAD
-=======
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_71__components_variables_variables_component__ = __webpack_require__("../../../../../src/app/components/variables/variables.component.ts");
->>>>>>> 0eb9310399e7ecb8f6eb5cad531906c7dd1f73f1
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -279,10 +272,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_67__components_usuario_proyecto_usuario_operacion_operacion_component__["a" /* OperacionComponent */],
             __WEBPACK_IMPORTED_MODULE_70__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__["a" /* EstadoResultadosComponent */],
             __WEBPACK_IMPORTED_MODULE_57__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__["a" /* FinanciamientoComponent */],
-<<<<<<< HEAD
-=======
             __WEBPACK_IMPORTED_MODULE_71__components_variables_variables_component__["a" /* VariablesComponent */],
->>>>>>> 0eb9310399e7ecb8f6eb5cad531906c7dd1f73f1
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_8_angular2_flash_messages__["FlashMessagesModule"],
@@ -316,11 +306,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_36__services_balance_service__["a" /* BalanceService */],
             __WEBPACK_IMPORTED_MODULE_27__services_usuario_credito_service__["a" /* UsuarioCreditoService */],
             __WEBPACK_IMPORTED_MODULE_21__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */],
-<<<<<<< HEAD
             __WEBPACK_IMPORTED_MODULE_39__services_dashboard_service__["a" /* DashboardService */],
-=======
-            __WEBPACK_IMPORTED_MODULE_39__services_variables_service__["a" /* VariablesService */],
->>>>>>> 0eb9310399e7ecb8f6eb5cad531906c7dd1f73f1
             __WEBPACK_IMPORTED_MODULE_38__services_resultados_service__["a" /* ResultadosService */],
             __WEBPACK_IMPORTED_MODULE_19__services_auxiliar_service__["a" /* AuxiliarService */],
             __WEBPACK_IMPORTED_MODULE_20__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */],
@@ -2086,6 +2072,8 @@ var BalanceHomeComponent = (function () {
         this.maquinasCompradas = [];
         this.productosDesarollados = [];
         this.productosZonaDesarrollados = [];
+        this.demanda = [];
+        this.maquinas = [];
         this.productos = new Array();
         this.selectedTabProd = "Productos en Desarrollo";
         this.selectedTabZona = "Zonas en Desarrollo";
@@ -2104,7 +2092,6 @@ var BalanceHomeComponent = (function () {
         this.colorScheme2 = {
             domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
         };
-        this._dash.returnDemandas();
         this.single = [
             {
                 "name": "Germany",
@@ -2184,6 +2171,10 @@ var BalanceHomeComponent = (function () {
         this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
         this.productosZonaDesarrollados = this._desarrolloZonaService.returnProductosDeZonaDesarrollados();
         this.balanceFinal = this._resultadosService.getBalanceFinal();
+        this.demanda = this._dash.returnDemandas();
+        console.log("Componente Demanda", this.demanda);
+        this.maquinas = this._dash.returnMaquinarias();
+        console.log("Componente Maquinas", this.maquinas);
     };
     BalanceHomeComponent.prototype.getNameById = function (id) {
         for (var _i = 0, _a = this.productos; _i < _a.length; _i++) {
@@ -5535,16 +5526,34 @@ var DashboardService = (function () {
         };
         return this.http.post('dashboard/productoszonademandadesarrollados', datos, { headers: headers }).map(function (res) { return res.json(); });
     };
+    DashboardService.prototype.getMaquinarias = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        var datos = {
+            "Proyecto_idProyecto": localStorage.getItem('idProyecto')
+        };
+        return this.http.post('dashboard/productomaquinaria', datos, { headers: headers }).map(function (res) { return res.json(); });
+    };
     DashboardService.prototype.returnDemandas = function () {
-        var _this = this;
+        var demandas = [];
         this.getDemandas().subscribe(function (data) {
-            console.log(data.datos);
             for (var num in data.datos) {
-                console.log(data.datos[num]);
-                _this.demandas[num] = data.datos[num];
+                demandas.push(data.datos[num]);
             }
         });
-        console.log(this.demandas);
+        console.log("Servicio", demandas);
+        return demandas;
+    };
+    DashboardService.prototype.returnMaquinarias = function () {
+        var maquinas = [];
+        this.getMaquinarias().subscribe(function (data) {
+            for (var num in data.datos) {
+                maquinas.push(data.datos[num]);
+            }
+        });
+        console.log("Servicio", maquinas);
+        return maquinas;
     };
     return DashboardService;
 }());
