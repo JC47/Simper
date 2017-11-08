@@ -45,7 +45,7 @@ import {OperacionService} from './services/operacion.service';
 import {BalanceService} from './services/balance.service';
 import {ProyectosService} from './services/proyectos.service';
 import {ResultadosService} from './services/resultados.service';
-
+import {DashboardService} from './services/dashboard.service';
 //Componentes
 import { AppComponent } from './app.component';
 import { ZonaProductoComponent } from './components/zona-producto/zona-producto.component';
@@ -146,6 +146,7 @@ import { EstadoResultadosComponent } from './components/usuario/proyecto-usuario
               BalanceService,
               UsuarioCreditoService,
               DesarrolloZonaService,
+              DashboardService,
               ResultadosService,
               AuxiliarService,
               CompraMaquinariaService,

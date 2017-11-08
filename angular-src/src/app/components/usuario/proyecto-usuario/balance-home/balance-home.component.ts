@@ -4,6 +4,7 @@ import { DesarrolloZonaService } from '../../../../services/desarrollo-zona.serv
 import { CompraMaquinariaService } from '../../../../services/compra-maquinaria.service';
 import { ProductoService } from '../../../../services/producto.service';
 import {ResultadosService} from '../../../../services/resultados.service';
+import {DashboardService} from '../../../../services/dashboard.service';
 
 @Component({
   selector: 'app-balance-home',
@@ -21,7 +22,7 @@ export class BalanceHomeComponent implements OnInit {
   selectedTabProd:any="Productos en Desarrollo";
   selectedTabZona:any="Zonas en Desarrollo";
 
-  view: any[] = [300];
+   view: any[] = [700, 400];
   showXAxis = true;
   showYAxis = true;
   gradient = false;
@@ -41,6 +42,9 @@ export class BalanceHomeComponent implements OnInit {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
+  single3:any;
+  single4:any;
+
 
 
 
@@ -50,33 +54,11 @@ export class BalanceHomeComponent implements OnInit {
               private _desarrolloZonaService:DesarrolloZonaService,
               private _CompraMaquinariaService:CompraMaquinariaService,
               private _productosService:ProductoService,
-              private _resultadosService:ResultadosService) {
-                this.options = {
-      chart: {
-        type: 'discreteBarChart',
-        height: 450,
-        margin : {
-          top: 20,
-          right: 20,
-          bottom: 50,
-          left: 55
-        },
-        x: function(d){return d.label;},
-        y: function(d){return d.value;},
-        showValues: true,
-        valueFormat: function(d){
-          return d3.format(',.4f')(d);
-        },
-        duration: 500,
-        xAxis: {
-          axisLabel: 'X Axis'
-        },
-        yAxis: {
-          axisLabel: 'Y Axis',
-          axisLabelDistance: -10
-        }
-      }
-    };
+              private _resultadosService:ResultadosService,
+              private _dash:DashboardService) {
+
+    this._dash.returnDemandas();
+
 
     this.single = [
   {
@@ -135,45 +117,30 @@ this.single2 = [
 
 ];
 
-    // this.data = [
-    //   {
-    //     key: "Cumulative Return",
-    //     values: [
-    //       {
-    //         "label" : "Producto X" ,
-    //         "value" : 20
-    //       } ,
-    //       {
-    //         "label" : "Producto c" ,
-    //         "value" : 30
-    //       } ,
-    //       {
-    //         "label" : "Producto B" ,
-    //         "value" : 50
-    //       } ,
-    //       {
-    //         "label" : "Producto A" ,
-    //         "value" : 20
-    //       } ,
-    //       {
-    //         "label" : "Producto Z" ,
-    //         "value" : 30
-    //       } ,
-    //       {
-    //         "label" : "Producto l" ,
-    //         "value" : 10
-    //       } ,
-    //       {
-    //         "label" : "Producto Q" ,
-    //         "value" : 50
-    //       } ,
-    //       {
-    //         "label" : "Producto R" ,
-    //         "value" : 30
-    //       }
-    //     ]
-    //   }
-    // ];
+this.single3 = [
+  {
+    "name": "Germany",
+    "value": 8940000
+  }
+];
+
+
+this.single4 = [
+  {
+    "name": "Germany",
+    "value": 8940000
+  },
+  {
+    "name": "USA",
+    "value": 5000000
+  },
+  {
+    "name": "France",
+    "value": 7200000
+  }
+];
+
+
   }
 
   ngOnInit() {
