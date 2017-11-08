@@ -5,9 +5,6 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class DashboardService {
-  maquinarias:any;
-  demandas:any;
-
 
   constructor(private http:Http) {
 
@@ -29,16 +26,37 @@ export class DashboardService {
     return this.http.post('dashboard/productoszonademandadesarrollados',datos,{headers}).map(res => res.json());
   }
 
+  getMaquinarias(){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    let datos:any={
+      "Proyecto_idProyecto":localStorage.getItem('idProyecto')
+    }
+    return this.http.post('dashboard/productomaquinaria',datos,{headers}).map(res => res.json());
+  }
+
 
   returnDemandas(){
+    var demandas = [];
     this.getDemandas().subscribe(data=>{
-      console.log(data.datos)
       for(let num in data.datos){
-        console.log(data.datos[num])
-        this.demandas[num]=data.datos[num]
+        demandas.push(data.datos[num]);
       }
     })
-    console.log(this.demandas);
+    console.log("Servicio",demandas);
+    return demandas;
+  }
+
+  returnMaquinarias(){
+    var maquinas = [];
+    this.getMaquinarias().subscribe(data=>{
+      for(let num in data.datos){
+        maquinas.push(data.datos[num]);
+      }
+    })
+    console.log("Servicio",maquinas);
+    return maquinas;
   }
 
 }

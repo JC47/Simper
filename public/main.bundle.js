@@ -2071,6 +2071,8 @@ var BalanceHomeComponent = (function () {
         this._resultadosService = _resultadosService;
         this._dash = _dash;
         this.productosZonaDesarrollados = [];
+        this.demanda = [];
+        this.maquinas = [];
         this.productos = new Array();
         this.selectedTabProd = "Productos en Desarrollo";
         this.selectedTabZona = "Zonas en Desarrollo";
@@ -2089,6 +2091,7 @@ var BalanceHomeComponent = (function () {
         this.colorScheme2 = {
             domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
         };
+<<<<<<< HEAD
         this.productosDesarollados = [];
         this.productosEnDesarrollo = [];
         this.productosSinDesarrollar = [];
@@ -2100,6 +2103,8 @@ var BalanceHomeComponent = (function () {
         }, 2000);
         this._dash.returnDemandas();
         console.log(this.productosDesarollados, this.productosEnDesarrollo, this.productosSinDesarrollar);
+=======
+>>>>>>> 86d068de3a1883f63e22bbbde48f3dc058d2d21b
         this.single = [
             {
                 "name": "Germany",
@@ -2174,6 +2179,7 @@ var BalanceHomeComponent = (function () {
         ];
     }
     BalanceHomeComponent.prototype.ngOnInit = function () {
+<<<<<<< HEAD
     };
     BalanceHomeComponent.prototype.grafProd = function (productos) {
         var data = [];
@@ -2188,6 +2194,17 @@ var BalanceHomeComponent = (function () {
             });
         }
         console.log(data);
+=======
+        this.productos = this._productosService.returnProductos();
+        this.maquinasCompradas = this._CompraMaquinariaService.returnMaquinasCompradas();
+        this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
+        this.productosZonaDesarrollados = this._desarrolloZonaService.returnProductosDeZonaDesarrollados();
+        this.balanceFinal = this._resultadosService.getBalanceFinal();
+        this.demanda = this._dash.returnDemandas();
+        console.log("Componente Demanda", this.demanda);
+        this.maquinas = this._dash.returnMaquinarias();
+        console.log("Componente Maquinas", this.maquinas);
+>>>>>>> 86d068de3a1883f63e22bbbde48f3dc058d2d21b
     };
     BalanceHomeComponent.prototype.getNameById = function (id) {
         for (var _i = 0, _a = this.productos; _i < _a.length; _i++) {
@@ -5539,16 +5556,34 @@ var DashboardService = (function () {
         };
         return this.http.post('dashboard/productoszonademandadesarrollados', datos, { headers: headers }).map(function (res) { return res.json(); });
     };
+    DashboardService.prototype.getMaquinarias = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        var datos = {
+            "Proyecto_idProyecto": localStorage.getItem('idProyecto')
+        };
+        return this.http.post('dashboard/productomaquinaria', datos, { headers: headers }).map(function (res) { return res.json(); });
+    };
     DashboardService.prototype.returnDemandas = function () {
-        var _this = this;
+        var demandas = [];
         this.getDemandas().subscribe(function (data) {
-            console.log(data.datos);
             for (var num in data.datos) {
-                console.log(data.datos[num]);
-                _this.demandas[num] = data.datos[num];
+                demandas.push(data.datos[num]);
             }
         });
-        console.log(this.demandas);
+        console.log("Servicio", demandas);
+        return demandas;
+    };
+    DashboardService.prototype.returnMaquinarias = function () {
+        var maquinas = [];
+        this.getMaquinarias().subscribe(function (data) {
+            for (var num in data.datos) {
+                maquinas.push(data.datos[num]);
+            }
+        });
+        console.log("Servicio", maquinas);
+        return maquinas;
     };
     return DashboardService;
 }());

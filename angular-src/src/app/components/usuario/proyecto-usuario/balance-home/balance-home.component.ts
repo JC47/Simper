@@ -14,6 +14,8 @@ import {DashboardService} from '../../../../services/dashboard.service';
 export class BalanceHomeComponent implements OnInit {
 
   productosZonaDesarrollados:any[] =[];
+  demanda = [];
+  maquinas = [];
   productos = new Array();
   options:any;
   data:any;
@@ -65,9 +67,12 @@ export class BalanceHomeComponent implements OnInit {
       this.grafProd(this.productosEnDesarrollo);
     }, 2000)
 
+<<<<<<< HEAD
     this._dash.returnDemandas();
     console.log(this.productosDesarollados,this.productosEnDesarrollo,this.productosSinDesarrollar)
 
+=======
+>>>>>>> 86d068de3a1883f63e22bbbde48f3dc058d2d21b
 
     this.single = [
   {
@@ -153,6 +158,7 @@ this.single4 = [
   }
 
   ngOnInit() {
+<<<<<<< HEAD
 
   }
 
@@ -171,6 +177,17 @@ this.single4 = [
 
     console.log(data);
 
+=======
+    this.productos = this._productosService.returnProductos();
+    this.maquinasCompradas = this._CompraMaquinariaService.returnMaquinasCompradas();
+    this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
+    this.productosZonaDesarrollados = this._desarrolloZonaService.returnProductosDeZonaDesarrollados();
+    this.balanceFinal = this._resultadosService.getBalanceFinal();
+    this.demanda = this._dash.returnDemandas();
+    console.log("Componente Demanda",this.demanda)
+    this.maquinas = this._dash.returnMaquinarias();
+    console.log("Componente Maquinas",this.maquinas)
+>>>>>>> 86d068de3a1883f63e22bbbde48f3dc058d2d21b
   }
 
   getNameById(id:number){
