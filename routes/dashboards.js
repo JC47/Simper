@@ -30,57 +30,26 @@ router.post('/productoszonademandadesarrollados/', (req, res, next) => {
   });
 });
 
-//PRODUCTOS EN DESARROLLO
+router.post('/productomaquinaria/', (req, res, next) => {
+  var idProyecto = req.body.Proyecto_idProyecto;
 
-function jsonProductosEnDesarrollo(productosendes, idszonasendes,zonas, productosendesenzona) {
-  var repIdProductosEnDes = [];//almacena las veces que se repite un idZona en productosdes
-
-  var i = 0;
-  while (i<idszonasendes.length) {
-    var aux = 0;
-    for (var j = 0; j < productosendes.length; j++) {
-      if (idszonasendes[i].Zona_idZonas == productosendes[j].Zona_idZonas) {
-        aux = aux +1;
-      }
+  Promise.join(dashboard.getMaquinariaProyecto(idProyecto),dashboard.getDistinctIdProducto(idProyecto),
+  function(maquinariasproyectos,idsproductos) {
+      return jsonProductosMaquinarias(maquinariasproyectos,idsproductos);
+     })
+  .then(function (rows) {
+      res.json({success: true, datos:rows, msg:"Operacion exitosa"});
+  })
+  .catch(function (err) {
+    console.error("got error: " + err);
+    if (err instanceof Error) {
+      res.status(400).send("Error general");
+      console.log(err);
+    } else {
+      res.status(200).json({ "code": 1000, "message": err });
     }
-    repIdProductosEnDes.push(aux);
-    i++;
-  }
-
-//console.log(repIdProductosDes);
-
-var productosEnDes = []
-var k = 0;
-
-while (k < idszonasendes.length) {
-  for (var i = 0; i < zonas.length; i++) {
-    if (idszonasendes[k].Zona_idZonas == zonas[i].idZona) {
-      var json = {
-        "idZona":idszonasendes[k].Zona_idZonas,
-        "nombreZona":zonas[i].nombreZona,
-        "productosEnDes":[]
-      }
-    productosEnDes.push(json);
-    }
-  }
-  k++;
-}
-//console.log(productosDes);
-
-var aux2 = 0;
-for (var j = 0; j < repIdProductosEnDes.length; j++) {
-  for (var k = 0; k < (repIdProductosEnDes[j]); k++) {
-    var json = {
-      "idProducto":productosendesenzona[aux2].Producto_idProducto,
-      "ultimoPeriodoDes":productosendesenzona[aux2].ultimoPeriodoDes
-    }
-    productosEnDes[j]['productosEnDes'].push(json);
-   aux2 = aux2 + 1;
-  }
-}
-//console.log(productosDes);
-  return productosEnDes;
-}
+  });
+});
 
 function jsonProductosZonasDemandasDesarollados(productoszonasdemandasdes,idsproductos) {
   var repIdZonasDes = [];//almacena las veces que se repite un idZona en productoszonasdemandas
@@ -97,8 +66,91 @@ function jsonProductosZonasDemandasDesarollados(productoszonasdemandasdes,idspro
     i++;
   }
 
-console.log(repIdZonasDes);
-return console.log("ok");
+//console.log(repIdZonasDes);
+
+var productosDes = []
+var k = 0;
+
+while (k < idsproductos.length) {
+//  for (var i = 0; i < productoszonasdemandasdes.length; i++) {
+  //  if (idsproductos[k].Producto_idProducto == productoszonasdemandasdes[i].Producto_idProducto) {
+      var json = {
+        "idProducto":idsproductos[k].Producto_idProducto,
+        "zonas":[]
+      }
+    productosDes.push(json);
+    //}
+  //}
+  k++;
+}
+//console.log(productosDes);
+
+var aux2 = 0;
+for (var j = 0; j < repIdZonasDes.length; j++) {
+  for (var k = 0; k < (repIdZonasDes[j]); k++) {
+    var json = {
+      "idZona":productoszonasdemandasdes[aux2].Zona_idZonas,
+      "demanda":productoszonasdemandasdes[aux2].cantidad
+    }
+    productosDes[j]['zonas'].push(json);
+   aux2 = aux2 + 1;
+  }
+}
+//console.log(productosDes);
+return productosDes;
+}
+
+//Proucto Maquinaria
+function jsonProductosMaquinarias(maquinariasproyectos,idsproductos) {
+  var repIdProductos = [];//almacena las veces que se repite un idZona en productoszonasdemandas
+
+  var i = 0;
+  while (i<idsproductos.length) {
+    var aux = 0;
+    for (var j = 0; j < maquinariasproyectos.length; j++) {
+      if (idsproductos[i].Producto_idProducto == maquinariasproyectos[j].Producto_idProducto) {
+        aux = aux +1;
+      }
+    }
+    repIdProductos.push(aux);
+    i++;
+  }
+
+//console.log(repIdProductos);
+
+
+var maquinariaProd = []
+var k = 0;
+
+while (k < idsproductos.length) {
+//  for (var i = 0; i < productoszonasdemandasdes.length; i++) {
+  //  if (idsproductos[k].Producto_idProducto == productoszonasdemandasdes[i].Producto_idProducto) {
+      var json = {
+        "idProducto":idsproductos[k].Producto_idProducto,
+        "maquinas":[]
+      }
+    maquinariaProd.push(json);
+    //}
+  //}
+  k++;
+}
+//console.log(maquinariaProd);
+
+
+var aux2 = 0;
+for (var j = 0; j < repIdProductos.length; j++) {
+  for (var k = 0; k < (repIdProductos[j]); k++) {
+    var json = {
+      "idMaquinaria":maquinariasproyectos[aux2].Maquinaria_idMaquinaria,
+      "cantidad":maquinariasproyectos[aux2].Cantidad
+    }
+    maquinariaProd[j]['maquinas'].push(json);
+   aux2 = aux2 + 1;
+  }
+}
+
+return maquinariaProd;
+
 }
 
 module.exports = router;
