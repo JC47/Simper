@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {CreditosService} from '../../services/creditos.service';
 import {NgbModal, ModalDismissReasons,NgbActiveModal,NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators,FormArray,FormBuilder} from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
@@ -25,24 +25,26 @@ export class CreditosComponent implements OnInit {
 
   constructor(private _creditosService:CreditosService,
               private modalService: NgbModal,
-              private _flashMessagesService: FlashMessagesService) {
+              private _fb:FormBuilder) {
 
-          this.newForm= new FormGroup({
-            'nombrePrestamo':new FormControl('',Validators.required),
-            'intereses':new FormControl('',Validators.required),
-            'plazoPago':new FormControl('',Validators.required),
-            'monto':new FormControl('',Validators.required),
-            'tipoPrestamo':new FormControl('',Validators.required),
-          });
+                this.newForm = this._fb.group({
+                        nombreCredito:['',Validators.required],
+                        montoMinimo:['',Validators.required],
+                        montoMaximo:['',Validators.required],
+                        pagoAnticipado:['',Validators.required],
+                        tipoPrestamo:['',Validators.required],
+                        pagos: this._fb.array([])
+                    });
+                    this.editForm = this._fb.group({
+                            nombreCredito:['',Validators.required],
+                            montoMinimo:['',Validators.required],
+                            montoMaximo:['',Validators.required],
+                            pagoAnticipado:['',Validators.required],
+                            tipoPrestamo:['',Validators.required],
+                            pagos: this._fb.array([])
+                        });
 
-          this.editForm= new FormGroup({
-            'idPrestamos':new FormControl('',Validators.required),
-            'nombrePrestamo':new FormControl('',Validators.required),
-            'intereses':new FormControl('',Validators.required),
-            'plazoPago':new FormControl('',Validators.required),
-            'monto':new FormControl('',Validators.required),
-            'tipoPrestamo':new FormControl('',Validators.required),
-          });
+
           this.creditos = this._creditosService.establecerValores();
           console.log(this.creditos);
 
@@ -52,6 +54,13 @@ export class CreditosComponent implements OnInit {
 
 
   }
+
+
+  initProductoOfNew(pago){
+    return this._fb.group({
+            pago:[pago,Validators.required]
+          });
+    }
 
   agregaCredito(credito){
     let reason
@@ -94,10 +103,22 @@ export class CreditosComponent implements OnInit {
   }
 
   openNew(){
-    this.modalNew.show()
+    let cantidadPagos=this.newForm.controls['pagos'].value.length
+    for(let i=0;i<cantidadPagos;i++){
+      (<FormArray>this.newForm.controls['pagos']).removeAt(0);
+    }
     this.newForm.reset();
+    this.modalNew.show()
+
+
   }
 
+
+  inputPago(form:FormGroup,pago){
+    const control = <FormArray>form.controls['pagos'];
+    (<FormArray>this.newForm.controls['pagos']).push(this.initProductoOfNew(pago));
+    console.log(this.newForm.controls.pagos);
+  }
 
 
  confDelete(credito){

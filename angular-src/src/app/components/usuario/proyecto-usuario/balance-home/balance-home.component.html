@@ -1,7 +1,4 @@
-<div class="">
 <div class="row">
-
-
 
   <div class="col-5" style="height:250px">
     <ngx-charts-advanced-pie-chart
@@ -156,14 +153,6 @@
                 </blockquote>
               </div>
             </div>
-
-
-
-
-
-
-
-
           </div>
 
 
@@ -366,39 +355,22 @@
 
         <div class="col-12">
           <div class="row" style="overflow-y:scroll; height:200px;oveflow-x:visible">
-            <div class="col-6" >
-              <ngx-charts-pie-grid
 
-              [scheme]="colorScheme"
-              [results]="single3"
-              designatedTotal="2000000">
-              </ngx-charts-pie-grid>
 
+            <div class="col-12" *ngFor="let zona of productosZonaEnDesGraf">
+              <h6 class="col-12 text-center">{{zona.nombreZona}}</h6>
+              <hr>
+              <div class="col-6" *ngFor="let producto of zona.productos">
+                <ngx-charts-pie-grid
+                [scheme]="colorScheme"
+                [results]="producto.graf"
+                [designatedTotal]="producto.max">
+                </ngx-charts-pie-grid>
+              </div>
             </div>
 
-            <div class="col-6" style="height:auto">
 
 
-              <ngx-charts-pie-grid
-
-              [scheme]="colorScheme"
-              [results]="single3"
-              designatedTotal="2000000">
-              </ngx-charts-pie-grid>
-
-            </div>
-
-            <div class="col-6" style="height:auto">
-
-
-              <ngx-charts-pie-grid
-
-              [scheme]="colorScheme"
-              [results]="single3"
-              designatedTotal="2000000">
-              </ngx-charts-pie-grid>
-
-            </div>
           </div>
 
         </div>
@@ -412,13 +384,3 @@
 
 
           </div>
-
-
-
-
-
-
-
-
-
-</div>
