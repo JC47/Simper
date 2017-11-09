@@ -133,20 +133,20 @@
 
 
             <div class="form-group row text-center ">
-            <label class="col-7 col-form-label">Tipo de Prestamo</label>
+            <label class="col-7 col-form-label">Descripción</label>
 
             <div class="input-group col-4 has-success"
-            [ngClass]="{'has-danger': !newForm.get('tipoPrestamo').valid}">
+            [ngClass]="{'has-danger': !newForm.get('pago').valid}">
               <span class="input-group-addon">$</span>
               <input type="number" class="form-control"
-              formControlName="tipoPrestamo">
+              formControlName="pago">
 
             </div>
 
             <div class="form-control-feedback offset-7 text-center col-4 has-success"
             style="font-size:10px;"
-            [ngClass]="{'has-danger': !newForm.get('tipoPrestamo').valid}"
-            *ngIf="!newForm.controls['tipoPrestamo'].valid">
+            [ngClass]="{'has-danger': !newForm.get('pago').valid}"
+            *ngIf="!newForm.controls['pago'].valid">
               El interes es reuqerido
             </div>
           </div>
@@ -164,11 +164,11 @@
                 </div>
 
                 </div>
+                <button type="button" class="btn btn-danger" (click)="eliminaPagoNew(i)">Eliminar</button>
               </div>
             </div>
 
             <button type="button" class="btn btn-primary" (click)="inputPago(editForm,0)">Agregar</button>
-
 
           </div>
 

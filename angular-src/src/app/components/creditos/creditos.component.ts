@@ -32,7 +32,7 @@ export class CreditosComponent implements OnInit {
                         montoMinimo:['',Validators.required],
                         montoMaximo:['',Validators.required],
                         pagoAnticipado:['',Validators.required],
-                        tipoPrestamo:['',Validators.required],
+                        pago:['',Validators.required],
                         pagos: this._fb.array([])
                     });
                     this.editForm = this._fb.group({
@@ -40,7 +40,7 @@ export class CreditosComponent implements OnInit {
                             montoMinimo:['',Validators.required],
                             montoMaximo:['',Validators.required],
                             pagoAnticipado:['',Validators.required],
-                            tipoPrestamo:['',Validators.required],
+                            pago:['',Validators.required],
                             pagos: this._fb.array([])
                         });
 
@@ -62,9 +62,13 @@ export class CreditosComponent implements OnInit {
           });
     }
 
+  eliminaPagoNew(i:number){
+    (<FormArray>this.newForm.controls['pagos']).removeAt(i);
+  }
+
   agregaCredito(credito){
-    let reason
-    this._creditosService.guardarCredito(credito);
+    console.log(credito)
+    //this._creditosService.guardarCredito(credito);
     this.modalNew.hide();
 
     this.alerts.push({
