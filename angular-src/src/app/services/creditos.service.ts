@@ -42,16 +42,16 @@ export class CreditosService {
 
 
 
-  addCredito(credito:credito){
+  addCredito(credito){
     let headers = new Headers({
       'Content-Type':'application/json'
     });
     console.log("Producto: ",credito.nombrePrestamo,"Agregado" );
-    return this.http.post('prestamo/register', credito, {headers}).map( res => res.json());
+    return this.http.post('prestamo/addcredito', credito, {headers}).map( res => res.json());
 
   }
 
-  guardarCredito(credito:credito){
+  guardarCredito(credito){
     this.addCredito(credito).subscribe(data => {
       for(let key$ in data.datos){
           this.creditos[key$] = data.datos[key$];
