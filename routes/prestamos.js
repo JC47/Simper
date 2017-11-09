@@ -33,11 +33,13 @@ router.post('/addcredito', (req, res, next) => {
 
   Promise.resolve()
   .then(function () {
+    var p = pagosCredito.length;
     var json = {
       "nombreCredito":nombreCredito,
       "montoMin":montoMin,
       "montoMax":montoMax,
-      "pagoAnticipado":pagoAnticipado
+      "pagoAnticipado":pagoAnticipado,
+      "plazo":p
     }
     return prestamo.addCredito(json);
   })
