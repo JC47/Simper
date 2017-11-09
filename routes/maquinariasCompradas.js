@@ -131,12 +131,11 @@ router.post('/undo', (req, res, next) => {
   var numeroPeriodo = req.body.Balance_numeroPeriodo;
   var idProyecto = req.body.Proyectos_idProyecto;
   var idMaquinaria = req.body.Maquinaria_idMaquinaria;
-  Promise.resolve().then(function () {
-    return auxiliar.getAuxiliar(numeroPeriodo, idProyecto);
-  }).then( function (rows) {
+  Promise.join(auxiliar.getAuxiliar(numeroPeriodo, idProyecto), variable.getIVA(), function(rows,variableIVA){
     var costo = req.body.costo;
     var dep = req.body.dep;
-    var ivaMaq = costo*.15;
+    var IVA = variableIVA[0].valor
+    var ivaMaq = costo*IVA;
     var depM = costo*(dep/100);
     var cm = costo + ivaMaq;
     var ivaMensual = ivaMaq/12;
