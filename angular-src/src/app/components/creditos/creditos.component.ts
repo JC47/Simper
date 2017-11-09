@@ -36,6 +36,7 @@ export class CreditosComponent implements OnInit {
                         pagos: this._fb.array([])
                     });
                     this.editForm = this._fb.group({
+                            idCredito:['',Validators.required],
                             nombreCredito:['',Validators.required],
                             montoMinimo:['',Validators.required],
                             montoMaximo:['',Validators.required],
