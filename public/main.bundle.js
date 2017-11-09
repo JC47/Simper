@@ -599,6 +599,7 @@ var CreditosComponent = (function () {
             pagos: this._fb.array([])
         });
         this.editForm = this._fb.group({
+            idCredito: ['', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["Validators"].required],
             nombreCredito: ['', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["Validators"].required],
             montoMinimo: ['', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["Validators"].required],
             montoMaximo: ['', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["Validators"].required],
