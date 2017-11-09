@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DesarrolloProductoService } from '../../../../services/desarrollo-producto.service';
-import { DesarrolloZonaService } from '../../../../services/desarrollo-zona.service';
 import { CompraMaquinariaService } from '../../../../services/compra-maquinaria.service';
 import { ProductoService } from '../../../../services/producto.service';
 import {ResultadosService} from '../../../../services/resultados.service';
 import {DashboardService} from '../../../../services/dashboard.service';
+import {DesarrolloZonaService} from '../../../../services/desarrollo-zona.service';
 
 @Component({
   selector: 'app-balance-home',
@@ -12,13 +12,16 @@ import {DashboardService} from '../../../../services/dashboard.service';
   styleUrls: ['./balance-home.component.css']
 })
 export class BalanceHomeComponent implements OnInit {
-  maquinasCompradas:any[]=[];
-  productosDesarollados:any[] = [];
-  productosZonaDesarrollados:any[] =[];
-  demanda = [];
-  maquinas = [];
+
+  productosZonaSinDesarrollar:any[] = [];
+  productosZonaEnDesarrollo: any[] = [];
+  productosZonaDesarrollados: any[] = [];
   productos = new Array();
   options:any;
+  demandas:any;
+  maquinarias:any;
+  demandasGraf:any[]=[];
+  maquinariasGraf:any[]=[];
   data:any;
   balanceFinal:any;
   selectedTabProd:any="Productos en Desarrollo";
@@ -29,6 +32,7 @@ export class BalanceHomeComponent implements OnInit {
   showYAxis = true;
   gradient = false;
   showLegend = true;
+  grafDemanda:any;
   showXAxisLabel = true;
   xAxisLabel = 'Country';
   showYAxisLabel = true;
@@ -46,9 +50,12 @@ export class BalanceHomeComponent implements OnInit {
 
   single3:any;
   single4:any;
-
-
-
+  productosDesarollados:any[] = [];
+  productosEnDesarrollo:any[] = [];
+  productosSinDesarrollar:any[] = [];
+  productosDesGraf:any;
+  productosEnDesGraf:any;
+productosSinDesGraf:any;
 
 
 
@@ -58,6 +65,33 @@ export class BalanceHomeComponent implements OnInit {
               private _productosService:ProductoService,
               private _resultadosService:ResultadosService,
               private _dash:DashboardService) {
+    this.productosSinDesarrollar = this._desarrolloProducto.returnProductosSinDesarrollar();
+    this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
+    this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
+    this.productosZonaSinDesarrollar = this._desarrolloZonaService.returnProductosDeZonaSinDesarrollar();
+    this.productosZonaEnDesarrollo = this._desarrolloZonaService.returnProductosDeZonaEnDesarrollo();
+    this.productosZonaDesarrollados = this._desarrolloZonaService.returnProductosDeZonaDesarrollados();
+    this.demandas=this._dash.returnDemandas();
+    this.maquinarias=this._dash.returnMaquinarias();
+    console.log(this.demandas,this.maquinarias);
+    console.log(this.productosSinDesarrollar)
+    setTimeout(()=>{
+
+      this.productosEnDesGraf=this.grafProd(this.productosEnDesarrollo);
+      console.log( this.productosDesGraf);
+      this.productosSinDesGraf=this.grafProdSin(this.productosSinDesarrollar);
+      console.log( this.productosSinDesGraf);
+      this.productosDesGraf=this.grafProdDes(this.productosDesarollados);
+      this.demandasGraf=this.getGrafDemanda(this.demandas);
+      this.maquinariasGraf=this.getGrafMaquinaria(this.maquinarias);
+      console.log("Grafica maq",this.maquinariasGraf)
+    }, 1000)
+
+
+
+
+
+
 
 
     this.single = [
@@ -144,15 +178,116 @@ this.single4 = [
   }
 
   ngOnInit() {
-    this.productos = this._productosService.returnProductos();
-    this.maquinasCompradas = this._CompraMaquinariaService.returnMaquinasCompradas();
-    this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
-    this.productosZonaDesarrollados = this._desarrolloZonaService.returnProductosDeZonaDesarrollados();
-    this.balanceFinal = this._resultadosService.getBalanceFinal();
-    this.demanda = this._dash.returnDemandas();
-    console.log("Componente Demanda",this.demanda)
-    this.maquinas = this._dash.returnMaquinarias();
-    console.log("Componente Maquinas",this.maquinas)
+
+  }
+
+  grafProd(productos){
+    let data:any=[]
+    console.log(productos)
+
+    for(let producto of productos){
+      console.log(producto);
+      data.push({
+        graf:[{
+          "name":producto.nombreProd,
+          "value":producto.periodosDes
+        }],
+        max:producto.tiempoDes
+      })
+    }
+
+  return data;
+
+  }
+
+  grafProdSin(productos){
+    let data:any=[]
+    console.log(productos)
+
+    for(let producto of productos){
+      console.log(producto);
+      data.push({
+        graf:[{
+          "name":producto.nombreProd,
+          "value":0
+        }],
+        max:producto.tiempoDes
+      })
+    }
+
+  return data;
+
+  }
+
+
+
+  getGrafDemanda(demandas){
+    let data:any[]=[];
+
+    for(let prod of demandas){
+      let demandaTotal:number=0;
+      for(let zona of prod.zonas){
+        demandaTotal=demandaTotal+zona.demanda
+      }
+      data.push({
+        "name":prod.idProducto,
+        "value":demandaTotal
+      });
+
+    }
+    return data;
+
+  }
+
+
+
+
+    getGrafMaquinaria(productos){
+      let data:any[]=[];
+
+      for(let prod of productos){
+        let produccionTotal:number=0;
+        for(let maquina of prod.maquinas){
+          produccionTotal=produccionTotal+maquina.cantidad
+        }
+        data.push({
+          "name":prod.idProducto,
+          "value":produccionTotal
+        });
+
+      }
+      return data;
+
+    }
+
+
+
+  grafDemandaDes(){}
+
+  grafDemandaEnDes(){}
+
+  grafDemandaSinDes(){
+
+  }
+
+
+  grafProdDes(productos){
+    let data:any=[]
+    console.log(productos)
+
+    for(let producto of productos){
+      console.log(producto);
+      data.push({
+        graf:[{
+          "name":producto.nombreProd,
+          "value":producto.tiempoDes
+        }],
+        max:producto.tiempoDes
+      })
+    }
+
+  return data;
+
   }
 
   getNameById(id:number){
