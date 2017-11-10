@@ -21,7 +21,14 @@ export class CreditosComponent implements OnInit {
   newForm:FormGroup;
   editForm:FormGroup;
   public alerts: any = [];
-  creditoDelete;
+  creditoDelete={
+    nombreCredito:null,
+    montoMinimo:null,
+    montoMaximo:null,
+    pagoAnticipado:null,
+    pago:null,
+    pagosCredito:[]
+  };
 
   constructor(private _creditosService:CreditosService,
               private modalService: NgbModal,
@@ -29,20 +36,20 @@ export class CreditosComponent implements OnInit {
 
                 this.newForm = this._fb.group({
                         nombreCredito:['',Validators.required],
-                        montoMinimo:['',Validators.required],
-                        montoMaximo:['',Validators.required],
+                        montoMin:['',Validators.required],
+                        montoMax:['',Validators.required],
                         pagoAnticipado:['',Validators.required],
                         pago:['',Validators.required],
-                        pagos: this._fb.array([])
+                        pagosCredito: this._fb.array([])
                     });
                     this.editForm = this._fb.group({
                             idCredito:['',Validators.required],
                             nombreCredito:['',Validators.required],
-                            montoMinimo:['',Validators.required],
-                            montoMaximo:['',Validators.required],
+                            montoMin:['',Validators.required],
+                            montoMax:['',Validators.required],
                             pagoAnticipado:['',Validators.required],
                             pago:['',Validators.required],
-                            pagos: this._fb.array([])
+                            pagosCredito: this._fb.array([])
                         });
 
 
@@ -56,6 +63,20 @@ export class CreditosComponent implements OnInit {
 
   }
 
+  validaCampo(i){
+    if(this.newForm.controls.pagosCredito.get(i+"").get('pago').valid)
+      return false;
+    else
+      return true;
+  }
+
+  validaCampoEdit(i){
+    if(this.editForm.controls.pagosCredito.get(i+"").get('pago').valid)
+      return false;
+    else
+      return true;
+  }
+
 
   initProductoOfNew(pago){
     return this._fb.group({
@@ -64,7 +85,11 @@ export class CreditosComponent implements OnInit {
     }
 
   eliminaPagoNew(i:number){
-    (<FormArray>this.newForm.controls['pagos']).removeAt(i);
+    (<FormArray>this.newForm.controls['pagosCredito']).removeAt(i);
+  }
+
+  eliminaPagoEdit(i:number){
+    (<FormArray>this.editForm.controls['pagosCredito']).removeAt(i);
   }
 
   agregaCredito(credito){
@@ -105,14 +130,20 @@ export class CreditosComponent implements OnInit {
   }
 
   openEdit(credito){
+    this.editForm.controls['montoMax'].setValue(credito.montoMax);
+    this.editForm.controls['montoMin'].setValue(credito.montoMin);
+    this.editForm.controls['nombreCredito'].setValue(credito.nombreCredito);
+    this.editForm.controls['pagoAnticipado'].setValue(credito.pagoAnticipado);
+    this.editForm.controls['pago'].setValue(credito.pago);
+    this.editForm.controls['idCredito'].setValue(credito.idCredito);
     this.modalEdit.show();
-    this.editForm.setValue(credito);
+    //this.editForm.setValue(credito);
   }
 
   openNew(){
-    let cantidadPagos=this.newForm.controls['pagos'].value.length
-    for(let i=0;i<cantidadPagos;i++){
-      (<FormArray>this.newForm.controls['pagos']).removeAt(0);
+    let cantidadpagosCredito=this.newForm.controls['pagosCredito'].value.length
+    for(let i=0;i<cantidadpagosCredito;i++){
+      (<FormArray>this.newForm.controls['pagosCredito']).removeAt(0);
     }
     this.newForm.reset();
     this.modalNew.show()
@@ -122,9 +153,12 @@ export class CreditosComponent implements OnInit {
 
 
   inputPago(form:FormGroup,pago){
-    const control = <FormArray>form.controls['pagos'];
-    (<FormArray>this.newForm.controls['pagos']).push(this.initProductoOfNew(pago));
-    console.log(this.newForm.controls.pagos);
+
+    (<FormArray>this.newForm.controls['pagosCredito']).push(this.initProductoOfNew(pago));
+    console.log(this.newForm.controls.pagosCredito);
+  }
+  inputPagoEdit(pago){
+        (<FormArray>this.editForm.controls['pagosCredito']).push(this.initProductoOfNew(pago));
   }
 
 

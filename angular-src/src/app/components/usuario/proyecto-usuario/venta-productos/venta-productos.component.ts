@@ -34,7 +34,7 @@ export class VentaProductosComponent implements OnInit {
 
   ventas:any;
   vendeForm:FormGroup[]=[];
-
+  openVenta:boolean=false;
   vendiendo:boolean=false;
   produciendo:boolean=false;
   openConf:boolean=false;
@@ -57,8 +57,8 @@ export class VentaProductosComponent implements OnInit {
 
 
 
-
     this.ventasForm=new FormGroup({
+      'idProducto':new FormControl(),
       'idZona':new FormControl(),
       'cantidadVenta':new FormControl(),
 
@@ -67,35 +67,9 @@ export class VentaProductosComponent implements OnInit {
     this.almacenForm=new FormGroup({
       'cantidadAlmacen':new FormControl(),
     });
-
-
-
-    console.log(this.formsVentas);
-    setTimeout(() => {
-      for(let producto of this.productosOperacion){
-        console.log(producto)
-        this.vendeForm.push(
-          new FormGroup({
-            idZona:new FormControl('6')
-          })
-        )
-        // console.log(producto);
-        // let array:FormControl[]=[];
-        // console.log(producto)
-        // for(let zona of producto.zonas){
-        //   array.push(new FormControl(''))
-        // }
-        // this.formsVentas.push(new FormArray(array))
-
-      }
-      console.log(this.vendeForm)
-
-
-
-   }, 500);
-
-
   }
+
+
 
   ngOnInit() {
     console.log(this.ventas);
@@ -109,10 +83,15 @@ export class VentaProductosComponent implements OnInit {
     this.produciendo=true;
     setTimeout(()=>{this.produciendo=false;this.vendiendo=true;}, 1000);
     setTimeout(()=>this.openLoad=false, 1000);
-
-
-
   }
+
+openModalVenta(idZona,idProducto){
+  this.ventasForm.controls['idProducto'].setValue(idProducto)
+
+  this.ventasForm.controls['idZona'].setValue(idZona)
+  this.openVenta=true;
+}
+
 
   progressAlmacen(){
       this.produciendo=true;
@@ -120,11 +99,11 @@ export class VentaProductosComponent implements OnInit {
       this.openLoad=true;
       setTimeout(()=>this.openLoad=false, 2000);
       setTimeout(()=>{this.produciendo=false}, 2000);
-
   }
 
   cobrarVenta(){
     this.openConf=false;
+    this.openVenta=false;
     var p = this.selectedVenta.idProducto;
     var idZ = this.selectedVenta.venta.idZona;
     var cv = this.selectedVenta.venta.cantidadVenta;
@@ -148,12 +127,17 @@ export class VentaProductosComponent implements OnInit {
     });
   }
 
-  selectVenta(venta,idProducto){
+  selectVenta(venta){
     this.openConf=true;
     this.selectedVenta={
-      venta:venta,
-      idProducto:idProducto
+      venta:{
+        idZona:venta.idZona,
+        cantidadVenta:venta.cantidadVenta
+      },
+      idProducto:venta.idProducto
     }
+
+    console.log(this.selectedVenta)
 
   }
 
