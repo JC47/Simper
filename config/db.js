@@ -19,7 +19,7 @@ var pool = mysql.createPool({
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: '',
     database: 'basesimv1'
 });
 

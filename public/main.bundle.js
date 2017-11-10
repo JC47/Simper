@@ -649,9 +649,10 @@ var CreditosComponent = (function () {
         this.modalNew.hide();
         this.alerts.push({
             type: 'success',
-            msg: "Usuario \"" + (credito.nombrePrestamo) + "\" agregado",
+            msg: "Usuario \"" + (credito.nombreCredito) + "\" agregado",
             timeout: 2000
         });
+        this._creditosService.guardarCredito(credito);
     };
     CreditosComponent.prototype.editaCredito = function (credito) {
         console.log(credito);
@@ -659,7 +660,7 @@ var CreditosComponent = (function () {
         this.modalEdit.hide();
         this.alerts.push({
             type: 'success',
-            msg: "Usuario \"" + (credito.nombrePrestamo) + "\" agregado",
+            msg: "Usuario \"" + (credito.nombreCredito) + "\" agregado",
             timeout: 2000
         });
     };
@@ -5620,22 +5621,21 @@ var CreditosService = (function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
             'Content-Type': 'application/json'
         });
-        console.log("Producto: ", credito.nombrePrestamo, "Agregado");
         return this.http.post('prestamo/addcredito', credito, { headers: headers }).map(function (res) { return res.json(); });
     };
     CreditosService.prototype.guardarCredito = function (credito) {
         var _this = this;
         this.addCredito(credito).subscribe(function (data) {
-            for (var key$ in data.datos) {
-                _this.creditos[key$] = data.datos[key$];
+            if (data.success) {
+                _this.establecerValores();
             }
         });
     };
     CreditosService.prototype.deleteCredito = function (id) {
         console.log("Eliminando", id);
         for (var i = 0; this.creditos.length > i; i++) {
-            if (this.creditos[i].idPrestamos == id) {
-                console.log(this.creditos[i].idPrestamos);
+            if (this.creditos[i].idCredito == id) {
+                console.log(this.creditos[i].idCred);
                 this.creditos.splice(i, 1);
                 console.log("credito: ", id, "eliminado");
             }
