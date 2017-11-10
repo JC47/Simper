@@ -39,43 +39,14 @@
           </div>
 
           <div class="col-lg-5 col-sm-8 " style="height:200px; overflow-y:scroll">
-            <table class="table table-responsive" style="margin-top:10px">
-    <thead class="thead-inverse">
-      <tr>
-        <th>Productos</th>
-        <th>Zona 1</th>
-        <th>Zona 2</th>
-        <th>Zona 3</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th>Producto 1</th>
-        <th>18,000</th>
-        <td>20,000</td>
-        <td>5,000</td>
-      </tr>
-      <tr>
-        <th>Producto 2</th>
-        <th>18,000</th>
-        <td>20,000</td>
-        <td>5,000</td>
-      </tr>
-      <tr>
-        <th>Producto 3</th>
-        <th>18,000</th>
-        <td>20,000</td>
-        <td>5,000</td>
-      </tr>
-      <tr>
-        <th>Producto 4</th>
-        <th>18,000</th>
-        <td>20,000</td>
-        <td>5,000</td>
-      </tr>
-    </tbody>
-  </table>
-
+            <div class="card" *ngFor="let producto of demandas" style="margin-top:15px">
+                {{getNameById(producto.idProducto)}}
+                <div class="card-footer">
+                  <div class="col-12" *ngFor="let zona of producto.zonas">
+                    {{zona.idZona}}: {{zona.demanda}}
+                  </div>
+                </div>
+            </div>
           </div>
 
         </div>

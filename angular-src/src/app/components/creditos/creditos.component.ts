@@ -134,6 +134,9 @@ export class CreditosComponent implements OnInit {
     this.editForm.controls['pagoAnticipado'].setValue(credito.pagoAnticipado);
     this.editForm.controls['pago'].setValue(credito.pago);
     this.editForm.controls['idCredito'].setValue(credito.idCredito);
+    for(let pago of credito.pagosTotales){
+      this.inputPagoEdit(pago.pagosCredito)
+    }
     this.modalEdit.show();
     //this.editForm.setValue(credito);
   }
