@@ -74,9 +74,11 @@ export class CreditosComponent implements OnInit {
 
     this.alerts.push({
       type: 'success',
-      msg: `Usuario "${(credito.nombrePrestamo)}" agregado`,
+      msg: `Usuario "${(credito.nombreCredito)}" agregado`,
       timeout: 2000
     });
+
+    this._creditosService.guardarCredito(credito);
   }
 
   editaCredito(credito){
@@ -85,7 +87,7 @@ export class CreditosComponent implements OnInit {
     this.modalEdit.hide();
     this.alerts.push({
       type: 'success',
-      msg: `Usuario "${(credito.nombrePrestamo)}" agregado`,
+      msg: `Usuario "${(credito.nombreCredito)}" agregado`,
       timeout: 2000
     });
   }

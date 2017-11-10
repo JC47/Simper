@@ -34,6 +34,7 @@ router.post('/addcredito', (req, res, next) => {
 
   Promise.resolve()
   .then(function () {
+    console.log(pagosCredito);
     var p = pagosCredito.length;
     var json = {
       "nombreCredito":nombreCredito,
@@ -69,11 +70,8 @@ router.post('/deletecredito/:idCredito', (req, res, next) => {
   .then(function () {
     return prestamo.deleteCredito(idCredito);
   })
-  .then(function () {
-    return prestamo.getCredito();
-  })
   .then(function(data){
-    res.json({success: true, datos: data, msg:"Operacion exitosa"});
+    res.json({success: true, msg:"Operacion exitosa"});
   })
   .catch(function (err) {
     console.error("got error: " + err);

@@ -46,15 +46,14 @@ export class CreditosService {
     let headers = new Headers({
       'Content-Type':'application/json'
     });
-    console.log("Producto: ",credito.nombrePrestamo,"Agregado" );
     return this.http.post('prestamo/addcredito', credito, {headers}).map( res => res.json());
 
   }
 
   guardarCredito(credito){
     this.addCredito(credito).subscribe(data => {
-      for(let key$ in data.datos){
-          this.creditos[key$] = data.datos[key$];
+      if(data.success){
+        this.establecerValores();
       }
     });
   }
@@ -62,8 +61,8 @@ export class CreditosService {
   deleteCredito(id:number){
     console.log("Eliminando",id);
     for(let i=0;this.creditos.length>i;i++){
-      if(this.creditos[i].idPrestamos==id){
-        console.log(this.creditos[i].idPrestamos);
+      if(this.creditos[i].idCredito==id){
+        console.log(this.creditos[i].idCred);
         this.creditos.splice(i,1);
         console.log("credito: ",id,"eliminado");
       }
