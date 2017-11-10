@@ -103,7 +103,7 @@ export class CreditosComponent implements OnInit {
       timeout: 2000
     });
 
-    this._creditosService.guardarCredito(credito);
+    this.creditos = this._creditosService.guardarCredito(credito);
   }
 
   editaCredito(credito){

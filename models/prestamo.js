@@ -32,7 +32,7 @@ module.exports.getLastIdCredito = function () {
 module.exports.addPagoCredito = function (lastIdCredito,pagosCredito) {
   for (var i = 0; i < pagosCredito.length; i++) {
     //var query = "insert into pagocredito set idCredito = "+lastIdCredito+", pagosCredito = "+pagosCredito[i]+" ";
-    querySql("insert into pagocredito set idCredito = "+lastIdCredito+", pagosCredito = "+pagosCredito[i]+" ");
+    querySql("insert into pagocredito set idCredito = "+lastIdCredito+", pagosCredito = "+pagosCredito[i].pago+" ");
   }
   return console.log("Insertado pagocredito");
 }
