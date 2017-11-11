@@ -51,11 +51,18 @@ export class CreditosService {
   }
 
   guardarCredito(credito){
+    var creditos = [];
     this.addCredito(credito).subscribe(data => {
       if(data.success){
-        this.establecerValores();
+        this.getCreditos().subscribe(data2 => {
+          for(let key$ in data2.datos){
+              creditos.push(data2.datos[key$]);
+          }
+        });
       }
     });
+    console.log("Agregado",creditos)
+    return creditos;
   }
 
   deleteCredito(id:number){

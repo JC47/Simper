@@ -652,7 +652,7 @@ var CreditosComponent = (function () {
             msg: "Usuario \"" + (credito.nombreCredito) + "\" agregado",
             timeout: 2000
         });
-        this._creditosService.guardarCredito(credito);
+        this.creditos = this._creditosService.guardarCredito(credito);
     };
     CreditosComponent.prototype.editaCredito = function (credito) {
         console.log(credito);
@@ -5634,11 +5634,18 @@ var CreditosService = (function () {
     };
     CreditosService.prototype.guardarCredito = function (credito) {
         var _this = this;
+        var creditos = [];
         this.addCredito(credito).subscribe(function (data) {
             if (data.success) {
-                _this.establecerValores();
+                _this.getCreditos().subscribe(function (data2) {
+                    for (var key$ in data2.datos) {
+                        creditos.push(data2.datos[key$]);
+                    }
+                });
             }
         });
+        console.log("Agregado", creditos);
+        return creditos;
     };
     CreditosService.prototype.deleteCredito = function (id) {
         console.log("Eliminando", id);
