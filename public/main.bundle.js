@@ -2096,6 +2096,7 @@ module.exports = "<div class=\"row\">\r\n\r\n  <div class=\"col-5\" style=\"heig
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_resultados_service__ = __webpack_require__("../../../../../src/app/services/resultados.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_dashboard_service__ = __webpack_require__("../../../../../src/app/services/dashboard.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_zona_service__ = __webpack_require__("../../../../../src/app/services/desarrollo-zona.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_balance_service__ = __webpack_require__("../../../../../src/app/services/balance.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BalanceHomeComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2113,8 +2114,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var BalanceHomeComponent = (function () {
-    function BalanceHomeComponent(_desarrolloProducto, _desarrolloZonaService, _CompraMaquinariaService, _productosService, _resultadosService, _dash) {
+    function BalanceHomeComponent(_desarrolloProducto, _desarrolloZonaService, _CompraMaquinariaService, _productosService, _resultadosService, _dash, _balanceService) {
         var _this = this;
         this._desarrolloProducto = _desarrolloProducto;
         this._desarrolloZonaService = _desarrolloZonaService;
@@ -2122,6 +2124,7 @@ var BalanceHomeComponent = (function () {
         this._productosService = _productosService;
         this._resultadosService = _resultadosService;
         this._dash = _dash;
+        this._balanceService = _balanceService;
         this.productosZonaSinDesarrollar = [];
         this.productosZonaEnDesarrollo = [];
         this.productosZonaDesarrollados = [];
@@ -2168,6 +2171,12 @@ var BalanceHomeComponent = (function () {
             _this.maquinariasGraf = _this.getGrafMaquinaria(_this.maquinarias);
             _this.productosZonaEnDesGraf = _this.grafZonaEnDes(_this.productosZonaEnDesarrollo);
             console.log("Grafica zona en des", _this.productosZonaEnDesGraf);
+            _this._balanceService.getBalanceFinal().subscribe(function (data) {
+                if (data.success) {
+                    _this.balanceFinal = _this._resultadosService.getBalanceFinal();
+                    console.log("Balance", _this.balanceFinal);
+                }
+            });
         }, 1500);
         this.single = [
             {
@@ -2362,10 +2371,10 @@ BalanceHomeComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_producto_service__["a" /* ProductoService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_resultados_service__["a" /* ResultadosService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_dashboard_service__["a" /* DashboardService */]) === "function" && _f || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_producto_service__["a" /* ProductoService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_resultados_service__["a" /* ResultadosService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_dashboard_service__["a" /* DashboardService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_7__services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__services_balance_service__["a" /* BalanceService */]) === "function" && _g || Object])
 ], BalanceHomeComponent);
 
-var _a, _b, _c, _d, _e, _f;
+var _a, _b, _c, _d, _e, _f, _g;
 //# sourceMappingURL=balance-home.component.js.map
 
 /***/ }),

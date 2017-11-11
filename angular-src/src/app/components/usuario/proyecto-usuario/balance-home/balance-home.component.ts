@@ -5,6 +5,8 @@ import { ProductoService } from '../../../../services/producto.service';
 import {ResultadosService} from '../../../../services/resultados.service';
 import {DashboardService} from '../../../../services/dashboard.service';
 import {DesarrolloZonaService} from '../../../../services/desarrollo-zona.service';
+import {BalanceService} from '../../../../services/balance.service';
+
 
 @Component({
   selector: 'app-balance-home',
@@ -48,6 +50,8 @@ export class BalanceHomeComponent implements OnInit {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
+
+
   single3:any;
   single4:any;
   productosDesarollados:any[] = [];
@@ -68,7 +72,8 @@ productosZonaSinDesGraf:any;
               private _CompraMaquinariaService:CompraMaquinariaService,
               private _productosService:ProductoService,
               private _resultadosService:ResultadosService,
-              private _dash:DashboardService) {
+              private _dash:DashboardService,
+              private _balanceService:BalanceService) {
     this.productos=this._productosService.returnProductos();
     console.log("productos para ID",this.productos)
     this.productosSinDesarrollar = this._desarrolloProducto.returnProductosSinDesarrollar();
@@ -92,8 +97,19 @@ productosZonaSinDesGraf:any;
       this.demandasGraf=this.getGrafDemanda(this.demandas);
       this.maquinariasGraf=this.getGrafMaquinaria(this.maquinarias);
       this.productosZonaEnDesGraf=this.grafZonaEnDes(this.productosZonaEnDesarrollo)
-      console.log("Grafica zona en des",this.productosZonaEnDesGraf)
+      console.log("Grafica zona en des",this.productosZonaEnDesGraf);
+      this._balanceService.getBalanceFinal().subscribe( data => {
+        if(data.success){
+          this.balanceFinal = this._resultadosService.getBalanceFinal();
+          console.log("Balance",this.balanceFinal);
+        }
+      });
+
     }, 1500)
+
+
+
+
 
 
 
