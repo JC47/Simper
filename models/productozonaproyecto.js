@@ -71,7 +71,7 @@ module.exports.getZonas = function () {
 //PRODUCTOS EN DESARROLLO
 
 module.exports.getProductosEnDesEnZona = function (idProyecto,idUsuario) {
-  var query = "select distinct Producto_idProducto,Zona_idZonas,ultimoPeriodoDes from productozonaproyecto inner join zona on productozonaproyecto.Zona_idZonas = zona.idZona where productozonaproyecto.Proyecto_idProyecto = "+idProyecto+" and productozonaproyecto.Proyecto_Usuario_idUsuario = "+idUsuario+" and productozonaproyecto.desarrollado = 0 order by Zona_idZonas";
+  var query = "select distinct Producto_idProducto,Zona_idZonas,ultimoPeriodoDes,periodosDes,tiempoDes from productozonaproyecto inner join zona on productozonaproyecto.Zona_idZonas = zona.idZona inner join producto on productozonaproyecto.Producto_idProducto = producto.idProducto where productozonaproyecto.Proyecto_idProyecto = "+idProyecto+" and productozonaproyecto.Proyecto_Usuario_idUsuario = "+idUsuario+" and productozonaproyecto.desarrollado = 0 order by Zona_idZonas";
   return querySql(query);
 }
 

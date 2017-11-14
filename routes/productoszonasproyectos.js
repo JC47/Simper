@@ -446,6 +446,8 @@ for (var j = 0; j < repIdProductosEnDes.length; j++) {
   for (var k = 0; k < (repIdProductosEnDes[j]); k++) {
     var json = {
       "idProducto":productosendesenzona[aux2].Producto_idProducto,
+      "periodosDes":productosendesenzona[aux2].periodosDes,
+      "tiempoDes":productosendesenzona[aux2].tiempoDes,
       "ultimoPeriodoDes":productosendesenzona[aux2].ultimoPeriodoDes
     }
     productosEnDes[j]['productosEnDes'].push(json);
