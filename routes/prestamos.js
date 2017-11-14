@@ -28,16 +28,21 @@ router.post('/addcredito', (req, res, next) => {
   var nombreCredito = req.body.nombreCredito;
   var montoMin = req.body.montoMin;
   var montoMax = req.body.montoMax;
+  var pago = req.body.pago;
   var pagoAnticipado = req.body.pagoAnticipado;
   var pagosCredito = req.body.pagosCredito;
 
   Promise.resolve()
   .then(function () {
+    console.log(pagosCredito);
+    var p = pagosCredito.length;
     var json = {
       "nombreCredito":nombreCredito,
       "montoMin":montoMin,
       "montoMax":montoMax,
-      "pagoAnticipado":pagoAnticipado
+      "pago":pago,
+      "pagoAnticipado":pagoAnticipado,
+      "plazo":p
     }
     return prestamo.addCredito(json);
   })
@@ -49,11 +54,8 @@ router.post('/addcredito', (req, res, next) => {
 
     return prestamo.addPagoCredito(ultimoId,pagosCredito);
   })
-  .then(function () {
-    return prestamo.getCredito();
-  })
   .then(function(data){
-    res.json({success: true, datos: data, msg:"Operacion exitosa"});
+    res.json({success: true, msg:"Operacion exitosa"});
   })
   .catch(function (err) {
     console.error("got error: " + err);
@@ -68,11 +70,8 @@ router.post('/deletecredito/:idCredito', (req, res, next) => {
   .then(function () {
     return prestamo.deleteCredito(idCredito);
   })
-  .then(function () {
-    return prestamo.getCredito();
-  })
   .then(function(data){
-    res.json({success: true, datos: data, msg:"Operacion exitosa"});
+    res.json({success: true, msg:"Operacion exitosa"});
   })
   .catch(function (err) {
     console.error("got error: " + err);

@@ -13,8 +13,9 @@
           <div class="col-8">
             <h4 class="card-title" style="margin-bottom:15px">{{credito.nombreCredito}}</h4>
             <h6 class="card-subtitle" style="margin-bottom:15px">Monto Máximo: {{credito.montoMax| currency:'USD':true }}</h6>
-            <h6 class="card-subtitle" style="margin-bottom:15px">Monto Minimo: {{credito.montoMin}}</h6>
+            <h6 class="card-subtitle" style="margin-bottom:15px">Monto Minimo: {{credito.montoMin| currency:'USD':true}}</h6>
             <h6 class="card-subtitle" style="margin-bottom:15px">Descripción: {{credito.pago}}</h6>
+            <h6 class="card-subtitle" style="margin-bottom:15px"> Duración: {{credito.plazo}} periodo(s)</h6>
 
           </div>
 

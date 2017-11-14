@@ -57,6 +57,45 @@ router.post('/final', (req, res, next) => {
               prestamo.getPagos(idProyecto,numeroPeriodoActual),
               auxiliar.getAuxiliar(numeroPeriodoActual,idProyecto),
               auxiliar.getAuxiliaresVenta(numeroPeriodoActual,idProyecto), function(balanceBase,prestamos,pagos,auxCompleto,auxesVentas){
+
+    //prestamos
+    var cantidadPrestada = 0;
+    var cantidadPrestadaAmenosAnio = 0;
+    for(let key in prestamos){
+      if(prestamos[key].plazo == 1){
+        cantidadPrestadaAmenosAnio += prestamos[key].monto;
+      }
+      else{
+      cantidadPrestada += prestamos[key].monto;
+      }
+    }
+
+    //Intereses de Anticipo
+    var interesesAnticipo = 0;
+    for(let key in prestamos){
+      interesesAnticipo += prestamos[key].anticipo;
+    }
+
+    //Pago de Prestamos
+    var PPagar = 0;
+    var PPagarAmenosAnio = 0;
+    for(let key in pagos){
+      if(pagos[key].plazo == 1){
+        PPagarAmenosAnio += pagos[key].pagoCapital + pagos[key].intereses;
+      }
+      else{
+      PPagar += pagos[key].pagoCapital;
+      }
+    }
+
+    //Intereses de Pago
+    var interesesPago = 0;
+    for(let key in pagos){
+      if(pagos[key].plazo != 1){
+      interesesPago += pagos[key].intereses;
+      }
+    }
+
     var IVAxEnterar = getIVAxEnterar(auxCompleto[0],auxesVentas);
     var proveedores = getProveedores(auxesVentas);
     var salidas = getSalidas(auxesVentas);
@@ -65,19 +104,8 @@ router.post('/final', (req, res, next) => {
     var almacenArtTerm = getAlmacenTerm(auxesVentas);
     var utlidadAcumulada = balanceBase[0].utilidadEjercicio + balanceBase[0].utilidadAcum;
     var maqEquipo = balanceBase[0].depMaqEquipo + auxCompleto[0].costoTransformacionMaq;
-    var utilidadEjercicio = getUtilidad(auxCompleto[0],auxesVentas) - balanceBase[0].almacenArtTerm;
+    var utilidadEjercicio = getUtilidad(auxCompleto[0],auxesVentas)-balanceBase[0].almacenArtTerm-interesesAnticipo-interesesPago;
 
-    //prestamos
-    var cantidadPrestada = 0;
-    for(let key in prestamos){
-      cantidadPrestada += prestamos[key].monto - prestamos[key].anticipo;
-    }
-
-    //Pago de Prestamos
-    var PPagar = 0;
-    for(let key in pagos){
-      PPagar += pagos[key].pagoCapital;
-    }
 
     //ISR y PTU
     var ISR = 0;
@@ -98,18 +126,20 @@ router.post('/final', (req, res, next) => {
     var cobroPorVentasCajaBancos = cuentasPorCobrar * 11;
     var IVACajaBancos = IVAxEnterar * 11;
     var prestamosMasAnio = balanceBase[0].prestamosMasAnio + cantidadPrestada - PPagar;
+    var prestamosMenosAnio = balanceBase[0].prestamosMenosAnio + cantidadPrestadaAmenosAnio - PPagarAmenosAnio;
     var comprasCajaBancos = proveedores*11;
     var maqYdesarrollos = auxCompleto[0].compraMaquinaria + (-auxCompleto[0].IVAGastosVenta + auxCompleto[0].desarrolloMercado + auxCompleto[0].desarrolloProducto);
     var depE = balanceBase[0].depEdif + (getDepEdif(auxesVentas) * .5);
     var depME = balanceBase[0].depMueblesEnseres + (getDepEdif(auxesVentas) * .5);
     var depT = balanceBase[0].depEqTrans + getDepTrans(auxesVentas);
 
-    var cajaBancos = balanceBase[0].cajaBancos + cantidadPrestada - PPagar - ISRCajaBancos - balanceBase[0].PTUPorPagar - balanceBase[0].imptosPorPagar + balanceBase[0].cuentasPorCobrar - balanceBase[0].proveedores - balanceBase[0].IVAPorEnterar + cobroPorVentasCajaBancos - IVACajaBancos - comprasCajaBancos - maqYdesarrollos - salidas;
+    var cajaBancos = balanceBase[0].cajaBancos + (cantidadPrestada+cantidadPrestadaAmenosAnio-interesesAnticipo)- PPagar -PPagarAmenosAnio - interesesPago - ISRCajaBancos - balanceBase[0].PTUPorPagar - balanceBase[0].imptosPorPagar + balanceBase[0].cuentasPorCobrar - balanceBase[0].proveedores - balanceBase[0].IVAPorEnterar + cobroPorVentasCajaBancos - IVACajaBancos - comprasCajaBancos - maqYdesarrollos - salidas;
 
     var x = {
       imptosPorPagar:imptsPorPagar,
       PTUPorPagar:PTU,
       prestamosMasAnio:prestamosMasAnio,
+      prestamosMenosAnio:prestamosMenosAnio,
       maqEquipo:maq,
       IVAPorEnterar:IVAxEnterar,
       proveedores:proveedores,

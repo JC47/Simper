@@ -32,7 +32,7 @@ module.exports.getLastIdCredito = function () {
 module.exports.addPagoCredito = function (lastIdCredito,pagosCredito) {
   for (var i = 0; i < pagosCredito.length; i++) {
     //var query = "insert into pagocredito set idCredito = "+lastIdCredito+", pagosCredito = "+pagosCredito[i]+" ";
-    querySql("insert into pagocredito set idCredito = "+lastIdCredito+", pagosCredito = "+pagosCredito[i]+" ");
+    querySql("insert into pagocredito set idCredito = "+lastIdCredito+", pagosCredito = "+pagosCredito[i].pago+" ");
   }
   return console.log("Insertado pagocredito");
 }
@@ -116,7 +116,7 @@ module.exports.eliminarAmortizacion = function(idCredito,idProyecto){
 }
 
 module.exports.getFinanciamientos = function(idProyecto,numeroPeriodo){
-  var query = "select  * from creditobalance where numeroPeriodo = "+numeroPeriodo+" and Proyectos_idProyecto = "+idProyecto+"";
+  var query = "select monto,anticipo,plazo,nombreCredito,numeroPeriodo from creditobalance inner join credito on creditobalance.credito_idCredito = credito.idCredito and numeroPeriodo = "+numeroPeriodo+" and Proyectos_idProyecto = "+idProyecto+"";
   return querySql(query);
 }
 
@@ -131,7 +131,7 @@ module.exports.updateCreditoBalance = function(json,idProyecto,numeroPeriodo,idC
 }
 
 module.exports.getPagos = function(idProyecto,numeroPeriodo){
-  var query = "select * from amortizacion where Proyecto_idProyecto = " +idProyecto+" and numeroPeriodo = " +numeroPeriodo+ "";
+  var query = "select numeroPeriodo,pagoCapital,intereses,plazo from amortizacion inner join credito on amortizacion.idCredito = credito.idCredito and Proyecto_idProyecto = " +idProyecto+" and numeroPeriodo = " +numeroPeriodo+ "";
   return querySql(query);
 }
 

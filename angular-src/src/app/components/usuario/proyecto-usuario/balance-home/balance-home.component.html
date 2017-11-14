@@ -1,7 +1,4 @@
-<div class="">
 <div class="row">
-
-
 
   <div class="col-5" style="height:250px">
     <ngx-charts-advanced-pie-chart
@@ -42,43 +39,14 @@
           </div>
 
           <div class="col-lg-5 col-sm-8 " style="height:200px; overflow-y:scroll">
-            <table class="table table-responsive" style="margin-top:10px">
-    <thead class="thead-inverse">
-      <tr>
-        <th>Productos</th>
-        <th>Zona 1</th>
-        <th>Zona 2</th>
-        <th>Zona 3</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th>Producto 1</th>
-        <th>18,000</th>
-        <td>20,000</td>
-        <td>5,000</td>
-      </tr>
-      <tr>
-        <th>Producto 2</th>
-        <th>18,000</th>
-        <td>20,000</td>
-        <td>5,000</td>
-      </tr>
-      <tr>
-        <th>Producto 3</th>
-        <th>18,000</th>
-        <td>20,000</td>
-        <td>5,000</td>
-      </tr>
-      <tr>
-        <th>Producto 4</th>
-        <th>18,000</th>
-        <td>20,000</td>
-        <td>5,000</td>
-      </tr>
-    </tbody>
-  </table>
-
+            <div class="card" *ngFor="let producto of demandas" style="margin-top:15px">
+                {{getNameById(producto.idProducto)}}
+                <div class="card-footer">
+                  <div class="col-12" *ngFor="let zona of producto.zonas">
+                    {{zona.idZona}}: {{zona.demanda}}
+                  </div>
+                </div>
+            </div>
           </div>
 
         </div>
@@ -156,14 +124,6 @@
                 </blockquote>
               </div>
             </div>
-
-
-
-
-
-
-
-
           </div>
 
 
@@ -366,39 +326,22 @@
 
         <div class="col-12">
           <div class="row" style="overflow-y:scroll; height:200px;oveflow-x:visible">
-            <div class="col-6" >
-              <ngx-charts-pie-grid
 
-              [scheme]="colorScheme"
-              [results]="single3"
-              designatedTotal="2000000">
-              </ngx-charts-pie-grid>
 
+            <div class="col-12" *ngFor="let zona of productosZonaEnDesGraf">
+              <h6 class="col-12 text-center">{{zona.nombreZona}}</h6>
+              <hr>
+              <div class="col-6" *ngFor="let producto of zona.productos">
+                <ngx-charts-pie-grid
+                [scheme]="colorScheme"
+                [results]="producto.graf"
+                [designatedTotal]="producto.max">
+                </ngx-charts-pie-grid>
+              </div>
             </div>
 
-            <div class="col-6" style="height:auto">
 
 
-              <ngx-charts-pie-grid
-
-              [scheme]="colorScheme"
-              [results]="single3"
-              designatedTotal="2000000">
-              </ngx-charts-pie-grid>
-
-            </div>
-
-            <div class="col-6" style="height:auto">
-
-
-              <ngx-charts-pie-grid
-
-              [scheme]="colorScheme"
-              [results]="single3"
-              designatedTotal="2000000">
-              </ngx-charts-pie-grid>
-
-            </div>
           </div>
 
         </div>
@@ -412,13 +355,3 @@
 
 
           </div>
-
-
-
-
-
-
-
-
-
-</div>

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {CreditosService} from '../../services/creditos.service';
 import {NgbModal, ModalDismissReasons,NgbActiveModal,NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators,FormArray,FormBuilder} from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
@@ -21,28 +21,38 @@ export class CreditosComponent implements OnInit {
   newForm:FormGroup;
   editForm:FormGroup;
   public alerts: any = [];
-  creditoDelete;
+  creditoDelete={
+    nombreCredito:null,
+    montoMinimo:null,
+    montoMaximo:null,
+    pagoAnticipado:null,
+    pago:null,
+    pagosCredito:[]
+  };
 
   constructor(private _creditosService:CreditosService,
               private modalService: NgbModal,
-              private _flashMessagesService: FlashMessagesService) {
+              private _fb:FormBuilder) {
 
-          this.newForm= new FormGroup({
-            'nombrePrestamo':new FormControl('',Validators.required),
-            'intereses':new FormControl('',Validators.required),
-            'plazoPago':new FormControl('',Validators.required),
-            'monto':new FormControl('',Validators.required),
-            'tipoPrestamo':new FormControl('',Validators.required),
-          });
+                this.newForm = this._fb.group({
+                        nombreCredito:['',Validators.required],
+                        montoMin:['',Validators.required],
+                        montoMax:['',Validators.required],
+                        pagoAnticipado:['',Validators.required],
+                        pago:['',Validators.required],
+                        pagosCredito: this._fb.array([])
+                    });
+                    this.editForm = this._fb.group({
+                            idCredito:['',Validators.required],
+                            nombreCredito:['',Validators.required],
+                            montoMin:['',Validators.required],
+                            montoMax:['',Validators.required],
+                            pagoAnticipado:['',Validators.required],
+                            pago:['',Validators.required],
+                            pagosCredito: this._fb.array([])
+                        });
 
-          this.editForm= new FormGroup({
-            'idPrestamos':new FormControl('',Validators.required),
-            'nombrePrestamo':new FormControl('',Validators.required),
-            'intereses':new FormControl('',Validators.required),
-            'plazoPago':new FormControl('',Validators.required),
-            'monto':new FormControl('',Validators.required),
-            'tipoPrestamo':new FormControl('',Validators.required),
-          });
+
           this.creditos = this._creditosService.establecerValores();
           console.log(this.creditos);
 
@@ -53,16 +63,47 @@ export class CreditosComponent implements OnInit {
 
   }
 
+  validaCampo(i){
+    if(this.newForm.controls.pagosCredito.get(i+"").get('pago').valid)
+      return false;
+    else
+      return true;
+  }
+
+  validaCampoEdit(i){
+    if(this.editForm.controls.pagosCredito.get(i+"").get('pago').valid)
+      return false;
+    else
+      return true;
+  }
+
+
+  initProductoOfNew(pago){
+    return this._fb.group({
+            pago:[pago,Validators.required]
+          });
+    }
+
+  eliminaPagoNew(i:number){
+    (<FormArray>this.newForm.controls['pagosCredito']).removeAt(i);
+  }
+
+  eliminaPagoEdit(i:number){
+    (<FormArray>this.editForm.controls['pagosCredito']).removeAt(i);
+  }
+
   agregaCredito(credito){
-    let reason
-    this._creditosService.guardarCredito(credito);
+    console.log(credito)
+    //this._creditosService.guardarCredito(credito);
     this.modalNew.hide();
 
     this.alerts.push({
       type: 'success',
-      msg: `Usuario "${(credito.nombrePrestamo)}" agregado`,
+      msg: `Usuario "${(credito.nombreCredito)}" agregado`,
       timeout: 2000
     });
+
+    this.creditos = this._creditosService.guardarCredito(credito);
   }
 
   editaCredito(credito){
@@ -71,7 +112,7 @@ export class CreditosComponent implements OnInit {
     this.modalEdit.hide();
     this.alerts.push({
       type: 'success',
-      msg: `Usuario "${(credito.nombrePrestamo)}" agregado`,
+      msg: `Usuario "${(credito.nombreCredito)}" agregado`,
       timeout: 2000
     });
   }
@@ -89,15 +130,39 @@ export class CreditosComponent implements OnInit {
   }
 
   openEdit(credito){
+    this.editForm.controls['montoMax'].setValue(credito.montoMax);
+    this.editForm.controls['montoMin'].setValue(credito.montoMin);
+    this.editForm.controls['nombreCredito'].setValue(credito.nombreCredito);
+    this.editForm.controls['pagoAnticipado'].setValue(credito.pagoAnticipado);
+    this.editForm.controls['pago'].setValue(credito.pago);
+    this.editForm.controls['idCredito'].setValue(credito.idCredito);
+    for(let pago of credito.pagosTotales){
+      this.inputPagoEdit(pago.pagosCredito)
+    }
     this.modalEdit.show();
-    this.editForm.setValue(credito);
+    //this.editForm.setValue(credito);
   }
 
   openNew(){
-    this.modalNew.show()
+    let cantidadpagosCredito=this.newForm.controls['pagosCredito'].value.length
+    for(let i=0;i<cantidadpagosCredito;i++){
+      (<FormArray>this.newForm.controls['pagosCredito']).removeAt(0);
+    }
     this.newForm.reset();
+    this.modalNew.show()
+
+
   }
 
+
+  inputPago(form:FormGroup,pago){
+
+    (<FormArray>this.newForm.controls['pagosCredito']).push(this.initProductoOfNew(pago));
+    console.log(this.newForm.controls.pagosCredito);
+  }
+  inputPagoEdit(pago){
+        (<FormArray>this.editForm.controls['pagosCredito']).push(this.initProductoOfNew(pago));
+  }
 
 
  confDelete(credito){

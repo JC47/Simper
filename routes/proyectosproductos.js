@@ -31,7 +31,6 @@ router.post('/desarrolloproducto', (req, res, next) => {
 
 router.post('/pagardesarrollo', (req, res, next) => {
   Promise.resolve().then(function () {
-    console.log("Penny",req.body);
     var idProyecto = req.body.Proyectos_idProyecto;
     var idProducto = req.body.Productos_idProducto;
     var ultimoPeriodo = req.body.ultimoPeriodoDes;
@@ -146,7 +145,6 @@ router.post('/desarrollado', (req, res, next) => {
   Promise.resolve().then(function () {
       var idProyecto = req.body.Proyectos_idProyecto;
       var idProducto = req.body.Productos_idProducto;
-      console.log(idProyecto,idProducto);
       var desarrollado = 1;
       return proyectoProducto.desarollado(idProyecto, idProducto, desarrollado);
   })
@@ -168,7 +166,6 @@ router.get('/getterminados/:idProyecto', (req, res, next) => {
   Promise.resolve().then(function () {
     return proyectoProducto.getTerminados(req.params.idProyecto);
   }).then( function (rows) {
-    console.log("Perro",rows);
     res.json({success: true, datos:rows, msg:"Operacion exitosa"});
   })
   .catch(function (err) {

@@ -43,7 +43,7 @@
 
 
 
-<!--         Formulario para Agregar Nuevo Credito
+
 <div bsModal #modalNew="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-md">
     <div class="modal-content">
@@ -56,15 +56,15 @@
 
 
             <div class="form-group row text-center" >
-              <label class="col-7 col-form-label">Nombre Prestamo</label>
-              <div class="col-4 has-success"  [ngClass]="{'has-danger': !newForm.get('nombrePrestamo').valid}">
+              <label class="col-5 col-form-label">Nombre Prestamo</label>
+              <div class="col-6 has-success"  [ngClass]="{'has-danger': !newForm.get('nombreCredito').valid}">
 
 
                 <input class="form-control"
                        type="text"
-                       formControlName="nombrePrestamo" >
+                       formControlName="nombreCredito" >
                        <div class="form-control-feedback" style="font-size:10px;"
-                       *ngIf="!newForm.controls['nombrePrestamo'].valid">
+                       *ngIf="!newForm.controls['nombreCredito'].valid">
                          El nombre es requerido
                        </div>
               </div>
@@ -72,20 +72,20 @@
 
 
             <div class="form-group row text-center ">
-            <label class="col-7 col-form-label">Intereses</label>
+            <label class="col-5 col-form-label">Monto Minimo</label>
 
-            <div class="input-group col-4 has-success"
-            [ngClass]="{'has-danger': !newForm.get('intereses').valid}">
+            <div class="input-group col-6 has-success"
+            [ngClass]="{'has-danger': !newForm.get('montoMin').valid}">
               <span class="input-group-addon">P</span>
               <input type="number" class="form-control"
-              formControlName="intereses">
+              formControlName="montoMin">
 
             </div>
 
             <div class="form-control-feedback offset-7 text-center col-4 has-success"
             style="font-size:10px;"
-            [ngClass]="{'has-danger': !newForm.get('intereses').valid}"
-            *ngIf="!newForm.controls['intereses'].valid">
+            [ngClass]="{'has-danger': !newForm.get('montoMin').valid}"
+            *ngIf="!newForm.controls['montoMin'].valid">
               El interes es reuqerido
             </div>
 
@@ -94,62 +94,114 @@
 
 
             <div class="form-group row text-center ">
-            <label class="col-7 col-form-label">Plazo Pago</label>
+            <label class="col-5 col-form-label">Monto Máximo</label>
 
-            <div class="input-group col-4 has-success"
-            [ngClass]="{'has-danger': !newForm.get('plazoPago').valid}">
+            <div class="input-group col-6 has-success"
+            [ngClass]="{'has-danger': !newForm.get('montoMax').valid}">
               <span class="input-group-addon">P</span>
               <input type="number" class="form-control"
-              formControlName="plazoPago">
+              formControlName="montoMax">
 
             </div>
 
             <div class="form-control-feedback offset-7 text-center col-4 has-success"
             style="font-size:10px;"
-            [ngClass]="{'has-danger': !newForm.get('plazoPago').valid}"
-            *ngIf="!newForm.controls['plazoPago'].valid">
+            [ngClass]="{'has-danger': !newForm.get('montoMax').valid}"
+            *ngIf="!newForm.controls['montoMax'].valid">
               El interes es reuqerido
             </div>
           </div>
 
             <div class="form-group row text-center ">
-            <label class="col-7 col-form-label">Monto Máximo</label>
+            <label class="col-5 col-form-label">Pago Anticipado</label>
 
-            <div class="input-group col-4 has-success"
-            [ngClass]="{'has-danger': !newForm.get('monto').valid}">
+            <div class="input-group col-6 has-success"
+            [ngClass]="{'has-danger': !newForm.get('pagoAnticipado').valid}">
               <span class="input-group-addon">$</span>
               <input type="number" class="form-control"
-              formControlName="monto">
+              formControlName="pagoAnticipado">
 
             </div>
 
             <div class="form-control-feedback offset-7 text-center col-4 has-success"
             style="font-size:10px;"
-            [ngClass]="{'has-danger': !newForm.get('monto').valid}"
-            *ngIf="!newForm.controls['monto'].valid">
+            [ngClass]="{'has-danger': !newForm.get('pagoAnticipado').valid}"
+            *ngIf="!newForm.controls['pagoAnticipado'].valid">
               El interes es reuqerido
             </div>
           </div>
 
 
             <div class="form-group row text-center ">
-            <label class="col-7 col-form-label">Tipo de Credito</label>
+            <label class="col-5 col-form-label">Descripción</label>
 
-            <div class="input-group col-4 has-success"
-            [ngClass]="{'has-danger': !newForm.get('tipoPrestamo').valid}">
+            <div class="input-group col-6 has-success"
+            [ngClass]="{'has-danger': !newForm.get('pago').valid}">
               <span class="input-group-addon">$</span>
-              <input type="number" class="form-control"
-              formControlName="tipoPrestamo">
+              <input type="text" class="form-control"
+              formControlName="pago">
 
             </div>
 
             <div class="form-control-feedback offset-7 text-center col-4 has-success"
             style="font-size:10px;"
-            [ngClass]="{'has-danger': !newForm.get('tipoPrestamo').valid}"
-            *ngIf="!newForm.controls['tipoPrestamo'].valid">
+            [ngClass]="{'has-danger': !newForm.get('pago').valid}"
+            *ngIf="!newForm.controls['pago'].valid">
               El interes es reuqerido
             </div>
           </div>
+
+          <div class="container row" style="margin-top:20px">
+            <div class="col-12">
+                <h6 class="col-12 text-left">Pagos de Credito:</h6>
+                <div formArrayName="pagosCredito">
+                  <div *ngFor="let pago of newForm.controls.pagosCredito.controls; let i=index">
+                    <div [formGroupName]="i">
+                    <div class="row">
+                      <div class="col-9">
+                        <div class="form-group row text-center ">
+                        <label class="col-3 col-form-label">Pago {{i}}</label>
+
+                        <div class="input-group col-8 has-success"
+                        [ngClass]="{'has-danger': validaCampo(i,'pago')}">
+                          <span class="input-group-addon">P</span>
+                          <input type="number" class="form-control"
+                          formControlName="pago">
+
+                        </div>
+
+                        <div class="form-control-feedback offset-7 text-center col-4 has-success"
+                        style="font-size:10px;"
+                        [ngClass]="{'has-danger': validaCampo(i,'pago')}"
+                        *ngIf="validaCampo(i,'pago')">
+                          El interes es reuqerido
+                        </div>
+                      </div>
+                      </div>
+                      <div class="col-2">
+                          <button type="button" class="btn btn-danger" (click)="eliminaPagoNew(i)">Eliminar</button>
+                      </div>
+
+                    </div>
+
+
+
+
+                    </div>
+
+                  </div>
+                </div>
+
+                <button type="button" class="btn btn-primary" (click)="inputPago(editForm,0)">Agregar</button>
+            </div>
+
+
+
+
+
+          </div>
+
+
 
             <div class="modal-footer">
               <button type="submit" class="btn btn-outline-success" [disabled]="!newForm.valid" >
@@ -166,9 +218,14 @@
     </div>
   </div>
 </div>
--->
 
-<!--- Formulario para editar credito
+
+
+
+
+
+
+- Formulario para editar credito
 <div bsModal #modalEdit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-md">
     <div class="modal-content">
@@ -176,115 +233,165 @@
         <h4 class="modal-title col-12 text-center">Editar Prestamos</h4>
       </div>
       <div class="modal-body">
+
         <form [formGroup]="editForm" (ngSubmit)="editaCredito(editForm.value)"  >
 
-                        <div class="form-group row text-center" >
-                          <label class="col-7 col-form-label">Nombre Prestamo</label>
-                          <div class="col-4 has-success"  [ngClass]="{'has-danger': !editForm.get('nombrePrestamo').valid}">
+            <input type="number" formControlName="idCredito" hidden="true">
+
+            <div class="form-group row text-center" >
+              <label class="col-7 col-form-label">Nombre Prestamo</label>
+              <div class="col-4 has-success"  [ngClass]="{'has-danger': !editForm.get('nombreCredito').valid}">
 
 
-                            <input class="form-control"
-                                   type="text"
-                                   formControlName="nombrePrestamo" >
-                                   <div class="form-control-feedback" style="font-size:10px;"
-                                   *ngIf="!editForm.controls['nombrePrestamo'].valid">
-                                     El nombre es requerido
-                                   </div>
-                          </div>
-                        </div>
-
-
-                        <div class="form-group row text-center ">
-                        <label class="col-7 col-form-label">Intereses</label>
-
-                        <div class="input-group col-4 has-success"
-                        [ngClass]="{'has-danger': !editForm.get('intereses').valid}">
-                          <span class="input-group-addon">P</span>
-                          <input type="number" class="form-control"
-                          formControlName="intereses">
-
-                        </div>
-
-                        <div class="form-control-feedback offset-7 text-center col-4 has-success"
-                        style="font-size:10px;"
-                        [ngClass]="{'has-danger': !editForm.get('intereses').valid}"
-                        *ngIf="!editForm.controls['intereses'].valid">
-                          El interes es reuqerido
-                        </div>
-
-
-                      </div>
-
-
-                        <div class="form-group row text-center ">
-                        <label class="col-7 col-form-label">Plazo Pago</label>
-
-                        <div class="input-group col-4 has-success"
-                        [ngClass]="{'has-danger': !editForm.get('plazoPago').valid}">
-                          <span class="input-group-addon">P</span>
-                          <input type="number" class="form-control"
-                          formControlName="plazoPago">
-
-                        </div>
-
-                        <div class="form-control-feedback offset-7 text-center col-4 has-success"
-                        style="font-size:10px;"
-                        [ngClass]="{'has-danger': !editForm.get('plazoPago').valid}"
-                        *ngIf="!editForm.controls['plazoPago'].valid">
-                          El interes es reuqerido
-                        </div>
-                      </div>
-
-                        <div class="form-group row text-center ">
-                        <label class="col-7 col-form-label">Monto Máximo</label>
-
-                        <div class="input-group col-4 has-success"
-                        [ngClass]="{'has-danger': !editForm.get('monto').valid}">
-                          <span class="input-group-addon">$</span>
-                          <input type="number" class="form-control"
-                          formControlName="monto">
-
-                        </div>
-
-                        <div class="form-control-feedback offset-7 text-center col-4 has-success"
-                        style="font-size:10px;"
-                        [ngClass]="{'has-danger': !editForm.get('monto').valid}"
-                        *ngIf="!editForm.controls['monto'].valid">
-                          El interes es reuqerido
-                        </div>
-                      </div>
-
-
-                        <div class="form-group row text-center ">
-                        <label class="col-7 col-form-label">Tipo de Credito</label>
-
-                        <div class="input-group col-4 has-success"
-                        [ngClass]="{'has-danger': !editForm.get('tipoPrestamo').valid}">
-                          <span class="input-group-addon">$</span>
-                          <input type="number" class="form-control"
-                          formControlName="tipoPrestamo">
-
-                        </div>
-
-                        <div class="form-control-feedback offset-7 text-center col-4 has-success"
-                        style="font-size:10px;"
-                        [ngClass]="{'has-danger': !editForm.get('tipoPrestamo').valid}"
-                        *ngIf="!editForm.controls['tipoPrestamo'].valid">
-                          El tipo es requerido
-                        </div>
-                      </div>
-
-
-
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-outline-success" [disabled]="!editForm.valid"  >
-                  Guardar
-                </button>
-
-                <button  type="button" class="btn btn-outline-danger" (click)="modalEdit.hide()">
-                Cancelar
-                </button>
+                <input class="form-control"
+                       type="text"
+                       formControlName="nombreCredito" >
+                       <div class="form-control-feedback" style="font-size:10px;"
+                       *ngIf="!editForm.controls['nombreCredito'].valid">
+                         El nombre es requerido
+                       </div>
               </div>
+            </div>
+
+
+            <div class="form-group row text-center ">
+            <label class="col-7 col-form-label">Monto Minimo</label>
+
+            <div class="input-group col-4 has-success"
+            [ngClass]="{'has-danger': !editForm.get('montoMin').valid}">
+              <span class="input-group-addon">P</span>
+              <input type="number" class="form-control"
+              formControlName="montoMin">
+
+            </div>
+
+            <div class="form-control-feedback offset-7 text-center col-4 has-success"
+            style="font-size:10px;"
+            [ngClass]="{'has-danger': !editForm.get('montoMin').valid}"
+            *ngIf="!editForm.controls['montoMin'].valid">
+              El interes es reuqerido
+            </div>
+
+
+          </div>
+
+
+            <div class="form-group row text-center ">
+            <label class="col-7 col-form-label">Monto Máximo</label>
+
+            <div class="input-group col-4 has-success"
+            [ngClass]="{'has-danger': !editForm.get('montoMax').valid}">
+              <span class="input-group-addon">P</span>
+              <input type="number" class="form-control"
+              formControlName="montoMax">
+
+            </div>
+
+            <div class="form-control-feedback offset-7 text-center col-4 has-success"
+            style="font-size:10px;"
+            [ngClass]="{'has-danger': !editForm.get('montoMax').valid}"
+            *ngIf="!editForm.controls['montoMax'].valid">
+              El interes es reuqerido
+            </div>
+          </div>
+
+            <div class="form-group row text-center ">
+            <label class="col-7 col-form-label">Pago Anticipado</label>
+
+            <div class="input-group col-4 has-success"
+            [ngClass]="{'has-danger': !editForm.get('pagoAnticipado').valid}">
+              <span class="input-group-addon">$</span>
+              <input type="number" class="form-control"
+              formControlName="pagoAnticipado">
+
+            </div>
+
+            <div class="form-control-feedback offset-7 text-center col-4 has-success"
+            style="font-size:10px;"
+            [ngClass]="{'has-danger': !editForm.get('pagoAnticipado').valid}"
+            *ngIf="!editForm.controls['pagoAnticipado'].valid">
+              El interes es reuqerido
+            </div>
+          </div>
+
+
+            <div class="form-group row text-center ">
+            <label class="col-7 col-form-label">Descripción</label>
+
+            <div class="input-group col-4 has-success"
+            [ngClass]="{'has-danger': !editForm.get('pago').valid}">
+              <span class="input-group-addon">$</span>
+              <input type="text" class="form-control"
+              formControlName="pago">
+
+            </div>
+
+            <div class="form-control-feedback offset-7 text-center col-4 has-success"
+            style="font-size:10px;"
+            [ngClass]="{'has-danger': !editForm.get('pago').valid}"
+            *ngIf="!editForm.controls['pago'].valid">
+              El interes es reuqerido
+            </div>
+          </div>
+
+          <div class="col-12">
+            <h5 class="text-left">Pagos:</h5>
+            <div formArrayName="pagosCredito">
+              <div *ngFor="let pago of editForm.controls.pagosCredito.controls; let i=index">
+
+                <div [formGroupName]="i">
+                  <div class="row">
+                    <div class="col-9">
+                      <div class="form-group row text-center ">
+                      <label class="col-3 col-form-label">Pago {{i}}</label>
+
+                      <div class="input-group col-8 has-success"
+                      [ngClass]="{'has-danger': validaCampoEdit(i)}">
+                        <span class="input-group-addon">P</span>
+                        <input type="number" class="form-control"
+                        formControlName="pago">
+
+                      </div>
+
+                      <div class="form-control-feedback offset-7 text-center col-4 has-success"
+                      style="font-size:10px;"
+                      [ngClass]="{'has-danger': validaCampoEdit(i)}"
+                      *ngIf="validaCampoEdit(i)">
+                        El interes es reuqerido
+                      </div>
+                    </div>
+
+                    </div>
+
+                    <div class="col-2">
+                      <button type="button" class="btn btn-danger" (click)="eliminaPagoEdit(i)">Eliminar</button>
+                    </div>
+                  </div>
+
+
+
+                </div>
+
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-primary" (click)="inputPagoEdit()">Agregar</button>
+
+          </div>
+
+
+
+
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-outline-success" [disabled]="!editForm.valid" >
+                Guardar
+              </button>
+
+              <button  type="button" class="btn btn-outline-danger" (click)="modalEdit.hide()">
+              Cancelar
+              </button>
+
+            </div>
         </form>
       </div>
     </div>
@@ -294,7 +401,7 @@
 
 
 
-<button type="button" (click)="openNew()" class="btn btn-warning btn-floating">Agregar</button>
+
 
 
 <div bsModal #modalConfDelete="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -307,7 +414,7 @@
 
 
         <div class="row text-center">
-          ¿Estas seguro que deseas eliminar el credito "{{creditoDelete.nombrePrestamo}}" ?
+          ¿Estas seguro que deseas eliminar el credito "{{creditoDelete.nombreCredito}}" ?
           <br>
         </div>
         <br>
@@ -322,4 +429,5 @@
   </div>
 </div>
 
--->
+
+<button type="button" (click)="openNew()" class="btn btn-warning btn-floating">Agregar</button>
