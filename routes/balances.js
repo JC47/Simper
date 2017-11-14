@@ -80,8 +80,13 @@ router.post('/final', (req, res, next) => {
     var PPagar = 0;
     var PPagarAmenosAnio = 0;
     for(let key in pagos){
-      if(pagos[key].plazo == 1){
-        PPagarAmenosAnio += pagos[key].pagoCapital + pagos[key].intereses;
+      if(pagos[key].tipo == 1){
+        if(pagos[key].plazo == 1){
+          PPagarAmenosAnio += pagos[key].pagoCapital + pagos[key].intereses;
+        }
+        else{
+          PPagar += pagos[key].pagoCapital + pagos[key].intereses;
+        }
       }
       else{
       PPagar += pagos[key].pagoCapital;
@@ -91,7 +96,7 @@ router.post('/final', (req, res, next) => {
     //Intereses de Pago
     var interesesPago = 0;
     for(let key in pagos){
-      if(pagos[key].plazo != 1){
+      if(pagos[key].tipo != 1){
       interesesPago += pagos[key].intereses;
       }
     }

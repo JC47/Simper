@@ -61,21 +61,14 @@ export class CreditosService {
         });
       }
     });
-    console.log("Agregado",creditos)
     return creditos;
   }
 
   deleteCredito(id:number){
-    console.log("Eliminando",id);
-    for(let i=0;this.creditos.length>i;i++){
-      if(this.creditos[i].idCredito==id){
-        console.log(this.creditos[i].idCred);
-        this.creditos.splice(i,1);
-        console.log("credito: ",id,"eliminado");
-      }
-    }
-    console.log('prestamo/delete/'+id);
-    return this.http.get('prestamo/delete/'+id).map(res => res.json());
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    return this.http.get('prestamo/deletecredito/'+id,{headers}).map(res => res.json());
 
 
   }

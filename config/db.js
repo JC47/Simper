@@ -5,24 +5,31 @@ Promise.promisifyAll(mysql);
 Promise.promisifyAll(require("mysql/lib/Connection").prototype);
 Promise.promisifyAll(require("mysql/lib/Pool").prototype);
 
-
+<<<<<<< HEAD
+/*
+=======
+>>>>>>> 21955d2766c906140179455f1672e28424fe0c08
 var pool = mysql.createPool({
     host: 'us-cdbr-iron-east-05.cleardb.net',
     user: 'bf32bf5a7a9eae',
     password: '966fbda0',
+<<<<<<< HEAD
     database: 'heroku_7be18966ed8d82e'
 });
+*/
+=======
+    database: 'heroku_7be18966ed8d82e'});
+>>>>>>> 21955d2766c906140179455f1672e28424fe0c08
 
-/*
 //Conexion Local
-
+/*
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: '',
     database: 'basesimv1'
 });
-*/
+
 function getSqlConnection() {
     return pool.getConnectionAsync().disposer(function (connection) {
         console.log("Realizando la conexión")

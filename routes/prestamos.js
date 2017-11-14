@@ -65,6 +65,7 @@ router.post('/addcredito', (req, res, next) => {
 
 router.post('/deletecredito/:idCredito', (req, res, next) => {
   var idCredito = req.params.idCredito;
+  console.log("Perro",idCredito);
 
   Promise.resolve()
   .then(function () {
@@ -471,6 +472,7 @@ function jsonCredito(credito,idscreditos,pagoscreditos) {
           "idCredito":credito[i].idCredito,
           "nombreCredito":credito[i].nombreCredito,
           "pago":credito[i].pago,
+          "plazo":credito[i].plazo,
           "montoMin":credito[i].montoMin,
           "montoMax":credito[i].montoMax,
           "pagoAnticipado":credito[i].pagoAnticipado,
