@@ -119,7 +119,6 @@ export class CreditosComponent implements OnInit {
 
   eliminaCredito(id:number){
     this._creditosService.deleteCredito(id).subscribe();
-    console.log("Eliminando: ",id);
     this.modalConfDelete.hide();
 
     this.alerts.push({
