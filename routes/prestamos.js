@@ -63,7 +63,7 @@ router.post('/addcredito', (req, res, next) => {
   });
 });
 
-router.post('/deletecredito/:idCredito', (req, res, next) => {
+router.get('/deletecredito/:idCredito', (req, res, next) => {
   var idCredito = req.params.idCredito;
   console.log("Perro",idCredito);
 

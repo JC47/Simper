@@ -61,16 +61,21 @@ export class CreditosService {
         });
       }
     });
+    this.creditos = creditos;
     return creditos;
   }
 
-  deleteCredito(id:number){
+  deleteCredito(id){
     let headers = new Headers({
       'Content-Type':'application/json'
     });
+
+    for(let i=0;this.creditos.length>i;i++){
+      if(this.creditos[i].idCredito==id){
+        this.creditos.splice(i,1);
+      }
+    }
     return this.http.get('prestamo/deletecredito/'+id,{headers}).map(res => res.json());
-
-
   }
 
 

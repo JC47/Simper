@@ -22,12 +22,14 @@ export class CreditosComponent implements OnInit {
   editForm:FormGroup;
   public alerts: any = [];
   creditoDelete={
+    idCredito:null,
     nombreCredito:null,
     montoMinimo:null,
     montoMaximo:null,
     pagoAnticipado:null,
     pago:null,
-    pagosCredito:[]
+    pagosCredito:[],
+    plazo:null
   };
 
   constructor(private _creditosService:CreditosService,
@@ -117,8 +119,10 @@ export class CreditosComponent implements OnInit {
     });
   }
 
-  eliminaCredito(id:number){
-    this._creditosService.deleteCredito(id).subscribe();
+  eliminaCredito(id){
+    this._creditosService.deleteCredito(id.idCredito).subscribe(data => {
+      console.log("Data",data);
+    });
     this.modalConfDelete.hide();
 
     this.alerts.push({
