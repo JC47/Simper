@@ -84,6 +84,12 @@ productosZonaSinDesGraf:any;
     this.productosZonaDesarrollados = this._desarrolloZonaService.returnProductosDeZonaDesarrollados();
     this.demandas=this._dash.returnDemandas();
     this.maquinarias=this._dash.returnMaquinarias();
+    // this._balanceService.getBalanceFinal().subscribe( data => {
+    //   if(data.success){
+    //     this.balanceFinal = this._resultadosService.getBalanceFinal();
+    //     console.log("Balance",this.balanceFinal);
+    //   }
+    // });
     console.log(this.demandas,this.maquinarias);
     console.log("Productos Zona",this.productosZonaDesarrollados,
                 this.productosZonaEnDesarrollo, this.productosZonaSinDesarrollar)
@@ -96,15 +102,8 @@ productosZonaSinDesGraf:any;
       this.productosDesGraf=this.grafProdDes(this.productosDesarollados);
       this.demandasGraf=this.getGrafDemanda(this.demandas);
       this.maquinariasGraf=this.getGrafMaquinaria(this.maquinarias);
+      //this.productosZonaSinDesGraf=this.grafZonaSinDes(this.productosZonaSinDesarrollar);
       this.productosZonaEnDesGraf=this.grafZonaEnDes(this.productosZonaEnDesarrollo)
-      console.log("Grafica zona en des",this.productosZonaEnDesGraf);
-      this._balanceService.getBalanceFinal().subscribe( data => {
-        if(data.success){
-          this.balanceFinal = this._resultadosService.getBalanceFinal();
-          console.log("Balance",this.balanceFinal);
-        }
-      });
-
     }, 1500)
 
 
@@ -249,6 +248,39 @@ this.single4 = [
 
 
     }
+    console.log("GrafZona",data)
+    return data;
+
+
+  }
+
+
+  grafZonaSinDes(zonas){
+    let data:any[]=[];
+
+
+    for(let zona of zonas){
+      let zonaTemp:any={
+        nombreZona:zona.nombreZona,
+        productos:[]
+      }
+
+
+      for(let producto of zona.productosEnDes){
+        zonaTemp.productos.push({
+          graf:[{
+            "name":producto.idProducto,
+            "value":0
+          }],
+          max:2
+        })
+      }
+
+      data.push(zonaTemp);
+
+
+    }
+    console.log("grafZona SIn Des",data)
     return data;
 
   }

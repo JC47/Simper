@@ -2159,6 +2159,12 @@ var BalanceHomeComponent = (function () {
         this.productosZonaDesarrollados = this._desarrolloZonaService.returnProductosDeZonaDesarrollados();
         this.demandas = this._dash.returnDemandas();
         this.maquinarias = this._dash.returnMaquinarias();
+        // this._balanceService.getBalanceFinal().subscribe( data => {
+        //   if(data.success){
+        //     this.balanceFinal = this._resultadosService.getBalanceFinal();
+        //     console.log("Balance",this.balanceFinal);
+        //   }
+        // });
         console.log(this.demandas, this.maquinarias);
         console.log("Productos Zona", this.productosZonaDesarrollados, this.productosZonaEnDesarrollo, this.productosZonaSinDesarrollar);
         setTimeout(function () {
@@ -2169,14 +2175,8 @@ var BalanceHomeComponent = (function () {
             _this.productosDesGraf = _this.grafProdDes(_this.productosDesarollados);
             _this.demandasGraf = _this.getGrafDemanda(_this.demandas);
             _this.maquinariasGraf = _this.getGrafMaquinaria(_this.maquinarias);
+            //this.productosZonaSinDesGraf=this.grafZonaSinDes(this.productosZonaSinDesarrollar);
             _this.productosZonaEnDesGraf = _this.grafZonaEnDes(_this.productosZonaEnDesarrollo);
-            console.log("Grafica zona en des", _this.productosZonaEnDesGraf);
-            _this._balanceService.getBalanceFinal().subscribe(function (data) {
-                if (data.success) {
-                    _this.balanceFinal = _this._resultadosService.getBalanceFinal();
-                    console.log("Balance", _this.balanceFinal);
-                }
-            });
         }, 1500);
         this.single = [
             {
@@ -2289,6 +2289,30 @@ var BalanceHomeComponent = (function () {
             }
             data.push(zonaTemp);
         }
+        console.log("GrafZona", data);
+        return data;
+    };
+    BalanceHomeComponent.prototype.grafZonaSinDes = function (zonas) {
+        var data = [];
+        for (var _i = 0, zonas_2 = zonas; _i < zonas_2.length; _i++) {
+            var zona = zonas_2[_i];
+            var zonaTemp = {
+                nombreZona: zona.nombreZona,
+                productos: []
+            };
+            for (var _a = 0, _b = zona.productosEnDes; _a < _b.length; _a++) {
+                var producto = _b[_a];
+                zonaTemp.productos.push({
+                    graf: [{
+                            "name": producto.idProducto,
+                            "value": 0
+                        }],
+                    max: 2
+                });
+            }
+            data.push(zonaTemp);
+        }
+        console.log("grafZona SIn Des", data);
         return data;
     };
     BalanceHomeComponent.prototype.grafProdSin = function (productos) {
