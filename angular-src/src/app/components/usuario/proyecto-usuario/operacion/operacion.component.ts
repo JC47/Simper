@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {OperacionService} from '../../../../services/operacion.service';
 import {ResultadosService} from '../../../../services/resultados.service';
 import {ProductoService} from '../../../../services/producto.service';
+import {BalanceService} from '../../../../services/balance.service';
 
 @Component({
   selector: 'app-operacion',
@@ -24,15 +25,24 @@ export class OperacionComponent implements OnInit {
   presGlobalCostoAdmon:boolean=false;
   presGlobalCostoVenta:boolean=false;
 
-  constructor(private _productoService:ProductoService, private _operacionService:OperacionService, private _resultadosService:ResultadosService) {
+  constructor(private _productoService:ProductoService,
+              private _balanceService:BalanceService,
+              private _operacionService:OperacionService,
+              private _resultadosService:ResultadosService) {
     this._resultadosService.vender();
-    this.auxiliaresAnteriores=this._operacionService.returnAuxiliaresAnteriores();
-    this.auxiliares=this._operacionService.returnAuxiliares();
-    this.auxiliarC=this._operacionService.returnAuxiliarC();
-    this.productos=this._productoService.returnProductos();
   }
 
   ngOnInit() {
+    setTimeout(() => {
+      this._balanceService.getBalanceFinal().subscribe( data => {
+        if(data.success){
+          this.auxiliaresAnteriores=this._operacionService.returnAuxiliaresAnteriores();
+          this.auxiliares=this._operacionService.returnAuxiliares();
+          this.auxiliarC=this._operacionService.returnAuxiliarC();
+          this.productos=this._productoService.returnProductos();
+        }
+      });
+    }, 1500);
   }
 
   getNameByIdProducto(id:number){
