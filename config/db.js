@@ -4,7 +4,20 @@ var Promise = require("bluebird");
 Promise.promisifyAll(mysql);
 Promise.promisifyAll(require("mysql/lib/Connection").prototype);
 Promise.promisifyAll(require("mysql/lib/Pool").prototype);
+//
+//
+//
+// var pool = mysql.createPool({
+//     host: 'us-cdbr-iron-east-05.cleardb.net',
+//     user: 'bf32bf5a7a9eae',
+//     password: '966fbda0',
+//     database: 'heroku_7be18966ed8d82e'
+// });
+//
 
+
+<<<<<<< HEAD
+=======
 /*
 var pool = mysql.createPool({
     host: 'us-cdbr-iron-east-05.cleardb.net',
@@ -13,13 +26,14 @@ var pool = mysql.createPool({
     database: 'heroku_7be18966ed8d82e'
 });
 */
+>>>>>>> d93039897d8f79437e187dec8c2657f18f2f53b9
 
 //Conexion Local
 
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: '',
+    password: 'root',
     database: 'basesimv1'
 });
 

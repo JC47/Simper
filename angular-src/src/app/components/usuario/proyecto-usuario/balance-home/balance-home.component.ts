@@ -54,6 +54,8 @@ export class BalanceHomeComponent implements OnInit {
 
   single3:any;
   single4:any;
+  activo:any;
+  pasivo:any;
   productosDesarollados:any[] = [];
   productosEnDesarrollo:any[] = [];
   productosSinDesarrollar:any[] = [];
@@ -81,15 +83,13 @@ productosZonaSinDesGraf:any;
     this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
     this.productosZonaSinDesarrollar = this._desarrolloZonaService.returnProductosDeZonaSinDesarrollar();
     this.productosZonaEnDesarrollo = this._desarrolloZonaService.returnProductosDeZonaEnDesarrollo();
+    console.log("zonas mercado",this.productosZonaEnDesarrollo)
     this.productosZonaDesarrollados = this._desarrolloZonaService.returnProductosDeZonaDesarrollados();
     this.demandas=this._dash.returnDemandas();
+    this.balanceFinal = this._resultadosService.getBalanceFinal();
     this.maquinarias=this._dash.returnMaquinarias();
-    // this._balanceService.getBalanceFinal().subscribe( data => {
-    //   if(data.success){
-    //     this.balanceFinal = this._resultadosService.getBalanceFinal();
-    //     console.log("Balance",this.balanceFinal);
-    //   }
-    // });
+    this.balanceFinal=this._balanceService.returnBalance();
+    console.log("Balance",this.balanceFinal)
     console.log(this.demandas,this.maquinarias);
     console.log("Productos Zona",this.productosZonaDesarrollados,
                 this.productosZonaEnDesarrollo, this.productosZonaSinDesarrollar)
@@ -102,9 +102,60 @@ productosZonaSinDesGraf:any;
       this.productosDesGraf=this.grafProdDes(this.productosDesarollados);
       this.demandasGraf=this.getGrafDemanda(this.demandas);
       this.maquinariasGraf=this.getGrafMaquinaria(this.maquinarias);
-      //this.productosZonaSinDesGraf=this.grafZonaSinDes(this.productosZonaSinDesarrollar);
-      this.productosZonaEnDesGraf=this.grafZonaEnDes(this.productosZonaEnDesarrollo)
-    }, 1500)
+      this.productosZonaSinDesGraf=this.grafZonaSinDes(this.productosZonaSinDesarrollar);
+      this.productosZonaEnDesGraf=this.grafZonaEnDes(this.productosZonaEnDesarrollo);
+      console.log("hola",this.productosZonaEnDesGraf)
+      console.log("Hola2",this.productosZonaSinDesGraf)
+      this.activo= [
+        {
+          "name": "Caja y Bancos",
+          "value": this.getCajaBancos()
+        },
+        {
+          "name": "Cuentas por Cobrar",
+          "value": this.getCuentasPorCobrar()
+        },
+        {
+          "name": "IVA Acreditable",
+          "value": 0
+        },
+        {
+          "name": "Almacen de Articulo Terminado",
+          "value": this.getAlmacenDeArticuloTermindo()
+        },
+        {
+          "name": "Total",
+          "value": this.getAlmacenDeArticuloTermindo()+this.getCuentasPorCobrar()+this.getCajaBancos()
+        }
+      ];
+
+      console.log("Activo",this.activo)
+
+
+      this.pasivo= [
+        {
+          "name": "IVA por Enterar",
+          "value": this.getIVAporEnterar()
+        },
+        {
+          "name": "Impuestos por Pagar",
+          "value": this.getImpuestosPorPagar()
+        },
+        {
+          "name": "Prestamos Más de un Año",
+          "value": this.getPrestamosMas()
+        },
+        {
+          "name": "Prestamos Menos de un Año",
+          "value": this.getPrestamosMenos()
+        }
+
+      ];
+
+
+
+
+    }, 3000)
 
 
 
@@ -196,6 +247,9 @@ this.single4 = [
     "value": 7200000
   }
 ];
+
+
+
 
 
   }
@@ -375,6 +429,82 @@ this.single4 = [
     }
     return "id no encontrado";
 
+  }
+
+  getCajaBancos(){
+    let cajaBancos = 0;
+    for(let key in this.balanceFinal){
+      cajaBancos += this.balanceFinal[key].cajaBancos;
+    }
+    return cajaBancos;
+  }
+
+
+  getCuentasPorCobrar(){
+    let item = 0;
+    for(let key in this.balanceFinal){
+      item += this.balanceFinal[key].cuentasPorCobrar;
+    }
+    return item;
+  }
+
+  getAlmacenDeArticuloTermindo(){
+    let item = 0;
+    for(let key in this.balanceFinal){
+      item += this.balanceFinal[key].almacenArtTerm;
+    }
+    return item;
+  }
+
+
+  getIVAporEnterar(){
+    let item = 0;
+    for(let key in this.balanceFinal){
+      item += this.balanceFinal[key].IVAPorEnterar;
+    }
+    return item;
+  }
+
+  getImpuestosPorPagar(){
+    let item = 0;
+    for(let key in this.balanceFinal){
+      item += this.balanceFinal[key].imptosPorPagar;
+    }
+    return item;
+  }
+
+  getProvedores(){
+    let item = 0;
+    for(let key in this.balanceFinal){
+      item += this.balanceFinal[key].imptosPorPagar;
+    }
+    return item;
+  }
+
+
+  getPTUporPagar(){
+    let item = 0;
+    for(let key in this.balanceFinal){
+      item += this.balanceFinal[key].PTUporPagar;
+    }
+    return item;
+  }
+
+  getPrestamosMenos(){
+    let item = 0;
+    for(let key in this.balanceFinal){
+      item += this.balanceFinal[key].prestamosMenosAnio;
+    }
+    return item;
+  }
+
+
+  getPrestamosMas(){
+    let item = 0;
+    for(let key in this.balanceFinal){
+      item += this.balanceFinal[key].prestamosMenosAnio;
+    }
+    return item;
   }
 
 }

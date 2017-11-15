@@ -22,6 +22,17 @@ periodoActual=localStorage.getItem('numeroPeriodo');
     return this.http.post('balance/',x,{headers}).map(res => res.json());
   }
 
+  returnBalance(){
+    let balanceF =[];
+    this.getBalance().subscribe(data =>{
+      for(let key in data.datos){
+        balanceF.push(data.datos[key]);
+      }
+    });
+    console.log("Balance Actuarl",balanceF);
+    return balanceF;
+  }
+
   getBalanceFinal(){
     var x = {
       idProyecto:parseInt(localStorage.getItem('idProyecto')),

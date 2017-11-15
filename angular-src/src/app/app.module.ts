@@ -83,7 +83,7 @@ import 'd3';
 import 'nvd3';
 import { EstadoResultadosComponent } from './components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component';
 import { VariablesComponent } from './components/variables/variables.component';
-import { PruebaComponent } from './components/usuario/proyecto-usuario/prueba/prueba.component';
+import { DemandaPotencialComponent } from './components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component';
 
 @NgModule({
   declarations: [
@@ -116,7 +116,7 @@ import { PruebaComponent } from './components/usuario/proyecto-usuario/prueba/pr
     EstadoResultadosComponent,
     FinanciamientoComponent,
     VariablesComponent,
-    PruebaComponent,
+    DemandaPotencialComponent,
   ],
   imports: [
     FlashMessagesModule,
