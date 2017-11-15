@@ -1,0 +1,34 @@
+<div class="col-12">
+<h3 class="text-center col-12">Demanda Potencial</h3>
+<hr>
+</div>
+
+
+<div class="row">
+  <div class="col-6" style="height:300px" *ngFor="let zona of graficas" >
+    <div class="row">
+      <h4 class="col-12 text-center">{{zona.nombreZona}}</h4>
+
+  <div class="col-12" style="height:250px;">
+    <ngx-charts-line-chart
+         [scheme]="colorScheme"
+         [results]="zona.graf"
+         xAxis="true"
+         legendTitle="Productos"
+         yAxis="true"
+         legend="true"
+         showXAxisLabel="true"
+         showYAxisLabel="true"
+         xAxisLabel="Periodos"
+         yAxisLabel="Demanda Potencial"
+         autoScale="true">
+       </ngx-charts-line-chart>
+  </div>
+    </div>
+
+
+
+
+  </div>
+
+</div>

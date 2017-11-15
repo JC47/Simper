@@ -4,6 +4,7 @@ import {ProductoService} from '../../../../services/producto.service';
 import {ZonasService} from '../../../../services/zonas.service';
 import {FormControl, FormGroup, Validators,FormArray} from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import {GraficasService} from '../../../../services/graficas.service';
 
 @Component({
   selector: 'app-venta-productos',
@@ -39,22 +40,34 @@ export class VentaProductosComponent implements OnInit {
   produciendo:boolean=false;
   openConf:boolean=false;
   openLoad:boolean=false;
+  prueba:any=[];
   formsVentas:FormArray[]=[];
+  graficas:any[]=[];
+  colorScheme:any;
+  zonaSelected:any={graf:null,nombreZona:null};
 
   @ViewChild('modalProgressVenta') public modalProgressVenta:ModalDirective;
 
   constructor(private _operacionService:OperacionService,
               private _zonasService: ZonasService,
-              private _productoService:ProductoService) {
-    this.zonas=this._zonasService.returnZonasNormales();
+              private _productoService:ProductoService,
+              private _graficasService:GraficasService) {
+    this.zonas=this._graficasService.returnZonas();
     this.productos=this._productoService.returnProductos();
     this.productosOperacion = this._operacionService.returnProductosOperacion();
     this.ventas=this._operacionService.returnAllOperaciones();
     console.log(this.productosOperacion);
 
 
+    this.colorScheme = {
+       domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+     };
 
 
+    setTimeout(() => {
+     this.graficas=this.setGrafica(this.zonas);
+     console.log(this.graficas);
+   }, 800);
 
 
     this.ventasForm=new FormGroup({
@@ -86,8 +99,13 @@ export class VentaProductosComponent implements OnInit {
   }
 
 openModalVenta(idZona,idProducto){
+  for(let zona of this.graficas){
+    if(this.getNameByIdZona(idZona)==zona.nombreZona){
+      this.zonaSelected=zona;
+    }
+  }
+  console.log(this.zonaSelected)
   this.ventasForm.controls['idProducto'].setValue(idProducto)
-
   this.ventasForm.controls['idZona'].setValue(idZona)
   this.openVenta=true;
 }
@@ -198,4 +216,52 @@ openModalVenta(idZona,idProducto){
     }
     return prod;
   }
+
+
+    setGrafica(zonas){
+      let zonasTemp:any=[]
+
+      for(let zona of zonas){
+        let zonaTemp:any={
+          nombreZona:zona.nombreZona,
+          graf:this.getProductos(zona.productos)
+        }
+        zonasTemp.push(zonaTemp);
+
+      }
+      return zonasTemp;
+
+    }
+
+    getProductos(productos){
+      let productosTemp:any[]=[];
+      for(let producto of productos){
+        let productoTemp:any={
+          name:this.getNameByIdProducto(producto.idProducto),
+          series:this.getSeries(producto.periodos)
+        }
+        productosTemp.push(productoTemp);
+      }
+      return productosTemp
+    }
+
+    getSeries(periodos){
+      let series:any=[];
+      for(let periodo of periodos){
+        let serieTemp:any={
+          name:periodo.numPeriodo,
+          value:periodo.cantidad
+        }
+        series.push(serieTemp)
+      }
+      return series
+
+    }
+
+
+
+
+
+
+
 }

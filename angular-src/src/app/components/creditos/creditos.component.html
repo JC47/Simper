@@ -7,7 +7,7 @@
 
 </div>
 
-<div class="container" style="overflow:scroll; height:550px;">
+<div class="container" style="overflow:scroll; height:1000px;">
 
   <div class="card-columns" >
     <div class="card" *ngFor="let credito of creditos">
@@ -93,6 +93,8 @@
           </div>
 
 
+
+
             <div class="form-group row text-center ">
             <label class="col-5 col-form-label">Monto Máximo</label>
 
@@ -111,6 +113,25 @@
               El interes es reuqerido
             </div>
           </div>
+
+          <fieldset class="form-group row">
+     <label class="col-form-legend col-5 text-center">Tipo de Credito:</label>
+     <div class="col-12 row">
+       <div class="form-check col-6">
+         <label class="form-check-label">
+           <input class="form-check-input text-center" type="radio" name="tipo"  value="1" checked formControlName="tipo">
+           Intereses Inicial
+         </label>
+       </div>
+       <div class="form-check col-6 ">
+         <label class="form-check-label text-center">
+           <input class="form-check-input" type="radio" name="tipo" value="2" formControlName="tipo">
+           Intereses en Periodos
+         </label>
+       </div>
+     </div>
+   </fieldset>
+
 
             <div class="form-group row text-center ">
             <label class="col-5 col-form-label">Pago Anticipado</label>
@@ -137,7 +158,7 @@
 
             <div class="input-group col-6 has-success"
             [ngClass]="{'has-danger': !newForm.get('pago').valid}">
-              <span class="input-group-addon">$</span>
+              <span class="input-group-addon">D</span>
               <input type="text" class="form-control"
               formControlName="pago">
 
@@ -225,7 +246,7 @@
 
 
 
-- Formulario para editar credito
+
 <div bsModal #modalEdit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-md">
     <div class="modal-content">

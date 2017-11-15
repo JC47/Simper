@@ -124,20 +124,39 @@
   <ngl-modal header="Confirmación"  [(open)]="openVenta" size="x-small" directional="false">
 
     <div body>
-
+      <h5>Venta de {{getNameByIdProducto(this.ventasForm.controls['idProducto'].value)}}  en {{zonaSelected.nombreZona}} </h5>
+      <div class="col-12" style="height:250px;">
+        <ngx-charts-line-chart
+             [scheme]="colorScheme"
+             [results]="zonaSelected.graf"
+             xAxis="true"
+             legendTitle="Productos"
+             yAxis="true"
+             legend="true"
+             showXAxisLabel="true"
+             showYAxisLabel="true"
+             xAxisLabel="Periodos"
+             yAxisLabel="Demanda Potencial"
+             autoScale="true"
+            >
+           </ngx-charts-line-chart>
+      </div>
           <form [formGroup]="ventasForm" (ngSubmit)="selectVenta(ventasForm.value,producto.idProducto)" class="offset-1"  >
           <div class="form-group row">
-            <input type="number" formControlName="idZonas" hidden="true" >
-            <input type="number"  formControlName="idZonas" hidden="true">
-            <label class="col-12 col-form-label">Cantidad a Vender</label>
-            <div class="col-12">
 
-              <input class="form-control" formControlName="cantidadVenta" value="0"
-              type="number">
+
+
+            <label class="col-12 col-form-label text-center">Cantidad a Vender</label>
+            <div class="offset-4 col-4">
+
+              <input type="number" class="form-control" formControlName="cantidadVenta"
+            >
             </div>
           </div>
           <ng-template ngl-modal-footer>
             <button type="submit" class="btn btn-primary col-5" (click)="selectVenta(ventasForm.value)" >Vender</button>
+            <button type="submit" class="btn btn-danger col-5 offset-1" (click)="oepnVenta=false" >Cancelar</button>
+
         </ng-template>
 
           </form>

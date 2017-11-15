@@ -38,6 +38,7 @@ export class CreditosComponent implements OnInit {
                         nombreCredito:['',Validators.required],
                         montoMin:['',Validators.required],
                         montoMax:['',Validators.required],
+                        tipo:['',Validators.required],
                         pagoAnticipado:['',Validators.required],
                         pago:['',Validators.required],
                         pagosCredito: this._fb.array([])
@@ -84,6 +85,15 @@ export class CreditosComponent implements OnInit {
           });
     }
 
+
+    initPagoOfEdit(pago,idPago){
+      return this._fb.group({
+              pago:[pago,Validators.required],
+              idPago:[idPago,Validators.required]
+            });
+      }
+
+
   eliminaPagoNew(i:number){
     (<FormArray>this.newForm.controls['pagosCredito']).removeAt(i);
   }
@@ -115,6 +125,9 @@ export class CreditosComponent implements OnInit {
       msg: `Usuario "${(credito.nombreCredito)}" agregado`,
       timeout: 2000
     });
+
+    this.editForm.controls['pagosCredito']=this._fb.array([]);
+
   }
 
   eliminaCredito(id:number){
@@ -129,6 +142,7 @@ export class CreditosComponent implements OnInit {
   }
 
   openEdit(credito){
+
     this.editForm.controls['montoMax'].setValue(credito.montoMax);
     this.editForm.controls['montoMin'].setValue(credito.montoMin);
     this.editForm.controls['nombreCredito'].setValue(credito.nombreCredito);
