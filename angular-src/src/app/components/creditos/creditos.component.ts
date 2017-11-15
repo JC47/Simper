@@ -130,6 +130,7 @@ export class CreditosComponent implements OnInit {
       msg: `Credito eliminado`,
       timeout: 2000
     });
+
   }
 
   openEdit(credito){
