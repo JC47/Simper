@@ -318,6 +318,8 @@ export class UsuariosComponent implements OnInit {
   }
 
   agregarMaquinaria(maquina,idUsuario){
+
+
     var x = {
       Administrador_idAdministrador:localStorage.getItem('idAdmin'),
       idUsuario:this.userSelected.idUsuario,
@@ -340,6 +342,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   agregarProducto(producto){
+    
     var y = {
       idUsuario:this.userSelected.idUsuario,
       idAdministrador:localStorage.getItem('idAdmin'),

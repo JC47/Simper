@@ -471,7 +471,7 @@
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="col-12 text-center">Variables de Proyectos de {{userSelected.nombreUsuario}}</h2>
+        <h2 class="col-12 text-center">Variables de Proyectos de {{userSelected.nombreUsuario}} {{userSelected.apPat}}</h2>
       </div>
       <div class="modal-body">
 
@@ -506,8 +506,9 @@
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="col-12 text-center">Variables Iniciales de Balance</h2>
+        <h4 class="col-12 text-center" style="margin-top:10px">{{userSelected.nombreUsuario}} {{userSelected.apPat}}</h4>
       </div>
-      <h5 class="col-12 text-center" style="margin-top:10px">({{userSelected.nombreUsuario}} {{userSelected.apPat}})</h5>
+
 
       <div class="modal-body">
 
@@ -536,7 +537,7 @@
             </div> -->
             <div class="row">
               <div class="col-12">
-                <h5>Valores de Activo</h5>
+                <h5 class="col-12 text-center">Valores de Activo</h5>
                 <div class="container">
                 <hr>
                 </div>
@@ -665,8 +666,8 @@
             <div class="row">
               <div class="col-12">
 
-                <div class="container">
-                <h5>Valores de Pasivo</h5>
+                <div class="container" style="margin-top:30px">
+                <h5 class="col-12 text-center">Valores de Pasivo</h5>
                 <hr>
                 </div>
 
@@ -823,102 +824,102 @@
                 <tbody>
                   <tr>
                     <td>Caja y Bancos</td>
-                    <td>{{usuario.cajaBancos}}</td>
+                    <td>{{usuario.cajaBancos| currency:'USD':true}}</td>
                   </tr>
 
                   <tr>
                     <td>Cuentas Por Cobrar:</td>
-                    <td>{{usuario.cuentasPorCobrar}}</td>
+                    <td>{{usuario.cuentasPorCobrar| currency:'USD':true}}</td>
                   </tr>
 
                   <tr>
                     <td>IVA Acreditable</td>
-                    <td>{{usuario.IVAAcreditable}}</td>
+                    <td>{{usuario.IVAAcreditable| currency:'USD':true}}</td>
                   </tr>
 
                   <tr>
-                    <td>Almacen de Artivulo Terminado</td>
-                    <td>{{usuario.almacenArtTerm}}</td>
+                    <td>Almacen de Articulo Terminado</td>
+                    <td>{{usuario.almacenArtTerm | currency:'USD':true }}</td>
                   </tr>
 
                   <tr>
                     <td>Almacen de Materiales</td>
-                    <td>{{usuario.almacenMateriales}}</td>
+                    <td>{{usuario.almacenMateriales| currency:'USD':true}}</td>
                   </tr>
 
                   <tr>
                     <td>Terrenos</td>
-                    <td>{{usuario.terreno}}</td>
+                    <td>{{usuario.terreno| currency:'USD':true}}</td>
                   </tr>
 
                   <tr>
                     <td>Maquinaria y Equipo</td>
-                    <td>{{usuario.maqEquipo}}</td>
+                    <td>{{usuario.maqEquipo| currency:'USD':true}}</td>
                   </tr>
 
                   <tr>
                     <td>Muebeles y Enseres</td>
-                    <td>{{usuario.mueblesEnseres}}</td>
+                    <td>{{usuario.mueblesEnseres| currency:'USD':true}}</td>
                   </tr>
 
                   <tr>
                     <td>Equipo de Transporte</td>
-                    <td>{{usuario.eqTrans}}</td>
+                    <td>{{usuario.eqTrans| currency:'USD':true}}</td>
                   </tr>
 
                   <tr>
                     <td>Pagos Por Anticipado</td>
-                    <td>{{usuario.pagosAnticipado}}</td>
+                    <td>{{usuario.pagosAnticipado| currency:'USD':true}}</td>
                   </tr>
 
                   <tr>
                     <td>Gastos de Amortización</td>
-                    <td>{{usuario.gastosAmortizacion}}</td>
+                    <td>{{usuario.gastosAmortizacion| currency:'USD':true}}</td>
                   </tr>
 
                   <tr>
                     <td>IVA por Enterar</td>
-                    <td>{{usuario.IVAPorEnterar}}</td>
+                    <td>{{usuario.IVAPorEnterar| currency:'USD':true}}</td>
                   </tr>
 
                   <tr>
                     <td>Impuestos por Pagar</td>
-                    <td>{{usuario.imptosPorPagar}}</td>
+                    <td>{{usuario.imptosPorPagar| currency:'USD':true}}</td>
                   </tr>
 
                   <tr>
                     <td>Proveedores</td>
-                    <td>{{usuario.proveedores}}</td>
+                    <td>{{usuario.proveedores| currency:'USD':true}}</td>
                   </tr>
 
                   <tr>
                     <td>PTU por Pagar</td>
-                    <td>{{usuario.PTUPorPagar}}</td>
+                    <td>{{usuario.PTUPorPagar| currency:'USD':true}}</td>
                   </tr>
 
                   <tr>
                     <td>Capital Social</td>
-                    <td>{{usuario.capitalSocial}}</td>
+                    <td>{{usuario.capitalSocial| currency:'USD':true}}</td>
                   </tr>
 
                   <tr>
                     <td>Reserva Legal</td>
-                    <td>{{usuario.reservaLegal}}</td>
+                    <td>{{usuario.reservaLegal| currency:'USD':true}}</td>
                   </tr>
 
                   <tr>
                     <td>Utilidad Acumulada</td>
-                    <td>{{usuario.utilidadAcum}}</td>
+                    <td>{{usuario.utilidadAcum| currency:'USD':true}}</td>
                   </tr>
 
                   <tr>
                     <td>Prestamos a menos de un Año</td>
-                    <td>{{usuario.prestamosMenosAnio}}</td>
+                    <td>{{usuario.prestamosMenosAnio| currency:'USD':true}}</td>
                   </tr>
 
                   <tr>
                     <td>Prestamos a Mas de un Año</td>
-                    <td>{{usuario.prestamosMasAnio}}</td>
+                    <td>{{usuario.prestamosMasAnio| currency:'USD':true}}</td>
                   </tr>
 
                 </tbody>
