@@ -44,6 +44,46 @@ periodoActual=localStorage.getItem('numeroPeriodo');
     return this.http.post('balance/final',x,{headers}).map(res => res.json());
   }
 
+  getActivos(){
+    var x = {
+      idProyecto:parseInt(localStorage.getItem('idProyecto')),
+      numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo'))
+    };
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    return this.http.post('balance/getactivos',x,{headers}).map(res => res.json());
+  }
+
+  getPasivos(){
+    var x = {
+      idProyecto:parseInt(localStorage.getItem('idProyecto')),
+      numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo'))
+    };
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    return this.http.post('balance/getpasivos',x,{headers}).map(res => res.json());
+  }
+
+  returnActivos(){
+    let activos = [];
+    this.getActivos().subscribe(data => {
+      for(let key in data.datos){
+        activos.push(data.datos[key]);
+      }
+    });
+    return activos;
+  }
+
+  returnPasivos(){
+    let pasivos = [];
+    this.getPasivos().subscribe(data => {
+      pasivos = data.datos;
+    });
+    return pasivos;
+  }
+
 
   getBalanceByIds(idProyecto,numeroPeriodo){
     var x = {
@@ -113,4 +153,6 @@ periodoActual=localStorage.getItem('numeroPeriodo');
     });
     return this.balancesArray;
   }
+
+
 }

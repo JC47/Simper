@@ -2143,6 +2143,8 @@ var BalanceHomeComponent = (function () {
         this.productosZonaEnDesarrollo = [];
         this.productosZonaDesarrollados = [];
         this.demandasGraf = [];
+        this.activos = [];
+        this.pasivos = [];
         this.selectedTabProd = "Productos en Desarrollo";
         this.selectedTabZona = "Zonas en Desarrollo";
         this.view = [700, 400];
@@ -2164,21 +2166,17 @@ var BalanceHomeComponent = (function () {
         this.productosEnDesarrollo = [];
         this.productosSinDesarrollar = [];
         this.productos = this._productosService.returnProductos();
-        console.log("productos para ID", this.productos);
         this.productosSinDesarrollar = this._desarrolloProducto.returnProductosSinDesarrollar();
         this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
         this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
         this.productosZonaSinDesarrollar = this._desarrolloZonaService.returnProductosDeZonaSinDesarrollar();
         this.productosZonaEnDesarrollo = this._desarrolloZonaService.returnProductosDeZonaEnDesarrollo();
-        console.log("zonas mercado", this.productosZonaEnDesarrollo);
         this.productosZonaDesarrollados = this._desarrolloZonaService.returnProductosDeZonaDesarrollados();
         this.demandas = this._dash.returnDemandas();
-        this.balanceFinal = this._resultadosService.getBalanceFinal();
         this.maquinarias = this._dash.returnMaquinarias();
-        this.balanceFinal = this._balanceService.returnBalance();
-        console.log("Balance", this.balanceFinal);
-        console.log(this.demandas, this.maquinarias);
-        console.log("Productos Zona", this.productosZonaDesarrollados, this.productosZonaEnDesarrollo, this.productosZonaSinDesarrollar);
+        this.activos = this._balanceService.returnActivos();
+        this.pasivos = this._balanceService.returnPasivos();
+        console.log(this.activo, this.pasivos);
         setTimeout(function () {
             _this.productosEnDesGraf = _this.grafProd(_this.productosEnDesarrollo);
             console.log(_this.productosDesGraf);
@@ -2189,50 +2187,32 @@ var BalanceHomeComponent = (function () {
             _this.maquinariasGraf = _this.getGrafMaquinaria(_this.maquinarias);
             _this.productosZonaSinDesGraf = _this.grafZonaSinDes(_this.productosZonaSinDesarrollar);
             _this.productosZonaEnDesGraf = _this.grafZonaEnDes(_this.productosZonaEnDesarrollo);
-            console.log("hola", _this.productosZonaEnDesGraf);
-            console.log("Hola2", _this.productosZonaSinDesGraf);
-            _this.activo = [
-                {
-                    "name": "Caja y Bancos",
-                    "value": _this.getCajaBancos()
-                },
-                {
-                    "name": "Cuentas por Cobrar",
-                    "value": _this.getCuentasPorCobrar()
-                },
-                {
-                    "name": "IVA Acreditable",
-                    "value": 0
-                },
-                {
-                    "name": "Almacen de Articulo Terminado",
-                    "value": _this.getAlmacenDeArticuloTermindo()
-                },
-                {
-                    "name": "Total",
-                    "value": _this.getAlmacenDeArticuloTermindo() + _this.getCuentasPorCobrar() + _this.getCajaBancos()
-                }
-            ];
-            console.log("Activo", _this.activo);
-            _this.pasivo = [
-                {
-                    "name": "IVA por Enterar",
-                    "value": _this.getIVAporEnterar()
-                },
-                {
-                    "name": "Impuestos por Pagar",
-                    "value": _this.getImpuestosPorPagar()
-                },
-                {
-                    "name": "Prestamos Más de un Año",
-                    "value": _this.getPrestamosMas()
-                },
-                {
-                    "name": "Prestamos Menos de un Año",
-                    "value": _this.getPrestamosMenos()
-                }
-            ];
+            //this.activosGraf = this.grafActivos(this.activos);
+            // console.log("Activo",this.activo)
+            //
+            //
+            // this.pasivo= [
+            //   {
+            //     "name": "IVA por Enterar",
+            //     "value": this.getIVAporEnterar()
+            //   },
+            //   {
+            //     "name": "Impuestos por Pagar",
+            //     "value": this.getImpuestosPorPagar()
+            //   },
+            //   {
+            //     "name": "Prestamos Más de un Año",
+            //     "value": this.getPrestamosMas()
+            //   },
+            //   {
+            //     "name": "Prestamos Menos de un Año",
+            //     "value": this.getPrestamosMenos()
+            //   }
+            //
+            // ];
         }, 3000);
+        this.activo = this.grafActivos();
+        console.log("Listo", this.activo);
         this.single = [
             {
                 "name": "Germany",
@@ -2307,6 +2287,14 @@ var BalanceHomeComponent = (function () {
         ];
     }
     BalanceHomeComponent.prototype.ngOnInit = function () {
+    };
+    BalanceHomeComponent.prototype.grafActivos = function () {
+        var act = [];
+        for (var key in this.activos) {
+            act.push({ "name": "Activo", "value": this.activos[key] });
+        }
+        console.log("Arreglo", act);
+        return act;
     };
     BalanceHomeComponent.prototype.grafProd = function (productos) {
         var data = [];
@@ -5774,6 +5762,42 @@ var BalanceService = (function () {
             'Content-Type': 'application/json'
         });
         return this.http.post('balance/final', x, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    BalanceService.prototype.getActivos = function () {
+        var x = {
+            idProyecto: parseInt(localStorage.getItem('idProyecto')),
+            numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo'))
+        };
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        return this.http.post('balance/getactivos', x, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    BalanceService.prototype.getPasivos = function () {
+        var x = {
+            idProyecto: parseInt(localStorage.getItem('idProyecto')),
+            numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo'))
+        };
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        return this.http.post('balance/getpasivos', x, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    BalanceService.prototype.returnActivos = function () {
+        var activos = [];
+        this.getActivos().subscribe(function (data) {
+            for (var key in data.datos) {
+                activos.push(data.datos[key]);
+            }
+        });
+        return activos;
+    };
+    BalanceService.prototype.returnPasivos = function () {
+        var pasivos = [];
+        this.getPasivos().subscribe(function (data) {
+            pasivos = data.datos;
+        });
+        return pasivos;
     };
     BalanceService.prototype.getBalanceByIds = function (idProyecto, numeroPeriodo) {
         var x = {
