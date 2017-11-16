@@ -10,6 +10,7 @@ import { OperacionComponent } from './operacion/operacion.component';
 import { EstadoResultadosComponent} from './estado-resultados/estado-resultados.component';
 import { FinanciamientoComponent } from './financiamiento/financiamiento.component';
 import {DemandaPotencialComponent} from './demanda-potencial/demanda-potencial.component'
+
 export const PROYECTO_ROUTES: Routes = [
   { path: 'compraMaquinaria', component: CompraMaquinariaComponent },
   { path: 'estadoResultados', component: EstadoResultadosComponent},

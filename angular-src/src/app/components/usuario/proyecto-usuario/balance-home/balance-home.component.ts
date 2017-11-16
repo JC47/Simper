@@ -26,6 +26,8 @@ export class BalanceHomeComponent implements OnInit {
   maquinariasGraf:any;
   data:any;
   balanceFinal:any;
+  activos = [];
+  pasivos = [];
   selectedTabProd:any="Productos en Desarrollo";
   selectedTabZona:any="Zonas en Desarrollo";
 
@@ -77,22 +79,19 @@ productosZonaSinDesGraf:any;
               private _dash:DashboardService,
               private _balanceService:BalanceService) {
     this.productos=this._productosService.returnProductos();
-    console.log("productos para ID",this.productos)
     this.productosSinDesarrollar = this._desarrolloProducto.returnProductosSinDesarrollar();
     this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
     this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
     this.productosZonaSinDesarrollar = this._desarrolloZonaService.returnProductosDeZonaSinDesarrollar();
     this.productosZonaEnDesarrollo = this._desarrolloZonaService.returnProductosDeZonaEnDesarrollo();
-    console.log("zonas mercado",this.productosZonaEnDesarrollo)
     this.productosZonaDesarrollados = this._desarrolloZonaService.returnProductosDeZonaDesarrollados();
     this.demandas=this._dash.returnDemandas();
-    this.balanceFinal = this._resultadosService.getBalanceFinal();
     this.maquinarias=this._dash.returnMaquinarias();
-    this.balanceFinal=this._balanceService.returnBalance();
-    console.log("Balance",this.balanceFinal)
-    console.log(this.demandas,this.maquinarias);
-    console.log("Productos Zona",this.productosZonaDesarrollados,
-                this.productosZonaEnDesarrollo, this.productosZonaSinDesarrollar)
+    this.activos = this._balanceService.returnActivos();
+    this.pasivos = this._balanceService.returnPasivos();
+
+    console.log(this.activo,this.pasivos);
+
     setTimeout(()=>{
 
       this.productosEnDesGraf=this.grafProd(this.productosEnDesarrollo);
@@ -104,68 +103,38 @@ productosZonaSinDesGraf:any;
       this.maquinariasGraf=this.getGrafMaquinaria(this.maquinarias);
       this.productosZonaSinDesGraf=this.grafZonaSinDes(this.productosZonaSinDesarrollar);
       this.productosZonaEnDesGraf=this.grafZonaEnDes(this.productosZonaEnDesarrollo);
-      console.log("hola",this.productosZonaEnDesGraf)
-      console.log("Hola2",this.productosZonaSinDesGraf)
-      this.activo= [
-        {
-          "name": "Caja y Bancos",
-          "value": this.getCajaBancos()
-        },
-        {
-          "name": "Cuentas por Cobrar",
-          "value": this.getCuentasPorCobrar()
-        },
-        {
-          "name": "IVA Acreditable",
-          "value": 0
-        },
-        {
-          "name": "Almacen de Articulo Terminado",
-          "value": this.getAlmacenDeArticuloTermindo()
-        },
-        {
-          "name": "Total",
-          "value": this.getAlmacenDeArticuloTermindo()+this.getCuentasPorCobrar()+this.getCajaBancos()
-        }
-      ];
+      //this.activosGraf = this.grafActivos(this.activos);
 
-      console.log("Activo",this.activo)
-
-
-      this.pasivo= [
-        {
-          "name": "IVA por Enterar",
-          "value": this.getIVAporEnterar()
-        },
-        {
-          "name": "Impuestos por Pagar",
-          "value": this.getImpuestosPorPagar()
-        },
-        {
-          "name": "Prestamos Más de un Año",
-          "value": this.getPrestamosMas()
-        },
-        {
-          "name": "Prestamos Menos de un Año",
-          "value": this.getPrestamosMenos()
-        }
-
-      ];
+      // console.log("Activo",this.activo)
+      //
+      //
+      // this.pasivo= [
+      //   {
+      //     "name": "IVA por Enterar",
+      //     "value": this.getIVAporEnterar()
+      //   },
+      //   {
+      //     "name": "Impuestos por Pagar",
+      //     "value": this.getImpuestosPorPagar()
+      //   },
+      //   {
+      //     "name": "Prestamos Más de un Año",
+      //     "value": this.getPrestamosMas()
+      //   },
+      //   {
+      //     "name": "Prestamos Menos de un Año",
+      //     "value": this.getPrestamosMenos()
+      //   }
+      //
+      // ];
 
 
 
 
     }, 3000)
 
-
-
-
-
-
-
-
-
-
+    this.activo = this.grafActivos();
+    console.log("Listo",this.activo);
 
 
     this.single = [
@@ -256,6 +225,15 @@ this.single4 = [
 
   ngOnInit() {
 
+  }
+
+  grafActivos(){
+    var act = [];
+    for(let key in this.activos){
+      act.push({"name":"Activo","value":this.activos[key]});
+    }
+    console.log("Arreglo",act);
+    return act;
   }
 
   grafProd(productos){

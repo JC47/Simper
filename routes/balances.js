@@ -45,6 +45,36 @@ router.post('/', (req,res,next) => {
   });
 });
 
+router.post('/getactivos', (req,res,next) => {
+  Promise.resolve().then( function () {
+    var idProyecto = req.body.idProyecto;
+    var numeroPeriodo = req.body.numeroPeriodo;
+    return balance.getActivos(idProyecto, numeroPeriodo);
+  }).then(function(rows){
+    return jsonActivos(rows);
+  }).then(function (rows) {
+    res.json({success: true, datos:rows, msg:"Operacion exitosa"});
+  })
+  .catch(function (err) {
+    console.log(err);
+    res.json({success:false, msg:"Operacion incompleta"});
+  });
+});
+
+router.post('/getpasivos', (req,res,next) => {
+  Promise.resolve().then( function () {
+    var idProyecto = req.body.idProyecto;
+    var numeroPeriodo = req.body.numeroPeriodo;
+    return balance.getPasivos(idProyecto, numeroPeriodo);
+  }).then(function (rows) {
+    res.json({success: true, datos:rows, msg:"Operacion exitosa"});
+  })
+  .catch(function (err) {
+    console.log(err);
+    res.json({success:false, msg:"Operacion incompleta"});
+  });
+});
+
 router.post('/final', (req, res, next) => {
   var idProyecto = req.body.idProyecto;
   var numeroPeriodoAnterior = req.body.numeroPeriodo;
@@ -270,6 +300,15 @@ function getAlmacenTerm(auxV){
       Comp += auxV[key].inventarioFinal;
   }
   return Comp;
+}
+
+function jsonActivos(rows) {
+  var activ = [];
+  activ.push(rows[0].cajaBancos);
+  activ.push(rows[0].cuentasPorCobrar);
+  activ.push(rows[0].IVAAcreditable);
+  activ.push(rows[0].almacenArtTerm);
+  return activ;
 }
 
 module.exports = router;

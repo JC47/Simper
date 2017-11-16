@@ -29,6 +29,7 @@ router.post('/addcredito', (req, res, next) => {
   var montoMin = req.body.montoMin;
   var montoMax = req.body.montoMax;
   var pago = req.body.pago;
+  var tipo = req.body.tipo;
   var pagoAnticipado = req.body.pagoAnticipado;
   var pagosCredito = req.body.pagosCredito;
 
@@ -41,6 +42,7 @@ router.post('/addcredito', (req, res, next) => {
       "montoMin":montoMin,
       "montoMax":montoMax,
       "pago":pago,
+      "tipo":tipo,
       "pagoAnticipado":pagoAnticipado,
       "plazo":p
     }

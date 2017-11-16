@@ -52,7 +52,7 @@
             <td class="text-right">{{producto.unidadesVendidas }}</td>
             <td class="text-right">{{getPrecioVenta(producto.Producto_idProducto) |currency:'USD':true:'1.0-0'}}</td>
             <td class="text-right">{{producto.Ventas - producto.IVAxVentas |currency:'USD':true:'1.0-0'}}</td>
-            <td class="text-right">{{0 |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{producto.IVAxVentas |currency:'USD':true:'1.0-0'}}</td>
             <td class="text-right">{{producto.Ventas |currency:'USD':true:'1.0-0'}}</td>
           </tr>
 
@@ -132,10 +132,10 @@
 
           <tr *ngFor="let producto of auxiliares">
             <td>{{getNameByIdProducto(producto.Producto_idProducto) }}</td>
-            <td class="text-right">{{getUniMP(producto.Producto_idProducto) |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{getUniMP(producto.Producto_idProducto)}</td>
             <td class="text-right">{{getCostoUni(producto.Producto_idProducto) |currency:'USD':true:'1.0-0'}}</td>
             <td class="text-right">{{producto.unidadesProducidas }}</td>
-            <td class="text-right">{{getUniMP(producto.Producto_idProducto) * producto.unidadesProducidas |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{getUniMP(producto.Producto_idProducto) * producto.unidadesProducidas}}</td>
             <td class="text-right">{{getCostoUni(producto.Producto_idProducto) * producto.unidadesProducidas |currency:'USD':true:'1.0-0'}}</td>
           </tr>
 
@@ -167,7 +167,7 @@
 
           <tr>
             <td class="text-right">1</td>
-            <td class="text-right">{{getUniMPTotal() |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{getUniMPTotal()}}</td>
             <td class="text-right">$69</td>
             <td class="text-right">{{getUniMPTotalCash() |currency:'USD':true:'1.0-0'}}</td>
             <td class="text-right">{{getIVAMP() |currency:'USD':true:'1.0-0'}}</td>
@@ -247,7 +247,7 @@
         <tbody>
           <tr>
             <th>Unidades  a Vender</th>
-            <td *ngFor="let producto of auxiliares">{{producto.unidadesVendidas }}</td>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{producto.unidadesVendidas }}</td>
           </tr>
 
           <tr>
@@ -287,7 +287,7 @@
 
           <tr>
             <th>Prevención Social</th>
-            <td  *ngFor="let producto of auxiliares">-</td>
+            <td class="text-right" *ngFor="let producto of auxiliares">-</td>
           </tr>
 
           <tr>
@@ -333,12 +333,12 @@
 
               <tr>
                 <th>Cto Unitario Total</th>
-                <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoAdministrativo |currency:'USD':true:'1.0-0'}}</td>
+                <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoAdministrativo/producto.unidadesVendidas |currency:'USD':true:'1.0-0'}}</td>
               </tr>
 
               <tr>
                 <th>Cto Administracion</th>
-                <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoAdministrativo / producto.unidadesVendidas |currency:'USD':true:'1.0-0'}}</td>
+                <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoAdministrativo |currency:'USD':true:'1.0-0'}}</td>
               </tr>
 
               <tr>
@@ -358,17 +358,17 @@
 
               <tr>
                 <th>Menos partidas que no Incluyen IVA</th>
-                <td  *ngFor="let producto of auxiliares">-</td>
+                <td class="text-right" *ngFor="let producto of auxiliares">-</td>
               </tr>
 
               <tr>
                 <th>Sueldos y salarios</th>
-                <td *ngFor="let producto of auxiliares">-</td>
+                <td class="text-right" *ngFor="let producto of auxiliares">-</td>
               </tr>
 
               <tr>
                 <th>Prevención Social</th>
-                <td *ngFor="let producto of auxiliares">-</td>
+                <td class="text-right" *ngFor="let producto of auxiliares">-</td>
               </tr>
 
               <tr>
