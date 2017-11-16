@@ -402,7 +402,7 @@ function IRR(CArray) {
 function porcentajesPagos(monto,pagoAnticipado,pagoTotal,tipo) {
   var pagoT = [];
 
-  if (tipo == 2) {//Es 1 cuando no existen pagos anticipados
+  if (tipo == 2 || tipo == 3) {//Es 1 cuando no existen pagos anticipados
       pagoT.push(-monto);
   }else {
       var pagoAntPorc = (pagoAnticipado)/(100);
