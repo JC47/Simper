@@ -1,5 +1,3 @@
-//prestamos.js CALETTE
-
 const express = require('express');
 const router = express.Router();
 const Promise = require("bluebird");
@@ -29,7 +27,6 @@ router.post('/addcredito', (req, res, next) => {
   var montoMin = req.body.montoMin;
   var montoMax = req.body.montoMax;
   var pago = req.body.pago;
-  var tipo = req.body.tipo;
   var pagoAnticipado = req.body.pagoAnticipado;
   var pagosCredito = req.body.pagosCredito;
 
@@ -42,7 +39,6 @@ router.post('/addcredito', (req, res, next) => {
       "montoMin":montoMin,
       "montoMax":montoMax,
       "pago":pago,
-      "tipo":tipo,
       "pagoAnticipado":pagoAnticipado,
       "plazo":p
     }
@@ -170,21 +166,33 @@ var capital;
 var pagoT = [];
 var TIR;
 var pagoAnticipado;
+var tipo;
 var pagoTotal;
 var anticipo;
 
 Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCredito),
             prestamo.getFinanEspecifico(idProyecto,numeroPeriodo,idCredito),function(pagoanticipado,pagoscreditos,financiamiento) {
-    console.log("consulta defectuosa",financiamiento);
+
      fina = financiamiento;
-     pagoAnticipado = pagoanticipado[0].pagoAnticipado;
+     tipo = pagoanticipado[0].tipo;//1,2,3
+     pagoAnticipado = pagoanticipado[0].pagoAnticipado;//1 o saldo
      pagoTotal = pagoscreditos;
     //Valores Iniciales para CAPITAL
-      if (pagoAnticipado==1) {//Es 1 cuando no existen pagos anticipados
+
+
+
+      if (tipo == 2) {//Es 0 cuando no existen pagos anticipados
           capital = monto;
+          anticipo = 0;
       }else {
-          var pagoAntPorc = (pagoAnticipado)/(100);
-          capital = monto - monto*pagoAntPorc;
+          if(tipo == 1){
+            var pagoAntPorc = (pagoAnticipado)/(100);
+            capital = monto - monto*pagoAntPorc;
+            anticipo = monto*((pagoAnticipado)/(100));
+          }else {
+            capital = monto
+            anticipo = monto*((pagoAnticipado)/(100));
+          }
       }
       //Valores Iniciales para porcentajes de pagos totales
 
@@ -204,7 +212,7 @@ Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCr
   })
   //sirve para insertar la cantidad a descontar si existe un pago anticipado en el credito pedido
   //se registra en creditobalance: anticipo
-  .then(function () {
+/*  .then(function () {
     if (pagoAnticipado==1) {
        anticipo = 0;
     }else {
@@ -212,6 +220,7 @@ Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCr
     }
     return console.log("ok");
   })
+  */
   //solo sirve para insertar en creditobalance
   .then(function () {
     var json = {
@@ -233,7 +242,7 @@ Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCr
     for (var i = 0; i < pagoTotal.length; i++) {
       console.log("pagoTotal: "+pagoTotal[i].pagosCredito);
     }
-   return porcentajesPagos(monto,pagoAnticipado,pagoTotal);
+   return porcentajesPagos(monto,pagoAnticipado,pagoTotal,tipo);
   })
   .then(function (pagosTotales) {
      for (var i = 0; i < pagosTotales.length; i++) {
@@ -299,6 +308,7 @@ router.post('/veramortizacion', (req, res, next) => {
   var pagoT = [];
   var TIR;
   var pagoAnticipado;
+  var tipo;
   var pagoTotal;
 
 
@@ -306,16 +316,24 @@ router.post('/veramortizacion', (req, res, next) => {
     function(pagoanticipado, pagoscreditos, credito) {
       console.log("pagoanticipado: "+pagoanticipado.pagoAnticipado);
        pagoAnticipado = pagoanticipado[0].pagoAnticipado;
+       tipo = pagoanticipado[0].tipo;//1,2,3
        pagoTotal = pagoscreditos;
        console.log("Monto",credito);
        monto = credito[0].monto;
       //Valores Iniciales para CAPITAL
-        if (pagoAnticipado==1) {//Es 1 cuando no existen pagos anticipados
-            capital = monto;
-        }else {
+      if (tipo == 2) {//Es 0 cuando no existen pagos anticipados
+          capital = monto;
+          anticipo = 0;
+      }else {
+          if(tipo == 1){
             var pagoAntPorc = (pagoAnticipado)/(100);
             capital = monto - monto*pagoAntPorc;
-        }
+            anticipo = monto*((pagoAnticipado)/(100));
+          }else {
+            capital = monto
+            anticipo = monto*((pagoAnticipado)/(100));
+          }
+      }
       //Valores Iniciales para porcentajes de pagos totales
 
       for (var i = 0; i < pagoTotal.length; i++) {
@@ -333,7 +351,7 @@ router.post('/veramortizacion', (req, res, next) => {
   for (var i = 0; i < pagoTotal.length; i++) {
     console.log("pagoTotal: "+pagoTotal[i].pagosCredito);
   }
-     return porcentajesPagos(monto,pagoAnticipado,pagoTotal);
+     return porcentajesPagos(monto,pagoAnticipado,pagoTotal,tipo);
     })
     .then(function (pagosTotales) {
        for (var i = 0; i < pagosTotales.length; i++) {
@@ -381,10 +399,10 @@ function IRR(CArray) {
 
 //pago anticipado es un número que deberá expresarse en %
 //pagoTotal
-function porcentajesPagos(monto,pagoAnticipado,pagoTotal) {
+function porcentajesPagos(monto,pagoAnticipado,pagoTotal,tipo) {
   var pagoT = [];
 
-  if (pagoAnticipado==1) {//Es 1 cuando no existen pagos anticipados
+  if (tipo == 2) {//Es 1 cuando no existen pagos anticipados
       pagoT.push(-monto);
   }else {
       var pagoAntPorc = (pagoAnticipado)/(100);

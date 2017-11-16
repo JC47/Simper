@@ -1,5 +1,3 @@
-//prestamo.js CALETTE
-
 const db = require('../config/db');
 const querySql = db.querySql;
 
@@ -75,7 +73,7 @@ module.exports.getPagoCredito = function () {
 //Inserta en amortizacion y creditobalance
 
 module.exports.getPagoAnticipado = function (idCredito) {
-  var query = "select pagoAnticipado from credito where idCredito = "+idCredito+" ";
+  var query = "select pagoAnticipado,tipo from credito where idCredito = "+idCredito+" ";
   return querySql(query);
 }
 
