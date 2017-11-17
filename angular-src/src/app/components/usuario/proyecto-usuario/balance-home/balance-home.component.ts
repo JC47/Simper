@@ -6,6 +6,7 @@ import {ResultadosService} from '../../../../services/resultados.service';
 import {DashboardService} from '../../../../services/dashboard.service';
 import {DesarrolloZonaService} from '../../../../services/desarrollo-zona.service';
 import {BalanceService} from '../../../../services/balance.service';
+import {ZonasService} from '../../../../services/zonas.service';
 
 
 @Component({
@@ -51,7 +52,7 @@ export class BalanceHomeComponent implements OnInit {
   colorScheme2 = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
-
+  zonas:any=[];
 
 
   single3:any;
@@ -62,6 +63,7 @@ export class BalanceHomeComponent implements OnInit {
   productosEnDesarrollo:any[] = [];
   productosSinDesarrollar:any[] = [];
   productosDesGraf:any;
+  activosGraf = [];
   productosEnDesGraf:any;
 productosSinDesGraf:any;
 
@@ -77,7 +79,8 @@ productosZonaSinDesGraf:any;
               private _productosService:ProductoService,
               private _resultadosService:ResultadosService,
               private _dash:DashboardService,
-              private _balanceService:BalanceService) {
+              private _balanceService:BalanceService,
+              private _demandaService:ZonasService) {
     this.productos=this._productosService.returnProductos();
     this.productosSinDesarrollar = this._desarrolloProducto.returnProductosSinDesarrollar();
     this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
@@ -89,6 +92,7 @@ productosZonaSinDesGraf:any;
     this.maquinarias=this._dash.returnMaquinarias();
     this.activos = this._balanceService.returnActivos();
     this.pasivos = this._balanceService.returnPasivos();
+      this.zonas=this._demandaService.returnZonasNormales();
 
     console.log(this.activo,this.pasivos);
 
@@ -103,38 +107,45 @@ productosZonaSinDesGraf:any;
       this.maquinariasGraf=this.getGrafMaquinaria(this.maquinarias);
       this.productosZonaSinDesGraf=this.grafZonaSinDes(this.productosZonaSinDesarrollar);
       this.productosZonaEnDesGraf=this.grafZonaEnDes(this.productosZonaEnDesarrollo);
-      //this.activosGraf = this.grafActivos(this.activos);
 
-      // console.log("Activo",this.activo)
-      //
-      //
-      // this.pasivo= [
-      //   {
-      //     "name": "IVA por Enterar",
-      //     "value": this.getIVAporEnterar()
-      //   },
-      //   {
-      //     "name": "Impuestos por Pagar",
-      //     "value": this.getImpuestosPorPagar()
-      //   },
-      //   {
-      //     "name": "Prestamos Más de un Año",
-      //     "value": this.getPrestamosMas()
-      //   },
-      //   {
-      //     "name": "Prestamos Menos de un Año",
-      //     "value": this.getPrestamosMenos()
-      //   }
-      //
-      // ];
+
+
+      this.pasivo= [
+        {
+          "name": "IVA por Enterar",
+          "value": this.getIVAporEnterar()
+        },
+        {
+          "name": "Proveedores",
+          "value": this.getProvedores()
+        },
+
+        {
+          "name": "Impuestos por Pagar",
+          "value": this.getImpuestosPorPagar()
+        },
+        {
+          "name": "Prestamos Más de un Año",
+          "value": this.getPrestamosMas()
+        },
+        {
+          "name": "Prestamos Menos de un Año",
+          "value": this.getPrestamosMenos()
+        }
+
+      ];
+      console.log("pasivo",this.pasivo)
 
 
 
 
     }, 3000)
 
-    this.activo = this.grafActivos();
-    console.log("Listo",this.activo);
+    this.activosGraf = this.grafActivos();
+
+    console.log("Activo",this.activo)
+
+
 
 
     this.single = [
@@ -229,6 +240,8 @@ this.single4 = [
 
   grafActivos(){
     var act = [];
+    console.log("Antes",this.activos)
+    
     for(let key in this.activos){
       act.push({"name":"Activo","value":this.activos[key]});
     }
@@ -409,6 +422,16 @@ this.single4 = [
 
   }
 
+
+  getNameByIdZona(id:number){
+    for(let zona of this.zonas){
+      if(zona.idZona==id)
+       return zona.nombreZona;
+    }
+    return "id no encontrado";
+
+  }
+
   getCajaBancos(){
     let cajaBancos = 0;
     for(let key in this.balanceFinal){
@@ -425,6 +448,8 @@ this.single4 = [
     }
     return item;
   }
+
+
 
   getAlmacenDeArticuloTermindo(){
     let item = 0;
