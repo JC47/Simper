@@ -306,20 +306,20 @@ function getAlmacenTerm(auxV){
 
 function jsonActivos(rows) {
   var activ = [];
-  activ.push(name:"Caja y Bancos",value:rows[0].cajaBancos);
-  activ.push(name:"Cuentas Por Cobrar",value:rows[0].cuentasPorCobrar);
-  activ.push(name:"IVA Acreditable",value:rows[0].IVAAcreditable);
-  activ.push(name:"Almacen de articulo terminado",value:rows[0].almacenArtTerm);
+  activ.push({name:"Caja y Bancos",value:rows[0].cajaBancos});
+  activ.push({name:"Cuentas Por Cobrar",value:rows[0].cuentasPorCobrar});
+  activ.push({name:"IVA Acreditable",value:rows[0].IVAAcreditable});
+  activ.push({name:"Almacen de articulo terminado",value:rows[0].almacenArtTerm});
   return activ;
 }
 
 function jsonPasivos(rows) {
   var activ = [];
-  activ.push(name:"IVA por enterar",value:rows[0].IVAPorEnterar);
-  activ.push(name:"Impuestos por pagar",value:rows[0].imptosPorPagar);
-  activ.push(name:"Proveedores",value:rows[0].proveedores);
-  activ.push(name:"Prestamos a menos de un año",value:rows[0].prestamosMenosAnio);
-  activ.push(name:"Prestamos a mas de un año",value:rows[0].prestamosMasAnio);
+  activ.push({name:"IVA por enterar",value:rows[0].IVAPorEnterar});
+  activ.push({name:"Impuestos por pagar",value:rows[0].imptosPorPagar});
+  activ.push({name:"Proveedores",value:rows[0].proveedores});
+  activ.push({name:"Prestamos a menos de un año",value:rows[0].prestamosMenosAnio});
+  activ.push({name:"Prestamos a mas de un año",value:rows[0].prestamosMasAnio});
   return activ;
 }
 

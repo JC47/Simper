@@ -225,7 +225,9 @@ Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCr
   .then(function () {
     return prestamo.limiteCreditos(idProyecto,numeroPeriodo);
   })
-  .then(function (limite[0].limiteCredito) {
+  .then(function (limite) {
+    console.log("limite: ", limite);
+      console.log("limite: ", limite[0].limiteCredito);
     var json = {
       "credito_idCredito":idCredito,
       "Proyectos_idProyecto":idProyecto,
