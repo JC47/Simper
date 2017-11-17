@@ -23,7 +23,7 @@ module.exports.getBalanceById = function (idProyecto, numeroPeriodo) {
 }
 
 module.exports.getActivos = function(idProyecto, numeroPeriodo){
-  const sql = "select cajaBancos,cuentasPorCobrar,IVAAcreditable,almacenArtTerm from Balance where Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+"";
+  const sql = "select cajaBancos,cuentasPorCobrar,IVAAcreditable,almacenArtTerm,proveedores from Balance where Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+"";
   return querySql(sql);
 }
 

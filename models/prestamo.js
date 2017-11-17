@@ -142,3 +142,18 @@ module.exports.getCreditosBalance = function(idProyecto){
   var query = "select * from creditobalance where Proyectos_idProyecto = " +idProyecto+ "";
   return querySql(query);
 }
+
+//valida 2 creditos por proyecto
+
+//si el resultado es 2 no se le permitirá pedir más créditos
+module.exports.limiteCreditos = function (idProyecto,numeroPeriodo) {
+  var query = "select count(*) as limiteCredito from amortizacion  where Proyecto_idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+" ";
+  return querySql(query);
+}
+
+//Devolverá el idCredito de los creditos activos
+
+module.exports.creditosActivos = function (idProyecto,numPeriodo) {
+  var query = "select idCredito from amortizacion where Proyecto_idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+" ";
+  return querySql(query);
+}

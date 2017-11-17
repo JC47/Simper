@@ -223,6 +223,9 @@ Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCr
   */
   //solo sirve para insertar en creditobalance
   .then(function () {
+    return prestamo.limiteCreditos(idProyecto,numeroPeriodo);
+  })
+  .then(function (limite[0].limiteCredito) {
     var json = {
       "credito_idCredito":idCredito,
       "Proyectos_idProyecto":idProyecto,
@@ -234,7 +237,12 @@ Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCr
       return prestamo.updateCreditoBalance(json,idProyecto,numeroPeriodo,idCredito);
     }
     else{
-      return prestamo.addCreditoBalance(json);
+      if (limite[0].limiteCredito==2) {
+        console.log("Límite de créditos alcanzado");
+        res.json({success: false, msg:"límite de creditos alcanzado"});
+      }else {
+        return prestamo.addCreditoBalance(json);
+      }
     }
   })
   .then(function () {
