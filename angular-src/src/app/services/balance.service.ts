@@ -79,7 +79,9 @@ periodoActual=localStorage.getItem('numeroPeriodo');
   returnPasivos(){
     let pasivos = [];
     this.getPasivos().subscribe(data => {
-      pasivos = data.datos;
+      for(let key in data.datos){
+        pasivos.push(data.datos[key]);
+      }
     });
     return pasivos;
   }
