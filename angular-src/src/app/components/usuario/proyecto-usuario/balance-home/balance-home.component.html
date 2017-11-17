@@ -1,21 +1,40 @@
 <div class="row">
 
   <div class="col-lg-6 col-sm-12 " style="height:200px;">
-    <ngx-charts-bar-horizontal
-          [scheme]="colorScheme"
-          [results]="activo"
-          xAxis="true"
-          yAxis="true"
-          showXAxisLabel="true"
-          roundDomains="true"
-          showYAxisLabel="true"
-          xAxisLabel="Demnada Potencial"
-          yAxisLabel="Productos">
-        </ngx-charts-bar-horizontal>
+    <!-- <ngx-charts-advanced-pie-chart
+        [scheme]="colorScheme"
+        [results]="pasivo">
+      </ngx-charts-advanced-pie-chart> -->
+
+      <table class="table table-sm">
+        <tr>
+          <th colspan="2" class="text-center">Pasivo</th>
+        </tr>
+        <tr>
+          <td>IVA por Enterar</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Proveedores</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Impuestos por Pagar</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Prestamos Más de un Año</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Prestamos Menos de un Año</td>
+          <td></td>
+        </tr>
+      </table>
   </div>
 
   <div class="col-lg-6 col-sm-12 " style="height:200px;">
-    <ngx-charts-bar-horizontal
+    <!-- <ngx-charts-bar-horizontal
           [scheme]="colorScheme"
           [results]="pasivo"
           xAxis="true"
@@ -25,7 +44,32 @@
           showYAxisLabel="true"
           xAxisLabel="Demnada Potencial"
           yAxisLabel="Productos">
-        </ngx-charts-bar-horizontal>
+        </ngx-charts-bar-horizontal> -->
+        <table class="table table-sm">
+          <tr>
+            <th colspan="2" class="text-center">Activo</th>
+          </tr>
+          <tr>
+            <td>Caja y Bancos</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Cuentas Por Cobrar</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>IVA Acreditable</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Almacen de Articulo Terminado</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Almacen de Materiales</td>
+            <td></td>
+          </tr>
+        </table>
   </div>
 
 
@@ -47,7 +91,7 @@
                   showXAxisLabel="true"
                   roundDomains="true"
                   showYAxisLabel="true"
-                  xAxisLabel="Demnada Potencial"
+                  xAxisLabel="Demnada Potencial(unidades)"
                   yAxisLabel="Productos">
                 </ngx-charts-bar-horizontal>
           </div>
@@ -56,9 +100,16 @@
             <div class="card" *ngFor="let producto of demandas" style="margin-top:15px">
                 {{getNameById(producto.idProducto)}}
                 <div class="card-footer">
-                  <div class="col-12" *ngFor="let zona of producto.zonas">
-                    {{zona.idZona}}: {{zona.demanda}}
-                  </div>
+                  <table class="table">
+                    <tr>
+                      <th class="text-center">Zona</th>
+                      <th class="text-center">Cantidad</th>
+                    </tr>
+                    <tr *ngFor="let zona of producto.zonas">
+                      <td class="text-center">{{getNameByIdZona(zona.idZona)}}</td>
+                      <td class="text-center">{{zona.demanda}}u</td>
+                    </tr>
+                  </table>
                 </div>
             </div>
           </div>
@@ -93,7 +144,7 @@
         yAxis="true"
         showXAxisLabel="true"
         showYAxisLabel="true"
-        xAxisLabel="Demnada Potencial"
+        xAxisLabel="Capacidad de Producción(unidades)"
         yAxisLabel="Productos">
       </ngx-charts-bar-horizontal>
 </div>
