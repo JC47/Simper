@@ -98,7 +98,7 @@ router.post('/getauxiliar', (req,res,next) => {
   Promise.resolve().then(function () {
     var idProyecto = req.body.Proyectos_idProyecto;
     var numeroPeriodo = req.body.Balance_numeroPeriodo;
-    return auxiliar.getAuxiliar(numeroPeriodo,idProyecto);
+    return auxiliar.getAuxiliares(numeroPeriodo,idProyecto);
   }).then(function(rows){
     res.json({success:true, datos:rows, msg:"Exito"});
   }).catch(function(err){
@@ -132,6 +132,20 @@ router.post('/modify', (req, res, next) => {
       res.status(200).json({ "code": 1000, "message": err });
     }
   });
+});
+
+router.post('/resultados', (req,res,next) => {
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+  Promise.join(operacion.getProductoCuentaVenta(idProyecto,numeroPeriodo),operacion.getProductoCuenta(idProyecto,numeroPeriodo),
+              function(rows1,rows2){
+                return jsonProductos(rows1,rows2);
+              }).then(function(salida){
+                return res.json({success:true,datos:salida,msg:"Bien"});
+              }).catch(function(err) {
+                console.log(err);
+                return res.json({success:false,msg:"Algo salió mal"});
+              });
 });
 
 router.post('/getproduccion', (req,res,next) => {
@@ -494,6 +508,28 @@ function getVentasAnteriores(ventasTotales){
     uniAnterioresVendidas += ventasTotales[key].unidadesVendidas;
   }
   return uniAnterioresVendidas;
+}
+
+function jsonProductos(r1,r2){
+  var p = [];
+
+  for(let key1 in r1){
+    p.push(r1[key1].Producto_idProducto);
+  }
+
+  for(let key2 in r2){
+    p.push(r2[key2].Producto_idProducto);
+  }
+
+  var hash = {};
+
+  var array = p.filter(function(current) {
+    var exists = !hash[current] || false;
+    hash[current] = true;
+    return exists;
+  });
+
+  return array.sort(function(a,b){return a - b;});
 }
 
 

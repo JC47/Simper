@@ -3485,28 +3485,10 @@ var _a;
 
 /***/ }),
 
-/***/ "../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n"
+module.exports = "<h4 class=\"text-center\">Estado de Resultados</h4>\r\n<hr>\r\n\r\n<table class=\"table table-bordered table-responsive offset-2\">\r\n  <thead>\r\n    <tr>\r\n      <th></th>\r\n      <th *ngFor=\"let producto of resultados\">{{getNameByIdProducto(producto) }}</th>\r\n      <th>Total</th>\r\n    </tr>\r\n  </thead>\r\n\r\n  <tbody>\r\n    <tr>\r\n      <th>Ventas Netas</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getVentasNetas(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" >{{getTotalVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Costo de Ventas</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getCostoVentas(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" >{{getTotalCostosVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Utilidad Bruta</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" >{{getUtilidadBruta() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Costo de distribucion</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getDistParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\">{{getDistTotal() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Otros Gastos</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\"> {{getOtrosGastosParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\">{{getOtrosGastosTotal() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Costo de Administración</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getAdminParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\">{{getAdminTotal() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Utilidad en Operación</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadAntesParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" >{{getUtilidadAntes() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Intereses</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">-</td>\r\n      <td *ngFor=\"let aux of auxiliarC\">-</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Utilidad antes de Impuestos</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.Ventas - producto.IVAxVentas - producto.costoVentas - producto.costoDistribucion - producto.costoAdministrativo |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\">{{getUtilidadAntes() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>ISR</th>\r\n      <td *ngFor=\"let producto of auxiliares\">-</td>\r\n      <td  class=\"text-right\" *ngFor=\"let aux of auxiliarC\">{{getISR() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>PTU</th>\r\n      <td *ngFor=\"let producto of auxiliares\">-</td>\r\n      <td class=\"text-right\" *ngFor=\"let aux of auxiliarC\">{{getPTU() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Utilidad del Ejercicio</th>\r\n      <td *ngFor=\"let producto of auxiliares\">-</td>\r\n      <td class=\"text-right\" *ngFor=\"let aux of auxiliarC\">{{getUtilidadAntes() - getISR() - getPTU() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n\r\n  </tbody>\r\n</table>\r\n"
 
 /***/ }),
 
@@ -3515,6 +3497,10 @@ module.exports = "\r\n"
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__ = __webpack_require__("../../../../../src/app/services/operacion.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_producto_service__ = __webpack_require__("../../../../../src/app/services/producto.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__ = __webpack_require__("../../../../../src/app/services/resultados.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_balance_service__ = __webpack_require__("../../../../../src/app/services/balance.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EstadoResultadosComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3526,48 +3512,191 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
+
 var EstadoResultadosComponent = (function () {
-    function EstadoResultadosComponent() {
-        this.view = [700, 400];
-        this.showXAxis = true;
-        this.showYAxis = true;
-        this.gradient = false;
-        this.showLegend = true;
-        this.showXAxisLabel = true;
-        this.xAxisLabel = 'Country';
-        this.showYAxisLabel = true;
-        this.yAxisLabel = 'Population';
-        this.colorScheme = {
-            domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-        };
-        this.single = [
-            {
-                "name": "Germany",
-                "value": 8940000
-            },
-            {
-                "name": "USA",
-                "value": 5000000
-            },
-            {
-                "name": "France",
-                "value": 7200000
-            }
-        ];
+    function EstadoResultadosComponent(_operacionService, _productoService, _balanceService, _resultadosService) {
+        this._operacionService = _operacionService;
+        this._productoService = _productoService;
+        this._balanceService = _balanceService;
+        this._resultadosService = _resultadosService;
+        this.resultados = [];
+        this.auxiliares = [];
+        this.auxiliarC = [];
+        this.productos = [];
+        this._resultadosService.vender();
     }
     EstadoResultadosComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this._balanceService.getBalanceFinal().subscribe(function (data) {
+                if (data.success) {
+                    _this.auxiliares = _this._operacionService.returnAuxiliares();
+                    _this.auxiliarC = _this._operacionService.returnAuxiliarC();
+                    _this.productos = _this._productoService.returnProductos();
+                    _this.resultados = _this._operacionService.returnProductoResultados();
+                    console.log(_this.auxiliarC);
+                }
+            });
+        }, 1500);
+    };
+    EstadoResultadosComponent.prototype.getNameByIdProducto = function (id) {
+        for (var _i = 0, _a = this.productos; _i < _a.length; _i++) {
+            var producto = _a[_i];
+            if (producto.idProducto == id)
+                return producto.nombreProd;
+        }
+        return "id no encontrado";
+    };
+    EstadoResultadosComponent.prototype.getVentasNetas = function (id) {
+        var i = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            if (aux.Producto_idProducto == id) {
+                i += (aux.Ventas - aux.IVAxVentas);
+            }
+        }
+        return i;
+    };
+    EstadoResultadosComponent.prototype.getTotalVentas = function () {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            T += aux.Ventas - aux.IVAxVentas;
+        }
+        return T;
+    };
+    EstadoResultadosComponent.prototype.getTotalCostosVentas = function () {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            T += aux.costoVentas;
+        }
+        return T;
+    };
+    EstadoResultadosComponent.prototype.getCostoVentas = function (id) {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            if (aux.Producto_idProducto == id) {
+                T += aux.costoVentas;
+            }
+        }
+        return T;
+    };
+    EstadoResultadosComponent.prototype.getUtilidadBruta = function () {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            T += aux.Ventas - aux.costoVentas - aux.IVAxVentas;
+        }
+        return T;
+    };
+    EstadoResultadosComponent.prototype.getUtilidadParcial = function (id) {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            if (aux.Producto_idProducto == id) {
+                T += aux.Ventas - aux.costoVentas - aux.IVAxVentas;
+            }
+        }
+        return T;
+    };
+    EstadoResultadosComponent.prototype.getDistTotal = function () {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            T += aux.costoDistribucion;
+        }
+        return T;
+    };
+    EstadoResultadosComponent.prototype.getDistParcial = function (id) {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            if (aux.Producto_idProducto == id) {
+                T += aux.costoDistribucion;
+            }
+        }
+        return T;
+    };
+    EstadoResultadosComponent.prototype.getAdminParcial = function (id) {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            if (aux.Producto_idProducto == id) {
+                T += aux.costoAdministrativo;
+            }
+        }
+        return T;
+    };
+    EstadoResultadosComponent.prototype.getAdminTotal = function () {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            T += aux.costoAdministrativo;
+        }
+        return T;
+    };
+    EstadoResultadosComponent.prototype.getOtrosGastosTotal = function () {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliarC; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            T += (aux.desarrolloMercado + aux.desarrolloProducto);
+        }
+        return T;
+    };
+    EstadoResultadosComponent.prototype.getOtrosGastosParcial = function (id) {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliarC; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            if (aux.Producto_idProducto == id) {
+                T += (aux.desarrolloMercado + aux.desarrolloProducto);
+            }
+        }
+        return T;
+    };
+    EstadoResultadosComponent.prototype.getUtilidadAntesParcial = function (id) {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            if (aux.Producto_idProducto == id) {
+                T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
+            }
+        }
+        for (var _b = 0, _c = this.auxiliarC; _b < _c.length; _b++) {
+            var aux2 = _c[_b];
+            if (aux2.Producto_idProducto == id) {
+                T += -aux2.desarrolloMercado - aux2.desarrolloProducto;
+            }
+        }
+        return T;
+    };
+    EstadoResultadosComponent.prototype.getUtilidadAntes = function () {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
+        }
+        for (var _b = 0, _c = this.auxiliarC; _b < _c.length; _b++) {
+            var aux2 = _c[_b];
+            T += -aux2.desarrolloMercado - aux2.desarrolloProducto;
+        }
+        return T;
     };
     return EstadoResultadosComponent;
 }());
 EstadoResultadosComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-estado-resultados',
-        template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.css")]
+        template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.html")
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__["a" /* ResultadosService */]) === "function" && _d || Object])
 ], EstadoResultadosComponent);
 
+var _a, _b, _c, _d;
 //# sourceMappingURL=estado-resultados.component.js.map
 
 /***/ }),
@@ -3707,7 +3836,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/operacion/operacion.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h3 class=\"text-center\">Resultado de Operacion</h3>\r\n\r\n\r\n\r\n\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <ngl-section [(open)]=\"almacenArticuloTerm\" title=\"Almacen de Articulo Terminado\">\r\n\r\n      <div class=\"offset-3\">\r\n        <table class=\"table table-bordered table-responsive\">\r\n\r\n          <tbody>\r\n            <tr>\r\n              <th class=\"text-center\">Producto</th>\r\n              <th class=\"text-center\">Unidades</th>\r\n              <th class=\"text-center\">Costo de Producción</th>\r\n              <th class=\"text-center\">TOTAL</th>\r\n            </tr>\r\n\r\n            <tr *ngFor=\"let producto of auxiliaresAnteriores\">\r\n              <td>{{getNameByIdProducto(producto.Producto_idProducto)}}</td>\r\n              <td class=\"text-right\">{{producto.unidadesAlmacenadas}}</td>\r\n              <td class=\"text-right\">{{(producto.inventarioFinal / producto.unidadesAlmacenadas)|currency:'USD':true:'1.0-0'}}</td>\r\n              <td class=\"text-right\">{{producto.inventarioFinal |currency:'USD':true:'1.0-0'}}</td>\r\n            </tr>\r\n\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n  </ngl-section>\r\n</div>\r\n\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <ngl-section [(open)]=\"presGlobalVentas\" title=\"Presupuesto Global de Ventas e IVA\">\r\n    <div class=\"offset-2\">\r\n      <table class=\"table table-bordered table-responsive\">\r\n\r\n        <tbody>\r\n          <tr>\r\n            <th class=\"text-center\">Producto</th>\r\n            <th class=\"text-center\">Unidades a Vender</th>\r\n            <th class=\"text-center\">Precio de Venta</th>\r\n            <th class=\"text-center\">Ventas en $</th>\r\n            <th class=\"text-center\">IVA (15%)</th>\r\n            <th class=\"text-center\">Importe</th>\r\n          </tr>\r\n\r\n          <tr *ngFor=\"let producto of auxiliares\">\r\n            <td>{{getNameByIdProducto(producto.Producto_idProducto) }}</td>\r\n            <td class=\"text-right\">{{producto.unidadesVendidas }}</td>\r\n            <td class=\"text-right\">{{getPrecioVenta(producto.Producto_idProducto) |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{producto.Ventas - producto.IVAxVentas |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{producto.IVAxVentas |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{producto.Ventas |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n\r\n  </ngl-section>\r\n</div>\r\n\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <ngl-section [(open)]=\"presGlobalProduccion\" title=\"´Presupuesto Global de Producción\">\r\n    <div class=\"\">\r\n      <table class=\"table table-bordered table-responsive\">\r\n\r\n        <tbody>\r\n          <tr>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Producto</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Unidades a Vender</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Inventario Final</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Inventario Inicial</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Unidades a Producir</th>\r\n            <th class=\"text-center align-middle\" colspan=\"2\">Materia Prima</th>\r\n            <th class=\"text-center align-middle\" colspan=\"2\" >Costo de Transformación</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Costo de Producción Unitario</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Costo de Producción Total</th>\r\n          </tr>\r\n          <tr>\r\n            <th class=\"text-center align-middle\">Costo Unitario</th>\r\n            <th class=\"text-center align-middle\">Costo Total</th>\r\n            <th class=\"text-center align-middle\">Costo Unitario</th>\r\n            <th class=\"text-center align-middle\">Costo Total</th>\r\n          </tr>\r\n\r\n          <tr *ngFor=\"let producto of auxiliares\">\r\n            <td>{{getNameByIdProducto(producto.Producto_idProducto) }}</td>\r\n            <td class=\"text-right\">{{producto.unidadesVendidas}}</td>\r\n            <td class=\"text-right\">{{producto.unidadesAlmacenadas}}</td>\r\n            <td class=\"text-right\">{{getUnidadesAlmacenadasAnterior(producto.Producto_idProducto) }}</td>\r\n            <td class=\"text-right\">{{producto.unidadesProducidas }}</td>\r\n            <td class=\"text-right\">{{getMPPuniProd(producto.Producto_idProducto) |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{producto.materiaCosumida |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{(producto.costoTransformacionVentas + producto.costoTransformacionMaq)/producto.unidadesProducidas |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\"> {{producto.costoTransformacionVentas + producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{getMPPuniProd(producto.Producto_idProducto) + (producto.costoTransformacionVentas + producto.costoTransformacionMaq)/producto.unidadesProducidas|currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{producto.costoTransformacionVentas + producto.costoTransformacionMaq + producto.materiaCosumida |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n        </tbody>\r\n      </table>\r\n\r\n\r\n    </div>\r\n  </ngl-section>\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <ngl-section [(open)]=\"presGlobalConsumoMP\" title=\"Presupuesto Global de Consumo de Materias Primas\">\r\n    <div class=\"offset-2\">\r\n      <table class=\"table table-bordered table-responsive\">\r\n\r\n        <tbody>\r\n          <tr>\r\n            <th class=\"text-center align-middle\" >Producto</th>\r\n            <th class=\"text-center align-middle\" >Cantidad Unitaria</th>\r\n            <th class=\"text-center align-middle\" >Costo Unitario</th>\r\n            <th class=\"text-center align-middle\" >Unidades a Producir</th>\r\n            <th class=\"text-center align-middle\" >Cantidad</th>\r\n            <th class=\"text-center align-middle\" >Importe</th>\r\n\r\n          </tr>\r\n\r\n          <tr *ngFor=\"let producto of auxiliares\">\r\n            <td>{{getNameByIdProducto(producto.Producto_idProducto) }}</td>\r\n            <td class=\"text-right\">{{getUniMP(producto.Producto_idProducto)}</td>\r\n            <td class=\"text-right\">{{getCostoUni(producto.Producto_idProducto) |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{producto.unidadesProducidas }}</td>\r\n            <td class=\"text-right\">{{getUniMP(producto.Producto_idProducto) * producto.unidadesProducidas}}</td>\r\n            <td class=\"text-right\">{{getCostoUni(producto.Producto_idProducto) * producto.unidadesProducidas |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n        </tbody>\r\n      </table>\r\n\r\n    </div>\r\n\r\n\r\n  </ngl-section>\r\n</div>\r\n\r\n\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <ngl-section [(open)]=\"presGlobalComprasMP\" title=\"Presupuesto Global Compras de Materias Primas e IVA\">\r\n    <div class=\"offset-2\">\r\n      <table class=\"table table-bordered table-responsive\">\r\n        <tbody>\r\n          <tr>\r\n            <th class=\"text-center align-middle\" >Materiales </th>\r\n            <th class=\"text-center align-middle\" >Cantidad a Comprar</th>\r\n            <th class=\"text-center align-middle\"  >Costo Unitario</th>\r\n            <th class=\"text-center align-middle\" >Importe</th>\r\n            <th class=\"text-center align-middle\" >IVA Acreditable</th>\r\n            <th class=\"text-center align-middle\" >Total a Pagar</th>\r\n          </tr>\r\n\r\n\r\n          <tr>\r\n            <td class=\"text-right\">1</td>\r\n            <td class=\"text-right\">{{getUniMPTotal()}}</td>\r\n            <td class=\"text-right\">$69</td>\r\n            <td class=\"text-right\">{{getUniMPTotalCash() |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{getIVAMP() |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{getTotalMP() |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n\r\n        </tbody>\r\n      </table>\r\n\r\n    </div>\r\n  </ngl-section>\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <ngl-section [(open)]=\"presGlobalCostoTrans\" title=\"Presupuesto Global de Costo de Transformación\">\r\n    <div class=\"\">\r\n      <table class=\"table table-bordered table-responsive\">\r\n\r\n        <tbody>\r\n          <tr>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Producto</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Unidades a Producir</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Costo Unitario Total</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Costo de Transformacion</th>\r\n            <th class=\"text-center align-middle\" colspan=\"2\">Menos</th>\r\n            <th class=\"text-center align-middle\" colspan=\"2\">Menos partidas que no incluyen IVA</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\" >Neto</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">IVA</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Total a Pagar</th>\r\n          </tr>\r\n          <tr>\r\n            <th class=\"text-center align-middle\">Depreciaciones</th>\r\n            <th class=\"text-center align-middle\">Neto</th>\r\n            <th class=\"text-center align-middle\">Sueldos y Salarios</th>\r\n            <th class=\"text-center align-middle\">Prevención Social</th>\r\n          </tr>\r\n\r\n          <tr *ngFor=\"let producto of auxiliares\">\r\n            <td>{{getNameByIdProducto(producto.Producto_idProducto) }}</td>\r\n            <td class=\"text-right\">{{producto.unidadesProducidas}}</td>\r\n            <td class=\"text-right\">{{(producto.costoTransformacionVentas + producto.costoTransformacionMaq )/ producto.unidadesProducidas |currency:'USD':true:'1.0-0' }}</td>\r\n            <td class=\"text-right\">{{producto.costoTransformacionVentas + producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{producto.costoTransformacionVentas |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{0}}</td>\r\n            <td class=\"text-right\">{{0}}</td>\r\n            <td class=\"text-right\">{{producto.costoTransformacionVentas |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{-producto.IVATrans |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{producto.costoTransformacionVentas - producto.IVATrans |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n  </ngl-section>\r\n</div>\r\n\r\n\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <ngl-section [(open)]=\"presGlobalCostoDist\" title=\"Presupuesto Global de Costo de Distribución\">\r\n    <div class=\"offset-2\">\r\n      <table class=\"table table-bordered table-responsive \">\r\n        <thead>\r\n          <tr>\r\n            <th></th>\r\n            <th *ngFor=\"let producto of auxiliares\">{{getNameByIdProducto(producto.Producto_idProducto) }}</th>\r\n          </tr>\r\n        </thead>\r\n\r\n        <tbody>\r\n          <tr>\r\n            <th>Unidades  a Vender</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.unidadesVendidas }}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Cto Unitario Total</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoDistribucion / producto.unidadesVendidas |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Cto Distribución</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoDistribucion |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Menos</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">-</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Depreciaciones</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoDistribucion - producto.costoDistDep |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Neto</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoDistDep |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Menos partidas que no Incluyen IVA</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">-</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Sueldos y salarios</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">-</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Prevención Social</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">-</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Neto</th>\r\n            <td  class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoDistDep |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>IVA</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{-producto.IVADist |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Total a Pagar</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoDistDep - producto.IVADist |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n\r\n        </tbody>\r\n      </table>\r\n\r\n    </div>\r\n  </ngl-section>\r\n</div>\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <ngl-section [(open)]=\"presGlobalCostoAdmon\" title=\"Presupuesto Global de Costo de Administración\">\r\n    <div class=\"offset-2\">\r\n\r\n          <table class=\"table table-bordered table-responsive \">\r\n            <thead>\r\n              <tr>\r\n                <th></th>\r\n                <th *ngFor=\"let producto of auxiliares\">{{getNameByIdProducto(producto.Producto_idProducto) }}</th>\r\n              </tr>\r\n            </thead>\r\n\r\n            <tbody>\r\n              <tr>\r\n                <th>Unidades  a Vender</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.unidadesVendidas }}</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Cto Unitario Total</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoAdministrativo/producto.unidadesVendidas |currency:'USD':true:'1.0-0'}}</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Cto Administracion</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoAdministrativo |currency:'USD':true:'1.0-0'}}</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Menos</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">-</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Depreciaciones</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoAdministrativo - producto.costoAdminDep |currency:'USD':true:'1.0-0'}}</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Neto</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoAdminDep |currency:'USD':true:'1.0-0'}}</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Menos partidas que no Incluyen IVA</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">-</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Sueldos y salarios</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">-</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Prevención Social</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">-</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Neto</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoAdminDep |currency:'USD':true:'1.0-0'}}</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>IVA</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{-producto.IVAAdmon |currency:'USD':true:'1.0-0'}}</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Total a Pagar</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoAdminDep - producto.IVAAdmon |currency:'USD':true:'1.0-0'}}</td>\r\n              </tr>\r\n\r\n\r\n            </tbody>\r\n          </table>\r\n    </div>\r\n\r\n  </ngl-section>\r\n</div>\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <ngl-section [(open)]=\"presGlobalCostoVenta\" title=\"Costo de Producción y Ventas\">\r\n    <div class=\"offset-2\">\r\n      <table class=\"table table-bordered table-responsive \">\r\n        <thead>\r\n          <tr>\r\n            <th></th>\r\n            <th *ngFor=\"let producto of auxiliares\">{{getNameByIdProducto(producto.Producto_idProducto) }}</th>\r\n          </tr>\r\n        </thead>\r\n\r\n        <tbody>\r\n          <tr>\r\n            <th>Materia Prima Consumida</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.materiaCosumida |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Indirectos de Producción</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoTransformacionVentas + producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Costo de Producción</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.materiaCosumida + producto.costoTransformacionVentas + producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>I.F. de Producto terminado</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.inventarioFinal |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Costo de Ventas</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoVentas |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n  </ngl-section>\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<hr>\r\n<h4 class=\"text-center\">Estado de Resultados</h4>\r\n<hr>\r\n\r\n<table class=\"table table-bordered table-responsive offset-2\">\r\n  <thead>\r\n    <tr>\r\n      <th></th>\r\n      <th *ngFor=\"let producto of auxiliares\">{{getNameByIdProducto(producto.Producto_idProducto) }}</th>\r\n      <th>Total</th>\r\n    </tr>\r\n  </thead>\r\n\r\n  <tbody>\r\n    <tr>\r\n      <th>Ventas Netas</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.Ventas - producto.IVAxVentas |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let aux of auxiliarC\">{{getTotalVentas() |number}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Costo de Ventas</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoVentas |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let aux of auxiliarC\">{{getTotalCostosVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Utilidad Bruta</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.Ventas - producto.costoVentas - producto.IVAxVentas |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let aux of auxiliarC\">{{getUtilidadBruta() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Costo de distribucion</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoDistribucion |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let aux of auxiliarC\">{{getDistTotal() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Otros Gastos</th>\r\n      <td *ngFor=\"let producto of auxiliares\">-</td>\r\n      <td class=\"text-right\" *ngFor=\"let aux of auxiliarC\">{{aux.desarrolloMercado + aux.desarrolloProducto |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Costo de Administración</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoAdministrativo |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let aux of auxiliarC\">{{getAdminTotal() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Utilidad en Operación</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.Ventas - producto.IVAxVentas - producto.costoVentas - producto.costoDistribucion - producto.costoAdministrativo |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let aux of auxiliarC\">{{getUtilidadAntes() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Intereses</th>\r\n      <td *ngFor=\"let producto of auxiliares\">-</td>\r\n      <td *ngFor=\"let aux of auxiliarC\">-</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Utilidad antes de Impuestos</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.Ventas - producto.IVAxVentas - producto.costoVentas - producto.costoDistribucion - producto.costoAdministrativo |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let aux of auxiliarC\">{{getUtilidadAntes() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>ISR</th>\r\n      <td *ngFor=\"let producto of auxiliares\">-</td>\r\n      <td  class=\"text-right\" *ngFor=\"let aux of auxiliarC\">{{getISR() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>PTU</th>\r\n      <td *ngFor=\"let producto of auxiliares\">-</td>\r\n      <td class=\"text-right\" *ngFor=\"let aux of auxiliarC\">{{getPTU() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Utilidad del Ejercicio</th>\r\n      <td *ngFor=\"let producto of auxiliares\">-</td>\r\n      <td class=\"text-right\" *ngFor=\"let aux of auxiliarC\">{{getUtilidadAntes() - getISR() - getPTU() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n\r\n  </tbody>\r\n</table>\r\n"
+module.exports = "<h3 class=\"text-center\">Resultados de Operacion</h3>\r\n\r\n\r\n\r\n\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <ngl-section [(open)]=\"almacenArticuloTerm\" title=\"Almacen de Articulo Terminado\">\r\n\r\n      <div class=\"offset-3\">\r\n        <table class=\"table table-bordered table-responsive\">\r\n\r\n          <tbody>\r\n            <tr>\r\n              <th class=\"text-center\">Producto</th>\r\n              <th class=\"text-center\">Unidades</th>\r\n              <th class=\"text-center\">Costo de Producción</th>\r\n              <th class=\"text-center\">TOTAL</th>\r\n            </tr>\r\n\r\n            <tr *ngFor=\"let producto of auxiliaresAnteriores\">\r\n              <td>{{getNameByIdProducto(producto.Producto_idProducto)}}</td>\r\n              <td class=\"text-right\">{{producto.unidadesAlmacenadas}}</td>\r\n              <td class=\"text-right\">{{(producto.inventarioFinal / producto.unidadesAlmacenadas)|currency:'USD':true:'1.0-0'}}</td>\r\n              <td class=\"text-right\">{{producto.inventarioFinal |currency:'USD':true:'1.0-0'}}</td>\r\n            </tr>\r\n\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n  </ngl-section>\r\n</div>\r\n\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <ngl-section [(open)]=\"presGlobalVentas\" title=\"Presupuesto Global de Ventas e IVA\">\r\n    <div class=\"offset-2\">\r\n      <table class=\"table table-bordered table-responsive\">\r\n\r\n        <tbody>\r\n          <tr>\r\n            <th class=\"text-center\">Producto</th>\r\n            <th class=\"text-center\">Unidades a Vender</th>\r\n            <th class=\"text-center\">Precio de Venta</th>\r\n            <th class=\"text-center\">Ventas en $</th>\r\n            <th class=\"text-center\">IVA (15%)</th>\r\n            <th class=\"text-center\">Importe</th>\r\n          </tr>\r\n\r\n          <tr *ngFor=\"let producto of auxiliares\">\r\n            <td>{{getNameByIdProducto(producto.Producto_idProducto) }}</td>\r\n            <td class=\"text-right\">{{producto.unidadesVendidas }}</td>\r\n            <td class=\"text-right\">{{getPrecioVenta(producto.Producto_idProducto) |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{producto.Ventas - producto.IVAxVentas |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{producto.IVAxVentas |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{producto.Ventas |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n\r\n  </ngl-section>\r\n</div>\r\n\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <ngl-section [(open)]=\"presGlobalProduccion\" title=\"´Presupuesto Global de Producción\">\r\n    <div class=\"\">\r\n      <table class=\"table table-bordered table-responsive\">\r\n\r\n        <tbody>\r\n          <tr>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Producto</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Unidades a Vender</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Inventario Final</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Inventario Inicial</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Unidades a Producir</th>\r\n            <th class=\"text-center align-middle\" colspan=\"2\">Materia Prima</th>\r\n            <th class=\"text-center align-middle\" colspan=\"2\" >Costo de Transformación</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Costo de Producción Unitario</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Costo de Producción Total</th>\r\n          </tr>\r\n          <tr>\r\n            <th class=\"text-center align-middle\">Costo Unitario</th>\r\n            <th class=\"text-center align-middle\">Costo Total</th>\r\n            <th class=\"text-center align-middle\">Costo Unitario</th>\r\n            <th class=\"text-center align-middle\">Costo Total</th>\r\n          </tr>\r\n\r\n          <tr *ngFor=\"let producto of auxiliares\">\r\n            <td>{{getNameByIdProducto(producto.Producto_idProducto) }}</td>\r\n            <td class=\"text-right\">{{producto.unidadesVendidas}}</td>\r\n            <td class=\"text-right\">{{producto.unidadesAlmacenadas}}</td>\r\n            <td class=\"text-right\">{{getUnidadesAlmacenadasAnterior(producto.Producto_idProducto) }}</td>\r\n            <td class=\"text-right\">{{producto.unidadesProducidas }}</td>\r\n            <td class=\"text-right\">{{getMPPuniProd(producto.Producto_idProducto) |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{producto.materiaCosumida |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{(producto.costoTransformacionVentas + producto.costoTransformacionMaq)/producto.unidadesProducidas |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\"> {{producto.costoTransformacionVentas + producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{getMPPuniProd(producto.Producto_idProducto) + (producto.costoTransformacionVentas + producto.costoTransformacionMaq)/producto.unidadesProducidas|currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{producto.costoTransformacionVentas + producto.costoTransformacionMaq + producto.materiaCosumida |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n        </tbody>\r\n      </table>\r\n\r\n\r\n    </div>\r\n  </ngl-section>\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <ngl-section [(open)]=\"presGlobalConsumoMP\" title=\"Presupuesto Global de Consumo de Materias Primas\">\r\n    <div class=\"offset-2\">\r\n      <table class=\"table table-bordered table-responsive\">\r\n\r\n        <tbody>\r\n          <tr>\r\n            <th class=\"text-center align-middle\" >Producto</th>\r\n            <th class=\"text-center align-middle\" >Cantidad Unitaria</th>\r\n            <th class=\"text-center align-middle\" >Costo Unitario</th>\r\n            <th class=\"text-center align-middle\" >Unidades a Producir</th>\r\n            <th class=\"text-center align-middle\" >Cantidad</th>\r\n            <th class=\"text-center align-middle\" >Importe</th>\r\n\r\n          </tr>\r\n\r\n          <tr *ngFor=\"let producto of auxiliares\">\r\n            <td>{{getNameByIdProducto(producto.Producto_idProducto) }}</td>\r\n            <td class=\"text-right\">{{getUniMP(producto.Producto_idProducto)}}</td>\r\n            <td class=\"text-right\">{{getCostoUni(producto.Producto_idProducto) |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{producto.unidadesProducidas }}</td>\r\n            <td class=\"text-right\">{{getUniMP(producto.Producto_idProducto) * producto.unidadesProducidas}}</td>\r\n            <td class=\"text-right\">{{getCostoUni(producto.Producto_idProducto) * (getUniMP(producto.Producto_idProducto) * producto.unidadesProducidas) |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n        </tbody>\r\n      </table>\r\n\r\n    </div>\r\n\r\n\r\n  </ngl-section>\r\n</div>\r\n\r\n\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <ngl-section [(open)]=\"presGlobalComprasMP\" title=\"Presupuesto Global Compras de Materias Primas e IVA\">\r\n    <div class=\"offset-2\">\r\n      <table class=\"table table-bordered table-responsive\">\r\n        <tbody>\r\n          <tr>\r\n            <th class=\"text-center align-middle\" >Materiales </th>\r\n            <th class=\"text-center align-middle\" >Cantidad a Comprar</th>\r\n            <th class=\"text-center align-middle\"  >Costo Unitario</th>\r\n            <th class=\"text-center align-middle\" >Importe</th>\r\n            <th class=\"text-center align-middle\" >IVA Acreditable</th>\r\n            <th class=\"text-center align-middle\" >Total a Pagar</th>\r\n          </tr>\r\n\r\n\r\n          <tr>\r\n            <td class=\"text-right\">1</td>\r\n            <td class=\"text-right\">{{getUniMPTotal()}}</td>\r\n            <td class=\"text-right\">$69</td>\r\n            <td class=\"text-right\">{{getUniMPTotalCash() |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{getIVAMP() |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{getTotalMP() |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n\r\n        </tbody>\r\n      </table>\r\n\r\n    </div>\r\n  </ngl-section>\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <ngl-section [(open)]=\"presGlobalCostoTrans\" title=\"Presupuesto Global de Costo de Transformación\">\r\n    <div class=\"\">\r\n      <table class=\"table table-bordered table-responsive\">\r\n\r\n        <tbody>\r\n          <tr>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Producto</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Unidades a Producir</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Costo Unitario Total</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Costo de Transformacion</th>\r\n            <th class=\"text-center align-middle\" colspan=\"2\">Menos</th>\r\n            <th class=\"text-center align-middle\" colspan=\"2\">Menos partidas que no incluyen IVA</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\" >Neto</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">IVA</th>\r\n            <th class=\"text-center align-middle\" rowspan=\"2\">Total a Pagar</th>\r\n          </tr>\r\n          <tr>\r\n            <th class=\"text-center align-middle\">Depreciaciones</th>\r\n            <th class=\"text-center align-middle\">Neto</th>\r\n            <th class=\"text-center align-middle\">Sueldos y Salarios</th>\r\n            <th class=\"text-center align-middle\">Prevención Social</th>\r\n          </tr>\r\n\r\n          <tr *ngFor=\"let producto of auxiliares\">\r\n            <td>{{getNameByIdProducto(producto.Producto_idProducto) }}</td>\r\n            <td class=\"text-right\">{{producto.unidadesProducidas}}</td>\r\n            <td class=\"text-right\">{{(producto.costoTransformacionVentas + producto.costoTransformacionMaq )/ producto.unidadesProducidas |currency:'USD':true:'1.0-0' }}</td>\r\n            <td class=\"text-right\">{{producto.costoTransformacionVentas + producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{producto.costoTransformacionVentas |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{0}}</td>\r\n            <td class=\"text-right\">{{0}}</td>\r\n            <td class=\"text-right\">{{producto.costoTransformacionVentas |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{-producto.IVATrans |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{producto.costoTransformacionVentas - producto.IVATrans |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n  </ngl-section>\r\n</div>\r\n\r\n\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <ngl-section [(open)]=\"presGlobalCostoDist\" title=\"Presupuesto Global de Costo de Distribución\">\r\n    <div class=\"offset-2\">\r\n      <table class=\"table table-bordered table-responsive \">\r\n        <thead>\r\n          <tr>\r\n            <th></th>\r\n            <th *ngFor=\"let producto of auxiliares\">{{getNameByIdProducto(producto.Producto_idProducto) }}</th>\r\n          </tr>\r\n        </thead>\r\n\r\n        <tbody>\r\n          <tr>\r\n            <th>Unidades  a Vender</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.unidadesVendidas }}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Cto Unitario Total</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoDistribucion / producto.unidadesVendidas |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Cto Distribución</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoDistribucion |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Menos</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">-</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Depreciaciones</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoDistribucion - producto.costoDistDep |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Neto</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoDistDep |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Menos partidas que no Incluyen IVA</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">-</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Sueldos y salarios</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">-</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Prevención Social</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">-</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Neto</th>\r\n            <td  class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoDistDep |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>IVA</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{-producto.IVADist |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Total a Pagar</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoDistDep - producto.IVADist |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n\r\n        </tbody>\r\n      </table>\r\n\r\n    </div>\r\n  </ngl-section>\r\n</div>\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <ngl-section [(open)]=\"presGlobalCostoAdmon\" title=\"Presupuesto Global de Costo de Administración\">\r\n    <div class=\"offset-2\">\r\n\r\n          <table class=\"table table-bordered table-responsive \">\r\n            <thead>\r\n              <tr>\r\n                <th></th>\r\n                <th *ngFor=\"let producto of auxiliares\">{{getNameByIdProducto(producto.Producto_idProducto) }}</th>\r\n              </tr>\r\n            </thead>\r\n\r\n            <tbody>\r\n              <tr>\r\n                <th>Unidades  a Vender</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.unidadesVendidas }}</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Cto Unitario Total</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoAdministrativo/producto.unidadesVendidas |currency:'USD':true:'1.0-0'}}</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Cto Administracion</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoAdministrativo |currency:'USD':true:'1.0-0'}}</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Menos</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">-</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Depreciaciones</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoAdministrativo - producto.costoAdminDep |currency:'USD':true:'1.0-0'}}</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Neto</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoAdminDep |currency:'USD':true:'1.0-0'}}</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Menos partidas que no Incluyen IVA</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">-</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Sueldos y salarios</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">-</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Prevención Social</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">-</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Neto</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoAdminDep |currency:'USD':true:'1.0-0'}}</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>IVA</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{-producto.IVAAdmon |currency:'USD':true:'1.0-0'}}</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Total a Pagar</th>\r\n                <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoAdminDep - producto.IVAAdmon |currency:'USD':true:'1.0-0'}}</td>\r\n              </tr>\r\n\r\n\r\n            </tbody>\r\n          </table>\r\n    </div>\r\n\r\n  </ngl-section>\r\n</div>\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <ngl-section [(open)]=\"presOtrosGastos\" title=\"Presupuesto Global de Otros Gastos\">\r\n    <div class=\"offset-2\">\r\n      <table class=\"table table-bordered table-responsive \">\r\n        <thead>\r\n          <tr>\r\n            <th></th>\r\n            <th *ngFor=\"let producto of auxiliarC\">{{getNameByIdProducto(producto.Producto_idProducto) }}</th>\r\n            <th>Total</th>\r\n          </tr>\r\n        </thead>\r\n\r\n        <tbody>\r\n          <tr>\r\n            <th>Desarrollo de Producto</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliarC\">{{producto.desarrolloProducto |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{getTotalProducto() |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Desarrollo de Mercado</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliarC\">{{producto.desarrolloMercado |currency:'USD':true:'1.0-0'}}</td>\r\n            <td class=\"text-right\">{{getTotalMercado() |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n  </ngl-section>\r\n</div>\r\n\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <ngl-section [(open)]=\"presGlobalCostoVenta\" title=\"Costo de Producción y Ventas\">\r\n    <div class=\"offset-2\">\r\n      <table class=\"table table-bordered table-responsive \">\r\n        <thead>\r\n          <tr>\r\n            <th></th>\r\n            <th *ngFor=\"let producto of auxiliares\">{{getNameByIdProducto(producto.Producto_idProducto) }}</th>\r\n          </tr>\r\n        </thead>\r\n\r\n        <tbody>\r\n          <tr>\r\n            <th>Materia Prima Consumida</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.materiaCosumida |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Indirectos de Producción</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoTransformacionVentas + producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Costo de Producción</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.materiaCosumida + producto.costoTransformacionVentas + producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>I.F. de Producto terminado</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.inventarioFinal |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <th>Costo de Ventas</th>\r\n            <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.costoVentas |currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n  </ngl-section>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -3755,6 +3884,7 @@ var OperacionComponent = (function () {
         this.presGlobalCostoDist = false;
         this.presGlobalCostoAdmon = false;
         this.presGlobalCostoVenta = false;
+        this.presOtrosGastos = false;
         this._resultadosService.vender();
     }
     OperacionComponent.prototype.ngOnInit = function () {
@@ -3879,6 +4009,22 @@ var OperacionComponent = (function () {
         for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
             var aux = _a[_i];
             T += aux.costoAdministrativo;
+        }
+        return T;
+    };
+    OperacionComponent.prototype.getTotalMercado = function () {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliarC; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            T += aux.desarrolloMercado;
+        }
+        return T;
+    };
+    OperacionComponent.prototype.getTotalProducto = function () {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliarC; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            T += aux.desarrolloProducto;
         }
         return T;
     };
@@ -6882,6 +7028,15 @@ var OperacionService = (function () {
         };
         return this.http.post('operacion/productosventa/', x, this.headers).map(function (res) { return res.json(); });
     };
+    OperacionService.prototype.returnProductoResultados = function () {
+        var resul = [];
+        this.getProductosResultados().subscribe(function (data) {
+            for (var key in data.datos) {
+                resul.push(data.datos[key]);
+            }
+        });
+        return resul;
+    };
     OperacionService.prototype.returnAuxiliares = function () {
         var _this = this;
         this.auxiliares.length = 0;
@@ -6928,6 +7083,13 @@ var OperacionService = (function () {
             "Balance_numeroPeriodo": localStorage.getItem('numeroPeriodo')
         };
         return this.http.post('operacion/getauxiliar/', x, this.headers).map(function (res) { return res.json(); });
+    };
+    OperacionService.prototype.getProductosResultados = function () {
+        var x = {
+            "idProyecto": localStorage.getItem('idProyecto'),
+            "numeroPeriodo": localStorage.getItem('numeroPeriodo')
+        };
+        return this.http.post('operacion/resultados/', x, this.headers).map(function (res) { return res.json(); });
     };
     OperacionService.prototype.getAuxiliaresAnteriores = function () {
         var x = {

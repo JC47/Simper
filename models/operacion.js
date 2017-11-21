@@ -76,3 +76,13 @@ module.exports.getAlmacenes = function(idProyecto,numeroPeriodo){
   var query = "select * from almacen where Proyecto_idProyecto = "+idProyecto+" and Balance_numeroPeriodo = "+numeroPeriodo+" ";
   return querySql(query);
 }
+
+module.exports.getProductoCuentaVenta = function(idProyecto,numeroPeriodo){
+  var query = "select Producto_idProducto from auxiliarcuentaventa where Balance_numeroPeriodo = "+numeroPeriodo+ " and Proyectos_idProyecto = " +idProyecto+"";
+  return querySql(query);
+}
+
+module.exports.getProductoCuenta = function(idProyecto,numeroPeriodo){
+  var query = "select Producto_idProducto from auxiliarcuenta where Balance_numeroPeriodo = "+numeroPeriodo+ " and Proyectos_idProyecto = " +idProyecto+"";
+  return querySql(query);
+}
