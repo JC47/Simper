@@ -262,9 +262,9 @@ router.post('/selling', (req,res,next) => {
   var periodoAnterior = numeroPeriodo - 1;
 
   Promise.join(operacion.getProductoVendido(idProducto), auxiliar.getAuxiliarVenta(periodoAnterior,idProyecto,idProducto),
-              operacion.getAlmacen(idProyecto,idProducto,numeroPeriodo),auxiliar.getAuxiliar(numeroPeriodo,idProyecto),
+              operacion.getAlmacen(idProyecto,idProducto,numeroPeriodo),
               auxiliar.getAuxiliarVenta(numeroPeriodo,idProyecto,idProducto),operacion.getMaquinarias(idProducto,idProyecto),
-              function(producto,opAnterior,almacenActual,aux,auxVenta,maquinas){
+              function(producto,opAnterior,almacenActual,auxVenta,maquinas){
     //Se obtienen los datos necesarios
     var uniAlmacenadas = 0
     if(almacenActual.length != 0){
@@ -276,6 +276,8 @@ router.post('/selling', (req,res,next) => {
     var cUMP = producto[0].costosMPPUniProd;
     //Inventario Inicial
     var inventarioInicial = getInventarioInicial(opAnterior);
+    //Efectivo del inventarioInicial
+    var cashInventarioInicial = getCashInventarioInicial(opAnterior);
     //Ventas en efectivo
     var ventasCash = uniVendidas * producto[0].precioVenta;
     //IVA de las ventasz
@@ -313,7 +315,7 @@ router.post('/selling', (req,res,next) => {
     //Inventario Final de Articulo Terminado
     var inventarioFinal = 0;
     if(uniAlmacenadas > 0){
-      inventarioFinal = ((aux[0].inventarioInicial + cProduccion) / (inventarioInicial + uniProd)) * uniAlmacenadas;
+      inventarioFinal = ((cashInventarioInicial + cProduccion) / (inventarioInicial + uniProd)) * uniAlmacenadas;
     }
     //Costo de ventas
     var cVentas = cProduccion - inventarioFinal;
@@ -432,6 +434,14 @@ function getInventarioInicial(opAnterior){
   var i = 0;
   if(opAnterior.length != 0){
     i = opAnterior[0].unidadesAlmacenadas;
+  }
+  return i;
+}
+
+function getCashInventarioInicial(opAnterior){
+  var i = 0;
+  if(opAnterior.length != 0){
+    i = opAnterior[0].inventarioFinal;
   }
   return i;
 }

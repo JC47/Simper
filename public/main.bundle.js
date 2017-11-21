@@ -2716,7 +2716,6 @@ var BalanceComponent = (function () {
                             numero: _this.periodo
                         };
                         _this.periodos.push(y);
-                        _this.crearAuxiliar(periodoNuevo_1, proyecto, dep);
                     }
                 });
             });
@@ -2736,14 +2735,6 @@ var BalanceComponent = (function () {
         this.periodo = numero;
         localStorage.setItem('numeroPeriodo', numero);
         this.modalPeriodos.hide();
-    };
-    BalanceComponent.prototype.crearAuxiliar = function (numeroPeriodo, idProyecto, dep) {
-        var x = {
-            Proyectos_idProyecto: idProyecto,
-            costoTransformacionMaq: dep,
-            Balance_numeroPeriodo: numeroPeriodo
-        };
-        this._auxiliarService.addAuxiliar(x).subscribe();
     };
     return BalanceComponent;
 }());
@@ -2891,6 +2882,7 @@ var CompraMaquinariaComponent = (function () {
         var y = {
             Balance_numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')),
             Proyectos_idProyecto: parseInt(localStorage.getItem('idProyecto')),
+            idProducto: this.maqSelectedAdd.Producto_idProducto,
             costo: this.maqSelectedAdd.costo,
             dep: this.maqSelectedAdd.depAcum
         };
@@ -2905,6 +2897,7 @@ var CompraMaquinariaComponent = (function () {
             var y = {
                 Balance_numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')),
                 Proyectos_idProyecto: parseInt(localStorage.getItem('idProyecto')),
+                idProducto: this.maqSelectedLess.Producto_idProducto,
                 costo: this.maqSelectedLess.costo,
                 dep: this.maqSelectedLess.depAcum
             };
@@ -2960,7 +2953,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-12\">\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\n<hr>\n</div>\n\n\n<div class=\"row\">\n  <div class=\"col-6\" style=\"height:300px\" *ngFor=\"let zona of graficas\" >\n    <div class=\"row\">\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\n\n  <div class=\"col-12\" style=\"height:250px;\">\n    <ngx-charts-line-chart\n         [scheme]=\"colorScheme\"\n         [results]=\"zona.graf\"\n         xAxis=\"true\"\n         legendTitle=\"Productos\"\n         yAxis=\"true\"\n         legend=\"true\"\n         showXAxisLabel=\"true\"\n         showYAxisLabel=\"true\"\n         xAxisLabel=\"Periodos\"\n         yAxisLabel=\"Demanda Potencial\"\n         autoScale=\"true\">\n       </ngx-charts-line-chart>\n  </div>\n    </div>\n\n\n\n\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"col-12\">\r\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\r\n<hr>\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-6\" style=\"height:300px\" *ngFor=\"let zona of graficas\" >\r\n    <div class=\"row\">\r\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\r\n\r\n  <div class=\"col-12\" style=\"height:250px;\">\r\n    <ngx-charts-line-chart\r\n         [scheme]=\"colorScheme\"\r\n         [results]=\"zona.graf\"\r\n         xAxis=\"true\"\r\n         legendTitle=\"Productos\"\r\n         yAxis=\"true\"\r\n         legend=\"true\"\r\n         showXAxisLabel=\"true\"\r\n         showYAxisLabel=\"true\"\r\n         xAxisLabel=\"Periodos\"\r\n         yAxisLabel=\"Demanda Potencial\"\r\n         autoScale=\"true\">\r\n       </ngx-charts-line-chart>\r\n  </div>\r\n    </div>\r\n\r\n\r\n\r\n\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -3269,8 +3262,9 @@ var DesarrolloMercadoComponent = (function () {
             Proyecto_Usuario_idUsuario: localStorage.getItem('idUsuario'),
             ultimoPeriodoDes: localStorage.getItem('numeroPeriodo')
         };
+        console.log("idProducto", this.productoSelectedPago.idProducto);
         this._desarrolloZonaService.Desarrollar(x).subscribe();
-        this._desarrolloZonaService.cobrarDesarrollo(costo).subscribe();
+        this._desarrolloZonaService.cobrarDesarrollo(costo, this.productoSelectedPago.idProducto).subscribe();
     };
     DesarrolloMercadoComponent.prototype.desarrollaZona = function (producto) {
         var _this = this;
@@ -3287,7 +3281,8 @@ var DesarrolloMercadoComponent = (function () {
             ultimoPeriodoDes: localStorage.getItem('numeroPeriodo')
         };
         var costo = this.getCosto(producto.idZona, producto.idProducto);
-        this._desarrolloZonaService.cobrarDesarrollo(costo).subscribe();
+        console.log("idProducto", producto.idProducto);
+        this._desarrolloZonaService.cobrarDesarrollo(costo, producto.idProducto).subscribe();
         this._desarrolloZonaService.comenzarDesarrolloZona(x);
     };
     DesarrolloMercadoComponent.prototype.quitaProducto = function (zona, producto) {
@@ -5814,7 +5809,9 @@ var BalanceService = (function () {
     BalanceService.prototype.returnPasivos = function () {
         var pasivos = [];
         this.getPasivos().subscribe(function (data) {
-            pasivos = data.datos;
+            for (var key in data.datos) {
+                pasivos.push(data.datos[key]);
+            }
         });
         return pasivos;
     };
@@ -6284,6 +6281,7 @@ var DesarrolloProductoService = (function () {
         }
         var y = {
             idProyecto: parseInt(localStorage.getItem('idProyecto')),
+            idProducto: id,
             numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')),
             costoDes: costo
         };
@@ -6314,6 +6312,7 @@ var DesarrolloProductoService = (function () {
             ultimoPeriodoDes: parseInt(localStorage.getItem('numeroPeriodo'))
         };
         var y = {
+            idProducto: id,
             idProyecto: parseInt(localStorage.getItem('idProyecto')),
             numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')),
             costoDes: costo
@@ -6370,7 +6369,6 @@ var DesarrolloZonaService = (function () {
     }
     DesarrolloZonaService.prototype.comenzarDesarrolloZona = function (x) {
         var _this = this;
-        console.log(x);
         this.addZona(x).subscribe(function (data) {
             if (data.success) {
                 _this.getProductosDeZonaEnDesarrollo().subscribe(function (data) {
@@ -6378,12 +6376,6 @@ var DesarrolloZonaService = (function () {
                         _this.productosZonaEnDesarrollo[key$] = data.datos[key$];
                     }
                 });
-                // this.getProductosDeZonaSinDesarrollar().subscribe(data => {
-                //   console.log(data.datos,2)
-                //   for(let key$ in data.datos){
-                //     this.productosZonaSinDesarrollar[key$] = data.datos[key$];
-                //   }
-                // });
             }
         });
     };
@@ -6409,8 +6401,9 @@ var DesarrolloZonaService = (function () {
         });
         return this.http.post('demanda/getdemanda', x, { headers: headers }).map(function (res) { return res.json(); });
     };
-    DesarrolloZonaService.prototype.cobrarDesarrollo = function (costoDes) {
+    DesarrolloZonaService.prototype.cobrarDesarrollo = function (costoDes, idProducto) {
         var x = {
+            idProducto: idProducto,
             idProyecto: localStorage.getItem('idProyecto'),
             numeroPeriodo: localStorage.getItem('numeroPeriodo'),
             costoDes: costoDes
@@ -7182,22 +7175,6 @@ var ProyectosService = (function () {
     ProyectosService.prototype.entrar = function () {
         this.router.navigate(['Usuario/proyecto']);
     };
-    ProyectosService.prototype.crearAuxiliar = function (idProyecto, dep) {
-        var x = {
-            Proyectos_idProyecto: idProyecto,
-            costoTransformacionMaq: dep,
-            Balance_numeroPeriodo: 1
-        };
-        this._auxiliarService.addAuxiliar(x).subscribe();
-    };
-    ProyectosService.prototype.crearAuxiliar0 = function (idProyecto, dep) {
-        var x = {
-            Proyectos_idProyecto: idProyecto,
-            costoTransformacionMaq: dep,
-            Balance_numeroPeriodo: 0
-        };
-        this._auxiliarService.addAuxiliar(x).subscribe();
-    };
     ProyectosService.prototype.asignarZonas = function (idProyecto, idUsuario) {
         var _this = this;
         this._usuarioZonaService.getZonasU(idUsuario).subscribe(function (data) {
@@ -7236,13 +7213,7 @@ var ProyectosService = (function () {
         this.buscarDatosUsuario().subscribe(function (data) {
             for (var key$ in data) {
                 if (data[key$].idUsuario == localStorage.getItem('idUsuario')) {
-                    var dep = data[key$].maqEquipo * .10;
-                    _this.crearBalanceUno(idProyecto, data[key$], 1).subscribe(function (data) {
-                        if (data.success) {
-                            _this.crearAuxiliar(idProyecto, dep);
-                            _this.crearAuxiliar0(idProyecto, dep);
-                        }
-                    });
+                    _this.crearBalanceUno(idProyecto, data[key$], 1).subscribe();
                     _this.crearBalanceCero(idProyecto, data[key$], 0).subscribe();
                     break;
                 }

@@ -139,8 +139,9 @@ export class DesarrolloMercadoComponent implements OnInit {
       Proyecto_Usuario_idUsuario:localStorage.getItem('idUsuario'),
       ultimoPeriodoDes:localStorage.getItem('numeroPeriodo')
     }
+    console.log("idProducto",this.productoSelectedPago.idProducto);
     this._desarrolloZonaService.Desarrollar(x).subscribe();
-    this._desarrolloZonaService.cobrarDesarrollo(costo).subscribe();
+    this._desarrolloZonaService.cobrarDesarrollo(costo,this.productoSelectedPago.idProducto).subscribe();
   }
 
   desarrollaZona(producto){
@@ -157,7 +158,8 @@ export class DesarrolloMercadoComponent implements OnInit {
       ultimoPeriodoDes:localStorage.getItem('numeroPeriodo')
     }
     var costo = this.getCosto(producto.idZona,producto.idProducto);
-    this._desarrolloZonaService.cobrarDesarrollo(costo).subscribe();
+    console.log("idProducto",producto.idProducto);
+    this._desarrolloZonaService.cobrarDesarrollo(costo,producto.idProducto).subscribe();
     this._desarrolloZonaService.comenzarDesarrolloZona(x);
   }
 

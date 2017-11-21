@@ -110,24 +110,6 @@ returnUsuarios(){
     this.router.navigate(['Usuario/proyecto']);
   }
 
-  crearAuxiliar(idProyecto,dep){
-    var x = {
-      Proyectos_idProyecto:idProyecto,
-      costoTransformacionMaq:dep,
-      Balance_numeroPeriodo:1
-    }
-    this._auxiliarService.addAuxiliar(x).subscribe();
-  }
-
-  crearAuxiliar0(idProyecto,dep){
-    var x = {
-      Proyectos_idProyecto:idProyecto,
-      costoTransformacionMaq:dep,
-      Balance_numeroPeriodo:0
-    }
-    this._auxiliarService.addAuxiliar(x).subscribe();
-  }
-
   asignarZonas(idProyecto, idUsuario){
     this._usuarioZonaService.getZonasU(idUsuario).subscribe(data => {
       for(let key$ in data.datos){
@@ -165,13 +147,7 @@ returnUsuarios(){
     this.buscarDatosUsuario().subscribe(data => {
       for(let key$ in data){
         if(data[key$].idUsuario == localStorage.getItem('idUsuario')){
-          var dep = data[key$].maqEquipo*.10;
-          this.crearBalanceUno(idProyecto,data[key$],1).subscribe(data => {
-            if(data.success){
-              this.crearAuxiliar(idProyecto,dep);
-              this.crearAuxiliar0(idProyecto,dep);
-            }
-          });
+          this.crearBalanceUno(idProyecto,data[key$],1).subscribe();
           this.crearBalanceCero(idProyecto,data[key$],0).subscribe();
           break;
         }
