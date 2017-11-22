@@ -12,23 +12,23 @@
         </tr>
         <tr>
           <td>IVA por Enterar</td>
-          <td>{{balance.IVAPorEnterar}}</td>
+          <td class="text-right">{{balance.IVAPorEnterar|currency:'USD':true:'1.0-0'}}</td>
         </tr>
         <tr>
           <td>Proveedores</td>
-          <td>{{balance.proveedores}}</td>
+          <td class="text-right">{{balance.proveedores|currency:'USD':true:'1.0-0'}}</td>
         </tr>
         <tr>
           <td>Impuestos por Pagar</td>
-          <td>{{balance.imptosPorPagar}}</td>
+          <td class="text-right">{{balance.imptosPorPagar|currency:'USD':true:'1.0-0'}}</td>
         </tr>
         <tr>
           <td>Prestamos Más de un Año</td>
-          <td>{{balance.prestamosMasAnio}}</td>
+          <td class="text-right">{{balance.prestamosMasAnio|currency:'USD':true:'1.0-0'}}</td>
         </tr>
         <tr>
           <td>Prestamos Menos de un Año</td>
-          <td>{{balance.prestamosMenosAnio}}</td>
+          <td class="text-right">{{balance.prestamosMenosAnio|currency:'USD':true:'1.0-0'}}</td>
         </tr>
       </table>
   </div>
@@ -55,23 +55,23 @@
           </tr>
           <tr>
             <td>Caja y Bancos</td>
-            <td>{{balance.cajaBancos}}</td>
+            <td class="text-right">{{balance.cajaBancos|currency:'USD':true:'1.0-0'}}</td>
           </tr>
           <tr>
             <td>Cuentas Por Cobrar</td>
-            <td>{{balance.cuentasPorCobrar}}</td>
+            <td class="text-right">{{balance.cuentasPorCobrar|currency:'USD':true:'1.0-0'}}</td>
           </tr>
           <tr>
             <td>IVA Acreditable</td>
-            <td>{{balance.IVAAcreditable}}</td>
+            <td class="text-right">{{balance.IVAAcreditable|currency:'USD':true:'1.0-0'}}</td>
           </tr>
           <tr>
             <td>Almacen de Articulo Terminado</td>
-            <td>{{balance.almacenArtTerm}}</td>
+            <td class="text-right">{{balance.almacenArtTerm|currency:'USD':true:'1.0-0'}}</td>
           </tr>
           <tr>
             <td>Almacen de Materiales</td>
-            <td>{{balance.almacenMateriales}}</td>
+            <td class="text-right">{{balance.almacenMateriales|currency:'USD':true:'1.0-0'}}</td>
           </tr>
         </table>
   </div>
@@ -288,39 +288,25 @@
 
           <div class="col-12">
             <div class="row" style="overflow-y:scroll; height:200px;oveflow-x:visible">
-              <div class="col-6" >
-                <ngx-charts-pie-grid
+              <div class="col-12" *ngFor="let zona of productosZonaDesGraf">
+                <h6>{{zona.nombreZona}}</h6>
+                <hr>
+                <div class="row">
+                  <div class="col-6" *ngFor="let producto of zona.productos">
+                    <ngx-charts-pie-grid
+                    [scheme]="colorScheme"
+                    [results]="producto.graf"
+                    designatedTotal="40">
+                    </ngx-charts-pie-grid>
 
-                [scheme]="colorScheme"
-                [results]="single3"
-                designatedTotal="2000000">
-                </ngx-charts-pie-grid>
 
-              </div>
-
-              <div class="col-6" style="height:auto">
-
-
-                <ngx-charts-pie-grid
-
-                [scheme]="colorScheme"
-                [results]="single3"
-                designatedTotal="2000000">
-                </ngx-charts-pie-grid>
+                  </div>
+                </div>
 
               </div>
 
-              <div class="col-6" style="height:auto">
 
 
-                <ngx-charts-pie-grid
-
-                [scheme]="colorScheme"
-                [results]="single3"
-                designatedTotal="2000000">
-                </ngx-charts-pie-grid>
-
-              </div>
             </div>
 
           </div>
@@ -338,8 +324,40 @@
         <div class="card-header">
           <h5 class="col-12 text-center">Opciones de Desarrollo de Mercado</h5>
         </div>
+        <div style="overflow-y:scroll; height:200px;oveflow-x:visible">
+          <div class="col-12" *ngFor="let zona of productosZonaEnDesGraf">
+            <h6>{{zona.nombreZona}}</h6>
+            <hr>
+            <div class="row">
+              <div class="col-12" *ngFor="let producto of zona.productos">
+                <div class="row">
+                  <div class="col-6" >
+                    <ngx-charts-pie-grid
+                    [scheme]="colorScheme"
+                    [results]="producto.graf"
+                    designatedTotal="40">
+                    </ngx-charts-pie-grid>
+                  </div>
+                  <div class="col-6">
+                    <div class="row">
+                      <div class="text-left col-12" style="font-size:13px; margin-top:20px">Periodos a desarrollar: {{getTiempo(zona.idZona,producto.idProducto)}} <br></div>
+                      <div class="text-left col-12" style="font-size:13px;margin-top:5px">Costo de Periodo: <br>{{getCosto(zona.idZona,producto.idProducto)}}p</div>
 
-        <div class="col-12">
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+
+
+        <!-- <div class="col-12">
           <div class="row" style="overflow-y:scroll; height:200px;oveflow-x:visible">
 
 
@@ -358,22 +376,13 @@
                 </div>
               </div>
 
-              <!-- <div class="col-6" *ngFor="let producto of productosSinDesGraf" >
-                <ngx-charts-pie-grid
-
-                [scheme]="colorScheme"
-                [results]="producto.graf"
-                [designatedTotal]="producto.max">
-                </ngx-charts-pie-grid>
-
-              </div> -->
             </div>
 
 
 
           </div>
 
-        </div>
+        </div> -->
       </blockquote>
     </div>
   </div>
@@ -383,38 +392,43 @@
 
 <div class="col-4" >
   <div class="card card-outline-secondary mb-3 text-center"
-  style="height:250px;overflow:hidden" >
-    <div class="card-block">
+  style="height:250px;overflow:hidden">
+    <div class="card-block" >
       <blockquote class="card-blockquote">
         <div class="card-header">
           <h5 class="col-12 text-center">Mercados en Desarrollo</h5>
         </div>
+        <div style="overflow-y:scroll; height:200px;oveflow-x:visible">
+          <div class="col-12" *ngFor="let zona of productosZonaEnDesGraf">
+            <h6>{{zona.nombreZona}}</h6>
+            <hr>
+            <div class="row">
+              <div class="col-12" *ngFor="let producto of zona.productos">
+                <div class="row">
+                  <div class="col-6" >
+                    <ngx-charts-pie-grid
+                    [scheme]="colorScheme"
+                    [results]="producto.graf"
+                    [designatedTotal]="producto.max">
+                    </ngx-charts-pie-grid>
+                  </div>
+                  <div class="col-6">
+                    <div class="row">
+                      <div class="text-left col-12" style="font-size:13px; margin-top:20px">Periodos Desarrollados: <br>{{producto.graf[0].value}} de {{producto.max}}</div>
+                      <div class="text-left col-12" style="font-size:13px;margin-top:5px">Costo de Periodo: <br>{{getCosto(zona.idZona,producto.idProducto)}}p</div>
 
-        <div class="col-12" *ngFor="let zona of productosZonaEnDesGraf">
-          <h6>{{zona.nombreZona}}</h6>
-          <hr>
-          <div class="row">
-            <div class="col-6" *ngFor="let producto of zona.productos">
-              <ngx-charts-pie-grid
-              [scheme]="colorScheme"
-              [results]="producto.graf"
-              designatedTotal="producto.max">
-              </ngx-charts-pie-grid>
+                    </div>
+                  </div>
+                </div>
 
+
+              </div>
 
             </div>
+
           </div>
-
-          <!-- <div class="col-6" *ngFor="let producto of productosSinDesGraf" >
-            <ngx-charts-pie-grid
-
-            [scheme]="colorScheme"
-            [results]="producto.graf"
-            [designatedTotal]="producto.max">
-            </ngx-charts-pie-grid>
-
-          </div> -->
         </div>
+
       </blockquote>
     </div>
   </div>

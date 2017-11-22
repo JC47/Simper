@@ -92,6 +92,13 @@ export class UsuarioCreditoService {
     return this.http.post('prestamo/veramortizacion/',x,headers).map(res => res.json());
   }
 
+  insertarAmortizacion(x){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    return this.http.post('prestamo/veramortizacion/',x,headers).map(res => res.json());
+  }
+
   verPagosR(x){
     let headers = new Headers({
       'Content-Type':'application/json'

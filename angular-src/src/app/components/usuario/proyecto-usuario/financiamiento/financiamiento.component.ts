@@ -42,10 +42,9 @@ export class FinanciamientoComponent implements OnInit {
       monto:cantidad.monto
     };
     this._creditoService.solicitarCredito(x).subscribe(data => {
-        if(data.success){
-          this.openModalConf=false;
-          this.verAmortizacion(cantidad.idCredito);
-        }
+      if(data.success){
+        this.verAmortizacion(cantidad.idCredito);
+      }
     });
   }
 
