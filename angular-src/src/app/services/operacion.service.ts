@@ -124,6 +124,26 @@ export class OperacionService {
     return this.auxiliarC;
   }
 
+  returnAlmacen(){
+    var alma = [];
+    this.getAlmacen().subscribe(data => {
+      for(let key in data.datos){
+        alma.push(data.datos[key]);
+      }
+    });
+    return alma;
+  }
+
+  registerAlmacen(x){
+    var alma = [];
+    this.addAlmacen(x).subscribe(data => {
+      for(let key in data.datos){
+        alma.push(data.datos[key]);
+      }
+    });
+    return alma;
+  }
+
   returnInter(){
     var intereses = [];
     this.getInter().subscribe(data => {
@@ -192,6 +212,14 @@ export class OperacionService {
 
   addAlmacen(x){
     return this.http.post('operacion/registerAlmacen/',x,this.headers).map(res => res.json());
+  }
+
+  getAlmacen(){
+    var x = {
+      Balance_numeroPeriodo:localStorage.getItem('numeroPeriodo'),
+      Proyecto_idProyecto:localStorage.getItem('idProyecto')
+    }
+    return this.http.post('operacion/getAlmacen/',x,this.headers).map(res => res.json());
   }
 
   getInter(){

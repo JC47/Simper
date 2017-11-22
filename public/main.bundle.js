@@ -3007,7 +3007,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-12\">\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\n<hr>\n</div>\n\n\n<div class=\"row\">\n  <div class=\"col-6\" style=\"height:300px\" *ngFor=\"let zona of graficas\" >\n    <div class=\"row\">\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\n\n  <div class=\"col-12\" style=\"height:250px;\">\n    <ngx-charts-line-chart\n         [scheme]=\"colorScheme\"\n         [results]=\"zona.graf\"\n         xAxis=\"true\"\n         legendTitle=\"Productos\"\n         yAxis=\"true\"\n         legend=\"true\"\n         showXAxisLabel=\"true\"\n         showYAxisLabel=\"true\"\n         xAxisLabel=\"Periodos\"\n         yAxisLabel=\"Demanda Potencial\"\n         autoScale=\"true\">\n       </ngx-charts-line-chart>\n  </div>\n    </div>\n\n\n\n\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"col-12\">\r\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\r\n<hr>\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-6\" style=\"height:300px\" *ngFor=\"let zona of graficas\" >\r\n    <div class=\"row\">\r\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\r\n\r\n  <div class=\"col-12\" style=\"height:250px;\">\r\n    <ngx-charts-line-chart\r\n         [scheme]=\"colorScheme\"\r\n         [results]=\"zona.graf\"\r\n         xAxis=\"true\"\r\n         legendTitle=\"Productos\"\r\n         yAxis=\"true\"\r\n         legend=\"true\"\r\n         showXAxisLabel=\"true\"\r\n         showYAxisLabel=\"true\"\r\n         xAxisLabel=\"Periodos\"\r\n         yAxisLabel=\"Demanda Potencial\"\r\n         autoScale=\"true\">\r\n       </ngx-charts-line-chart>\r\n  </div>\r\n    </div>\r\n\r\n\r\n\r\n\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -4385,6 +4385,7 @@ var VentaProductosComponent = (function () {
         this.productosOperacion = [];
         this.productos = [];
         this.zonas = [];
+        this.almacen = [];
         this.ventaO = {
             idZona: null,
             cantiadVenta: null
@@ -4412,6 +4413,7 @@ var VentaProductosComponent = (function () {
         this.productos = this._productoService.returnProductos();
         this.productosOperacion = this._operacionService.returnProductosOperacion();
         this.ventas = this._operacionService.returnAllOperaciones();
+        this.almacen = this._operacionService.returnAlmacen();
         console.log(this.productosOperacion);
         this.colorScheme = {
             domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
@@ -4521,7 +4523,7 @@ var VentaProductosComponent = (function () {
             if (data.success) {
                 _this.openConfAlmacen = false;
                 _this.progressAlmacen();
-                _this._operacionService.addAlmacen(x).subscribe();
+                _this.almacen = _this._operacionService.registerAlmacen(x);
             }
             else {
                 alert(data.msg);
@@ -7142,6 +7144,24 @@ var OperacionService = (function () {
         });
         return this.auxiliarC;
     };
+    OperacionService.prototype.returnAlmacen = function () {
+        var alma = [];
+        this.getAlmacen().subscribe(function (data) {
+            for (var key in data.datos) {
+                alma.push(data.datos[key]);
+            }
+        });
+        return alma;
+    };
+    OperacionService.prototype.registerAlmacen = function (x) {
+        var alma = [];
+        this.addAlmacen(x).subscribe(function (data) {
+            for (var key in data.datos) {
+                alma.push(data.datos[key]);
+            }
+        });
+        return alma;
+    };
     OperacionService.prototype.returnInter = function () {
         var intereses = [];
         this.getInter().subscribe(function (data) {
@@ -7201,6 +7221,13 @@ var OperacionService = (function () {
     };
     OperacionService.prototype.addAlmacen = function (x) {
         return this.http.post('operacion/registerAlmacen/', x, this.headers).map(function (res) { return res.json(); });
+    };
+    OperacionService.prototype.getAlmacen = function () {
+        var x = {
+            Balance_numeroPeriodo: localStorage.getItem('numeroPeriodo'),
+            Proyecto_idProyecto: localStorage.getItem('idProyecto')
+        };
+        return this.http.post('operacion/getAlmacen/', x, this.headers).map(function (res) { return res.json(); });
     };
     OperacionService.prototype.getInter = function () {
         var x = {

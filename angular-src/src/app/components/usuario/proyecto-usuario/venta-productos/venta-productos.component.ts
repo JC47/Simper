@@ -15,6 +15,7 @@ export class VentaProductosComponent implements OnInit {
   productosOperacion = [];
   productos=[];
   zonas=[];
+  almacen = [];
   ventasForm:FormGroup;
   almacenForm:FormGroup;
   valueBar:number
@@ -56,6 +57,7 @@ export class VentaProductosComponent implements OnInit {
     this.productos=this._productoService.returnProductos();
     this.productosOperacion = this._operacionService.returnProductosOperacion();
     this.ventas=this._operacionService.returnAllOperaciones();
+    this.almacen = this._operacionService.returnAlmacen();
     console.log(this.productosOperacion);
 
 
@@ -187,7 +189,7 @@ openModalVenta(idZona,idProducto){
       if(data.success){
         this.openConfAlmacen=false;
         this.progressAlmacen();
-        this._operacionService.addAlmacen(x).subscribe();
+        this.almacen = this._operacionService.registerAlmacen(x);
       }
       else{
         alert(data.msg);
