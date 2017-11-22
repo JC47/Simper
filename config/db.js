@@ -31,21 +31,21 @@ Promise.promisifyAll(require("mysql/lib/Pool").prototype);
 
 //Conexion con contrseña
 //
-<<<<<<< HEAD
+
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: 'root',
     database: 'basesimv1'
 });
-=======
+
 // var pool = mysql.createPool({
 //     host: 'localhost',
 //     user: 'root',
 //     password: 'root',
 //     database: 'basesimv1'
 // });
->>>>>>> cb9984b7c0c40586a6d7f00c06179063c6b94e18
+
 
 function getSqlConnection() {
     return pool.getConnectionAsync().disposer(function (connection) {

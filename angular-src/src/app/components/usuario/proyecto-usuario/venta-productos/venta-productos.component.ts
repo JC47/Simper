@@ -63,15 +63,15 @@ export class VentaProductosComponent implements OnInit {
     this.productos=this._productoService.returnProductos();
     this.productosOperacion = this._operacionService.returnProductosOperacion();
     this.ventas=this._operacionService.returnAllOperaciones();
-<<<<<<< HEAD
+
     console.log(this.zonas);
     this.maquinarias=this._dash.returnMaquinarias();
     this.demandas=this._dash.returnDemandas();
-=======
-    this.almacen = this._operacionService.returnAlmacen();
-    console.log(this.productosOperacion);
 
->>>>>>> cb9984b7c0c40586a6d7f00c06179063c6b94e18
+    this.almacen = this._operacionService.returnAlmacen();
+    console.log(this.almacen);
+
+
 
     this.colorScheme = {
        domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
@@ -195,6 +195,7 @@ openModalVenta(idZona,idProducto){
   }
 
   cobrarAlmacen(){
+
     var x = {
       Producto_idProducto:this.selectedAlmacen.idProducto,
       unidadesAlmacenadas:this.selectedAlmacen.almacen,
@@ -215,6 +216,9 @@ openModalVenta(idZona,idProducto){
         this.openConfAlmacen=false;
       }
     });
+
+
+      setTimeout(()=>{this.almacen=this._operacionService.returnAlmacen()}, 1000);
 
   }
 
