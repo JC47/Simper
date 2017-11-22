@@ -22,6 +22,19 @@ router.get('/', (req, res, next) => {
   });
 });
 
+router.post('/getIntereses', (req,res,next) => {
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+  Promise.join(prestamo.getFinanciamientos(idProyecto,numeroPeriodo),prestamo.getPagos(idProyecto,numeroPeriodo),
+              function(prestamos,pagos){
+                return getIntereses(prestamos,pagos);
+              }).then(function(salida){
+                return res.json({success:true,msg:"Sirve",datos:salida});
+              }).catch(function(err){
+                return res.json({success:false,msg:"No sirve"});
+              });
+});
+
 router.post('/addcredito', (req, res, next) => {
   var nombreCredito = req.body.nombreCredito;
   var montoMin = req.body.montoMin;
@@ -529,6 +542,21 @@ for (var j = 0; j < repIdCreditos.length; j++) {
 }
 //console.log(creditosArray);
   return creditosArray;
+}
+
+function getIntereses(prestamos,pagos){
+  var p = [];
+  var T = 0;
+  for(let key in prestamos){
+    T += prestamos[key].anticipo;
+  }
+  for(let key1 in pagos){
+    if(pagos[key1].tipo != 1){
+    T += pagos[key].intereses;
+    }
+  }
+  p.push(T);
+  return p;
 }
 
 module.exports = router;

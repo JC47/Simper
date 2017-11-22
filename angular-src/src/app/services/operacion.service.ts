@@ -117,12 +117,33 @@ export class OperacionService {
   returnAuxiliarC(){
     this.auxiliarC.length = 0;
     this.getAuxiliarC().subscribe(data => {
-      console.log("Auxes C",data)
       for(let key in data.datos) {
           this.auxiliarC.push(data.datos[key]);
       }
     });
     return this.auxiliarC;
+  }
+
+  returnInter(){
+    var intereses = [];
+    this.getInter().subscribe(data => {
+      for(let key in data.datos){
+        intereses.push(data.datos[key]);
+      }
+    });
+    return intereses;
+  }
+
+  returnAuxiliarCTotal(){
+    var auxiliarT = [];
+    var T = 0;
+    this.getAuxiliarC().subscribe(data => {
+      for(let key in data.datos) {
+          T += data.datos[key].desarrolloMercado + data.datos[key].desarrolloProducto;
+      }
+      auxiliarT.push(T);
+    });
+    return auxiliarT;
   }
 
   getAuxiliares(){
@@ -171,6 +192,14 @@ export class OperacionService {
 
   addAlmacen(x){
     return this.http.post('operacion/registerAlmacen/',x,this.headers).map(res => res.json());
+  }
+
+  getInter(){
+    var x = {
+      "idProyecto":localStorage.getItem('idProyecto'),
+      "numeroPeriodo":parseInt(localStorage.getItem('numeroPeriodo'))
+    }
+    return this.http.post('prestamo/getIntereses/',x,this.headers).map(res => res.json());
   }
 
 }
