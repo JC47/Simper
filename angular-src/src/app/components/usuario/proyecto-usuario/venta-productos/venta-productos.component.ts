@@ -16,6 +16,7 @@ export class VentaProductosComponent implements OnInit {
   productosOperacion = [];
   productos=[];
   zonas=[];
+  almacen = [];
   ventasForm:FormGroup;
   almacenForm:FormGroup;
   valueBar:number
@@ -62,9 +63,15 @@ export class VentaProductosComponent implements OnInit {
     this.productos=this._productoService.returnProductos();
     this.productosOperacion = this._operacionService.returnProductosOperacion();
     this.ventas=this._operacionService.returnAllOperaciones();
+<<<<<<< HEAD
     console.log(this.zonas);
     this.maquinarias=this._dash.returnMaquinarias();
     this.demandas=this._dash.returnDemandas();
+=======
+    this.almacen = this._operacionService.returnAlmacen();
+    console.log(this.productosOperacion);
+
+>>>>>>> cb9984b7c0c40586a6d7f00c06179063c6b94e18
 
     this.colorScheme = {
        domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
@@ -201,7 +208,7 @@ openModalVenta(idZona,idProducto){
       if(data.success){
         this.openConfAlmacen=false;
         this.progressAlmacen();
-        this._operacionService.addAlmacen(x).subscribe();
+        this.almacen = this._operacionService.registerAlmacen(x);
       }
       else{
         alert(data.msg);

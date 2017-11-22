@@ -37,6 +37,21 @@ router.post('/register', (req, res, next) => {
 });
 
 
+router.post('/getAlmacen', (req,res,next) => {
+  var idProyecto = req.body.Proyecto_idProyecto;
+  var numeroPeriodo = req.body.Balance_numeroPeriodo;
+  Promise.resolve().then(function(){
+    return operacion.getAlmacenes(idProyecto,numeroPeriodo);
+  })
+  .then(function (rows) {
+    res.json({success: true, datos:rows, msg:"Operacion exitosa"});
+  })
+  .catch(function (err) {
+    console.error("got error: " + err);
+    res.json({success:false,msg:"No sirve"});
+  });
+});
+
 router.post('/registerAlmacen', (req, res, next) => {
   var idProducto = req.body.Producto_idProducto;
   var idProyecto = req.body.Proyecto_idProyecto;

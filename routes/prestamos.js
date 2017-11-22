@@ -22,6 +22,19 @@ router.get('/', (req, res, next) => {
   });
 });
 
+router.post('/getIntereses', (req,res,next) => {
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+  Promise.join(prestamo.getFinanciamientos(idProyecto,numeroPeriodo),prestamo.getPagos(idProyecto,numeroPeriodo),
+              function(prestamos,pagos){
+                return getIntereses(prestamos,pagos);
+              }).then(function(salida){
+                return res.json({success:true,msg:"Sirve",datos:salida});
+              }).catch(function(err){
+                return res.json({success:false,msg:"No sirve"});
+              });
+});
+
 router.post('/addcredito', (req, res, next) => {
   var nombreCredito = req.body.nombreCredito;
   var montoMin = req.body.montoMin;
@@ -230,24 +243,24 @@ Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCr
     if(fina.length > 0){
       return prestamo.updateCreditoBalance(json,idProyecto,numeroPeriodo,idCredito);
     }
-    else{
+    //else{
       //creditobalance
-      if (limite1 == 2 ) {
-        console.log("Límite1 de créditos alcanzado");
-        limitecredito = 1;
-        //return res.json({success: true, msg:"límite de creditos alcanzado"});
-      }else {
-        //amortizacion
-          if (limite2==2) {
-            console.log("Límite2 de créditos alcanzado");
-        limitecredito = 1;
-          //  return res.json({success: true, msg:"límite de creditos alcanzado"});
-          }
+      // if (limite1 == 2 ) {
+      //   console.log("Límite1 de créditos alcanzado");
+      //   limitecredito = 1;
+      //   //return res.json({success: true, msg:"límite de creditos alcanzado"});
+      // }else {
+      //   //amortizacion
+      //     if (limite2==2) {
+      //       console.log("Límite2 de créditos alcanzado");
+      //   limitecredito = 1;
+      //     //  return res.json({success: true, msg:"límite de creditos alcanzado"});
+      //     }
           else {
             return prestamo.addCreditoBalance(json);
           }
-      }
-    }
+    //  }
+  //  }
   })
   .then(function () {
     console.log("pagoAnticipado: "+pagoAnticipado);
@@ -270,9 +283,10 @@ Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCr
   })
   .then(function (json) {
     return prestamo.addAmortizacion(numeroPeriodo,idProyecto,idCredito,json);
-  }).then(function(){
-    return prestamo.getFinanciamientos(idProyecto,numeroPeriodo);
   })
+  // .then(function(){
+  //   return prestamo.getFinanciamientos(idProyecto,numeroPeriodo);
+  // })
 .then(function(){
   res.json({success: true,  msg:"Operacion exitosa"});
   array.length=0;
@@ -531,6 +545,21 @@ for (var j = 0; j < repIdCreditos.length; j++) {
 }
 //console.log(creditosArray);
   return creditosArray;
+}
+
+function getIntereses(prestamos,pagos){
+  var p = [];
+  var T = 0;
+  for(let key in prestamos){
+    T += prestamos[key].anticipo;
+  }
+  for(let key1 in pagos){
+    if(pagos[key1].tipo != 1){
+    T += pagos[key].intereses;
+    }
+  }
+  p.push(T);
+  return p;
 }
 
 module.exports = router;

@@ -3014,7 +3014,11 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.html":
 /***/ (function(module, exports) {
 
+<<<<<<< HEAD
 module.exports = "<div class=\"col-12\">\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\n<hr>\n</div>\n\n\n<div class=\"row\">\n  <div class=\"col-12\" style=\"height:500px\" *ngFor=\"let zona of graficas\" >\n    <div class=\"row\">\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\n\n  <div class=\"col-12\" style=\"height:400px;\">\n    <ngx-charts-line-chart\n         [scheme]=\"colorScheme\"\n         [results]=\"zona.graf\"\n         xAxis=\"true\"\n         legendTitle=\"Productos\"\n         yAxis=\"true\"\n         legend=\"true\"\n         showXAxisLabel=\"true\"\n         showYAxisLabel=\"true\"\n         xAxisLabel=\"Periodos\"\n         yAxisLabel=\"Demanda Potencial\"\n         autoScale=\"true\">\n       </ngx-charts-line-chart>\n  </div>\n    </div>\n\n\n\n\n  </div>\n\n</div>\n"
+=======
+module.exports = "<div class=\"col-12\">\r\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\r\n<hr>\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-6\" style=\"height:300px\" *ngFor=\"let zona of graficas\" >\r\n    <div class=\"row\">\r\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\r\n\r\n  <div class=\"col-12\" style=\"height:250px;\">\r\n    <ngx-charts-line-chart\r\n         [scheme]=\"colorScheme\"\r\n         [results]=\"zona.graf\"\r\n         xAxis=\"true\"\r\n         legendTitle=\"Productos\"\r\n         yAxis=\"true\"\r\n         legend=\"true\"\r\n         showXAxisLabel=\"true\"\r\n         showYAxisLabel=\"true\"\r\n         xAxisLabel=\"Periodos\"\r\n         yAxisLabel=\"Demanda Potencial\"\r\n         autoScale=\"true\">\r\n       </ngx-charts-line-chart>\r\n  </div>\r\n    </div>\r\n\r\n\r\n\r\n\r\n  </div>\r\n\r\n</div>\r\n"
+>>>>>>> cb9984b7c0c40586a6d7f00c06179063c6b94e18
 
 /***/ }),
 
@@ -3549,7 +3553,7 @@ var _a;
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h4 class=\"text-center\">Estado de Resultados</h4>\r\n<hr>\r\n\r\n<table class=\"table table-bordered table-responsive offset-2\">\r\n  <thead>\r\n    <tr>\r\n      <th></th>\r\n      <th *ngFor=\"let producto of resultados\">{{getNameByIdProducto(producto) }}</th>\r\n      <th>Total</th>\r\n    </tr>\r\n  </thead>\r\n\r\n  <tbody>\r\n    <tr>\r\n      <th>Ventas Netas</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getVentasNetas(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" >{{getTotalVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Costo de Ventas</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getCostoVentas(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" >{{getTotalCostosVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Utilidad Bruta</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" >{{getUtilidadBruta() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Costo de distribucion</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getDistParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\">{{getDistTotal() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Otros Gastos</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\"> {{getOtrosGastosParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\">{{getOtrosGastosTotal() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Costo de Administración</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getAdminParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\">{{getAdminTotal() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Utilidad en Operación</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadAntesParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" >{{getUtilidadAntes() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Intereses</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">-</td>\r\n      <td *ngFor=\"let aux of auxiliarC\">-</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Utilidad antes de Impuestos</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of auxiliares\">{{producto.Ventas - producto.IVAxVentas - producto.costoVentas - producto.costoDistribucion - producto.costoAdministrativo |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\">{{getUtilidadAntes() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>ISR</th>\r\n      <td *ngFor=\"let producto of auxiliares\">-</td>\r\n      <td  class=\"text-right\" *ngFor=\"let aux of auxiliarC\">{{getISR() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>PTU</th>\r\n      <td *ngFor=\"let producto of auxiliares\">-</td>\r\n      <td class=\"text-right\" *ngFor=\"let aux of auxiliarC\">{{getPTU() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Utilidad del Ejercicio</th>\r\n      <td *ngFor=\"let producto of auxiliares\">-</td>\r\n      <td class=\"text-right\" *ngFor=\"let aux of auxiliarC\">{{getUtilidadAntes() - getISR() - getPTU() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n\r\n  </tbody>\r\n</table>\r\n"
+module.exports = "<h4 class=\"text-center\">Estado de Resultados</h4>\r\n<hr>\r\n\r\n<table class=\"table table-bordered table-responsive offset-2\">\r\n  <thead>\r\n    <tr>\r\n      <th></th>\r\n      <th *ngFor=\"let producto of resultados\">{{getNameByIdProducto(producto) }}</th>\r\n      <th>Total</th>\r\n    </tr>\r\n  </thead>\r\n\r\n  <tbody>\r\n    <tr>\r\n      <th>Ventas Netas</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getVentasNetas(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" >{{getTotalVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Costo de Ventas</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getCostoVentas(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" >{{getTotalCostosVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Utilidad Bruta</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" >{{getUtilidadBruta() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Costo de distribucion</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getDistParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\">{{getDistTotal() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Otros Gastos</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\"> {{getOtrosGastosParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let item of auxiliarT\">{{item |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Costo de Administración</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getAdminParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\">{{getAdminTotal() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Utilidad en Operación</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadAntesParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let item of auxiliarT\">{{getUtilidadAntes() - item |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Intereses</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n      <td class=\"text-right\" *ngFor=\"let aux of intereses\">{{aux}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Utilidad antes de Impuestos</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadAntesParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\">{{getUtilidad2() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>ISR</th>\r\n      <td  class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n      <td  class=\"text-right\">{{getISR() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>PTU</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n      <td class=\"text-right\">{{getPTU() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Utilidad del Ejercicio</th>\r\n      <td class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n      <td class=\"text-right\">{{getUtilidad2() - getISR() - getPTU()|currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n\r\n  </tbody>\r\n</table>\r\n"
 
 /***/ }),
 
@@ -3579,6 +3583,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var EstadoResultadosComponent = (function () {
     function EstadoResultadosComponent(_operacionService, _productoService, _balanceService, _resultadosService) {
+        var _this = this;
         this._operacionService = _operacionService;
         this._productoService = _productoService;
         this._balanceService = _balanceService;
@@ -3587,21 +3592,20 @@ var EstadoResultadosComponent = (function () {
         this.auxiliares = [];
         this.auxiliarC = [];
         this.productos = [];
+        this.auxiliarT = [];
+        this.intereses = [];
         this._resultadosService.vender();
+        setTimeout(function () {
+            _this.auxiliares = _this._operacionService.returnAuxiliares();
+            _this.productos = _this._productoService.returnProductos();
+            _this.intereses = _this._operacionService.returnInter();
+            _this.auxiliarT = _this._operacionService.returnAuxiliarCTotal();
+            _this.resultados = _this._operacionService.returnProductoResultados();
+            _this.auxiliarC = _this._operacionService.returnAuxiliarC();
+            console.log("Total", _this.auxiliarT);
+        }, 1500);
     }
     EstadoResultadosComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        setTimeout(function () {
-            _this._balanceService.getBalanceFinal().subscribe(function (data) {
-                if (data.success) {
-                    _this.auxiliares = _this._operacionService.returnAuxiliares();
-                    _this.auxiliarC = _this._operacionService.returnAuxiliarC();
-                    _this.productos = _this._productoService.returnProductos();
-                    _this.resultados = _this._operacionService.returnProductoResultados();
-                    console.log(_this.auxiliarC);
-                }
-            });
-        }, 1500);
     };
     EstadoResultadosComponent.prototype.getNameByIdProducto = function (id) {
         for (var _i = 0, _a = this.productos; _i < _a.length; _i++) {
@@ -3701,14 +3705,6 @@ var EstadoResultadosComponent = (function () {
         }
         return T;
     };
-    EstadoResultadosComponent.prototype.getOtrosGastosTotal = function () {
-        var T = 0;
-        for (var _i = 0, _a = this.auxiliarC; _i < _a.length; _i++) {
-            var aux = _a[_i];
-            T += (aux.desarrolloMercado + aux.desarrolloProducto);
-        }
-        return T;
-    };
     EstadoResultadosComponent.prototype.getOtrosGastosParcial = function (id) {
         var T = 0;
         for (var _i = 0, _a = this.auxiliarC; _i < _a.length; _i++) {
@@ -3741,11 +3737,39 @@ var EstadoResultadosComponent = (function () {
             var aux = _a[_i];
             T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
         }
-        for (var _b = 0, _c = this.auxiliarC; _b < _c.length; _b++) {
-            var aux2 = _c[_b];
-            T += -aux2.desarrolloMercado - aux2.desarrolloProducto;
+        return T;
+    };
+    EstadoResultadosComponent.prototype.getUtilidad2 = function () {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
+        }
+        for (var _b = 0, _c = this.auxiliarT; _b < _c.length; _b++) {
+            var i = _c[_b];
+            T -= i;
+        }
+        for (var _d = 0, _e = this.intereses; _d < _e.length; _d++) {
+            var i2 = _e[_d];
+            T -= i2;
         }
         return T;
+    };
+    EstadoResultadosComponent.prototype.getISR = function () {
+        var isr = 0;
+        var uti = this.getUtilidad2();
+        if (uti > 0) {
+            isr = uti * .34;
+        }
+        return isr;
+    };
+    EstadoResultadosComponent.prototype.getPTU = function () {
+        var ptu = 0;
+        var uti = this.getUtilidadAntes();
+        if (uti > 0) {
+            ptu = uti * .10;
+        }
+        return ptu;
     };
     return EstadoResultadosComponent;
 }());
@@ -4375,6 +4399,7 @@ var VentaProductosComponent = (function () {
         this.productosOperacion = [];
         this.productos = [];
         this.zonas = [];
+        this.almacen = [];
         this.ventaO = {
             idZona: null,
             cantiadVenta: null
@@ -4402,9 +4427,14 @@ var VentaProductosComponent = (function () {
         this.productos = this._productoService.returnProductos();
         this.productosOperacion = this._operacionService.returnProductosOperacion();
         this.ventas = this._operacionService.returnAllOperaciones();
+<<<<<<< HEAD
         console.log(this.zonas);
         this.maquinarias = this._dash.returnMaquinarias();
         this.demandas = this._dash.returnDemandas();
+=======
+        this.almacen = this._operacionService.returnAlmacen();
+        console.log(this.productosOperacion);
+>>>>>>> cb9984b7c0c40586a6d7f00c06179063c6b94e18
         this.colorScheme = {
             domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
         };
@@ -4517,7 +4547,7 @@ var VentaProductosComponent = (function () {
             if (data.success) {
                 _this.openConfAlmacen = false;
                 _this.progressAlmacen();
-                _this._operacionService.addAlmacen(x).subscribe();
+                _this.almacen = _this._operacionService.registerAlmacen(x);
             }
             else {
                 alert(data.msg);
@@ -7162,12 +7192,49 @@ var OperacionService = (function () {
         var _this = this;
         this.auxiliarC.length = 0;
         this.getAuxiliarC().subscribe(function (data) {
-            console.log("Auxes C", data);
             for (var key in data.datos) {
                 _this.auxiliarC.push(data.datos[key]);
             }
         });
         return this.auxiliarC;
+    };
+    OperacionService.prototype.returnAlmacen = function () {
+        var alma = [];
+        this.getAlmacen().subscribe(function (data) {
+            for (var key in data.datos) {
+                alma.push(data.datos[key]);
+            }
+        });
+        return alma;
+    };
+    OperacionService.prototype.registerAlmacen = function (x) {
+        var alma = [];
+        this.addAlmacen(x).subscribe(function (data) {
+            for (var key in data.datos) {
+                alma.push(data.datos[key]);
+            }
+        });
+        return alma;
+    };
+    OperacionService.prototype.returnInter = function () {
+        var intereses = [];
+        this.getInter().subscribe(function (data) {
+            for (var key in data.datos) {
+                intereses.push(data.datos[key]);
+            }
+        });
+        return intereses;
+    };
+    OperacionService.prototype.returnAuxiliarCTotal = function () {
+        var auxiliarT = [];
+        var T = 0;
+        this.getAuxiliarC().subscribe(function (data) {
+            for (var key in data.datos) {
+                T += data.datos[key].desarrolloMercado + data.datos[key].desarrolloProducto;
+            }
+            auxiliarT.push(T);
+        });
+        return auxiliarT;
     };
     OperacionService.prototype.getAuxiliares = function () {
         var x = {
@@ -7208,6 +7275,20 @@ var OperacionService = (function () {
     };
     OperacionService.prototype.addAlmacen = function (x) {
         return this.http.post('operacion/registerAlmacen/', x, this.headers).map(function (res) { return res.json(); });
+    };
+    OperacionService.prototype.getAlmacen = function () {
+        var x = {
+            Balance_numeroPeriodo: localStorage.getItem('numeroPeriodo'),
+            Proyecto_idProyecto: localStorage.getItem('idProyecto')
+        };
+        return this.http.post('operacion/getAlmacen/', x, this.headers).map(function (res) { return res.json(); });
+    };
+    OperacionService.prototype.getInter = function () {
+        var x = {
+            "idProyecto": localStorage.getItem('idProyecto'),
+            "numeroPeriodo": parseInt(localStorage.getItem('numeroPeriodo'))
+        };
+        return this.http.post('prestamo/getIntereses/', x, this.headers).map(function (res) { return res.json(); });
     };
     return OperacionService;
 }());
