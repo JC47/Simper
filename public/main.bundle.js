@@ -2993,7 +2993,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-12\">\r\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\r\n<hr>\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-6\" style=\"height:300px\" *ngFor=\"let zona of graficas\" >\r\n    <div class=\"row\">\r\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\r\n\r\n  <div class=\"col-12\" style=\"height:250px;\">\r\n    <ngx-charts-line-chart\r\n         [scheme]=\"colorScheme\"\r\n         [results]=\"zona.graf\"\r\n         xAxis=\"true\"\r\n         legendTitle=\"Productos\"\r\n         yAxis=\"true\"\r\n         legend=\"true\"\r\n         showXAxisLabel=\"true\"\r\n         showYAxisLabel=\"true\"\r\n         xAxisLabel=\"Periodos\"\r\n         yAxisLabel=\"Demanda Potencial\"\r\n         autoScale=\"true\">\r\n       </ngx-charts-line-chart>\r\n  </div>\r\n    </div>\r\n\r\n\r\n\r\n\r\n  </div>\r\n\r\n</div>\r\n"
+module.exports = "<div class=\"col-12\">\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\n<hr>\n</div>\n\n\n<div class=\"row\">\n  <div class=\"col-6\" style=\"height:300px\" *ngFor=\"let zona of graficas\" >\n    <div class=\"row\">\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\n\n  <div class=\"col-12\" style=\"height:250px;\">\n    <ngx-charts-line-chart\n         [scheme]=\"colorScheme\"\n         [results]=\"zona.graf\"\n         xAxis=\"true\"\n         legendTitle=\"Productos\"\n         yAxis=\"true\"\n         legend=\"true\"\n         showXAxisLabel=\"true\"\n         showYAxisLabel=\"true\"\n         xAxisLabel=\"Periodos\"\n         yAxisLabel=\"Demanda Potencial\"\n         autoScale=\"true\">\n       </ngx-charts-line-chart>\n  </div>\n    </div>\n\n\n\n\n  </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -3815,9 +3815,15 @@ var FinanciamientoComponent = (function () {
             monto: cantidad.monto
         };
         this._creditoService.solicitarCredito(x).subscribe(function (data) {
-            if (data.success) {
-                _this.openModalConf = false;
-                _this.verAmortizacion(cantidad.idCredito);
+            if (data.limite == 1) {
+                alert("Rebasaste el numero de creditos permitidos");
+            }
+            else {
+                _this._creditoService.insertarAmortizacion(x).subscribe(function (data2) {
+                    if (data2.success) {
+                        _this.verAmortizacion(cantidad.idCredito);
+                    }
+                });
             }
         });
     };
@@ -7825,7 +7831,7 @@ var UsuarioCreditoService = (function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
             'Content-Type': 'application/json'
         });
-        return this.http.post('prestamo/amortizacioncreditobalance/', x, headers).map(function (res) { return res.json(); });
+        return this.http.post('prestamo/validacreditos/', x, headers).map(function (res) { return res.json(); });
     };
     UsuarioCreditoService.prototype.eliminarCredito = function (x) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
@@ -7849,6 +7855,12 @@ var UsuarioCreditoService = (function () {
         return tabla;
     };
     UsuarioCreditoService.prototype.verTabla = function (x) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        return this.http.post('prestamo/veramortizacion/', x, headers).map(function (res) { return res.json(); });
+    };
+    UsuarioCreditoService.prototype.insertarAmortizacion = function (x) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
             'Content-Type': 'application/json'
         });

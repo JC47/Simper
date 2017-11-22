@@ -109,8 +109,6 @@ router.post('/final', (req, res, next) => {
     IVAGastos += getGastos(auxCompleto);
     compraM += getCompraM(auxCompleto);
 
-    console.log("Perro",);
-
     //prestamos
     var cantidadPrestada = 0;
     var cantidadPrestadaAmenosAnio = 0;
