@@ -42,6 +42,7 @@ export class FinanciamientoComponent implements OnInit {
       monto:cantidad.monto
     };
     this._creditoService.solicitarCredito(x).subscribe(data => {
+        console.log("Respuesta de validacion",data)
         if(data.limite == 1){
           alert("Rebasaste el numero de creditos permitidos");
         }

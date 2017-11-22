@@ -258,6 +258,8 @@ var idCredito = req.body.idCredito;
 var idProyecto = req.body.idProyecto;
 var numeroPeriodo = req.body.numeroPeriodo;
 var monto = req.body.monto;
+
+console.log(req.body);
 var fina;
 var interes;
 var pago;
@@ -298,7 +300,7 @@ Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCr
       for (var i = 0; i < pagoTotal.length; i++) {
         pagoT.push(monto*((pagoTotal[i].pagosCredito)/(100)));
       }
-
+//      console.log(pagoT);
       for (var i = 0; i < pagoT.length; i++) {
             console.log("pagoT: "+pagoT[i]);
       }
@@ -309,34 +311,6 @@ Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCr
         return console.log("ok");
       }
   })
-  //sirve para insertar la cantidad a descontar si existe un pago anticipado en el credito pedido
-  //se registra en creditobalance: anticipo
-/*  .then(function () {
-    if (pagoAnticipado==1) {
-       anticipo = 0;
-    }else {
-       anticipo = monto*((pagoAnticipado)/(100));
-    }
-    return console.log("ok");
-  })
-  */
-  //solo sirve para insertar en creditobalance
-  // .then(function () {
-  //   var json = {
-  //     "credito_idCredito":idCredito,
-  //     "Proyectos_idProyecto":idProyecto,
-  //     "numeroPeriodo":numeroPeriodo,
-  //     "monto":monto,
-  //     "anticipo": anticipo
-  //   }
-  //   if(fina.length > 0){
-  //     return prestamo.updateCreditoBalance(json,idProyecto,numeroPeriodo,idCredito);
-  //   }
-  //   else{
-  //
-  //     return prestamo.addCreditoBalance(json);
-  //   }
-  // })
   .then(function () {
     console.log("pagoAnticipado: "+pagoAnticipado);
     for (var i = 0; i < pagoTotal.length; i++) {
