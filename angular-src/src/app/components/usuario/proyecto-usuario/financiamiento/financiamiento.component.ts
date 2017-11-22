@@ -42,9 +42,15 @@ export class FinanciamientoComponent implements OnInit {
       monto:cantidad.monto
     };
     this._creditoService.solicitarCredito(x).subscribe(data => {
-        if(data.success){
-          this.openModalConf=false;
-          this.verAmortizacion(cantidad.idCredito);
+        if(data.limite == 1){
+          alert("Rebasaste el numero de creditos permitidos");
+        }
+        else{
+          this._creditoService.insertarAmortizacion(x).subscribe(data2 =>{
+            if(data2.success){
+              this.verAmortizacion(cantidad.idCredito);
+            }
+          });
         }
     });
   }
