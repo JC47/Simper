@@ -109,7 +109,8 @@ productosZonaSinDesGraf:any;
       this.maquinariasGraf=this.getGrafMaquinaria(this.maquinarias);
       this.productosZonaSinDesGraf=this.grafZonaSinDes(this.productosZonaSinDesarrollar);
       this.productosZonaEnDesGraf=this.grafZonaEnDes(this.productosZonaEnDesarrollo);
-      console.log("graf",this.productosZonaEnDesGraf);
+      this.productosZonaDesGraf=this.grafZonaDes(this.productosZonaDesarrollados);
+      console.log("graf",this.productosZonaEnDesarrollo);
 
       this.pasivo= [
         {
@@ -276,6 +277,7 @@ this.single4 = [
     for(let zona of zonas){
       let zonaTemp:any={
         nombreZona:zona.nombreZona,
+        idZona:zona.idZona,
         productos:[]
       }
 
@@ -283,10 +285,11 @@ this.single4 = [
       for(let producto of zona.productosEnDes){
         zonaTemp.productos.push({
           graf:[{
-            "name":producto.idProducto,
-            "value":null
+            "name":this.getNameById(producto.idProducto),
+            "value":producto.periodosDes
           }],
-          max:3
+          max:producto.tiempoDes,
+          idProducto:producto.idProducto
         })
       }
 
@@ -301,6 +304,19 @@ this.single4 = [
   }
 
 
+  getCosto(idZona,idProducto){
+    for(let zona of this.zonas){
+      if(zona.idZona == idZona){
+        for(let producto of zona.productos){
+          if(producto.Producto_idProducto == idProducto){
+            return producto.costoDes;
+          }
+        }
+      }
+    }
+    return 0;
+  }
+
   grafZonaSinDes(zonas){
     let data:any[]=[];
 
@@ -313,6 +329,37 @@ this.single4 = [
 
 
       for(let producto of zona.productosSinDes){
+        zonaTemp.productos.push({
+          graf:[{
+            "name":this.getNameById(producto),
+            "value":0
+          }],
+          max:2
+        })
+      }
+
+      data.push(zonaTemp);
+
+
+    }
+    console.log("grafZona SIn Des",data)
+    return data;
+
+  }
+
+
+  grafZonaDes(zonas){
+    let data:any[]=[];
+
+
+    for(let zona of zonas){
+      let zonaTemp:any={
+        nombreZona:zona.nombreZona,
+        productos:[]
+      }
+
+
+      for(let producto of zona.productosDes){
         zonaTemp.productos.push({
           graf:[{
             "name":this.getNameById(producto),
