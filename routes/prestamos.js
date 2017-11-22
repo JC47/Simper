@@ -230,24 +230,24 @@ Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCr
     if(fina.length > 0){
       return prestamo.updateCreditoBalance(json,idProyecto,numeroPeriodo,idCredito);
     }
-    else{
+    //else{
       //creditobalance
-      if (limite1 == 2 ) {
-        console.log("Límite1 de créditos alcanzado");
-        limitecredito = 1;
-        //return res.json({success: true, msg:"límite de creditos alcanzado"});
-      }else {
-        //amortizacion
-          if (limite2==2) {
-            console.log("Límite2 de créditos alcanzado");
-        limitecredito = 1;
-          //  return res.json({success: true, msg:"límite de creditos alcanzado"});
-          }
+      // if (limite1 == 2 ) {
+      //   console.log("Límite1 de créditos alcanzado");
+      //   limitecredito = 1;
+      //   //return res.json({success: true, msg:"límite de creditos alcanzado"});
+      // }else {
+      //   //amortizacion
+      //     if (limite2==2) {
+      //       console.log("Límite2 de créditos alcanzado");
+      //   limitecredito = 1;
+      //     //  return res.json({success: true, msg:"límite de creditos alcanzado"});
+      //     }
           else {
             return prestamo.addCreditoBalance(json);
           }
-      }
-    }
+    //  }
+  //  }
   })
   .then(function () {
     console.log("pagoAnticipado: "+pagoAnticipado);
@@ -270,9 +270,10 @@ Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCr
   })
   .then(function (json) {
     return prestamo.addAmortizacion(numeroPeriodo,idProyecto,idCredito,json);
-  }).then(function(){
-    return prestamo.getFinanciamientos(idProyecto,numeroPeriodo);
   })
+  // .then(function(){
+  //   return prestamo.getFinanciamientos(idProyecto,numeroPeriodo);
+  // })
 .then(function(){
   res.json({success: true,  msg:"Operacion exitosa"});
   array.length=0;
