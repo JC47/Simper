@@ -146,8 +146,18 @@ module.exports.getCreditosBalance = function(idProyecto){
 //valida 2 creditos por proyecto
 
 //si el resultado es 2 no se le permitirá pedir más créditos
-module.exports.limiteCreditos = function (idProyecto,numeroPeriodo) {
-  var query = "select count(*) as limiteCredito from amortizacion  where Proyecto_idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+" ";
+//filtro 1
+module.exports.limiteCreditos1 = function (idProyecto,numeroPeriodo) {
+  var query = "select count(*) as limiteCredito1 from creditobalance  where Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+" ";
+  return querySql(query);
+}
+
+//valida 2 creditos por proyecto
+
+//si el resultado es 2 no se le permitirá pedir más créditos
+//filtro 2
+module.exports.limiteCreditos2 = function (idProyecto,numeroPeriodo) {
+  var query = "select count(*) as limiteCredito2 from amortizacion  where Proyecto_idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+" ";
   return querySql(query);
 }
 
