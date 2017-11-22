@@ -3829,16 +3829,8 @@ var FinanciamientoComponent = (function () {
             monto: cantidad.monto
         };
         this._creditoService.solicitarCredito(x).subscribe(function (data) {
-            console.log("Respuesta de validacion", data);
-            if (data.limite == 1) {
-                alert("Rebasaste el numero de creditos permitidos");
-            }
-            else {
-                _this._creditoService.insertarAmortizacion(x).subscribe(function (data2) {
-                    if (data2.success) {
-                        _this.verAmortizacion(cantidad.idCredito);
-                    }
-                });
+            if (data.success) {
+                _this.verAmortizacion(cantidad.idCredito);
             }
         });
     };
@@ -7846,7 +7838,7 @@ var UsuarioCreditoService = (function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
             'Content-Type': 'application/json'
         });
-        return this.http.post('prestamo/validacreditos/', x, headers).map(function (res) { return res.json(); });
+        return this.http.post('prestamo/amortizacioncreditobalance/', x, headers).map(function (res) { return res.json(); });
     };
     UsuarioCreditoService.prototype.eliminarCredito = function (x) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
