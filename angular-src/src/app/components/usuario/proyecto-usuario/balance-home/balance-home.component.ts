@@ -103,7 +103,7 @@ productosZonaSinDesGraf:any;
       this.productosEnDesGraf=this.grafProd(this.productosEnDesarrollo);
       console.log( this.productosDesGraf);
       this.productosSinDesGraf=this.grafProdSin(this.productosSinDesarrollar);
-      console.log( this.productosSinDesGraf);
+      console.log("Productos SIn DesGraf",this.productosSinDesGraf);
       this.productosDesGraf=this.grafProdDes(this.productosDesarollados);
       this.demandasGraf=this.getGrafDemanda(this.demandas);
       this.maquinariasGraf=this.getGrafMaquinaria(this.maquinarias);
@@ -262,7 +262,9 @@ this.single4 = [
           "name":producto.nombreProd,
           "value":producto.periodosDes
         }],
-        max:producto.tiempoDes
+        max:producto.tiempoDes,
+        costoDes:producto.costoDes
+
       })
     }
 
@@ -337,6 +339,7 @@ this.single4 = [
     for(let zona of zonas){
       let zonaTemp:any={
         nombreZona:zona.nombreZona,
+        idZona:zona.idZona,
         productos:[]
       }
 
@@ -347,7 +350,8 @@ this.single4 = [
             "name":this.getNameById(producto),
             "value":0
           }],
-          max:2
+          max:2,
+          idProducto:producto
         })
       }
 
@@ -368,6 +372,7 @@ this.single4 = [
     for(let zona of zonas){
       let zonaTemp:any={
         nombreZona:zona.nombreZona,
+        idZona:zona.idZona,
         productos:[]
       }
 
@@ -376,8 +381,9 @@ this.single4 = [
         zonaTemp.productos.push({
           graf:[{
             "name":this.getNameById(producto),
-            "value":0
+            "value":2
           }],
+          idProducto:producto,
           max:2
         })
       }
@@ -402,7 +408,8 @@ this.single4 = [
           "name":producto.nombreProd,
           "value":0
         }],
-        max:producto.tiempoDes
+        max:producto.tiempoDes,
+        costoDes:producto.costoDes
       })
     }
 
@@ -466,7 +473,8 @@ this.single4 = [
           "name":producto.nombreProd,
           "value":producto.tiempoDes
         }],
-        max:producto.tiempoDes
+        max:producto.tiempoDes,
+        costoDes:producto.costoDes
       })
     }
 

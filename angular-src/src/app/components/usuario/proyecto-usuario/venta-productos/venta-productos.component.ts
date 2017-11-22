@@ -5,6 +5,7 @@ import {ZonasService} from '../../../../services/zonas.service';
 import {FormControl, FormGroup, Validators,FormArray} from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import {GraficasService} from '../../../../services/graficas.service';
+import {DashboardService} from '../../../../services/dashboard.service';
 
 @Component({
   selector: 'app-venta-productos',
@@ -44,6 +45,10 @@ export class VentaProductosComponent implements OnInit {
   formsVentas:FormArray[]=[];
   graficas:any[]=[];
   colorScheme:any;
+  demandas:any;
+  maquinarias:any;
+  produccionSelected:any;
+  demandaSelected:any;
   zonaSelected:any={graf:null,nombreZona:null};
 
   @ViewChild('modalProgressVenta') public modalProgressVenta:ModalDirective;
@@ -51,13 +56,15 @@ export class VentaProductosComponent implements OnInit {
   constructor(private _operacionService:OperacionService,
               private _zonasService: ZonasService,
               private _productoService:ProductoService,
-              private _graficasService:GraficasService) {
+              private _graficasService:GraficasService,
+              private _dash:DashboardService) {
     this.zonas=this._graficasService.returnZonas();
     this.productos=this._productoService.returnProductos();
     this.productosOperacion = this._operacionService.returnProductosOperacion();
     this.ventas=this._operacionService.returnAllOperaciones();
-    console.log(this.productosOperacion);
-
+    console.log(this.zonas);
+    this.maquinarias=this._dash.returnMaquinarias();
+    this.demandas=this._dash.returnDemandas();
 
     this.colorScheme = {
        domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
@@ -99,6 +106,10 @@ export class VentaProductosComponent implements OnInit {
   }
 
 openModalVenta(idZona,idProducto){
+  this.selectProduccion(idProducto);
+  this.selectDemanda(idZona,idProducto);
+  console.log(this.demandaSelected)
+  console.log(this.produccionSelected);
   for(let zona of this.graficas){
     if(this.getNameByIdZona(idZona)==zona.nombreZona){
       this.zonaSelected=zona;
@@ -146,6 +157,7 @@ openModalVenta(idZona,idProducto){
   }
 
   selectVenta(venta){
+
     this.openConf=true;
     this.selectedVenta={
       venta:{
@@ -183,6 +195,8 @@ openModalVenta(idZona,idProducto){
       Proyecto_idProyecto:localStorage.getItem('idProyecto')
     }
 
+
+
     this._operacionService.validarAlmacen(x).subscribe(data => {
       if(data.success){
         this.openConfAlmacen=false;
@@ -204,6 +218,34 @@ openModalVenta(idZona,idProducto){
     }
     return "id no encontrado";
 
+  }
+
+  selectProduccion(idProducto){
+    console.log(idProducto)
+    console.log(this.maquinarias);
+    let cantProdTem:number=0;
+    for(let produccion of this.maquinarias){
+      if(produccion.idProducto==idProducto){
+        for(let maquina of produccion.maquinas){
+          cantProdTem=maquina.cantidadProd+cantProdTem;
+          console.log("Maq",maquina);
+        }
+      }
+    }
+    this.produccionSelected=cantProdTem;
+    console.log(this.produccionSelected)
+  }
+
+  selectDemanda(idZona,idProducto){
+    for(let producto of this.demandas){
+      if(producto.idProducto==idProducto){
+        for(let zona of producto.zonas){
+          if(zona.idZona==idZona){
+            this.demandaSelected=zona.demanda;
+          }
+        }
+      }
+    }
   }
 
   getProducto(id){
