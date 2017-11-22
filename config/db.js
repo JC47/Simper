@@ -22,21 +22,21 @@ Promise.promisifyAll(require("mysql/lib/Pool").prototype);
 // });
 
 //Conexion sin contrseña
-var pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'basesimv1'
-});
-
-//Conexion con contrseña
-//
 // var pool = mysql.createPool({
 //     host: 'localhost',
 //     user: 'root',
-//     password: 'root',
+//     password: '',
 //     database: 'basesimv1'
 // });
+
+//Conexion con contrseña
+//
+var pool = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    database: 'basesimv1'
+});
 
 function getSqlConnection() {
     return pool.getConnectionAsync().disposer(function (connection) {
