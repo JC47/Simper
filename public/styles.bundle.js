@@ -62,7 +62,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".btn-floating{\n        position:fixed;\n        bottom:30px;\n        right:30px;\n        border-radius: 30px;\n}\n", ""]);
+exports.push([module.i, ".btn-floating{\r\n        position:fixed;\r\n        bottom:30px;\r\n        right:30px;\r\n        border-radius: 30px;\r\n}\r\n", ""]);
 
 // exports
 
