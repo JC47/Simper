@@ -59,7 +59,7 @@ export class UsuarioCreditoService {
     let headers = new Headers({
       'Content-Type':'application/json'
     });
-    return this.http.post('prestamo/validacreditos/',x,headers).map(res => res.json());
+    return this.http.post('prestamo/amortizacioncreditobalance/',x,headers).map(res => res.json());
   }
 
   eliminarCredito(x){
