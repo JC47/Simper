@@ -324,8 +324,40 @@
         <div class="card-header">
           <h5 class="col-12 text-center">Opciones de Desarrollo de Mercado</h5>
         </div>
+        <div style="overflow-y:scroll; height:200px;oveflow-x:visible">
+          <div class="col-12" *ngFor="let zona of productosZonaEnDesGraf">
+            <h6>{{zona.nombreZona}}</h6>
+            <hr>
+            <div class="row">
+              <div class="col-12" *ngFor="let producto of zona.productos">
+                <div class="row">
+                  <div class="col-6" >
+                    <ngx-charts-pie-grid
+                    [scheme]="colorScheme"
+                    [results]="producto.graf"
+                    designatedTotal="40">
+                    </ngx-charts-pie-grid>
+                  </div>
+                  <div class="col-6">
+                    <div class="row">
+                      <div class="text-left col-12" style="font-size:13px; margin-top:20px">Periodos a desarrollar: {{getTiempo(zona.idZona,producto.idProducto)}} <br></div>
+                      <div class="text-left col-12" style="font-size:13px;margin-top:5px">Costo de Periodo: <br>{{getCosto(zona.idZona,producto.idProducto)}}p</div>
 
-        <div class="col-12">
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+
+
+        <!-- <div class="col-12">
           <div class="row" style="overflow-y:scroll; height:200px;oveflow-x:visible">
 
 
@@ -350,7 +382,7 @@
 
           </div>
 
-        </div>
+        </div> -->
       </blockquote>
     </div>
   </div>
@@ -377,12 +409,12 @@
                     <ngx-charts-pie-grid
                     [scheme]="colorScheme"
                     [results]="producto.graf"
-                    designatedTotal="producto.max">
+                    [designatedTotal]="producto.max">
                     </ngx-charts-pie-grid>
                   </div>
                   <div class="col-6">
                     <div class="row">
-                      <div class="text-left col-12" style="font-size:13px; margin-top:20px">Periodos Desarrollados: <br>{{producto.graf[0].value}}p</div>
+                      <div class="text-left col-12" style="font-size:13px; margin-top:20px">Periodos Desarrollados: <br>{{producto.graf[0].value}} de {{producto.max}}</div>
                       <div class="text-left col-12" style="font-size:13px;margin-top:5px">Costo de Periodo: <br>{{getCosto(zona.idZona,producto.idProducto)}}p</div>
 
                     </div>

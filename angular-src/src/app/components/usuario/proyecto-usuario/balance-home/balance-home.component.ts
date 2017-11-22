@@ -303,6 +303,19 @@ this.single4 = [
 
   }
 
+  getTiempo(idZona,idProducto){
+    for(let zona of this.zonas){
+      if(zona.idZona == idZona){
+        for(let producto of zona.productos){
+          if(producto.Producto_idProducto == idProducto){
+            return producto.tiempoDes;
+          }
+        }
+      }
+    }
+    return 0;
+  }
+
 
   getCosto(idZona,idProducto){
     for(let zona of this.zonas){
