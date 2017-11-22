@@ -82,6 +82,16 @@ export class OperacionService {
     return this.http.post('operacion/productosventa/',x,this.headers).map(res=>res.json());
   }
 
+  returnProductoResultados(){
+    var resul = [];
+    this.getProductosResultados().subscribe(data => {
+      for(let key in data.datos){
+        resul.push(data.datos[key]);
+      }
+    });
+    return resul;
+  }
+
   returnAuxiliares(){
     this.auxiliares.length = 0;
     this.getAuxiliares().subscribe(data => {
@@ -129,6 +139,14 @@ export class OperacionService {
       "Balance_numeroPeriodo":localStorage.getItem('numeroPeriodo')
     }
     return this.http.post('operacion/getauxiliar/',x,this.headers).map(res => res.json());
+  }
+
+  getProductosResultados(){
+    var x = {
+      "idProyecto":localStorage.getItem('idProyecto'),
+      "numeroPeriodo":localStorage.getItem('numeroPeriodo')
+    }
+    return this.http.post('operacion/resultados/',x,this.headers).map(res => res.json());
   }
 
   getAuxiliaresAnteriores(){

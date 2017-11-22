@@ -1,1 +1,88 @@
+<h4 class="text-center">Estado de Resultados</h4>
+<hr>
 
+<table class="table table-bordered table-responsive offset-2">
+  <thead>
+    <tr>
+      <th></th>
+      <th *ngFor="let producto of resultados">{{getNameByIdProducto(producto) }}</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <th>Ventas Netas</th>
+      <td class="text-right" *ngFor="let producto of resultados">{{getVentasNetas(producto) |currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" >{{getTotalVentas() |currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <th>Costo de Ventas</th>
+      <td class="text-right" *ngFor="let producto of resultados">{{getCostoVentas(producto) |currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" >{{getTotalCostosVentas() |currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <th>Utilidad Bruta</th>
+      <td class="text-right" *ngFor="let producto of resultados">{{getUtilidadParcial(producto) |currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" >{{getUtilidadBruta() |currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <th>Costo de distribucion</th>
+      <td class="text-right" *ngFor="let producto of resultados">{{getDistParcial(producto) |currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right">{{getDistTotal() |currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <th>Otros Gastos</th>
+      <td class="text-right" *ngFor="let producto of resultados"> {{getOtrosGastosParcial(producto) |currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right">{{getOtrosGastosTotal() |currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <th>Costo de Administración</th>
+      <td class="text-right" *ngFor="let producto of resultados">{{getAdminParcial(producto) |currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right">{{getAdminTotal() |currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <th>Utilidad en Operación</th>
+      <td class="text-right" *ngFor="let producto of resultados">{{getUtilidadAntesParcial(producto) |currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" >{{getUtilidadAntes() |currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <th>Intereses</th>
+      <td class="text-right" *ngFor="let producto of auxiliares">-</td>
+      <td *ngFor="let aux of auxiliarC">-</td>
+    </tr>
+
+    <tr>
+      <th>Utilidad antes de Impuestos</th>
+      <td class="text-right" *ngFor="let producto of auxiliares">{{producto.Ventas - producto.IVAxVentas - producto.costoVentas - producto.costoDistribucion - producto.costoAdministrativo |currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right">{{getUtilidadAntes() |currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <th>ISR</th>
+      <td *ngFor="let producto of auxiliares">-</td>
+      <td  class="text-right" *ngFor="let aux of auxiliarC">{{getISR() |currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <th>PTU</th>
+      <td *ngFor="let producto of auxiliares">-</td>
+      <td class="text-right" *ngFor="let aux of auxiliarC">{{getPTU() |currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <th>Utilidad del Ejercicio</th>
+      <td *ngFor="let producto of auxiliares">-</td>
+      <td class="text-right" *ngFor="let aux of auxiliarC">{{getUtilidadAntes() - getISR() - getPTU() |currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+
+  </tbody>
+</table>

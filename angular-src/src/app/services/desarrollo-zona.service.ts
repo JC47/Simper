@@ -10,7 +10,6 @@ export class DesarrolloZonaService {
   constructor(private http:Http) { }
 
   comenzarDesarrolloZona(x){
-    console.log(x)
     this.addZona(x).subscribe(data => {
       if(data.success){
         this.getProductosDeZonaEnDesarrollo().subscribe(data => {
@@ -18,12 +17,6 @@ export class DesarrolloZonaService {
             this.productosZonaEnDesarrollo[key$] = data.datos[key$];
           }
         });
-        // this.getProductosDeZonaSinDesarrollar().subscribe(data => {
-        //   console.log(data.datos,2)
-        //   for(let key$ in data.datos){
-        //     this.productosZonaSinDesarrollar[key$] = data.datos[key$];
-        //   }
-        // });
       }
     });
   }
@@ -53,8 +46,9 @@ export class DesarrolloZonaService {
     return this.http.post('demanda/getdemanda',x, {headers}).map(res => res.json());
   }
 
-  cobrarDesarrollo(costoDes){
+  cobrarDesarrollo(costoDes,idProducto){
     var x = {
+      idProducto:idProducto,
       idProyecto:localStorage.getItem('idProyecto'),
       numeroPeriodo:localStorage.getItem('numeroPeriodo'),
       costoDes:costoDes

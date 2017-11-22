@@ -131,7 +131,8 @@ router.post('/undo', (req, res, next) => {
   var numeroPeriodo = req.body.Balance_numeroPeriodo;
   var idProyecto = req.body.Proyectos_idProyecto;
   var idMaquinaria = req.body.Maquinaria_idMaquinaria;
-  Promise.join(auxiliar.getAuxiliar(numeroPeriodo, idProyecto), variable.getIVA(), function(rows,variableIVA){
+  var idProducto = req.body.idProducto;
+  Promise.join(auxiliar.getAuxiliar(numeroPeriodo,idProyecto,idProducto), variable.getIVA(), function(rows,variableIVA){
     var costo = req.body.costo;
     var dep = req.body.dep;
     var IVA = variableIVA[0].valor
@@ -163,7 +164,9 @@ router.post('/undo', (req, res, next) => {
 router.post('/cobrar', (req, res, next) => {
   var numeroPeriodo = req.body.Balance_numeroPeriodo;
   var idProyecto = req.body.Proyectos_idProyecto;
-  Promise.join(auxiliar.getAuxiliar(numeroPeriodo, idProyecto), variable.getIVA(), function(rows,variableIVA){
+  var idProducto = req.body.idProducto;
+
+  Promise.join(auxiliar.getAuxiliar(numeroPeriodo,idProyecto,idProducto), variable.getIVA(), function(rows,variableIVA){
     var IVA = variableIVA[0].valor
     var costo = req.body.costo;
     var dep = req.body.dep;
@@ -171,17 +174,40 @@ router.post('/cobrar', (req, res, next) => {
     var depM = costo*(dep/100);
     var cm = costo + ivaMaq;
     var ivaMensual = ivaMaq/12;
-    var x = {
-      IVACompraMaq:rows[0].IVACompraMaq,
-      compraMaquinaria:rows[0].compraMaquinaria,
-      costoTransformacionMaq:rows[0].costoTransformacionMaq
+    var IVACompraMaq = 0;
+    var compraMaquinaria = 0;
+    var costoTransformacionMaq = 0;
+
+    if(rows.length > 0){
+      IVACompraMaq += rows[0].IVACompraMaq,
+      compraMaquinaria += rows[0].compraMaquinaria,
+      costoTransformacionMaq += rows[0].costoTransformacionMaq
     }
 
-    x.compraMaquinaria = x.compraMaquinaria + cm;
-    x.IVACompraMaq = x.IVACompraMaq - ivaMaq;
-    x.costoTransformacionMaq = x.costoTransformacionMaq + depM;
+    compraMaquinaria += cm;
+    IVACompraMaq -= ivaMaq;
+    costoTransformacionMaq += depM;
 
-    return auxiliar.setAuxiliar(numeroPeriodo,idProyecto,x);
+    var x = {
+      "compraMaquinaria":compraMaquinaria,
+      "IVACompraMaq":IVACompraMaq,
+      "costoTransformacionMaq":costoTransformacionMaq
+    }
+
+    if(rows.length > 0){
+      return auxiliar.setAuxiliar(numeroPeriodo,idProyecto,idProducto,x);
+    }
+    else{
+      var x2 = {
+        "Balance_numeroPeriodo":numeroPeriodo,
+        "Proyectos_idProyecto":idProyecto,
+        "Producto_idProducto":idProducto,
+        "compraMaquinaria":compraMaquinaria,
+        "IVACompraMaq":IVACompraMaq,
+        "costoTransformacionMaq":costoTransformacionMaq
+      }
+      return auxiliar.addAuxiliar(x2);
+    }
   }).then(function () {
     res.json({success:true, msg:"Operacion completa"});
   })

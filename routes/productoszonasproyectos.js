@@ -219,16 +219,20 @@ router.post('/operacionespagardesarrollo', (req, res, next) => {
   var idProyecto = req.body.idProyecto;
   var numPeriodo = req.body.numeroPeriodo;
   var costoDesProd = req.body.costoDes;
+  var idProducto = req.body.idProducto;
 
   Promise.resolve().then(function () {
 //    return productoZonaProyecto.getBalance(idProyecto,numPeriodo);
-      return auxiliar.getAuxiliar(numPeriodo,idProyecto);
+      return auxiliar.getAuxiliar(numPeriodo,idProyecto,idProducto);
   })
   .then(function (rows) {
-    var desMercado = rows[0].desarrolloMercado;
-    var  IVAxPagar = rows[0].IVAPorPagar;
-    var IVAxGtos = rows[0].IVAGastosVenta;
-    var  IVATot = rows[0].IVATotal;
+    var desMercado = 0;
+    var IVAxGtos = 0;
+
+    if(rows.length > 0){
+      desMercado += rows[0].desarrolloMercado;
+      IVAxGtos += rows[0].IVAGastosVenta;
+    }
 
     //IVA por Gatos de Venta
     var IVAxGtosVenta = IVAxGastosVenta(costoDesProd);
@@ -241,7 +245,21 @@ router.post('/operacionespagardesarrollo', (req, res, next) => {
       IVAGastosVenta: (IVAxGtos - IVAxGastosVenta(costoDesProd)),
       desarrolloMercado: desMercado + costoDesProd
     }
-    return auxiliar.setAuxiliar(numPeriodo,idProyecto,json);
+
+    if(rows.length > 0){
+      return auxiliar.setAuxiliar(numPeriodo,idProyecto,idProducto,json);
+    }
+    else{
+      var json2 = {
+        Producto_idProducto:idProducto,
+        Balance_numeroPeriodo:numPeriodo,
+        Proyectos_idProyecto:idProyecto,
+        IVAGastosVenta: (IVAxGtos - IVAxGastosVenta(costoDesProd)),
+        desarrolloMercado: desMercado + costoDesProd
+      }
+      return auxiliar.addAuxiliar(json2);
+    }
+
   })
   .then(function(){
     res.json({success: true, msg:"Operacion exitosa"});

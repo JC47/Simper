@@ -105,7 +105,6 @@ export class BalanceComponent implements OnInit {
               numero: this.periodo
             }
             this.periodos.push(y);
-            this.crearAuxiliar(periodoNuevo,proyecto,dep);
           }
         });
       });
@@ -129,15 +128,6 @@ export class BalanceComponent implements OnInit {
     this.periodo = numero;
     localStorage.setItem('numeroPeriodo', numero);
     this.modalPeriodos.hide();
-  }
-
-  crearAuxiliar(numeroPeriodo,idProyecto,dep){
-    var x = {
-      Proyectos_idProyecto:idProyecto,
-      costoTransformacionMaq:dep,
-      Balance_numeroPeriodo:numeroPeriodo
-    }
-    this._auxiliarService.addAuxiliar(x).subscribe();
   }
 
 

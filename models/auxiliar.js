@@ -1,13 +1,18 @@
 const db = require('../config/db');
 const querySql = db.querySql;
 
-module.exports.getAuxiliar = function(numeroPeriodo,idProyecto){
+module.exports.getAuxiliar = function(numeroPeriodo,idProyecto,idProducto){
+  var sql = "select * from auxiliarcuenta where Balance_numeroPeriodo = "+numeroPeriodo+ " and Proyectos_idProyecto = "+idProyecto+" and Producto_idProducto = "+idProducto+" " ;
+  return querySql(sql);
+}
+
+module.exports.getAuxiliares = function(numeroPeriodo,idProyecto){
   var sql = "select * from auxiliarcuenta where Balance_numeroPeriodo = "+numeroPeriodo+ " and Proyectos_idProyecto = "+idProyecto+" " ;
   return querySql(sql);
 }
 
-module.exports.setAuxiliar = function(numeroPeriodo,idProyecto,data){
-  var sql = "update auxiliarcuenta set ? where Balance_numeroPeriodo = "+numeroPeriodo+ " and Proyectos_idProyecto = "+idProyecto+" " ;
+module.exports.setAuxiliar = function(numeroPeriodo,idProyecto,idProducto,data){
+  var sql = "update auxiliarcuenta set ? where Balance_numeroPeriodo = "+numeroPeriodo+ " and Proyectos_idProyecto = "+idProyecto+" and Producto_idProducto = "+idProducto+" " ;
   return querySql(sql,data);
 }
 
