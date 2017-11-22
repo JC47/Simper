@@ -26,7 +26,7 @@ export class BalanceHomeComponent implements OnInit {
   demandasGraf:any[]=[];
   maquinariasGraf:any;
   data:any;
-  balanceFinal:any;
+  balanceFinal:any=[];
   activos = [];
   pasivos = [];
   selectedTabProd:any="Productos en Desarrollo";
@@ -87,14 +87,16 @@ productosZonaSinDesGraf:any;
     this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
     this.productosZonaSinDesarrollar = this._desarrolloZonaService.returnProductosDeZonaSinDesarrollar();
     this.productosZonaEnDesarrollo = this._desarrolloZonaService.returnProductosDeZonaEnDesarrollo();
+    console.log("Zona en des",this.productosZonaEnDesarrollo)
     this.productosZonaDesarrollados = this._desarrolloZonaService.returnProductosDeZonaDesarrollados();
     this.demandas=this._dash.returnDemandas();
+    this.balanceFinal=this._balanceService.returnBalance();
     this.maquinarias=this._dash.returnMaquinarias();
     this.activos = this._balanceService.returnActivos();
     this.pasivos = this._balanceService.returnPasivos();
       this.zonas=this._demandaService.returnZonasNormales();
 
-    console.log(this.activo,this.pasivos);
+    console.log(this.activos,this.pasivos);
 
     setTimeout(()=>{
 
@@ -107,8 +109,7 @@ productosZonaSinDesGraf:any;
       this.maquinariasGraf=this.getGrafMaquinaria(this.maquinarias);
       this.productosZonaSinDesGraf=this.grafZonaSinDes(this.productosZonaSinDesarrollar);
       this.productosZonaEnDesGraf=this.grafZonaEnDes(this.productosZonaEnDesarrollo);
-
-
+      console.log("graf",this.productosZonaEnDesGraf);
 
       this.pasivo= [
         {
@@ -134,7 +135,7 @@ productosZonaSinDesGraf:any;
         }
 
       ];
-      console.log("pasivo",this.pasivo)
+      console.log(this.balanceFinal)
 
 
 
@@ -208,7 +209,7 @@ this.single2 = [
 this.single3 = [
   {
     "name": "Germany",
-    "value": 8940000
+    "value": 0
   }
 ];
 
@@ -241,7 +242,7 @@ this.single4 = [
   grafActivos(){
     var act = [];
     console.log("Antes",this.activos)
-    
+
     for(let key in this.activos){
       act.push({"name":"Activo","value":this.activos[key]});
     }
@@ -283,7 +284,7 @@ this.single4 = [
         zonaTemp.productos.push({
           graf:[{
             "name":producto.idProducto,
-            "value":1
+            "value":null
           }],
           max:3
         })
@@ -311,10 +312,10 @@ this.single4 = [
       }
 
 
-      for(let producto of zona.productosEnDes){
+      for(let producto of zona.productosSinDes){
         zonaTemp.productos.push({
           graf:[{
-            "name":producto.idProducto,
+            "name":this.getNameById(producto),
             "value":0
           }],
           max:2
@@ -479,7 +480,7 @@ this.single4 = [
   getProvedores(){
     let item = 0;
     for(let key in this.balanceFinal){
-      item += this.balanceFinal[key].imptosPorPagar;
+      item += this.balanceFinal[key].proveedores;
     }
     return item;
   }

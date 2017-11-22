@@ -6,29 +6,29 @@
         [results]="pasivo">
       </ngx-charts-advanced-pie-chart> -->
 
-      <table class="table table-sm">
+      <table class="table table-sm" *ngFor= "let balance of balanceFinal">
         <tr>
           <th colspan="2" class="text-center">Pasivo</th>
         </tr>
         <tr>
           <td>IVA por Enterar</td>
-          <td></td>
+          <td>{{balance.IVAPorEnterar}}</td>
         </tr>
         <tr>
           <td>Proveedores</td>
-          <td></td>
+          <td>{{balance.proveedores}}</td>
         </tr>
         <tr>
           <td>Impuestos por Pagar</td>
-          <td></td>
+          <td>{{balance.imptosPorPagar}}</td>
         </tr>
         <tr>
           <td>Prestamos Más de un Año</td>
-          <td></td>
+          <td>{{balance.prestamosMasAnio}}</td>
         </tr>
         <tr>
           <td>Prestamos Menos de un Año</td>
-          <td></td>
+          <td>{{balance.prestamosMenosAnio}}</td>
         </tr>
       </table>
   </div>
@@ -36,7 +36,7 @@
   <div class="col-lg-6 col-sm-12 " style="height:200px;">
     <!-- <ngx-charts-bar-horizontal
           [scheme]="colorScheme"
-          [results]="pasivo"
+          [results]="activos"
           xAxis="true"
           yAxis="true"
           showXAxisLabel="true"
@@ -45,29 +45,33 @@
           xAxisLabel="Demnada Potencial"
           yAxisLabel="Productos">
         </ngx-charts-bar-horizontal> -->
-        <table class="table table-sm">
+        <!-- <ngx-charts-advanced-pie-chart
+            [scheme]="colorScheme"
+            [results]="activos">
+          </ngx-charts-advanced-pie-chart> -->
+        <table class="table table-sm" *ngFor= "let balance of balanceFinal">
           <tr>
             <th colspan="2" class="text-center">Activo</th>
           </tr>
           <tr>
             <td>Caja y Bancos</td>
-            <td></td>
+            <td>{{balance.cajaBancos}}</td>
           </tr>
           <tr>
             <td>Cuentas Por Cobrar</td>
-            <td></td>
+            <td>{{balance.cuentasPorCobrar}}</td>
           </tr>
           <tr>
             <td>IVA Acreditable</td>
-            <td></td>
+            <td>{{balance.IVAAcreditable}}</td>
           </tr>
           <tr>
             <td>Almacen de Articulo Terminado</td>
-            <td></td>
+            <td>{{balance.almacenArtTerm}}</td>
           </tr>
           <tr>
             <td>Almacen de Materiales</td>
-            <td></td>
+            <td>{{balance.almacenMateriales}}</td>
           </tr>
         </table>
   </div>
@@ -337,39 +341,36 @@
 
         <div class="col-12">
           <div class="row" style="overflow-y:scroll; height:200px;oveflow-x:visible">
-            <div class="col-6" >
-              <ngx-charts-pie-grid
 
-              [scheme]="colorScheme"
-              [results]="single3"
-              designatedTotal="2000000">
-              </ngx-charts-pie-grid>
 
+            <div class="col-12" *ngFor="let zona of productosZonaSinDesGraf">
+              <h6>{{zona.nombreZona}}</h6>
+              <hr>
+              <div class="row">
+                <div class="col-6" *ngFor="let producto of zona.productos">
+                  <ngx-charts-pie-grid
+                  [scheme]="colorScheme"
+                  [results]="producto.graf"
+                  designatedTotal="40">
+                  </ngx-charts-pie-grid>
+
+
+                </div>
+              </div>
+
+              <!-- <div class="col-6" *ngFor="let producto of productosSinDesGraf" >
+                <ngx-charts-pie-grid
+
+                [scheme]="colorScheme"
+                [results]="producto.graf"
+                [designatedTotal]="producto.max">
+                </ngx-charts-pie-grid>
+
+              </div> -->
             </div>
 
-            <div class="col-6" style="height:auto">
 
 
-              <ngx-charts-pie-grid
-
-              [scheme]="colorScheme"
-              [results]="single3"
-              designatedTotal="2000000">
-              </ngx-charts-pie-grid>
-
-            </div>
-
-            <div class="col-6" style="height:auto">
-
-
-              <ngx-charts-pie-grid
-
-              [scheme]="colorScheme"
-              [results]="single3"
-              designatedTotal="2000000">
-              </ngx-charts-pie-grid>
-
-            </div>
           </div>
 
         </div>
@@ -389,27 +390,30 @@
           <h5 class="col-12 text-center">Mercados en Desarrollo</h5>
         </div>
 
-        <div class="col-12">
-          <div class="row" style="overflow-y:scroll; height:200px;oveflow-x:visible">
+        <div class="col-12" *ngFor="let zona of productosZonaEnDesGraf">
+          <h6>{{zona.nombreZona}}</h6>
+          <hr>
+          <div class="row">
+            <div class="col-6" *ngFor="let producto of zona.productos">
+              <ngx-charts-pie-grid
+              [scheme]="colorScheme"
+              [results]="producto.graf"
+              designatedTotal="producto.max">
+              </ngx-charts-pie-grid>
 
 
-            <div class="col-12" *ngFor="let zona of productosZonaEnDesGraf">
-              <h6 class="col-12 text-center">{{zona.nombreZona}}</h6>
-              <hr>
-              <div class="col-6" *ngFor="let producto of zona.productos">
-                {{producto.graf[0].name}}
-                <ngx-charts-pie-grid
-                [scheme]="colorScheme"
-                [results]="producto.graf"
-                [designatedTotal]="producto.max">
-                </ngx-charts-pie-grid>
-              </div>
             </div>
-
-
-
           </div>
 
+          <!-- <div class="col-6" *ngFor="let producto of productosSinDesGraf" >
+            <ngx-charts-pie-grid
+
+            [scheme]="colorScheme"
+            [results]="producto.graf"
+            [designatedTotal]="producto.max">
+            </ngx-charts-pie-grid>
+
+          </div> -->
         </div>
       </blockquote>
     </div>

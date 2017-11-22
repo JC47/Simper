@@ -103,6 +103,7 @@ comprar(){
     var y = {
       Balance_numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo')),
       Proyectos_idProyecto:parseInt(localStorage.getItem('idProyecto')),
+      idProducto :this.maqSelectedAdd.Producto_idProducto,
       costo:this.maqSelectedAdd.costo,
       dep:this.maqSelectedAdd.depAcum
     }
@@ -119,6 +120,7 @@ comprar(){
       var y = {
         Balance_numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo')),
         Proyectos_idProyecto:parseInt(localStorage.getItem('idProyecto')),
+        idProducto :this.maqSelectedLess.Producto_idProducto,
         costo:this.maqSelectedLess.costo,
         dep:this.maqSelectedLess.depAcum
       }

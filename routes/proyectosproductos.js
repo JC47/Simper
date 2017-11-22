@@ -181,9 +181,10 @@ router.post('/devolverpagardesarrollo', (req, res, next) => {
   var idProyecto = req.body.idProyecto;
   var numPeriodo = req.body.numeroPeriodo;
   var costoDesProd = req.body.costoDes;
+  var idProducto = req.body.idProducto;
 
   Promise.resolve().then(function () {
-    return auxiliar.getAuxiliar(numPeriodo,idProyecto);
+    return auxiliar.getAuxiliarVenta(numPeriodo,idProyecto,idProducto);
   })
   .then(function (rows) {
     var desProducto = rows[0].desarrolloProducto;
@@ -194,7 +195,7 @@ router.post('/devolverpagardesarrollo', (req, res, next) => {
       desarrolloProducto: unDoDesarrolloProducto(desProducto,costoDesProd)
     }
 
-    return auxiliar.setAuxiliar(numPeriodo,idProyecto,json);
+    return auxiliar.setAuxiliarVenta(numPeriodo,idProyecto,json);
   })
   .then(function(){
     res.json({success: true, msg:"Operacion exitosa"});
@@ -215,21 +216,40 @@ router.post('/operacionespagardesarrollo', (req, res, next) => {
   var idProyecto = req.body.idProyecto;
   var numPeriodo = req.body.numeroPeriodo;
   var costoDesProd = req.body.costoDes;
+  var idProducto = req.body.idProducto;
 
   Promise.resolve().then(function () {
-    return auxiliar.getAuxiliar(numPeriodo,idProyecto);
+    return auxiliar.getAuxiliar(numPeriodo,idProyecto,idProducto);
   })
   .then(function (rows) {
+    var desProducto = 0;
+    var IVAxGtos = 0;
 
-    var desProducto = rows[0].desarrolloProducto;
-    var IVAxGtos = rows[0].IVAGastosVenta;
+    if(rows.length > 0){
+      desProducto += rows[0].desarrolloProducto;
+      IVAxGtos += rows[0].IVAGastosVenta;
+    }
 
 
     var json = {
       IVAGastosVenta: (IVAxGtos - IVAxGastosVenta(costoDesProd)),
-      desarrolloProducto: desProducto + costoDesProd,//desarrolloProducto(desProducto,costoDesProd),
+      desarrolloProducto: desProducto + costoDesProd//desarrolloProducto(desProducto,costoDesProd),
     }
-    return auxiliar.setAuxiliar(numPeriodo,idProyecto,json);
+
+    if(rows.length > 0){
+      return auxiliar.setAuxiliar(numPeriodo,idProyecto,idProducto,json);
+    }
+    else{
+      var json2 = {
+        Producto_idProducto:idProducto,
+        Balance_numeroPeriodo:numPeriodo,
+        Proyectos_idProyecto:idProyecto,
+        IVAGastosVenta: (IVAxGtos - IVAxGastosVenta(costoDesProd)),
+        desarrolloProducto: desProducto + costoDesProd//desarrolloProducto(desProducto,costoDesProd),
+      }
+      return auxiliar.addAuxiliar(json2);
+    }
+
   })
   .then(function(){
     res.json({success: true, msg:"Operacion exitosa"});

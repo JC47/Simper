@@ -81,14 +81,35 @@ router.post('/final', (req, res, next) => {
   var idProyecto = req.body.idProyecto;
   var numeroPeriodoAnterior = req.body.numeroPeriodo;
   var numeroPeriodoActual = req.body.numeroPeriodo + 1;
+  var depMAnterior = 0;
+  var costoTransformacionMaqGlobal = 0;
+  var desarrolloMercadoGlobal = 0;
+  var desarrolloProductoGlobal = 0;
+  var IVAGastos = 0;
+  var compraM = 0;
 
   console.log(idProyecto,numeroPeriodoActual,numeroPeriodoAnterior);
 
   Promise.join(balance.getBalanceById(idProyecto,numeroPeriodoAnterior),
               prestamo.getFinanciamientos(idProyecto,numeroPeriodoActual),
               prestamo.getPagos(idProyecto,numeroPeriodoActual),
-              auxiliar.getAuxiliar(numeroPeriodoActual,idProyecto),
+              auxiliar.getAuxiliares(numeroPeriodoActual,idProyecto),
               auxiliar.getAuxiliaresVenta(numeroPeriodoActual,idProyecto), function(balanceBase,prestamos,pagos,auxCompleto,auxesVentas){
+    //depreciacion del balance anterior
+    depMAnterior = balanceBase[0].maqEquipo * .10;
+
+    //Costo de transformacion de maquinaria global
+    costoTransformacionMaqGlobal = depMAnterior + getTransMaq(auxCompleto);
+
+    //Desarrollos
+    desarrolloMercadoGlobal += getDesarrollosM(auxCompleto);
+    desarrolloProductoGlobal += getDesarrollosP(auxCompleto);
+
+    //Para Caja y Bancos
+    IVAGastos += getGastos(auxCompleto);
+    compraM += getCompraM(auxCompleto);
+
+    console.log("Perro",);
 
     //prestamos
     var cantidadPrestada = 0;
@@ -133,15 +154,16 @@ router.post('/final', (req, res, next) => {
       }
     }
 
-    var IVAxEnterar = getIVAxEnterar(auxCompleto[0],auxesVentas);
+    var IVAxEnterar = getIVAxEnterar(auxCompleto,auxesVentas);
     var proveedores = getProveedores(auxesVentas);
     var salidas = getSalidas(auxesVentas);
-    var maq = balanceBase[0].maqEquipo + (auxCompleto[0].compraMaquinaria+auxCompleto[0].IVACompraMaq);
+    var maq = balanceBase[0].maqEquipo + getMaquinariaBalance(auxCompleto);
     var cuentasPorCobrar = getCuentasPorCobrar(auxesVentas);
     var almacenArtTerm = getAlmacenTerm(auxesVentas);
     var utlidadAcumulada = balanceBase[0].utilidadEjercicio + balanceBase[0].utilidadAcum;
-    var maqEquipo = balanceBase[0].depMaqEquipo + auxCompleto[0].costoTransformacionMaq;
-    var utilidadEjercicio = getUtilidad(auxCompleto[0],auxesVentas)-balanceBase[0].almacenArtTerm-interesesAnticipo-interesesPago;
+    var maqEquipo = balanceBase[0].depMaqEquipo + costoTransformacionMaqGlobal;
+    //auxV,costoTransformacionMaq,desarrolloMercado,desarrolloProducto
+    var utilidadEjercicio = getUtilidad(auxesVentas,costoTransformacionMaqGlobal,desarrolloMercadoGlobal,desarrolloProductoGlobal)-balanceBase[0].almacenArtTerm-interesesAnticipo-interesesPago;
 
 
     //ISR y PTU
@@ -165,7 +187,7 @@ router.post('/final', (req, res, next) => {
     var prestamosMasAnio = balanceBase[0].prestamosMasAnio + cantidadPrestada - PPagar;
     var prestamosMenosAnio = balanceBase[0].prestamosMenosAnio + cantidadPrestadaAmenosAnio - PPagarAmenosAnio;
     var comprasCajaBancos = proveedores*11;
-    var maqYdesarrollos = auxCompleto[0].compraMaquinaria + (-auxCompleto[0].IVAGastosVenta + auxCompleto[0].desarrolloMercado + auxCompleto[0].desarrolloProducto);
+    var maqYdesarrollos = compraM + (-IVAGastos + desarrolloMercadoGlobal + desarrolloProductoGlobal);
     var depE = balanceBase[0].depEdif + (getDepEdif(auxesVentas) * .5);
     var depME = balanceBase[0].depMueblesEnseres + (getDepEdif(auxesVentas) * .5);
     var depT = balanceBase[0].depEqTrans + getDepTrans(auxesVentas);
@@ -241,7 +263,7 @@ function getSalidas(auxV){
   return salidas;
 }
 
-function getUtilidad(aux,auxV){
+function getUtilidad(auxV,costoTransformacionMaq,desarrolloMercado,desarrolloProducto){
     var utilidad = 0;
     var transMaqVentas = 0;
     for (let key in auxV) {
@@ -251,11 +273,11 @@ function getUtilidad(aux,auxV){
       utilidad += (auxV[key].Ventas-auxV[key].IVAxVentas);
       transMaqVentas += auxV[key].costoTransformacionMaq;
     }
-    if(transMaqVentas != aux.costoTransformacionMaq){
-      utilidad -= (aux.costoTransformacionMaq - transMaqVentas);
+    if(transMaqVentas != costoTransformacionMaq){
+      utilidad -= (costoTransformacionMaq - transMaqVentas);
     }
 
-    return (utilidad - aux.desarrolloProducto - aux.desarrolloMercado);
+    return (utilidad - desarrolloProducto - desarrolloMercado);
 }
 
 function getIVAxEnterar(aux,auxV){
@@ -263,9 +285,13 @@ function getIVAxEnterar(aux,auxV){
   var ivaCom = 0;
   var ivaTrans = 0;
   var ivaDist = 0;
-  var ivaMaq = aux.IVACompraMaq;
+  var ivaMaq = 0;
   var ivaAdmin = 0;
-  var ivaGV = aux.IVAGastosVenta;
+  var ivaGV = 0;
+  for(let key in aux){
+    ivaMaq += aux[key].IVACompraMaq;
+    ivaGV += aux[key].IVAGastosVenta;
+  }
   for (let key in auxV) {
     ivaV += auxV[key].IVAxVentas;
     ivaCom += auxV[key].IVACompras;
@@ -296,12 +322,59 @@ function getCuentasPorCobrar(auxV){
   return CompTotal;
 }
 
+function getMaquinariaBalance(auxCompleto) {
+  var mb = 0;
+  for(let key in auxCompleto){
+    mb += (auxCompleto[key].compraMaquinaria+auxCompleto[key].IVACompraMaq);
+  }
+  return mb;
+}
+
 function getAlmacenTerm(auxV){
   var Comp = 0;
   for (let key in auxV) {
       Comp += auxV[key].inventarioFinal;
   }
   return Comp;
+}
+
+function getTransMaq(auxCompleto){
+  var transM = 0;
+  for(let key in auxCompleto){
+    transM += auxCompleto[key].costoTransformacionMaq;
+  }
+  return transM;
+}
+
+function getDesarrollosM(auxCompleto){
+  var i = 0;
+  for(let key in auxCompleto){
+    i+=auxCompleto[key].desarrolloMercado;
+  }
+  return i;
+}
+function getDesarrollosP(auxCompleto){
+  var i = 0;
+  for(let key in auxCompleto){
+    i+=auxCompleto[key].desarrolloProducto;
+  }
+  return i;
+}
+
+function getGastos(auxCompleto){
+  var i = 0;
+  for(let key in auxCompleto){
+    i += auxCompleto[key].IVAGastosVenta;
+  }
+  return i;
+}
+
+function getCompraM(auxCompleto){
+  var i = 0;
+  for(let key in auxCompleto){
+    i += auxCompleto[key].compraMaquinaria;
+  }
+  return i;
 }
 
 function jsonActivos(rows) {

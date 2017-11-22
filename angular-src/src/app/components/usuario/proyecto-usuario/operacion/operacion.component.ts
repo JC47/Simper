@@ -24,6 +24,7 @@ export class OperacionComponent implements OnInit {
   presGlobalCostoDist:boolean=false;
   presGlobalCostoAdmon:boolean=false;
   presGlobalCostoVenta:boolean=false;
+  presOtrosGastos:boolean=false;
 
   constructor(private _productoService:ProductoService,
               private _balanceService:BalanceService,
@@ -159,6 +160,23 @@ export class OperacionComponent implements OnInit {
     }
     return T;
   }
+
+  getTotalMercado(){
+    var T = 0;
+    for(let aux of this.auxiliarC){
+      T+= aux.desarrolloMercado;
+    }
+    return T;
+  }
+
+  getTotalProducto(){
+    var T = 0;
+    for(let aux of this.auxiliarC){
+      T+= aux.desarrolloProducto;
+    }
+    return T;
+  }
+
 
   getUtilidadAntes(){
     var T = 0;
