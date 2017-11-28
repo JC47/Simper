@@ -167,3 +167,41 @@ module.exports.creditosActivos = function (idProyecto,numPeriodo) {
   var query = "select idCredito from amortizacion where Proyecto_idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+" ";
   return querySql(query);
 }
+//obtenemos cuanto dura el préstamo que se pidió
+module.exports.plazoCredito = function (idCredito) {
+  var query = "select count(idCredito) as plazocredito from pagocredito where idCredito = "+idCredito+" ";
+  return querySql(query);
+}
+
+//agregamos el credito seleccionado a una tabla que registra los créditos que tenemos
+module.exports.addCreditoActivo = function (json) {
+  var query = "insert into creditoactivo set ? ";
+  return querySql(query,json);
+}
+//actualiza los valores de creditoactivo
+module.exports.updateCreditoActivo = function (json, idCredito, idProyecto) {
+  var query = "update creditoactivo set ? where idCredito = "+idCredito+" and idProyecto = "+idProyecto+" ";
+  return querySql(query,json);
+}
+
+//borra los valores de creditoactivo
+module.exports.deleteCreditoActivo = function (idCredito,idProyecto) {
+  var query = "delete from creditoactivo where idCredito = "+idCredito+" and idProyecto = "+idProyecto+" ";
+  return querySql(query);
+}
+
+//numero de creditos activos por Proyecto_idProyecto
+module.exports.getCreditosActivos = function (idProyecto) {
+  var query = "select count(idCredito) as creditosactivos from creditoactivo where idProyecto = "+idProyecto+" and activo = 1 ";
+  return querySql(query);
+}
+//Id's de credito activos
+module.exports.getIdCreditosActivos = function (idProyecto) {
+  var query = "select idCredito from creditoactivo where idProyecto = "+idProyecto+" ";
+  return querySql(query);
+}
+//get plazo,activo de creditoactivo
+module.exports.getPlazoActivo = function (idProyecto) {
+  var query = "select * from creditoactivo where idProyecto = "+idProyecto+" ";
+  return querySql(query);
+}
