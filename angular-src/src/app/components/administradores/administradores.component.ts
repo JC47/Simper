@@ -5,6 +5,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 
+
 @Component({
   selector: 'app-administradores',
   templateUrl: './administradores.component.html',
@@ -81,13 +82,14 @@ export class AdministradoresComponent implements OnInit {
 
   }
 
+
   buscaRepetidos(admin){
     for(let admiS of this.administradores){
       if(admin.nombreAdmin+" "+admin.apPat+" "+admin.apMat==admiS.nombreAdmin+" "+admiS.apPat+" "+admiS.apMat){
         return true
       }
 
-      
+
 
     }
 
