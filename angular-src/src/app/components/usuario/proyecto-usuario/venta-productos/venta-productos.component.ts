@@ -6,6 +6,7 @@ import {FormControl, FormGroup, Validators,FormArray} from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import {GraficasService} from '../../../../services/graficas.service';
 import {DashboardService} from '../../../../services/dashboard.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-venta-productos',
@@ -58,6 +59,7 @@ export class VentaProductosComponent implements OnInit {
 
   constructor(private _operacionService:OperacionService,
               private _zonasService: ZonasService,
+              private router:Router,
               private _productoService:ProductoService,
               private _graficasService:GraficasService,
               private _dash:DashboardService) {
@@ -160,9 +162,15 @@ openModalVenta(idZona,idProducto){
         this.ventas = this._operacionService.registerOperacion(x);
       }
       else{
-      this.mensaje=data.msg;
-      this.modalAlerta=true;
-
+        if(data.m){
+          this.mensaje=data.msg;
+          this.modalAlerta=true;
+          this.router.navigate(['Usuario/proyecto/compraMaquinaria']);
+        }
+        else{
+          this.mensaje=data.msg;
+          this.modalAlerta=true;
+        }
       }
     });
   }

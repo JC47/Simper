@@ -208,7 +208,7 @@ router.post('/validateAlmacen', (req,res,next) => {
                 var uniProd = uniVendidas + uniA;
                 console.log(produccionA,uniProd);
                 if(uniProd > produccionA){
-                  res.json({success:false,msg:"Maquinaria Insuficiente"});
+                  res.json({success:false,msg:"Maquinaria Insuficiente, reduce la cantidad a almacenar o compra más maquinaria"});
                 }
                 else{
                   res.json({success:true,msg:"Puedes almacenar"});
@@ -246,10 +246,10 @@ router.post('/validate', (req,res,next) => {
                 var uniProd = uniVendidas + uniAlmacenadas - inventarioInicial + uniVendidasAnteriores;
 
                 if(uniProd > produccionA){
-                  res.json({success:false,msg:"Maquinaria Insuficiente"});
+                  res.json({success:false,msg:"Maquinaria Insuficiente, reduce la cantidad a vender o compra más maquinaria",m:true});
                 }
                 else if(uniVendidas > demandaP){
-                  res.json({success:false,msg:"Demanda Superada"});
+                  res.json({success:false,msg:"Demanda Superada, reduce la cantidad a vender",m:false});
                 }
                 else{
                   res.json({success:true,msg:"Puedes vender"});
