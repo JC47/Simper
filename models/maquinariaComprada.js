@@ -28,9 +28,9 @@ module.exports.updateMaquinariaComprada = function(data){
   return querySql(sql, data)
 }
 
-module.exports.getMaqMaqProyecto = function(idProyecto) {
-  var queryMaqProy = "select * from maquinaria inner join maquinariaproyecto on maquinaria.idMaquinaria = maquinariaproyecto.Maquinaria_idMaquinaria and maquinariaproyecto.Proyectos_idProyecto = ? ";
-  return querySql(queryMaqProy,idProyecto);
+module.exports.getMaqMaqProyecto = function(idProyecto,numeroPeriodo) {
+  var query = "select * from maquinaria inner join maquinariaproyecto on maquinaria.idMaquinaria = maquinariaproyecto.Maquinaria_idMaquinaria and maquinariaproyecto.Proyectos_idProyecto = "+idProyecto+" where maquinariaproyecto.Balance_numeroPeriodo <= "+numeroPeriodo+" ";
+  return querySql(query);
 }
 
 module.exports.addMaquinariaProyecto = function (idProyecto,idMaquinaria,idProducto,cantidadValor,numeroPeriodo) {

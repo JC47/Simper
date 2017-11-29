@@ -23,9 +23,15 @@ router.post('/modify', (req,res,next) => {
   });
 });
 
-router.get('/:id', (req, res, next) => {
+//GET -> POST
+//idProyecto
+//numeroPeriodo
+router.post('/', (req, res, next) => {
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+
   Promise.resolve().then(function () {
-    return maquinariaComprada.getMaqMaqProyecto(req.params.id);
+    return maquinariaComprada.getMaqMaqProyecto(idProyecto,numeroPeriodo);
   }).then( function (data) {
     res.json({success: true, datos:data, msg:"Operacion exitosa"});
   })
