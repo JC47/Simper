@@ -29,16 +29,18 @@ router.post('/addcredito', (req, res, next) => {
   var pago = req.body.pago;
   var pagoAnticipado = req.body.pagoAnticipado;
   var pagosCredito = req.body.pagosCredito;
+  var t = req.body.tipo;
 
   Promise.resolve()
   .then(function () {
-    console.log(pagosCredito);
+    console.log("tipo",t);
     var p = pagosCredito.length;
     var json = {
       "nombreCredito":nombreCredito,
       "montoMin":montoMin,
       "montoMax":montoMax,
       "pago":pago,
+      "tipo":t,
       "pagoAnticipado":pagoAnticipado,
       "plazo":p
     }
@@ -85,7 +87,6 @@ router.post('/modifycredito', (req, res, next) => {
   var montoMax = req.body.montoMax;
   var pagoAnticipado = req.body.pagoAnticipado;
   var pagosTotales = req.body.pagosTotales;
-  var t = req.body.tipo;
 
   Promise.resolve()
   .then(function () {
@@ -94,7 +95,6 @@ router.post('/modifycredito', (req, res, next) => {
       "nombreCredito": nombreCredito,
       "montoMin": montoMin,
       "montoMax": montoMax,
-      "tipo":t,
       "pagoAnticipado": pagoAnticipado
     }
     return prestamo.updateCredito(json,idCredito);
