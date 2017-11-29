@@ -89,6 +89,7 @@ router.post('/modifycredito', (req, res, next) => {
 
   Promise.resolve()
   .then(function () {
+    console.log("tipo",t);
     var json = {
       "nombreCredito": nombreCredito,
       "montoMin": montoMin,
