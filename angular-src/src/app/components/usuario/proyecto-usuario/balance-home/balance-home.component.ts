@@ -87,7 +87,7 @@ productosZonaSinDesGraf:any;
     this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
     this.productosZonaSinDesarrollar = this._desarrolloZonaService.returnProductosDeZonaSinDesarrollar();
     this.productosZonaEnDesarrollo = this._desarrolloZonaService.returnProductosDeZonaEnDesarrollo();
-    console.log("Zona en des",this.productosZonaEnDesarrollo)
+    console.log("Productos desarrolados",this.productosDesGraf,this.productosSinDesGraf)
     this.productosZonaDesarrollados = this._desarrolloZonaService.returnProductosDeZonaDesarrollados();
     this.demandas=this._dash.returnDemandas();
     this.balanceFinal=this._balanceService.returnBalance();
@@ -111,6 +111,7 @@ productosZonaSinDesGraf:any;
       this.productosZonaEnDesGraf=this.grafZonaEnDes(this.productosZonaEnDesarrollo);
       this.productosZonaDesGraf=this.grafZonaDes(this.productosZonaDesarrollados);
       console.log("graf",this.productosZonaEnDesarrollo);
+      console.log("Prtoductos2",this.productosDesarollados,this.productosEnDesarrollo)
 
       this.pasivo= [
         {

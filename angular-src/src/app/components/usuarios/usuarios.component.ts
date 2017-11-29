@@ -15,6 +15,7 @@ import {UsuarioProductoService} from '../../services/usuario-producto.service';
 import {ZonasService} from '../../services/zonas.service';
 import {UsuarioMaquinariaService} from '../../services/usuario-maquinaria.service';
 
+
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
@@ -142,10 +143,6 @@ export class UsuariosComponent implements OnInit {
        return admin.nombreAdmin;
     }
     return "id no encontrado";
-  }
-
-  getProyectos(){
-
   }
 
   ngOnInit() {
@@ -342,7 +339,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   agregarProducto(producto){
-    
+
     var y = {
       idUsuario:this.userSelected.idUsuario,
       idAdministrador:localStorage.getItem('idAdmin'),

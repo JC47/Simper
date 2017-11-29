@@ -14,12 +14,12 @@ Promise.promisifyAll(require("mysql/lib/Pool").prototype);
 // });
 //
 // //Conexion sin contrseña
-var pool = mysql.createPool({
-    host: 'us-cdbr-iron-east-05.cleardb.net',
-    user: 'bf32bf5a7a9eae',
-    password: '966fbda0',
-    database: 'heroku_7be18966ed8d82e'
-});
+// var pool = mysql.createPool({
+//     host: 'us-cdbr-iron-east-05.cleardb.net',
+//     user: 'bf32bf5a7a9eae',
+//     password: '966fbda0',
+//     database: 'heroku_7be18966ed8d82e'
+// });
 
 //Conexion sin contrseña
 // var pool = mysql.createPool({
@@ -32,12 +32,12 @@ var pool = mysql.createPool({
 //Conexion con contrseña
 //
 
-// var pool = mysql.createPool({
-//     host: 'localhost',
-//     user: 'root',
-//     password: 'root',
-//     database: 'basesimv1'
-// });
+var pool = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    database: 'basesimv1'
+});
 
 // var pool = mysql.createPool({
 //     host: 'localhost',

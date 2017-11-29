@@ -172,8 +172,20 @@
                   </div>
 
                   <div class="row">
-                    <div class="col-12" *ngFor="let producto of productosDesGraf">
-                      <div class="row">
+                    <div class="col-4" *ngFor="let producto of productosDesarollados">
+                      <div class="card">
+
+                          <div class="col-12" style="margin-top:10px">
+                            <img src="assets/img/box.png"  class="img-fluid">
+                          </div>
+
+
+                          <span class="col-12 text-center">{{getNameById(producto.idProducto)}}</span>
+
+
+
+                      </div>
+                      <!-- <div class="row">
                         <div class="col-6" >
                           <ngx-charts-pie-grid
                           [scheme]="colorScheme"
@@ -188,34 +200,14 @@
 
                           </div>
                         </div>
-                      </div>
+                      </div> -->
 
 
                     </div>
 
                   </div>
 
-                  <!-- <div class="col-12">
-                    <div class="row" style="overflow-y:scroll;oveflow-x:hidden; height:200px">
-                      <div class="col-6" *ngFor="let producto of productosDesGraf">
-                        <ngx-charts-pie-grid
-                        [scheme]="colorScheme"
-                        [results]="producto.graf"
-                        [designatedTotal]="producto.max">
-                        </ngx-charts-pie-grid>
-
-                      </div>
-
-                    </div>
-
-                  </div> -->
-
-
-
-
-
-
-                </blockquote>
+            </blockquote>
               </div>
             </div>
           </div>
