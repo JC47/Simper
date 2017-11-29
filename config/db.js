@@ -13,6 +13,7 @@ Promise.promisifyAll(require("mysql/lib/Pool").prototype);
 //     database: 'heroku_7be18966ed8d82e'
 // });
 //
+<<<<<<< HEAD
 // //Conexion sin contrseña
 // var pool = mysql.createPool({
 //     host: 'us-cdbr-iron-east-05.cleardb.net',
@@ -20,6 +21,15 @@ Promise.promisifyAll(require("mysql/lib/Pool").prototype);
 //     password: '966fbda0',
 //     database: 'heroku_7be18966ed8d82e'
 // });
+=======
+//Conexion sin contrseña
+var pool = mysql.createPool({
+    host: 'us-cdbr-iron-east-05.cleardb.net',
+    user: 'bf32bf5a7a9eae',
+    password: '966fbda0',
+    database: 'heroku_7be18966ed8d82e'
+});
+>>>>>>> df686eee5f72855a86e35d9b384d3c85d1b8225d
 
 //Conexion sin contrseña
 // var pool = mysql.createPool({
@@ -31,6 +41,7 @@ Promise.promisifyAll(require("mysql/lib/Pool").prototype);
 
 //Conexion con contrseña
 //
+<<<<<<< HEAD
 
 var pool = mysql.createPool({
     host: 'localhost',
@@ -39,13 +50,14 @@ var pool = mysql.createPool({
     database: 'basesimv1'
 });
 
+=======
+>>>>>>> df686eee5f72855a86e35d9b384d3c85d1b8225d
 // var pool = mysql.createPool({
 //     host: 'localhost',
 //     user: 'root',
-//     password: 'root',
+//     password: '',
 //     database: 'basesimv1'
 // });
-
 
 function getSqlConnection() {
     return pool.getConnectionAsync().disposer(function (connection) {
