@@ -162,6 +162,7 @@ openModalVenta(idZona,idProducto){
       else{
       this.mensaje=data.msg;
       this.modalAlerta=true;
+      this.openConf=true;
 
       }
     });
@@ -216,9 +217,9 @@ openModalVenta(idZona,idProducto){
         this.almacen = this._operacionService.registerAlmacen(x);
       }
       else{
-        alert(data.msg);
-        this.openConfAlmacen=false;
+        this.mensaje=data.msg
         this.openVenta=true;
+        this.modalAlerta=true;
       }
     });
 
