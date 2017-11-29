@@ -36,6 +36,8 @@ export class VentaProductosComponent implements OnInit {
   openConfAlmacen:boolean=false;
 
   ventas:any;
+  mensaje:any;
+  modalAlerta:any=false;
   vendeForm:FormGroup[]=[];
   openVenta:boolean=false;
   vendiendo:boolean=false;
@@ -133,8 +135,8 @@ openModalVenta(idZona,idProducto){
       this.produciendo=true;
       this.vendiendo=false;
       this.openLoad=true;
-      setTimeout(()=>this.openLoad=false, 2000);
-      setTimeout(()=>{this.produciendo=false}, 2000);
+      setTimeout(()=>this.openLoad=false, 1000);
+      setTimeout(()=>{this.produciendo=false}, 1000);
   }
 
   cobrarVenta(){
@@ -158,7 +160,9 @@ openModalVenta(idZona,idProducto){
         this.ventas = this._operacionService.registerOperacion(x);
       }
       else{
-        alert(data.msg);
+      this.mensaje=data.msg;
+      this.modalAlerta=true;
+
       }
     });
   }
@@ -214,6 +218,7 @@ openModalVenta(idZona,idProducto){
       else{
         alert(data.msg);
         this.openConfAlmacen=false;
+        this.openVenta=true;
       }
     });
 

@@ -99,7 +99,7 @@ productosZonaSinDesGraf:any;
     console.log(this.activos,this.pasivos);
 
     setTimeout(()=>{
-
+      console.log("prod des zONA",this.productosZonaDesarrollados,this.productosZonaSinDesarrollar)
       this.productosEnDesGraf=this.grafProd(this.productosEnDesarrollo);
       console.log( this.productosDesGraf);
       this.productosSinDesGraf=this.grafProdSin(this.productosSinDesarrollar);

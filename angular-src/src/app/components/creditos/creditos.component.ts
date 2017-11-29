@@ -114,7 +114,7 @@ export class CreditosComponent implements OnInit {
       msg: `Usuario "${(credito.nombreCredito)}" agregado`,
       timeout: 2000
     });
-
+    console.log(credito)
     this.creditos = this._creditosService.guardarCredito(credito);
   }
 

@@ -12,14 +12,14 @@
       <div class="row" *ngFor="let producto of productosOperacion" style="margin-bottom:50px">
         <div class="col-12 card card-inverse card-success  text-center" style="margin-bottom:20px">
           <div class="card-block">
-            <img class="img-fluid col-6" src="assets/img/box.png" alt="Card image cap">
-            <blockquote class="card-blockquote">
+              <blockquote class="card-blockquote">
               <br>
-              <h3>{{getNameByIdProducto(producto.idProducto)}}</h3>
+              <h3 class="col-12 text center">{{getNameByIdProducto(producto.idProducto)}}</h3>
+                                  <h5 class="col-12 text-center">Opciones de Venta</h5>
               <form [formGroup]="ventasForm" (ngSubmit)="selectVenta(ventasForm.value,producto.idProducto)" class="offset-1"  >
-              <div class="col-12 " >
+              <div class="col-12" >
                     <!-- <option *ngFor="let option of producto.zonas" value={{option}}>{{getNameByIdZona(option)}}</option> -->
-                    <h5 class="col-12 text-center">Opciones de Venta</h5>
+
                     <div class="container" *ngFor="let option of producto.zonas" style="margin-top:30px">
                       <div class="row">
                         <div class="col-6 text-center">
@@ -102,7 +102,7 @@
     <tr *ngFor="let venta of ventas">
       <td>{{getNameByIdProducto(venta.Producto_idProducto)}}</td>
       <td>{{getNameByIdZona(venta.Zona_idZonas)}}</td>
-      <td class="col-12 text-right">{{venta.unidadesVendidas}}</td>
+      <td class="col-12 text-right">{{venta.unidadesVendidas|number:'1.0-0'}}</td>
     </tr>
   </tbody>
 </table>
@@ -122,7 +122,7 @@
 <tbody>
 <tr *ngFor="let alma of almacen">
 <td class="col-12 text-center">{{getNameByIdProducto(alma.Producto_idProducto)}}</td>
-<td class="col-12 text-right">{{alma.unidadesAlmacenadas}}</td>
+<td class="col-12 text-right">{{alma.unidadesAlmacenadas|number:'1.0-0'}}</td>
 </tr>
 </tbody>
 </table>
@@ -143,7 +143,7 @@
 
 
 
-  <ngl-modal header="Confirmación"  [(open)]="openVenta" size="x-small" directional="false">
+  <ngl-modal header="Confirmación de Venta"  [(open)]="openVenta" size="x-small" directional="false">
 
     <div body>
       <h5 class="col-12 text-center">Venta de {{getNameByIdProducto(this.ventasForm.controls['idProducto'].value)}}  en {{zonaSelected.nombreZona}} </h5>
@@ -164,8 +164,8 @@
            </ngx-charts-line-chart>
       </div> -->
 
-      <h5>Capacidad de Producción en Unidades: <b>{{produccionSelected}}</b></h5>
-      <h5>Demanda de Periodo:<b>{{demandaSelected|number:'1.0-0'}}</b> </h5>
+      <h5 style="margin-top:15px">Capacidad de Producción en Unidades: <b>{{produccionSelected|number:'1.0-0'}}</b></h5>
+      <h5 >Demanda de Periodo:<b>{{demandaSelected|number:'1.0-0'}}</b> </h5>
           <form [formGroup]="ventasForm" (ngSubmit)="selectVenta(ventasForm.value,producto.idProducto)" class="offset-1"  >
           <div class="form-group row">
 
@@ -196,7 +196,7 @@
 
     <div body>
       <div class="col-12 text-center container">
-        <h5 style="margin-bottom:30px">¿Estas seguro que deseas almacenar {{selectedAlmacen.almacen}} unidades del producto "{{getNameByIdProducto(selectedAlmacen.idProducto)}}"?</h5>
+        <h5 style="margin-bottom:30px">¿Estas seguro que deseas almacenar {{selectedAlmacen.almacen|number:'1.0-0'}} unidades del producto "{{getNameByIdProducto(selectedAlmacen.idProducto)}}"?</h5>
         <div class="row">
           <div class="col-4 offset-4">
             <img  src="assets/img/machine.png" class="img-fluid">
@@ -231,21 +231,12 @@
     <ngl-modal header="Confirmación"  [(open)]="openConf" size="x-small" directional="false">
 
       <div body>
-        <div class="col-12 text-center container">
-          <h5 style="margin-bottom:30px">¿Estas seguro que deseas vender el producto "{{getNameByIdProducto(selectedVenta.idProducto)}}", en la zona "{{getNameByIdZona(selectedVenta.venta.idZona)}}" ?</h5>
-          <div class="row">
-            <div class="col-3 offset-2">
-              <img  src="assets/img/machine.png" class="img-fluid">
+        <div class="container">
+          <h5 class="col-12 text-center" style="margin-bottom:30px">¿Estas seguro que deseas vender {{selectedVenta.venta.cantidadVenta}} unidades del producto "{{getNameByIdProducto(selectedVenta.idProducto)}}", en la zona "{{getNameByIdZona(selectedVenta.venta.idZona)}}" ?</h5>
+            <div class="col-2 offset-5">
+              <img  src="assets/img/box.png" class="img-fluid">
             </div>
-            <div class="col-6 ">
-              <p>
-              <h5 class="text-left"><b>Unidades a Vender: </b> {{ selectedVenta.venta.cantidadVenta }}</h5>
-            </div>
-          </div>
-          <div class="row">
 
-          </div>
-          <br>
         </div>
       </div>
 
@@ -254,3 +245,18 @@
       <button class="btn btn-primary" (click)="cobrarVenta()">Vender</button>
     </ng-template>
       </ngl-modal>
+
+
+
+
+      <ngl-modal header="Confirmación"  [(open)]="modalAlerta" size="x-small" directional="false">
+
+        <div body>
+          <h3 class="col-12 text-center">{{mensaje}}</h3>
+        </div>
+
+        <ng-template ngl-modal-footer>
+        <button class="btn btn-primary col-4 offset-4" (click)="modalAlerta=false">Aceptar</button>
+
+      </ng-template>
+        </ngl-modal>

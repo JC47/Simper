@@ -35,11 +35,14 @@ export class CompraMaquinariaService {
 
 
    getMaquinariaC(){
+     let headers = new Headers({
+       'Content-Type':'application/json'
+     });
      var x = {
        idProyecto:localStorage.getItem('idProyecto'),
        numeroPeriodo:localStorage.getItem('numeroPeriodo')
      }
-    return this.http.post('maquinariacomprada/').map(res => res.json());
+    return this.http.post('maquinariacomprada/',x,{headers}).map(res => res.json());
    }
 
   compraMaquinaria(x,y){
