@@ -35,7 +35,11 @@ export class CompraMaquinariaService {
 
 
    getMaquinariaC(){
-    return this.http.get('maquinariacomprada/'+localStorage.getItem('idProyecto')).map(res => res.json());
+     var x = {
+       idProyecto:localStorage.getItem('idProyecto'),
+       numeroPeriodo:localStorage.getItem('numeroPeriodo')
+     }
+    return this.http.post('maquinariacomprada/').map(res => res.json());
    }
 
   compraMaquinaria(x,y){

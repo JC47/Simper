@@ -5,6 +5,7 @@ import {ResultadosService} from '../../../../services/resultados.service';
 import {DesarrolloZonaService} from '../../../../services/desarrollo-zona.service';
 import {AuxiliarService} from '../../../../services/auxiliar.service';
 import {BalanceService} from '../../../../services/balance.service';
+import { UsuarioCreditoService } from '../../../../services/usuario-credito.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 
@@ -38,6 +39,7 @@ export class BalanceComponent implements OnInit {
               private _resultadosService:ResultadosService,
               private _desarrolloZona:DesarrolloZonaService,
               private router:Router,
+              private _creditoService:UsuarioCreditoService,
               private _desarrolloProducto:DesarrolloProductoService) {
 
               this.balanceFinal = this._resultadosService.getBalanceFinal();
@@ -110,6 +112,7 @@ export class BalanceComponent implements OnInit {
       });
       this._desarrolloProducto.actualizarPD();
       this._desarrolloZona.actualizarZonasDes();
+      this._creditoService.validarP().subscribe();
     }
   }
 

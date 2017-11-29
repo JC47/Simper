@@ -41,9 +41,15 @@ export class FinanciamientoComponent implements OnInit {
       numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo')),
       monto:cantidad.monto
     };
-    this._creditoService.solicitarCredito(x).subscribe(data => {
-      if(data.success){
-        this.verAmortizacion(cantidad.idCredito);
+    this._creditoService.validarC().subscribe(data1 => {
+      if(data1.limite == 0){
+        this._creditoService.solicitarCredito(x).subscribe(data => {
+          if(data.success){
+            this.verAmortizacion(cantidad.idCredito);
+          }
+        });
+      }else{
+        alert("Limite de creditos excedidos");
       }
     });
   }

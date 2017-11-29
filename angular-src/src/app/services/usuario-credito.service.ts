@@ -29,7 +29,7 @@ export class UsuarioCreditoService {
     let headers = new Headers({
       'Content-Type':'application/json'
     });
-    return this.http.post('usuarioscreditos/register/',credito,headers).map(res => res.json());
+    return this.http.post('usuarioscreditos/register/',credito,{headers}).map(res => res.json());
   }
 
   getCreditosU(idUsuario){
@@ -52,21 +52,21 @@ export class UsuarioCreditoService {
     let headers = new Headers({
       'Content-Type':'application/json'
     });
-    return this.http.post('usuarioscreditos/delete/',credito,headers).map(res => res.json());
+    return this.http.post('usuarioscreditos/delete/',credito,{headers}).map(res => res.json());
   }
 
   solicitarCredito(x){
     let headers = new Headers({
       'Content-Type':'application/json'
     });
-    return this.http.post('prestamo/amortizacioncreditobalance/',x,headers).map(res => res.json());
+    return this.http.post('prestamo/amortizacioncreditobalance/',x,{headers}).map(res => res.json());
   }
 
   eliminarCredito(x){
     let headers = new Headers({
       'Content-Type':'application/json'
     });
-    return this.http.post('prestamo/deletecreditobalance/',x,headers).map(res => res.json());
+    return this.http.post('prestamo/deletecreditobalance/',x,{headers}).map(res => res.json());
   }
 
   visualizarTabla(idCredito){
@@ -89,21 +89,21 @@ export class UsuarioCreditoService {
     let headers = new Headers({
       'Content-Type':'application/json'
     });
-    return this.http.post('prestamo/veramortizacion/',x,headers).map(res => res.json());
+    return this.http.post('prestamo/veramortizacion/',x,{headers}).map(res => res.json());
   }
 
   insertarAmortizacion(x){
     let headers = new Headers({
       'Content-Type':'application/json'
     });
-    return this.http.post('prestamo/veramortizacion/',x,headers).map(res => res.json());
+    return this.http.post('prestamo/veramortizacion/',x,{headers}).map(res => res.json());
   }
 
   verPagosR(x){
     let headers = new Headers({
       'Content-Type':'application/json'
     });
-    return this.http.post('prestamo/getAmortizacion/',x,headers).map(res => res.json());
+    return this.http.post('prestamo/getAmortizacion/',x,{headers}).map(res => res.json());
   }
 
   verPagosP(idCredito){
@@ -121,6 +121,26 @@ export class UsuarioCreditoService {
       }
     });
     return tabla;
+  }
+
+  validarC(){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto')
+    }
+    return this.http.post('prestamo/validacreditos',x,{headers}).map(res => res.json());
+  }
+
+  validarP(){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto')
+    }
+    return this.http.post('prestamo/validaperiodos',x,{headers}).map(res => res.json());
   }
 
 
