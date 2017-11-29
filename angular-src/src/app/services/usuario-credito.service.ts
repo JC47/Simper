@@ -133,6 +133,16 @@ export class UsuarioCreditoService {
     return this.http.post('prestamo/validacreditos',x,{headers}).map(res => res.json());
   }
 
+  arregloC(){
+    var r = [];
+    this.validarC().subscribe(data => {
+      for(let key in data.datos){
+        r.push(data.datos[key]);
+      }
+    });
+    return r;
+  }
+
   validarP(){
     let headers = new Headers({
       'Content-Type':'application/json'

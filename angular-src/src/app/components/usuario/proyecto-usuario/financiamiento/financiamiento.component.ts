@@ -12,6 +12,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class FinanciamientoComponent implements OnInit {
   tablaA = [];
+  creditosActivos = [];
   creditos:any;
   creditosSolicitados = [];
   creditoSelected:any;
@@ -23,6 +24,7 @@ export class FinanciamientoComponent implements OnInit {
 
   constructor(private _creditoService:UsuarioCreditoService) {
     this.creditos=this._creditoService.returnCreditosU(localStorage.getItem('idUsuario'));
+    this.creditosActivos=this._creditoService.arregloC();
     this.solicitudForm= new FormGroup({
       'monto':new FormControl('',Validators.required),
       'idCredito':new FormControl('',Validators.required)
