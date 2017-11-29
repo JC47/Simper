@@ -1,35 +1,73 @@
-<div class="container" style="overflow:scroll; height:1000px;">
-
-  <div class="card-columns" >
-    <div class="card" *ngFor="let credito of creditos">
-
-      <div class="card-block">
-        <div class="row">
-          <div class="col-4">
-            <img  src="assets/img/credit.png" class=" img-fluid"  style="margin-left:30px">
-
-          </div>
-
-          <div class="col-8">
-            <h4 class="card-title" style="margin-bottom:15px">{{credito.nombreCredito}}</h4>
-            <h6 class="card-subtitle" style="margin-bottom:15px">Monto Máximo: {{credito.montoMax| currency:'USD':true }}</h6>
-            <h6 class="card-subtitle" style="margin-bottom:15px">Monto Minimo: {{credito.montoMin| currency:'USD':true}}</h6>
-            <h6 class="card-subtitle" style="margin-bottom:15px">Descripción: {{credito.pago}}</h6>
-            <h6 class="card-subtitle" style="margin-bottom:15px"> Duración: {{credito.plazo}} periodo(s)</h6>
-
-          </div>
-
+<div class="container" style="height:800px;">
+  <div class="row">
+    <div class="col-8" >
+      <div class="row">
+        <div class="col-12">
+          <h3 class="col-12 text-center">Creditos</h3>
+          <hr>
         </div>
+        <div class="card col-6" *ngFor="let credito of creditos">
 
-        <div class="card-footer">
-          <div  class="btn btn-primary  offset-1 col-10" (click)="selectCredito(credito)" >Solicitar</div>
-          <button class="btn btn-success offset-1 col-10" (click)="verPagos(credito.idCredito)">Ver Pagos</button>
-          <button type="button" class="btn btn-danger col-10 offset-1" (click)="eliminarCreditoSolicitado(credito.idCredito)">Cancelar</button>
+          <div class="card-block">
+            <div class="row">
+              <div class="col-4">
+                <img  src="assets/img/credit.png" class=" img-fluid"  style="margin-left:20px">
 
+              </div>
+
+              <div class="col-8">
+                <h4 class="card-title" style="margin-bottom:15px">{{credito.nombreCredito}}</h4>
+                <h6 class="card-subtitle" style="margin-bottom:15px">Monto Máximo: {{credito.montoMax| currency:'USD':true }}</h6>
+                <h6 class="card-subtitle" style="margin-bottom:15px">Monto Minimo: {{credito.montoMin| currency:'USD':true}}</h6>
+                <h6 class="card-subtitle" style="margin-bottom:15px">Descripción: {{credito.pago}}</h6>
+                <h6 class="card-subtitle" style="margin-bottom:15px"> Duración: {{credito.plazo}} periodo(s)</h6>
+
+              </div>
+
+            </div>
+
+            <div class="card-footer">
+              <div  class="btn btn-primary  offset-1 col-10" (click)="selectCredito(credito)" [hidden]="validaCredito(credito)" >Solicitar</div>
+              <button class="btn btn-success offset-1 col-10" (click)="verPagos(credito.idCredito)" [hidden]="!validaCredito(credito)">Ver Pagos</button>
+              <button type="button" class="btn btn-danger col-10 offset-1" (click)="eliminarCreditoSolicitado(credito.idCredito)" [hidden]="!validaCredito(credito)">Cancelar</button>
+
+            </div>
+          </div>
         </div>
       </div>
+
+    </div>
+
+    <div class="col-4">
+      <div class="row">
+        <div class="col-12">
+          <h3 class="col-12 text-center">Creditos Activos</h3>
+          <hr>
+        </div>
+        <div class="card col-12" *ngFor="let credito of creditosActivos">
+
+          <div class="card-block">
+            <div class="row">
+              <div class="col-4">
+                <img  src="assets/img/credit.png" class=" img-fluid"  style="margin-left:20px">
+              </div>
+
+              <div class="col-8">
+                <h4 class="card-title" style="margin-bottom:15px">{{getNameById(credito.idCredito)}}</h4>
+
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
     </div>
   </div>
+
 </div>
 
 
@@ -66,7 +104,7 @@
           </div>
 
           <div class="col-12">
-            <button type="submit" class="btn btn-primary offset-2 col-4" >Solicitar</button>
+            <button type="submit" class="btn btn-primary offset-2 col-4"  >Solicitar</button>
             <button class="btn btn-danger offset-1 col-4" (click)="openModalConf=false">Salir</button>
 
           </div>

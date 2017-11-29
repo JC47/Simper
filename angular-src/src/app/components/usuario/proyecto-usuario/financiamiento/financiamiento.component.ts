@@ -25,10 +25,33 @@ export class FinanciamientoComponent implements OnInit {
   constructor(private _creditoService:UsuarioCreditoService) {
     this.creditos=this._creditoService.returnCreditosU(localStorage.getItem('idUsuario'));
     this.creditosActivos=this._creditoService.arregloC();
+    console.log("cActivos",this.creditosActivos)
     this.solicitudForm= new FormGroup({
       'monto':new FormControl('',Validators.required),
       'idCredito':new FormControl('',Validators.required)
     });
+  }
+
+  validaCredito(credito){
+    for(let credit of this.creditosActivos){
+      if(credito.idCredito==credit.idCredito){
+        console.log("esta pedidio")
+        return true;
+
+      }
+    }
+    console.log("no esta pedido")
+    return false;
+
+  }
+
+  getNameById(id:number){
+    for(let credito of this.creditos){
+      if(credito.idCredito==id)
+       return credito.nombreCredito;
+    }
+    return "id no encontrado";
+
   }
 
   selectCredito(credito){
