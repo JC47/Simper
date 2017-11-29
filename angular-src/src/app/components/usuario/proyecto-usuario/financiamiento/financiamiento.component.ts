@@ -73,6 +73,7 @@ export class FinanciamientoComponent implements OnInit {
             this.verAmortizacion(cantidad.idCredito);
           }
         });
+      this.creditosActivos=this._creditoService.arregloC();  
       }else{
         alert("Limite de creditos excedidos");
       }
