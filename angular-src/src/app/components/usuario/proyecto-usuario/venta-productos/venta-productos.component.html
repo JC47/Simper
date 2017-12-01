@@ -238,7 +238,19 @@
         </div>
 
         <ng-template ngl-modal-footer>
-        <button class="btn btn-primary col-4 offset-4" (click)="modalAlerta=false">Aceptar</button>
+        <button class="btn btn-primary col-4 offset-4" (click)="paso()">Aceptar</button>
 
       </ng-template>
         </ngl-modal>
+
+        <ngl-modal header="Confirmación"  [(open)]="modalAlerta2" size="x-small" directional="false">
+
+          <div body>
+            <h3 class="col-12 text-center">{{mensaje}}</h3>
+          </div>
+
+          <ng-template ngl-modal-footer>
+          <button class="btn btn-primary col-4 offset-4" (click)="modalAlerta2=false">Aceptar</button>
+
+        </ng-template>
+          </ngl-modal>

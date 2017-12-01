@@ -3,6 +3,7 @@ import {OperacionService} from '../../../../services/operacion.service';
 import {ProductoService} from '../../../../services/producto.service';
 import {ResultadosService} from '../../../../services/resultados.service';
 import {BalanceService} from '../../../../services/balance.service';
+import { CompraMaquinariaService } from '../../../../services/compra-maquinaria.service';
 
 @Component({
   selector: 'app-estado-resultados',
@@ -17,9 +18,11 @@ export class EstadoResultadosComponent implements OnInit {
   productos=[];
   auxiliarT = [];
   intereses = [];
+  maquinas = [];
 
   constructor(private _operacionService:OperacionService,
               private _productoService:ProductoService,
+              private _maqService:CompraMaquinariaService,
               private _balanceService:BalanceService,
               private _resultadosService:ResultadosService){
     this._resultadosService.vender();
@@ -30,7 +33,7 @@ export class EstadoResultadosComponent implements OnInit {
         this.auxiliarT = this._operacionService.returnAuxiliarCTotal();
         this.resultados = this._operacionService.returnProductoResultados();
         this.auxiliarC=this._operacionService.returnAuxiliarC();
-        console.log("Total",this.auxiliarT);
+        this.maquinas =this._maqService.returnMaquinasCompradas();
     }, 1500);
   }
 
@@ -65,17 +68,33 @@ export class EstadoResultadosComponent implements OnInit {
 
   getTotalCostosVentas(){
     var T = 0;
-    for(let aux of this.auxiliares){
-      T += aux.costoVentas;
+    if(this.auxiliares.length == 0){
+      for(let m of this.maquinas){
+        T += ((m.costo * (m.depAcum/100))*m.Cantidad);
+      }
+    }
+    else{
+      for(let aux of this.auxiliares){
+        T += aux.costoVentas;
+      }
     }
     return T;
   }
 
   getCostoVentas(id){
     var T = 0;
-    for(let aux of this.auxiliares){
-      if(aux.Producto_idProducto == id){
-        T += aux.costoVentas;
+    if(this.auxiliares.length == 0){
+      for(let m of this.maquinas){
+        if(m.Producto_idProducto == id){
+          T += ((m.costo * (m.depAcum/100))*m.Cantidad);
+        }
+      }
+    }
+    else{
+      for(let aux of this.auxiliares){
+        if(aux.Producto_idProducto == id){
+          T += aux.costoVentas;
+        }
       }
     }
     return T;
@@ -91,9 +110,18 @@ export class EstadoResultadosComponent implements OnInit {
 
   getUtilidadParcial(id){
     var T = 0;
-    for(let aux of this.auxiliares){
-      if(aux.Producto_idProducto == id){
-        T += aux.Ventas - aux.costoVentas - aux.IVAxVentas;
+    if(this.auxiliares.length == 0){
+      for(let m of this.maquinas){
+        if(m.Producto_idProducto == id){
+          T -= ((m.costo * (m.depAcum/100))*m.Cantidad);
+        }
+      }
+    }
+    else{
+      for(let aux of this.auxiliares){
+        if(aux.Producto_idProducto == id){
+          T += aux.Ventas - aux.costoVentas - aux.IVAxVentas;
+        }
       }
     }
     return T;
@@ -147,9 +175,18 @@ export class EstadoResultadosComponent implements OnInit {
 
   getUtilidadAntesParcial(id){
     var T = 0;
-    for(let aux of this.auxiliares){
-      if(aux.Producto_idProducto == id){
-        T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
+    if(this.auxiliares.length == 0){
+      for(let m of this.maquinas){
+        if(m.Producto_idProducto == id){
+          T -= ((m.costo * (m.depAcum/100))*m.Cantidad);
+        }
+      }
+    }
+    else{
+      for(let aux of this.auxiliares){
+        if(aux.Producto_idProducto == id){
+          T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
+        }
       }
     }
     for(let aux2 of this.auxiliarC){
@@ -162,16 +199,30 @@ export class EstadoResultadosComponent implements OnInit {
 
   getUtilidadAntes(){
     var T = 0;
-    for(let aux of this.auxiliares){
-      T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
+    if(this.auxiliares.length == 0){
+      for(let m of this.maquinas){
+        T -= ((m.costo * (m.depAcum/100))*m.Cantidad);
+      }
+    }
+    else{
+      for(let aux of this.auxiliares){
+        T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
+      }
     }
     return T;
   }
 
   getUtilidad2(){
     var T = 0;
-    for(let aux of this.auxiliares){
-      T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
+    if(this.auxiliares.length == 0){
+      for(let m of this.maquinas){
+        T -= ((m.costo * (m.depAcum/100))*m.Cantidad);
+      }
+    }
+    else{
+      for(let aux of this.auxiliares){
+        T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
+      }
     }
     for(let i of this.auxiliarT){
       T -= i

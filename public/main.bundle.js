@@ -3140,6 +3140,7 @@ var CompraMaquinariaComponent = (function () {
         if (this.maqSelectedLess.Balance_numeroPeriodo == parseInt(localStorage.getItem('numeroPeriodo'))) {
             var x = {
                 Maquinaria_idMaquinaria: this.maqSelectedLess.idMaquinaria,
+                Balance_numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')),
                 Proyectos_idProyecto: parseInt(localStorage.getItem('idProyecto'))
             };
             var y = {
@@ -3201,7 +3202,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-12\">\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\n<hr>\n</div>\n\n\n<div class=\"row\">\n  <div class=\"col-12\" style=\"height:500px\" *ngFor=\"let zona of graficas\" >\n    <div class=\"row\">\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\n\n  <div class=\"col-12\" style=\"height:400px;\">\n    <ngx-charts-line-chart\n         [scheme]=\"colorScheme\"\n         [results]=\"zona.graf\"\n         xAxis=\"true\"\n         legendTitle=\"Productos\"\n         yAxis=\"true\"\n         legend=\"true\"\n         showXAxisLabel=\"true\"\n         showYAxisLabel=\"true\"\n         xAxisLabel=\"Periodos\"\n         yAxisLabel=\"Demanda Potencial\"\n         autoScale=\"true\">\n       </ngx-charts-line-chart>\n  </div>\n    </div>\n\n\n\n\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"col-12\">\r\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\r\n<hr>\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-12\" style=\"height:500px\" *ngFor=\"let zona of graficas\" >\r\n    <div class=\"row\">\r\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\r\n\r\n  <div class=\"col-12\" style=\"height:400px;\">\r\n    <ngx-charts-line-chart\r\n         [scheme]=\"colorScheme\"\r\n         [results]=\"zona.graf\"\r\n         xAxis=\"true\"\r\n         legendTitle=\"Productos\"\r\n         yAxis=\"true\"\r\n         legend=\"true\"\r\n         showXAxisLabel=\"true\"\r\n         showYAxisLabel=\"true\"\r\n         xAxisLabel=\"Periodos\"\r\n         yAxisLabel=\"Demanda Potencial\"\r\n         autoScale=\"true\">\r\n       </ngx-charts-line-chart>\r\n  </div>\r\n    </div>\r\n\r\n\r\n\r\n\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -3749,6 +3750,7 @@ module.exports = "<h4 class=\"text-center\">Estado de Resultados</h4>\r\n<hr>\r\
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_producto_service__ = __webpack_require__("../../../../../src/app/services/producto.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__ = __webpack_require__("../../../../../src/app/services/resultados.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_balance_service__ = __webpack_require__("../../../../../src/app/services/balance.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_compra_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/compra-maquinaria.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EstadoResultadosComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3764,11 +3766,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var EstadoResultadosComponent = (function () {
-    function EstadoResultadosComponent(_operacionService, _productoService, _balanceService, _resultadosService) {
+    function EstadoResultadosComponent(_operacionService, _productoService, _maqService, _balanceService, _resultadosService) {
         var _this = this;
         this._operacionService = _operacionService;
         this._productoService = _productoService;
+        this._maqService = _maqService;
         this._balanceService = _balanceService;
         this._resultadosService = _resultadosService;
         this.resultados = [];
@@ -3777,6 +3781,7 @@ var EstadoResultadosComponent = (function () {
         this.productos = [];
         this.auxiliarT = [];
         this.intereses = [];
+        this.maquinas = [];
         this._resultadosService.vender();
         setTimeout(function () {
             _this.auxiliares = _this._operacionService.returnAuxiliares();
@@ -3785,7 +3790,7 @@ var EstadoResultadosComponent = (function () {
             _this.auxiliarT = _this._operacionService.returnAuxiliarCTotal();
             _this.resultados = _this._operacionService.returnProductoResultados();
             _this.auxiliarC = _this._operacionService.returnAuxiliarC();
-            console.log("Total", _this.auxiliarT);
+            _this.maquinas = _this._maqService.returnMaquinasCompradas();
         }, 1500);
     }
     EstadoResultadosComponent.prototype.ngOnInit = function () {
@@ -3818,18 +3823,36 @@ var EstadoResultadosComponent = (function () {
     };
     EstadoResultadosComponent.prototype.getTotalCostosVentas = function () {
         var T = 0;
-        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
-            var aux = _a[_i];
-            T += aux.costoVentas;
+        if (this.auxiliares.length == 0) {
+            for (var _i = 0, _a = this.maquinas; _i < _a.length; _i++) {
+                var m = _a[_i];
+                T += ((m.costo * (m.depAcum / 100)) * m.Cantidad);
+            }
+        }
+        else {
+            for (var _b = 0, _c = this.auxiliares; _b < _c.length; _b++) {
+                var aux = _c[_b];
+                T += aux.costoVentas;
+            }
         }
         return T;
     };
     EstadoResultadosComponent.prototype.getCostoVentas = function (id) {
         var T = 0;
-        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
-            var aux = _a[_i];
-            if (aux.Producto_idProducto == id) {
-                T += aux.costoVentas;
+        if (this.auxiliares.length == 0) {
+            for (var _i = 0, _a = this.maquinas; _i < _a.length; _i++) {
+                var m = _a[_i];
+                if (m.Producto_idProducto == id) {
+                    T += ((m.costo * (m.depAcum / 100)) * m.Cantidad);
+                }
+            }
+        }
+        else {
+            for (var _b = 0, _c = this.auxiliares; _b < _c.length; _b++) {
+                var aux = _c[_b];
+                if (aux.Producto_idProducto == id) {
+                    T += aux.costoVentas;
+                }
             }
         }
         return T;
@@ -3844,10 +3867,20 @@ var EstadoResultadosComponent = (function () {
     };
     EstadoResultadosComponent.prototype.getUtilidadParcial = function (id) {
         var T = 0;
-        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
-            var aux = _a[_i];
-            if (aux.Producto_idProducto == id) {
-                T += aux.Ventas - aux.costoVentas - aux.IVAxVentas;
+        if (this.auxiliares.length == 0) {
+            for (var _i = 0, _a = this.maquinas; _i < _a.length; _i++) {
+                var m = _a[_i];
+                if (m.Producto_idProducto == id) {
+                    T -= ((m.costo * (m.depAcum / 100)) * m.Cantidad);
+                }
+            }
+        }
+        else {
+            for (var _b = 0, _c = this.auxiliares; _b < _c.length; _b++) {
+                var aux = _c[_b];
+                if (aux.Producto_idProducto == id) {
+                    T += aux.Ventas - aux.costoVentas - aux.IVAxVentas;
+                }
             }
         }
         return T;
@@ -3900,14 +3933,24 @@ var EstadoResultadosComponent = (function () {
     };
     EstadoResultadosComponent.prototype.getUtilidadAntesParcial = function (id) {
         var T = 0;
-        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
-            var aux = _a[_i];
-            if (aux.Producto_idProducto == id) {
-                T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
+        if (this.auxiliares.length == 0) {
+            for (var _i = 0, _a = this.maquinas; _i < _a.length; _i++) {
+                var m = _a[_i];
+                if (m.Producto_idProducto == id) {
+                    T -= ((m.costo * (m.depAcum / 100)) * m.Cantidad);
+                }
             }
         }
-        for (var _b = 0, _c = this.auxiliarC; _b < _c.length; _b++) {
-            var aux2 = _c[_b];
+        else {
+            for (var _b = 0, _c = this.auxiliares; _b < _c.length; _b++) {
+                var aux = _c[_b];
+                if (aux.Producto_idProducto == id) {
+                    T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
+                }
+            }
+        }
+        for (var _d = 0, _e = this.auxiliarC; _d < _e.length; _d++) {
+            var aux2 = _e[_d];
             if (aux2.Producto_idProducto == id) {
                 T += -aux2.desarrolloMercado - aux2.desarrolloProducto;
             }
@@ -3916,24 +3959,41 @@ var EstadoResultadosComponent = (function () {
     };
     EstadoResultadosComponent.prototype.getUtilidadAntes = function () {
         var T = 0;
-        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
-            var aux = _a[_i];
-            T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
+        if (this.auxiliares.length == 0) {
+            for (var _i = 0, _a = this.maquinas; _i < _a.length; _i++) {
+                var m = _a[_i];
+                T -= ((m.costo * (m.depAcum / 100)) * m.Cantidad);
+            }
         }
+        else {
+            for (var _b = 0, _c = this.auxiliares; _b < _c.length; _b++) {
+                var aux = _c[_b];
+                T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
+            }
+        }
+        console.log(T);
         return T;
     };
     EstadoResultadosComponent.prototype.getUtilidad2 = function () {
         var T = 0;
-        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
-            var aux = _a[_i];
-            T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
+        if (this.auxiliares.length == 0) {
+            for (var _i = 0, _a = this.maquinas; _i < _a.length; _i++) {
+                var m = _a[_i];
+                T -= ((m.costo * (m.depAcum / 100)) * m.Cantidad);
+            }
         }
-        for (var _b = 0, _c = this.auxiliarT; _b < _c.length; _b++) {
-            var i = _c[_b];
+        else {
+            for (var _b = 0, _c = this.auxiliares; _b < _c.length; _b++) {
+                var aux = _c[_b];
+                T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
+            }
+        }
+        for (var _d = 0, _e = this.auxiliarT; _d < _e.length; _d++) {
+            var i = _e[_d];
             T -= i;
         }
-        for (var _d = 0, _e = this.intereses; _d < _e.length; _d++) {
-            var i2 = _e[_d];
+        for (var _f = 0, _g = this.intereses; _f < _g.length; _f++) {
+            var i2 = _g[_f];
             T -= i2;
         }
         return T;
@@ -3961,10 +4021,10 @@ EstadoResultadosComponent = __decorate([
         selector: 'app-estado-resultados',
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.html")
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__["a" /* ResultadosService */]) === "function" && _d || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__["a" /* ResultadosService */]) === "function" && _e || Object])
 ], EstadoResultadosComponent);
 
-var _a, _b, _c, _d;
+var _a, _b, _c, _d, _e;
 //# sourceMappingURL=estado-resultados.component.js.map
 
 /***/ }),
@@ -4569,7 +4629,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/venta-productos/venta-productos.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div class=\"container\">\r\n    <h1 class=\"col-12 text-center\">Ventas de Periodo</h1>\r\n    <hr>\r\n  </div>\r\n\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n    <div class=\"col-3 offset-1\">\r\n      <div class=\"row\" *ngFor=\"let producto of productosOperacion\" style=\"margin-bottom:50px\">\r\n        <div class=\"col-12 card card-inverse card-success  text-center\" style=\"margin-bottom:20px\">\r\n          <div class=\"card-block\">\r\n              <blockquote class=\"card-blockquote\">\r\n              <br>\r\n              <h3 class=\"col-12 text center\">{{getNameByIdProducto(producto.idProducto)}}</h3>\r\n                                  <h5 class=\"col-12 text-center\">Opciones de Venta</h5>\r\n              <form [formGroup]=\"ventasForm\" (ngSubmit)=\"selectVenta(ventasForm.value,producto.idProducto)\" class=\"offset-1\"  >\r\n              <div class=\"col-12\" >\r\n                    <!-- <option *ngFor=\"let option of producto.zonas\" value={{option}}>{{getNameByIdZona(option)}}</option> -->\r\n\r\n                    <div class=\"container\" *ngFor=\"let option of producto.zonas\" style=\"margin-top:30px\">\r\n                      <div class=\"row\">\r\n                        <div class=\"col-6 text-center\">\r\n                          <h6>{{getNameByIdZona(option)}}</h6>\r\n                        </div>\r\n\r\n                        <div class=\"offset-1 col-2\">\r\n                          <button type=\"button\" class=\"btn btn-primary\" (click)=\"openModalVenta(option,producto.idProducto)\">Vender</button>\r\n                        </div>\r\n                      </div>\r\n\r\n                    </div>\r\n              </div>\r\n            </form>\r\n\r\n            <h3 class=\"col-12 text-center\" style=\"margin-top:25px\">Almacenamiento</h3>\r\n            <form [formGroup]=\"almacenForm\" (ngSubmit)=\"selectAlmacen(almacenForm.value,producto.idProducto)\" class=\"offset-1\"  >\r\n\r\n              <div class=\"form-group row\">\r\n                <label class=\"col-12 col-form-label\">Cantidad a Almacenar</label>\r\n                <div class=\"col-8 offset-2\">\r\n                  <input class=\"form-control\" currencyMask [options]=\"{ prefix: '', thousands: ',', precision:'0' }\"\r\n                  formControlName=\"cantidadAlmacen\" value=\"0\">\r\n                </div>\r\n              </div>\r\n\r\n\r\n            <button type=\"submit\" class=\"btn btn-primary col-6\" >Almacenar</button>\r\n\r\n          </form>\r\n\r\n            </blockquote>\r\n\r\n          </div>\r\n          </div>\r\n\r\n\r\n\r\n\r\n      </div>\r\n\r\n    </div>\r\n\r\n    <div class=\" offset-1 col-5\" style=\"height:auto\">\r\n      <div class=\"row\">\r\n        <h2 class=\" col-12 text-center\">Relación de Ventas </h2>\r\n        <hr>\r\n      </div>\r\n\r\n\r\n      <table class=\"table table-striped\">\r\n  <thead>\r\n    <tr>\r\n      <th scope=\"col-12 text-center\">Producto</th>\r\n      <th scope=\"col-12 text-center\">Zona</th>\r\n      <th scope=\"col-12 text-center\">Unidades Vendidas</th>\r\n      </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr *ngFor=\"let venta of ventas\">\r\n      <td>{{getNameByIdProducto(venta.Producto_idProducto)}}</td>\r\n      <td>{{getNameByIdZona(venta.Zona_idZonas)}}</td>\r\n      <td class=\"col-12 text-right\">{{venta.unidadesVendidas|number:'1.0-0'}}</td>\r\n    </tr>\r\n  </tbody>\r\n</table>\r\n\r\n<div class=\"row\">\r\n  <h3 class=\"col-12 text-center\">Almacen</h3>\r\n  <hr>\r\n</div>\r\n\r\n<table class=\"table table-striped\">\r\n<thead>\r\n<tr>\r\n<th scope=\"col-12 text-center\">Producto</th>\r\n<th scope=\"col-12 text-center\">Unidades Almacenandas</th>\r\n</tr>\r\n</thead>\r\n<tbody>\r\n<tr *ngFor=\"let alma of almacen\">\r\n<td class=\"col-12 text-center\">{{getNameByIdProducto(alma.Producto_idProducto)}}</td>\r\n<td class=\"col-12 text-right\">{{alma.unidadesAlmacenadas|number:'1.0-0'}}</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n\r\n\r\n\r\n\r\n    </div>\r\n\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n  <ngl-modal header=\"Confirmación de Venta\"  [(open)]=\"openVenta\" size=\"x-small\" directional=\"false\">\r\n\r\n    <div body>\r\n      <h5 class=\"col-12 text-center\">Venta de {{getNameByIdProducto(this.ventasForm.controls['idProducto'].value)}}  en {{zonaSelected.nombreZona}} </h5>\r\n      <!-- <div class=\"col-12\" style=\"height:250px;\">\r\n        <ngx-charts-line-chart\r\n             [scheme]=\"colorScheme\"\r\n             [results]=\"zonaSelected.graf\"\r\n             xAxis=\"true\"\r\n             legendTitle=\"Productos\"\r\n             yAxis=\"true\"\r\n             legend=\"true\"\r\n             showXAxisLabel=\"true\"\r\n             showYAxisLabel=\"true\"\r\n             xAxisLabel=\"Periodos\"\r\n             yAxisLabel=\"Demanda Potencial\"\r\n             autoScale=\"true\"\r\n            >\r\n           </ngx-charts-line-chart>\r\n      </div> -->\r\n\r\n      <h5 style=\"margin-top:15px\">Capacidad de Producción en Unidades: <b>{{produccionSelected|number:'1.0-0'}}</b></h5>\r\n      <h5 >Demanda de Periodo:<b>{{demandaSelected|number:'1.0-0'}}</b> </h5>\r\n          <form [formGroup]=\"ventasForm\" (ngSubmit)=\"selectVenta(ventasForm.value,producto.idProducto)\" class=\"offset-1\"  >\r\n          <div class=\"form-group row\">\r\n\r\n\r\n\r\n            <label class=\"col-12 col-form-label text-center\">Cantidad a Vender</label>\r\n            <div class=\"offset-3 col-6\">\r\n\r\n              <input  currencyMask [options]=\"{ prefix: '', thousands: ',', precision:'0' }\" class=\"form-control\" formControlName=\"cantidadVenta\">\r\n            </div>\r\n          </div>\r\n          <ng-template ngl-modal-footer>\r\n              <button type=\"submit\" class=\"btn btn-danger col-5 offset-1\" (click)=\"openVenta=false\" >Cancelar</button>\r\n            <button type=\"submit\" class=\"btn btn-primary col-5\" (click)=\"selectVenta(ventasForm.value)\" >Vender</button>\r\n\r\n\r\n        </ng-template>\r\n\r\n          </form>\r\n    </div>\r\n\r\n\r\n    </ngl-modal>\r\n\r\n\r\n\r\n  <ngl-modal header=\"Confirmación\"  [(open)]=\"openConfAlmacen\" size=\"x-small\" directional=\"false\">\r\n\r\n    <div body>\r\n      <div class=\"col-12 text-center container\">\r\n        <h5 style=\"margin-bottom:30px\">¿Estas seguro que deseas almacenar {{selectedAlmacen.almacen|number:'1.0-0'}} unidades del producto \"{{getNameByIdProducto(selectedAlmacen.idProducto)}}\"?</h5>\r\n        <div class=\"row\">\r\n          <div class=\"col-4 offset-4\">\r\n            <img  src=\"assets/img/machine.png\" class=\"img-fluid\">\r\n          </div>\r\n        </div>\r\n        <br>\r\n      </div>\r\n    </div>\r\n\r\n    <ng-template ngl-modal-footer>\r\n      <button class=\"btn btn-danger\" (click)=\"openConfAlmacen=false\">Cancelar</button>\r\n      <button class=\"btn btn-primary\" (click)=\"cobrarAlmacen()\">Almacenar</button>\r\n\r\n  </ng-template>\r\n    </ngl-modal>\r\n\r\n\r\n  <ngl-modal  [(open)]=\"openLoad\" size=\"small\" directional=\"false\">\r\n    <div body>\r\n      <h1 class=\"col-12 text-center\" *ngIf=\"produciendo\">Produciendo...</h1>\r\n      <h1 class=\"col-12 text-center\" *ngIf=\"vendiendo\">Vendiendo...</h1>\r\n\r\n      <h6 class=\"col-12 text-center\">Realizando Operación</h6>\r\n      <div style=\"position:relative; height:6.25rem; z-index:0;\">\r\n        <ngl-spinner size=\"large\" type=\"brand\"></ngl-spinner>\r\n      </div>\r\n\r\n    </div>\r\n    </ngl-modal>\r\n\r\n\r\n\r\n    <ngl-modal header=\"Confirmación\"  [(open)]=\"openConf\" size=\"x-small\" directional=\"false\">\r\n\r\n      <div body>\r\n        <div class=\"container\">\r\n          <h5 class=\"col-12 text-center\" style=\"margin-bottom:30px\">¿Estas seguro que deseas vender {{selectedVenta.venta.cantidadVenta|number:'1.0-0'}} unidades del producto \"{{getNameByIdProducto(selectedVenta.idProducto)}}\", en la zona \"{{getNameByIdZona(selectedVenta.venta.idZona)}}\" ?</h5>\r\n            <div class=\"col-2 offset-5\">\r\n              <img  src=\"assets/img/box.png\" class=\"img-fluid\">\r\n            </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n      <ng-template ngl-modal-footer>\r\n        <button class=\"btn btn-danger\" (click)=\"openConf=false\">Cancelar</button>\r\n        <button class=\"btn btn-primary\" (click)=\"cobrarVenta()\">Vender</button>\r\n\r\n    </ng-template>\r\n      </ngl-modal>\r\n\r\n\r\n\r\n\r\n      <ngl-modal header=\"Confirmación\"  [(open)]=\"modalAlerta\" size=\"x-small\" directional=\"false\">\r\n\r\n        <div body>\r\n          <h3 class=\"col-12 text-center\">{{mensaje}}</h3>\r\n        </div>\r\n\r\n        <ng-template ngl-modal-footer>\r\n        <button class=\"btn btn-primary col-4 offset-4\" (click)=\"modalAlerta=false\">Aceptar</button>\r\n\r\n      </ng-template>\r\n        </ngl-modal>\r\n"
+module.exports = "<div class=\"row\">\r\n  <div class=\"container\">\r\n    <h1 class=\"col-12 text-center\">Ventas de Periodo</h1>\r\n    <hr>\r\n  </div>\r\n\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n    <div class=\"col-3 offset-1\">\r\n      <div class=\"row\" *ngFor=\"let producto of productosOperacion\" style=\"margin-bottom:50px\">\r\n        <div class=\"col-12 card card-inverse card-success  text-center\" style=\"margin-bottom:20px\">\r\n          <div class=\"card-block\">\r\n              <blockquote class=\"card-blockquote\">\r\n              <br>\r\n              <h3 class=\"col-12 text center\">{{getNameByIdProducto(producto.idProducto)}}</h3>\r\n                                  <h5 class=\"col-12 text-center\">Opciones de Venta</h5>\r\n              <form [formGroup]=\"ventasForm\" (ngSubmit)=\"selectVenta(ventasForm.value,producto.idProducto)\" class=\"offset-1\"  >\r\n              <div class=\"col-12\" >\r\n                    <!-- <option *ngFor=\"let option of producto.zonas\" value={{option}}>{{getNameByIdZona(option)}}</option> -->\r\n\r\n                    <div class=\"container\" *ngFor=\"let option of producto.zonas\" style=\"margin-top:30px\">\r\n                      <div class=\"row\">\r\n                        <div class=\"col-6 text-center\">\r\n                          <h6>{{getNameByIdZona(option)}}</h6>\r\n                        </div>\r\n\r\n                        <div class=\"offset-1 col-2\">\r\n                          <button type=\"button\" class=\"btn btn-primary\" (click)=\"openModalVenta(option,producto.idProducto)\">Vender</button>\r\n                        </div>\r\n                      </div>\r\n\r\n                    </div>\r\n              </div>\r\n            </form>\r\n\r\n            <h3 class=\"col-12 text-center\" style=\"margin-top:25px\">Almacenamiento</h3>\r\n            <form [formGroup]=\"almacenForm\" (ngSubmit)=\"selectAlmacen(almacenForm.value,producto.idProducto)\" class=\"offset-1\"  >\r\n\r\n              <div class=\"form-group row\">\r\n                <label class=\"col-12 col-form-label\">Cantidad a Almacenar</label>\r\n                <div class=\"col-8 offset-2\">\r\n                  <input class=\"form-control\" currencyMask [options]=\"{ prefix: '', thousands: ',', precision:'0' }\"\r\n                  formControlName=\"cantidadAlmacen\" value=\"0\">\r\n                </div>\r\n              </div>\r\n\r\n\r\n            <button type=\"submit\" class=\"btn btn-primary col-6\" >Almacenar</button>\r\n\r\n          </form>\r\n\r\n            </blockquote>\r\n\r\n          </div>\r\n          </div>\r\n\r\n\r\n\r\n\r\n      </div>\r\n\r\n    </div>\r\n\r\n    <div class=\" offset-1 col-5\" style=\"height:auto\">\r\n      <div class=\"row\">\r\n        <h2 class=\" col-12 text-center\">Relación de Ventas </h2>\r\n        <hr>\r\n      </div>\r\n\r\n\r\n      <table class=\"table table-striped\">\r\n  <thead>\r\n    <tr>\r\n      <th scope=\"col-12 text-center\">Producto</th>\r\n      <th scope=\"col-12 text-center\">Zona</th>\r\n      <th scope=\"col-12 text-center\">Unidades Vendidas</th>\r\n      </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr *ngFor=\"let venta of ventas\">\r\n      <td>{{getNameByIdProducto(venta.Producto_idProducto)}}</td>\r\n      <td>{{getNameByIdZona(venta.Zona_idZonas)}}</td>\r\n      <td class=\"col-12 text-right\">{{venta.unidadesVendidas|number:'1.0-0'}}</td>\r\n    </tr>\r\n  </tbody>\r\n</table>\r\n\r\n<div class=\"row\">\r\n  <h3 class=\"col-12 text-center\">Almacen</h3>\r\n  <hr>\r\n</div>\r\n\r\n<table class=\"table table-striped\">\r\n<thead>\r\n<tr>\r\n<th scope=\"col-12 text-center\">Producto</th>\r\n<th scope=\"col-12 text-center\">Unidades Almacenandas</th>\r\n</tr>\r\n</thead>\r\n<tbody>\r\n<tr *ngFor=\"let alma of almacen\">\r\n<td class=\"col-12 text-center\">{{getNameByIdProducto(alma.Producto_idProducto)}}</td>\r\n<td class=\"col-12 text-right\">{{alma.unidadesAlmacenadas|number:'1.0-0'}}</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n\r\n\r\n\r\n\r\n    </div>\r\n\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n  <ngl-modal header=\"Confirmación de Venta\"  [(open)]=\"openVenta\" size=\"x-small\" directional=\"false\">\r\n\r\n    <div body>\r\n      <h5 class=\"col-12 text-center\">Venta de {{getNameByIdProducto(this.ventasForm.controls['idProducto'].value)}}  en {{zonaSelected.nombreZona}} </h5>\r\n      <!-- <div class=\"col-12\" style=\"height:250px;\">\r\n        <ngx-charts-line-chart\r\n             [scheme]=\"colorScheme\"\r\n             [results]=\"zonaSelected.graf\"\r\n             xAxis=\"true\"\r\n             legendTitle=\"Productos\"\r\n             yAxis=\"true\"\r\n             legend=\"true\"\r\n             showXAxisLabel=\"true\"\r\n             showYAxisLabel=\"true\"\r\n             xAxisLabel=\"Periodos\"\r\n             yAxisLabel=\"Demanda Potencial\"\r\n             autoScale=\"true\"\r\n            >\r\n           </ngx-charts-line-chart>\r\n      </div> -->\r\n\r\n      <h5 style=\"margin-top:15px\">Capacidad de Producción en Unidades: <b>{{produccionSelected|number:'1.0-0'}}</b></h5>\r\n      <h5 >Demanda de Periodo:<b>{{demandaSelected|number:'1.0-0'}}</b> </h5>\r\n          <form [formGroup]=\"ventasForm\" (ngSubmit)=\"selectVenta(ventasForm.value,producto.idProducto)\" class=\"offset-1\"  >\r\n          <div class=\"form-group row\">\r\n\r\n\r\n\r\n            <label class=\"col-12 col-form-label text-center\">Cantidad a Vender</label>\r\n            <div class=\"offset-3 col-6\">\r\n\r\n              <input  currencyMask [options]=\"{ prefix: '', thousands: ',', precision:'0' }\" class=\"form-control\" formControlName=\"cantidadVenta\">\r\n            </div>\r\n          </div>\r\n          <ng-template ngl-modal-footer>\r\n              <button type=\"submit\" class=\"btn btn-danger col-5 offset-1\" (click)=\"openVenta=false\" >Cancelar</button>\r\n            <button type=\"submit\" class=\"btn btn-primary col-5\" (click)=\"selectVenta(ventasForm.value)\" >Vender</button>\r\n\r\n\r\n        </ng-template>\r\n\r\n          </form>\r\n    </div>\r\n\r\n\r\n    </ngl-modal>\r\n\r\n\r\n\r\n  <ngl-modal header=\"Confirmación\"  [(open)]=\"openConfAlmacen\" size=\"x-small\" directional=\"false\">\r\n\r\n    <div body>\r\n      <div class=\"col-12 text-center container\">\r\n        <h5 style=\"margin-bottom:30px\">¿Estas seguro que deseas almacenar {{selectedAlmacen.almacen|number:'1.0-0'}} unidades del producto \"{{getNameByIdProducto(selectedAlmacen.idProducto)}}\"?</h5>\r\n        <div class=\"row\">\r\n          <div class=\"col-4 offset-4\">\r\n            <img  src=\"assets/img/machine.png\" class=\"img-fluid\">\r\n          </div>\r\n        </div>\r\n        <br>\r\n      </div>\r\n    </div>\r\n\r\n    <ng-template ngl-modal-footer>\r\n      <button class=\"btn btn-danger\" (click)=\"openConfAlmacen=false\">Cancelar</button>\r\n      <button class=\"btn btn-primary\" (click)=\"cobrarAlmacen()\">Almacenar</button>\r\n\r\n  </ng-template>\r\n    </ngl-modal>\r\n\r\n\r\n  <ngl-modal  [(open)]=\"openLoad\" size=\"small\" directional=\"false\">\r\n    <div body>\r\n      <h1 class=\"col-12 text-center\" *ngIf=\"produciendo\">Produciendo...</h1>\r\n      <h1 class=\"col-12 text-center\" *ngIf=\"vendiendo\">Vendiendo...</h1>\r\n\r\n      <h6 class=\"col-12 text-center\">Realizando Operación</h6>\r\n      <div style=\"position:relative; height:6.25rem; z-index:0;\">\r\n        <ngl-spinner size=\"large\" type=\"brand\"></ngl-spinner>\r\n      </div>\r\n\r\n    </div>\r\n    </ngl-modal>\r\n\r\n\r\n\r\n    <ngl-modal header=\"Confirmación\"  [(open)]=\"openConf\" size=\"x-small\" directional=\"false\">\r\n\r\n      <div body>\r\n        <div class=\"container\">\r\n          <h5 class=\"col-12 text-center\" style=\"margin-bottom:30px\">¿Estas seguro que deseas vender {{selectedVenta.venta.cantidadVenta|number:'1.0-0'}} unidades del producto \"{{getNameByIdProducto(selectedVenta.idProducto)}}\", en la zona \"{{getNameByIdZona(selectedVenta.venta.idZona)}}\" ?</h5>\r\n            <div class=\"col-2 offset-5\">\r\n              <img  src=\"assets/img/box.png\" class=\"img-fluid\">\r\n            </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n      <ng-template ngl-modal-footer>\r\n        <button class=\"btn btn-danger\" (click)=\"openConf=false\">Cancelar</button>\r\n        <button class=\"btn btn-primary\" (click)=\"cobrarVenta()\">Vender</button>\r\n\r\n    </ng-template>\r\n      </ngl-modal>\r\n\r\n\r\n\r\n\r\n      <ngl-modal header=\"Confirmación\"  [(open)]=\"modalAlerta\" size=\"x-small\" directional=\"false\">\r\n\r\n        <div body>\r\n          <h3 class=\"col-12 text-center\">{{mensaje}}</h3>\r\n        </div>\r\n\r\n        <ng-template ngl-modal-footer>\r\n        <button class=\"btn btn-primary col-4 offset-4\" (click)=\"paso()\">Aceptar</button>\r\n\r\n      </ng-template>\r\n        </ngl-modal>\r\n\r\n        <ngl-modal header=\"Confirmación\"  [(open)]=\"modalAlerta2\" size=\"x-small\" directional=\"false\">\r\n\r\n          <div body>\r\n            <h3 class=\"col-12 text-center\">{{mensaje}}</h3>\r\n          </div>\r\n\r\n          <ng-template ngl-modal-footer>\r\n          <button class=\"btn btn-primary col-4 offset-4\" (click)=\"modalAlerta2=false\">Aceptar</button>\r\n\r\n        </ng-template>\r\n          </ngl-modal>\r\n"
 
 /***/ }),
 
@@ -4632,6 +4692,7 @@ var VentaProductosComponent = (function () {
         };
         this.openConfAlmacen = false;
         this.modalAlerta = false;
+        this.modalAlerta2 = false;
         this.vendeForm = [];
         this.openVenta = false;
         this.vendiendo = false;
@@ -4726,14 +4787,17 @@ var VentaProductosComponent = (function () {
                 if (data.m) {
                     _this.mensaje = data.msg;
                     _this.modalAlerta = true;
-                    _this.router.navigate(['Usuario/proyecto/compraMaquinaria']);
                 }
                 else {
                     _this.mensaje = data.msg;
-                    _this.modalAlerta = true;
+                    _this.modalAlerta2 = true;
                 }
             }
         });
+    };
+    VentaProductosComponent.prototype.paso = function () {
+        this.modalAlerta = false;
+        this.router.navigate(['Usuario/proyecto/compraMaquinaria']);
     };
     VentaProductosComponent.prototype.selectVenta = function (venta) {
         this.openConf = true;
@@ -6451,7 +6515,6 @@ var CompraMaquinariaService = (function () {
     CompraMaquinariaService.prototype.compraMaquinaria = function (x, y) {
         var _this = this;
         this.comprar(x).subscribe(function (data) {
-            console.log(data);
             for (var key$ in data.datos) {
                 _this.maquinasCompradas[key$] = data.datos[key$];
             }
