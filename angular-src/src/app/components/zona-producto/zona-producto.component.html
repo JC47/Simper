@@ -104,13 +104,14 @@
                         </div>
 
                         <div class="modal-footer">
+                          <button  type="button" class="btn btn-outline-danger" (click)="modalPeriodoNew.hide()">
+                          Cancelar
+                          </button>
                           <button type="submit" class="btn btn-outline-success"  [disabled]="!formPeriodoNew.valid">
                             Guardar
                           </button>
 
-                          <button  type="button" class="btn btn-outline-danger" (click)="modalPeriodoNew.hide()">
-                          Cancelar
-                          </button>
+
 
                         </div>
 
@@ -165,13 +166,14 @@
                         </div>
 
                         <div class="modal-footer">
+                          <button  type="button" class="btn btn-outline-danger" (click)="modalPeriodoEdit.hide()">
+                          Cancelar
+                          </button>
                           <button type="submit" class="btn btn-outline-success"  [disabled]="!formPeriodoEdit.valid">
                             Guardar
                           </button>
 
-                          <button  type="button" class="btn btn-outline-danger" (click)="modalPeriodoEdit.hide()">
-                          Cancelar
-                          </button>
+
 
                         </div>
 

@@ -6,7 +6,7 @@
           <h3 class="col-12 text-center">Creditos</h3>
           <hr>
         </div>
-        <div class="card col-6" *ngFor="let credito of creditos">
+        <div class="card col-5 offset-1" *ngFor="let credito of creditos">
 
           <div class="card-block">
             <div class="row">
@@ -104,8 +104,9 @@
           </div>
 
           <div class="col-12">
-            <button type="submit" class="btn btn-primary offset-2 col-4"  >Solicitar</button>
-            <button class="btn btn-danger offset-1 col-4" (click)="openModalConf=false">Salir</button>
+            <button class="btn btn-danger offset-2 col-4" (click)="openModalConf=false">Salir</button>
+            <button type="submit" class="btn btn-primary offset-1 col-4"  >Solicitar</button>
+
 
           </div>
 
@@ -193,3 +194,17 @@
 
 
       </ngl-modal>
+
+
+
+      <ngl-modal header="Alerta"  [(open)]="modalAlerta" size="x-small" directional="false">
+
+        <div body>
+          <h5 class="col-12 text-center">Has sobrepasado el limite de créditos activos, termina de pagar un credito para pedir otro nuevo</h5>
+        </div>
+
+        <ng-template ngl-modal-footer>
+        <button class="btn btn-primary col-4 offset-4" (click)="modalAlerta=false">Aceptar</button>
+
+      </ng-template>
+        </ngl-modal>
