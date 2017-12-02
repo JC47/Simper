@@ -197,7 +197,7 @@ module.exports.getCreditosActivos = function (idProyecto) {
 }
 //Id's de credito activos
 module.exports.getIdCreditosActivos = function (idProyecto) {
-  var query = "select idCredito from creditoactivo where idProyecto = "+idProyecto+" ";
+  var query = "select idCredito,numeroPeriodo from creditoactivo inner join creditobalance on creditoactivo.activo = 1 and creditoactivo.idProyecto = "+idProyecto+" and creditobalance.Proyectos_idProyecto = creditoactivo.idProyecto and creditobalance.credito_idCredito = creditoactivo.idCredito ";
   return querySql(query);
 }
 //get plazo,activo de creditoactivo

@@ -41,20 +41,6 @@ router.post('/', (req, res, next) => {
   });
 });
 
-router.post('/', (req, res, next) => {
-  Promise.resolve().then(function () {
-    var idP = req.body.Proyectos_idProyecto;
-    var idM = req.body.Maquinaria_idMaquinaria;
-    return maquinariaComprada.getMaquinariaComprada(idP, idM);
-  }).then( function (rows) {
-    res.json({success: true, datos:rows[0], msg:"Operacion exitosa"});
-  })
-  .catch(function (err) {
-    console.log(err);
-    res.json({success:false, msg:"Operacion incompleta"});
-  });
-});
-
 router.post('/compra', (req, res, next) => {
 
 var idProyecto = req.body.Proyectos_idProyecto;
@@ -78,7 +64,7 @@ var numeroPeriodo = req.body.Balance_numeroPeriodo;
   })
   .then(function () {
     var idProyecto = req.body.Proyectos_idProyecto;
-    return maquinariaComprada.getMaqMaqProyecto(idProyecto);
+    return maquinariaComprada.getMaqMaqProyecto(idProyecto,numeroPeriodo);
   })
   .then( function (rows) {
     res.json({success: true, datos:rows, msg:"Operacion exitosa"});
@@ -107,6 +93,7 @@ router.post('/vuelta', (req, res, next) => {
 
 var idProyecto = req.body.Proyectos_idProyecto;
 var idMaquinaria = req.body.Maquinaria_idMaquinaria;
+var numeroPeriodo = req.body.Balance_numeroPeriodo;
 
 Promise.resolve().then(function () {
   return maquinariaComprada.getMaquinariaComprada(idProyecto,idMaquinaria);
@@ -121,7 +108,7 @@ Promise.resolve().then(function () {
   })
   .then(function () {
     var idProyecto = req.body.Proyectos_idProyecto;
-    return maquinariaComprada.getMaqMaqProyecto(idProyecto);
+    return maquinariaComprada.getMaqMaqProyecto(idProyecto,numeroPeriodo);
   })
   .then( function (rows) {
     res.json({success: true, datos:rows, msg:"Operacion exitosa"});

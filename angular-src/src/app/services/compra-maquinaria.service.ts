@@ -47,7 +47,6 @@ export class CompraMaquinariaService {
 
   compraMaquinaria(x,y){
     this.comprar(x).subscribe(data => {
-      console.log(data)
       for(let key$ in data.datos){
         this.maquinasCompradas[key$] = data.datos[key$];
       }
