@@ -95,11 +95,12 @@ export class BalanceFinalComponent implements OnInit {
 
 
 
-      doc.setFontType("normal");
+
+
   //Activo
       doc.text(10, 40, 'A menos de un año');
       doc.line(10, 45, 120, 45);
-
+          doc.setFontType("normal");
       doc.text(12, 48, 'Caja y Bancos');
       doc.line(10, mar+anchCell*1, 120, mar+anchCell*1);
       doc.text(120, 48, '$20,000,000' , null, null, 'right');
@@ -178,6 +179,7 @@ doc.setFontSize(7);
 
 doc.text(10, 130, 'De Aplicación Difereida');
 doc.line(10, 135, 120, 135);
+doc.setFontType("normal");
 
 doc.text(12, 44+anchCell*12+46, 'Pagos Hechos por Anticipado');
 doc.line(10, mar+0+anchCell*12+46, 120, mar+anchCell*12+46);
@@ -199,6 +201,7 @@ doc.line(120, mar+0+anchCell*18+46, 140, mar+anchCell*18+46);
 //Pasivo
   doc.text(165, 40, 'A menos de un año');
 doc.line(165, 45, 235, 45);
+doc.setFontType("normal");
 
 doc.text(167, 44+anchCell*1, 'IVA por enterar');
 doc.text(235, 44+anchCell*1, '$20,000,000', null, null, 'right');
@@ -230,7 +233,7 @@ doc.setFontSize(8);
 doc.setFontType("bold");
 doc.text(167, 44+anchCell*6, 'Total');
 doc.text(255, 44+anchCell*6, '$20,000,000', null, null, 'right');
-doc.setFontType("normal");
+
 doc.setFontSize(7);
 
 doc.text(165, 85, 'A más de un año');
@@ -272,8 +275,8 @@ doc.text(235, 44+anchCell*11+45, '$20,000,000', null, null, 'right');
 doc.text(167, 44+anchCell*12+45, 'Utilidad del Ejercicio');
 doc.line(165, mar+0+anchCell*12+45, 235, mar+anchCell*12+45);
 doc.text(235, 44+anchCell*12+45, '$20,000,000', null, null, 'right');
-
-
+doc.setFontSize(8);
+doc.setFontType("bold");
 doc.text(167, 44+anchCell*13+45, 'Total');
 doc.text(255, 44+anchCell*13+45, '$20,000,000', null, null, 'right');
 
@@ -281,16 +284,7 @@ doc.text(165, 44+anchCell*18+46, 'Suma de los Derechos');
 doc.text(255, 44+anchCell*18+46, '$20,000,000', null, null, 'right');
 doc.line(235, mar+0+anchCell*18+46, 255, mar+anchCell*18+46);
 
-
-
-
-
-
-
-    //doc.autoTable(columns0,[],{tableWidth:500});
-    //doc.setPage(1);
-  //  doc.autoTable(columns,rows,{startY: doc.autoTableEndPosY()});
-    doc.save("prue.pdf")
+doc.save("prue.pdf")
   }
 
 }

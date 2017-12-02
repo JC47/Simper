@@ -21,6 +21,7 @@ export class FinanciamientoComponent implements OnInit {
   tablaPagos = [];
   openModalConf:boolean=false;
   solicitudForm:FormGroup;
+  modalAlerta:boolean=false;
 
   constructor(private _creditoService:UsuarioCreditoService) {
     this.creditos=this._creditoService.returnCreditosU(localStorage.getItem('idUsuario'));
@@ -73,9 +74,10 @@ export class FinanciamientoComponent implements OnInit {
             this.verAmortizacion(cantidad.idCredito);
           }
         });
-      this.creditosActivos=this._creditoService.arregloC();  
+      this.creditosActivos=this._creditoService.arregloC();
       }else{
-        alert("Limite de creditos excedidos");
+        this.modalAlerta=true;
+        this.openModalConf=false;
       }
     });
   }
