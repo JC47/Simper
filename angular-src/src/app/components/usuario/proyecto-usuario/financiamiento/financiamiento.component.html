@@ -6,7 +6,7 @@
           <h3 class="col-12 text-center">Creditos</h3>
           <hr>
         </div>
-        <div class="card col-5 offset-1" *ngFor="let credito of creditos">
+        <div class="card col-5" *ngFor="let credito of creditos">
 
           <div class="card-block">
             <div class="row">
@@ -29,7 +29,7 @@
             <div class="card-footer">
               <div  class="btn btn-primary  offset-1 col-10" (click)="selectCredito(credito)" [hidden]="validaCredito(credito)" >Solicitar</div>
               <button class="btn btn-success offset-1 col-10" (click)="verPagos(credito.idCredito)" [hidden]="!validaCredito(credito)">Ver Pagos</button>
-              <button type="button" class="btn btn-danger col-10 offset-1" (click)="eliminarCreditoSolicitado(credito.idCredito)" [hidden]="!validaCredito(credito)">Cancelar</button>
+
 
             </div>
           </div>
@@ -52,11 +52,11 @@
                 <img  src="assets/img/credit.png" class=" img-fluid"  style="margin-left:20px">
               </div>
 
-              <div class="col-8">
+              <div class="col-3">
                 <h4 class="card-title" style="margin-bottom:15px">{{getNameById(credito.idCredito)}}</h4>
-
-
               </div>
+
+              <button type="button" class="btn btn-danger col-3 offset-1 text-center" (click)="eliminarCreditoSolicitado(credito.idCredito)" [disabled]="!validaCreditoA(credito)">Cancelar</button>
 
             </div>
 

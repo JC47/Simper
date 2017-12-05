@@ -46,6 +46,13 @@ export class FinanciamientoComponent implements OnInit {
 
   }
 
+  validaCreditoA(credito){
+    if(credito.numeroPeriodo==localStorage.getItem('numeroPeriodo'))
+      return true
+    else
+      return false
+  }
+
   getNameById(id:number){
     for(let credito of this.creditos){
       if(credito.idCredito==id)

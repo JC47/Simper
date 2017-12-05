@@ -319,6 +319,117 @@ export class OperacionComponent implements OnInit {
 
 
 
+
+
+              PDFpresupuestoGlobalComprasMP(){
+                var doc= new jsPDF({
+                orientation: 'landscape',
+                unit: 'mm',
+                format: [215.9,279]});
+
+                var columns = [
+                {title: "Material", dataKey: "material"},
+                {title: "Cantidad a Comprar", dataKey: "cantidadComprar"},
+                {title: "Costo Unitario", dataKey: "costoUni"},
+                {title: "Importe", dataKey: "importe"},
+                {title: "IVA Acreditable", dataKey: "ivaA"},
+                {title: "Total a Pagar", dataKey: "totalP"}];
+
+                var rows = [
+                {"material":"", "unidades": "", "cantidadComprar": "","costoUni": "","importe": "","ivaA": "","total": "totalP"}
+
+              ];
+
+                doc.autoTable(columns, rows, {
+                margin: {top: 40,
+                         left:40},
+                 tableWidth: 200,
+                headerStyles: {fillColor:0},
+                columnStyles: {
+                	total: {halign:'right',columnWidth:'auto'},
+                  material:{halign:'center'},
+                  unidades:{halign:'right'},
+                  costoUni:{halign:'right'}
+                },
+                addPageContent: function(data) {
+                  doc.setFontSize(15);
+                  doc.setFontType("bold");
+                  doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+                  doc.setFontSize(13);
+                  doc.text(139.5, 23, 'Presupuesto Global de Compras de Materia Prima e I.V.A. del Periodo X', null, null, 'center');
+                  doc.line(50, 27, 228, 27);
+                },
+
+
+
+
+
+
+                });
+
+                doc.save("Alamcen de Materiales.pdf");
+
+
+
+                }
+
+
+                PDFpresupuestoGlobalConsumoMP(){
+                  var doc= new jsPDF({
+                  orientation: 'landscape',
+                  unit: 'mm',
+                  format: [215.9,279]});
+
+                  var columns = [
+                  {title: "Producto", dataKey: "producto"},
+                  {title: "Cantidad Unitaria", dataKey: "cantidadUnit"},
+                  {title: "Costo Unitario", dataKey: "costoUni"},
+                  {title: "Unidades a Producir", dataKey: "unidadProd"},
+                  {title: "Cantidad", dataKey: "cantidad"},
+                  {title: "Importe", dataKey: "importe"}];
+
+                  var rows = [
+                  {"prodcuto":"", "cantidadUnit": "", "costoUni": "","unidadProd": "","cantidad": "","importe": ""}
+
+                ];
+
+                  doc.autoTable(columns, rows, {
+                  margin: {top: 40,
+                           left:40},
+                   tableWidth: 200,
+                  headerStyles: {fillColor:0},
+                  columnStyles: {
+                    total: {halign:'right',columnWidth:'auto'},
+                    material:{halign:'center'},
+                    unidades:{halign:'right'},
+                    costoUni:{halign:'right'}
+                  },
+                  addPageContent: function(data) {
+                    doc.setFontSize(15);
+                    doc.setFontType("bold");
+                    doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+                    doc.setFontSize(13);
+                    doc.text(139.5, 23, 'Presupuesto Global de Compras de Materia Prima e I.V.A. del Periodo X', null, null, 'center');
+                    doc.line(50, 27, 228, 27);
+                  },
+
+
+
+
+
+
+                  });
+
+                  doc.save("Alamcen de Materiales.pdf");
+
+
+
+                  }
+
+
+
+
+
                   PDFpresupuestoGlobalVentasIVA(){
                     var doc= new jsPDF({
                     orientation: 'landscape',
@@ -681,70 +792,6 @@ export class OperacionComponent implements OnInit {
 
 
 
-                                                          PDFestadoDeResultados(){
-                                                            var doc= new jsPDF({
-                                                            orientation: 'landscape',
-                                                            unit: 'mm',
-                                                            format: [215.9,279]});
-
-                                                            var columns = [
-                                                            {title: "", dataKey: "cara"},
-                                                            {title: "Producto X", dataKey: "x"}];
-
-
-                                                            var rows = [
-                                                            {"cara":"Ventas Netas","x": "1000000"},
-                                                            {"cara":"Costo de Ventas","x": "1000000"},
-                                                            {"cara":"","x": ""},
-                                                            {"cara":"Utilidad Bruta","x": "1000000"},
-                                                            {"cara":"","x": ""},
-                                                            {"cara":"Costo de Distribución","x": "1000000"},
-                                                            {"cara":"Otros Gastos","x": "1000000"},
-                                                            {"cara":"Gastos de Administración","x": "1000000"},
-                                                            {"cara":"","x": ""},
-                                                            {"cara":"","x": ""},
-                                                            {"cara":"Utilidad en Operación" ,"x": "1000000"},
-                                                            {"cara":"","x": ""},
-                                                            {"cara":"Intereses" ,"x": "1000000"},
-                                                            {"cara":"","x": ""},
-                                                            {"cara":"Utilidad antes de Impuestos","x": "1000000"},
-                                                            {"cara":"","x": ""},
-                                                            {"cara":"ISR","x": "1000000"},
-                                                            {"cara":"PTU","x": "1000000"},
-                                                            {"cara":"","x": ""},
-                                                            {"cara":"Utilidad del Ejercicio","x": "1000000"},
-                                                          ];
-
-
-                                                            doc.autoTable(columns, rows, {
-                                                            margin: {top: 40,
-                                                                     left:40},
-                                                             tableWidth: 200,
-                                                            headerStyles: {fillColor:0},
-                                                            columnStyles: {
-                                                              cara: {halign:'left',columnWidth:65}
-                                                            },
-                                                            addPageContent: function(data) {
-                                                              doc.setFontSize(15);
-                                                              doc.setFontType("bold");
-                                                              doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
-                                                              doc.setFontSize(13);
-                                                              doc.text(139.5, 23, 'Estado de Resultados', null, null, 'center');
-                                                              doc.line(50, 27, 228, 27);
-                                                            },
-
-
-
-
-
-
-                                                            });
-
-                                                            doc.save("Estado de Resultados.pdf");
-
-
-
-                                                            }
 
 
 
