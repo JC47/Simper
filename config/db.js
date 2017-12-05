@@ -29,7 +29,11 @@ Promise.promisifyAll(require("mysql/lib/Pool").prototype);
 //     password: '966fbda0',
 //     database: 'heroku_7be18966ed8d82e'
 // });
+<<<<<<< HEAD
 //
+=======
+
+>>>>>>> 0a669cfe79fc65a986fe3d3acdab44d9792a4d1b
 
 //Conexion sin contrseña
 // var pool = mysql.createPool({
@@ -53,7 +57,11 @@ Promise.promisifyAll(require("mysql/lib/Pool").prototype);
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
+<<<<<<< HEAD
     password: 'root',
+=======
+    password: '',
+>>>>>>> 0a669cfe79fc65a986fe3d3acdab44d9792a4d1b
     database: 'basesimv1'
 });
 

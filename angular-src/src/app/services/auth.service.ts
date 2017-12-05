@@ -71,6 +71,8 @@ export class AuthService {
     localStorage.setItem('id_token', token);
     localStorage.setItem('idUsuario', usuario.id);
     localStorage.setItem('nombreUsuario', usuario.name);
+    localStorage.setItem("periodos", usuario.periodos);
+    localStorage.setItem("regresion",usuario.regresion);
     this.authToken = token;
     this.usuario = usuario;
   }

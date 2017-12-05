@@ -14,17 +14,16 @@ router.post('/register', (req, res, next) => {
     var Administrador_idAdministrador = req.body.Administrador_idAdministrador;
     var contra = req.body.contra;
     var user = req.body.user;
+    var proyectos = req.body.proyectos;
+    var periodos = req.body.periodos;
+    var regresion = req.body.regresion;
 
-  return getJSONUsuario(nombreUsuario, apPat, apMat, Administrador_idAdministrador, contra, user);
+  return getJSONUsuario(nombreUsuario,apPat,apMat,Administrador_idAdministrador,contra,user,proyectos,periodos,regresion);
   })
   .then(function (newUsuario) {
       return usuario.addUsuario(newUsuario);
   }).then(function(){
-    //res.json({success: true, msg:"Operacion exitosa"});
     return usuario.getUsuarios();
-  }).
-  then( function (rows) {
-    return toArrayUsuario(rows);
   }).
   then( function (usuarioList) {
     res.json({success: true, datos:usuarioList, msg:"Operacion exitosa"});
@@ -44,7 +43,10 @@ router.post('/modify/:idUsuario', (req, res, next) => {
        var Administrador_idAdministrador = req.body.Administrador_idAdministrador;
        var contra = req.body.contra;
        var user = req.body.user;
-      return getJSONUsuario(nombreUsuario, apPat, apMat, Administrador_idAdministrador, contra, user);
+       var proyectos = req.body.proyectos;
+       var periodos = req.body.periodos;
+       var regresion = req.body.regresion;
+      return getJSONUsuario(nombreUsuario,apPat,apMat,Administrador_idAdministrador,contra,user,proyectos,periodos,regresion);
   })
   .then(function (data) {
       var idUsuario = req.params.idUsuario;
@@ -129,7 +131,9 @@ Promise.resolve().then(function () {
         token: 'JWT ' + token,
         usuario: {
           id: usuario.idUsuario,
-          name: usuario.user
+          name: usuario.user,
+          regresion:usuario.regresion,
+          periodos:usuario.periodos
         }
       });
     }
@@ -269,7 +273,7 @@ function toArrayProyecto(rows) {
   return ProyectoList;
 }
 
-function getJSONUsuario(nombreUsuario, apPat, apMat, Administrador_idAdministrador, contra, user) {
+function getJSONUsuario(nombreUsuario,apPat,apMat,Administrador_idAdministrador,contra,user,pro,per,regre) {
   //recibimos datos
   var data = {
       "nombreUsuario": nombreUsuario,
@@ -277,7 +281,10 @@ function getJSONUsuario(nombreUsuario, apPat, apMat, Administrador_idAdministrad
       "apMat":apMat,
       "Administrador_idAdministrador": Administrador_idAdministrador,
       "contra":contra,
-      "user":user
+      "user":user,
+      "proyectos":pro,
+      "periodos":per,
+      "regresion":regre
    };
    return data;
 }
@@ -290,7 +297,10 @@ function toJsonAdmin(rows){
       "apMat": rows[0].apMat,
       "Administrador_idAdministrador": rows[0].Administrador_idAdministrador,
       "contra": rows[0].contra,
-      "user": rows[0].user
+      "user": rows[0].user,
+      "proyectos":rows[0].proyectos,
+      "periodos":rows[0].periodos,
+      "regresion":rows[0].regresion
     }
   return usuario;
 }
