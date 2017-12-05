@@ -77,42 +77,47 @@ export class BalanceComponent implements OnInit {
   }
 
   pasarPeriodo(){
+    var p = localStorage.getItem('numeroPeriodo');
+    var proyecto = localStorage.getItem('idProyecto');
+    let periodoNuevo = parseInt(p) + 1;
     var cajaBancosFinal = 0;
     for(let b of this.balanceFinal){
       cajaBancosFinal += b.cajaBancos;
     }
-    if(cajaBancosFinal < 0){
-      this.openConf=false;
-      alert("Necesitas un prestamo");
-      this.router.navigate(['Usuario/proyecto/financiamiento']);
+
+    if(localStorage.getItem('periodos') == p){
+      alert("Haz finalizado la simulacion");
     }
     else{
-      this.openConf=false;
-      this.openLoad=true;
-      setTimeout(()=>{this.openLoad=false,this.openBien=true;}, 2000);
+      if(cajaBancosFinal < 0){
+        this.openConf=false;
+        alert("Necesitas un prestamo");
+        this.router.navigate(['Usuario/proyecto/financiamiento']);
+      }
+      else{
+        this.openConf=false;
+        this.openLoad=true;
+        setTimeout(()=>{this.openLoad=false,this.openBien=true;}, 2000);
+        this._balanceService.getBalanceByIds(proyecto,p).subscribe(data => {
+          var dep = data.datos[0].maqEquipo*.10;
+          this._balanceService.crearBalance(proyecto,data.datos[0],periodoNuevo).subscribe(data => {
+            if(data.success){
+              localStorage.setItem('numeroPeriodo',periodoNuevo.toString());
+              localStorage.setItem('numeroRPeriodos',periodoNuevo.toString());
 
-      var p = localStorage.getItem('numeroPeriodo');
-      var proyecto = localStorage.getItem('idProyecto');
-      let periodoNuevo = parseInt(p) + 1;
-      this._balanceService.getBalanceByIds(proyecto,p).subscribe(data => {
-        var dep = data.datos[0].maqEquipo*.10;
-        this._balanceService.crearBalance(proyecto,data.datos[0],periodoNuevo).subscribe(data => {
-          if(data.success){
-            localStorage.setItem('numeroPeriodo',periodoNuevo.toString());
-            localStorage.setItem('numeroRPeriodos',periodoNuevo.toString());
-
-            this.periodo = this.periodo + 1 ;
-            var y = {
-              nombre: "Periodo "+this.periodo,
-              numero: this.periodo
+              this.periodo = this.periodo + 1 ;
+              var y = {
+                nombre: "Periodo "+this.periodo,
+                numero: this.periodo
+              }
+              this.periodos.push(y);
             }
-            this.periodos.push(y);
-          }
+          });
         });
-      });
-      this._desarrolloProducto.actualizarPD();
-      this._desarrolloZona.actualizarZonasDes();
-      this._creditoService.validarP().subscribe();
+        this._desarrolloProducto.actualizarPD();
+        this._desarrolloZona.actualizarZonasDes();
+        this._creditoService.validarP().subscribe();
+      }
     }
   }
 
