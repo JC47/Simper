@@ -8,6 +8,7 @@ import { AlertModule, ModalModule } from 'ngx-bootstrap';
 import { DatePipe } from '@angular/common';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AccordionModule } from 'ngx-bootstrap';
+import {CurrencyPipe} from '@angular/common'
 import { PaginationModule } from 'ngx-bootstrap';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NvD3Module } from 'ng2-nvd3';
@@ -147,6 +148,7 @@ import { DemandaPotencialComponent } from './components/usuario/proyecto-usuario
   providers: [UsuariosService,
               AuthService,
               AuthGuard,
+              CurrencyPipe,
               DatePipe,
               DesarrolloProductoService,
               BalanceService,
