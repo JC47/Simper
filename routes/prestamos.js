@@ -126,6 +126,23 @@ router.get('/getcredito', (req, res, next) => {
   });
 });
 
+router.post('/deleteactivo', (req, res, next) => {
+  var idCredito = req.body.idCredito;
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+  Promise.resolve()
+  .then(function () {
+    return prestamo.deleteCreditoActivo(idCredito,idProyecto);
+  })
+  .then(function(){
+    res.json({success: true, msg:"Operacion exitosa"});
+  })
+  .catch(function (err) {
+    console.error("got error: " + err);
+    res.json({success:false, msg:"No sirve"});
+  });
+});
+
 router.post('/getAmortizacion', (req,res,next) => {
   var idCredito = req.body.idCredito;
   var idProyecto = req.body.idProyecto;

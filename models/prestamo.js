@@ -205,3 +205,8 @@ module.exports.getPlazoActivo = function (idProyecto) {
   var query = "select * from creditoactivo where idProyecto = "+idProyecto+" ";
   return querySql(query);
 }
+
+module.exports.deteleCreditoActivo = function (idCredito,idProyecto) {
+  var query = "delete from creditoactivo where idCredito = "+idCredito+" and idProyecto = "+idProyecto+" ";
+  return querySql(query);
+}
