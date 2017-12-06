@@ -56,7 +56,7 @@
     <tr>
       <th>Intereses</th>
       <td class="text-right" *ngFor="let producto of resultados">-</td>
-      <td class="text-right" *ngFor="let aux of intereses">{{aux}}</td>
+      <td class="text-right" *ngFor="let aux of intereses">{{aux |currency:'USD':true:'1.0-0'}}</td>
     </tr>
 
     <tr>

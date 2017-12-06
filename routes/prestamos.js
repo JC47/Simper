@@ -716,6 +716,7 @@ for (var i = 0; i < plazoactivo.length; i++) {//2
 }
 
 function getIntereses(prestamos,pagos){
+  console.log(prestamos,pagos);
   var p = [];
   var T = 0;
   for(let key in prestamos){
@@ -723,7 +724,7 @@ function getIntereses(prestamos,pagos){
   }
   for(let key1 in pagos){
     if(pagos[key1].tipo != 1){
-    T += pagos[key].intereses;
+    T += pagos[key1].intereses;
     }
   }
   p.push(T);

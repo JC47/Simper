@@ -34,6 +34,7 @@ export class EstadoResultadosComponent implements OnInit {
         this.resultados = this._operacionService.returnProductoResultados();
         this.auxiliarC=this._operacionService.returnAuxiliarC();
         this.maquinas =this._maqService.returnMaquinasCompradas();
+        console.log("Intereses",this.intereses);
     }, 1500);
   }
 
