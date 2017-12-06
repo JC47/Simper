@@ -254,69 +254,112 @@ export class EstadoResultadosComponent implements OnInit {
 
 
 
-                                                            PDFestadoDeResultados(){
-                                                              var doc= new jsPDF({
-                                                              orientation: 'landscape',
-                                                              unit: 'mm',
-                                                              format: [215.9,279]});
+  PDFestadoDeResultados(){
+  var doc= new jsPDF({
+  orientation: 'landscape',
+  unit: 'mm',
+  format: [215.9,279]});
 
-                                                              var columns = [
-                                                              {title: "", dataKey: "cara"},
-                                                              {title: "Producto X", dataKey: "x"}];
-
-
-                                                              var rows = [
-                                                              {"cara":"Ventas Netas","x": "1000000"},
-                                                              {"cara":"Costo de Ventas","x": "1000000"},
-                                                              {"cara":"","x": ""},
-                                                              {"cara":"Utilidad Bruta","x": "1000000"},
-                                                              {"cara":"","x": ""},
-                                                              {"cara":"Costo de Distribución","x": "1000000"},
-                                                              {"cara":"Otros Gastos","x": "1000000"},
-                                                              {"cara":"Gastos de Administración","x": "1000000"},
-                                                              {"cara":"","x": ""},
-                                                              {"cara":"","x": ""},
-                                                              {"cara":"Utilidad en Operación" ,"x": "1000000"},
-                                                              {"cara":"","x": ""},
-                                                              {"cara":"Intereses" ,"x": "1000000"},
-                                                              {"cara":"","x": ""},
-                                                              {"cara":"Utilidad antes de Impuestos","x": "1000000"},
-                                                              {"cara":"","x": ""},
-                                                              {"cara":"ISR","x": "1000000"},
-                                                              {"cara":"PTU","x": "1000000"},
-                                                              {"cara":"","x": ""},
-                                                              {"cara":"Utilidad del Ejercicio","x": "1000000"},
-                                                            ];
+  var columns = [
+  {title: "", dataKey: "cara"}];
 
 
-                                                              doc.autoTable(columns, rows, {
-                                                              margin: {top: 40,
-                                                                       left:40},
-                                                               tableWidth: 200,
-                                                              headerStyles: {fillColor:0},
-                                                              columnStyles: {
-                                                                cara: {halign:'left',columnWidth:65}
-                                                              },
-                                                              addPageContent: function(data) {
-                                                                doc.setFontSize(15);
-                                                                doc.setFontType("bold");
-                                                                doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
-                                                                doc.setFontSize(13);
-                                                                doc.text(139.5, 23, 'Estado de Resultados', null, null, 'center');
-                                                                doc.line(50, 27, 228, 27);
-                                                              },
+  var rows = [
+  {"cara":"Ventas Netas"},
+  {"cara":"Costo de Ventas"},
+  {"cara":""},
+  {"cara":"Utilidad Bruta"},
+  {"cara":""},
+  {"cara":"Costo de Distribución"},
+  {"cara":"Otros Gastos"},
+  {"cara":"Gastos de Administración"},
+  {"cara":""},
+  {"cara":""},
+  {"cara":"Utilidad en Operación" },
+  {"cara":""},
+  {"cara":"Intereses" },
+  {"cara":""},
+  {"cara":"Utilidad antes de Impuestos"},
+  {"cara":""},
+  {"cara":"ISR"},
+  {"cara":"PTU"},
+  {"cara":""},
+  {"cara":"Utilidad del Ejercicio"},
+  ];
+
+  for(let producto of this.resultados){
+    var x = {
+      title:this.getNameByIdProducto(producto),
+      dataKey:producto
+    }
+    columns.push(x);
+    rows[0][x.dataKey] = this.getVentasNetas(producto).toString();
+    rows[1][x.dataKey] = this.getCostoVentas(producto).toString();
+    rows[3][x.dataKey] = this.getUtilidadParcial(producto).toString();
+    rows[5][x.dataKey] = this.getDistParcial(producto).toString();
+    rows[6][x.dataKey] = this.getOtrosGastosParcial(producto).toString();
+    rows[7][x.dataKey] = this.getAdminParcial(producto).toString();
+    rows[10][x.dataKey] = this.getUtilidadAntesParcial(producto).toString();
+    rows[12][x.dataKey] = "-";
+    rows[14][x.dataKey] = this.getUtilidadAntesParcial(producto).toString();
+    rows[16][x.dataKey] = "-";
+    rows[17][x.dataKey] = "-";
+    rows[19][x.dataKey] = "-";
+  }
+
+  var t = {
+    title:"Total",
+    dataKey:"t"
+  }
+  columns.push(t);
+
+  rows[0][t.dataKey] = this.getTotalVentas().toString();
+  rows[1][t.dataKey] = this.getTotalCostosVentas().toString();
+  rows[3][t.dataKey] = this.getUtilidadBruta().toString();
+  rows[5][t.dataKey] = this.getDistTotal().toString();
+  for(let item of this.auxiliarT){
+    rows[6][t.dataKey] = item.toString();
+    rows[10][t.dataKey] = (this.getUtilidadAntes() - item).toString();
+  }
+  rows[7][t.dataKey] = this.getAdminTotal().toString();
+  for(let aux of this.intereses){
+    rows[12][t.dataKey] = aux.toString();
+  }
+  rows[14][t.dataKey] = this.getUtilidad2().toString();
+  rows[16][t.dataKey] = this.getISR().toString();
+  rows[17][t.dataKey] = this.getPTU().toString();
+  rows[19][t.dataKey] = (this.getUtilidad2() - this.getISR() - this.getPTU()).toString();
+
+
+
+  doc.autoTable(columns, rows, {
+  margin: {top: 40,
+       left:40},
+  tableWidth: 200,
+  headerStyles: {fillColor:0},
+  columnStyles: {
+  cara: {halign:'left',columnWidth:65}
+  },
+  addPageContent: function(data) {
+  doc.setFontSize(15);
+  doc.setFontType("bold");
+  doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+  doc.setFontSize(13);
+  doc.text(139.5, 23, 'Estado de Resultados', null, null, 'center');
+  doc.line(50, 27, 228, 27);
+  },
 
 
 
 
 
 
-                                                              });
+  });
 
-                                                              doc.save("Estado de Resultados.pdf");
+  doc.save("Estado de Resultados.pdf");
 
 
 
-                                                              }
+  }
 
 }

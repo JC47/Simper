@@ -398,22 +398,35 @@ export class OperacionComponent implements OnInit {
     format: [215.9,279]});
 
     var columns = [
-    {title: "", dataKey: "cara"},
-    {title: "Producto X", dataKey: "x"}];
+    {title: "", dataKey: "cara"}];
 
 
     var rows = [
-    {"cara":"Unidades a Vender","x": "1000000"},
-    {"cara":"","x": ""},
-    {"cara":"Precio de Venta","x": "1000000"},
-    {"cara":"","x": ""},
-    {"cara":"Venta en $ ","x": ""},
-    {"cara":"","x": ""},
-    {"cara":"Importe","x": ""},
-    {"cara":"","x": ""}];
+    {"cara":"Unidades a Vender"},
+    {"cara":""},
+    {"cara":"Precio de Venta"},
+    {"cara":""},
+    {"cara":"Venta en $ "},
+    {"cara":""},
+    {"cara":"IVA"},
+    {"cara":""},
+    {"cara":"Importe"},
+    {"cara":""}];
 
 
+    for(let producto of this.auxiliares){
+      var x = {
+        title:this.getNameByIdProducto(producto.Producto_idProducto),
+        dataKey:this.getNameByIdProducto(producto.Producto_idProducto)
+      }
+      columns.push(x);
+      rows[0][x.dataKey] = producto.unidadesVendidas.toString();
+      rows[2][x.dataKey] = this.getPrecioVenta(producto.Producto_idProducto).toString();
+      rows[4][x.dataKey] = (producto.Ventas - producto.IVAxVentas).toString();
+      rows[6][x.dataKey] = producto.IVAxVentas.toString();
+      rows[8][x.dataKey] = producto.Ventas.toString();
 
+    }
 
     doc.autoTable(columns, rows, {
     margin: {top: 40,
@@ -531,33 +544,48 @@ export class OperacionComponent implements OnInit {
     format: [215.9,279]});
 
     var columns = [
-    {title: "", dataKey: "cara"},
-    {title: "Producto X", dataKey: "x"}];
+    {title: "", dataKey: "cara"}];
 
 
     var rows = [
-    {"cara":"Unidades a Vender","x": "1000000"},
-    {"cara":"","x": ""},
-    {"cara":"Costo Unitario Total","x": "1000000"},
-    {"cara":"","x": ""},
-    {"cara":"Costo de Distribución","x": "1000000"},
-    {"cara":"","x": ""},
-    {"cara":"Menos: ","x": ""},
-    {"cara":"Depreciaciones","x": "5000000"},
-    {"cara":"Neto","x": "1000000"},
-    {"cara":"","x": ""},
-    {"cara":"Menos partidas que no incluyen I.V.A.","x": ""},
-    {"cara":"","x": ""},
-    {"cara":"Sueldos y Salarios","x": ""},
-    {"cara":"Previsión Social","x": ""},
-    {"cara":"","x": ""},
-    {"cara":"Neto","x": ""},
-    {"cara":"I.V.A.","x": ""},
-    {"cara":"Total a Pagar","x": ""},
+    {"cara":"Unidades a Vender"},
+    {"cara":""},
+    {"cara":"Costo Unitario Total"},
+    {"cara":""},
+    {"cara":"Costo de Distribución"},
+    {"cara":""},
+    {"cara":"Menos: "},
+    {"cara":"Depreciaciones"},
+    {"cara":"Neto"},
+    {"cara":""},
+    {"cara":"Menos partidas que no incluyen I.V.A."},
+    {"cara":""},
+    {"cara":"Sueldos y Salarios"},
+    {"cara":"Previsión Social"},
+    {"cara":""},
+    {"cara":"Neto"},
+    {"cara":"I.V.A."},
+    {"cara":"Total a Pagar"},
   ];
 
 
-  rows[0]["t"]="hola"
+  for(let producto of this.auxiliares){
+    var x = {
+      title:this.getNameByIdProducto(producto.Producto_idProducto),
+      dataKey:this.getNameByIdProducto(producto.Producto_idProducto)
+    }
+    columns.push(x);
+    rows[0][x.dataKey] = producto.unidadesVendidas.toString();
+    rows[2][x.dataKey] = (producto.costoDistribucion / producto.unidadesVendidas).toString();
+    rows[4][x.dataKey] = producto.costoDistribucion.toString();
+    rows[7][x.dataKey] = (producto.costoDistribucion - producto.costoDistDep).toString();
+    rows[8][x.dataKey] = producto.costoDistDep.toString();
+    rows[12][x.dataKey] = "0";
+    rows[13][x.dataKey] = "0";
+    rows[15][x.dataKey] = producto.costoDistDep.toString();
+    rows[16][x.dataKey] = -producto.IVADist.toString();
+    rows[17][x.dataKey] = (producto.costoDistDep - producto.IVADist).toString();
+  }
 
     doc.autoTable(columns, rows, {
     margin: {top: 40,
@@ -597,33 +625,47 @@ export class OperacionComponent implements OnInit {
       format: [215.9,279]});
 
       var columns = [
-      {title: "", dataKey: "cara"},
-      {title: "Producto X", dataKey: "x"}];
+      {title: "", dataKey: "cara"}];
 
 
       var rows = [
-      {"cara":"Unidades a Vender","x": "1000000"},
-      {"cara":"","x": ""},
-      {"cara":"Costo Unitario Total","x": "1000000"},
-      {"cara":"","x": ""},
-      {"cara":"Costo de Distribución","x": "1000000"},
-      {"cara":"","x": ""},
-      {"cara":"Menos: ","x": ""},
-      {"cara":"Depreciaciones","x": "5000000"},
-      {"cara":"Neto","x": "1000000"},
-      {"cara":"","x": ""},
-      {"cara":"Menos partidas que no incluyen I.V.A.","x": ""},
-      {"cara":"","x": ""},
-      {"cara":"Sueldos y Salarios","x": ""},
-      {"cara":"Previsión Social","x": ""},
-      {"cara":"","x": ""},
-      {"cara":"Neto","x": ""},
-      {"cara":"I.V.A.","x": ""},
-      {"cara":"Total a Pagar","x": ""},
+        {"cara":"Unidades a Vender"},
+        {"cara":""},
+        {"cara":"Costo Unitario Total"},
+        {"cara":""},
+        {"cara":"Costo de Administracion"},
+        {"cara":""},
+        {"cara":"Menos: "},
+        {"cara":"Depreciaciones"},
+        {"cara":"Neto"},
+        {"cara":""},
+        {"cara":"Menos partidas que no incluyen I.V.A."},
+        {"cara":""},
+        {"cara":"Sueldos y Salarios"},
+        {"cara":"Previsión Social"},
+        {"cara":""},
+        {"cara":"Neto"},
+        {"cara":"I.V.A."},
+        {"cara":"Total a Pagar"},
     ];
 
-
-    rows[0]["t"]="hola"
+    for(let producto of this.auxiliares){
+      var x = {
+        title:this.getNameByIdProducto(producto.Producto_idProducto),
+        dataKey:this.getNameByIdProducto(producto.Producto_idProducto)
+      }
+      columns.push(x);
+      rows[0][x.dataKey] = producto.unidadesVendidas.toString();
+      rows[2][x.dataKey] = (producto.costoAdministrativo/producto.unidadesVendidas ).toString();
+      rows[4][x.dataKey] = producto.costoAdministrativo.toString();
+      rows[7][x.dataKey] = (producto.costoAdministrativo - producto.costoAdminDep).toString();
+      rows[8][x.dataKey] = producto.costoAdminDep.toString();
+      rows[12][x.dataKey] = "0";
+      rows[13][x.dataKey] = "0";
+      rows[15][x.dataKey] = producto.costoAdminDep.toString();
+      rows[16][x.dataKey] = -producto.IVAAdmon.toString();
+      rows[17][x.dataKey] = (producto.costoAdminDep - producto.IVAAdmon).toString();
+    }
 
       doc.autoTable(columns, rows, {
       margin: {top: 40,
@@ -641,12 +683,6 @@ export class OperacionComponent implements OnInit {
         doc.text(139.5, 23, 'Presupuesto Global de  Costo de Administración del Periodo X', null, null, 'center');
         doc.line(50, 27, 228, 27);
       },
-
-
-
-
-
-
       });
 
       doc.save("Presupuesto Global de Costo de Administracion.pdf");
@@ -662,20 +698,35 @@ export class OperacionComponent implements OnInit {
         format: [215.9,279]});
 
         var columns = [
-        {title: "", dataKey: "cara"},
-        {title: "Producto X", dataKey: "x"},
-        {title:"Producto Y",dataKey:"ProductoY"}];
+        {title: "", dataKey: "cara"}];
 
 
         var rows = [
-        {"cara":"Desarrollo de Producto","x": "1000000"},
-        {"cara":"Desarrollo de Mercado","x": "1000000"},
-        {"cara":"Participación de Mercado","x": "1000000"},
-        {"cara":"Total","x": "1000000"},
+        {"cara":"Desarrollo de Producto"},
+        {"cara":"Desarrollo de Mercado"}
 
       ];
 
-      rows[0]["ProductoY"]="3000000";
+      for(let producto of this.auxiliarC){
+        var x = {
+          title:this.getNameByIdProducto(producto.Producto_idProducto),
+          dataKey:this.getNameByIdProducto(producto.Producto_idProducto)
+        }
+        columns.push(x);
+        rows[0][x.dataKey] = producto.desarrolloProducto.toString();
+        rows[1][x.dataKey] = producto.desarrolloMercado.toString();
+      }
+
+      var y = {
+        title:"Total",
+        dataKey:"t"
+      }
+
+      columns.push(y);
+      rows[0]["t"] = this.getTotalProducto().toString();
+      rows[1]["t"] = this.getTotalMercado().toString();
+
+
 
 
         doc.autoTable(columns, rows, {
@@ -716,26 +767,41 @@ export class OperacionComponent implements OnInit {
           format: [215.9,279]});
 
           var columns = [
-          {title: "", dataKey: "cara"},
-          {title: "Producto X", dataKey: "x"}];
+          {title: "", dataKey: "cara"}];
 
 
           var rows = [
-          {"cara":"I.I de Materia Prima","x": "1000000"},
-          {"cara":"Compras","x": "1000000"},
-          {"cara":"I.F. de Materia prima","x": "1000000"},
-          {"cara":"Materia prima consumida","x": "1000000"},
-          {"cara":"","x": ""},
-          {"cara":"Mano de Obra y Gastos I.P.","x": "1000000"},
-          {"cara":"","x": ""},
-          {"cara":"Costo de Producción","x": "1000000"},
-          {"cara":"","x": ""},
-          {"cara":"I.I. de Producto Terminado" ,"x": "1000000"},
-          {"cara":"I.F. de Producto Terminado" ,"x": "1000000"},
-          {"cara":"","x": ""},
-          {"cara":"Costo de Ventas","x": "1000000"}
+          {"cara":"I.I de Materia Prima"},
+          {"cara":"Compras"},
+          {"cara":"I.F. de Materia prima"},
+          {"cara":"Materia prima consumida"},
+          {"cara":""},
+          {"cara":"Mano de Obra y Gastos I.P."},
+          {"cara":""},
+          {"cara":"Costo de Producción"},
+          {"cara":""},
+          {"cara":"I.I. de Producto Terminado" },
+          {"cara":"I.F. de Producto Terminado" },
+          {"cara":""},
+          {"cara":"Costo de Ventas"}
         ];
 
+        for(let producto of this.auxiliares){
+          var x = {
+            title:this.getNameByIdProducto(producto.Producto_idProducto),
+            dataKey:this.getNameByIdProducto(producto.Producto_idProducto)
+          }
+          columns.push(x);
+          rows[0][x.dataKey] = "0";
+          rows[1][x.dataKey] = "0";
+          rows[2][x.dataKey] = "0";
+          rows[3][x.dataKey] = producto.materiaCosumida.toString();
+          rows[5][x.dataKey] = (producto.costoTransformacionVentas + producto.costoTransformacionMaq).toString();
+          rows[7][x.dataKey] = (producto.materiaCosumida + producto.costoTransformacionVentas + producto.costoTransformacionMaq).toString();
+          rows[9][x.dataKey] = producto.inventarioInicial.toString();
+          rows[10][x.dataKey] = producto.inventarioFinal.toString();
+          rows[12][x.dataKey] = producto.costoVentas.toString();
+        }
 
           doc.autoTable(columns, rows, {
           margin: {top: 40,
