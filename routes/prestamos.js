@@ -139,6 +139,23 @@ router.get('/getcredito', (req, res, next) => {
   });
 });
 
+router.post('/deleteactivo', (req, res, next) => {
+  var idCredito = req.body.idCredito;
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+  Promise.resolve()
+  .then(function () {
+    return prestamo.deleteCreditoActivo(idCredito,idProyecto);
+  })
+  .then(function(){
+    res.json({success: true, msg:"Operacion exitosa"});
+  })
+  .catch(function (err) {
+    console.error("got error: " + err);
+    res.json({success:false, msg:"No sirve"});
+  });
+});
+
 router.post('/getAmortizacion', (req,res,next) => {
   var idCredito = req.body.idCredito;
   var idProyecto = req.body.idProyecto;
@@ -699,6 +716,7 @@ for (var i = 0; i < plazoactivo.length; i++) {//2
 }
 
 function getIntereses(prestamos,pagos){
+  console.log(prestamos,pagos);
   var p = [];
   var T = 0;
   for(let key in prestamos){
@@ -706,7 +724,7 @@ function getIntereses(prestamos,pagos){
   }
   for(let key1 in pagos){
     if(pagos[key1].tipo != 1){
-    T += pagos[key].intereses;
+    T += pagos[key1].intereses;
     }
   }
   p.push(T);
