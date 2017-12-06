@@ -3226,7 +3226,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-12\">\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\n<hr>\n</div>\n\n\n<div class=\"row\">\n  <div class=\"col-12\" style=\"height:500px\" *ngFor=\"let zona of graficas\" >\n    <div class=\"row\">\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\n\n  <div class=\"col-12\" style=\"height:400px;\">\n    <ngx-charts-line-chart\n         [scheme]=\"colorScheme\"\n         [results]=\"zona.graf\"\n         xAxis=\"true\"\n         legendTitle=\"Productos\"\n         yAxis=\"true\"\n         legend=\"true\"\n         showXAxisLabel=\"true\"\n         showYAxisLabel=\"true\"\n         xAxisLabel=\"Periodos\"\n         yAxisLabel=\"Demanda Potencial\"\n         autoScale=\"true\">\n       </ngx-charts-line-chart>\n  </div>\n    </div>\n\n\n\n\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"col-12\">\r\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\r\n<hr>\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-12\" style=\"height:500px\" *ngFor=\"let zona of graficas\" >\r\n    <div class=\"row\">\r\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\r\n\r\n  <div class=\"col-12\" style=\"height:400px;\">\r\n    <ngx-charts-line-chart\r\n         [scheme]=\"colorScheme\"\r\n         [results]=\"zona.graf\"\r\n         xAxis=\"true\"\r\n         legendTitle=\"Productos\"\r\n         yAxis=\"true\"\r\n         legend=\"true\"\r\n         showXAxisLabel=\"true\"\r\n         showYAxisLabel=\"true\"\r\n         xAxisLabel=\"Periodos\"\r\n         yAxisLabel=\"Demanda Potencial\"\r\n         autoScale=\"true\">\r\n       </ngx-charts-line-chart>\r\n  </div>\r\n    </div>\r\n\r\n\r\n\r\n\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -4517,11 +4517,19 @@ var OperacionComponent = (function () {
             { title: "Total", dataKey: "total" }
         ];
         var rows = [
-            { "producto": "", "unidades": "", "costoUni": "", "total": "" },
-            { "producto": "ProductoX", "unidades": "200000", "costoUni": "$20", "total": "$200000" },
-            { "producto": "ProductoX", "unidades": "200000", "costoUni": "$20", "total": "$200000" },
-            { "producto": "ProductoX", "unidades": "200000", "costoUni": "$20", "total": "$200000" }
+            { "producto": "", "unidades": "", "costoUni": "", "total": "" }
         ];
+        //Cosas Importantes
+        for (var _i = 0, _a = this.auxiliaresAnteriores; _i < _a.length; _i++) {
+            var producto = _a[_i];
+            var x = {
+                "producto": this.getNameByIdProducto(producto.Producto_idProducto),
+                "unidades": producto.unidadesAlmacenadas.toString(),
+                "costoUni": (producto.inventarioFinal / producto.unidadesAlmacenadas).toString(),
+                "total": producto.inventarioFinal.toString()
+            };
+            rows.push(x);
+        }
         doc.autoTable(columns, rows, {
             margin: { top: 40,
                 left: 40 },
@@ -4538,48 +4546,11 @@ var OperacionComponent = (function () {
                 doc.setFontType("bold");
                 doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
                 doc.setFontSize(13);
-                doc.text(139.5, 23, 'Almacen de Artículo Terminado del Periodo X', null, null, 'center');
+                doc.text(139.5, 23, 'Almacen de Artículo Terminado del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
                 doc.line(50, 27, 228, 27);
             },
         });
         doc.save("Alamcen Articulo Terminado.pdf");
-    };
-    OperacionComponent.prototype.PDFalmacenMateriales = function () {
-        var doc = new jsPDF({
-            orientation: 'landscape',
-            unit: 'mm',
-            format: [215.9, 279]
-        });
-        var columns = [
-            { title: "Material", dataKey: "material" },
-            { title: "Unidades", dataKey: "unidades" },
-            { title: "Costo Unitario", dataKey: "costoUni" },
-            { title: "Total", dataKey: "total" }
-        ];
-        var rows = [
-            { "material": "", "unidades": "", "costoUni": "", "total": "" }
-        ];
-        doc.autoTable(columns, rows, {
-            margin: { top: 40,
-                left: 40 },
-            tableWidth: 200,
-            headerStyles: { fillColor: 0 },
-            columnStyles: {
-                total: { halign: 'right', columnWidth: 'auto' },
-                material: { halign: 'center' },
-                unidades: { halign: 'right' },
-                costoUni: { halign: 'right' }
-            },
-            addPageContent: function (data) {
-                doc.setFontSize(15);
-                doc.setFontType("bold");
-                doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
-                doc.setFontSize(13);
-                doc.text(139.5, 23, 'Almacen de Materiales del Periodo X', null, null, 'center');
-                doc.line(50, 27, 228, 27);
-            },
-        });
-        doc.save("Alamcen de Materiales.pdf");
     };
     OperacionComponent.prototype.PDFpresupuestoGlobalComprasMP = function () {
         var doc = new jsPDF({
@@ -4593,10 +4564,17 @@ var OperacionComponent = (function () {
             { title: "Costo Unitario", dataKey: "costoUni" },
             { title: "Importe", dataKey: "importe" },
             { title: "IVA Acreditable", dataKey: "ivaA" },
-            { title: "Total a Pagar", dataKey: "totalP" }
+            { title: "Total a Pagar", dataKey: "total" }
         ];
         var rows = [
-            { "material": "", "unidades": "", "cantidadComprar": "", "costoUni": "", "importe": "", "ivaA": "", "total": "totalP" }
+            { "material": "", "cantidadComprar": "", "costoUni": "", "importe": "", "ivaA": "", "total": "" },
+            { "material": "1",
+                "cantidadComprar": this.getUniMPTotal().toString(),
+                "costoUni": "69",
+                "importe": this.getUniMPTotalCash().toString(),
+                "ivaA": this.getIVAMP().toString(),
+                "total": this.getTotalMP().toString()
+            }
         ];
         doc.autoTable(columns, rows, {
             margin: { top: 40,
@@ -4614,11 +4592,11 @@ var OperacionComponent = (function () {
                 doc.setFontType("bold");
                 doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
                 doc.setFontSize(13);
-                doc.text(139.5, 23, 'Presupuesto Global de Compras de Materia Prima e I.V.A. del Periodo X', null, null, 'center');
+                doc.text(139.5, 23, 'Presupuesto Global de Compras de Materia Prima e I.V.A. del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
                 doc.line(50, 27, 228, 27);
             },
         });
-        doc.save("Alamcen de Materiales.pdf");
+        doc.save("Presupuesto Global de Compras de Materia Prima.pdf");
     };
     OperacionComponent.prototype.PDFpresupuestoGlobalConsumoMP = function () {
         var doc = new jsPDF({
@@ -4635,8 +4613,21 @@ var OperacionComponent = (function () {
             { title: "Importe", dataKey: "importe" }
         ];
         var rows = [
-            { "prodcuto": "", "cantidadUnit": "", "costoUni": "", "unidadProd": "", "cantidad": "", "importe": "" }
+            { "producto": "", "cantidadUnit": "", "costoUni": "", "unidadProd": "", "cantidad": "", "importe": "" }
         ];
+        //Cosas Importantes
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var producto = _a[_i];
+            var x = {
+                "producto": this.getNameByIdProducto(producto.Producto_idProducto),
+                "cantidadUnit": (this.getUniMP(producto.Producto_idProducto)).toString(),
+                "costoUni": (this.getCostoUni(producto.Producto_idProducto)).toString(),
+                "unidadProd": producto.unidadesProducidas.toString(),
+                "cantidad": (this.getUniMP(producto.Producto_idProducto) * producto.unidadesProducidas).toString(),
+                "importe": (this.getCostoUni(producto.Producto_idProducto) * (this.getUniMP(producto.Producto_idProducto) * producto.unidadesProducidas)).toString()
+            };
+            rows.push(x);
+        }
         doc.autoTable(columns, rows, {
             margin: { top: 40,
                 left: 40 },
@@ -4657,7 +4648,7 @@ var OperacionComponent = (function () {
                 doc.line(50, 27, 228, 27);
             },
         });
-        doc.save("Alamcen de Materiales.pdf");
+        doc.save("Presupuesto Global de Consumo de Materias Primas.pdf");
     };
     OperacionComponent.prototype.PDFpresupuestoGlobalVentasIVA = function () {
         var doc = new jsPDF({
@@ -4705,28 +4696,43 @@ var OperacionComponent = (function () {
             format: [215.9, 279]
         });
         var columns = [
-            { title: "", dataKey: "cara" },
-            { title: "Producto X", dataKey: "x" }
+            { title: "", dataKey: "cara" }
         ];
         var rows = [
-            { "cara": "Unidades a Producir", "x": "1000000" },
-            { "cara": "", "x": "" },
-            { "cara": "Costo de Transformación", "x": "1000000" },
-            { "cara": "", "x": "" },
-            { "cara": "Menos: ", "x": "" },
-            { "cara": "Depreciaciones", "x": "5000000" },
-            { "cara": "Neto", "x": "1000000" },
-            { "cara": "", "x": "" },
-            { "cara": "Menos partidas que no incluyen I.V.A.", "x": "" },
-            { "cara": "", "x": "" },
-            { "cara": "Sueldos y Salarios", "x": "" },
-            { "cara": "Previsión Social", "x": "" },
-            { "cara": "", "x": "" },
-            { "cara": "Neto", "x": "" },
-            { "cara": "I.V.A.", "x": "" },
-            { "cara": "Total a Pagar", "x": "" },
+            { "cara": "Unidades a Producir" },
+            { "cara": "" },
+            { "cara": "Costo de Transformación" },
+            { "cara": "" },
+            { "cara": "Menos: " },
+            { "cara": "Depreciaciones" },
+            { "cara": "Neto" },
+            { "cara": "" },
+            { "cara": "Menos partidas que no incluyen I.V.A." },
+            { "cara": "" },
+            { "cara": "Sueldos y Salarios" },
+            { "cara": "Previsión Social" },
+            { "cara": "" },
+            { "cara": "Neto" },
+            { "cara": "I.V.A." },
+            { "cara": "Total a Pagar" },
         ];
-        rows[0]["t"] = "hola";
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var producto = _a[_i];
+            var x = {
+                title: this.getNameByIdProducto(producto.Producto_idProducto),
+                dataKey: this.getNameByIdProducto(producto.Producto_idProducto)
+            };
+            columns.push(x);
+            rows[0][x.dataKey] = ((producto.costoTransformacionVentas + producto.costoTransformacionMaq) / producto.unidadesProducidas).toString();
+            rows[2][x.dataKey] = (producto.costoTransformacionVentas + producto.costoTransformacionMaq).toString();
+            rows[5][x.dataKey] = producto.costoTransformacionMaq.toString();
+            rows[6][x.dataKey] = producto.costoTransformacionVentas.toString();
+            rows[10][x.dataKey] = "0";
+            rows[11][x.dataKey] = "0";
+            rows[13][x.dataKey] = producto.costoTransformacionVentas.toString();
+            rows[14][x.dataKey] = -producto.IVATrans.toString();
+            rows[15][x.dataKey] = (producto.costoTransformacionVentas - producto.IVATrans).toString();
+        }
         doc.autoTable(columns, rows, {
             margin: { top: 40,
                 left: 40 },
@@ -4854,7 +4860,8 @@ var OperacionComponent = (function () {
         });
         var columns = [
             { title: "", dataKey: "cara" },
-            { title: "Producto X", dataKey: "x" }
+            { title: "Producto X", dataKey: "x" },
+            { title: "Producto Y", dataKey: "ProductoY" }
         ];
         var rows = [
             { "cara": "Desarrollo de Producto", "x": "1000000" },
@@ -4862,6 +4869,7 @@ var OperacionComponent = (function () {
             { "cara": "Participación de Mercado", "x": "1000000" },
             { "cara": "Total", "x": "1000000" },
         ];
+        rows[0]["ProductoY"] = "3000000";
         doc.autoTable(columns, rows, {
             margin: { top: 40,
                 left: 40 },

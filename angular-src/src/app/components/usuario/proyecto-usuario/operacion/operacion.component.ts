@@ -231,11 +231,19 @@ export class OperacionComponent implements OnInit {
     {title: "Total", dataKey: "total"}];
 
     var rows = [
-    {"producto":"", "unidades": "", "costoUni": "","total": ""},
-    {"producto":"ProductoX", "unidades": "200000", "costoUni": "$20","total": "$200000"},
-    {"producto":"ProductoX", "unidades": "200000", "costoUni": "$20","total": "$200000"},
-    {"producto":"ProductoX", "unidades": "200000", "costoUni": "$20","total": "$200000"}
-  ];
+    {"producto":"", "unidades": "", "costoUni": "","total": ""}
+    ];
+
+    //Cosas Importantes
+    for(let producto of this.auxiliaresAnteriores){
+      var x = {
+        "producto":this.getNameByIdProducto(producto.Producto_idProducto),
+        "unidades":producto.unidadesAlmacenadas.toString(),
+        "costoUni":(producto.inventarioFinal / producto.unidadesAlmacenadas).toString(),
+        "total":producto.inventarioFinal.toString()
+      }
+      rows.push(x);
+    }
 
     doc.autoTable(columns, rows, {
     margin: {top: 40,
@@ -253,7 +261,7 @@ export class OperacionComponent implements OnInit {
       doc.setFontType("bold");
       doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
       doc.setFontSize(13);
-      doc.text(139.5, 23, 'Almacen de Artículo Terminado del Periodo X', null, null, 'center');
+      doc.text(139.5, 23, 'Almacen de Artículo Terminado del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
       doc.line(50, 27, 228, 27);
     },
 
@@ -270,24 +278,405 @@ export class OperacionComponent implements OnInit {
 
     }
 
+  PDFpresupuestoGlobalComprasMP(){
+    var doc= new jsPDF({
+    orientation: 'landscape',
+    unit: 'mm',
+    format: [215.9,279]});
+
+    var columns = [
+    {title: "Material", dataKey: "material"},
+    {title: "Cantidad a Comprar", dataKey: "cantidadComprar"},
+    {title: "Costo Unitario", dataKey: "costoUni"},
+    {title: "Importe", dataKey: "importe"},
+    {title: "IVA Acreditable", dataKey: "ivaA"},
+    {title: "Total a Pagar", dataKey: "total"}];
+
+    var rows = [
+    {"material":"","cantidadComprar": "","costoUni": "","importe": "","ivaA": "","total": ""},
+    {"material":"1",
+    "cantidadComprar":this.getUniMPTotal().toString(),
+    "costoUni":"69",
+    "importe":this.getUniMPTotalCash().toString(),
+    "ivaA":this.getIVAMP().toString(),
+    "total":this.getTotalMP().toString()
+    }
+    ];
+
+    doc.autoTable(columns, rows, {
+    margin: {top: 40,
+             left:40},
+     tableWidth: 200,
+    headerStyles: {fillColor:0},
+    columnStyles: {
+    	total: {halign:'right',columnWidth:'auto'},
+      material:{halign:'center'},
+      unidades:{halign:'right'},
+      costoUni:{halign:'right'}
+    },
+    addPageContent: function(data) {
+      doc.setFontSize(15);
+      doc.setFontType("bold");
+      doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+      doc.setFontSize(13);
+      doc.text(139.5, 23, 'Presupuesto Global de Compras de Materia Prima e I.V.A. del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
+      doc.line(50, 27, 228, 27);
+    },
+    });
+
+    doc.save("Presupuesto Global de Compras de Materia Prima.pdf");
 
 
-      PDFalmacenMateriales(){
+
+    }
+
+
+    PDFpresupuestoGlobalConsumoMP(){
+      var doc= new jsPDF({
+      orientation: 'landscape',
+      unit: 'mm',
+      format: [215.9,279]});
+
+      var columns = [
+      {title: "Producto", dataKey: "producto"},
+      {title: "Cantidad Unitaria", dataKey: "cantidadUnit"},
+      {title: "Costo Unitario", dataKey: "costoUni"},
+      {title: "Unidades a Producir", dataKey: "unidadProd"},
+      {title: "Cantidad", dataKey: "cantidad"},
+      {title: "Importe", dataKey: "importe"}];
+
+      var rows = [
+      {"producto":"", "cantidadUnit": "", "costoUni": "","unidadProd": "","cantidad": "","importe": ""}
+      ];
+
+      //Cosas Importantes
+      for(let producto of this.auxiliares){
+        var x = {
+          "producto":this.getNameByIdProducto(producto.Producto_idProducto),
+          "cantidadUnit":(this.getUniMP(producto.Producto_idProducto)).toString(),
+          "costoUni":(this.getCostoUni(producto.Producto_idProducto)).toString(),
+          "unidadProd":producto.unidadesProducidas.toString(),
+          "cantidad":(this.getUniMP(producto.Producto_idProducto)*producto.unidadesProducidas).toString(),
+          "importe":(this.getCostoUni(producto.Producto_idProducto)*(this.getUniMP(producto.Producto_idProducto) * producto.unidadesProducidas)).toString()
+        }
+
+        rows.push(x);
+      }
+
+      doc.autoTable(columns, rows, {
+      margin: {top: 40,
+               left:40},
+       tableWidth: 200,
+      headerStyles: {fillColor:0},
+      columnStyles: {
+        total: {halign:'right',columnWidth:'auto'},
+        material:{halign:'center'},
+        unidades:{halign:'right'},
+        costoUni:{halign:'right'}
+      },
+      addPageContent: function(data) {
+        doc.setFontSize(15);
+        doc.setFontType("bold");
+        doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+        doc.setFontSize(13);
+        doc.text(139.5, 23, 'Presupuesto Global de Compras de Materia Prima e I.V.A. del Periodo X', null, null, 'center');
+        doc.line(50, 27, 228, 27);
+      },
+
+      });
+
+      doc.save("Presupuesto Global de Consumo de Materias Primas.pdf");
+
+
+
+      }
+
+  PDFpresupuestoGlobalVentasIVA(){
+    var doc= new jsPDF({
+    orientation: 'landscape',
+    unit: 'mm',
+    format: [215.9,279]});
+
+    var columns = [
+    {title: "", dataKey: "cara"},
+    {title: "Producto X", dataKey: "x"}];
+
+
+    var rows = [
+    {"cara":"Unidades a Vender","x": "1000000"},
+    {"cara":"","x": ""},
+    {"cara":"Precio de Venta","x": "1000000"},
+    {"cara":"","x": ""},
+    {"cara":"Venta en $ ","x": ""},
+    {"cara":"","x": ""},
+    {"cara":"Importe","x": ""},
+    {"cara":"","x": ""}];
+
+
+
+
+    doc.autoTable(columns, rows, {
+    margin: {top: 40,
+             left:40},
+     tableWidth: 200,
+    headerStyles: {fillColor:0},
+    columnStyles: {
+      cara: {halign:'left',columnWidth:40}
+    },
+    addPageContent: function(data) {
+      doc.setFontSize(15);
+      doc.setFontType("bold");
+      doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+      doc.setFontSize(13);
+      doc.text(139.5, 23, 'Presupuesto Global de Ventas e IVA del Periodo X', null, null, 'center');
+      doc.line(50, 27, 228, 27);
+    },
+
+
+
+
+
+
+    });
+
+    doc.save("Presupuesto Global de Ventas e IVA.pdf");
+
+
+
+    }
+
+
+
+  PDFpresupuestoGlobalCostoTrans(){
+  var doc= new jsPDF({
+  orientation: 'landscape',
+  unit: 'mm',
+  format: [215.9,279]});
+
+  var columns = [
+  {title: "", dataKey: "cara"}];
+
+  var rows = [
+  {"cara":"Unidades a Producir"},
+  {"cara":""},
+  {"cara":"Costo de Transformación"},
+  {"cara":""},
+  {"cara":"Menos: "},
+  {"cara":"Depreciaciones"},
+  {"cara":"Neto"},
+  {"cara":""},
+  {"cara":"Menos partidas que no incluyen I.V.A."},
+  {"cara":""},
+  {"cara":"Sueldos y Salarios"},
+  {"cara":"Previsión Social"},
+  {"cara":""},
+  {"cara":"Neto"},
+  {"cara":"I.V.A."},
+  {"cara":"Total a Pagar"},
+  ];
+
+  for(let producto of this.auxiliares){
+    var x = {
+      title:this.getNameByIdProducto(producto.Producto_idProducto),
+      dataKey:this.getNameByIdProducto(producto.Producto_idProducto)
+    }
+    columns.push(x);
+    rows[0][x.dataKey] = ((producto.costoTransformacionVentas + producto.costoTransformacionMaq )/ producto.unidadesProducidas).toString();
+    rows[2][x.dataKey] = (producto.costoTransformacionVentas + producto.costoTransformacionMaq).toString();
+    rows[5][x.dataKey] = producto.costoTransformacionMaq.toString();
+    rows[6][x.dataKey] = producto.costoTransformacionVentas.toString();
+    rows[10][x.dataKey] = "0";
+    rows[11][x.dataKey] = "0";
+    rows[13][x.dataKey] = producto.costoTransformacionVentas.toString();
+    rows[14][x.dataKey] = -producto.IVATrans.toString();
+    rows[15][x.dataKey] = (producto.costoTransformacionVentas - producto.IVATrans).toString();
+  }
+
+
+  doc.autoTable(columns, rows, {
+  margin: {top: 40,
+     left:40},
+  tableWidth: 200,
+  headerStyles: {fillColor:0},
+  columnStyles: {
+  cara: {halign:'left',columnWidth:65}
+  },
+  addPageContent: function(data) {
+  doc.setFontSize(15);
+  doc.setFontType("bold");
+  doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+  doc.setFontSize(13);
+  doc.text(139.5, 23, 'Presupuesto Global de  Costo de Trasnformación del Periodo X', null, null, 'center');
+  doc.line(50, 27, 228, 27);
+  },
+
+
+
+
+
+
+  });
+
+  doc.save("Presupuesto Global de Costo de Trasnformacion.pdf");
+
+
+
+  }
+
+
+  PDFpresupuestoGlobalCostoDist(){
+    var doc= new jsPDF({
+    orientation: 'landscape',
+    unit: 'mm',
+    format: [215.9,279]});
+
+    var columns = [
+    {title: "", dataKey: "cara"},
+    {title: "Producto X", dataKey: "x"}];
+
+
+    var rows = [
+    {"cara":"Unidades a Vender","x": "1000000"},
+    {"cara":"","x": ""},
+    {"cara":"Costo Unitario Total","x": "1000000"},
+    {"cara":"","x": ""},
+    {"cara":"Costo de Distribución","x": "1000000"},
+    {"cara":"","x": ""},
+    {"cara":"Menos: ","x": ""},
+    {"cara":"Depreciaciones","x": "5000000"},
+    {"cara":"Neto","x": "1000000"},
+    {"cara":"","x": ""},
+    {"cara":"Menos partidas que no incluyen I.V.A.","x": ""},
+    {"cara":"","x": ""},
+    {"cara":"Sueldos y Salarios","x": ""},
+    {"cara":"Previsión Social","x": ""},
+    {"cara":"","x": ""},
+    {"cara":"Neto","x": ""},
+    {"cara":"I.V.A.","x": ""},
+    {"cara":"Total a Pagar","x": ""},
+  ];
+
+
+  rows[0]["t"]="hola"
+
+    doc.autoTable(columns, rows, {
+    margin: {top: 40,
+             left:40},
+     tableWidth: 200,
+    headerStyles: {fillColor:0},
+    columnStyles: {
+      cara: {halign:'left',columnWidth:65}
+    },
+    addPageContent: function(data) {
+      doc.setFontSize(15);
+      doc.setFontType("bold");
+      doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+      doc.setFontSize(13);
+      doc.text(139.5, 23, 'Presupuesto Global de  Costo de Distribución del Periodo X', null, null, 'center');
+      doc.line(50, 27, 228, 27);
+    },
+
+
+
+
+
+
+    });
+
+    doc.save("Presupuesto Global de Costo de Distribucion.pdf");
+
+
+
+    }
+
+
+    PDFpresupuestoGlobalCostoAdmin(){
+      var doc= new jsPDF({
+      orientation: 'landscape',
+      unit: 'mm',
+      format: [215.9,279]});
+
+      var columns = [
+      {title: "", dataKey: "cara"},
+      {title: "Producto X", dataKey: "x"}];
+
+
+      var rows = [
+      {"cara":"Unidades a Vender","x": "1000000"},
+      {"cara":"","x": ""},
+      {"cara":"Costo Unitario Total","x": "1000000"},
+      {"cara":"","x": ""},
+      {"cara":"Costo de Distribución","x": "1000000"},
+      {"cara":"","x": ""},
+      {"cara":"Menos: ","x": ""},
+      {"cara":"Depreciaciones","x": "5000000"},
+      {"cara":"Neto","x": "1000000"},
+      {"cara":"","x": ""},
+      {"cara":"Menos partidas que no incluyen I.V.A.","x": ""},
+      {"cara":"","x": ""},
+      {"cara":"Sueldos y Salarios","x": ""},
+      {"cara":"Previsión Social","x": ""},
+      {"cara":"","x": ""},
+      {"cara":"Neto","x": ""},
+      {"cara":"I.V.A.","x": ""},
+      {"cara":"Total a Pagar","x": ""},
+    ];
+
+
+    rows[0]["t"]="hola"
+
+      doc.autoTable(columns, rows, {
+      margin: {top: 40,
+               left:40},
+       tableWidth: 200,
+      headerStyles: {fillColor:0},
+      columnStyles: {
+        cara: {halign:'left',columnWidth:65}
+      },
+      addPageContent: function(data) {
+        doc.setFontSize(15);
+        doc.setFontType("bold");
+        doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+        doc.setFontSize(13);
+        doc.text(139.5, 23, 'Presupuesto Global de  Costo de Administración del Periodo X', null, null, 'center');
+        doc.line(50, 27, 228, 27);
+      },
+
+
+
+
+
+
+      });
+
+      doc.save("Presupuesto Global de Costo de Administracion.pdf");
+
+
+
+      }
+
+      PDFpresupuestoGlobalOtrosGastos(){
         var doc= new jsPDF({
         orientation: 'landscape',
         unit: 'mm',
         format: [215.9,279]});
 
         var columns = [
-        {title: "Material", dataKey: "material"},
-        {title: "Unidades", dataKey: "unidades"},
-        {title: "Costo Unitario", dataKey: "costoUni"},
-        {title: "Total", dataKey: "total"}];
+        {title: "", dataKey: "cara"},
+        {title: "Producto X", dataKey: "x"},
+        {title:"Producto Y",dataKey:"ProductoY"}];
+
 
         var rows = [
-        {"material":"", "unidades": "", "costoUni": "","total": ""}
+        {"cara":"Desarrollo de Producto","x": "1000000"},
+        {"cara":"Desarrollo de Mercado","x": "1000000"},
+        {"cara":"Participación de Mercado","x": "1000000"},
+        {"cara":"Total","x": "1000000"},
 
       ];
+
+      rows[0]["ProductoY"]="3000000";
+
 
         doc.autoTable(columns, rows, {
         margin: {top: 40,
@@ -295,17 +684,14 @@ export class OperacionComponent implements OnInit {
          tableWidth: 200,
         headerStyles: {fillColor:0},
         columnStyles: {
-        	total: {halign:'right',columnWidth:'auto'},
-          material:{halign:'center'},
-          unidades:{halign:'right'},
-          costoUni:{halign:'right'}
+          cara: {halign:'left',columnWidth:65}
         },
         addPageContent: function(data) {
           doc.setFontSize(15);
           doc.setFontType("bold");
           doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
           doc.setFontSize(13);
-          doc.text(139.5, 23, 'Almacen de Materiales del Periodo X', null, null, 'center');
+          doc.text(139.5, 23, 'Presupuesto Global de Otros Gastos del Periodo X', null, null, 'center');
           doc.line(50, 27, 228, 27);
         },
 
@@ -316,484 +702,70 @@ export class OperacionComponent implements OnInit {
 
         });
 
-        doc.save("Alamcen de Materiales.pdf");
+        doc.save("Presupuesto Global Otros Gastos.pdf");
 
 
 
         }
 
 
+        PDFcostoProduccionVentas(){
+          var doc= new jsPDF({
+          orientation: 'landscape',
+          unit: 'mm',
+          format: [215.9,279]});
 
+          var columns = [
+          {title: "", dataKey: "cara"},
+          {title: "Producto X", dataKey: "x"}];
 
 
-              PDFpresupuestoGlobalComprasMP(){
-                var doc= new jsPDF({
-                orientation: 'landscape',
-                unit: 'mm',
-                format: [215.9,279]});
+          var rows = [
+          {"cara":"I.I de Materia Prima","x": "1000000"},
+          {"cara":"Compras","x": "1000000"},
+          {"cara":"I.F. de Materia prima","x": "1000000"},
+          {"cara":"Materia prima consumida","x": "1000000"},
+          {"cara":"","x": ""},
+          {"cara":"Mano de Obra y Gastos I.P.","x": "1000000"},
+          {"cara":"","x": ""},
+          {"cara":"Costo de Producción","x": "1000000"},
+          {"cara":"","x": ""},
+          {"cara":"I.I. de Producto Terminado" ,"x": "1000000"},
+          {"cara":"I.F. de Producto Terminado" ,"x": "1000000"},
+          {"cara":"","x": ""},
+          {"cara":"Costo de Ventas","x": "1000000"}
+        ];
 
-                var columns = [
-                {title: "Material", dataKey: "material"},
-                {title: "Cantidad a Comprar", dataKey: "cantidadComprar"},
-                {title: "Costo Unitario", dataKey: "costoUni"},
-                {title: "Importe", dataKey: "importe"},
-                {title: "IVA Acreditable", dataKey: "ivaA"},
-                {title: "Total a Pagar", dataKey: "totalP"}];
 
-                var rows = [
-                {"material":"", "unidades": "", "cantidadComprar": "","costoUni": "","importe": "","ivaA": "","total": "totalP"}
+          doc.autoTable(columns, rows, {
+          margin: {top: 40,
+                   left:40},
+           tableWidth: 200,
+          headerStyles: {fillColor:0},
+          columnStyles: {
+            cara: {halign:'left',columnWidth:65}
+          },
+          addPageContent: function(data) {
+            doc.setFontSize(15);
+            doc.setFontType("bold");
+            doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+            doc.setFontSize(13);
+            doc.text(139.5, 23, 'Costo de Producción y Ventas', null, null, 'center');
+            doc.line(50, 27, 228, 27);
+          },
 
-              ];
 
-                doc.autoTable(columns, rows, {
-                margin: {top: 40,
-                         left:40},
-                 tableWidth: 200,
-                headerStyles: {fillColor:0},
-                columnStyles: {
-                	total: {halign:'right',columnWidth:'auto'},
-                  material:{halign:'center'},
-                  unidades:{halign:'right'},
-                  costoUni:{halign:'right'}
-                },
-                addPageContent: function(data) {
-                  doc.setFontSize(15);
-                  doc.setFontType("bold");
-                  doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
-                  doc.setFontSize(13);
-                  doc.text(139.5, 23, 'Presupuesto Global de Compras de Materia Prima e I.V.A. del Periodo X', null, null, 'center');
-                  doc.line(50, 27, 228, 27);
-                },
 
 
 
 
+          });
 
+          doc.save("Costo de Producción y Ventas.pdf");
 
-                });
 
-                doc.save("Alamcen de Materiales.pdf");
 
-
-
-                }
-
-
-                PDFpresupuestoGlobalConsumoMP(){
-                  var doc= new jsPDF({
-                  orientation: 'landscape',
-                  unit: 'mm',
-                  format: [215.9,279]});
-
-                  var columns = [
-                  {title: "Producto", dataKey: "producto"},
-                  {title: "Cantidad Unitaria", dataKey: "cantidadUnit"},
-                  {title: "Costo Unitario", dataKey: "costoUni"},
-                  {title: "Unidades a Producir", dataKey: "unidadProd"},
-                  {title: "Cantidad", dataKey: "cantidad"},
-                  {title: "Importe", dataKey: "importe"}];
-
-                  var rows = [
-                  {"prodcuto":"", "cantidadUnit": "", "costoUni": "","unidadProd": "","cantidad": "","importe": ""}
-
-                ];
-
-                  doc.autoTable(columns, rows, {
-                  margin: {top: 40,
-                           left:40},
-                   tableWidth: 200,
-                  headerStyles: {fillColor:0},
-                  columnStyles: {
-                    total: {halign:'right',columnWidth:'auto'},
-                    material:{halign:'center'},
-                    unidades:{halign:'right'},
-                    costoUni:{halign:'right'}
-                  },
-                  addPageContent: function(data) {
-                    doc.setFontSize(15);
-                    doc.setFontType("bold");
-                    doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
-                    doc.setFontSize(13);
-                    doc.text(139.5, 23, 'Presupuesto Global de Compras de Materia Prima e I.V.A. del Periodo X', null, null, 'center');
-                    doc.line(50, 27, 228, 27);
-                  },
-
-
-
-
-
-
-                  });
-
-                  doc.save("Alamcen de Materiales.pdf");
-
-
-
-                  }
-
-
-
-
-
-                  PDFpresupuestoGlobalVentasIVA(){
-                    var doc= new jsPDF({
-                    orientation: 'landscape',
-                    unit: 'mm',
-                    format: [215.9,279]});
-
-                    var columns = [
-                    {title: "", dataKey: "cara"},
-                    {title: "Producto X", dataKey: "x"}];
-
-
-                    var rows = [
-                    {"cara":"Unidades a Vender","x": "1000000"},
-                    {"cara":"","x": ""},
-                    {"cara":"Precio de Venta","x": "1000000"},
-                    {"cara":"","x": ""},
-                    {"cara":"Venta en $ ","x": ""},
-                    {"cara":"","x": ""},
-                    {"cara":"Importe","x": ""},
-                    {"cara":"","x": ""}];
-
-
-
-
-                    doc.autoTable(columns, rows, {
-                    margin: {top: 40,
-                             left:40},
-                     tableWidth: 200,
-                    headerStyles: {fillColor:0},
-                    columnStyles: {
-                      cara: {halign:'left',columnWidth:40}
-                    },
-                    addPageContent: function(data) {
-                      doc.setFontSize(15);
-                      doc.setFontType("bold");
-                      doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
-                      doc.setFontSize(13);
-                      doc.text(139.5, 23, 'Presupuesto Global de Ventas e IVA del Periodo X', null, null, 'center');
-                      doc.line(50, 27, 228, 27);
-                    },
-
-
-
-
-
-
-                    });
-
-                    doc.save("Presupuesto Global de Ventas e IVA.pdf");
-
-
-
-                    }
-
-
-
-          PDFpresupuestoGlobalCostoTrans(){
-            var doc= new jsPDF({
-            orientation: 'landscape',
-            unit: 'mm',
-            format: [215.9,279]});
-
-            var columns = [
-            {title: "", dataKey: "cara"},
-            {title: "Producto X", dataKey: "x"}];
-
-
-            var rows = [
-            {"cara":"Unidades a Producir","x": "1000000"},
-            {"cara":"","x": ""},
-            {"cara":"Costo de Transformación","x": "1000000"},
-            {"cara":"","x": ""},
-            {"cara":"Menos: ","x": ""},
-            {"cara":"Depreciaciones","x": "5000000"},
-            {"cara":"Neto","x": "1000000"},
-            {"cara":"","x": ""},
-            {"cara":"Menos partidas que no incluyen I.V.A.","x": ""},
-            {"cara":"","x": ""},
-            {"cara":"Sueldos y Salarios","x": ""},
-            {"cara":"Previsión Social","x": ""},
-            {"cara":"","x": ""},
-            {"cara":"Neto","x": ""},
-            {"cara":"I.V.A.","x": ""},
-            {"cara":"Total a Pagar","x": ""},
-          ];
-
-
-          rows[0]["t"]="hola"
-
-            doc.autoTable(columns, rows, {
-            margin: {top: 40,
-                     left:40},
-             tableWidth: 200,
-            headerStyles: {fillColor:0},
-            columnStyles: {
-              cara: {halign:'left',columnWidth:65}
-            },
-            addPageContent: function(data) {
-              doc.setFontSize(15);
-              doc.setFontType("bold");
-              doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
-              doc.setFontSize(13);
-              doc.text(139.5, 23, 'Presupuesto Global de  Costo de Trasnformación del Periodo X', null, null, 'center');
-              doc.line(50, 27, 228, 27);
-            },
-
-
-
-
-
-
-            });
-
-            doc.save("Presupuesto Global de Costo de Trasnformacion.pdf");
-
-
-
-            }
-
-
-                      PDFpresupuestoGlobalCostoDist(){
-                        var doc= new jsPDF({
-                        orientation: 'landscape',
-                        unit: 'mm',
-                        format: [215.9,279]});
-
-                        var columns = [
-                        {title: "", dataKey: "cara"},
-                        {title: "Producto X", dataKey: "x"}];
-
-
-                        var rows = [
-                        {"cara":"Unidades a Vender","x": "1000000"},
-                        {"cara":"","x": ""},
-                        {"cara":"Costo Unitario Total","x": "1000000"},
-                        {"cara":"","x": ""},
-                        {"cara":"Costo de Distribución","x": "1000000"},
-                        {"cara":"","x": ""},
-                        {"cara":"Menos: ","x": ""},
-                        {"cara":"Depreciaciones","x": "5000000"},
-                        {"cara":"Neto","x": "1000000"},
-                        {"cara":"","x": ""},
-                        {"cara":"Menos partidas que no incluyen I.V.A.","x": ""},
-                        {"cara":"","x": ""},
-                        {"cara":"Sueldos y Salarios","x": ""},
-                        {"cara":"Previsión Social","x": ""},
-                        {"cara":"","x": ""},
-                        {"cara":"Neto","x": ""},
-                        {"cara":"I.V.A.","x": ""},
-                        {"cara":"Total a Pagar","x": ""},
-                      ];
-
-
-                      rows[0]["t"]="hola"
-
-                        doc.autoTable(columns, rows, {
-                        margin: {top: 40,
-                                 left:40},
-                         tableWidth: 200,
-                        headerStyles: {fillColor:0},
-                        columnStyles: {
-                          cara: {halign:'left',columnWidth:65}
-                        },
-                        addPageContent: function(data) {
-                          doc.setFontSize(15);
-                          doc.setFontType("bold");
-                          doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
-                          doc.setFontSize(13);
-                          doc.text(139.5, 23, 'Presupuesto Global de  Costo de Distribución del Periodo X', null, null, 'center');
-                          doc.line(50, 27, 228, 27);
-                        },
-
-
-
-
-
-
-                        });
-
-                        doc.save("Presupuesto Global de Costo de Distribucion.pdf");
-
-
-
-                        }
-
-
-                        PDFpresupuestoGlobalCostoAdmin(){
-                          var doc= new jsPDF({
-                          orientation: 'landscape',
-                          unit: 'mm',
-                          format: [215.9,279]});
-
-                          var columns = [
-                          {title: "", dataKey: "cara"},
-                          {title: "Producto X", dataKey: "x"}];
-
-
-                          var rows = [
-                          {"cara":"Unidades a Vender","x": "1000000"},
-                          {"cara":"","x": ""},
-                          {"cara":"Costo Unitario Total","x": "1000000"},
-                          {"cara":"","x": ""},
-                          {"cara":"Costo de Distribución","x": "1000000"},
-                          {"cara":"","x": ""},
-                          {"cara":"Menos: ","x": ""},
-                          {"cara":"Depreciaciones","x": "5000000"},
-                          {"cara":"Neto","x": "1000000"},
-                          {"cara":"","x": ""},
-                          {"cara":"Menos partidas que no incluyen I.V.A.","x": ""},
-                          {"cara":"","x": ""},
-                          {"cara":"Sueldos y Salarios","x": ""},
-                          {"cara":"Previsión Social","x": ""},
-                          {"cara":"","x": ""},
-                          {"cara":"Neto","x": ""},
-                          {"cara":"I.V.A.","x": ""},
-                          {"cara":"Total a Pagar","x": ""},
-                        ];
-
-
-                        rows[0]["t"]="hola"
-
-                          doc.autoTable(columns, rows, {
-                          margin: {top: 40,
-                                   left:40},
-                           tableWidth: 200,
-                          headerStyles: {fillColor:0},
-                          columnStyles: {
-                            cara: {halign:'left',columnWidth:65}
-                          },
-                          addPageContent: function(data) {
-                            doc.setFontSize(15);
-                            doc.setFontType("bold");
-                            doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
-                            doc.setFontSize(13);
-                            doc.text(139.5, 23, 'Presupuesto Global de  Costo de Administración del Periodo X', null, null, 'center');
-                            doc.line(50, 27, 228, 27);
-                          },
-
-
-
-
-
-
-                          });
-
-                          doc.save("Presupuesto Global de Costo de Administracion.pdf");
-
-
-
-                          }
-
-                          PDFpresupuestoGlobalOtrosGastos(){
-                            var doc= new jsPDF({
-                            orientation: 'landscape',
-                            unit: 'mm',
-                            format: [215.9,279]});
-
-                            var columns = [
-                            {title: "", dataKey: "cara"},
-                            {title: "Producto X", dataKey: "x"}];
-
-
-                            var rows = [
-                            {"cara":"Desarrollo de Producto","x": "1000000"},
-                            {"cara":"Desarrollo de Mercado","x": "1000000"},
-                            {"cara":"Participación de Mercado","x": "1000000"},
-                            {"cara":"Total","x": "1000000"},
-
-                          ];
-
-
-                            doc.autoTable(columns, rows, {
-                            margin: {top: 40,
-                                     left:40},
-                             tableWidth: 200,
-                            headerStyles: {fillColor:0},
-                            columnStyles: {
-                              cara: {halign:'left',columnWidth:65}
-                            },
-                            addPageContent: function(data) {
-                              doc.setFontSize(15);
-                              doc.setFontType("bold");
-                              doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
-                              doc.setFontSize(13);
-                              doc.text(139.5, 23, 'Presupuesto Global de Otros Gastos del Periodo X', null, null, 'center');
-                              doc.line(50, 27, 228, 27);
-                            },
-
-
-
-
-
-
-                            });
-
-                            doc.save("Presupuesto Global Otros Gastos.pdf");
-
-
-
-                            }
-
-
-                            PDFcostoProduccionVentas(){
-                              var doc= new jsPDF({
-                              orientation: 'landscape',
-                              unit: 'mm',
-                              format: [215.9,279]});
-
-                              var columns = [
-                              {title: "", dataKey: "cara"},
-                              {title: "Producto X", dataKey: "x"}];
-
-
-                              var rows = [
-                              {"cara":"I.I de Materia Prima","x": "1000000"},
-                              {"cara":"Compras","x": "1000000"},
-                              {"cara":"I.F. de Materia prima","x": "1000000"},
-                              {"cara":"Materia prima consumida","x": "1000000"},
-                              {"cara":"","x": ""},
-                              {"cara":"Mano de Obra y Gastos I.P.","x": "1000000"},
-                              {"cara":"","x": ""},
-                              {"cara":"Costo de Producción","x": "1000000"},
-                              {"cara":"","x": ""},
-                              {"cara":"I.I. de Producto Terminado" ,"x": "1000000"},
-                              {"cara":"I.F. de Producto Terminado" ,"x": "1000000"},
-                              {"cara":"","x": ""},
-                              {"cara":"Costo de Ventas","x": "1000000"}
-                            ];
-
-
-                              doc.autoTable(columns, rows, {
-                              margin: {top: 40,
-                                       left:40},
-                               tableWidth: 200,
-                              headerStyles: {fillColor:0},
-                              columnStyles: {
-                                cara: {halign:'left',columnWidth:65}
-                              },
-                              addPageContent: function(data) {
-                                doc.setFontSize(15);
-                                doc.setFontType("bold");
-                                doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
-                                doc.setFontSize(13);
-                                doc.text(139.5, 23, 'Costo de Producción y Ventas', null, null, 'center');
-                                doc.line(50, 27, 228, 27);
-                              },
-
-
-
-
-
-
-                              });
-
-                              doc.save("Costo de Producción y Ventas.pdf");
-
-
-
-                              }
+          }
 
 
 
