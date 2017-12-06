@@ -5,7 +5,9 @@ import {ResultadosService} from '../../../../services/resultados.service';
 import {ProductoService} from '../../../../services/producto.service';
 import {BalanceService} from '../../../../services/balance.service';
 import {CurrencyPipe} from '@angular/common'
+import {DecimalPipe} from '@angular/common'
 declare var jsPDF: any;
+
 @Component({
   selector: 'app-operacion',
   templateUrl: './operacion.component.html',
@@ -35,7 +37,8 @@ export class OperacionComponent implements OnInit {
               private _balanceService:BalanceService,
               private _operacionService:OperacionService,
               private _resultadosService:ResultadosService,
-              private cp: CurrencyPipe) {
+              private cp: CurrencyPipe,
+              private dc:DecimalPipe) {
     this._resultadosService.vender();
   }
 
@@ -238,8 +241,8 @@ export class OperacionComponent implements OnInit {
     for(let producto of this.auxiliaresAnteriores){
       var x = {
         "producto":this.getNameByIdProducto(producto.Producto_idProducto),
-        "unidades":producto.unidadesAlmacenadas.toString(),
-        "costoUni":(producto.inventarioFinal / producto.unidadesAlmacenadas).toString(),
+        "unidades":this.cp.transform( producto.unidadesAlmacenadas ,'USD',true,'1.0-0'),
+        "costoUni":this.cp.transform((producto.inventarioFinal / producto.unidadesAlmacenadas) ,'USD',true,'1.0-0'),
         "total":producto.inventarioFinal.toString()
       }
       rows.push(x);
@@ -295,11 +298,11 @@ export class OperacionComponent implements OnInit {
     var rows = [
     {"material":"","cantidadComprar": "","costoUni": "","importe": "","ivaA": "","total": ""},
     {"material":"1",
-    "cantidadComprar":this.getUniMPTotal().toString(),
+    "cantidadComprar":this.dc.transform(this.getUniMPTotal(),'1.0-0'),
     "costoUni":"69",
-    "importe":this.getUniMPTotalCash().toString(),
-    "ivaA":this.getIVAMP().toString(),
-    "total":this.getTotalMP().toString()
+    "importe":this.cp.transform(this.getUniMPTotalCash(),'USD',true,'1.0-0'),
+    "ivaA":this.cp.transform(this.getIVAMP(),'USD',true,'1.0-0'),
+    "total":this.cp.transform(this.getTotalMP(),'USD',true,'1.0-0')
     }
     ];
 
@@ -309,10 +312,12 @@ export class OperacionComponent implements OnInit {
      tableWidth: 200,
     headerStyles: {fillColor:0},
     columnStyles: {
-    	total: {halign:'right',columnWidth:'auto'},
+    	cantidadComprar: {halign:'right',columnWidth:'auto'},
       material:{halign:'center'},
-      unidades:{halign:'right'},
-      costoUni:{halign:'right'}
+      importe:{halign:'right'},
+      costoUni:{halign:'right'},
+      ivaA:{halign:'right'},
+      total:{halign:'right'}
     },
     addPageContent: function(data) {
       doc.setFontSize(15);
@@ -353,13 +358,13 @@ export class OperacionComponent implements OnInit {
       for(let producto of this.auxiliares){
         var x = {
           "producto":this.getNameByIdProducto(producto.Producto_idProducto),
-          "cantidadUnit":(this.getUniMP(producto.Producto_idProducto)).toString(),
-          "costoUni":(this.getCostoUni(producto.Producto_idProducto)).toString(),
-          "unidadProd":producto.unidadesProducidas.toString(),
-          "cantidad":(this.getUniMP(producto.Producto_idProducto)*producto.unidadesProducidas).toString(),
-          "importe":(this.getCostoUni(producto.Producto_idProducto)*(this.getUniMP(producto.Producto_idProducto) * producto.unidadesProducidas)).toString()
+          "cantidadUnit":this.cp.transform(this.getUniMP(producto.Producto_idProducto),'USD',true,'1.0-0'),
+          "costoUni":this.cp.transform( this.getCostoUni(producto.Producto_idProducto) ,'USD',true,'1.0-0'),
+          "unidadProd":this.dc.transform( producto.unidadesProducidas ,'1.0-0'),
+          "cantidad":this.dc.transform( (this.getUniMP(producto.Producto_idProducto)*producto.unidadesProducidas),'1.0-0'),
+          "importe":this.cp.transform( (this.getCostoUni(producto.Producto_idProducto)*(this.getUniMP(producto.Producto_idProducto) * producto.unidadesProducidas)) ,'USD',true,'1.0-0')
         }
-
+        //this.cp.transform(  ,'USD',true,'1.0-0')
         rows.push(x);
       }
 
@@ -369,10 +374,12 @@ export class OperacionComponent implements OnInit {
        tableWidth: 200,
       headerStyles: {fillColor:0},
       columnStyles: {
-        total: {halign:'right',columnWidth:'auto'},
-        material:{halign:'center'},
-        unidades:{halign:'right'},
-        costoUni:{halign:'right'}
+        producto: {halign:'center',columnWidth:'auto'},
+        cantidadUnit:{halign:'right'},
+        costoUni:{halign:'right'},
+        unidadProd:{halign:'right'},
+        cantidad:{halign:'right'},
+        importe:{halign:'right'},
       },
       addPageContent: function(data) {
         doc.setFontSize(15);
@@ -389,7 +396,17 @@ export class OperacionComponent implements OnInit {
 
 
 
+
+                    var columns = [
+                    {title: "Producto", dataKey: "producto"},
+                    {title: "Unidades A Vender", dataKey: "unidadesVender"},
+                    {title: "Precio de Venta", dataKey: "precioVenta"},
+                    {title: "Venta en $", dataKey: "vnetaEn"},
+                    {title: "Importe", dataKey: "importe"}
+                    ];
+
       }
+
 
   PDFpresupuestoGlobalVentasIVA(){
     var doc= new jsPDF({
@@ -397,8 +414,11 @@ export class OperacionComponent implements OnInit {
     unit: 'mm',
     format: [215.9,279]});
 
+
+
     var columns = [
     {title: "", dataKey: "cara"}];
+
 
 
     var rows = [
@@ -460,6 +480,65 @@ export class OperacionComponent implements OnInit {
 
 
 
+    PDFpresupuestoGlobalProduccion(){
+      var doc= new jsPDF({
+      orientation: 'landscape',
+      unit: 'mm',
+      format: [215.9,279]});
+
+      var columns = [
+      {title: "Producto", dataKey: "producto"},
+      {title: "Unidades A Vender (+)", dataKey: "unidadesVender"},
+      {title: "Inventario Final (+)", dataKey: "invFinal"},
+      {title: "Inventario Inicial(-)", dataKey: "invInicial"},
+      {title: "Unidades a Producir", dataKey: "unidadesProducir"},
+      {title: "Costo Unitario (M.P.)", dataKey: "costUnitMP"},
+      {title: "Costo Total (M.P.)", dataKey: "cosTotalMP"},
+      {title: "Costo Unitario (Trasnformación)", dataKey: "costUnitTrans"},
+      {title: "Costo Total (Transformación)", dataKey: "cosTotalTrans"},
+      {title: "Costo de Producción Unitario", dataKey: "costProdUnit"},
+      {title: "Costo de Producción Total", dataKey: "costProdTot"}
+      ];
+
+
+      var rows = [
+      {"producto":"","unidadesVender":"","invFinal":"","invInicial":"","unidadesProducir":"","costoUnitMP":"","cosTotalMP":"","costUnitTrans":"","costTotalTrans":"","costProdUnit":"","costProdTot":""}];
+
+
+
+
+      doc.autoTable(columns, rows, {
+      margin: {top: 40,
+               left:40},
+       tableWidth: 200,
+      headerStyles: {fillColor:0},
+      columnStyles: {
+        cara: {halign:'left',columnWidth:40}
+      },
+      addPageContent: function(data) {
+        doc.setFontSize(15);
+        doc.setFontType("bold");
+        doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+        doc.setFontSize(13);
+        doc.text(139.5, 23, 'Presupuesto Global de Ventas e IVA del Periodo X', null, null, 'center');
+        doc.line(50, 27, 228, 27);
+      },
+
+
+
+
+
+
+      });
+
+      doc.save("Presupuesto Global de Produccion.pdf");
+
+
+
+      }
+
+
+
   PDFpresupuestoGlobalCostoTrans(){
   var doc= new jsPDF({
   orientation: 'landscape',
@@ -488,31 +567,14 @@ export class OperacionComponent implements OnInit {
   {"cara":"Total a Pagar"},
   ];
 
-  for(let producto of this.auxiliares){
-    var x = {
-      title:this.getNameByIdProducto(producto.Producto_idProducto),
-      dataKey:this.getNameByIdProducto(producto.Producto_idProducto)
-    }
-    columns.push(x);
-    rows[0][x.dataKey] = ((producto.costoTransformacionVentas + producto.costoTransformacionMaq )/ producto.unidadesProducidas).toString();
-    rows[2][x.dataKey] = (producto.costoTransformacionVentas + producto.costoTransformacionMaq).toString();
-    rows[5][x.dataKey] = producto.costoTransformacionMaq.toString();
-    rows[6][x.dataKey] = producto.costoTransformacionVentas.toString();
-    rows[10][x.dataKey] = "0";
-    rows[11][x.dataKey] = "0";
-    rows[13][x.dataKey] = producto.costoTransformacionVentas.toString();
-    rows[14][x.dataKey] = -producto.IVATrans.toString();
-    rows[15][x.dataKey] = (producto.costoTransformacionVentas - producto.IVATrans).toString();
-  }
-
-
-  doc.autoTable(columns, rows, {
+  let options={
   margin: {top: 40,
      left:40},
   tableWidth: 200,
-  headerStyles: {fillColor:0},
+  headerStyles: {fillColor:0,halign:'center'},
   columnStyles: {
   cara: {halign:'left',columnWidth:65}
+
   },
   addPageContent: function(data) {
   doc.setFontSize(15);
@@ -521,14 +583,33 @@ export class OperacionComponent implements OnInit {
   doc.setFontSize(13);
   doc.text(139.5, 23, 'Presupuesto Global de  Costo de Trasnformación del Periodo X', null, null, 'center');
   doc.line(50, 27, 228, 27);
-  },
+  }, }
+
+  for(let producto of this.auxiliares){
+    var x = {
+      title:this.getNameByIdProducto(producto.Producto_idProducto),
+      dataKey:this.getNameByIdProducto(producto.Producto_idProducto)
+    }
+    columns.push(x);
+    rows[0][x.dataKey] = this.dc.transform(((producto.costoTransformacionVentas + producto.costoTransformacionMaq )/ producto.unidadesProducidas),'1.0-0');
+    rows[2][x.dataKey] = this.cp.transform( (producto.costoTransformacionVentas + producto.costoTransformacionMaq) ,'USD',true,'1.0-0');
+    rows[5][x.dataKey] = this.cp.transform( producto.costoTransformacionMaq ,'USD',true,'1.0-0');
+    rows[6][x.dataKey] = this.cp.transform( producto.costoTransformacionVentas ,'USD',true,'1.0-0');
+    rows[10][x.dataKey] = "$0";
+    rows[11][x.dataKey] = "$0";
+    rows[13][x.dataKey] = this.cp.transform( producto.costoTransformacionVentas ,'USD',true,'1.0-0');
+    rows[14][x.dataKey] =  this.cp.transform(-producto.IVATrans ,'USD',true,'1.0-0');
+    rows[15][x.dataKey] = this.cp.transform( (producto.costoTransformacionVentas - producto.IVATrans) ,'USD',true,'1.0-0')
 
 
+    options.columnStyles[this.getNameByIdProducto(producto.Producto_idProducto)]={halign:'right'};
+    console.log(options)
+  }
+
+//this.cp.transform(  ,'USD',true,'1.0-0')
 
 
-
-
-  });
+  doc.autoTable(columns, rows,options);
 
   doc.save("Presupuesto Global de Costo de Trasnformacion.pdf");
 
