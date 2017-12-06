@@ -27,6 +27,7 @@ export class BalanceComponent implements OnInit {
   openConf:boolean=false;
   openBien:boolean=false;
   openLoad:boolean=false;
+  alert:boolean=false;
 
   public status: any = {
     isFirstOpen: true,
@@ -91,8 +92,7 @@ export class BalanceComponent implements OnInit {
     else{
       if(cajaBancosFinal < 0){
         this.openConf=false;
-        alert("Necesitas un prestamo");
-        this.router.navigate(['Usuario/proyecto/financiamiento']);
+        this.alert=true;
       }
       else{
         this.openConf=false;
@@ -124,6 +124,11 @@ export class BalanceComponent implements OnInit {
   openBalances(){
     this.modalPeriodos.show();
 
+  }
+
+  pasaCreditos(){
+    this.router.navigate(['Usuario/proyecto/financiamiento']);
+    this.alert=false;
   }
 
   modalPasarPeriodo(){

@@ -64,3 +64,23 @@
         </div>
       </div>
     </ngl-modal>
+
+
+
+    <ngl-modal header="Confirmación"  [(open)]="alert" size="x-small" directional="false">
+
+      <div body>
+        <div class="container">
+          <h5 class="col-12 text-center" style="margin-bottom:30px">Tienes deuda, no puedes pasar de periodo, necesitas un prestamo</h5>
+            <div class="col-2 offset-5">
+              <img  src="assets/img/credit.png" class="img-fluid">
+            </div>
+
+        </div>
+      </div>
+
+      <ng-template ngl-modal-footer>
+        <button class="btn btn-primary" (click)="pasaCreditos()">Acepta</button>
+
+    </ng-template>
+      </ngl-modal>

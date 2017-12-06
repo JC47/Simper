@@ -18,7 +18,7 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
 import { AngularDraggableModule } from 'angular2-draggable';
 import { NG2D3Module } from 'ng2d3';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
-
+import {DecimalPipe} from '@angular/common'
 //Rutas
 import {app_routing} from './app.routes'
 
@@ -150,6 +150,7 @@ import { DemandaPotencialComponent } from './components/usuario/proyecto-usuario
               AuthGuard,
               CurrencyPipe,
               DatePipe,
+              DecimalPipe,
               DesarrolloProductoService,
               BalanceService,
               UsuarioCreditoService,
