@@ -39,6 +39,7 @@ export class VentaProductosComponent implements OnInit {
   ventas:any;
   mensaje:any;
   modalAlerta:any=false;
+  modalAlerta2:any=false;
   vendeForm:FormGroup[]=[];
   openVenta:boolean=false;
   vendiendo:boolean=false;
@@ -165,14 +166,18 @@ openModalVenta(idZona,idProducto){
         if(data.m){
           this.mensaje=data.msg;
           this.modalAlerta=true;
-          this.router.navigate(['Usuario/proyecto/compraMaquinaria']);
         }
         else{
           this.mensaje=data.msg;
-          this.modalAlerta=true;
+          this.modalAlerta2=true;
         }
       }
     });
+  }
+
+  paso(){
+    this.modalAlerta=false;
+    this.router.navigate(['Usuario/proyecto/compraMaquinaria']);
   }
 
   selectVenta(venta){

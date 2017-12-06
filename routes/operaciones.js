@@ -152,9 +152,11 @@ router.post('/modify', (req, res, next) => {
 router.post('/resultados', (req,res,next) => {
   var idProyecto = req.body.idProyecto;
   var numeroPeriodo = req.body.numeroPeriodo;
+  var anterior = numeroPeriodo-1;
   Promise.join(operacion.getProductoCuentaVenta(idProyecto,numeroPeriodo),operacion.getProductoCuenta(idProyecto,numeroPeriodo),
-              function(rows1,rows2){
-                return jsonProductos(rows1,rows2);
+  operacion.getProductoMaquinaria(idProyecto,anterior),
+              function(rows1,rows2,r3){
+                return jsonProductos(rows1,rows2,r3);
               }).then(function(salida){
                 return res.json({success:true,datos:salida,msg:"Bien"});
               }).catch(function(err) {
@@ -525,7 +527,7 @@ function getVentasAnteriores(ventasTotales){
   return uniAnterioresVendidas;
 }
 
-function jsonProductos(r1,r2){
+function jsonProductos(r1,r2,r3){
   var p = [];
 
   for(let key1 in r1){
@@ -534,6 +536,10 @@ function jsonProductos(r1,r2){
 
   for(let key2 in r2){
     p.push(r2[key2].Producto_idProducto);
+  }
+
+  for(let key3 in r3){
+    p.push(r3[key3].Maquinaria_idProducto);
   }
 
   var hash = {};

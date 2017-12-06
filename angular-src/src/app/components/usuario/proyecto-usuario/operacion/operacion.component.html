@@ -6,7 +6,7 @@
 
 <div class="col-10 offset-1">
   <ngl-section [(open)]="almacenArticuloTerm" title="Almacen de Articulo Terminado">
-
+    <div class="row">
       <div class="offset-3">
         <table class="table table-bordered table-responsive">
 
@@ -28,37 +28,57 @@
           </tbody>
         </table>
       </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4 offset-4">
+        <button type="button" class="btn btn-primary" (click)="PDFalmacenArticuloTerminado()">Exportar a PDF</button>
+      </div>
+    </div>
+
+
   </ngl-section>
 </div>
 
 
 <div class="col-10 offset-1">
   <ngl-section [(open)]="presGlobalVentas" title="Presupuesto Global de Ventas e IVA">
-    <div class="offset-2">
-      <table class="table table-bordered table-responsive">
+    <div class="row">
+      <div class="offset-2">
+        <table class="table table-bordered table-responsive">
 
-        <tbody>
-          <tr>
-            <th class="text-center">Producto</th>
-            <th class="text-center">Unidades a Vender</th>
-            <th class="text-center">Precio de Venta</th>
-            <th class="text-center">Ventas en $</th>
-            <th class="text-center">IVA (15%)</th>
-            <th class="text-center">Importe</th>
-          </tr>
+          <tbody>
+            <tr>
+              <th class="text-center">Producto</th>
+              <th class="text-center">Unidades a Vender</th>
+              <th class="text-center">Precio de Venta</th>
+              <th class="text-center">Ventas en $</th>
+              <th class="text-center">IVA (15%)</th>
+              <th class="text-center">Importe</th>
+            </tr>
 
-          <tr *ngFor="let producto of auxiliares">
-            <td>{{getNameByIdProducto(producto.Producto_idProducto) }}</td>
-            <td class="text-right">{{producto.unidadesVendidas }}</td>
-            <td class="text-right">{{getPrecioVenta(producto.Producto_idProducto) |currency:'USD':true:'1.0-0'}}</td>
-            <td class="text-right">{{producto.Ventas - producto.IVAxVentas |currency:'USD':true:'1.0-0'}}</td>
-            <td class="text-right">{{producto.IVAxVentas |currency:'USD':true:'1.0-0'}}</td>
-            <td class="text-right">{{producto.Ventas |currency:'USD':true:'1.0-0'}}</td>
-          </tr>
+            <tr *ngFor="let producto of auxiliares">
+              <td>{{getNameByIdProducto(producto.Producto_idProducto) }}</td>
+              <td class="text-right">{{producto.unidadesVendidas }}</td>
+              <td class="text-right">{{getPrecioVenta(producto.Producto_idProducto) |currency:'USD':true:'1.0-0'}}</td>
+              <td class="text-right">{{producto.Ventas - producto.IVAxVentas |currency:'USD':true:'1.0-0'}}</td>
+              <td class="text-right">{{producto.IVAxVentas |currency:'USD':true:'1.0-0'}}</td>
+              <td class="text-right">{{producto.Ventas |currency:'USD':true:'1.0-0'}}</td>
+            </tr>
 
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
+
+    <div class="row">
+      <div class="col-4 offset-4">
+        <button type="button" class="btn btn-primary" (click)=" PDFpresupuestoGlobalVentasIVA()">Exportar a PDF</button>
+      </div>
+    </div>
+
+
+
 
   </ngl-section>
 </div>
@@ -144,6 +164,12 @@
 
     </div>
 
+    <div class="row">
+      <div class="col-4 offset-4">
+        <button type="button" class="btn btn-primary" (click)="PDFpresupuestoGlobalConsumoMP()">Exportar a PDF</button>
+      </div>
+    </div>
+
 
   </ngl-section>
 </div>
@@ -152,32 +178,42 @@
 
 <div class="col-10 offset-1">
   <ngl-section [(open)]="presGlobalComprasMP" title="Presupuesto Global Compras de Materias Primas e IVA">
-    <div class="offset-2">
-      <table class="table table-bordered table-responsive">
-        <tbody>
-          <tr>
-            <th class="text-center align-middle" >Materiales </th>
-            <th class="text-center align-middle" >Cantidad a Comprar</th>
-            <th class="text-center align-middle"  >Costo Unitario</th>
-            <th class="text-center align-middle" >Importe</th>
-            <th class="text-center align-middle" >IVA Acreditable</th>
-            <th class="text-center align-middle" >Total a Pagar</th>
-          </tr>
+    <div class="row">
+      <div class="offset-2">
+        <table class="table table-bordered table-responsive">
+          <tbody>
+            <tr>
+              <th class="text-center align-middle" >Materiales </th>
+              <th class="text-center align-middle" >Cantidad a Comprar</th>
+              <th class="text-center align-middle"  >Costo Unitario</th>
+              <th class="text-center align-middle" >Importe</th>
+              <th class="text-center align-middle" >IVA Acreditable</th>
+              <th class="text-center align-middle" >Total a Pagar</th>
+            </tr>
 
 
-          <tr>
-            <td class="text-right">1</td>
-            <td class="text-right">{{getUniMPTotal()}}</td>
-            <td class="text-right">$69</td>
-            <td class="text-right">{{getUniMPTotalCash() |currency:'USD':true:'1.0-0'}}</td>
-            <td class="text-right">{{getIVAMP() |currency:'USD':true:'1.0-0'}}</td>
-            <td class="text-right">{{getTotalMP() |currency:'USD':true:'1.0-0'}}</td>
-          </tr>
+            <tr>
+              <td class="text-right">1</td>
+              <td class="text-right">{{getUniMPTotal()}}</td>
+              <td class="text-right">$69</td>
+              <td class="text-right">{{getUniMPTotalCash() |currency:'USD':true:'1.0-0'}}</td>
+              <td class="text-right">{{getIVAMP() |currency:'USD':true:'1.0-0'}}</td>
+              <td class="text-right">{{getTotalMP() |currency:'USD':true:'1.0-0'}}</td>
+            </tr>
 
 
-        </tbody>
-      </table>
+          </tbody>
+        </table>
 
+
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4 offset-4">
+        <button type="button" class="btn btn-primary" (click)="PDFpresupuestoGlobalComprasMP()">Exportar a PDF</button>
+      </div>
     </div>
   </ngl-section>
 </div>
@@ -188,6 +224,7 @@
 
 <div class="col-10 offset-1">
   <ngl-section [(open)]="presGlobalCostoTrans" title="Presupuesto Global de Costo de Transformación">
+  <div class="row">
     <div class="">
       <table class="table table-bordered table-responsive">
 
@@ -228,6 +265,15 @@
         </tbody>
       </table>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-4 offset-4">
+      <button type="button" class="btn btn-primary" (click)="PDFpresupuestoGlobalCostoTrans()">Exportar a PDF</button>
+    </div>
+  </div>
+
+
+
   </ngl-section>
 </div>
 
@@ -310,6 +356,13 @@
       </table>
 
     </div>
+
+    <div class="row">
+      <div class="col-4 offset-4">
+        <button type="button" class="btn btn-primary" (click)="PDFpresupuestoGlobalCostoDist()">Exportar a PDF</button>
+      </div>
+    </div>
+
   </ngl-section>
 </div>
 
@@ -391,6 +444,12 @@
           </table>
     </div>
 
+    <div class="row">
+      <div class="col-4 offset-4">
+        <button type="button" class="btn btn-primary" (click)="PDFpresupuestoGlobalCostoAdmin()">Exportar a PDF</button>
+      </div>
+    </div>
+
   </ngl-section>
 </div>
 
@@ -421,6 +480,13 @@
         </tbody>
       </table>
     </div>
+
+    <div class="row">
+      <div class="col-4 offset-4">
+        <button type="button" class="btn btn-primary" (click)="PDFpresupuestoGlobalOtrosGastos()">Exportar a PDF</button>
+      </div>
+    </div>
+
   </ngl-section>
 </div>
 
@@ -465,5 +531,12 @@
         </tbody>
       </table>
     </div>
+
+    <div class="row">
+      <div class="col-4 offset-4">
+        <button type="button" class="btn btn-primary" (click)="PDFcostoProduccionVentas()">Exportar a PDF</button>
+      </div>
+    </div>
+
   </ngl-section>
 </div>

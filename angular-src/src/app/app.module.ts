@@ -8,6 +8,7 @@ import { AlertModule, ModalModule } from 'ngx-bootstrap';
 import { DatePipe } from '@angular/common';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AccordionModule } from 'ngx-bootstrap';
+import {CurrencyPipe} from '@angular/common'
 import { PaginationModule } from 'ngx-bootstrap';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NvD3Module } from 'ng2-nvd3';
@@ -40,6 +41,7 @@ import {UsuarioZonaService} from './services/usuario-zona.service';
 import {DesarrolloProductoService} from './services/desarrollo-producto.service';
 import {MaquinariaService} from './services/maquinaria.service';
 import {ProductoService} from './services/producto.service';
+import {VariablesService} from './services/variables.service';
 import {CreditosService} from './services/creditos.service';
 import {ZonasService} from './services/zonas.service';
 import {OperacionService} from './services/operacion.service';
@@ -146,6 +148,7 @@ import { DemandaPotencialComponent } from './components/usuario/proyecto-usuario
   providers: [UsuariosService,
               AuthService,
               AuthGuard,
+              CurrencyPipe,
               DatePipe,
               DesarrolloProductoService,
               BalanceService,
@@ -154,6 +157,7 @@ import { DemandaPotencialComponent } from './components/usuario/proyecto-usuario
               DashboardService,
               ResultadosService,
               AuxiliarService,
+              VariablesService,
               CompraMaquinariaService,
               ZonasService,
               ResultadosOperacionService,

@@ -6,7 +6,7 @@
           <h3 class="col-12 text-center">Creditos</h3>
           <hr>
         </div>
-        <div class="card col-6" *ngFor="let credito of creditos">
+        <div class="card col-5" *ngFor="let credito of creditos">
 
           <div class="card-block">
             <div class="row">
@@ -29,7 +29,7 @@
             <div class="card-footer">
               <div  class="btn btn-primary  offset-1 col-10" (click)="selectCredito(credito)" [hidden]="validaCredito(credito)" >Solicitar</div>
               <button class="btn btn-success offset-1 col-10" (click)="verPagos(credito.idCredito)" [hidden]="!validaCredito(credito)">Ver Pagos</button>
-              <button type="button" class="btn btn-danger col-10 offset-1" (click)="eliminarCreditoSolicitado(credito.idCredito)" [hidden]="!validaCredito(credito)">Cancelar</button>
+
 
             </div>
           </div>
@@ -52,11 +52,11 @@
                 <img  src="assets/img/credit.png" class=" img-fluid"  style="margin-left:20px">
               </div>
 
-              <div class="col-8">
+              <div class="col-3">
                 <h4 class="card-title" style="margin-bottom:15px">{{getNameById(credito.idCredito)}}</h4>
-
-
               </div>
+
+              <button type="button" class="btn btn-danger col-3 offset-1 text-center" (click)="eliminarCreditoSolicitado(credito.idCredito)" [disabled]="!validaCreditoA(credito)">Cancelar</button>
 
             </div>
 
@@ -104,8 +104,9 @@
           </div>
 
           <div class="col-12">
-            <button type="submit" class="btn btn-primary offset-2 col-4"  >Solicitar</button>
-            <button class="btn btn-danger offset-1 col-4" (click)="openModalConf=false">Salir</button>
+            <button class="btn btn-danger offset-2 col-4" (click)="openModalConf=false">Salir</button>
+            <button type="submit" class="btn btn-primary offset-1 col-4"  >Solicitar</button>
+
 
           </div>
 
@@ -193,3 +194,17 @@
 
 
       </ngl-modal>
+
+
+
+      <ngl-modal header="Alerta"  [(open)]="modalAlerta" size="x-small" directional="false">
+
+        <div body>
+          <h5 class="col-12 text-center">Has sobrepasado el limite de créditos activos, termina de pagar un credito para pedir otro nuevo</h5>
+        </div>
+
+        <ng-template ngl-modal-footer>
+        <button class="btn btn-primary col-4 offset-4" (click)="modalAlerta=false">Aceptar</button>
+
+      </ng-template>
+        </ngl-modal>

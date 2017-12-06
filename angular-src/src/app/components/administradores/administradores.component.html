@@ -141,13 +141,14 @@
           </div>
 
               <div class="modal-footer">
+
+                  <button  type="button" class="btn btn-outline-danger" (click)="modalNew.hide()">
+                  Cancelar
+                  </button>
                 <button type="submit" class="btn btn-outline-success" [disabled]="!newForm.valid" >
                   Guardar
                 </button>
 
-                <button  type="button" class="btn btn-outline-danger" (click)="modalNew.hide()">
-                Cancelar
-                </button>
 
               </div>
         </form>
@@ -274,13 +275,14 @@
 
 
               <div class="modal-footer">
+                <button  type="button" class="btn btn-outline-danger" (click)="modalEdit.hide()">
+                Cancelar
+                </button>
                 <button type="submit" class="btn btn-outline-success" [disabled]="!editForm.valid" >
                   Guardar
                 </button>
 
-                <button  type="button" class="btn btn-outline-danger" (click)="modalEdit.hide()">
-                Cancelar
-                </button>
+
               </div>
         </form>
       </div>

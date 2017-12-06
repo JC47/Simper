@@ -238,13 +238,14 @@
 
 
               <div class="modal-footer">
+                <button  type="button" class="btn btn-outline-danger" (click)="modalNew.hide()">
+                Cancelar
+                </button>
                 <button type="submit" class="btn btn-outline-success" [disabled]="!newForm.valid"   >
                   Guardar
                 </button>
 
-                <button  type="button" class="btn btn-outline-danger" (click)="modalNew.hide()">
-                Cancelar
-                </button>
+
 
               </div>
         </form>
@@ -364,13 +365,14 @@
 
 
               <div class="modal-footer">
+                <button  type="button" class="btn btn-outline-danger" (click)="cerrarEdit()">
+                Cancelar
+                </button>
                 <button type="submit" class="btn btn-outline-success" >
                   Guardar
                 </button>
 
-                <button  type="button" class="btn btn-outline-danger" (click)="cerrarEdit()">
-                Cancelar
-                </button>
+
 
               </div>
         </form>
@@ -443,13 +445,14 @@
           </div>
 
           <div class="modal-footer">
+            <button  type="button" class="btn btn-outline-danger" (click)="modalEditProd.hide()">
+            Cancelar
+            </button>
             <button type="submit" class="btn btn-outline-success" [disabled]="!productoZona.valid">
               Guardar
             </button>
 
-            <button  type="button" class="btn btn-outline-danger" (click)="modalEditProd.hide()">
-            Cancelar
-            </button>
+
 
           </div>
 

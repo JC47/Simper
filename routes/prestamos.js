@@ -111,6 +111,19 @@ router.post('/modifycredito', (req, res, next) => {
   });
 });
 
+router.post('/getIntereses', (req,res,next) => {
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+  Promise.join(prestamo.getFinanciamientos(idProyecto,numeroPeriodo),prestamo.getPagos(idProyecto,numeroPeriodo),
+              function(prestamos,pagos){
+                return getIntereses(prestamos,pagos);
+              }).then(function(salida){
+                return res.json({success:true,msg:"Sirve",datos:salida});
+              }).catch(function(err){
+                return res.json({success:false,msg:"No sirve"});
+              });
+});
+
 router.get('/getcredito', (req, res, next) => {
 
   Promise.join(prestamo.getCredito(),prestamo.distinctIdCredito(),prestamo.getPagoCredito(),
@@ -700,6 +713,21 @@ for (var i = 0; i < plazoactivo.length; i++) {//2
     }
   }
   return periodos;
+}
+
+function getIntereses(prestamos,pagos){
+  var p = [];
+  var T = 0;
+  for(let key in prestamos){
+    T += prestamos[key].anticipo;
+  }
+  for(let key1 in pagos){
+    if(pagos[key1].tipo != 1){
+    T += pagos[key].intereses;
+    }
+  }
+  p.push(T);
+  return p;
 }
 
 module.exports = router;

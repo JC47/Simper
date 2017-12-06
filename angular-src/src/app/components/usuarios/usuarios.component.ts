@@ -38,13 +38,16 @@ export class UsuariosComponent implements OnInit {
 
 
   idAdmin;
-  usuarioDelete:usuario={
+  usuarioDelete:any={
     idUsuario:0,
     nombreUsuario:"",
     apPat:"",
     apMat:"",
     contra:"",
     user:"",
+    proyectos:0,
+    periodos:0,
+    regresion:0
   };
 
   public alerts: any = [];
@@ -55,10 +58,12 @@ export class UsuariosComponent implements OnInit {
     apMat:"",
     contra:"",
     user:"",
+    proyectos:0,
+    periodos:0,
+    regresion:0
   };
-  userNew:usuario;
   administradores = new Array();
-  usuarios:usuario[]=new Array();
+  usuarios:any[]=new Array();
   proyectos = new Array();
   closeResult: string;
   maquinas:any;
@@ -97,6 +102,9 @@ export class UsuariosComponent implements OnInit {
       'apMat':new FormControl('',Validators.required),
       'user':new FormControl('',Validators.required),
       'contra':new FormControl('',Validators.required),
+      'proyectos':new FormControl('',Validators.required),
+      'periodos':new FormControl('',Validators.required),
+      'regresion':new FormControl('',Validators.required),
       'Administrador_idAdministrador': new FormControl(localStorage.getItem('idAdmin'))
     });
 
@@ -107,6 +115,9 @@ export class UsuariosComponent implements OnInit {
       'apMat':new FormControl('',Validators.required),
       'user':new FormControl('',Validators.required),
       'contra':new FormControl('',Validators.required),
+      'proyectos':new FormControl('',Validators.required),
+      'periodos':new FormControl('',Validators.required),
+      'regresion':new FormControl('',Validators.required),
       'Administrador_idAdministrador': new FormControl(localStorage.getItem('idAdmin'))
 
     });
@@ -154,7 +165,7 @@ export class UsuariosComponent implements OnInit {
 
 
 
-  guarda(usuario:usuario){
+  guarda(usuario){
     if(!this.buscaRepetidos(usuario)){
       this._usuariosService.guardarUsuario(usuario);
       this.modalNew.hide();
@@ -180,7 +191,7 @@ export class UsuariosComponent implements OnInit {
     }
   }
 
-  editaUsuario(usuario:usuario){
+  editaUsuario(usuario){
     this._usuariosService.setUsuario(usuario).subscribe();
     this.modalEdit.hide();
     this.alerts.push({
@@ -281,6 +292,9 @@ export class UsuariosComponent implements OnInit {
       this.editForm.controls['apMat'].setValue(usuario.apMat);
       this.editForm.controls['user'].setValue(usuario.user);
       this.editForm.controls['contra'].setValue(usuario.contra);
+      this.editForm.controls['proyectos'].setValue(usuario.proyectos);
+      this.editForm.controls['periodos'].setValue(usuario.periodos);
+      this.editForm.controls['regresion'].setValue(usuario.regresion);
       this.editForm.controls['Administrador_idAdministrador'].setValue(usuario.Administrador_idAdministrador);
 
   }
@@ -294,7 +308,8 @@ export class UsuariosComponent implements OnInit {
 
   }
 
-  openVars(usuario:usuario){
+  openVars(usuario){
+    console.log(usuario);
     this.productos = this._productoService.returnProductos();
     this.maquinas=this._maquinariaService.returnMaquinas();
     this.zonas=this._zonasService.returnZonas();
@@ -307,7 +322,7 @@ export class UsuariosComponent implements OnInit {
     this.userSelected=usuario;
   }
 
-  confDelete(usuario:usuario){
+  confDelete(usuario){
     this.usuarioDelete=usuario;
     console.log(this.usuarioDelete);
     this.modalConfDelete.show();

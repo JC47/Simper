@@ -115,6 +115,7 @@ comprar(){
     if(this.maqSelectedLess.Balance_numeroPeriodo == parseInt(localStorage.getItem('numeroPeriodo'))){
       var x = {
         Maquinaria_idMaquinaria:this.maqSelectedLess.idMaquinaria,
+        Balance_numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo')),
         Proyectos_idProyecto:parseInt(localStorage.getItem('idProyecto'))
       }
       var y = {

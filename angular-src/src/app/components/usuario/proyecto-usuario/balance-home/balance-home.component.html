@@ -1,36 +1,31 @@
 <div class="row">
 
   <div class="col-lg-6 col-sm-12 " style="height:200px;">
-    <!-- <ngx-charts-advanced-pie-chart
-        [scheme]="colorScheme"
-        [results]="pasivo">
-      </ngx-charts-advanced-pie-chart> -->
-
-      <table class="table table-sm" *ngFor= "let balance of balanceFinal">
-        <tr>
-          <th colspan="2" class="text-center">Pasivo</th>
-        </tr>
-        <tr>
-          <td>IVA por Enterar</td>
-          <td class="text-right">{{balance.IVAPorEnterar|currency:'USD':true:'1.0-0'}}</td>
-        </tr>
-        <tr>
-          <td>Proveedores</td>
-          <td class="text-right">{{balance.proveedores|currency:'USD':true:'1.0-0'}}</td>
-        </tr>
-        <tr>
-          <td>Impuestos por Pagar</td>
-          <td class="text-right">{{balance.imptosPorPagar|currency:'USD':true:'1.0-0'}}</td>
-        </tr>
-        <tr>
-          <td>Prestamos Más de un Año</td>
-          <td class="text-right">{{balance.prestamosMasAnio|currency:'USD':true:'1.0-0'}}</td>
-        </tr>
-        <tr>
-          <td>Prestamos Menos de un Año</td>
-          <td class="text-right">{{balance.prestamosMenosAnio|currency:'USD':true:'1.0-0'}}</td>
-        </tr>
-      </table>
+    <table class="table table-sm" *ngFor= "let balance of balanceFinal">
+      <tr>
+        <th colspan="2" class="text-center">Activo</th>
+      </tr>
+      <tr>
+        <td>Caja y Bancos</td>
+        <td class="text-right">{{balance.cajaBancos|currency:'USD':true:'1.0-0'}}</td>
+      </tr>
+      <tr>
+        <td>Cuentas Por Cobrar</td>
+        <td class="text-right">{{balance.cuentasPorCobrar|currency:'USD':true:'1.0-0'}}</td>
+      </tr>
+      <tr>
+        <td>IVA Acreditable</td>
+        <td class="text-right">{{balance.IVAAcreditable|currency:'USD':true:'1.0-0'}}</td>
+      </tr>
+      <tr>
+        <td>Almacen de Articulo Terminado</td>
+        <td class="text-right">{{balance.almacenArtTerm|currency:'USD':true:'1.0-0'}}</td>
+      </tr>
+      <tr>
+        <td>Almacen de Materiales</td>
+        <td class="text-right">{{balance.almacenMateriales|currency:'USD':true:'1.0-0'}}</td>
+      </tr>
+    </table>    
   </div>
 
   <div class="col-lg-6 col-sm-12 " style="height:200px;">
@@ -49,29 +44,30 @@
             [scheme]="colorScheme"
             [results]="activos">
           </ngx-charts-advanced-pie-chart> -->
+
         <table class="table table-sm" *ngFor= "let balance of balanceFinal">
           <tr>
-            <th colspan="2" class="text-center">Activo</th>
+            <th colspan="2" class="text-center">Pasivo</th>
           </tr>
           <tr>
-            <td>Caja y Bancos</td>
-            <td class="text-right">{{balance.cajaBancos|currency:'USD':true:'1.0-0'}}</td>
+            <td>IVA por Enterar</td>
+            <td class="text-right">{{balance.IVAPorEnterar|currency:'USD':true:'1.0-0'}}</td>
           </tr>
           <tr>
-            <td>Cuentas Por Cobrar</td>
-            <td class="text-right">{{balance.cuentasPorCobrar|currency:'USD':true:'1.0-0'}}</td>
+            <td>Proveedores</td>
+            <td class="text-right">{{balance.proveedores|currency:'USD':true:'1.0-0'}}</td>
           </tr>
           <tr>
-            <td>IVA Acreditable</td>
-            <td class="text-right">{{balance.IVAAcreditable|currency:'USD':true:'1.0-0'}}</td>
+            <td>Impuestos por Pagar</td>
+            <td class="text-right">{{balance.imptosPorPagar|currency:'USD':true:'1.0-0'}}</td>
           </tr>
           <tr>
-            <td>Almacen de Articulo Terminado</td>
-            <td class="text-right">{{balance.almacenArtTerm|currency:'USD':true:'1.0-0'}}</td>
+            <td>Prestamos Más de un Año</td>
+            <td class="text-right">{{balance.prestamosMasAnio|currency:'USD':true:'1.0-0'}}</td>
           </tr>
           <tr>
-            <td>Almacen de Materiales</td>
-            <td class="text-right">{{balance.almacenMateriales|currency:'USD':true:'1.0-0'}}</td>
+            <td>Prestamos Menos de un Año</td>
+            <td class="text-right">{{balance.prestamosMenosAnio|currency:'USD':true:'1.0-0'}}</td>
           </tr>
         </table>
   </div>

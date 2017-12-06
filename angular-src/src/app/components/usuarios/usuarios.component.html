@@ -212,6 +212,54 @@
               </div>
             </div>
 
+            <div class="form-group row text-center" >
+              <label class="col-5 col-form-label">Proyectos</label>
+              <div class="col-6 has-success"
+              [ngClass]="{'has-danger': !newForm.get('proyectos').valid}">
+
+
+                <input class="form-control"
+                       type="number"
+                       formControlName="proyectos" >
+                       <div class="form-control-feedback" style="font-size:10px;"
+                       *ngIf="!newForm.controls['proyectos'].valid">
+                         El numero de proyectos es requerido
+                       </div>
+              </div>
+            </div>
+
+            <div class="form-group row text-center" >
+              <label class="col-5 col-form-label">Periodos por proyecto</label>
+              <div class="col-6 has-success"
+              [ngClass]="{'has-danger': !newForm.get('periodos').valid}">
+
+
+                <input class="form-control"
+                       type="number"
+                       formControlName="periodos" >
+                       <div class="form-control-feedback" style="font-size:10px;"
+                       *ngIf="!newForm.controls['periodos'].valid">
+                         El numero de periodos es requerido
+                       </div>
+              </div>
+            </div>
+
+            <div class="form-group row text-center" >
+              <label class="col-5 col-form-label">Modificacion de periodos anteriores</label>
+              <div class="col-6 has-success"
+              [ngClass]="{'has-danger': !newForm.get('regresion').valid}">
+
+
+                <input class="form-control"
+                       type="number"
+                       formControlName="regresion" >
+                       <div class="form-control-feedback" style="font-size:10px;"
+                       *ngIf="!newForm.controls['regresion'].valid">
+                         El valor es requerido
+                       </div>
+              </div>
+            </div>
+
 
 
                 <input class="form-control"
@@ -222,13 +270,14 @@
 
 
                 <div class="modal-footer">
+                  <button  type="button" class="btn btn-outline-danger" (click)="modalNew.hide()">
+                  Cancelar
+                  </button>
                   <button type="submit" class="btn btn-outline-success"  [disabled]="!newForm.valid">
                     Guardar
                   </button>
 
-                  <button  type="button" class="btn btn-outline-danger" (click)="modalNew.hide()">
-                  Cancelar
-                  </button>
+
 
                 </div>
           </form>
@@ -393,6 +442,54 @@
             </div>
           </div>
 
+          <div class="form-group row text-center" >
+            <label class="col-5 col-form-label">Proyectos</label>
+            <div class="col-6 has-success"
+            [ngClass]="{'has-danger': !editForm.get('proyectos').valid}">
+
+
+              <input class="form-control"
+                     type="number"
+                     formControlName="proyectos" >
+                     <div class="form-control-feedback" style="font-size:10px;"
+                     *ngIf="!editForm.controls['proyectos'].valid">
+                       El numero de proyectos es requerido
+                     </div>
+            </div>
+          </div>
+
+          <div class="form-group row text-center" >
+            <label class="col-5 col-form-label">Periodos por proyecto</label>
+            <div class="col-6 has-success"
+            [ngClass]="{'has-danger': !editForm.get('periodos').valid}">
+
+
+              <input class="form-control"
+                     type="number"
+                     formControlName="periodos" >
+                     <div class="form-control-feedback" style="font-size:10px;"
+                     *ngIf="!editForm.controls['periodos'].valid">
+                       El numero de periodos es requerido
+                     </div>
+            </div>
+          </div>
+
+          <div class="form-group row text-center" >
+            <label class="col-5 col-form-label">Modificacion de periodos anteriores</label>
+            <div class="col-6 has-success"
+            [ngClass]="{'has-danger': !editForm.get('regresion').valid}">
+
+
+              <input class="form-control"
+                     type="number"
+                     formControlName="regresion" >
+                     <div class="form-control-feedback" style="font-size:10px;"
+                     *ngIf="!editForm.controls['regresion'].valid">
+                       El valor es requerido
+                     </div>
+            </div>
+          </div>
+
 
               <input class="form-control"
                      type="text"
@@ -407,13 +504,14 @@
 
 
               <div class="modal-footer">
+                <button  type="button" class="btn btn-outline-danger" (click)="modalEdit.hide()">
+                Cancelar
+                </button>
                 <button type="submit" class="btn btn-outline-success" [disabled]="!editForm.valid" >
                   Guardar
                 </button>
 
-                <button  type="button" class="btn btn-outline-danger" (click)="modalEdit.hide()">
-                Cancelar
-                </button>
+
 
               </div>
         </form>
@@ -769,6 +867,9 @@
             </div>
 
             <div class="modal-footer">
+              <button  type="button" class="btn btn-outline-danger" (click)="modalVariables.hide()">
+              Cancelar
+              </button>
               <button type="button" class="btn btn-outline-primary" (click)="openCopia()">
                 Copiar Variables
               </button>
@@ -777,9 +878,7 @@
                 Guardar
               </button>
 
-              <button  type="button" class="btn btn-outline-danger" (click)="modalVariables.hide()">
-              Cancelar
-              </button>
+
 
             </div>
 

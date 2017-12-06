@@ -21,6 +21,7 @@ export class FinanciamientoComponent implements OnInit {
   tablaPagos = [];
   openModalConf:boolean=false;
   solicitudForm:FormGroup;
+  modalAlerta:boolean=false;
 
   constructor(private _creditoService:UsuarioCreditoService) {
     this.creditos=this._creditoService.returnCreditosU(localStorage.getItem('idUsuario'));
@@ -43,6 +44,13 @@ export class FinanciamientoComponent implements OnInit {
     console.log("no esta pedido")
     return false;
 
+  }
+
+  validaCreditoA(credito){
+    if(credito.numeroPeriodo==localStorage.getItem('numeroPeriodo'))
+      return true
+    else
+      return false
   }
 
   getNameById(id:number){
@@ -73,9 +81,11 @@ export class FinanciamientoComponent implements OnInit {
             this.verAmortizacion(cantidad.idCredito);
           }
         });
-      this.creditosActivos=this._creditoService.arregloC();  
+      console.log("Activos",this._creditoService.arregloC());
+      this.creditosActivos=this._creditoService.arregloC();
       }else{
-        alert("Limite de creditos excedidos");
+        this.modalAlerta=true;
+        this.openModalConf=false;
       }
     });
   }
@@ -87,6 +97,7 @@ export class FinanciamientoComponent implements OnInit {
       numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo'))
     };
     this._creditoService.eliminarCredito(x).subscribe(data => {console.log(2,data);});
+    this._creditoService.eliminarCreditoActivo(x).subscribe();
   }
 
   verAmortizacion(idCredito){
