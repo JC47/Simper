@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Pipe} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser'
 import {OperacionService} from '../../../../services/operacion.service';
 import {ResultadosService} from '../../../../services/resultados.service';
 import {ProductoService} from '../../../../services/producto.service';
 import {BalanceService} from '../../../../services/balance.service';
-
+import {CurrencyPipe} from '@angular/common'
 declare var jsPDF: any;
 @Component({
   selector: 'app-operacion',
@@ -33,7 +34,8 @@ export class OperacionComponent implements OnInit {
   constructor(private _productoService:ProductoService,
               private _balanceService:BalanceService,
               private _operacionService:OperacionService,
-              private _resultadosService:ResultadosService) {
+              private _resultadosService:ResultadosService,
+              private cp: CurrencyPipe) {
     this._resultadosService.vender();
   }
 
@@ -214,6 +216,9 @@ export class OperacionComponent implements OnInit {
 
 
   PDFalmacenArticuloTerminado(){
+    let vars=200000;
+    let varss=this.cp.transform(vars, 'USD', true, '1.0-0');
+    console.log(varss);
     var doc= new jsPDF({
     orientation: 'landscape',
     unit: 'mm',

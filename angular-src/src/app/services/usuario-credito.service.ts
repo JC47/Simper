@@ -153,6 +153,13 @@ export class UsuarioCreditoService {
     return this.http.post('prestamo/validaperiodos',x,{headers}).map(res => res.json());
   }
 
+  eliminarCreditoActivo(x){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    return this.http.post('prestamo/deleteactivo',x,{headers}).map(res => res.json());
+  }
+
 
 
 }
