@@ -37,6 +37,7 @@ export class BalanceFinalComponent implements OnInit {
         almacenArtTerm,
         almacenMateriales,
         terreno,
+        maqEquipo,
         edificios,
         mueblesEnseres,
         equipoTrans,
@@ -51,6 +52,11 @@ export class BalanceFinalComponent implements OnInit {
         capitalSocial,
         reservaLegal,
         utilidadAcum,
+        depMaqEquipo,
+        depEdif,
+        depTerreno,
+        depEqTrans,
+        depMueblesEnseres,
         utilidadEjercicio;
 
 
@@ -62,22 +68,29 @@ export class BalanceFinalComponent implements OnInit {
       almacenArtTerm=balance.almacenArtTerm;
       almacenMateriales=balance.almacenMateriales
       terreno=balance.terreno;
-      edificios=balance.edificios;
-      mueblesEnseres=
-      equipoTrans,
-      pagosAnticipado,
-      gastosAmortizacion,
-      IVAPorEnterar,
-      imptosPorPagar,
-      proveedores,
-      PTUPorPagar,
-      prestamosMenosAnio,
-      prestamosMasAnio,
-      capitalSocial,
-      reservaLegal,
-      utilidadAcum,
-      utilidadEjercicio;
+      edificios=balance.edifInsta;
+      maqEquipo=balance.maqEquipo;
+      mueblesEnseres=balance.mueblesEnseres;
+      equipoTrans=balance.eqTrans;
+      pagosAnticipado=balance.pagosAnticipado;
+      gastosAmortizacion=balance.gastosAmortizacion;
+      IVAPorEnterar=balance.IVAPorEnterar;
+      imptosPorPagar=balance.imptosPorPagar;
+      proveedores=balance.proveedores;
+      PTUPorPagar=balance.PTUPorPagar;
+      prestamosMenosAnio=balance.prestamosMenosAnio;
+      prestamosMasAnio=balance.prestamosMasAnio;
+      capitalSocial=balance.capitalSocial;
+      reservaLegal=balance.reservaLegal;
+      utilidadAcum=balance.utilidadAcum;
+      utilidadEjercicio=balance.utilidadEjercicio;
+      depMaqEquipo=balance.depMaqEquipo;
+      depEdif=balance.depEdif;
+      depTerreno=balance.depTerreno;
+      depEqTrans=balance.depEqTrans;
+      depMueblesEnseres=balance.depMueblesEnseres;
     }
+    var total1 = cajaBancos+cuentasPorCobrar+IVAAcreditable+almacenArtTerm+almacenMateriales;
     var doc= new jsPDF({
     orientation: 'landscape',
     unit: 'mm',
@@ -87,7 +100,7 @@ export class BalanceFinalComponent implements OnInit {
       doc.setFontType("bold");
       doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
       doc.setFontSize(13);
-      doc.text(139.5, 23, 'Posición Financiera Final del Periodo X', null, null, 'center');
+      doc.text(139.5, 23, 'Posición Financiera Final del Periodo '+ localStorage.getItem('numeroPeriodo'), null, null, 'center');
       doc.line(50, 27, 228, 27);
       doc.setFontSize(7);
       let mar=45;
@@ -103,28 +116,28 @@ export class BalanceFinalComponent implements OnInit {
           doc.setFontType("normal");
       doc.text(12, 48, 'Caja y Bancos');
       doc.line(10, mar+anchCell*1, 120, mar+anchCell*1);
-      doc.text(120, 48, '$20,000,000' , null, null, 'right');
+      doc.text(120, 48, cajaBancos.toString() , null, null, 'right');
 
       doc.text(12, 44+anchCell*2, 'Cuentas por Cobrar');
 doc.line(10, mar+anchCell*2, 120, mar+anchCell*2);
-doc.text(120, 44+anchCell*2, '$20,000,000', null, null, 'right');
+doc.text(120, 44+anchCell*2, cuentasPorCobrar.toString(), null, null, 'right');
 
 doc.text(12, 44+anchCell*3, 'IVA Acreditable');
 doc.line(10, mar+anchCell*3, 120, mar+anchCell*3);
-doc.text(120, 44+anchCell*3, '$20,000,000', null, null, 'right');
+doc.text(120, 44+anchCell*3, IVAAcreditable.toString(), null, null, 'right');
 
 doc.text(12, 44+anchCell*4, 'Almacén de Artículo Terminado');
 doc.line(10, mar+anchCell*4, 120, mar+anchCell*4);
-doc.text(120, 44+anchCell*4, '$20,000,000', null, null, 'right');
+doc.text(120, 44+anchCell*4, almacenArtTerm.toString(), null, null, 'right');
 
 doc.text(12, 44+anchCell*5, 'Almacen de Materiales');
 doc.line(10, mar+anchCell*5, 120, mar+anchCell*5);
-doc.text(120, 44+anchCell*5, '$20,000,000', null, null, 'right');
+doc.text(120, 44+anchCell*5, almacenMateriales.toString(), null, null, 'right');
 
 doc.setFontSize(8);
 doc.setFontType("bold");
 doc.text(12, 44+anchCell*6, 'Total');
-doc.text(140, 44+anchCell*6, '$20,000,000', null, null, 'right');
+doc.text(140, 44+anchCell*6, total1.toString(), null, null, 'right');
 
 
 doc.text(10, 85, 'A más de un año');
@@ -134,46 +147,50 @@ doc.text(62, 44+anchCell*7+17, 'I.O.');
 doc.text(82, 44+anchCell*7+17, 'Dep. Acum');
 doc.line(10, 90, 120, 90);
 
+var r = terreno-depTerreno;
 doc.text(12, 44+anchCell*7+21, 'Terreno');
 doc.line(10, mar+0+anchCell*7+21, 120, mar+anchCell*7+21);
-doc.text(120, 44+anchCell*7+21, '$20,000,000', null, null, 'right');
-doc.text(70, 44+anchCell*7+21, '$20,000,000', null, null, 'right');
-doc.text(95, 44+anchCell*7+21, '$20,000,000', null, null, 'right');
+doc.text(120, 44+anchCell*7+21, r.toString(), null, null, 'right');
+doc.text(70, 44+anchCell*7+21, terreno.toString(), null, null, 'right');
+doc.text(95, 44+anchCell*7+21, depTerreno.toString(), null, null, 'right');
 
+var r1 = edificios-depEdif;
 doc.text(12, 44+anchCell*8+21, 'Edificios e Instalaciones');
 doc.line(10, mar+0+anchCell*8+21, 120, mar+anchCell*8+21);
-doc.text(120, 44+anchCell*8+21, '$20,000,000', null, null, 'right');
-doc.text(70, 44+anchCell*8+21, '$20,000,000', null, null, 'right');
-doc.text(95, 44+anchCell*8+21, '$20,000,000', null, null, 'right');
+doc.text(120, 44+anchCell*8+21, r1.toString(), null, null, 'right');
+doc.text(70, 44+anchCell*8+21, edificios.toString(), null, null, 'right');
+doc.text(95, 44+anchCell*8+21, depEdif.toString(), null, null, 'right');
 
-
+var r2 = maqEquipo-depMaqEquipo;
 doc.text(12, 44+anchCell*9+21, 'Maquinaria y Equipo');
 doc.line(10, mar+0+anchCell*9+21, 120, mar+anchCell*9+21);
-doc.text(120, 44+anchCell*9+21, '$20,000,000', null, null, 'right');
-doc.text(70, 44+anchCell*9+21, '$20,000,000', null, null, 'right');
-doc.text(95, 44+anchCell*9+21, '$20,000,000', null, null, 'right');
+doc.text(120, 44+anchCell*9+21, r2.toString(), null, null, 'right');
+doc.text(70, 44+anchCell*9+21, maqEquipo.toString(), null, null, 'right');
+doc.text(95, 44+anchCell*9+21, depMaqEquipo.toString(), null, null, 'right');
 
-
+var r3 = mueblesEnseres-depMueblesEnseres;
 doc.text(12, 44+anchCell*10+21, 'Muebles y Enseres');
 doc.line(10, mar+0+anchCell*10+21, 120, mar+anchCell*10+21);
-doc.text(120, 44+anchCell*10+21, '$20,000,000', null, null, 'right');
-doc.text(70, 44+anchCell*10+21, '$20,000,000', null, null, 'right');
-doc.text(95, 44+anchCell*10+21, '$20,000,000', null, null, 'right');
+doc.text(120, 44+anchCell*10+21, r3.toString(), null, null, 'right');
+doc.text(70, 44+anchCell*10+21, mueblesEnseres.toString(), null, null, 'right');
+doc.text(95, 44+anchCell*10+21, depMueblesEnseres.toString(), null, null, 'right');
 
-
+var r4 = equipoTrans-depEqTrans;
 doc.text(12, 44+anchCell*11+21, 'Equipo de Transportes');
 doc.line(10, mar+0+anchCell*11+21, 120, mar+anchCell*11+21);
-doc.text(120, 44+anchCell*11+21, '$20,000,000', null, null, 'right');
-doc.text(70, 44+anchCell*11+21, '$20,000,000', null, null, 'right');
-doc.text(95, 44+anchCell*11+21, '$20,000,000', null, null, 'right');
+doc.text(120, 44+anchCell*11+21, r4.toString(), null, null, 'right');
+doc.text(70, 44+anchCell*11+21, equipoTrans.toString(), null, null, 'right');
+doc.text(95, 44+anchCell*11+21, depEqTrans.toString(), null, null, 'right');
 
-
+var rt = r+r1+r2+r3+r4;
+var rn = equipoTrans+mueblesEnseres+maqEquipo+edificios+terreno;
+var rdep = depEdif+depMaqEquipo+depTerreno+depMueblesEnseres+depEqTrans;
 doc.setFontSize(8);
 doc.setFontType("bold");
 doc.text(12, 44+anchCell*12+21, 'Total');
-doc.text(140, 44+anchCell*12+21, '$20,000,000', null, null, 'right');
-doc.text(70, 44+anchCell*12+21, '$20,000,000', null, null, 'right');
-doc.text(95, 44+anchCell*12+21, '$20,000,000', null, null, 'right');
+doc.text(140, 44+anchCell*12+21, rt.toString(), null, null, 'right');
+doc.text(70, 44+anchCell*12+21, rn.toString(), null, null, 'right');
+doc.text(95, 44+anchCell*12+21, rdep.toString(), null, null, 'right');
 
 doc.setFontSize(7);
 
@@ -183,19 +200,19 @@ doc.setFontType("normal");
 
 doc.text(12, 44+anchCell*12+46, 'Pagos Hechos por Anticipado');
 doc.line(10, mar+0+anchCell*12+46, 120, mar+anchCell*12+46);
-doc.text(120, 44+anchCell*12+46, '$20,000,000', null, null, 'right');
+doc.text(120, 44+anchCell*12+46, pagosAnticipado.toString(), null, null, 'right');
 
 doc.text(12, 44+anchCell*13+46, 'Gastos por Amortizar');
 doc.line(10, mar+0+anchCell*13+46, 120, mar+anchCell*13+46);
-doc.text(120, 44+anchCell*13+46, '$20,000,000', null, null, 'right');
+doc.text(120, 44+anchCell*13+46, gastosAmortizacion.toString(), null, null, 'right');
 
 doc.setFontSize(8);
 doc.setFontType("bold");
 doc.text(12, 44+anchCell*14+46, 'Total');
-doc.text(140, 44+anchCell*14+46, '$20,000,000', null, null, 'right');
+doc.text(140, 44+anchCell*14+46, (total1+rt+pagosAnticipado+gastosAmortizacion).toString(), null, null, 'right');
 
 doc.text(12, 44+anchCell*18+46, 'Suma de los Derechos');
-doc.text(140, 44+anchCell*18+46, '$20,000,000', null, null, 'right');
+doc.text(140, 44+anchCell*18+46, (total1+rt+pagosAnticipado+gastosAmortizacion).toString(), null, null, 'right');
 doc.line(120, mar+0+anchCell*18+46, 140, mar+anchCell*18+46);
 
 //Pasivo
@@ -204,35 +221,30 @@ doc.line(165, 45, 235, 45);
 doc.setFontType("normal");
 
 doc.text(167, 44+anchCell*1, 'IVA por enterar');
-doc.text(235, 44+anchCell*1, '$20,000,000', null, null, 'right');
+doc.text(235, 44+anchCell*1, IVAPorEnterar.toString(), null, null, 'right');
 doc.line(165, mar+anchCell*1, 235, mar+anchCell*1);
 
-
-
-
-
-
 doc.text(167, 44+anchCell*2, 'Impuestos por Pagar');
-doc.text(235, 44+anchCell*2, '$20,000,000', null, null, 'right');
+doc.text(235, 44+anchCell*2, imptosPorPagar.toString(), null, null, 'right');
 doc.line(165, mar+anchCell*2, 235, mar+anchCell*2);
 
 doc.text(167, 44+anchCell*3, 'Proveedores');
-doc.text(235, 44+anchCell*3, '$20,000,000', null, null, 'right');
+doc.text(235, 44+anchCell*3, proveedores.toString(), null, null, 'right');
 doc.line(165, mar+anchCell*3, 235, mar+anchCell*3);
 
 doc.text(167, 44+anchCell*4, 'PTU por Pagar');
-doc.text(235, 44+anchCell*4, '$20,000,000', null, null, 'right');
+doc.text(235, 44+anchCell*4, PTUPorPagar.toString(), null, null, 'right');
 doc.line(165, mar+anchCell*4, 235, mar+anchCell*4);
 
 doc.text(167, 44+anchCell*5, 'Prestamos Bancarios');
-doc.text(235, 44+anchCell*5, '$20,000,000', null, null, 'right');
+doc.text(235, 44+anchCell*5, prestamosMenosAnio.toString(), null, null, 'right');
 doc.line(165, mar+anchCell*5, 235, mar+anchCell*5);
 
-
+var t1 = IVAPorEnterar+imptosPorPagar+PTUPorPagar+proveedores+prestamosMenosAnio;
 doc.setFontSize(8);
 doc.setFontType("bold");
 doc.text(167, 44+anchCell*6, 'Total');
-doc.text(255, 44+anchCell*6, '$20,000,000', null, null, 'right');
+doc.text(255, 44+anchCell*6, t1.toString(), null, null, 'right');
 
 doc.setFontSize(7);
 
@@ -244,13 +256,13 @@ doc.line(165, 90, 235, 90);
 
 doc.text(167, 44+anchCell*7+21, 'Prestamos Bancarios');
 doc.line(165, mar+0+anchCell*7+21, 235, mar+anchCell*7+21);
-doc.text(235, 44+anchCell*7+21, '$20,000,000', null, null, 'right');
+doc.text(235, 44+anchCell*7+21, prestamosMasAnio.toString(), null, null, 'right');
 
 
 doc.setFontSize(8);
 doc.setFontType("bold");
 doc.text(167, 44+anchCell*8+21, 'Total');
-doc.text(255, 44+anchCell*8+21, '$20,000,000', null, null, 'right');
+doc.text(255, 44+anchCell*8+21, prestamosMasAnio.toString(), null, null, 'right');
 
 doc.text(165, 115, 'Con los Accionistas');
 doc.line(165, 122, 235, 122);
@@ -260,28 +272,29 @@ doc.setFontSize(7);
 
 doc.text(167, 44+anchCell*9+45, 'Capital Social');
 doc.line(165, mar+0+anchCell*9+45, 235, mar+anchCell*9+45);
-doc.text(235, 44+anchCell*9+45, '$20,000,000', null, null, 'right');
+doc.text(235, 44+anchCell*9+45, capitalSocial.toString(), null, null, 'right');
 
 doc.text(167, 44+anchCell*10+45, 'Reserva Legal');
 doc.line(165, mar+0+anchCell*10+45, 235, mar+anchCell*10+45);
-doc.text(235, 44+anchCell*10+45, '$20,000,000', null, null, 'right');
+doc.text(235, 44+anchCell*10+45, reservaLegal.toString(), null, null, 'right');
 
 
 doc.text(167, 44+anchCell*11+45, 'Utilidad Acumulada');
 doc.line(165, mar+0+anchCell*11+45, 235, mar+anchCell*11+45);
-doc.text(235, 44+anchCell*11+45, '$20,000,000', null, null, 'right');
+doc.text(235, 44+anchCell*11+45, utilidadAcum.toString(), null, null, 'right');
 
 
 doc.text(167, 44+anchCell*12+45, 'Utilidad del Ejercicio');
 doc.line(165, mar+0+anchCell*12+45, 235, mar+anchCell*12+45);
-doc.text(235, 44+anchCell*12+45, '$20,000,000', null, null, 'right');
+doc.text(235, 44+anchCell*12+45, utilidadEjercicio.toString(), null, null, 'right');
 doc.setFontSize(8);
 doc.setFontType("bold");
+var tr = t1+prestamosMasAnio+capitalSocial+reservaLegal+utilidadAcum+utilidadEjercicio;
 doc.text(167, 44+anchCell*13+45, 'Total');
-doc.text(255, 44+anchCell*13+45, '$20,000,000', null, null, 'right');
+doc.text(255, 44+anchCell*13+45, tr.toString(), null, null, 'right');
 
 doc.text(165, 44+anchCell*18+46, 'Suma de los Derechos');
-doc.text(255, 44+anchCell*18+46, '$20,000,000', null, null, 'right');
+doc.text(255, 44+anchCell*18+46, tr.toString(), null, null, 'right');
 doc.line(235, mar+0+anchCell*18+46, 255, mar+anchCell*18+46);
 
 doc.save("prue.pdf")
