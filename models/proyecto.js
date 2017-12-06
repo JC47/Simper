@@ -22,3 +22,13 @@ module.exports.getProyectos = function (id) {
     var query = "select * from Proyecto where Usuario_idUsuario = ?";
     return querySql(query,id);
 }
+
+module.exports.getProyectosActivos = function (idUsuario) {
+  var query = "select proyectos from  usuario where idUsuario = "+idUsuario+" ";
+  return querySql(query);
+}
+
+module.exports.getPs = function (idUsuario) {
+  var query = "select * from proyecto where Usuario_idUsuario = ?";
+  return querySql(query,idUsuario);
+}
