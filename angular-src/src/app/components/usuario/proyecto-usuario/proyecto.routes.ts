@@ -10,6 +10,7 @@ import { OperacionComponent } from './operacion/operacion.component';
 import { EstadoResultadosComponent} from './estado-resultados/estado-resultados.component';
 import { FinanciamientoComponent } from './financiamiento/financiamiento.component';
 import {DemandaPotencialComponent} from './demanda-potencial/demanda-potencial.component'
+import {PruebaComponent} from './prueba/prueba.component';
 
 export const PROYECTO_ROUTES: Routes = [
   { path: 'compraMaquinaria', component: CompraMaquinariaComponent },
@@ -23,5 +24,6 @@ export const PROYECTO_ROUTES: Routes = [
   { path: 'home', component: BalanceHomeComponent},
   { path: 'balance_inicial', component: BalanceInicialComponent },
   { path: 'balance_final', component: BalanceFinalComponent },
+  { path: 'comparativa', component: PruebaComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];

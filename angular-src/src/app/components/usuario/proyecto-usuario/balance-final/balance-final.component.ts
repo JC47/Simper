@@ -299,7 +299,7 @@ doc.text(165, 44+anchCell*18+46, 'Suma de los Derechos');
 doc.text(255, 44+anchCell*18+46,  this.cp.transform(tr,'USD',true,'1.0-0'), null, null, 'right');
 doc.line(235, mar+0+anchCell*18+46, 255, mar+anchCell*18+46);
 
-doc.save("prue.pdf")
+doc.save("Balance Final.pdf")
   }
 
 }
