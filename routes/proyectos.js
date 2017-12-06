@@ -1,27 +1,40 @@
 const express = require('express');
 const router = express.Router();
+const Promise = require("bluebird");
 const proyecto = require('../models/proyecto');
 
 router.post('/register/:idUsuario', (req, res, next) => {
-  Promise.resolve().then(function () {
+  var nombreProyecto = req.body.nombreProyecto;
+  var fechaCreacion = req.body.fechaCreacion;
+  var Usuario_idUsuario = req.body.Usuario_idUsuario;
+  var boolean;
 
-    var nombreProyecto = req.body.nombreProyecto;
-    var fechaCreacion = req.body.fechaCreacion;
-    var Usuario_idUsuario = req.body.Usuario_idUsuario;
+  Promise.join(proyecto.getProyectosActivos(Usuario_idUsuario),proyecto.getPs(Usuario_idUsuario),
+    function (fijo,variable) {
 
-    return getJSONProyecto(nombreProyecto, fechaCreacion, Usuario_idUsuario);
-  })
-  .then(function (newProyecto) {
-      return proyecto.addProyecto(newProyecto);
-  }).then(function(){
+      var diez = fijo[0].proyectos;
+      var variable = variable.length;
+
+      if (variable < diez) {
+        boolean = true;
+            console.log("boolean: ",boolean);
+          return proyecto.addProyecto(getJSONProyecto(nombreProyecto, fechaCreacion, Usuario_idUsuario));
+
+      }else {
+          boolean = false;
+              console.log("boolean: ",boolean);
+      }
+    })
+  .then(function(){
     const id = req.params.idUsuario;
     return proyecto.getProyectos(id);
-  }).
-  then( function (rows) {
+  })
+  .then( function (rows) {
     return toArrayProyecto(rows);
-  }).
-  then( function (ProyectoList) {
-    res.json({success: true, datos:ProyectoList, msg:"Operacion exitosa"});
+  })
+  .then( function (ProyectoList) {
+
+    res.json({success: boolean, datos:ProyectoList, msg:"Operacion exitosa"});
   })
   .catch(function (err) {
     console.log(err);
