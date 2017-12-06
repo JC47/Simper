@@ -442,19 +442,16 @@ export class OperacionComponent implements OnInit {
                     format: [215.9,279]});
 
                     var columns = [
-                    {title: "", dataKey: "cara"},
-                    {title: "Producto X", dataKey: "x"}];
+                    {title: "Producto", dataKey: "producto"},
+                    {title: "Unidades A Vender", dataKey: "unidadesVender"},
+                    {title: "Precio de Venta", dataKey: "precioVenta"},
+                    {title: "Venta en $", dataKey: "vnetaEn"},
+                    {title: "Importe", dataKey: "importe"}
+                    ];
 
 
                     var rows = [
-                    {"cara":"Unidades a Vender","x": "1000000"},
-                    {"cara":"","x": ""},
-                    {"cara":"Precio de Venta","x": "1000000"},
-                    {"cara":"","x": ""},
-                    {"cara":"Venta en $ ","x": ""},
-                    {"cara":"","x": ""},
-                    {"cara":"Importe","x": ""},
-                    {"cara":"","x": ""}];
+                    {"producto":"","unidadesVender":"","precioVenta":"","ventaEn":"","importe":""}];
 
 
 
@@ -488,6 +485,67 @@ export class OperacionComponent implements OnInit {
 
 
                     }
+
+
+
+
+                                      PDFpresupuestoGlobalProduccion(){
+                                        var doc= new jsPDF({
+                                        orientation: 'landscape',
+                                        unit: 'mm',
+                                        format: [215.9,279]});
+
+                                        var columns = [
+                                        {title: "Producto", dataKey: "producto"},
+                                        {title: "Unidades A Vender (+)", dataKey: "unidadesVender"},
+                                        {title: "Inventario Final (+)", dataKey: "invFinal"},
+                                        {title: "Inventario Inicial(-)", dataKey: "invInicial"},
+                                        {title: "Unidades a Producir", dataKey: "unidadesProducir"},
+                                        {title: "Costo Unitario (M.P.)", dataKey: "costUnitMP"},
+                                        {title: "Costo Total (M.P.)", dataKey: "cosTotalMP"},
+                                        {title: "Costo Unitario (Trasnformación)", dataKey: "costUnitTrans"},
+                                        {title: "Costo Total (Transformación)", dataKey: "cosTotalTrans"},
+                                        {title: "Costo de Producción Unitario", dataKey: "costProdUnit"},
+                                        {title: "Costo de Producción Total", dataKey: "costProdTot"}
+                                        ];
+
+
+                                        var rows = [
+                                        {"producto":"","unidadesVender":"","invFinal":"","invInicial":"","unidadesProducir":"","costoUnitMP":"","cosTotalMP":"","costUnitTrans":"","costTotalTrans":"","costProdUnit":"","costProdTot":""}];
+
+
+
+
+                                        doc.autoTable(columns, rows, {
+                                        margin: {top: 40,
+                                                 left:40},
+                                         tableWidth: 200,
+                                        headerStyles: {fillColor:0},
+                                        columnStyles: {
+                                          cara: {halign:'left',columnWidth:40}
+                                        },
+                                        addPageContent: function(data) {
+                                          doc.setFontSize(15);
+                                          doc.setFontType("bold");
+                                          doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+                                          doc.setFontSize(13);
+                                          doc.text(139.5, 23, 'Presupuesto Global de Ventas e IVA del Periodo X', null, null, 'center');
+                                          doc.line(50, 27, 228, 27);
+                                        },
+
+
+
+
+
+
+                                        });
+
+                                        doc.save("Presupuesto Global de Produccion.pdf");
+
+
+
+                                        }
+
 
 
 
