@@ -81,6 +81,7 @@ export class FinanciamientoComponent implements OnInit {
             this.verAmortizacion(cantidad.idCredito);
           }
         });
+      console.log("Activos",this._creditoService.arregloC());
       this.creditosActivos=this._creditoService.arregloC();
       }else{
         this.modalAlerta=true;
@@ -96,6 +97,7 @@ export class FinanciamientoComponent implements OnInit {
       numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo'))
     };
     this._creditoService.eliminarCredito(x).subscribe(data => {console.log(2,data);});
+    this._creditoService.eliminarCreditoActivo(x).subscribe();
   }
 
   verAmortizacion(idCredito){
