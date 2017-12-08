@@ -135,20 +135,20 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_53__components_demandas_demandas_component__ = __webpack_require__("../../../../../src/app/components/demandas/demandas.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_54__components_usuarios_usuarios_component__ = __webpack_require__("../../../../../src/app/components/usuarios/usuarios.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_55__components_home_home_component__ = __webpack_require__("../../../../../src/app/components/home/home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__components_usuario_proyecto_usuario_prueba_prueba_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/prueba/prueba.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_57__components_usuario_proyectos_proyectos_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyectos/proyectos.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_58__components_administradores_administradores_component__ = __webpack_require__("../../../../../src/app/components/administradores/administradores.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_59__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_60__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_61_ng_lightning_ng_lightning__ = __webpack_require__("../../../../ng-lightning/ng-lightning.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_62__components_usuario_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/usuario.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_63__components_usuario_navbar_usuario_navbar_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/navbar-usuario/navbar-usuario.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_64__components_usuario_proyecto_usuario_proyecto_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/proyecto-usuario.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_65__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_66__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-inicial/balance-inicial.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_67__components_usuario_proyecto_usuario_balance_final_balance_final_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-final/balance-final.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_68__components_usuario_proyecto_usuario_balance_home_balance_home_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_69__components_usuario_proyecto_usuario_operacion_operacion_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/operacion/operacion.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__components_usuario_proyectos_proyectos_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyectos/proyectos.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_57__components_administradores_administradores_component__ = __webpack_require__("../../../../../src/app/components/administradores/administradores.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_58__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_59__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_60_ng_lightning_ng_lightning__ = __webpack_require__("../../../../ng-lightning/ng-lightning.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_61__components_usuario_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/usuario.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_62__components_usuario_navbar_usuario_navbar_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/navbar-usuario/navbar-usuario.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_63__components_usuario_proyecto_usuario_proyecto_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/proyecto-usuario.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_64__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_65__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-inicial/balance-inicial.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_66__components_usuario_proyecto_usuario_balance_final_balance_final_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-final/balance-final.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_67__components_usuario_proyecto_usuario_balance_home_balance_home_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_68__components_usuario_proyecto_usuario_operacion_operacion_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/operacion/operacion.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_69__components_usuario_proyecto_usuario_prueba_prueba_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/prueba/prueba.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_70_d3__ = __webpack_require__("../../../../d3/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_71_nvd3__ = __webpack_require__("../../../../nvd3/build/nv.d3.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_71_nvd3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_71_nvd3__);
@@ -256,15 +256,15 @@ AppModule = __decorate([
         declarations: [
             __WEBPACK_IMPORTED_MODULE_41__app_component__["a" /* AppComponent */],
             __WEBPACK_IMPORTED_MODULE_47__components_navbar_navbar_component__["a" /* NavbarComponent */],
-            __WEBPACK_IMPORTED_MODULE_60__components_login_login_component__["a" /* LoginComponent */],
+            __WEBPACK_IMPORTED_MODULE_59__components_login_login_component__["a" /* LoginComponent */],
             __WEBPACK_IMPORTED_MODULE_49__components_sidenav_sidenav_component__["a" /* SidenavComponent */],
             __WEBPACK_IMPORTED_MODULE_48__components_usuario_proyecto_usuario_balance_balance_component__["a" /* BalanceComponent */],
             __WEBPACK_IMPORTED_MODULE_42__components_zona_producto_zona_producto_component__["a" /* ZonaProductoComponent */],
             __WEBPACK_IMPORTED_MODULE_50__components_productos_productos_component__["a" /* ProductosComponent */],
             __WEBPACK_IMPORTED_MODULE_51__components_maquinarias_maquinarias_component__["a" /* MaquinariasComponent */],
-            __WEBPACK_IMPORTED_MODULE_57__components_usuario_proyectos_proyectos_component__["a" /* ProyectosComponent */],
+            __WEBPACK_IMPORTED_MODULE_56__components_usuario_proyectos_proyectos_component__["a" /* ProyectosComponent */],
             __WEBPACK_IMPORTED_MODULE_52__components_creditos_creditos_component__["a" /* CreditosComponent */],
-            __WEBPACK_IMPORTED_MODULE_56__components_usuario_proyecto_usuario_prueba_prueba_component__["a" /* PruebaComponent */],
+            __WEBPACK_IMPORTED_MODULE_69__components_usuario_proyecto_usuario_prueba_prueba_component__["a" /* PruebaComponent */],
             __WEBPACK_IMPORTED_MODULE_53__components_demandas_demandas_component__["a" /* DemandasComponent */],
             __WEBPACK_IMPORTED_MODULE_54__components_usuarios_usuarios_component__["a" /* UsuariosComponent */],
             __WEBPACK_IMPORTED_MODULE_43__components_usuario_proyecto_usuario_desarrollo_mercado_desarrollo_mercado_component__["a" /* DesarrolloMercadoComponent */],
@@ -272,17 +272,17 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_45__components_usuario_proyecto_usuario_venta_productos_venta_productos_component__["a" /* VentaProductosComponent */],
             __WEBPACK_IMPORTED_MODULE_46__components_usuario_proyecto_usuario_compra_maquinaria_compra_maquinaria_component__["a" /* CompraMaquinariaComponent */],
             __WEBPACK_IMPORTED_MODULE_55__components_home_home_component__["a" /* HomeComponent */],
-            __WEBPACK_IMPORTED_MODULE_58__components_administradores_administradores_component__["a" /* AdministradoresComponent */],
-            __WEBPACK_IMPORTED_MODULE_62__components_usuario_usuario_component__["a" /* UsuarioComponent */],
-            __WEBPACK_IMPORTED_MODULE_63__components_usuario_navbar_usuario_navbar_usuario_component__["a" /* NavbarUsuarioComponent */],
-            __WEBPACK_IMPORTED_MODULE_64__components_usuario_proyecto_usuario_proyecto_usuario_component__["a" /* ProyectoUsuarioComponent */],
-            __WEBPACK_IMPORTED_MODULE_65__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__["a" /* SidenavPComponent */],
-            __WEBPACK_IMPORTED_MODULE_66__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__["a" /* BalanceInicialComponent */],
-            __WEBPACK_IMPORTED_MODULE_67__components_usuario_proyecto_usuario_balance_final_balance_final_component__["a" /* BalanceFinalComponent */],
-            __WEBPACK_IMPORTED_MODULE_68__components_usuario_proyecto_usuario_balance_home_balance_home_component__["a" /* BalanceHomeComponent */],
-            __WEBPACK_IMPORTED_MODULE_69__components_usuario_proyecto_usuario_operacion_operacion_component__["a" /* OperacionComponent */],
+            __WEBPACK_IMPORTED_MODULE_57__components_administradores_administradores_component__["a" /* AdministradoresComponent */],
+            __WEBPACK_IMPORTED_MODULE_61__components_usuario_usuario_component__["a" /* UsuarioComponent */],
+            __WEBPACK_IMPORTED_MODULE_62__components_usuario_navbar_usuario_navbar_usuario_component__["a" /* NavbarUsuarioComponent */],
+            __WEBPACK_IMPORTED_MODULE_63__components_usuario_proyecto_usuario_proyecto_usuario_component__["a" /* ProyectoUsuarioComponent */],
+            __WEBPACK_IMPORTED_MODULE_64__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__["a" /* SidenavPComponent */],
+            __WEBPACK_IMPORTED_MODULE_65__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__["a" /* BalanceInicialComponent */],
+            __WEBPACK_IMPORTED_MODULE_66__components_usuario_proyecto_usuario_balance_final_balance_final_component__["a" /* BalanceFinalComponent */],
+            __WEBPACK_IMPORTED_MODULE_67__components_usuario_proyecto_usuario_balance_home_balance_home_component__["a" /* BalanceHomeComponent */],
+            __WEBPACK_IMPORTED_MODULE_68__components_usuario_proyecto_usuario_operacion_operacion_component__["a" /* OperacionComponent */],
             __WEBPACK_IMPORTED_MODULE_72__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__["a" /* EstadoResultadosComponent */],
-            __WEBPACK_IMPORTED_MODULE_59__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__["a" /* FinanciamientoComponent */],
+            __WEBPACK_IMPORTED_MODULE_58__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__["a" /* FinanciamientoComponent */],
             __WEBPACK_IMPORTED_MODULE_73__components_variables_variables_component__["a" /* VariablesComponent */],
             __WEBPACK_IMPORTED_MODULE_74__components_usuario_proyecto_usuario_demanda_potencial_demanda_potencial_component__["a" /* DemandaPotencialComponent */],
             __WEBPACK_IMPORTED_MODULE_75__components_usuario_proyecto_usuario_flujo_flujo_component__["a" /* FlujoComponent */],
@@ -300,7 +300,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_9_ngx_bootstrap_tabs__["a" /* TabsModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_16__app_routes__["a" /* app_routing */],
             __WEBPACK_IMPORTED_MODULE_12_ng2_currency_mask__["CurrencyMaskModule"],
-            __WEBPACK_IMPORTED_MODULE_61_ng_lightning_ng_lightning__["a" /* NglModule */].forRoot(),
+            __WEBPACK_IMPORTED_MODULE_60_ng_lightning_ng_lightning__["a" /* NglModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_6_ngx_bootstrap__["c" /* AccordionModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_6_ngx_bootstrap__["d" /* PaginationModule */].forRoot(),
@@ -3173,7 +3173,7 @@ var CompraMaquinariaComponent = (function () {
             costo: this.maqSelectedAdd.costo,
             dep: this.maqSelectedAdd.depAcum
         };
-        this._CompraMaquinariaService.compraMaquinaria(x, y);
+        this.maquinasCompradas = this._CompraMaquinariaService.compraMaquinaria(x, y);
     };
     CompraMaquinariaComponent.prototype.regresar = function () {
         if (this.maqSelectedLess.Balance_numeroPeriodo == parseInt(localStorage.getItem('numeroPeriodo'))) {
@@ -3190,7 +3190,6 @@ var CompraMaquinariaComponent = (function () {
                 dep: this.maqSelectedLess.depAcum
             };
             this.maquinasCompradas = this._CompraMaquinariaService.regresarMaquinaria(x, y);
-            console.log(this.maquinasCompradas);
         }
         else {
             alert("No puedes regresar esa maquinaria");
@@ -3241,7 +3240,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-12\">\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\n<hr>\n</div>\n\n\n<div class=\"row\">\n  <div class=\"col-12\" style=\"height:500px\" *ngFor=\"let zona of graficas\" >\n    <div class=\"row\">\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\n\n  <div class=\"col-12\" style=\"height:400px;\">\n    <ngx-charts-line-chart\n         [scheme]=\"colorScheme\"\n         [results]=\"zona.graf\"\n         xAxis=\"true\"\n         legendTitle=\"Productos\"\n         yAxis=\"true\"\n         legend=\"true\"\n         showXAxisLabel=\"true\"\n         showYAxisLabel=\"true\"\n         xAxisLabel=\"Periodos\"\n         yAxisLabel=\"Demanda Potencial\"\n         autoScale=\"true\">\n       </ngx-charts-line-chart>\n  </div>\n    </div>\n\n\n\n\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"col-12\">\r\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\r\n<hr>\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-12\" style=\"height:500px\" *ngFor=\"let zona of graficas\" >\r\n    <div class=\"row\">\r\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\r\n\r\n  <div class=\"col-12\" style=\"height:400px;\">\r\n    <ngx-charts-line-chart\r\n         [scheme]=\"colorScheme\"\r\n         [results]=\"zona.graf\"\r\n         xAxis=\"true\"\r\n         legendTitle=\"Productos\"\r\n         yAxis=\"true\"\r\n         legend=\"true\"\r\n         showXAxisLabel=\"true\"\r\n         showYAxisLabel=\"true\"\r\n         xAxisLabel=\"Periodos\"\r\n         yAxisLabel=\"Demanda Potencial\"\r\n         autoScale=\"true\">\r\n       </ngx-charts-line-chart>\r\n  </div>\r\n    </div>\r\n\r\n\r\n\r\n\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -4364,7 +4363,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/flujo/flujo.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<table class=\"table table-bordered  table-responsive\" >\r\n\r\n  <tbody>\r\n    <tr class=\"thead-inverse\">\r\n    <th colspan=\"2\">Presupuesto Global de Caja y Bancos</th>\r\n    </tr>\r\n\r\n\r\n\r\n\r\n    <tr>\r\n      <td>Saldo Inical</td>\r\n      <td class=\"text-right\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th colspan=\"2\">Entradas </th>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Cobro por Ventas</td>\r\n      <td class=\"text-right\"></td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Préstamos</td>\r\n      <td class=\"text-right\"></td>\r\n\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Intereses</td>\r\n      <td class=\"text-right\"></td>\r\n\r\n\r\n\r\n\r\n    </tr>\r\n\r\n\r\n\r\n    <tr>\r\n      <td>Incremento de Capital</td>\r\n      <td class=\"text-right\"></td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n            <td colspan=\"\"></td>\r\n    </tr>\r\n\r\n\r\n    <tr>\r\n      <th>Disponible</th>\r\n      <th class=\"text-right\"></th>\r\n\r\n    </tr>\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td colspan=\"2\">Salidas</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Costo de Transformación</td>\r\n      <td class=\"text-right\"></td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Costo de Distribución</td>\r\n      <td class=\"text-right\"></td>\r\n\r\n    </tr>\r\n\r\n\r\n    <tr>\r\n      <td>Costo de Administrativo</td>\r\n      <td class=\"text-right\"></td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Gastos de Venta</td>\r\n      <td class=\"text-right\"></td>\r\n    </tr>\r\n\r\n\r\n\r\n    <tr>\r\n      <td>Compra de Maquinaria</td>\r\n      <td class=\"text-right\"></td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Compras</td>\r\n      <td class=\"text-right\"></td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Intereses</td>\r\n      <td class=\"text-right\"></td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Pago de Préstamos</td>\r\n      <td class=\"text-right\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Dividendos</td>\r\n      <td class=\"text-right\"></td>\r\n\r\n    </tr>\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>PTU</td>\r\n      <td class=\"text-right\"></td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>ISR</td>\r\n      <td class=\"text-right\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>IVA</td>\r\n      <td class=\"text-right\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td colspan=\"2\"></td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Total de Salidas</td>\r\n      <td class=\"text-right\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Saldo Final</th>\r\n      <th class=\"text-right\"></th>\r\n    </tr>\r\n\r\n  </tbody>\r\n</table>\r\n"
+module.exports = "<table class=\"table table-bordered  table-responsive\" >\n\n  <tbody>\n    <tr class=\"thead-inverse\">\n    <th colspan=\"2\">Presupuesto Global de Caja y Bancos</th>\n    </tr>\n\n\n\n\n    <tr>\n      <td>Saldo Inical</td>\n      <td class=\"text-right\"></td>\n    </tr>\n\n    <tr>\n            <td colspan=\"2\"></td>\n    </tr>\n\n    <tr>\n      <th colspan=\"2\">Entradas </th>\n\n    </tr>\n\n    <tr>\n            <td colspan=\"2\"></td>\n    </tr>\n\n    <tr>\n      <td>Cobro por Ventas</td>\n      <td class=\"text-right\"></td>\n\n\n    </tr>\n\n    <tr>\n      <td>Préstamos</td>\n      <td class=\"text-right\"></td>\n\n\n\n    </tr>\n\n    <tr>\n      <td>Intereses</td>\n      <td class=\"text-right\"></td>\n\n\n\n\n    </tr>\n\n\n\n    <tr>\n      <td>Incremento de Capital</td>\n      <td class=\"text-right\"></td>\n\n    </tr>\n\n    <tr>\n            <td colspan=\"\"></td>\n    </tr>\n\n\n    <tr>\n      <th>Disponible</th>\n      <th class=\"text-right\"></th>\n\n    </tr>\n    <tr>\n            <td colspan=\"2\"></td>\n    </tr>\n\n    <tr>\n      <td colspan=\"2\">Salidas</td>\n    </tr>\n\n    <tr>\n      <td>Costo de Transformación</td>\n      <td class=\"text-right\"></td>\n\n    </tr>\n\n    <tr>\n      <td>Costo de Distribución</td>\n      <td class=\"text-right\"></td>\n\n    </tr>\n\n\n    <tr>\n      <td>Costo de Administrativo</td>\n      <td class=\"text-right\"></td>\n\n    </tr>\n\n    <tr>\n      <td>Gastos de Venta</td>\n      <td class=\"text-right\"></td>\n    </tr>\n\n\n\n    <tr>\n      <td>Compra de Maquinaria</td>\n      <td class=\"text-right\"></td>\n\n\n    </tr>\n\n    <tr>\n      <td>Compras</td>\n      <td class=\"text-right\"></td>\n\n\n    </tr>\n\n    <tr>\n      <td>Intereses</td>\n      <td class=\"text-right\"></td>\n\n    </tr>\n\n    <tr>\n      <td>Pago de Préstamos</td>\n      <td class=\"text-right\"></td>\n    </tr>\n\n    <tr>\n      <td>Dividendos</td>\n      <td class=\"text-right\"></td>\n\n    </tr>\n    <tr>\n            <td colspan=\"2\"></td>\n    </tr>\n\n    <tr>\n      <td>PTU</td>\n      <td class=\"text-right\"></td>\n\n    </tr>\n\n    <tr>\n      <td>ISR</td>\n      <td class=\"text-right\"></td>\n    </tr>\n\n    <tr>\n      <td>IVA</td>\n      <td class=\"text-right\"></td>\n    </tr>\n\n    <tr>\n      <td colspan=\"2\"></td>\n\n    </tr>\n\n    <tr>\n      <td>Total de Salidas</td>\n      <td class=\"text-right\"></td>\n    </tr>\n\n    <tr>\n\n    </tr>\n\n    <tr>\n      <th>Saldo Final</th>\n      <th class=\"text-right\"></th>\n    </tr>\n\n  </tbody>\n</table>\n"
 
 /***/ }),
 
@@ -7441,15 +7440,16 @@ var CompraMaquinariaService = (function () {
         return this.http.post('maquinariacomprada/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
     CompraMaquinariaService.prototype.compraMaquinaria = function (x, y) {
-        var _this = this;
-        this.comprar(x).subscribe(function (data) {
-            for (var key$ in data.datos) {
-                _this.maquinasCompradas[key$] = data.datos[key$];
-            }
-        });
         this.cobrar(y).subscribe(function (data) {
             console.log("Perro", data);
         });
+        var maqC = [];
+        this.comprar(x).subscribe(function (data) {
+            for (var key$ in data.datos) {
+                maqC.push(data.datos[key$]);
+            }
+        });
+        return maqC;
     };
     CompraMaquinariaService.prototype.regresarMaquinaria = function (x, y) {
         this.undo(y).subscribe(function (data) {

@@ -66,7 +66,6 @@ import { CreditosComponent } from './components/creditos/creditos.component';
 import { DemandasComponent } from './components/demandas/demandas.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { HomeComponent } from './components/home/home.component';
-import { PruebaComponent } from './components/usuario/proyecto-usuario/prueba/prueba.component';
 import { ProyectosComponent} from './components/usuario/proyectos/proyectos.component';
 import { AdministradoresComponent } from './components/administradores/administradores.component';
 import { FinanciamientoComponent } from './components/usuario/proyecto-usuario/financiamiento/financiamiento.component';
@@ -83,6 +82,7 @@ import { BalanceInicialComponent } from './components/usuario/proyecto-usuario/b
 import { BalanceFinalComponent } from './components/usuario/proyecto-usuario/balance-final/balance-final.component';
 import { BalanceHomeComponent } from './components/usuario/proyecto-usuario/balance-home/balance-home.component';
 import { OperacionComponent } from './components/usuario/proyecto-usuario/operacion/operacion.component';
+import { PruebaComponent } from './components/usuario/proyecto-usuario/prueba/prueba.component';
 declare var require : any;
 import 'd3';
 import 'nvd3';
@@ -103,7 +103,7 @@ import { FlujoComponent } from './components/usuario/proyecto-usuario/flujo/fluj
     MaquinariasComponent,
     ProyectosComponent,
     CreditosComponent,
-     PruebaComponent ,
+    PruebaComponent ,
     DemandasComponent,
     UsuariosComponent,
     DesarrolloMercadoComponent,

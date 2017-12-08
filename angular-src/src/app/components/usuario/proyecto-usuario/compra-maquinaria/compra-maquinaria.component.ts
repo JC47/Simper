@@ -107,7 +107,7 @@ comprar(){
       costo:this.maqSelectedAdd.costo,
       dep:this.maqSelectedAdd.depAcum
     }
-    this._CompraMaquinariaService.compraMaquinaria(x,y);
+    this.maquinasCompradas = this._CompraMaquinariaService.compraMaquinaria(x,y);
 
   }
 
@@ -126,7 +126,6 @@ comprar(){
         dep:this.maqSelectedLess.depAcum
       }
       this.maquinasCompradas = this._CompraMaquinariaService.regresarMaquinaria(x,y);
-      console.log(this.maquinasCompradas);
     }
     else{
       alert("No puedes regresar esa maquinaria");
