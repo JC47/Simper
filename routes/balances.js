@@ -161,8 +161,7 @@ router.post('/final', (req, res, next) => {
     var utlidadAcumulada = balanceBase[0].utilidadEjercicio + balanceBase[0].utilidadAcum;
     var maqEquipo = balanceBase[0].depMaqEquipo + costoTransformacionMaqGlobal;
     //auxV,costoTransformacionMaq,desarrolloMercado,desarrolloProducto
-    var utilidadEjercicio = getUtilidad(auxesVentas,costoTransformacionMaqGlobal,desarrolloMercadoGlobal,desarrolloProductoGlobal)-balanceBase[0].almacenArtTerm-interesesAnticipo-interesesPago;
-
+    var utilidadEjercicio = getUtilidad(auxesVentas,costoTransformacionMaqGlobal,desarrolloMercadoGlobal,desarrolloProductoGlobal)-interesesAnticipo-interesesPago;
 
     //ISR y PTU
     var ISR = 0;
