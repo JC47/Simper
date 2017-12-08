@@ -1,6 +1,18 @@
 <div class="nav-side-menu">
-    <div class="brand">Proyecto
-      <button type="button" class="btn btn-danger" style="position:fixed; margin-left:4.1%;height:50px" (click)="verProyectos()"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+    <div class="brand">
+      <div class="row" >
+        <div class="col-12 text-center">
+          <h6 style="margin-top:20px">Proyecto {{proyectoActual}}</h6>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 text-center" style="margin-bottom:10px">
+          <button type="button" class="btn btn-danger" style="font-size:10px" (click)="verProyectos()">Salir de Proyecto</button>
+        </div>
+
+      </div>
+
     </div>
     <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 

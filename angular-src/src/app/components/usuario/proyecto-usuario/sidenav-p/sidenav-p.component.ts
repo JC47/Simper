@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router}  from '@angular/router';
+import {ProyectosService} from '../../../../services/proyectos.service';
 
 @Component({
   selector: 'app-sidenav-p',
@@ -8,7 +9,19 @@ import {Router}  from '@angular/router';
 })
 export class SidenavPComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  proyectos:any;
+  proyectoActual:any;
+  constructor(private router:Router,
+              private _proyectosS:ProyectosService) {
+
+  this.proyectos=this._proyectosS.returnUsuarios();
+  console.log("Proyectos",this.proyectos)
+  setTimeout(() => {
+    this.proyectoActual=this.getNameById(localStorage.getItem('idProyecto'))
+    console.log(this.proyectoActual)
+ }, 500);
+
+              }
 
   ngOnInit() {
   }
@@ -19,4 +32,18 @@ export class SidenavPComponent implements OnInit {
     localStorage.removeItem('numeroRPeriodos');
     this.router.navigate(['/Usuario/proyectos']);
   }
+
+
+  getNameById(idProyecto){
+    for(let proyecto of this.proyectos){
+      if(proyecto.idProyecto==idProyecto)
+        return proyecto.nombreProyecto
+    }
+      return "id NO encontrado"
+
+  }
+
+
+
+
 }
