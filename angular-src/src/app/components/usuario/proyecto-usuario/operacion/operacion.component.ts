@@ -350,9 +350,7 @@ export class OperacionComponent implements OnInit {
       {title: "Cantidad", dataKey: "cantidad"},
       {title: "Importe", dataKey: "importe"}];
 
-      var rows = [
-      {"producto":"", "cantidadUnit": "", "costoUni": "","unidadProd": "","cantidad": "","importe": ""}
-      ];
+      var rows = [];
 
       //Cosas Importantes
       for(let producto of this.auxiliares){
@@ -441,11 +439,11 @@ export class OperacionComponent implements OnInit {
       }
       columns.push(x);
       rows[0][x.dataKey] = producto.unidadesVendidas.toString();
-      rows[2][x.dataKey] = this.getPrecioVenta(producto.Producto_idProducto).toString();
-      rows[4][x.dataKey] = (producto.Ventas - producto.IVAxVentas).toString();
-      rows[6][x.dataKey] = producto.IVAxVentas.toString();
-      rows[8][x.dataKey] = producto.Ventas.toString();
-
+      rows[2][x.dataKey] = this.cp.transform(this.getPrecioVenta(producto.Producto_idProducto),'USD',true,'1.0-0')
+      rows[4][x.dataKey] =  this.cp.transform((producto.Ventas - producto.IVAxVentas),'USD',true,'1.0-0')
+      rows[6][x.dataKey] =  this.cp.transform(producto.IVAxVentas,'USD',true,'1.0-0')
+      rows[8][x.dataKey] =  this.cp.transform(producto.Ventas,'USD',true,'1.0-0')
+//this.cp.transform(,'USD',true,'1.0-0')
     }
 
     doc.autoTable(columns, rows, {
