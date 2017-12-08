@@ -243,6 +243,7 @@ router.post('/validate', (req,res,next) => {
                 }
 
                 var inventarioInicial = getInventarioInicial(opAnterior);
+                console.log("Inventario Inicial",inventarioInicial);
                 var produccionA = getProduccion(maquinas);
                 var demandaP = demanda[0].cantidad;
                 var uniProd = uniVendidas + uniAlmacenadas - inventarioInicial + uniVendidasAnteriores;

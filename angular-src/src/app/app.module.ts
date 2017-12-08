@@ -81,6 +81,7 @@ import { BalanceInicialComponent } from './components/usuario/proyecto-usuario/b
 import { BalanceFinalComponent } from './components/usuario/proyecto-usuario/balance-final/balance-final.component';
 import { BalanceHomeComponent } from './components/usuario/proyecto-usuario/balance-home/balance-home.component';
 import { OperacionComponent } from './components/usuario/proyecto-usuario/operacion/operacion.component';
+import { PruebaComponent } from './components/usuario/proyecto-usuario/prueba/prueba.component';
 declare var require : any;
 import 'd3';
 import 'nvd3';
@@ -121,6 +122,7 @@ import { FlujoComponent } from './components/usuario/proyecto-usuario/flujo/fluj
     FinanciamientoComponent,
     VariablesComponent,
     DemandaPotencialComponent,
+    PruebaComponent,
     FlujoComponent,
   ],
   imports: [

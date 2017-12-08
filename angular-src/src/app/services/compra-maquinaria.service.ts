@@ -46,14 +46,16 @@ export class CompraMaquinariaService {
    }
 
   compraMaquinaria(x,y){
-    this.comprar(x).subscribe(data => {
-      for(let key$ in data.datos){
-        this.maquinasCompradas[key$] = data.datos[key$];
-      }
-    });
     this.cobrar(y).subscribe( data => {
       console.log("Perro",data)
     });
+    var maqC = [];
+    this.comprar(x).subscribe(data => {
+      for(let key$ in data.datos){
+        maqC.push(data.datos[key$]);
+      }
+    });
+    return maqC;
   }
 
   regresarMaquinaria(x,y){

@@ -148,13 +148,14 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_66__components_usuario_proyecto_usuario_balance_final_balance_final_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-final/balance-final.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_67__components_usuario_proyecto_usuario_balance_home_balance_home_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_68__components_usuario_proyecto_usuario_operacion_operacion_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/operacion/operacion.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_69_d3__ = __webpack_require__("../../../../d3/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_70_nvd3__ = __webpack_require__("../../../../nvd3/build/nv.d3.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_70_nvd3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_70_nvd3__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_71__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_72__components_variables_variables_component__ = __webpack_require__("../../../../../src/app/components/variables/variables.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_73__components_usuario_proyecto_usuario_demanda_potencial_demanda_potencial_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_74__components_usuario_proyecto_usuario_flujo_flujo_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/flujo/flujo.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_69__components_usuario_proyecto_usuario_prueba_prueba_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/prueba/prueba.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_70_d3__ = __webpack_require__("../../../../d3/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_71_nvd3__ = __webpack_require__("../../../../nvd3/build/nv.d3.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_71_nvd3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_71_nvd3__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_72__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_73__components_variables_variables_component__ = __webpack_require__("../../../../../src/app/components/variables/variables.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_74__components_usuario_proyecto_usuario_demanda_potencial_demanda_potencial_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_75__components_usuario_proyecto_usuario_flujo_flujo_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/flujo/flujo.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -244,6 +245,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var AppModule = (function () {
     function AppModule() {
     }
@@ -278,11 +280,12 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_66__components_usuario_proyecto_usuario_balance_final_balance_final_component__["a" /* BalanceFinalComponent */],
             __WEBPACK_IMPORTED_MODULE_67__components_usuario_proyecto_usuario_balance_home_balance_home_component__["a" /* BalanceHomeComponent */],
             __WEBPACK_IMPORTED_MODULE_68__components_usuario_proyecto_usuario_operacion_operacion_component__["a" /* OperacionComponent */],
-            __WEBPACK_IMPORTED_MODULE_71__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__["a" /* EstadoResultadosComponent */],
+            __WEBPACK_IMPORTED_MODULE_72__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__["a" /* EstadoResultadosComponent */],
             __WEBPACK_IMPORTED_MODULE_58__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__["a" /* FinanciamientoComponent */],
-            __WEBPACK_IMPORTED_MODULE_72__components_variables_variables_component__["a" /* VariablesComponent */],
-            __WEBPACK_IMPORTED_MODULE_73__components_usuario_proyecto_usuario_demanda_potencial_demanda_potencial_component__["a" /* DemandaPotencialComponent */],
-            __WEBPACK_IMPORTED_MODULE_74__components_usuario_proyecto_usuario_flujo_flujo_component__["a" /* FlujoComponent */],
+            __WEBPACK_IMPORTED_MODULE_73__components_variables_variables_component__["a" /* VariablesComponent */],
+            __WEBPACK_IMPORTED_MODULE_74__components_usuario_proyecto_usuario_demanda_potencial_demanda_potencial_component__["a" /* DemandaPotencialComponent */],
+            __WEBPACK_IMPORTED_MODULE_69__components_usuario_proyecto_usuario_prueba_prueba_component__["a" /* PruebaComponent */],
+            __WEBPACK_IMPORTED_MODULE_75__components_usuario_proyecto_usuario_flujo_flujo_component__["a" /* FlujoComponent */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_8_angular2_flash_messages__["FlashMessagesModule"],
@@ -3170,7 +3173,7 @@ var CompraMaquinariaComponent = (function () {
             costo: this.maqSelectedAdd.costo,
             dep: this.maqSelectedAdd.depAcum
         };
-        this._CompraMaquinariaService.compraMaquinaria(x, y);
+        this.maquinasCompradas = this._CompraMaquinariaService.compraMaquinaria(x, y);
     };
     CompraMaquinariaComponent.prototype.regresar = function () {
         if (this.maqSelectedLess.Balance_numeroPeriodo == parseInt(localStorage.getItem('numeroPeriodo'))) {
@@ -3187,7 +3190,6 @@ var CompraMaquinariaComponent = (function () {
                 dep: this.maqSelectedLess.depAcum
             };
             this.maquinasCompradas = this._CompraMaquinariaService.regresarMaquinaria(x, y);
-            console.log(this.maquinasCompradas);
         }
         else {
             alert("No puedes regresar esa maquinaria");
@@ -7381,15 +7383,16 @@ var CompraMaquinariaService = (function () {
         return this.http.post('maquinariacomprada/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
     CompraMaquinariaService.prototype.compraMaquinaria = function (x, y) {
-        var _this = this;
-        this.comprar(x).subscribe(function (data) {
-            for (var key$ in data.datos) {
-                _this.maquinasCompradas[key$] = data.datos[key$];
-            }
-        });
         this.cobrar(y).subscribe(function (data) {
             console.log("Perro", data);
         });
+        var maqC = [];
+        this.comprar(x).subscribe(function (data) {
+            for (var key$ in data.datos) {
+                maqC.push(data.datos[key$]);
+            }
+        });
+        return maqC;
     };
     CompraMaquinariaService.prototype.regresarMaquinaria = function (x, y) {
         this.undo(y).subscribe(function (data) {

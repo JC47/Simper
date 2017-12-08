@@ -144,7 +144,7 @@ router.post('/undo', (req, res, next) => {
       x.IVACompraMaq = x.IVACompraMaq + ivaMaq;
       x.costoTransformacionMaq = x.costoTransformacionMaq - depM;
     }
-    return auxiliar.setAuxiliar(numeroPeriodo,idProyecto,x);
+    return auxiliar.setAuxiliar(numeroPeriodo,idProyecto,idProducto,x);
   }).then(function () {
     res.json({success:true, msg:"Operacion completa"});
   })
