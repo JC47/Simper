@@ -10,11 +10,11 @@
         <div class="card-block"
         [ngClass]="{'letra-resaltar':maquina.idMaquinaria==this.maqSelectedAdd.idMaquinaria}">
           <div class="row align-items-center">
-            <div class="col-4">
+            <div class="col-2">
               <img  src="assets/img/machine.png" class="img-fluid" style="margin-left:10px;">
             </div>
 
-            <div class="col-8">
+            <div class="col-10">
               <h4 class="card-title">{{maquina.nombreMaq}}</h4>
               <h6 class="card-subtitle">Costo Total: {{ maquina.costo | currency:'USD':true }} </h6>
 
