@@ -231,7 +231,7 @@ router.post('/validate', (req,res,next) => {
   var periodoAnterior = numeroPeriodo - 1;
 
   Promise.join(operacion.getMaquinarias(idProducto,idProyecto),operacion.getDemandaPotencial(numeroPeriodo,idProducto,idZona),
-              auxiliar.getAuxiliarVenta(periodoAnterior,idProyecto,idProducto),operacion.getAlmacen(idProyecto,idProducto,numeroPeriodo),
+              operacion.getAlmacen(idProyecto,idProducto,periodoAnterior),operacion.getAlmacen(idProyecto,idProducto,numeroPeriodo),
               operacion.getOperacionProducto(idProyecto,idProducto,numeroPeriodo,idUsuario,idZona),
               function(maquinas,demanda,opAnterior,almacenActual,ventasTotales){
 
@@ -350,7 +350,7 @@ router.post('/selling', (req,res,next) => {
       inventarioFinal = ((cashInventarioInicial + cProduccion) / (inventarioInicial + uniProd)) * uniAlmacenadas;
     }
     //Costo de ventas
-    var cVentas = cProduccion - inventarioFinal;
+    var cVentas = cProduccion + cashInventarioInicial - inventarioFinal;
     //Ganancia de ventas
     var ventas = ventasCash + ivaVentas;
     //Ventas por cobrar

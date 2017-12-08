@@ -19,10 +19,10 @@
 
     <tr>
       <td>Caja Bancos</td>
-      <td class="text-right">{{balance.cajaBancos |currency:'USD':true:'1.0-0'}}</td>
-      <td  class="text-right"></td>
-      <td  class="text-right"></td>
-      <td  class="text-right"></td>
+      <td class="text-right" >{{balance.cajaBancos |currency:'USD':true:'1.0-0'}}</td>
+      <td  class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.cajaBancos |currency:'USD':true:'1.0-0'}}</td>
+      <td  class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.cajaBancos,balanceI.cajaBancos) |currency:'USD':true:'1.0-0'}}</td>
+      <td  class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.cajaBancos,balanceI.cajaBancos) |currency:'USD':true:'1.0-0'}}</td>
 
 
     </tr>
@@ -30,9 +30,9 @@
     <tr>
       <td>Cuentas por Cobrar</td>
       <td  class="text-right">{{balance.cuentasPorCobrar|currency:'USD':true:'1.0-0'}}</td>
-      <td  class="text-right"></td>
-      <td  class="text-right"></td>
-      <td  class="text-right"></td>
+      <td  class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.cuentasPorCobrar|currency:'USD':true:'1.0-0'}}</td>
+      <td  class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.cuentasPorCobrar,balanceI.cuentasPorCobrar)|currency:'USD':true:'1.0-0'}}</td>
+      <td  class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.cuentasPorCobrar,balanceI.cuentasPorCobrar)|currency:'USD':true:'1.0-0'}}</td>
 
 
     </tr>
@@ -40,7 +40,7 @@
     <tr>
       <td>IVA Acreditable</td>
       <td class="text-right">{{balance.IVAAcreditable|currency:'USD':true:'1.0-0'}}</td>
-      <td  class="text-right"></td>
+      <td  class="text-right" *ngFor="let balanceI of balanceInicial"> {{balanceI.IVAAcreditable|currency:'USD':true:'1.0-0'}}</td>
       <td  class="text-right"></td>
       <td  class="text-right"></td>
 
@@ -50,9 +50,9 @@
     <tr>
       <td>Almacen de Articulo Terminado</td>
       <td class="text-right">{{balance.almacenArtTerm|currency:'USD':true:'1.0-0'}}</td>
-      <td  class="text-right"></td>
-      <td  class="text-right"></td>
-      <td  class="text-right"></td>
+      <td  class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.almacenArtTerm|currency:'USD':true:'1.0-0'}}</td>
+      <td  class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.almacenArtTerm,balanceI.almacenArtTerm) |currency:'USD':true:'1.0-0'}}</td>
+      <td  class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.almacenArtTerm,balanceI.almacenArtTerm) |currency:'USD':true:'1.0-0'}}</td>
 
 
     </tr>
@@ -60,9 +60,9 @@
     <tr>
       <td>Alamacén de Materiales</td>
       <td class="text-right">{{balance.almacenMateriales|currency:'USD':true:'1.0-0'}}</td>
-      <td  class="text-right"></td>
-      <td  class="text-right"></td>
-
+      <td  class="text-right" *ngFor="let balanceI of balanceInicial">{{balance.almacenMateriales|currency:'USD':true:'1.0-0'}}</td>
+      <td  class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.almacenMateriales,balanceI.almacenMateriales)|currency:'USD':true:'1.0-0'}}</td>
+      <td  class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.almacenMateriales,balanceI.almacenMateriales)|currency:'USD':true:'1.0-0'}}</td>
 
 
     </tr>
@@ -77,41 +77,73 @@
     <tr>
       <td>Terrenos</td>
       <td class="text-right">{{balance.terreno|currency:'USD':true:'1.0-0'}}</td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
-      <td class="text-right"> </td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial"></td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial"></td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial"></td>
     </tr>
 
     <tr>
       <td>Edificios e Instalaciones</td>
       <td class="text-right">{{balance.edifInsta|currency:'USD':true:'1.0-0'}}</td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.terreno|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.terreno,balanceI.terreno) |currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.terreno,balanceI.terreno) |currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <td>Depreciación Acumulada</td>
+      <td class="text-right">{{balance.depEdif|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.depEdif|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.depEdif,balanceI.depEdif)|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.depEdif,balanceI.depEdif)|currency:'USD':true:'1.0-0'}}</td>
     </tr>
 
     <tr>
       <td>Maquinaria y Equipo</td>
       <td class="text-right">{{balance.maqEquipo|currency:'USD':true:'1.0-0'}}</td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.maqEquipo|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.maqEquipo,balanceI.maqEquipo)|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.maqEquipo,balanceI.maqEquipo)|currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <td>Depreciación Acumulada</td>
+      <td class="text-right">{{balance.depMaqEquipo|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.depMaqEquipo|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.depMaqEquipo,balanceI.depMaqEquipo) |currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.depMaqEquipo,balanceI.depMaqEquipo) |currency:'USD':true:'1.0-0'}}</td>
     </tr>
 
     <tr>
       <td>Muebles y Enseres</td>
       <td class="text-right">{{balance.mueblesEnseres|currency:'USD':true:'1.0-0'}}</td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.mueblesEnseres|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.mueblesEnseres,balanceI.mueblesEnseres)|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.mueblesEnseres,balanceI.mueblesEnseres)|currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <td>Depreciación Acumulada</td>
+      <td class="text-right">{{balance.depMueblesEnseres|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.depMueblesEnseres|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.depMueblesEnseres,balanceI.depMueblesEnseres)|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.depMueblesEnseres,balanceI.depMueblesEnseres)|currency:'USD':true:'1.0-0'}}</td>
     </tr>
 
     <tr>
       <td>Equipo de Transporte</td>
       <td class="text-right">{{balance.eqTrans|currency:'USD':true:'1.0-0'}}</td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.eqTrans|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.eqTrans,balanceI.eqTrans)|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.eqTrans,balanceI.eqTrans)|currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+
+    <tr>
+      <td>Depreciación Acumulada</td>
+      <td class="text-right">{{balance.depEqTrans|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.depEqTrans|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.depEqTrans,balanceI.depEqTrans)|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.depEqTrans,balanceI.depEqTrans)|currency:'USD':true:'1.0-0'}}</td>
     </tr>
 
 
@@ -122,9 +154,9 @@
     <tr>
       <td>Pagos Hechos por anticipado</td>
       <td class="text-right">{{balance.pagosAnticipado|currency:'USD':true:'1.0-0'}}</td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.pagosAnticipado|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.pagosAnticipado,balanceI.pagosAnticipado)|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.pagosAnticipado,balanceI.pagosAnticipado)|currency:'USD':true:'1.0-0'}}</td>
 
 
 
@@ -133,9 +165,9 @@
     <tr>
       <td>Gastos por Amortizar</td>
       <td class="text-right">{{balance.gastosAmortizacion|currency:'USD':true:'1.0-0'}}</td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.gastosAmortizacion|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.gastosAmortizacion,balanceI.gastosAmortizacion)|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.gastosAmortizacion,balanceI.gastosAmortizacion)|currency:'USD':true:'1.0-0'}}</td>
 
 
     </tr>
@@ -154,9 +186,9 @@
     <tr>
       <td>IVA por enterar</td>
       <td class="text-right">{{balance.IVAPorEnterar|currency:'USD':true:'1.0-0'}}</td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.IVAPorEnterar|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.IVAPorEnterar,balanceI.IVAPorEnterar)|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.IVAPorEnterar,balanceI.IVAPorEnterar)|currency:'USD':true:'1.0-0'}}</td>
 
 
     </tr>
@@ -164,9 +196,9 @@
     <tr>
       <td>Impuestos por Pagar</td>
       <td class="text-right">{{balance.imptosPorPagar|currency:'USD':true:'1.0-0'}}</td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.imptosPorPagar|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.imptosPorPagar,balanceI.imptosPorPagar)|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.imptosPorPagar,balanceI.imptosPorPagar)|currency:'USD':true:'1.0-0'}}</td>
 
 
     </tr>
@@ -174,18 +206,18 @@
     <tr>
       <td>Proveedores</td>
       <td class="text-right">{{balance.proveedores|currency:'USD':true:'1.0-0'}}</td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.proveedores|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.proveedores,balanceI.proveedores)|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.proveedores,balanceI.proveedores)|currency:'USD':true:'1.0-0'}}</td>
 
     </tr>
 
     <tr>
       <td>PTU por Pagar</td>
       <td class="text-right">{{balance.PTUPorPagar|currency:'USD':true:'1.0-0'}}</td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.PTUPorPagar|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.PTUPorPagar,balanceI.PTUPorPagar)|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.PTUPorPagar,balanceI.PTUPorPagar)|currency:'USD':true:'1.0-0'}}</td>
 
 
     </tr>
@@ -193,9 +225,9 @@
     <tr>
       <td>Préstamos Bancarios</td>
       <td class="text-right">{{balance.prestamosMenosAnio|currency:'USD':true:'1.0-0'}}</td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.prestamosMenosAnio|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.prestamosMenosAnio,balanceI.prestamosMenosAnio)|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.prestamosMenosAnio,balanceI.prestamosMenosAnio)|currency:'USD':true:'1.0-0'}}</td>
 
     </tr>
 
@@ -206,9 +238,9 @@
     <tr>
       <td>Prestamos Totales</td>
       <td class="text-right">{{balance.prestamosMasAnio|currency:'USD':true:'1.0-0'}}</td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.prestamosMasAnio|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.prestamosMasAnio,balanceI.prestamosMasAnio)|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.prestamosMasAnio,balanceI.prestamosMasAnio)|currency:'USD':true:'1.0-0'}}</td>
 
     </tr>
 
@@ -219,42 +251,42 @@
     <tr>
       <td>Capital Social</td>
       <td class="text-right">{{balance.capitalSocial|currency:'USD':true:'1.0-0'}}</td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.capitalSocial|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.capitalSocial,balanceI.capitalSocial)|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.capitalSocial,balanceI.capitalSocial)|currency:'USD':true:'1.0-0'}}</td>
     </tr>
 
     <tr>
       <td>Reserva legal</td>
       <td class="text-right">{{balance.reservaLegal|currency:'USD':true:'1.0-0'}}</td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.reservaLegal|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.reservaLegal,balanceI.reservaLegal)|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.reservaLegal,balanceI.reservaLegal)|currency:'USD':true:'1.0-0'}}</td>
     </tr>
 
     <tr>
       <td>Utilidad Acumulada</td>
       <td class="text-right">{{balance.utilidadAcum|currency:'USD':true:'1.0-0'}}</td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
-      <td class="text-right"></td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.utilidadAcum|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.utilidadAcum,balanceI.utilidadAcum)|currency:'USD':true:'1.0-0'}}</td>
+      <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.utilidadAcum,balanceI.utilidadAcum)|currency:'USD':true:'1.0-0'}}</td>
     </tr>
 
     <tr>
       <td >Utilidad del Ejercicio</td>
         <td class="text-right">{{balance.utilidadEjercicio|currency:'USD':true:'1.0-0'}}</td>
-        <td class="text-right"></td>
-        <td class="text-right"></td>
-        <td class="text-right"></td>
+        <td class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.utilidadEjercicio|currency:'USD':true:'1.0-0'}}</td>
+        <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.utilidadEjercicio,balanceI.utilidadEjercicio)|currency:'USD':true:'1.0-0'}}</td>
+        <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(balance.utilidadEjercicio,balanceI.utilidadEjercicio)|currency:'USD':true:'1.0-0'}}</td>
 
     </tr>
 
     <tr>
       <th>Total</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th class="text-right">{{0|currency:'USD':true:'1.0-0'}}</th>
+      <th class="text-right">{{0|currency:'USD':true:'1.0-0'}}</th>
+      <th class="text-right">{{aplicacion}}</th>
+      <th class="text-right">{{origen}}</th>
     </tr>
 
   </tbody>
