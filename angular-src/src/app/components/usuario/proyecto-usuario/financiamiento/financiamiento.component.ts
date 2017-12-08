@@ -22,11 +22,16 @@ export class FinanciamientoComponent implements OnInit {
   openModalConf:boolean=false;
   solicitudForm:FormGroup;
   modalAlerta:boolean=false;
+  modalAlerta2:boolean=false;
+  deleteCreditoSelected:any={
+    idCredito:null
+  }
+  confDeleteCredito:boolean=false;
 
   constructor(private _creditoService:UsuarioCreditoService) {
     this.creditos=this._creditoService.returnCreditosU(localStorage.getItem('idUsuario'));
     this.creditosActivos=this._creditoService.arregloC();
-    console.log("cActivos",this.creditosActivos)
+    console.log("cActivos",this.creditos)
     this.solicitudForm= new FormGroup({
       'monto':new FormControl('',Validators.required),
       'idCredito':new FormControl('',Validators.required)
@@ -67,32 +72,43 @@ export class FinanciamientoComponent implements OnInit {
     this.openModalConf=true;
     this.creditoSelected=credito;
   }
+
+
   solicitaCredito(cantidad){
-    var x = {
-      idCredito:cantidad.idCredito,
-      idProyecto:parseInt(localStorage.getItem('idProyecto')),
-      numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo')),
-      monto:cantidad.monto
-    };
-    this._creditoService.validarC().subscribe(data1 => {
-      if(data1.limite == 0){
-        this._creditoService.solicitarCredito(x).subscribe(data => {
-          if(data.success){
-            this.verAmortizacion(cantidad.idCredito);
-          }
-        });
-      console.log("Activos",this._creditoService.arregloC());
-      this.creditosActivos=this._creditoService.arregloC();
-      }else{
-        this.modalAlerta=true;
-        this.openModalConf=false;
-      }
-    });
+    if(cantidad.monto<this.getMinById(cantidad.idCredito) || cantidad.monto>this.getMaxById(cantidad.idCredito)){
+      this.modalAlerta2=true;
+      this.openModalConf=false;
+    }else{
+      var x = {
+        idCredito:cantidad.idCredito,
+        idProyecto:parseInt(localStorage.getItem('idProyecto')),
+        numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo')),
+        monto:cantidad.monto
+      };
+      this._creditoService.validarC().subscribe(data1 => {
+        if(data1.limite == 0){
+          this._creditoService.solicitarCredito(x).subscribe(data => {
+            if(data.success){
+              this.verAmortizacion(cantidad.idCredito);
+            }
+          });
+        console.log("Activos",this._creditoService.arregloC());
+        this.creditosActivos=this._creditoService.arregloC();
+        }else{
+          this.modalAlerta=true;
+          this.openModalConf=false;
+        }
+      });
+      this.openModalConf=false;
+    }
+
+
   }
 
-  eliminarCreditoSolicitado(idCredito){
+  eliminarCreditoSolicitado(){
+    this.confDeleteCredito=false;
     var x = {
-      idCredito:idCredito,
+      idCredito:this.deleteCreditoSelected.idCredito,
       idProyecto:parseInt(localStorage.getItem('idProyecto')),
       numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo'))
     };
@@ -108,6 +124,23 @@ export class FinanciamientoComponent implements OnInit {
   verPagos(idCredito){
     this.openPagos = true;
     this.tablaPagos = this._creditoService.verPagosP(idCredito);
+  }
+
+  getMaxById(idCredito){
+    for(let credito of this.creditos){
+      if(credito.idCredito==idCredito)
+       return credito.montoMax
+    }
+    return "id no encontrado"
+  }
+
+  getMinById(idCredito){
+    for(let credito of this.creditos){
+      if(credito.idCredito==idCredito)
+       return credito.montoMin
+    }
+    return "id no encontrado"
+
   }
 
   ngOnInit() {

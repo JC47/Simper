@@ -118,6 +118,7 @@ export class VentaProductosComponent implements OnInit {
   }
 
 openModalVenta(idZona,idProducto){
+  this.ventasForm.reset();
   this.selectProduccion(idProducto);
   this.selectDemanda(idZona,idProducto);
   console.log(this.demandaSelected)
@@ -181,7 +182,6 @@ openModalVenta(idZona,idProducto){
   }
 
   selectVenta(venta){
-
     this.openConf=true;
     this.selectedVenta={
       venta:{

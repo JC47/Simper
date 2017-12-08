@@ -56,7 +56,7 @@
                 <h4 class="card-title" style="margin-bottom:15px">{{getNameById(credito.idCredito)}}</h4>
               </div>
 
-              <button type="button" class="btn btn-danger col-4 offset-1 text-center" (click)="eliminarCreditoSolicitado(credito.idCredito)" [disabled]="!validaCreditoA(credito)">Cancelar</button>
+              <button type="button" class="btn btn-danger col-4 offset-1 text-center" (click)="deleteCreditoSelected=credito;confDeleteCredito=true" [disabled]="!validaCreditoA(credito)">Cancelar</button>
 
             </div>
 
@@ -208,3 +208,29 @@
 
       </ng-template>
         </ngl-modal>
+
+        <ngl-modal header="Alerta"  [(open)]="modalAlerta2" size="x-small" directional="false">
+
+          <div body>
+            <h5 class="col-12 text-center">Tu cantidad ingresada no coincide con los limites permitidos de éste crédito</h5>
+          </div>
+
+          <ng-template ngl-modal-footer>
+          <button class="btn btn-primary col-4 offset-4" (click)="modalAlerta2=false;openModalConf=true">Aceptar</button>
+
+        </ng-template>
+          </ngl-modal>
+
+
+          <ngl-modal header="Confirmación"  [(open)]=confDeleteCredito size="x-small" directional="false">
+
+            <div body>
+              <h5 class="col-12 text-center">¿Estas seguro que deseas eliminar el credito {{getNameById(deleteCreditoSelected.idCredito)}}?</h5>
+            </div>
+
+            <ng-template ngl-modal-footer>
+            <button class="btn btn-danger col-5 " (click)="confDeleteCredito=false">Cancelar</button>
+            <button class="btn btn-primary col-5"  (click)="eliminarCreditoSolicitado()">Aceptar</button>
+
+          </ng-template>
+            </ngl-modal>
