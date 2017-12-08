@@ -4,7 +4,7 @@
 
 
 
-<div class="col-10 offset-1" style="margin-bottmo:30px">
+<div class="col-10 offset-1" style="margin-bottom:30px">
   <ngl-section [(open)]="almacenArticuloTerm" title="Almacen de Articulo Terminado">
     <div class="row">
       <div class="offset-3">
@@ -30,9 +30,12 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-4 offset-4">
-        <button type="button" class="btn btn-primary" (click)="PDFalmacenArticuloTerminado()">Exportar a PDF</button>
+    <div class="row align-items-center" style="margin-bottom:20px">
+      <div class="offset-8 col-1">
+        Exportar:
+      </div>
+      <div class="col-2">
+        <button type="button" class="btn btn-danger" (click)="PDFalmacenArticuloTerminado()">PDF</button>
       </div>
     </div>
 

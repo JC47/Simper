@@ -25,7 +25,7 @@
         <td>Almacen de Materiales</td>
         <td class="text-right">{{balance.almacenMateriales|currency:'USD':true:'1.0-0'}}</td>
       </tr>
-    </table>    
+    </table>
   </div>
 
   <div class="col-lg-6 col-sm-12 " style="height:200px;">
@@ -232,13 +232,14 @@
                   <div class="row" style="overflow-y:scroll; height:160px;oveflow-x:visible">
                     <div class="col-12" *ngFor="let producto of productosSinDesarrollar">
                       <div class="card" style="margin-bottom:10px">
-                        <div class="row">
+                        <div class="row align-items-center" >
                           <div class="col-3">
                             <img src="assets/img/box.png" class="img-fluid" style="margin-left:18px;margin-top:10px;margin-bottom:10px">
                           </div>
                           <div class="col-9">
-                            <div class="row">
-                              <div class="text-left col-12" style="font-size:13px; margin-top:15px">Periodos a desarrollar: {{producto.tiempoDes}}p</div>
+                            <div class="row ">
+                              <div class="text-left col-12" style="font-size:16px; margin-top:15px">{{producto.nombreProd}}p</div>
+                              <div class="text-left col-12" style="font-size:13px; margin-top:5px">Periodos a desarrollar: {{producto.tiempoDes}}p</div>
                               <div class="text-left col-12" style="font-size:13px;margin-top:5px">Costo por Periodo:{{producto.costoDes|currency:'USD':true:'1.0-0'}}</div>
 
                             </div>
@@ -292,7 +293,8 @@
                 </div>
                 <div class="col-6">
                   <div class="row">
-                    <div class="text-left col-12" style="font-size:13px; margin-top:30px">Periodos  desarrollados: {{producto.graf[0].value}} de {{producto.max}} <br></div>
+
+                    <div class="text-left col-12" style="font-size:13px; margin-top:5px">Periodos  desarrollados: {{producto.graf[0].value}} de {{producto.max}} <br></div>
                     <div class="text-left col-12" style="font-size:13px;margin-top:5px">Costo del Periodo: <br>{{producto.costoDes|currency:'USD':true:'1.0-0'}}</div>
 
                   </div>
@@ -435,13 +437,14 @@
             <div class="row">
               <div class="col-12" *ngFor="let producto of zona.productosSinDes">
                 <div class="card" style="margin-bottom:10px">
-                  <div class="row">
+                  <div class="row align-items-center">
                     <div class="col-3">
                       <img src="assets/img/zone.png" class="img-fluid" style="margin-left:18px;margin-top:10px;margin-bottom:10px">
                     </div>
                     <div class="col-9">
-                      <div class="row">
-                        <div class="text-left col-12" style="font-size:13px; margin-top:15px">Periodos a desarrollar: {{getTiempo(zona.idZona,producto)}}p</div>
+                      <div class="row ">
+                        <div class="text-left col-12" style="font-size:16px; margin-top:15px">{{getNameById(producto)}}</div>
+                        <div class="text-left col-12" style="font-size:13px; margin-top:5px">Periodos a desarrollar: {{getTiempo(zona.idZona,producto)}}p</div>
                         <div class="text-left col-12" style="font-size:13px;margin-top:5px">Costo por Periodo:{{getCosto(zona.idZona,producto)|currency:'USD':true:'1.0-0'}}</div>
 
                       </div>
