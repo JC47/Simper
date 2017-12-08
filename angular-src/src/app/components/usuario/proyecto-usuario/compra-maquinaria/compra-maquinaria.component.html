@@ -9,12 +9,14 @@
       [ngClass]="{'resaltar':maquina.idMaquinaria==this.maqSelectedAdd.idMaquinaria}">
         <div class="card-block"
         [ngClass]="{'letra-resaltar':maquina.idMaquinaria==this.maqSelectedAdd.idMaquinaria}">
-          <div class="row">
-            <img  src="assets/img/machine.png" style="height:60px;margin-left:10px;">
+          <div class="row align-items-center">
+            <div class="col-4">
+              <img  src="assets/img/machine.png" class="img-fluid" style="margin-left:10px;">
+            </div>
 
-            <div class="col-6">
+            <div class="col-8">
               <h4 class="card-title">{{maquina.nombreMaq}}</h4>
-              <h6 class="card-subtitle">Costo: {{ maquina.costo | currency:'USD':true }} </h6>
+              <h6 class="card-subtitle">Costo Total: {{ maquina.costo | currency:'USD':true }} </h6>
 
 
             </div>
@@ -24,11 +26,13 @@
           </div>
         </div>
         <div class="card-footer">
-          <div class="row">
-            <img src="assets/img/box.png" style="height:35px;margin-left:10px;margin-top:6px; margin-right:10px">
-            <div class="col-6">
+          <div class="row align-items-center">
+            <div class="col-2">
+              <img src="assets/img/box.png" class="img-fluid" style="margin-top:6px; margin-right:10px">
+            </div>
+            <div class="col-10">
               <span class="row sma">Producto: {{getNameById(maquina.Producto_idProducto)}}</span>
-              <span class="row sma">Producción: {{maquina.cantidadProd}}u</span>
+              <span class="row sma">Producción por Periodo: {{maquina.cantidadProd}}u</span>
             </div>
 
           </div>

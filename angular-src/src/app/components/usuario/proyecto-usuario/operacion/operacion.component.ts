@@ -649,6 +649,22 @@ export class OperacionComponent implements OnInit {
     {"cara":"Total a Pagar"},
   ];
 
+ let options={
+ margin: {top: 40,
+          left:40},
+  tableWidth: 200,
+ headerStyles: {fillColor:0},
+ columnStyles: {
+   cara: {halign:'left',columnWidth:65}
+ },
+ addPageContent: function(data) {
+   doc.setFontSize(15);
+   doc.setFontType("bold");
+   doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+   doc.setFontSize(13);
+   doc.text(139.5, 23, 'Presupuesto Global de  Costo de Distribución del Periodo X', null, null, 'center');
+   doc.line(50, 27, 228, 27);
+ }}
 
   for(let producto of this.auxiliares){
     var x = {
@@ -656,41 +672,25 @@ export class OperacionComponent implements OnInit {
       dataKey:this.getNameByIdProducto(producto.Producto_idProducto)
     }
     columns.push(x);
-    rows[0][x.dataKey] = producto.unidadesVendidas.toString();
-    rows[2][x.dataKey] = (producto.costoDistribucion / producto.unidadesVendidas).toString();
-    rows[4][x.dataKey] = producto.costoDistribucion.toString();
-    rows[7][x.dataKey] = (producto.costoDistribucion - producto.costoDistDep).toString();
-    rows[8][x.dataKey] = producto.costoDistDep.toString();
-    rows[12][x.dataKey] = "0";
-    rows[13][x.dataKey] = "0";
-    rows[15][x.dataKey] = producto.costoDistDep.toString();
-    rows[16][x.dataKey] = -producto.IVADist.toString();
-    rows[17][x.dataKey] = (producto.costoDistDep - producto.IVADist).toString();
+    rows[0][x.dataKey] = this.dc.transform( producto.unidadesVendidas,'1.0-0')
+    rows[2][x.dataKey] = this.cp.transform((producto.costoDistribucion / producto.unidadesVendidas) ,'USD',true,'1.0-0')
+    rows[4][x.dataKey] =  this.cp.transform( producto.costoDistribucion ,'USD',true,'1.0-0');
+    rows[7][x.dataKey] =  this.cp.transform( (producto.costoDistribucion - producto.costoDistDep),'USD',true,'1.0-0')
+    rows[8][x.dataKey] = this.cp.transform( producto.costoDistDep ,'USD',true,'1.0-0')
+    rows[12][x.dataKey] = "$0";
+    rows[13][x.dataKey] = "$0";
+    rows[15][x.dataKey] =  this.cp.transform(producto.costoDistDep ,'USD',true,'1.0-0')
+    rows[16][x.dataKey] =  this.cp.transform(-producto.IVADist ,'USD',true,'1.0-0')
+    rows[17][x.dataKey] = this.cp.transform( (producto.costoDistDep - producto.IVADist) ,'USD',true,'1.0-0')
+
+    options.columnStyles[this.getNameByIdProducto(producto.Producto_idProducto)]={halign:'right'};
+
   }
 
-    doc.autoTable(columns, rows, {
-    margin: {top: 40,
-             left:40},
-     tableWidth: 200,
-    headerStyles: {fillColor:0},
-    columnStyles: {
-      cara: {halign:'left',columnWidth:65}
-    },
-    addPageContent: function(data) {
-      doc.setFontSize(15);
-      doc.setFontType("bold");
-      doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
-      doc.setFontSize(13);
-      doc.text(139.5, 23, 'Presupuesto Global de  Costo de Distribución del Periodo X', null, null, 'center');
-      doc.line(50, 27, 228, 27);
-    },
 
 
 
-
-
-
-    });
+    doc.autoTable(columns, rows,options);
 
     doc.save("Presupuesto Global de Costo de Distribucion.pdf");
 
@@ -730,47 +730,55 @@ export class OperacionComponent implements OnInit {
         {"cara":"Total a Pagar"},
     ];
 
+    let options={
+    margin: {top: 40,
+             left:40},
+     tableWidth: 200,
+    headerStyles: {fillColor:0},
+    columnStyles: {
+      cara: {halign:'left',columnWidth:65}
+    },
+    addPageContent: function(data) {
+      doc.setFontSize(15);
+      doc.setFontType("bold");
+      doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+      doc.setFontSize(13);
+      doc.text(139.5, 23, 'Presupuesto Global de  Costo de Administración del Periodo X', null, null, 'center');
+      doc.line(50, 27, 228, 27);
+    },
+    }
+
     for(let producto of this.auxiliares){
       var x = {
         title:this.getNameByIdProducto(producto.Producto_idProducto),
         dataKey:this.getNameByIdProducto(producto.Producto_idProducto)
       }
       columns.push(x);
-      rows[0][x.dataKey] = producto.unidadesVendidas.toString();
-      rows[2][x.dataKey] = (producto.costoAdministrativo/producto.unidadesVendidas ).toString();
-      rows[4][x.dataKey] = producto.costoAdministrativo.toString();
-      rows[7][x.dataKey] = (producto.costoAdministrativo - producto.costoAdminDep).toString();
-      rows[8][x.dataKey] = producto.costoAdminDep.toString();
-      rows[12][x.dataKey] = "0";
-      rows[13][x.dataKey] = "0";
-      rows[15][x.dataKey] = producto.costoAdminDep.toString();
-      rows[16][x.dataKey] = -producto.IVAAdmon.toString();
-      rows[17][x.dataKey] = (producto.costoAdminDep - producto.IVAAdmon).toString();
+      rows[0][x.dataKey] =  this.cp.transform( producto.unidadesVendidas ,'USD',true,'1.0-0')
+      rows[2][x.dataKey] =  this.cp.transform( (producto.costoAdministrativo/producto.unidadesVendidas ) ,'USD',true,'1.0-0')
+      rows[4][x.dataKey] =  this.cp.transform(producto.costoAdministrativo ,'USD',true,'1.0-0')
+      rows[7][x.dataKey] =  this.cp.transform( (producto.costoAdministrativo - producto.costoAdminDep) ,'USD',true,'1.0-0')
+      rows[8][x.dataKey] =  this.cp.transform( producto.costoAdminDep ,'USD',true,'1.0-0')
+      rows[12][x.dataKey] = "$0";
+      rows[13][x.dataKey] = "$0";
+      rows[15][x.dataKey] =  this.cp.transform(producto.costoAdminDep ,'USD',true,'1.0-0')
+      rows[16][x.dataKey] =  this.cp.transform( -producto.IVAAdmon ,'USD',true,'1.0-0')
+      rows[17][x.dataKey] =  this.cp.transform((producto.costoAdminDep - producto.IVAAdmon),'USD',true,'1.0-0')
+
+        options.columnStyles[this.getNameByIdProducto(producto.Producto_idProducto)]={halign:'right'};
+
     }
 
-      doc.autoTable(columns, rows, {
-      margin: {top: 40,
-               left:40},
-       tableWidth: 200,
-      headerStyles: {fillColor:0},
-      columnStyles: {
-        cara: {halign:'left',columnWidth:65}
-      },
-      addPageContent: function(data) {
-        doc.setFontSize(15);
-        doc.setFontType("bold");
-        doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
-        doc.setFontSize(13);
-        doc.text(139.5, 23, 'Presupuesto Global de  Costo de Administración del Periodo X', null, null, 'center');
-        doc.line(50, 27, 228, 27);
-      },
-      });
+
+      doc.autoTable(columns, rows, options);
 
       doc.save("Presupuesto Global de Costo de Administracion.pdf");
 
 
 
       }
+
+
 
       PDFpresupuestoGlobalOtrosGastos(){
         var doc= new jsPDF({
@@ -788,15 +796,39 @@ export class OperacionComponent implements OnInit {
 
       ];
 
+      let options={
+      margin: {top: 40,
+               left:40},
+       tableWidth: 200,
+      headerStyles: {fillColor:0},
+      columnStyles: {
+        cara: {halign:'left',columnWidth:65}
+      },
+      addPageContent: function(data) {
+        doc.setFontSize(15);
+        doc.setFontType("bold");
+        doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+        doc.setFontSize(13);
+        doc.text(139.5, 23, 'Presupuesto Global de Otros Gastos del Periodo X', null, null, 'center');
+        doc.line(50, 27, 228, 27);
+      }}
+
       for(let producto of this.auxiliarC){
         var x = {
           title:this.getNameByIdProducto(producto.Producto_idProducto),
           dataKey:this.getNameByIdProducto(producto.Producto_idProducto)
         }
         columns.push(x);
-        rows[0][x.dataKey] = producto.desarrolloProducto.toString();
-        rows[1][x.dataKey] = producto.desarrolloMercado.toString();
+        rows[0][x.dataKey] =  this.cp.transform( producto.desarrolloProducto ,'USD',true,'1.0-0')
+        rows[1][x.dataKey] =  this.cp.transform( producto.desarrolloMercado ,'USD',true,'1.0-0')
+
+        options.columnStyles[this.getNameByIdProducto(producto.Producto_idProducto)]={halign:'right'};
+
       }
+
+
+
+
 
       var y = {
         title:"Total",
@@ -804,35 +836,13 @@ export class OperacionComponent implements OnInit {
       }
 
       columns.push(y);
-      rows[0]["t"] = this.getTotalProducto().toString();
-      rows[1]["t"] = this.getTotalMercado().toString();
+      rows[0]["t"] =   this.cp.transform(this.getTotalProducto() ,'USD',true,'1.0-0')
+      rows[1]["t"] =  this.cp.transform( this.getTotalMercado() ,'USD',true,'1.0-0')
 
 
 
 
-        doc.autoTable(columns, rows, {
-        margin: {top: 40,
-                 left:40},
-         tableWidth: 200,
-        headerStyles: {fillColor:0},
-        columnStyles: {
-          cara: {halign:'left',columnWidth:65}
-        },
-        addPageContent: function(data) {
-          doc.setFontSize(15);
-          doc.setFontType("bold");
-          doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
-          doc.setFontSize(13);
-          doc.text(139.5, 23, 'Presupuesto Global de Otros Gastos del Periodo X', null, null, 'center');
-          doc.line(50, 27, 228, 27);
-        },
-
-
-
-
-
-
-        });
+        doc.autoTable(columns, rows,options );
 
         doc.save("Presupuesto Global Otros Gastos.pdf");
 
@@ -867,6 +877,23 @@ export class OperacionComponent implements OnInit {
           {"cara":"Costo de Ventas"}
         ];
 
+        let options= {
+        margin: {top: 40,
+                 left:40},
+         tableWidth: 200,
+        headerStyles: {fillColor:0},
+        columnStyles: {
+          cara: {halign:'left',columnWidth:65}
+        },
+        addPageContent: function(data) {
+          doc.setFontSize(15);
+          doc.setFontType("bold");
+          doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+          doc.setFontSize(13);
+          doc.text(139.5, 23, 'Costo de Producción y Ventas', null, null, 'center');
+          doc.line(50, 27, 228, 27);
+        }}
+
         for(let producto of this.auxiliares){
           var x = {
             title:this.getNameByIdProducto(producto.Producto_idProducto),
@@ -876,37 +903,20 @@ export class OperacionComponent implements OnInit {
           rows[0][x.dataKey] = "0";
           rows[1][x.dataKey] = "0";
           rows[2][x.dataKey] = "0";
-          rows[3][x.dataKey] = producto.materiaCosumida.toString();
-          rows[5][x.dataKey] = (producto.costoTransformacionVentas + producto.costoTransformacionMaq).toString();
-          rows[7][x.dataKey] = (producto.materiaCosumida + producto.costoTransformacionVentas + producto.costoTransformacionMaq).toString();
-          rows[9][x.dataKey] = producto.inventarioInicial.toString();
-          rows[10][x.dataKey] = producto.inventarioFinal.toString();
-          rows[12][x.dataKey] = producto.costoVentas.toString();
+          rows[3][x.dataKey] =  this.cp.transform(producto.materiaCosumida,'USD',true,'1.0-0')
+          rows[5][x.dataKey] =  this.cp.transform( (producto.costoTransformacionVentas + producto.costoTransformacionMaq) ,'USD',true,'1.0-0')
+          rows[7][x.dataKey] =  this.cp.transform( (producto.materiaCosumida + producto.costoTransformacionVentas + producto.costoTransformacionMaq) ,'USD',true,'1.0-0')
+          rows[9][x.dataKey] = this.cp.transform( producto.inventarioInicia ,'USD',true,'1.0-0')
+          rows[10][x.dataKey] =  this.cp.transform( producto.inventarioFinal ,'USD',true,'1.0-0')
+          rows[12][x.dataKey] =  this.cp.transform( producto.costoVentas ,'USD',true,'1.0-0')
+
+          options.columnStyles[this.getNameByIdProducto(producto.Producto_idProducto)]={halign:'right'};
+
         }
 
-          doc.autoTable(columns, rows, {
-          margin: {top: 40,
-                   left:40},
-           tableWidth: 200,
-          headerStyles: {fillColor:0},
-          columnStyles: {
-            cara: {halign:'left',columnWidth:65}
-          },
-          addPageContent: function(data) {
-            doc.setFontSize(15);
-            doc.setFontType("bold");
-            doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
-            doc.setFontSize(13);
-            doc.text(139.5, 23, 'Costo de Producción y Ventas', null, null, 'center');
-            doc.line(50, 27, 228, 27);
-          },
+        //this.cp.transform( ,'USD',true,'1.0-0')
 
-
-
-
-
-
-          });
+          doc.autoTable(columns, rows, options);
 
           doc.save("Costo de Producción y Ventas.pdf");
 

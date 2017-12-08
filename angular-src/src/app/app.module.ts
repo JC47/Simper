@@ -38,6 +38,7 @@ import {UsuarioMaquinariaService} from './services/usuario-maquinaria.service';
 import {UsuarioCreditoService} from './services/usuario-credito.service';
 import {UsuarioProductoService} from './services/usuario-producto.service';
 import {UsuarioZonaService} from './services/usuario-zona.service';
+
 import {DesarrolloProductoService} from './services/desarrollo-producto.service';
 import {MaquinariaService} from './services/maquinaria.service';
 import {ProductoService} from './services/producto.service';
@@ -102,6 +103,7 @@ import { FlujoComponent } from './components/usuario/proyecto-usuario/flujo/fluj
     MaquinariasComponent,
     ProyectosComponent,
     CreditosComponent,
+    PruebaComponent ,
     DemandasComponent,
     UsuariosComponent,
     DesarrolloMercadoComponent,
@@ -122,7 +124,6 @@ import { FlujoComponent } from './components/usuario/proyecto-usuario/flujo/fluj
     FinanciamientoComponent,
     VariablesComponent,
     DemandaPotencialComponent,
-    PruebaComponent,
     FlujoComponent,
   ],
   imports: [

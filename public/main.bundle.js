@@ -264,6 +264,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_51__components_maquinarias_maquinarias_component__["a" /* MaquinariasComponent */],
             __WEBPACK_IMPORTED_MODULE_56__components_usuario_proyectos_proyectos_component__["a" /* ProyectosComponent */],
             __WEBPACK_IMPORTED_MODULE_52__components_creditos_creditos_component__["a" /* CreditosComponent */],
+            __WEBPACK_IMPORTED_MODULE_69__components_usuario_proyecto_usuario_prueba_prueba_component__["a" /* PruebaComponent */],
             __WEBPACK_IMPORTED_MODULE_53__components_demandas_demandas_component__["a" /* DemandasComponent */],
             __WEBPACK_IMPORTED_MODULE_54__components_usuarios_usuarios_component__["a" /* UsuariosComponent */],
             __WEBPACK_IMPORTED_MODULE_43__components_usuario_proyecto_usuario_desarrollo_mercado_desarrollo_mercado_component__["a" /* DesarrolloMercadoComponent */],
@@ -284,7 +285,6 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_58__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__["a" /* FinanciamientoComponent */],
             __WEBPACK_IMPORTED_MODULE_73__components_variables_variables_component__["a" /* VariablesComponent */],
             __WEBPACK_IMPORTED_MODULE_74__components_usuario_proyecto_usuario_demanda_potencial_demanda_potencial_component__["a" /* DemandaPotencialComponent */],
-            __WEBPACK_IMPORTED_MODULE_69__components_usuario_proyecto_usuario_prueba_prueba_component__["a" /* PruebaComponent */],
             __WEBPACK_IMPORTED_MODULE_75__components_usuario_proyecto_usuario_flujo_flujo_component__["a" /* FlujoComponent */],
         ],
         imports: [
@@ -3067,7 +3067,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/compra-maquinaria/compra-maquinaria.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n\r\n<div class=\"row\">\r\n  <div class=\"offset-1 col-4\" >\r\n    <h2 class=\"col-12 text-center\">Maquinas para Comprar</h2>\r\n    <hr>\r\n    <div class=\"col-12\"  style=\"overflow-y:scroll;height:550px\">\r\n      <div class=\"card\" *ngFor=\"let maquina of maquinas\" (click)=\"selectMaquinariaAdd(maquina)\"\r\n      [ngClass]=\"{'resaltar':maquina.idMaquinaria==this.maqSelectedAdd.idMaquinaria}\">\r\n        <div class=\"card-block\"\r\n        [ngClass]=\"{'letra-resaltar':maquina.idMaquinaria==this.maqSelectedAdd.idMaquinaria}\">\r\n          <div class=\"row\">\r\n            <img  src=\"assets/img/machine.png\" style=\"height:60px;margin-left:10px;\">\r\n\r\n            <div class=\"col-6\">\r\n              <h4 class=\"card-title\">{{maquina.nombreMaq}}</h4>\r\n              <h6 class=\"card-subtitle\">Costo: {{ maquina.costo | currency:'USD':true }} </h6>\r\n\r\n\r\n            </div>\r\n            <!-- <div class=\" col-3 \">\r\n              <button type=\"button\" class=\"btn btn-success\" (click)= \"agregarMaquinaria(maquina)\"><i class=\"fa fa-plus\" aria-hidden=\"true\"></i></button>\r\n            </div> -->\r\n          </div>\r\n        </div>\r\n        <div class=\"card-footer\">\r\n          <div class=\"row\">\r\n            <img src=\"assets/img/box.png\" style=\"height:35px;margin-left:10px;margin-top:6px; margin-right:10px\">\r\n            <div class=\"col-6\">\r\n              <span class=\"row sma\">Producto: {{getNameById(maquina.Producto_idProducto)}}</span>\r\n              <span class=\"row sma\">Producción: {{maquina.cantidadProd}}u</span>\r\n            </div>\r\n\r\n          </div>\r\n\r\n\r\n        </div>\r\n\r\n      </div>\r\n\r\n    </div>\r\n\r\n  </div>\r\n\r\n  <div class=\"col-2\">\r\n    <button type=\"button\" class=\"offset-1 col-10 btn btn-primary \"\r\n    (click) =\"openConf=true\" style=\"margin-top:250px\"><i class=\"material-icons\">keyboard_arrow_right</i></button>\r\n    <button type=\"button\" class=\"offset-1 col-10 btn btn-danger \" style=\"margin-top:50px\" (click)=\"regresar()\">\r\n      <i class=\"material-icons\">keyboard_arrow_left</i>\r\n    </button>\r\n  </div>\r\n\r\n  <div class=\"col-4\">\r\n    <h2 class=\"col-12 text-center\">Maquinas Compradas</h2>\r\n    <hr>\r\n\r\n    <div class=\"col-12\" style=\"overflow-y:scroll;height:550px\">\r\n      <div class=\"card\" *ngFor=\"let maquina of maquinasCompradas\" (click)=\"selectMaquinariaLess(maquina)\"\r\n      [ngClass]=\"{'resaltarLess':maquina.idMaquinaria==this.maqSelectedLess.idMaquinaria}\">\r\n        <div class=\"card-block\"\r\n        [ngClass]=\"{'letra-resaltar':maquina.idMaquinaria==this.maqSelectedLess.idMaquinaria}\">\r\n          <div class=\"row\">\r\n            <img  src=\"assets/img/machine.png\" style=\"height:60px;margin-left:10px;\">\r\n\r\n            <div class=\"col-6\">\r\n              <h4 class=\"card-title\">{{maquina.nombreMaq}}</h4>\r\n              <h6 class=\"card-subtitle\">Cantidad:<ngl-badge type=\"success\" class=\"slds-l-horizontal--large\">{{maquina.Cantidad}}</ngl-badge></h6>\r\n\r\n\r\n\r\n            </div>\r\n\r\n            <!-- <div class=\" col-3 \">\r\n              <button type=\"button\" class=\"btn btn-success\" (click)= \"agregarMaquinaria(maquina)\"><i class=\"fa fa-plus\" aria-hidden=\"true\"></i></button>\r\n            </div> -->\r\n          </div>\r\n        </div>\r\n        <div class=\"card-footer\">\r\n          <div class=\"row\">\r\n            <img src=\"assets/img/box.png\" style=\"height:35px;margin-left:10px;margin-top:6px; margin-right:10px\">\r\n            <div class=\"col-6\">\r\n              <span class=\"row sma\">Producto: {{getNameById(maquina.Producto_idProducto)}}</span>\r\n              <span class=\"row sma\">Producción: {{maquina.cantidadProd*maquina.Cantidad}}u</span>\r\n            </div>\r\n\r\n          </div>\r\n\r\n\r\n        </div>\r\n\r\n      </div>\r\n    </div>\r\n\r\n\r\n        <!-- <div class=\"card\" *ngFor=\"let maquina of maquinasCompradas\" >\r\n          <div class=\"card-block\">\r\n            <div class=\"row\">\r\n              <img  src=\"assets/img/machine.png\" style=\"height:40px;margin-left:10px;\">\r\n\r\n              <div class=\"col-6\">\r\n                <h4 class=\"card-title\">{{maquina.nombreMaq}}</h4>\r\n                {{maquina.Cantidad}}\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n        </div> -->\r\n\r\n\r\n\r\n\r\n\r\n\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<ngl-modal  [(open)]=\"openLoad\" size=\"small\" directional=\"false\">\r\n  <div body>\r\n        <h2 class=\"col-12 text-center\">Comprando Maquinaria</h2>\r\n    <h6 class=\"col-12 text-center\">Realizando Operación</h6>\r\n    <div style=\"position:relative; height:6.25rem; z-index:0;\">\r\n      <ngl-spinner size=\"large\" type=\"brand\"></ngl-spinner>\r\n    </div>\r\n\r\n  </div>\r\n  </ngl-modal>\r\n\r\n\r\n  <ngl-modal header=\"Confirmación\"  [(open)]=\"openConf\" size=\"x-small\" directional=\"false\">\r\n\r\n    <div body>\r\n      <div class=\"col-12 text-center container\">\r\n        <h5 style=\"margin-bottom:30px\">¿Estas seguro que deseas comprar la maquina \"{{maqSelectedAdd.nombreMaq}}\"?</h5>\r\n        <div class=\"row\">\r\n          <div class=\"col-3 offset-2\">\r\n            <img  src=\"assets/img/machine.png\" class=\"img-fluid\">\r\n          </div>\r\n          <div class=\"col-5 \">\r\n            <p>\r\n            <h5 class=\"text-left\"><b>Costo: </b>{{ maqSelectedAdd.costo | currency:'USD':true }}</h5>\r\n            <p>\r\n            <h5 class=\"text-left\"><b>Producto: </b>{{getNameById(maqSelectedAdd.Producto_idProducto)}}</h5>\r\n            <p>\r\n            <h5 class=\"text-left\"><b>Producción: </b>{{maqSelectedAdd.cantidadProd}}u</h5>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n\r\n        </div>\r\n        <br>\r\n      </div>\r\n    </div>\r\n\r\n    <ng-template ngl-modal-footer>\r\n    <button class=\"btn btn-danger\" (click)=\"openConf=false\">Cancelar</button>\r\n    <button class=\"btn btn-primary\" (click)=\"comprar()\">Comprar</button>\r\n  </ng-template>\r\n    </ngl-modal>\r\n"
+module.exports = "\r\n\r\n<div class=\"row\">\r\n  <div class=\"offset-1 col-4\" >\r\n    <h2 class=\"col-12 text-center\">Maquinas para Comprar</h2>\r\n    <hr>\r\n    <div class=\"col-12\"  style=\"overflow-y:scroll;height:550px\">\r\n      <div class=\"card\" *ngFor=\"let maquina of maquinas\" (click)=\"selectMaquinariaAdd(maquina)\"\r\n      [ngClass]=\"{'resaltar':maquina.idMaquinaria==this.maqSelectedAdd.idMaquinaria}\">\r\n        <div class=\"card-block\"\r\n        [ngClass]=\"{'letra-resaltar':maquina.idMaquinaria==this.maqSelectedAdd.idMaquinaria}\">\r\n          <div class=\"row align-items-center\">\r\n            <div class=\"col-4\">\r\n              <img  src=\"assets/img/machine.png\" class=\"img-fluid\" style=\"margin-left:10px;\">\r\n            </div>\r\n\r\n            <div class=\"col-8\">\r\n              <h4 class=\"card-title\">{{maquina.nombreMaq}}</h4>\r\n              <h6 class=\"card-subtitle\">Costo Total: {{ maquina.costo | currency:'USD':true }} </h6>\r\n\r\n\r\n            </div>\r\n            <!-- <div class=\" col-3 \">\r\n              <button type=\"button\" class=\"btn btn-success\" (click)= \"agregarMaquinaria(maquina)\"><i class=\"fa fa-plus\" aria-hidden=\"true\"></i></button>\r\n            </div> -->\r\n          </div>\r\n        </div>\r\n        <div class=\"card-footer\">\r\n          <div class=\"row align-items-center\">\r\n            <div class=\"col-2\">\r\n              <img src=\"assets/img/box.png\" class=\"img-fluid\" style=\"margin-top:6px; margin-right:10px\">\r\n            </div>\r\n            <div class=\"col-10\">\r\n              <span class=\"row sma\">Producto: {{getNameById(maquina.Producto_idProducto)}}</span>\r\n              <span class=\"row sma\">Producción por Periodo: {{maquina.cantidadProd}}u</span>\r\n            </div>\r\n\r\n          </div>\r\n\r\n\r\n        </div>\r\n\r\n      </div>\r\n\r\n    </div>\r\n\r\n  </div>\r\n\r\n  <div class=\"col-2\">\r\n    <button type=\"button\" class=\"offset-1 col-10 btn btn-primary \"\r\n    (click) =\"openConf=true\" style=\"margin-top:250px\"><i class=\"material-icons\">keyboard_arrow_right</i></button>\r\n    <button type=\"button\" class=\"offset-1 col-10 btn btn-danger \" style=\"margin-top:50px\" (click)=\"regresar()\">\r\n      <i class=\"material-icons\">keyboard_arrow_left</i>\r\n    </button>\r\n  </div>\r\n\r\n  <div class=\"col-4\">\r\n    <h2 class=\"col-12 text-center\">Maquinas Compradas</h2>\r\n    <hr>\r\n\r\n    <div class=\"col-12\" style=\"overflow-y:scroll;height:550px\">\r\n      <div class=\"card\" *ngFor=\"let maquina of maquinasCompradas\" (click)=\"selectMaquinariaLess(maquina)\"\r\n      [ngClass]=\"{'resaltarLess':maquina.idMaquinaria==this.maqSelectedLess.idMaquinaria}\">\r\n        <div class=\"card-block\"\r\n        [ngClass]=\"{'letra-resaltar':maquina.idMaquinaria==this.maqSelectedLess.idMaquinaria}\">\r\n          <div class=\"row\">\r\n            <img  src=\"assets/img/machine.png\" style=\"height:60px;margin-left:10px;\">\r\n\r\n            <div class=\"col-6\">\r\n              <h4 class=\"card-title\">{{maquina.nombreMaq}}</h4>\r\n              <h6 class=\"card-subtitle\">Cantidad:<ngl-badge type=\"success\" class=\"slds-l-horizontal--large\">{{maquina.Cantidad}}</ngl-badge></h6>\r\n\r\n\r\n\r\n            </div>\r\n\r\n            <!-- <div class=\" col-3 \">\r\n              <button type=\"button\" class=\"btn btn-success\" (click)= \"agregarMaquinaria(maquina)\"><i class=\"fa fa-plus\" aria-hidden=\"true\"></i></button>\r\n            </div> -->\r\n          </div>\r\n        </div>\r\n        <div class=\"card-footer\">\r\n          <div class=\"row\">\r\n            <img src=\"assets/img/box.png\" style=\"height:35px;margin-left:10px;margin-top:6px; margin-right:10px\">\r\n            <div class=\"col-6\">\r\n              <span class=\"row sma\">Producto: {{getNameById(maquina.Producto_idProducto)}}</span>\r\n              <span class=\"row sma\">Producción: {{maquina.cantidadProd*maquina.Cantidad}}u</span>\r\n            </div>\r\n\r\n          </div>\r\n\r\n\r\n        </div>\r\n\r\n      </div>\r\n    </div>\r\n\r\n\r\n        <!-- <div class=\"card\" *ngFor=\"let maquina of maquinasCompradas\" >\r\n          <div class=\"card-block\">\r\n            <div class=\"row\">\r\n              <img  src=\"assets/img/machine.png\" style=\"height:40px;margin-left:10px;\">\r\n\r\n              <div class=\"col-6\">\r\n                <h4 class=\"card-title\">{{maquina.nombreMaq}}</h4>\r\n                {{maquina.Cantidad}}\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n        </div> -->\r\n\r\n\r\n\r\n\r\n\r\n\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<ngl-modal  [(open)]=\"openLoad\" size=\"small\" directional=\"false\">\r\n  <div body>\r\n        <h2 class=\"col-12 text-center\">Comprando Maquinaria</h2>\r\n    <h6 class=\"col-12 text-center\">Realizando Operación</h6>\r\n    <div style=\"position:relative; height:6.25rem; z-index:0;\">\r\n      <ngl-spinner size=\"large\" type=\"brand\"></ngl-spinner>\r\n    </div>\r\n\r\n  </div>\r\n  </ngl-modal>\r\n\r\n\r\n  <ngl-modal header=\"Confirmación\"  [(open)]=\"openConf\" size=\"x-small\" directional=\"false\">\r\n\r\n    <div body>\r\n      <div class=\"col-12 text-center container\">\r\n        <h5 style=\"margin-bottom:30px\">¿Estas seguro que deseas comprar la maquina \"{{maqSelectedAdd.nombreMaq}}\"?</h5>\r\n        <div class=\"row\">\r\n          <div class=\"col-3 offset-2\">\r\n            <img  src=\"assets/img/machine.png\" class=\"img-fluid\">\r\n          </div>\r\n          <div class=\"col-5 \">\r\n            <p>\r\n            <h5 class=\"text-left\"><b>Costo: </b>{{ maqSelectedAdd.costo | currency:'USD':true }}</h5>\r\n            <p>\r\n            <h5 class=\"text-left\"><b>Producto: </b>{{getNameById(maqSelectedAdd.Producto_idProducto)}}</h5>\r\n            <p>\r\n            <h5 class=\"text-left\"><b>Producción: </b>{{maqSelectedAdd.cantidadProd}}u</h5>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n\r\n        </div>\r\n        <br>\r\n      </div>\r\n    </div>\r\n\r\n    <ng-template ngl-modal-footer>\r\n    <button class=\"btn btn-danger\" (click)=\"openConf=false\">Cancelar</button>\r\n    <button class=\"btn btn-primary\" (click)=\"comprar()\">Comprar</button>\r\n  </ng-template>\r\n    </ngl-modal>\r\n"
 
 /***/ }),
 
@@ -4971,25 +4971,7 @@ var OperacionComponent = (function () {
             { "cara": "I.V.A." },
             { "cara": "Total a Pagar" },
         ];
-        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
-            var producto = _a[_i];
-            var x = {
-                title: this.getNameByIdProducto(producto.Producto_idProducto),
-                dataKey: this.getNameByIdProducto(producto.Producto_idProducto)
-            };
-            columns.push(x);
-            rows[0][x.dataKey] = producto.unidadesVendidas.toString();
-            rows[2][x.dataKey] = (producto.costoDistribucion / producto.unidadesVendidas).toString();
-            rows[4][x.dataKey] = producto.costoDistribucion.toString();
-            rows[7][x.dataKey] = (producto.costoDistribucion - producto.costoDistDep).toString();
-            rows[8][x.dataKey] = producto.costoDistDep.toString();
-            rows[12][x.dataKey] = "0";
-            rows[13][x.dataKey] = "0";
-            rows[15][x.dataKey] = producto.costoDistDep.toString();
-            rows[16][x.dataKey] = -producto.IVADist.toString();
-            rows[17][x.dataKey] = (producto.costoDistDep - producto.IVADist).toString();
-        }
-        doc.autoTable(columns, rows, {
+        var options = {
             margin: { top: 40,
                 left: 40 },
             tableWidth: 200,
@@ -5004,8 +4986,28 @@ var OperacionComponent = (function () {
                 doc.setFontSize(13);
                 doc.text(139.5, 23, 'Presupuesto Global de  Costo de Distribución del Periodo X', null, null, 'center');
                 doc.line(50, 27, 228, 27);
-            },
-        });
+            }
+        };
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var producto = _a[_i];
+            var x = {
+                title: this.getNameByIdProducto(producto.Producto_idProducto),
+                dataKey: this.getNameByIdProducto(producto.Producto_idProducto)
+            };
+            columns.push(x);
+            rows[0][x.dataKey] = this.dc.transform(producto.unidadesVendidas, '1.0-0');
+            rows[2][x.dataKey] = this.cp.transform((producto.costoDistribucion / producto.unidadesVendidas), 'USD', true, '1.0-0');
+            rows[4][x.dataKey] = this.cp.transform(producto.costoDistribucion, 'USD', true, '1.0-0');
+            rows[7][x.dataKey] = this.cp.transform((producto.costoDistribucion - producto.costoDistDep), 'USD', true, '1.0-0');
+            rows[8][x.dataKey] = this.cp.transform(producto.costoDistDep, 'USD', true, '1.0-0');
+            rows[12][x.dataKey] = "$0";
+            rows[13][x.dataKey] = "$0";
+            rows[15][x.dataKey] = this.cp.transform(producto.costoDistDep, 'USD', true, '1.0-0');
+            rows[16][x.dataKey] = this.cp.transform(-producto.IVADist, 'USD', true, '1.0-0');
+            rows[17][x.dataKey] = this.cp.transform((producto.costoDistDep - producto.IVADist), 'USD', true, '1.0-0');
+            options.columnStyles[this.getNameByIdProducto(producto.Producto_idProducto)] = { halign: 'right' };
+        }
+        doc.autoTable(columns, rows, options);
         doc.save("Presupuesto Global de Costo de Distribucion.pdf");
     };
     OperacionComponent.prototype.PDFpresupuestoGlobalCostoAdmin = function () {
@@ -5037,25 +5039,7 @@ var OperacionComponent = (function () {
             { "cara": "I.V.A." },
             { "cara": "Total a Pagar" },
         ];
-        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
-            var producto = _a[_i];
-            var x = {
-                title: this.getNameByIdProducto(producto.Producto_idProducto),
-                dataKey: this.getNameByIdProducto(producto.Producto_idProducto)
-            };
-            columns.push(x);
-            rows[0][x.dataKey] = producto.unidadesVendidas.toString();
-            rows[2][x.dataKey] = (producto.costoAdministrativo / producto.unidadesVendidas).toString();
-            rows[4][x.dataKey] = producto.costoAdministrativo.toString();
-            rows[7][x.dataKey] = (producto.costoAdministrativo - producto.costoAdminDep).toString();
-            rows[8][x.dataKey] = producto.costoAdminDep.toString();
-            rows[12][x.dataKey] = "0";
-            rows[13][x.dataKey] = "0";
-            rows[15][x.dataKey] = producto.costoAdminDep.toString();
-            rows[16][x.dataKey] = -producto.IVAAdmon.toString();
-            rows[17][x.dataKey] = (producto.costoAdminDep - producto.IVAAdmon).toString();
-        }
-        doc.autoTable(columns, rows, {
+        var options = {
             margin: { top: 40,
                 left: 40 },
             tableWidth: 200,
@@ -5071,7 +5055,27 @@ var OperacionComponent = (function () {
                 doc.text(139.5, 23, 'Presupuesto Global de  Costo de Administración del Periodo X', null, null, 'center');
                 doc.line(50, 27, 228, 27);
             },
-        });
+        };
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var producto = _a[_i];
+            var x = {
+                title: this.getNameByIdProducto(producto.Producto_idProducto),
+                dataKey: this.getNameByIdProducto(producto.Producto_idProducto)
+            };
+            columns.push(x);
+            rows[0][x.dataKey] = this.cp.transform(producto.unidadesVendidas, 'USD', true, '1.0-0');
+            rows[2][x.dataKey] = this.cp.transform((producto.costoAdministrativo / producto.unidadesVendidas), 'USD', true, '1.0-0');
+            rows[4][x.dataKey] = this.cp.transform(producto.costoAdministrativo, 'USD', true, '1.0-0');
+            rows[7][x.dataKey] = this.cp.transform((producto.costoAdministrativo - producto.costoAdminDep), 'USD', true, '1.0-0');
+            rows[8][x.dataKey] = this.cp.transform(producto.costoAdminDep, 'USD', true, '1.0-0');
+            rows[12][x.dataKey] = "$0";
+            rows[13][x.dataKey] = "$0";
+            rows[15][x.dataKey] = this.cp.transform(producto.costoAdminDep, 'USD', true, '1.0-0');
+            rows[16][x.dataKey] = this.cp.transform(-producto.IVAAdmon, 'USD', true, '1.0-0');
+            rows[17][x.dataKey] = this.cp.transform((producto.costoAdminDep - producto.IVAAdmon), 'USD', true, '1.0-0');
+            options.columnStyles[this.getNameByIdProducto(producto.Producto_idProducto)] = { halign: 'right' };
+        }
+        doc.autoTable(columns, rows, options);
         doc.save("Presupuesto Global de Costo de Administracion.pdf");
     };
     OperacionComponent.prototype.PDFpresupuestoGlobalOtrosGastos = function () {
@@ -5087,24 +5091,7 @@ var OperacionComponent = (function () {
             { "cara": "Desarrollo de Producto" },
             { "cara": "Desarrollo de Mercado" }
         ];
-        for (var _i = 0, _a = this.auxiliarC; _i < _a.length; _i++) {
-            var producto = _a[_i];
-            var x = {
-                title: this.getNameByIdProducto(producto.Producto_idProducto),
-                dataKey: this.getNameByIdProducto(producto.Producto_idProducto)
-            };
-            columns.push(x);
-            rows[0][x.dataKey] = producto.desarrolloProducto.toString();
-            rows[1][x.dataKey] = producto.desarrolloMercado.toString();
-        }
-        var y = {
-            title: "Total",
-            dataKey: "t"
-        };
-        columns.push(y);
-        rows[0]["t"] = this.getTotalProducto().toString();
-        rows[1]["t"] = this.getTotalMercado().toString();
-        doc.autoTable(columns, rows, {
+        var options = {
             margin: { top: 40,
                 left: 40 },
             tableWidth: 200,
@@ -5119,8 +5106,27 @@ var OperacionComponent = (function () {
                 doc.setFontSize(13);
                 doc.text(139.5, 23, 'Presupuesto Global de Otros Gastos del Periodo X', null, null, 'center');
                 doc.line(50, 27, 228, 27);
-            },
-        });
+            }
+        };
+        for (var _i = 0, _a = this.auxiliarC; _i < _a.length; _i++) {
+            var producto = _a[_i];
+            var x = {
+                title: this.getNameByIdProducto(producto.Producto_idProducto),
+                dataKey: this.getNameByIdProducto(producto.Producto_idProducto)
+            };
+            columns.push(x);
+            rows[0][x.dataKey] = this.cp.transform(producto.desarrolloProducto, 'USD', true, '1.0-0');
+            rows[1][x.dataKey] = this.cp.transform(producto.desarrolloMercado, 'USD', true, '1.0-0');
+            options.columnStyles[this.getNameByIdProducto(producto.Producto_idProducto)] = { halign: 'right' };
+        }
+        var y = {
+            title: "Total",
+            dataKey: "t"
+        };
+        columns.push(y);
+        rows[0]["t"] = this.cp.transform(this.getTotalProducto(), 'USD', true, '1.0-0');
+        rows[1]["t"] = this.cp.transform(this.getTotalMercado(), 'USD', true, '1.0-0');
+        doc.autoTable(columns, rows, options);
         doc.save("Presupuesto Global Otros Gastos.pdf");
     };
     OperacionComponent.prototype.PDFcostoProduccionVentas = function () {
@@ -5147,24 +5153,7 @@ var OperacionComponent = (function () {
             { "cara": "" },
             { "cara": "Costo de Ventas" }
         ];
-        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
-            var producto = _a[_i];
-            var x = {
-                title: this.getNameByIdProducto(producto.Producto_idProducto),
-                dataKey: this.getNameByIdProducto(producto.Producto_idProducto)
-            };
-            columns.push(x);
-            rows[0][x.dataKey] = "0";
-            rows[1][x.dataKey] = "0";
-            rows[2][x.dataKey] = "0";
-            rows[3][x.dataKey] = producto.materiaCosumida.toString();
-            rows[5][x.dataKey] = (producto.costoTransformacionVentas + producto.costoTransformacionMaq).toString();
-            rows[7][x.dataKey] = (producto.materiaCosumida + producto.costoTransformacionVentas + producto.costoTransformacionMaq).toString();
-            rows[9][x.dataKey] = producto.inventarioInicial.toString();
-            rows[10][x.dataKey] = producto.inventarioFinal.toString();
-            rows[12][x.dataKey] = producto.costoVentas.toString();
-        }
-        doc.autoTable(columns, rows, {
+        var options = {
             margin: { top: 40,
                 left: 40 },
             tableWidth: 200,
@@ -5179,8 +5168,28 @@ var OperacionComponent = (function () {
                 doc.setFontSize(13);
                 doc.text(139.5, 23, 'Costo de Producción y Ventas', null, null, 'center');
                 doc.line(50, 27, 228, 27);
-            },
-        });
+            }
+        };
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var producto = _a[_i];
+            var x = {
+                title: this.getNameByIdProducto(producto.Producto_idProducto),
+                dataKey: this.getNameByIdProducto(producto.Producto_idProducto)
+            };
+            columns.push(x);
+            rows[0][x.dataKey] = "0";
+            rows[1][x.dataKey] = "0";
+            rows[2][x.dataKey] = "0";
+            rows[3][x.dataKey] = this.cp.transform(producto.materiaCosumida, 'USD', true, '1.0-0');
+            rows[5][x.dataKey] = this.cp.transform((producto.costoTransformacionVentas + producto.costoTransformacionMaq), 'USD', true, '1.0-0');
+            rows[7][x.dataKey] = this.cp.transform((producto.materiaCosumida + producto.costoTransformacionVentas + producto.costoTransformacionMaq), 'USD', true, '1.0-0');
+            rows[9][x.dataKey] = this.cp.transform(producto.inventarioInicia, 'USD', true, '1.0-0');
+            rows[10][x.dataKey] = this.cp.transform(producto.inventarioFinal, 'USD', true, '1.0-0');
+            rows[12][x.dataKey] = this.cp.transform(producto.costoVentas, 'USD', true, '1.0-0');
+            options.columnStyles[this.getNameByIdProducto(producto.Producto_idProducto)] = { halign: 'right' };
+        }
+        //this.cp.transform( ,'USD',true,'1.0-0')
+        doc.autoTable(columns, rows, options);
         doc.save("Costo de Producción y Ventas.pdf");
     };
     return OperacionComponent;
@@ -5410,7 +5419,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"nav-side-menu\">\r\n    <div class=\"brand\">Proyecto\r\n      <button type=\"button\" class=\"btn btn-danger\" style=\"position:fixed; margin-left:4.1%;height:50px\" (click)=\"verProyectos()\"><i class=\"fa fa-sign-out\" aria-hidden=\"true\"></i></button>\r\n    </div>\r\n    <i class=\"fa fa-bars fa-2x toggle-btn\" data-toggle=\"collapse\" data-target=\"#menu-content\"></i>\r\n\r\n        <div class=\"menu-list\">\r\n            <ul id=\"menu-content\" class=\"menu-content collapse out\">\r\n\r\n                <li [routerLink]=\"['home']\">\r\n                  <a >\r\n                  <i class=\"fa fa-tachometer fa-lg\"></i> Valores iniciales\r\n                  </a>\r\n                </li>\r\n\r\n                <li [routerLink]=\"['demandaPotencial']\">\r\n                  <a >\r\n                  <i class=\"fa fa-area-chart fa-lg\"></i> Demanda potencial\r\n                  </a>\r\n                </li>\r\n\r\n                <li [routerLink]=\"['produccion']\" routerLinkActive=\"active\">\r\n                   <a>\r\n                    <i class=\"fa fa-pie-chart fa-lg\"></i>  Decisiones de Producción\r\n                   </a>\r\n                </li>\r\n\r\n                <li data-toggle=\"collapse\" data-target=\"#service\" class=\"collapsed\">\r\n                  <a href=\"#\"><i class=\"fa fa-line-chart fa-lg\"></i> Decisiones de Crecimiento<span class=\"arrow\"></span></a>\r\n                </li>\r\n                <ul class=\"sub-menu collapse\" id=\"service\">\r\n\r\n                  <li [routerLink]=\"['compraMaquinaria']\" routerLinkActive=\"active\">\r\n                     <a >\r\n                     <i class=\"fa fa-cogs fa-lg\"></i> Compra de Maquinaria\r\n                     </a>\r\n                   </li>\r\n                   <li [routerLink]=\"['desarrolloProducto']\" routerLinkActive=\"active\">\r\n                      <a >\r\n                      <i class=\"fa fa-flask fa-lg\"></i> Desarrollo de Productos\r\n                      </a>\r\n                    </li>\r\n                   <li [routerLink]=\"['desarrolloMercado']\" routerLinkActive=\"active\">\r\n                      <a >\r\n                      <i class=\"fa fa-map-marker fa-lg\"></i> Desarrollo de mercados\r\n                      </a>\r\n                    </li>\r\n                </ul>\r\n\r\n                <li [routerLink]=\"['financiamiento']\" routerLinkActive=\"active\">\r\n                   <a>\r\n                    <i class=\"fa fa-credit-card fa-lg\"></i>  Decisiones de Finaciamiento\r\n                   </a>\r\n                </li>\r\n\r\n                <li data-toggle=\"collapse\" data-target=\"#service2\" class=\"collapsed\">\r\n                  <a href=\"#\"><i class=\"fa fa-list-alt fa-lg\"></i> Resultados del periodo<span class=\"arrow\"></span></a>\r\n                </li>\r\n                <ul class=\"sub-menu collapse\" id=\"service2\">\r\n                  <li [routerLink]=\"['balance_inicial']\" >Balance Inicial</li>\r\n                  <li [routerLink]=\"['operacion']\" >Resultados Operacion</li>\r\n                  <li [routerLink]=\"['estadoResultados']\">Estado de Resultados</li>\r\n                  <li [routerLink]=\"['balance_final']\">Balance Final</li>\r\n                  <li [routerLink]=\"['comparativa']\">Prueba</li>\r\n                </ul>\r\n            </ul>\r\n     </div>\r\n</div>\r\n"
+module.exports = "<div class=\"nav-side-menu\">\r\n    <div class=\"brand\">\r\n      <div class=\"row\" >\r\n        <div class=\"col-12 text-center\">\r\n          <h6 style=\"margin-top:20px\">Proyecto {{proyectoActual}}</h6>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-12 text-center\" style=\"margin-bottom:10px\">\r\n          <button type=\"button\" class=\"btn btn-danger\" style=\"font-size:10px\" (click)=\"verProyectos()\">Salir de Proyecto</button>\r\n        </div>\r\n\r\n      </div>\r\n\r\n    </div>\r\n    <i class=\"fa fa-bars fa-2x toggle-btn\" data-toggle=\"collapse\" data-target=\"#menu-content\"></i>\r\n\r\n        <div class=\"menu-list\">\r\n            <ul id=\"menu-content\" class=\"menu-content collapse out\">\r\n\r\n                <li [routerLink]=\"['home']\">\r\n                  <a >\r\n                  <i class=\"fa fa-tachometer fa-lg\"></i> Valores iniciales\r\n                  </a>\r\n                </li>\r\n\r\n                <li [routerLink]=\"['demandaPotencial']\">\r\n                  <a >\r\n                  <i class=\"fa fa-area-chart fa-lg\"></i> Demanda potencial\r\n                  </a>\r\n                </li>\r\n\r\n                <li [routerLink]=\"['produccion']\" routerLinkActive=\"active\">\r\n                   <a>\r\n                    <i class=\"fa fa-pie-chart fa-lg\"></i>  Decisiones de Producción\r\n                   </a>\r\n                </li>\r\n\r\n                <li data-toggle=\"collapse\" data-target=\"#service\" class=\"collapsed\">\r\n                  <a href=\"#\"><i class=\"fa fa-line-chart fa-lg\"></i> Decisiones de Crecimiento<span class=\"arrow\"></span></a>\r\n                </li>\r\n                <ul class=\"sub-menu collapse\" id=\"service\">\r\n\r\n                  <li [routerLink]=\"['compraMaquinaria']\" routerLinkActive=\"active\">\r\n                     <a >\r\n                     <i class=\"fa fa-cogs fa-lg\"></i> Compra de Maquinaria\r\n                     </a>\r\n                   </li>\r\n                   <li [routerLink]=\"['desarrolloProducto']\" routerLinkActive=\"active\">\r\n                      <a >\r\n                      <i class=\"fa fa-flask fa-lg\"></i> Desarrollo de Productos\r\n                      </a>\r\n                    </li>\r\n                   <li [routerLink]=\"['desarrolloMercado']\" routerLinkActive=\"active\">\r\n                      <a >\r\n                      <i class=\"fa fa-map-marker fa-lg\"></i> Desarrollo de mercados\r\n                      </a>\r\n                    </li>\r\n                </ul>\r\n\r\n                <li [routerLink]=\"['financiamiento']\" routerLinkActive=\"active\">\r\n                   <a>\r\n                    <i class=\"fa fa-credit-card fa-lg\"></i>  Decisiones de Finaciamiento\r\n                   </a>\r\n                </li>\r\n\r\n                <li data-toggle=\"collapse\" data-target=\"#service2\" class=\"collapsed\">\r\n                  <a href=\"#\"><i class=\"fa fa-list-alt fa-lg\"></i> Resultados del periodo<span class=\"arrow\"></span></a>\r\n                </li>\r\n                <ul class=\"sub-menu collapse\" id=\"service2\">\r\n                  <li [routerLink]=\"['balance_inicial']\" >Balance Inicial</li>\r\n                  <li [routerLink]=\"['operacion']\" >Resultados Operacion</li>\r\n                  <li [routerLink]=\"['estadoResultados']\">Estado de Resultados</li>\r\n                  <li [routerLink]=\"['balance_final']\">Balance Final</li>\r\n                  <li [routerLink]=\"['comparativa']\">Prueba</li>\r\n                </ul>\r\n            </ul>\r\n     </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -5420,6 +5429,7 @@ module.exports = "<div class=\"nav-side-menu\">\r\n    <div class=\"brand\">Proy
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SidenavPComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5432,9 +5442,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var SidenavPComponent = (function () {
-    function SidenavPComponent(router) {
+    function SidenavPComponent(router, _proyectosS) {
+        var _this = this;
         this.router = router;
+        this._proyectosS = _proyectosS;
+        this.proyectos = this._proyectosS.returnUsuarios();
+        console.log("Proyectos", this.proyectos);
+        setTimeout(function () {
+            _this.proyectoActual = _this.getNameById(localStorage.getItem('idProyecto'));
+            console.log(_this.proyectoActual);
+        }, 500);
     }
     SidenavPComponent.prototype.ngOnInit = function () {
     };
@@ -5444,6 +5463,14 @@ var SidenavPComponent = (function () {
         localStorage.removeItem('numeroRPeriodos');
         this.router.navigate(['/Usuario/proyectos']);
     };
+    SidenavPComponent.prototype.getNameById = function (idProyecto) {
+        for (var _i = 0, _a = this.proyectos; _i < _a.length; _i++) {
+            var proyecto = _a[_i];
+            if (proyecto.idProyecto == idProyecto)
+                return proyecto.nombreProyecto;
+        }
+        return "id NO encontrado";
+    };
     return SidenavPComponent;
 }());
 SidenavPComponent = __decorate([
@@ -5452,10 +5479,10 @@ SidenavPComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _b || Object])
 ], SidenavPComponent);
 
-var _a;
+var _a, _b;
 //# sourceMappingURL=sidenav-p.component.js.map
 
 /***/ }),
