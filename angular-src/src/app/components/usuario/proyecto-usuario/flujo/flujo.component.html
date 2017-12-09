@@ -10,7 +10,7 @@
 
     <tr>
       <td>Saldo Inical</td>
-      <td class="text-right"></td>
+      <td class="text-right" *ngFor="let balance of balanceInicial">{{balance.cajaBancos |currency:'USD':true:'1.0-0'}}</td>
     </tr>
 
     <tr>
@@ -28,7 +28,7 @@
 
     <tr>
       <td>Cobro por Ventas</td>
-      <td class="text-right"></td>
+      <td class="text-right">{{getCobroVentas() |currency:'USD':true:'1.0-0'}}</td>
 
 
     </tr>
@@ -43,7 +43,7 @@
 
     <tr>
       <td>Intereses</td>
-      <td class="text-right"></td>
+      <td class="text-right">-</td>
 
 
 
@@ -54,7 +54,7 @@
 
     <tr>
       <td>Incremento de Capital</td>
-      <td class="text-right"></td>
+      <td class="text-right">-</td>
 
     </tr>
 
@@ -168,7 +168,7 @@
 
     <tr>
       <th>Saldo Final</th>
-      <th class="text-right"></th>
+      <th class="text-right" *ngFor="let balance of balanceFinal">{{balance.cajaBancos |currency:'USD':true:'1.0-0'}}</th>
     </tr>
 
   </tbody>

@@ -11,6 +11,7 @@ import { EstadoResultadosComponent} from './estado-resultados/estado-resultados.
 import { FinanciamientoComponent } from './financiamiento/financiamiento.component';
 import {DemandaPotencialComponent} from './demanda-potencial/demanda-potencial.component'
 import {PruebaComponent} from './prueba/prueba.component';
+import {FlujoComponent} from './flujo/flujo.component';
 
 export const PROYECTO_ROUTES: Routes = [
   { path: 'compraMaquinaria', component: CompraMaquinariaComponent },
@@ -25,5 +26,6 @@ export const PROYECTO_ROUTES: Routes = [
   { path: 'balance_inicial', component: BalanceInicialComponent },
   { path: 'balance_final', component: BalanceFinalComponent },
   { path: 'comparativa', component: PruebaComponent },
+  { path: 'flujo', component: FlujoComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
