@@ -230,4 +230,45 @@ export class OperacionService {
     return this.http.post('prestamo/getIntereses/',x,this.headers).map(res => res.json());
   }
 
+  prestamosPedidos(){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:localStorage.getItem('numeroPeriodo')
+    }
+    return this.http.post('prestamo/getPrestamos',x,{headers}).map(res => res.json());
+  }
+
+  returnPrestamosActuales(){
+    var p = [];
+    this.prestamosPedidos().subscribe(data => {
+      for(let key in data.datos){
+        p.push(data.datos[key]);
+      }
+    });
+    return p;
+  }
+
+  pagos(){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:localStorage.getItem('numeroPeriodo')
+    }
+    return this.http.post('prestamo/getPagos',x,{headers}).map(res => res.json());
+  }
+
+  returnPagos(){
+    var p = [];
+    this.pagos().subscribe(data => {
+      p.push(data.datos);
+    });
+    return p;
+  }
+
+
 }

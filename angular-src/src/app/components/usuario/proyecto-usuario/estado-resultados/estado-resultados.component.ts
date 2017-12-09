@@ -19,6 +19,7 @@ export class EstadoResultadosComponent implements OnInit {
   auxiliarT = [];
   intereses = [];
   maquinas = [];
+  balanceFinal =[];
 
   constructor(private _operacionService:OperacionService,
               private _productoService:ProductoService,
@@ -27,6 +28,11 @@ export class EstadoResultadosComponent implements OnInit {
               private _resultadosService:ResultadosService){
     this._resultadosService.vender();
     setTimeout(() => {
+        this._balanceService.getBalanceFinal().subscribe( data => {
+          if(data.success){
+            this.balanceFinal = this._resultadosService.getBalanceFinal();
+          }
+        });
         this.auxiliares=this._operacionService.returnAuxiliares();
         this.productos=this._productoService.returnProductos();
         this.intereses = this._operacionService.returnInter();

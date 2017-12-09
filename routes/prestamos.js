@@ -111,6 +111,34 @@ router.post('/modifycredito', (req, res, next) => {
   });
 });
 
+router.post('/getPrestamos', (req,res,next) => {
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+  Promise.resolve().then(function(){
+    return prestamo.getFinanciamientos(idProyecto,numeroPeriodo);
+  }).then(function(rows) {
+    res.json({success:true,datos:rows,msg:"Bien"});
+  }).catch(function (err) {
+    console.log(err);
+    res.json({success:false,msg:"Mal"});
+  })
+});
+
+router.post('/getPagos', (req,res,next) => {
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+  Promise.resolve().then(function(){
+    return prestamo.getPagos(idProyecto,numeroPeriodo);
+  }).then(function(pagos){
+    return gPagos(pagos);
+  }).then(function(rows) {
+    res.json({success:true,datos:rows,msg:"Bien"});
+  }).catch(function (err) {
+    console.log(err);
+    res.json({success:false,msg:"Mal"});
+  })
+});
+
 router.post('/getIntereses', (req,res,next) => {
   var idProyecto = req.body.idProyecto;
   var numeroPeriodo = req.body.numeroPeriodo;
@@ -730,5 +758,19 @@ function getIntereses(prestamos,pagos){
   p.push(T);
   return p;
 }
+
+function gPagos(pagos){
+  var PPagar = 0;
+  for(let key in pagos){
+    if(pagos[key].tipo == 1){
+      PPagar += pagos[key].pagoCapital + pagos[key].intereses;
+    }
+    else{
+    PPagar += pagos[key].pagoCapital;
+    }
+  }
+  return PPagar;
+}
+
 
 module.exports = router;

@@ -168,8 +168,14 @@ router.post('/final', (req, res, next) => {
     var PTU = 0;
     var ISRCajaBancos = 0;
     var imptsPorPagar = 0;
+    var utilidadVerdadera = 0;
     if(utilidadEjercicio > 0){
-      var utilidadVerdadera = utilidadEjercicio - utlidadAcumulada;
+      if(utlidadAcumulada < 0){
+        utilidadVerdadera = utilidadEjercicio + utlidadAcumulada;
+      }
+      else{
+        utilidadVerdadera = utilidadEjercicio;
+      }
       if(utilidadVerdadera > 0){
         ISR = utilidadVerdadera * .34;
         PTU = utilidadVerdadera * .10;
