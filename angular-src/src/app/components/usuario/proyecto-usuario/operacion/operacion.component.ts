@@ -499,8 +499,24 @@ export class OperacionComponent implements OnInit {
       ];
 
 
-      var rows = [
-      {"producto":"","unidadesVender":"","invFinal":"","invInicial":"","unidadesProducir":"","costoUnitMP":"","cosTotalMP":"","costUnitTrans":"","costTotalTrans":"","costProdUnit":"","costProdTot":""}];
+      var rows = [];
+
+      for(let producto of this.auxiliares){
+        var x = {
+          "producto":this.getNameByIdProducto(producto.Producto_idProducto),
+          "unidadesVender":this.dc.transform(producto.unidadesVendidas,'1.0-0'),
+          "invFinal":this.dc.transform(producto.unidadesAlmacenadas,'1.0-0'),
+          "invInicial":this.dc.transform(this.getUnidadesAlmacenadasAnterior(producto.Producto_idProducto),'1.0-0'),
+          "unidadesProducir":this.dc.transform(producto.unidadesProducidas,'1.0-0'),
+          "costUnitMP":this.cp.transform(this.getMPPuniProd(producto.Producto_idProducto),'USD',true,'1.0-0'),
+          "cosTotalMP":this.cp.transform(producto.materiaCosumida,'USD',true,'1.0-0'),
+          "costUnitTrans":this.cp.transform(((producto.costoTransformacionVentas + producto.costoTransformacionMaq)/producto.unidadesProducidas),'USD',true,'1.0-0'),
+          "cosTotalTrans":this.cp.transform((producto.costoTransformacionVentas + producto.costoTransformacionMaq),'USD',true,'1.0-0'),
+          "costProdUnit":this.cp.transform((this.getMPPuniProd(producto.Producto_idProducto) + (producto.costoTransformacionVentas + producto.costoTransformacionMaq)/producto.unidadesProducidas),'USD',true,'1.0-0'),
+          "costProdTot":this.cp.transform((producto.costoTransformacionVentas + producto.costoTransformacionMaq + producto.materiaCosumida),'USD',true,'1.0-0')
+        }
+        rows.push(x);
+      }
 
 
 
