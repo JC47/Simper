@@ -9410,6 +9410,7 @@ var UsuarioCreditoService = (function () {
     function UsuarioCreditoService(http) {
         this.http = http;
         this.creditosU = [];
+        this.r = [];
     }
     UsuarioCreditoService.prototype.insertar = function (credito) {
         var _this = this;
@@ -9526,14 +9527,15 @@ var UsuarioCreditoService = (function () {
         return this.http.post('prestamo/validacreditos', x, { headers: headers }).map(function (res) { return res.json(); });
     };
     UsuarioCreditoService.prototype.arregloC = function () {
-        var r = [];
+        var _this = this;
+        this.r.length = 0;
         this.validarC().subscribe(function (data) {
             for (var key in data.datos) {
-                r.push(data.datos[key]);
+                _this.r.push(data.datos[key]);
             }
         });
-        console.log("Servicio", r);
-        return r;
+        console.log("Servicio", this.r);
+        return this.r;
     };
     UsuarioCreditoService.prototype.validarP = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({

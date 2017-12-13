@@ -4,6 +4,7 @@ import {Http, Headers} from '@angular/http';
 @Injectable()
 export class UsuarioCreditoService {
   creditosU:any = [];
+  r =[];
 
   constructor(private http:Http) { }
 
@@ -134,14 +135,14 @@ export class UsuarioCreditoService {
   }
 
   arregloC(){
-    var r = [];
+    this.r.length = 0;
     this.validarC().subscribe(data => {
       for(let key in data.datos){
-        r.push(data.datos[key]);
+        this.r.push(data.datos[key]);
       }
     });
-    console.log("Servicio",r);
-    return r;
+    console.log("Servicio",this.r);
+    return this.r;
   }
 
   validarP(){

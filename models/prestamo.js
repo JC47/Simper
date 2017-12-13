@@ -175,6 +175,7 @@ module.exports.plazoCredito = function (idCredito) {
 
 //agregamos el credito seleccionado a una tabla que registra los créditos que tenemos
 module.exports.addCreditoActivo = function (json) {
+  console.log("CREDITO ACTIVO");
   var query = "insert into creditoactivo set ? ";
   return querySql(query,json);
 }
@@ -186,6 +187,7 @@ module.exports.updateCreditoActivo = function (json, idCredito, idProyecto) {
 
 //borra los valores de creditoactivo
 module.exports.deleteCreditoActivo = function (idCredito,idProyecto) {
+  console.log("DELETE CREDITO ACTIVO");
   var query = "delete from creditoactivo where idCredito = "+idCredito+" and idProyecto = "+idProyecto+" ";
   return querySql(query);
 }
@@ -195,6 +197,7 @@ module.exports.getCreditosActivos = function (idProyecto) {
   var query = "select count(idCredito) as creditosactivos from creditoactivo where idProyecto = "+idProyecto+" and activo = 1 ";
   return querySql(query);
 }
+//select count(*) as creditosactivos from creditoactivo where idProyecto = 447 and activo = 1;
 //Id's de credito activos
 module.exports.getIdCreditosActivos = function (idProyecto) {
   var query = "select idCredito,numeroPeriodo from creditoactivo inner join creditobalance on creditoactivo.activo = 1 and creditoactivo.idProyecto = "+idProyecto+" and creditobalance.Proyectos_idProyecto = creditoactivo.idProyecto and creditobalance.credito_idCredito = creditoactivo.idCredito ";

@@ -219,7 +219,8 @@ router.post('/validacreditos', (req,res,next) => {
   var arrayIdCredito = [];
   Promise.join(prestamo.getCreditosActivos(idProyecto),prestamo.getIdCreditosActivos(idProyecto),
    function(activos, idsactivos) {
-
+console.log("activos", activos);
+console.log("idsactivos",idsactivos);
      if (activos[0].creditosactivos<2) {
        //bloquea
        limite = 0;//limite: 0 puede escoger otro credito.
