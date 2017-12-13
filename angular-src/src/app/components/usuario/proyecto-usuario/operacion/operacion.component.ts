@@ -187,6 +187,16 @@ export class OperacionComponent implements OnInit {
     return T;
   }
 
+  getCostoAlmacen(){
+    var r = 0;
+    for(let producto of this.auxiliaresAnteriores){
+      if(producto.unidadesAlmacenadas != 0){
+          r = producto.inventarioFinal / producto.unidadesAlmacenadas;
+      }
+    }
+    return r;
+  }
+
 
   getUtilidadAntes(){
     var T = 0;
@@ -243,8 +253,14 @@ export class OperacionComponent implements OnInit {
         "producto":this.getNameByIdProducto(producto.Producto_idProducto),
         "unidades":this.cp.transform( producto.unidadesAlmacenadas ,'USD',true,'1.0-0'),
         "costoUni":this.cp.transform((producto.inventarioFinal / producto.unidadesAlmacenadas) ,'USD',true,'1.0-0'),
-        "total":producto.inventarioFinal.toString()
+        "total":this.cp.transform(producto.inventarioFinal, 'USD',true,'1.0-0')
       }
+      if(producto.unidadesAlmacenadas == 0){
+        x.unidades = this.cp.transform( 0 ,'USD',true,'1.0-0');
+        x.costoUni = this.cp.transform( 0 ,'USD',true,'1.0-0');
+        x.total = this.cp.transform(0, 'USD',true,'1.0-0');
+      }
+
       rows.push(x);
     }
 

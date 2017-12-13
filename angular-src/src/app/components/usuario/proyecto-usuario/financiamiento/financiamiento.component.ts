@@ -31,7 +31,7 @@ export class FinanciamientoComponent implements OnInit {
   constructor(private _creditoService:UsuarioCreditoService) {
     this.creditos=this._creditoService.returnCreditosU(localStorage.getItem('idUsuario'));
     this.creditosActivos=this._creditoService.arregloC();
-    console.log("cActivos",this.creditos)
+    console.log("cActivos",this.creditosActivos)
     this.solicitudForm= new FormGroup({
       'monto':new FormControl('',Validators.required),
       'idCredito':new FormControl('',Validators.required)
@@ -92,17 +92,20 @@ export class FinanciamientoComponent implements OnInit {
               this.verAmortizacion(cantidad.idCredito);
             }
           });
-        console.log("Activos",this._creditoService.arregloC());
-        this.creditosActivos=this._creditoService.arregloC();
         }else{
           this.modalAlerta=true;
           this.openModalConf=false;
         }
       });
       this.openModalConf=false;
+      this.actualizarActivos();
     }
+  }
 
-
+  actualizarActivos(){
+    this._creditoService.validarP();
+    this.creditosActivos=this._creditoService.arregloC();
+    console.log("P",this.creditosActivos);
   }
 
   eliminarCreditoSolicitado(){

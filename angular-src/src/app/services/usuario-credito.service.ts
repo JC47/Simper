@@ -140,6 +140,7 @@ export class UsuarioCreditoService {
         r.push(data.datos[key]);
       }
     });
+    console.log("Servicio",r);
     return r;
   }
 

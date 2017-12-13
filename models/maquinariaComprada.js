@@ -11,13 +11,13 @@ module.exports.getMaquinariasCompradas = function(idProyecto){
   return querySql(sql,idProyecto);
 }
 
-module.exports.getMaquinariaComprada = function(idP,idM){
-  const sql = "select * from maquinariaproyecto where Proyectos_idProyecto = "+idP+" and Maquinaria_idMaquinaria = "+idM+"";
+module.exports.getMaquinariaComprada = function(idP,idM,nP){
+  const sql = "select * from maquinariaproyecto where Proyectos_idProyecto = "+idP+" and Maquinaria_idMaquinaria = "+idM+" and Balance_numeroPeriodo = " +nP+"";
   return querySql(sql);
 }
 
-module.exports.deleteMaquinariaComprada = function(idProyecto, idMaquinaria){
-  const sql = "delete from maquinariaproyecto where Proyectos_idProyecto = "+ idProyecto+" and Maquinaria_idMaquinaria = " +idMaquinaria+" ";
+module.exports.deleteMaquinariaComprada = function(idProyecto, idMaquinaria,numeroPeriodo){
+  const sql = "delete from maquinariaproyecto where Proyectos_idProyecto = "+ idProyecto+" and Maquinaria_idMaquinaria = " +idMaquinaria+" and Balance_numeroPeriodo = " +numeroPeriodo+ "";
   return querySql(sql);
 }
 
@@ -38,7 +38,7 @@ module.exports.addMaquinariaProyecto = function (idProyecto,idMaquinaria,idProdu
   return querySql(queryMaqProy);
 }
 
-module.exports.updateCantidad = function (idProyecto,idMaquinaria,cantidad) {
-  var queryMaqProy = "update maquinariaproyecto set Cantidad = "+cantidad+" where Maquinaria_idMaquinaria = "+idMaquinaria+" and Proyectos_idProyecto = "+idProyecto+" ";
+module.exports.updateCantidad = function (idProyecto,idMaquinaria,numeroPeriodo,cantidad) {
+  var queryMaqProy = "update maquinariaproyecto set Cantidad = "+cantidad+" where Maquinaria_idMaquinaria = "+idMaquinaria+" and Proyectos_idProyecto = "+idProyecto+" and Balance_numeroPeriodo = " +numeroPeriodo+ "";
   return querySql(queryMaqProy);
 }

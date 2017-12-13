@@ -49,7 +49,7 @@ var idProducto = req.body.Producto_idProducto;
 var numeroPeriodo = req.body.Balance_numeroPeriodo;
 
  Promise.join(maquinariaComprada.getMaquinariasCompradas(idProyecto),
- maquinariaComprada.getMaquinariaComprada(idProyecto, idMaquinaria),function(maqcompradas,maqproyecto) {
+ maquinariaComprada.getMaquinariaComprada(idProyecto, idMaquinaria, numeroPeriodo),function(maqcompradas,maqproyecto) {
       return maqEnMaqProyecto(maqcompradas, maqproyecto);
   })
   .then(function (cantidad) {
@@ -59,7 +59,7 @@ var numeroPeriodo = req.body.Balance_numeroPeriodo;
       var cantidadValor = 1;
       return maquinariaComprada.addMaquinariaProyecto(idProyecto,idMaquinaria,idProducto,cantidadValor,numeroPeriodo);
     }else {//update a maquinariaproyecto con cantidad
-      return maquinariaComprada.updateCantidad(idProyecto,idMaquinaria,cantidad);
+      return maquinariaComprada.updateCantidad(idProyecto,idMaquinaria,numeroPeriodo,cantidad);
     }
   })
   .then(function () {
@@ -78,7 +78,6 @@ var numeroPeriodo = req.body.Balance_numeroPeriodo;
 //
 router.post('/asignar', (req,res,next) => {
   Promise.resolve().then(function (){
-    console.log(req.body);
     return maquinariaComprada.addMaquinariaComprada(req.body);
   }).then(function () {
     res.json({success:true, msg:"Sirve"});
@@ -96,14 +95,14 @@ var idMaquinaria = req.body.Maquinaria_idMaquinaria;
 var numeroPeriodo = req.body.Balance_numeroPeriodo;
 
 Promise.resolve().then(function () {
-  return maquinariaComprada.getMaquinariaComprada(idProyecto,idMaquinaria);
+  return maquinariaComprada.getMaquinariaComprada(idProyecto,idMaquinaria,numeroPeriodo);
 }).then(function (rows) {
     if(rows[0].Cantidad == 1 ){
-      return maquinariaComprada.deleteMaquinariaComprada(idProyecto,idMaquinaria)
+      return maquinariaComprada.deleteMaquinariaComprada(idProyecto,idMaquinaria,numeroPeriodo)
     }
     else{
       var cantidadN = rows[0].Cantidad - 1;
-      return maquinariaComprada.updateCantidad(idProyecto,idMaquinaria,cantidadN);
+      return maquinariaComprada.updateCantidad(idProyecto,idMaquinaria,numeroPeriodo,cantidadN);
     }
   })
   .then(function () {
@@ -212,11 +211,13 @@ router.post('/cobrar', (req, res, next) => {
 });
 
 function maqEnMaqProyecto(maqcompradas, maqproyecto) {
+  console.log(maqcompradas,maqproyecto);
   var cantidad = 0;
   for (var i = 0; i < maqcompradas.length; i++) {
     for (var j = 0; j < maqproyecto.length; j++) {
       if (maqcompradas[i].Maquinaria_idMaquinaria == maqproyecto[j].Maquinaria_idMaquinaria
-         && maqcompradas[i].Proyectos_idProyecto == maqproyecto[j].Proyectos_idProyecto) {
+         && maqcompradas[i].Proyectos_idProyecto == maqproyecto[j].Proyectos_idProyecto
+         && maqcompradas[i].Balance_numeroPeriodo == maqproyecto[j].Balance_numeroPeriodo) {
            cantidad = aumentaCantidad(maqproyecto[j].Cantidad);
       }
     }
