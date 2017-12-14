@@ -109,7 +109,7 @@ module.exports.getMonto = function (idCredito,idProyecto,numPeriodo) {
 }
 
 module.exports.eliminarAmortizacion = function(idCredito,idProyecto,numeroPeriodo){
-  var query = "delete from amortizacion where Proyecto_idProyecto = " +idProyecto+" and idCredito = " +idCredito+ " and numeroPeriodo => "+numeroPeriodo+" ";
+  var query = "delete from amortizacion where Proyecto_idProyecto = " +idProyecto+" and idCredito = " +idCredito+ " and numeroPeriodo > "+numeroPeriodo+" ";
   return querySql(query);
 }
 
