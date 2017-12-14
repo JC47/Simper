@@ -108,8 +108,8 @@ module.exports.getMonto = function (idCredito,idProyecto,numPeriodo) {
   return querySql(query);
 }
 
-module.exports.eliminarAmortizacion = function(idCredito,idProyecto){
-  var query = "delete from amortizacion where Proyecto_idProyecto = " +idProyecto+" and idCredito = " +idCredito+ " ";
+module.exports.eliminarAmortizacion = function(idCredito,idProyecto,numeroPeriodo){
+  var query = "delete from amortizacion where Proyecto_idProyecto = " +idProyecto+" and idCredito = " +idCredito+ " and numeroPeriodo => "+numeroPeriodo+" ";
   return querySql(query);
 }
 
@@ -189,6 +189,12 @@ module.exports.updateCreditoActivo = function (json, idCredito, idProyecto) {
 module.exports.deleteCreditoActivo = function (idCredito,idProyecto) {
   console.log("DELETE CREDITO ACTIVO");
   var query = "delete from creditoactivo where idCredito = "+idCredito+" and idProyecto = "+idProyecto+" ";
+  return querySql(query);
+}
+
+//borra los valores de creditoactivo para un periodo específico
+module.exports.deleteCreditoActivoNumP = function (idCredito,idProyecto,numeroPeriodo) {
+  var query = "delete from creditoactivo where idCredito = "+idCredito+" and idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+" ";
   return querySql(query);
 }
 

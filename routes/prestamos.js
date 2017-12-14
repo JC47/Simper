@@ -173,7 +173,7 @@ router.post('/deleteactivo', (req, res, next) => {
   var numeroPeriodo = req.body.numeroPeriodo;
   Promise.resolve()
   .then(function () {
-    return prestamo.deleteCreditoActivo(idCredito,idProyecto);
+    return prestamo.deleteCreditoActivoNumP(idCredito,idProyecto,numeroPeriodo);
   })
   .then(function(){
     res.json({success: true, msg:"Operacion exitosa"});
@@ -268,39 +268,28 @@ console.log("idsactivos",idsactivos);
 router.post('/validaperiodos', (req,res,next) => {
   var idProyecto = req.body.idProyecto;
   var arrayFaltantes = [];
-  //Promise.join(prestamo.getCreditosActivos(idProyecto),prestamo.getPlazoActivo(idProyecto),
-    //function(activos, plazoactivo) {
-      //activos: numero de creditos activos por proyecto
-      //plazoactivo: idCredito,idProyecto,plazo,activo de creditoactivo
-      //  console.log("activos[0].creditosactivos: ",activos[0].creditosactivos);
-    //número de creditos activos del proyecto
     Promise.resolve()
     .then(function () {
       return prestamo.getPlazoActivo(idProyecto);
     })
     .then(function (plazoactivo) {
-//      if (activos[0].creditosactivos == 2) {
         console.log("No puedes pedir más creditos");
         arrayFaltantes = periodosFaltantes(plazoactivo);
+
         for (var i = 0; i < arrayFaltantes.length; i++) {
           if (arrayFaltantes[i].activo == 1) {
-            //console.log("arrayFaltantes: ",arrayFaltantes);
             var json = {
-            //  "idCredito":arrayFaltantes[i].idCredito,
-            //  "idProyecto":arrayFaltantes[i].idProyecto,
               "plazo":arrayFaltantes[i].plazo,
               "activo":arrayFaltantes[i].activo
             }
             console.log("json update", json);
+            //1
             prestamo.updateCreditoActivo(json,arrayFaltantes[i].idCredito,arrayFaltantes[i].idProyecto);
           }else {
-            //console.log("arrayFaltantes: ",arrayFaltantes);
+            //0
             prestamo.deleteCreditoActivo(arrayFaltantes[i].idCredito,idProyecto);
           }
         }
-    //  }else {
-    //    console.log("amortizacioncreditobalance");
-    //  }
           return prestamo.getIdCreditosActivos(idProyecto);
     })
     //})
@@ -462,7 +451,7 @@ router.post('/deletecreditobalance', (req, res, next) => {
   .then(function () {
       return prestamo.deleteCreditoBalance(idCredito,idProyecto,numeroPeriodo);
   }).then(function(){
-    return prestamo.eliminarAmortizacion(idCredito,idProyecto);
+    return prestamo.eliminarAmortizacion(idCredito,idProyecto,numeroPeriodo);
   }).then(function(){
     return prestamo.getFinanciamientos(idProyecto,numeroPeriodo);
   })
