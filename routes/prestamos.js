@@ -436,6 +436,7 @@ Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCr
     var json = {
       "idCredito":idCredito,
       "idProyecto":idProyecto,
+      "numeroPeriodo":numeroPeriodo,
       "plazo":plazo[0].plazocredito,
       "activo":1
     }
