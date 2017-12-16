@@ -463,6 +463,19 @@ router.post('/deletecreditobalance', (req, res, next) => {
     res.json({success:false, msg:"No sirve"});
   });
 });
+
+router.post('/getActivos', (req,res,next) => {
+  var idProyecto =req.body.idProyecto;
+  Promise.resolve()
+  .then(function () {
+      return prestamo.returnActivos(idProyecto);
+  }).then(function(rows){
+    res.json({success:true,datos:rows,msg:"Ok"});
+  }).catch(function (err) {
+    console.error("got error: " + err);
+    res.json({success:false, msg:"No sirve"});
+  });
+});
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 router.post('/veramortizacion', (req, res, next) => {
 

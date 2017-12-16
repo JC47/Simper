@@ -4235,6 +4235,8 @@ var FinanciamientoComponent = (function () {
             'idCredito': new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormControl"]('', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required)
         });
     }
+    FinanciamientoComponent.prototype.ngOnInit = function () {
+    };
     FinanciamientoComponent.prototype.validaCredito = function (credito) {
         for (var _i = 0, _a = this.creditosActivos; _i < _a.length; _i++) {
             var credit = _a[_i];
@@ -4243,7 +4245,6 @@ var FinanciamientoComponent = (function () {
                 return true;
             }
         }
-        console.log("no esta pedido");
         return false;
     };
     FinanciamientoComponent.prototype.validaCreditoA = function (credito) {
@@ -4283,6 +4284,7 @@ var FinanciamientoComponent = (function () {
                     _this._creditoService.solicitarCredito(x).subscribe(function (data) {
                         if (data.success) {
                             _this.verAmortizacion(cantidad.idCredito);
+                            _this.actualizar();
                         }
                     });
                 }
@@ -4292,23 +4294,22 @@ var FinanciamientoComponent = (function () {
                 }
             });
             this.openModalConf = false;
-            this.actualizarActivos();
         }
     };
-    FinanciamientoComponent.prototype.actualizarActivos = function () {
-        this._creditoService.validarP();
-        this.creditosActivos = this._creditoService.arregloC();
-        console.log("P", this.creditosActivos);
-    };
     FinanciamientoComponent.prototype.eliminarCreditoSolicitado = function () {
+        var _this = this;
         this.confDeleteCredito = false;
         var x = {
             idCredito: this.deleteCreditoSelected.idCredito,
             idProyecto: parseInt(localStorage.getItem('idProyecto')),
             numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo'))
         };
-        this._creditoService.eliminarCredito(x).subscribe(function (data) { console.log(2, data); });
         this._creditoService.eliminarCreditoActivo(x).subscribe();
+        this._creditoService.eliminarCredito(x).subscribe(function (data) {
+            if (data.success) {
+                _this.actualizar();
+            }
+        });
     };
     FinanciamientoComponent.prototype.verAmortizacion = function (idCredito) {
         this.openTablaAmort = true;
@@ -4334,7 +4335,8 @@ var FinanciamientoComponent = (function () {
         }
         return "id no encontrado";
     };
-    FinanciamientoComponent.prototype.ngOnInit = function () {
+    FinanciamientoComponent.prototype.actualizar = function () {
+        this.creditosActivos = this._creditoService.arregloC();
     };
     return FinanciamientoComponent;
 }());
@@ -9410,7 +9412,6 @@ var UsuarioCreditoService = (function () {
     function UsuarioCreditoService(http) {
         this.http = http;
         this.creditosU = [];
-        this.r = [];
     }
     UsuarioCreditoService.prototype.insertar = function (credito) {
         var _this = this;
@@ -9527,15 +9528,23 @@ var UsuarioCreditoService = (function () {
         return this.http.post('prestamo/validacreditos', x, { headers: headers }).map(function (res) { return res.json(); });
     };
     UsuarioCreditoService.prototype.arregloC = function () {
-        var _this = this;
-        this.r.length = 0;
-        this.validarC().subscribe(function (data) {
+        var r = [];
+        this.getActivos().subscribe(function (data) {
             for (var key in data.datos) {
-                _this.r.push(data.datos[key]);
+                r.push(data.datos[key]);
             }
         });
-        console.log("Servicio", this.r);
-        return this.r;
+        console.log("Arreglo", r);
+        return r;
+    };
+    UsuarioCreditoService.prototype.getActivos = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        var x = {
+            idProyecto: localStorage.getItem('idProyecto')
+        };
+        return this.http.post('prestamo/getActivos', x, { headers: headers }).map(function (res) { return res.json(); });
     };
     UsuarioCreditoService.prototype.validarP = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({

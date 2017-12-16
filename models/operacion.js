@@ -83,7 +83,7 @@ module.exports.getProductoCuentaVenta = function(idProyecto,numeroPeriodo){
 }
 
 module.exports.getProductoMaquinaria = function(idProyecto,numeroPeriodo){
-  var query = "select * from maquinariaproyecto where Balance_numeroPeriodo = "+numeroPeriodo+ " and Proyectos_idProyecto = " +idProyecto+"";
+  var query = "select * from maquinariaproyecto where Balance_numeroPeriodo <= "+numeroPeriodo+ " and Proyectos_idProyecto = " +idProyecto+"";
   return querySql(query);
 }
 

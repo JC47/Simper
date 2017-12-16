@@ -4,7 +4,6 @@ import {Http, Headers} from '@angular/http';
 @Injectable()
 export class UsuarioCreditoService {
   creditosU:any = [];
-  r =[];
 
   constructor(private http:Http) { }
 
@@ -135,14 +134,24 @@ export class UsuarioCreditoService {
   }
 
   arregloC(){
-    this.r.length = 0;
-    this.validarC().subscribe(data => {
+    var r =[];
+    this.getActivos().subscribe(data => {
       for(let key in data.datos){
-        this.r.push(data.datos[key]);
+        r.push(data.datos[key]);
       }
     });
-    console.log("Servicio",this.r);
-    return this.r;
+    console.log("Arreglo",r)
+    return r;
+  }
+
+  getActivos(){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto')
+    }
+    return this.http.post('prestamo/getActivos',x,{headers}).map(res => res.json());
   }
 
   validarP(){

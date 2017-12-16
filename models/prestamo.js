@@ -143,6 +143,11 @@ module.exports.getCreditosBalance = function(idProyecto){
   return querySql(query);
 }
 
+module.exports.returnActivos = function(idProyecto) {
+  var query = "select idCredito,numeroPeriodo from creditoactivo where idProyecto = "+idProyecto+" and activo = 1 ";
+  return querySql(query);
+}
+
 //valida 2 creditos por proyecto
 
 //si el resultado es 2 no se le permitirá pedir más créditos
