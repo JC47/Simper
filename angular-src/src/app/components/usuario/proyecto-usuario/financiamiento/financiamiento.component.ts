@@ -35,11 +35,14 @@ export class FinanciamientoComponent implements OnInit {
     this._proyectoService.ocultaCierrePeriodo()
     this.creditos=this._creditoService.returnCreditosU(localStorage.getItem('idUsuario'));
     this.creditosActivos=this._creditoService.arregloC();
-    console.log("cActivos",this.creditos)
+    console.log("cActivos",this.creditosActivos)
     this.solicitudForm= new FormGroup({
       'monto':new FormControl('',Validators.required),
       'idCredito':new FormControl('',Validators.required)
     });
+  }
+
+  ngOnInit() {
   }
 
   validaCredito(credito){
@@ -50,7 +53,6 @@ export class FinanciamientoComponent implements OnInit {
 
       }
     }
-    console.log("no esta pedido")
     return false;
 
   }
@@ -94,10 +96,9 @@ export class FinanciamientoComponent implements OnInit {
           this._creditoService.solicitarCredito(x).subscribe(data => {
             if(data.success){
               this.verAmortizacion(cantidad.idCredito);
+              this.actualizar();
             }
           });
-        console.log("Activos",this._creditoService.arregloC());
-        this.creditosActivos=this._creditoService.arregloC();
         }else{
           this.modalAlerta=true;
           this.openModalConf=false;
@@ -105,8 +106,6 @@ export class FinanciamientoComponent implements OnInit {
       });
       this.openModalConf=false;
     }
-
-
   }
 
   eliminarCreditoSolicitado(){
@@ -116,8 +115,12 @@ export class FinanciamientoComponent implements OnInit {
       idProyecto:parseInt(localStorage.getItem('idProyecto')),
       numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo'))
     };
-    this._creditoService.eliminarCredito(x).subscribe(data => {console.log(2,data);});
     this._creditoService.eliminarCreditoActivo(x).subscribe();
+    this._creditoService.eliminarCredito(x).subscribe(data => {
+      if(data.success){
+        this.actualizar();
+      }
+    });
   }
 
   verAmortizacion(idCredito){
@@ -147,7 +150,10 @@ export class FinanciamientoComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+
+
+  actualizar(){
+    this.creditosActivos = this._creditoService.arregloC();
   }
 
 }

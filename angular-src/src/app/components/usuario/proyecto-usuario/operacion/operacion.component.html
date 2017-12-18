@@ -21,7 +21,7 @@
             <tr *ngFor="let producto of auxiliaresAnteriores">
               <td>{{getNameByIdProducto(producto.Producto_idProducto)}}</td>
               <td class="text-right">{{producto.unidadesAlmacenadas}}</td>
-              <td class="text-right">{{(producto.inventarioFinal / producto.unidadesAlmacenadas)|currency:'USD':true:'1.0-0'}}</td>
+              <td class="text-right">{{getCostoAlmacen() |currency:'USD':true:'1.0-0'}}</td>
               <td class="text-right">{{producto.inventarioFinal |currency:'USD':true:'1.0-0'}}</td>
             </tr>
 

@@ -134,13 +134,24 @@ export class UsuarioCreditoService {
   }
 
   arregloC(){
-    var r = [];
-    this.validarC().subscribe(data => {
+    var r =[];
+    this.getActivos().subscribe(data => {
       for(let key in data.datos){
         r.push(data.datos[key]);
       }
     });
+    console.log("Arreglo",r)
     return r;
+  }
+
+  getActivos(){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto')
+    }
+    return this.http.post('prestamo/getActivos',x,{headers}).map(res => res.json());
   }
 
   validarP(){

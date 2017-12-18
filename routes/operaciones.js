@@ -152,9 +152,8 @@ router.post('/modify', (req, res, next) => {
 router.post('/resultados', (req,res,next) => {
   var idProyecto = req.body.idProyecto;
   var numeroPeriodo = req.body.numeroPeriodo;
-  var anterior = numeroPeriodo-1;
   Promise.join(operacion.getProductoCuentaVenta(idProyecto,numeroPeriodo),operacion.getProductoCuenta(idProyecto,numeroPeriodo),
-  operacion.getProductoMaquinaria(idProyecto,anterior),
+  operacion.getProductoMaquinaria(idProyecto,numeroPeriodo),
               function(rows1,rows2,r3){
                 return jsonProductos(rows1,rows2,r3);
               }).then(function(salida){
