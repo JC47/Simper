@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,Output,EventEmitter } from '@angular/core';
 import {ProyectosService} from '../../../../services/proyectos.service';
 import {DesarrolloProductoService} from '../../../../services/desarrollo-producto.service';
 import {ResultadosService} from '../../../../services/resultados.service';
@@ -9,6 +9,7 @@ import { UsuarioCreditoService } from '../../../../services/usuario-credito.serv
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-balance',
   templateUrl: './balance.component.html'
@@ -17,9 +18,7 @@ export class BalanceComponent implements OnInit {
 
   @ViewChild('modalPeriodos') public modalPeriodos:ModalDirective;
   @ViewChild('modalConf') public confModal:ModalDirective;
-  public totalItems: number = 50;
-  public currentPage: number;
-  public smallnumPages: number = 0;
+
   opciones:boolean=false;
   periodo:number;
   periodos = [];
@@ -28,11 +27,8 @@ export class BalanceComponent implements OnInit {
   openBien:boolean=false;
   openLoad:boolean=false;
   alert:boolean=false;
+  perAct:any;
 
-  public status: any = {
-    isFirstOpen: true,
-    isOpen: true
-  };
 
   constructor(private _proyectoService:ProyectosService,
               private _balanceService:BalanceService,
@@ -43,11 +39,20 @@ export class BalanceComponent implements OnInit {
               private _creditoService:UsuarioCreditoService,
               private _desarrolloProducto:DesarrolloProductoService) {
 
+              this.asignarBalance(localStorage.getItem('idProyecto'));
               this.balanceFinal = this._resultadosService.getBalanceFinal();
+              this.perAct=this._proyectoService.periodo;
    }
 
   ngOnInit() {
-    this.asignarBalance(localStorage.getItem('idProyecto'));
+
+    setTimeout(() => {
+      this._balanceService.getBalanceFinal().subscribe( data => {
+        if(data.success){
+          this.balanceFinal = this._resultadosService.getBalanceFinal();
+        }
+      });
+    }, 1500);
   }
 
   asignarBalance(idProyecto){

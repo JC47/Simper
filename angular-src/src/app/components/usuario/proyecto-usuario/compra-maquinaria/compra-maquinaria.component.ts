@@ -4,6 +4,9 @@ import { CompraMaquinariaService } from '../../../../services/compra-maquinaria.
 import { MaquinariaService } from '../../../../services/maquinaria.service';
 import { ProductoService } from '../../../../services/producto.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import {ProyectosService} from '../../../../services/proyectos.service';
+
+
 
 @Component({
   selector: 'app-compra-maquinaria',
@@ -50,7 +53,9 @@ export class CompraMaquinariaComponent implements OnInit {
 
   constructor(private _CompraMaquinariaService:CompraMaquinariaService,
     private _productosService:ProductoService,
-    private _maquinariaService:MaquinariaService) {
+    private _maquinariaService:MaquinariaService,
+  private _proyectoService:ProyectosService){
+    this._proyectoService.ocultaCierrePeriodo()
     this.productos = this._productosService.returnProductos();
     this.maquinas = this._maquinariaService.returnMPC();
     this.maquinasCompradas = this._CompraMaquinariaService.returnMaquinasCompradas();

@@ -7,6 +7,9 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import {GraficasService} from '../../../../services/graficas.service';
 import {DashboardService} from '../../../../services/dashboard.service';
 import { Router } from '@angular/router';
+import {ProyectosService} from '../../../../services/proyectos.service';
+
+
 
 @Component({
   selector: 'app-venta-productos',
@@ -63,7 +66,9 @@ export class VentaProductosComponent implements OnInit {
               private router:Router,
               private _productoService:ProductoService,
               private _graficasService:GraficasService,
-              private _dash:DashboardService) {
+              private _dash:DashboardService,
+            private _proyectoService:ProyectosService) {
+    this._proyectoService.ocultaCierrePeriodo()
     this.zonas=this._graficasService.returnZonas();
     this.productos=this._productoService.returnProductos();
     this.productosOperacion = this._operacionService.returnProductosOperacion();

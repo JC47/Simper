@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ResultadosService} from '../../../../services/resultados.service';
+import {ProyectosService} from '../../../../services/proyectos.service';
 
 
 @Component({
@@ -9,9 +10,12 @@ import {ResultadosService} from '../../../../services/resultados.service';
 })
 export class BalanceInicialComponent implements OnInit {
   balanceInicial:any;
-  constructor(private _resultadosService:ResultadosService) {
+  constructor(private _resultadosService:ResultadosService,
+              private _proyectoService:ProyectosService) {
     this.balanceInicial = this._resultadosService.balanceInicialAnterior();
     console.log(this.balanceInicial)
+    this._proyectoService.ocultaCierrePeriodo()
+
   }
 
 

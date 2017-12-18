@@ -1955,7 +1955,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/navbar-usuario/navbar-usuario.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"usuario\">\r\n<nav class=\"navbar navbar-toggleable-md navbar-light bg-faded fixed-top navbar-inverse\" style=\"background-color:#007CB9;height:110px;\">\r\n\r\n  <button class=\"navbar-toggler navbar-toggler-right\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n\r\n\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n  <span class=\"navbar-brand\" style=\"margin-left:50px;\">\r\n       <img class=\"img-fluid rounded-circle\" style=\"width:10%;\"\r\n       src=\"assets/img/user.png\"> {{usuario.nombreUsuario}} {{usuario.apPat}}\r\n  </span>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n      <button style=\"margin-left:60%;\" class=\"navbar-right btn btn-danger my-2 \"><i class=\"fa fa-bell fa-lg\"></i></button>\r\n      <button style=\"margin-left:30px;\" class=\"btn btn-success my-2 \" (click)=\"logOut()\"><i class=\"fa fa-sign-out fa-lg\"></i></button>\r\n\r\n\r\n  </div>\r\n</nav>\r\n</div>\r\n"
+module.exports = "\r\n\r\n<div *ngIf=\"usuario\">\r\n\r\n<nav class=\"navbar navbar-toggleable-md navbar-light bg-faded fixed-top navbar-inverse\" style=\"background-color:#007CB9;height:110px;\">\r\n\r\n  <button class=\"navbar-toggler navbar-toggler-right\" type=\"button\"\r\n  data-toggle=\"collapse\" data-target=\"#navbarTogglerDemo01\" aria-controls=\"navbarTogglerDemo01\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n     <span class=\"navbar-toggler-icon\"></span>\r\n   </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarTogglerDemo01\">\r\n  <span class=\"navbar-brand\" style=\"margin-left:30px;\">\r\n         <img class=\"img-fluid rounded-circle\" style=\"width:80px;\"\r\n         src=\"assets/img/user.png\"> {{usuario.nombreUsuario}} {{usuario.apPat}}\r\n    </span>\r\n\r\n\r\n  <ul class=\"nav navbar-nav navbar-right ml-auto\" style=\"margin-top:23px\"    >\r\n\r\n    <li class=\"nav-item pull-left\" style=\"margin-right:25px; margin-bottom:10px\">\r\n      <h4 style=\"color:white\"  >Periodo Corriendo: {{this._proyectoService.periodo}}</h4>\r\n    </li>\r\n\r\n    <li class=\"nav-item pull-left\" style=\"margin-right:20px; margin-bottom:10px\" >\r\n      <button  [hidden]=\"_proyectoService.muestraPeriodo\"    type=\"button\" class=\"btn btn-success navbar-right\" (click)=\"openConf=true\">Cerrar Periodo</button>\r\n    </li>\r\n\r\n    <li class=\"nav-item \" style=\"margin-right:40px;margin-bottom:10px\">\r\n      <button [hidden]=\"_proyectoService.muestraPeriodo\"  type=\"button\" class=\"btn btn-info\" (click)=\"openBalances()\">Periodos Anteriores</button>\r\n    </li>\r\n  \r\n\r\n  </ul>\r\n\r\n  <ul class=\"nav navbar-nav ml-auto\" style=\"margin-top:23px\">\r\n        <li class=\"nav-item \" style=\"margin-right:20px\">\r\n          <button  class=\"btn btn-danger\"><i class=\"fa fa-bell fa-lg\"></i></button>\r\n        </li>\r\n\r\n        <li class=\"nav-item \" style=\"margin-right:20px\">\r\n          <button  class=\"btn btn-success \" (click)=\"logOut()\"><i class=\"fa fa-sign-out fa-lg\"></i></button>\r\n\r\n        </li>\r\n  </ul>\r\n</div>\r\n\r\n\r\n</nav>\r\n\r\n</div>\r\n\r\n\r\n<ngl-modal header=\"Confirmación\"  [(open)]=\"openConf\" size=\"x-small\" directional=\"false\">\r\n    <div body>\r\n      <div class=\"col-12 text-center container\">\r\n        <h2 style=\"margin-bottom:30px\">¿Esta seguro que deseas cerrar el periodo actual ?</h2>\r\n      </div>\r\n    </div>\r\n\r\n    <ng-template ngl-modal-footer>\r\n    <button class=\"btn btn-danger\" (click)=\"openConf=false\">Cancel</button>\r\n    <button class=\"btn btn-primary\" (click)=\"pasarPeriodo()\">Cerrar Periodo</button>\r\n    </ng-template>\r\n  </ngl-modal>\r\n\r\n\r\n\r\n\r\n      <ngl-modal header=\"Confirmación\"  [(open)]=\"openBien\" size=\"x-small\" directional=\"false\">\r\n        <div body>\r\n          <div class=\"col-12 text-center container\">\r\n            <h2 style=\"margin-bottom:30px\">Ha cerrado periodo satisfactoriamente</h2>\r\n          </div>\r\n        </div>\r\n\r\n        <ng-template ngl-modal-footer>\r\n        <button class=\"btn btn-primary\" (click)=\"modalPasarPeriodo()\">Aceptar</button>\r\n        </ng-template>\r\n      </ngl-modal>\r\n\r\n\r\n\r\n          <ngl-modal header=\"Confirmación\"  [(open)]=\"alert\" size=\"x-small\" directional=\"false\">\r\n\r\n            <div body>\r\n              <div class=\"container\">\r\n                <h5 class=\"col-12 text-center\" style=\"margin-bottom:30px\">Tienes deuda, no puedes pasar de periodo, necesitas un prestamo</h5>\r\n                  <div class=\"col-2 offset-5\">\r\n                    <img  src=\"assets/img/credit.png\" class=\"img-fluid\">\r\n                  </div>\r\n\r\n              </div>\r\n            </div>\r\n\r\n            <ng-template ngl-modal-footer>\r\n              <button class=\"btn btn-primary\" (click)=\"pasaCreditos()\">Acepta</button>\r\n\r\n          </ng-template>\r\n            </ngl-modal>\r\n\r\n\r\n\r\n\r\n\r\n\r\n                <ngl-modal  [(open)]=\"openLoad\" size=\"small\" directional=\"false\">\r\n                  <div body>\r\n                    <h1 class=\"col-12 text-center\" >Cerrando Periodo</h1>\r\n                    <h5 class=\"col-12 text-center\">Realzando Operacion</h5>\r\n                    <div style=\"position:relative; height:6.25rem; z-index:0;\">\r\n                      <ngl-spinner size=\"large\" type=\"brand\"></ngl-spinner>\r\n                    </div>\r\n                  </div>\r\n                </ngl-modal>\r\n\r\n\r\n\r\n\r\n                <div bsModal #modalPeriodos=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\"\r\n                style=\"z-index:100000\">\r\n                  <div class=\"modal-dialog modal-sm\">\r\n                    <div class=\"modal-content\">\r\n                      <div class=\"modal-header\">\r\n                        <h2 class=\"modal-title\">Periodos</h2>\r\n                      </div>\r\n                      <div class=\"modal-body\">\r\n                        <div class=\"list-group\" >\r\n                          <a class=\"list-group-item list-group-item-action \" *ngFor=\"let p of periodos\" (click)=\"transicion(p.numero)\">{{p.nombre}}</a>\r\n                        </div>\r\n                            <div class=\"modal-footer\">\r\n                              <button  type=\"button\" class=\"btn btn-outline-danger\" (click)=\"modalPeriodos.hide()\">\r\n                              Cancelar\r\n                              </button>\r\n                            </div>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n"
 
 /***/ }),
 
@@ -1966,6 +1966,13 @@ module.exports = "<div *ngIf=\"usuario\">\r\n<nav class=\"navbar navbar-toggleab
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_balance_service__ = __webpack_require__("../../../../../src/app/services/balance.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_resultados_service__ = __webpack_require__("../../../../../src/app/services/resultados.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_producto_service__ = __webpack_require__("../../../../../src/app/services/desarrollo-producto.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_desarrollo_zona_service__ = __webpack_require__("../../../../../src/app/services/desarrollo-zona.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_usuario_credito_service__ = __webpack_require__("../../../../../src/app/services/usuario-credito.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_auxiliar_service__ = __webpack_require__("../../../../../src/app/services/auxiliar.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NavbarUsuarioComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1979,10 +1986,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+
+
+
+
+
 var NavbarUsuarioComponent = (function () {
-    function NavbarUsuarioComponent(authService, router) {
+    function NavbarUsuarioComponent(authService, router, _resultadosService, _proyectoService, _balanceService, _auxiliarService, _desarrolloZona, _desarrolloProducto, _creditoService) {
         this.authService = authService;
         this.router = router;
+        this._resultadosService = _resultadosService;
+        this._proyectoService = _proyectoService;
+        this._balanceService = _balanceService;
+        this._auxiliarService = _auxiliarService;
+        this._desarrolloZona = _desarrolloZona;
+        this._desarrolloProducto = _desarrolloProducto;
+        this._creditoService = _creditoService;
+        this.openConf = false;
+        this.openBien = false;
+        this.openLoad = false;
+        this.alert = false;
+        this.opciones = false;
+        this.periodos = [];
+        this._resultadosService.vender();
+        this.asignarBalance(localStorage.getItem('idProyecto'));
     }
     NavbarUsuarioComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1995,6 +2024,106 @@ var NavbarUsuarioComponent = (function () {
         this.authService.logoutUsuario();
         this.router.navigate(['login']);
     };
+    NavbarUsuarioComponent.prototype.asignarBalance = function (idProyecto) {
+        var _this = this;
+        this.periodos.length = 0;
+        this._proyectoService.buscarPeriodos(idProyecto).subscribe(function (data) {
+            if (data.datos.length == 0) {
+                _this.periodo = 1;
+                var x = {
+                    nombre: "Periodo 1",
+                    numero: 1
+                };
+                _this.periodos.push(x);
+            }
+            else {
+                _this.periodo = parseInt(data.datos.length) - 1;
+                for (var key$ in data.datos) {
+                    if (data.datos[key$].numeroPeriodo != 0) {
+                        var y = {
+                            nombre: "Periodo " + (data.datos[key$].numeroPeriodo),
+                            numero: (data.datos[key$].numeroPeriodo)
+                        };
+                        _this.periodos.push(y);
+                    }
+                }
+            }
+        });
+    };
+    NavbarUsuarioComponent.prototype.openBalances = function () {
+        //this.modalPeriodos.show();
+    };
+    NavbarUsuarioComponent.prototype.pasaCreditos = function () {
+        this.router.navigate(['Usuario/proyecto/financiamiento']);
+        this.alert = false;
+    };
+    NavbarUsuarioComponent.prototype.modalPasarPeriodo = function () {
+        this.openBien = false;
+        this.router.navigate(['Usuario/proyecto/home']);
+    };
+    NavbarUsuarioComponent.prototype.transicion = function (numero) {
+        console.log(numero);
+        this.periodo = numero;
+        localStorage.setItem('numeroPeriodo', numero);
+        //this.modalPeriodos.hide();
+    };
+    NavbarUsuarioComponent.prototype.pasarPeriodo = function () {
+        var _this = this;
+        this.openLoad = true;
+        this.openConf = false;
+        setTimeout(function () { _this.openLoad = false; }, 1000);
+        this._balanceService.getBalanceFinal().subscribe(function (data) {
+            console.log("data side av", data);
+            if (data.success) {
+                _this.balanceFinal = _this._resultadosService.getBalanceFinal();
+            }
+        });
+        setTimeout(function () {
+            var p = localStorage.getItem('numeroPeriodo');
+            var proyecto = localStorage.getItem('idProyecto');
+            var periodoNuevo = parseInt(p) + 1;
+            var cajaBancosFinal = 0;
+            console.log(_this.balanceFinal);
+            for (var _i = 0, _a = _this.balanceFinal; _i < _a.length; _i++) {
+                var b = _a[_i];
+                cajaBancosFinal += b.cajaBancos;
+            }
+            if (localStorage.getItem('periodos') == p) {
+                alert("Haz finalizado la simulacion");
+            }
+            else {
+                if (cajaBancosFinal < 0) {
+                    _this.openConf = false;
+                    _this.alert = true;
+                }
+                else {
+                    _this._balanceService.getBalanceByIds(proyecto, p).subscribe(function (data) {
+                        var dep = data.datos[0].maqEquipo * .10;
+                        _this._balanceService.crearBalance(proyecto, data.datos[0], periodoNuevo).subscribe(function (data) {
+                            if (data.success) {
+                                setTimeout(function () { _this.openBien = true; }, 1000);
+                                localStorage.setItem('numeroPeriodo', periodoNuevo.toString());
+                                localStorage.setItem('numeroRPeriodos', periodoNuevo.toString());
+                                _this.periodo = _this.periodo + 1;
+                                _this._proyectoService.changePeriodo();
+                                setTimeout(function () {
+                                    console.log("Peri", _this._proyectoService.periodo);
+                                }, 1000);
+                                var y = {
+                                    nombre: "Periodo " + _this.periodo,
+                                    numero: _this.periodo
+                                };
+                                _this.periodos.push(y);
+                            }
+                        });
+                    });
+                    _this._desarrolloProducto.actualizarPD();
+                    _this._desarrolloZona.actualizarZonasDes();
+                    _this._creditoService.validarP().subscribe();
+                }
+            }
+        }, 1000);
+    };
     return NavbarUsuarioComponent;
 }());
 NavbarUsuarioComponent = __decorate([
@@ -2003,10 +2132,10 @@ NavbarUsuarioComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/usuario/navbar-usuario/navbar-usuario.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/usuario/navbar-usuario/navbar-usuario.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_resultados_service__["a" /* ResultadosService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_balance_service__["a" /* BalanceService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_9__services_auxiliar_service__["a" /* AuxiliarService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__services_auxiliar_service__["a" /* AuxiliarService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_7__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_8__services_usuario_credito_service__["a" /* UsuarioCreditoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__services_usuario_credito_service__["a" /* UsuarioCreditoService */]) === "function" && _j || Object])
 ], NavbarUsuarioComponent);
 
-var _a, _b;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 //# sourceMappingURL=navbar-usuario.component.js.map
 
 /***/ }),
@@ -2032,7 +2161,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/balance-final/balance-final.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h3 class=\"col-12 text-center\">Balance General Final</h3>\r\n<div class=\"col-10 offset-1\" >\r\n  <table class=\"table table-hover  table-responsive\" *ngFor=\"let balance of balanceFinal\">\r\n\r\n    <tbody>\r\n      <tr class=\"thead-inverse\">\r\n        <th colspan=\"4\" class=\"text-center bg-primary \">A menos de un año</th>\r\n        <th colspan=\"2\" class=\"text-center bg-warning\">A menos de un año</th>\r\n      </tr>\r\n      <tr>\r\n        <td>Caja Bancos</td>\r\n        <td colspan=\"3\" class=\"text-right\">{{balance.cajaBancos |currency:'USD':true:'1.0-0'}}</td>\r\n        <td>IVA por enterar</td>\r\n        <td class=\"text-right\">{{balance.IVAPorEnterar|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Cuentas por Cobrar</td>\r\n        <td colspan=\"3\" class=\"text-right\">{{balance.cuentasPorCobrar|currency:'USD':true:'1.0-0'}}</td>\r\n        <td>Impuestos por Pagar</td>\r\n        <td class=\"text-right\">{{balance.imptosPorPagar|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>IVA Acreditable</td>\r\n        <td colspan=\"3\" class=\"text-right\">{{balance.IVAAcreditable|currency:'USD':true:'1.0-0'}}</td>\r\n        <td>Proveedores</td>\r\n        <td class=\"text-right\">{{balance.proveedores|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Almacen de Articulo Terminado</td>\r\n        <td colspan=\"3\" class=\"text-right\">{{balance.almacenArtTerm|currency:'USD':true:'1.0-0'}}</td>\r\n        <td>PTU por Pagar</td>\r\n        <td class=\"text-right\">{{balance.PTUPorPagar|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Alamacén de Materiales</td>\r\n        <td colspan=\"3\" class=\"text-right\">{{balance.almacenMateriales|currency:'USD':true:'1.0-0'}}</td>\r\n        <td>Préstamos Bancarios</td>\r\n        <td class=\"text-right\">{{balance.prestamosMenosAnio|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th class=\"text-center\">TOTAL</th>\r\n        <td colspan=\"3\" class=\"text-right\">{{balance.cajaBancos + balance.cuentasPorCobrar + balance.IVAAcreditable\r\n            + balance.almacenArtTerm + balance.almacenMateriales|currency:'USD':true:'1.0-0'}}</td>\r\n        <th class=\"text-center\">TOTAL</th>\r\n        <td class=\"text-right\">{{balance.IVAPorEnterar + balance.imptosPorPagar + balance.proveedores + balance.PTUPorPagar + balance.prestamosMenosAnio|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr class=\"thead-inverse\">\r\n        <th class=\"text-center bg-primary\" colspan=\"4\">A más de un año</th>\r\n        <th class=\"text-center bg-warning\" colspan=\"2\">A más de un año</th>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th class=\"text-center\"></th>\r\n        <td>I.O.</td>\r\n        <td>Dep. Acum</td>\r\n        <td>Neto</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Terrenos</td>\r\n        <td class=\"text-right\">{{balance.terreno|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{balance.depTerreno|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{balance.terreno - balance.depTerreno|currency:'USD':true:'1.0-0'}}</td>\r\n        <td>Prestamos Totales</td>\r\n        <td class=\"text-right\">{{balance.prestamosMasAnio|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Edificios e Instalaciones</td>\r\n        <td class=\"text-right\">{{balance.edifInsta|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{balance.depEdif|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{balance.edifInsta - balance.depEdif|currency:'USD':true:'1.0-0'}}</td>\r\n        <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Maquinaria y Equipo</td>\r\n        <td class=\"text-right\">{{balance.maqEquipo|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{balance.depMaqEquipo|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{balance.maqEquipo - balance.depMaqEquipo|currency:'USD':true:'1.0-0'}}</td>\r\n        <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Muebles y Enseres</td>\r\n        <td class=\"text-right\">{{balance.mueblesEnseres|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{balance.depMueblesEnseres|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{balance.mueblesEnseres - balance.depMueblesEnseres|currency:'USD':true:'1.0-0'}}</td>\r\n        <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Equipo de Transporte</td>\r\n        <td class=\"text-right\">{{balance.eqTrans|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{balance.depEqTrans|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{balance.eqTrans - balance.depEqTrans|currency:'USD':true:'1.0-0'}}</td>\r\n        <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th class=\"text-center\">TOTAL</th>\r\n        <td></td>\r\n        <td></td>\r\n        <td class=\"text-right\">{{balance.terreno + balance.edifInsta + balance.mueblesEnseres + balance.eqTrans + balance.maqEquipo - balance.depMaqEquipo - balance.depEdif - balance.depMueblesEnseres -balance.depEqTrans|currency:'USD':true:'1.0-0'}}</td>\r\n        <th class=\"text-center\">TOTAL</th>\r\n        <td class=\"text-right\">{{balance.prestamosMasAnio|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr class=\"\">\r\n        <th colspan=\"4\" class=\"text-center bg-primary\">De Aplicación Diferida</th>\r\n        <th class=\"text-center bg-warning\" colspan=\"2\">Con los Accionistas</th>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Pagos Hechos por anticipado</td>\r\n        <td colspan=\"3\" class=\"text-right\">{{balance.pagosAnticipado|currency:'USD':true:'1.0-0'}}</td>\r\n        <td>Capital Social</td>\r\n        <td class=\"text-right\">{{balance.capitalSocial|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Gastos por Amortizar</td>\r\n        <td colspan=\"3\" class=\"text-right\">{{balance.gastosAmortizacion|currency:'USD':true:'1.0-0'}}</td>\r\n        <td>Reserva legal</td>\r\n        <td class=\"text-right\">{{balance.reservaLegal|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td colspan=\"4\"></td>\r\n        <td>Utilidad Acumulada</td>\r\n        <td class=\"text-right\">{{balance.utilidadAcum|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td colspan=\"4\"></td>\r\n        <td >Utilidad del Ejercicio</td>\r\n        <td class=\"text-right\">{{balance.utilidadEjercicio|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th class=\"text-center\">TOTAL</th>\r\n        <td colspan=\"3\" class=\"text-right\">{{balance.pagosAnticipado + balance.gastosAmortizacion|currency:'USD':true:'1.0-0'}}</td>\r\n        <th class=\"text-center\">TOTAL</th>\r\n        <td class=\"text-right\">{{balance.capitalSocial + balance.reservaLegal + balance.utilidadAcum + balance.utilidadEjercicio|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <th >Suma de los Derechos</th>\r\n        <td colspan=\"3\" class=\"text-right\">{{balance.pagosAnticipado + balance.gastosAmortizacion + balance.terreno\r\n          + balance.edifInsta + balance.mueblesEnseres + balance.eqTrans + balance.maqEquipo\r\n          + balance.cajaBancos + balance.cuentasPorCobrar + balance.IVAAcreditable + balance.almacenArtTerm\r\n          + balance.almacenMateriales - balance.depMaqEquipo - balance.depEdif - balance.depMueblesEnseres -balance.depEqTrans|currency:'USD':true:'1.0-0'}}</td>\r\n        <td>Suma de las Obligaciones</td>\r\n        <td class=\"text-right\">{{balance.IVAPorEnterar + balance.imptosPorPagar + balance.proveedores + balance.PTUPorPagar\r\n          + balance.prestamosMenosAnio + balance.prestamosMasAnio + balance.capitalSocial + balance.reservaLegal\r\n          + balance.utilidadAcum + balance.utilidadEjercicio|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Diferencia</th>\r\n        <td colspan=\"3\" class=\"text-right\">{{(balance.pagosAnticipado + balance.gastosAmortizacion + balance.terreno\r\n          + balance.edifInsta + balance.mueblesEnseres + balance.eqTrans + balance.maqEquipo\r\n          + balance.cajaBancos + balance.cuentasPorCobrar + balance.IVAAcreditable + balance.almacenArtTerm\r\n          + balance.almacenMateriales) - (balance.IVAPorEnterar + balance.imptosPorPagar + balance.proveedores + balance.PTUPorPagar\r\n            + balance.prestamosMenosAnio + balance.prestamosMasAnio + balance.capitalSocial + balance.reservaLegal\r\n            + balance.utilidadAcum + balance.utilidadEjercicio) - balance.depMaqEquipo - balance.depEdif - balance.depMueblesEnseres -balance.depEqTrans|currency:'USD':true:'1.0-0'}}</td>\r\n        <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n    </tbody>\r\n  </table>\r\n  <div class=\"row\">\r\n    <button type=\"button\" (click)=\"descargaPDF()\"  class=\"btn btn-primary col-4 offset-4\">Exportar Resultado</button>\r\n\r\n  </div>\r\n</div>\r\n"
+module.exports = "\r\n<h3 class=\"col-12 text-center\">Balance General Final</h3>\r\n<div class=\"col-10 offset-1\" >\r\n  <table class=\"table table-hover  table-responsive\" *ngFor=\"let balance of balanceFinal\">\r\n\r\n    <tbody>\r\n      <tr class=\"thead-inverse\">\r\n        <th colspan=\"4\" class=\"text-center bg-primary \">A menos de un año</th>\r\n        <th colspan=\"2\" class=\"text-center bg-warning\">A menos de un año</th>\r\n      </tr>\r\n      <tr>\r\n        <td>Caja Bancos</td>\r\n        <td colspan=\"3\" class=\"text-right\">{{balance.cajaBancos |currency:'USD':true:'1.0-0'}}</td>\r\n        <td>IVA por enterar</td>\r\n        <td class=\"text-right\">{{balance.IVAPorEnterar|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Cuentas por Cobrar</td>\r\n        <td colspan=\"3\" class=\"text-right\">{{balance.cuentasPorCobrar|currency:'USD':true:'1.0-0'}}</td>\r\n        <td>Impuestos por Pagar</td>\r\n        <td class=\"text-right\">{{balance.imptosPorPagar|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>IVA Acreditable</td>\r\n        <td colspan=\"3\" class=\"text-right\">{{balance.IVAAcreditable|currency:'USD':true:'1.0-0'}}</td>\r\n        <td>Proveedores</td>\r\n        <td class=\"text-right\">{{balance.proveedores|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Almacen de Articulo Terminado</td>\r\n        <td colspan=\"3\" class=\"text-right\">{{balance.almacenArtTerm|currency:'USD':true:'1.0-0'}}</td>\r\n        <td>PTU por Pagar</td>\r\n        <td class=\"text-right\">{{balance.PTUPorPagar|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Alamacén de Materiales</td>\r\n        <td colspan=\"3\" class=\"text-right\">{{balance.almacenMateriales|currency:'USD':true:'1.0-0'}}</td>\r\n        <td>Préstamos Bancarios</td>\r\n        <td class=\"text-right\">{{balance.prestamosMenosAnio|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th class=\"text-center\">TOTAL</th>\r\n        <td colspan=\"3\" class=\"text-right\">{{balance.cajaBancos + balance.cuentasPorCobrar + balance.IVAAcreditable\r\n            + balance.almacenArtTerm + balance.almacenMateriales|currency:'USD':true:'1.0-0'}}</td>\r\n        <th class=\"text-center\">TOTAL</th>\r\n        <td class=\"text-right\">{{balance.IVAPorEnterar + balance.imptosPorPagar + balance.proveedores + balance.PTUPorPagar + balance.prestamosMenosAnio|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr class=\"thead-inverse\">\r\n        <th class=\"text-center bg-primary\" colspan=\"4\">A más de un año</th>\r\n        <th class=\"text-center bg-warning\" colspan=\"2\">A más de un año</th>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th class=\"text-center\"></th>\r\n        <td>I.O.</td>\r\n        <td>Dep. Acum</td>\r\n        <td>Neto</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Terrenos</td>\r\n        <td class=\"text-right\">{{balance.terreno|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{balance.depTerreno|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{balance.terreno - balance.depTerreno|currency:'USD':true:'1.0-0'}}</td>\r\n        <td>Prestamos Totales</td>\r\n        <td class=\"text-right\">{{balance.prestamosMasAnio|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Edificios e Instalaciones</td>\r\n        <td class=\"text-right\">{{balance.edifInsta|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{balance.depEdif|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{balance.edifInsta - balance.depEdif|currency:'USD':true:'1.0-0'}}</td>\r\n        <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Maquinaria y Equipo</td>\r\n        <td class=\"text-right\">{{balance.maqEquipo|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{balance.depMaqEquipo|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{balance.maqEquipo - balance.depMaqEquipo|currency:'USD':true:'1.0-0'}}</td>\r\n        <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Muebles y Enseres</td>\r\n        <td class=\"text-right\">{{balance.mueblesEnseres|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{balance.depMueblesEnseres|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{balance.mueblesEnseres - balance.depMueblesEnseres|currency:'USD':true:'1.0-0'}}</td>\r\n        <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Equipo de Transporte</td>\r\n        <td class=\"text-right\">{{balance.eqTrans|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{balance.depEqTrans|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{balance.eqTrans - balance.depEqTrans|currency:'USD':true:'1.0-0'}}</td>\r\n        <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th class=\"text-center\">TOTAL</th>\r\n        <td></td>\r\n        <td></td>\r\n        <td class=\"text-right\">{{balance.terreno + balance.edifInsta + balance.mueblesEnseres + balance.eqTrans + balance.maqEquipo - balance.depMaqEquipo - balance.depEdif - balance.depMueblesEnseres -balance.depEqTrans|currency:'USD':true:'1.0-0'}}</td>\r\n        <th class=\"text-center\">TOTAL</th>\r\n        <td class=\"text-right\">{{balance.prestamosMasAnio|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr class=\"\">\r\n        <th colspan=\"4\" class=\"text-center bg-primary\">De Aplicación Diferida</th>\r\n        <th class=\"text-center bg-warning\" colspan=\"2\">Con los Accionistas</th>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Pagos Hechos por anticipado</td>\r\n        <td colspan=\"3\" class=\"text-right\">{{balance.pagosAnticipado|currency:'USD':true:'1.0-0'}}</td>\r\n        <td>Capital Social</td>\r\n        <td class=\"text-right\">{{balance.capitalSocial|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Gastos por Amortizar</td>\r\n        <td colspan=\"3\" class=\"text-right\">{{balance.gastosAmortizacion|currency:'USD':true:'1.0-0'}}</td>\r\n        <td>Reserva legal</td>\r\n        <td class=\"text-right\">{{balance.reservaLegal|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td colspan=\"4\"></td>\r\n        <td>Utilidad Acumulada</td>\r\n        <td class=\"text-right\">{{balance.utilidadAcum|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td colspan=\"4\"></td>\r\n        <td >Utilidad del Ejercicio</td>\r\n        <td class=\"text-right\">{{balance.utilidadEjercicio|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th class=\"text-center\">TOTAL</th>\r\n        <td colspan=\"3\" class=\"text-right\">{{balance.pagosAnticipado + balance.gastosAmortizacion|currency:'USD':true:'1.0-0'}}</td>\r\n        <th class=\"text-center\">TOTAL</th>\r\n        <td class=\"text-right\">{{balance.capitalSocial + balance.reservaLegal + balance.utilidadAcum + balance.utilidadEjercicio|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <th >Suma de los Derechos</th>\r\n        <td colspan=\"3\" class=\"text-right\">{{balance.pagosAnticipado + balance.gastosAmortizacion + balance.terreno\r\n          + balance.edifInsta + balance.mueblesEnseres + balance.eqTrans + balance.maqEquipo\r\n          + balance.cajaBancos + balance.cuentasPorCobrar + balance.IVAAcreditable + balance.almacenArtTerm\r\n          + balance.almacenMateriales - balance.depMaqEquipo - balance.depEdif - balance.depMueblesEnseres -balance.depEqTrans|currency:'USD':true:'1.0-0'}}</td>\r\n        <td>Suma de las Obligaciones</td>\r\n        <td class=\"text-right\">{{balance.IVAPorEnterar + balance.imptosPorPagar + balance.proveedores + balance.PTUPorPagar\r\n          + balance.prestamosMenosAnio + balance.prestamosMasAnio + balance.capitalSocial + balance.reservaLegal\r\n          + balance.utilidadAcum + balance.utilidadEjercicio|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Diferencia</th>\r\n        <td colspan=\"3\" class=\"text-right\">{{(balance.pagosAnticipado + balance.gastosAmortizacion + balance.terreno\r\n          + balance.edifInsta + balance.mueblesEnseres + balance.eqTrans + balance.maqEquipo\r\n          + balance.cajaBancos + balance.cuentasPorCobrar + balance.IVAAcreditable + balance.almacenArtTerm\r\n          + balance.almacenMateriales) - (balance.IVAPorEnterar + balance.imptosPorPagar + balance.proveedores + balance.PTUPorPagar\r\n            + balance.prestamosMenosAnio + balance.prestamosMasAnio + balance.capitalSocial + balance.reservaLegal\r\n            + balance.utilidadAcum + balance.utilidadEjercicio) - balance.depMaqEquipo - balance.depEdif - balance.depMueblesEnseres -balance.depEqTrans|currency:'USD':true:'1.0-0'}}</td>\r\n        <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n    </tbody>\r\n  </table>\r\n  <div class=\"row\">\r\n    <button type=\"button\" (click)=\"descargaPDF()\"  class=\"btn btn-primary col-4 offset-4\">Exportar Resultado</button>\r\n\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2044,6 +2173,12 @@ module.exports = "<h3 class=\"col-12 text-center\">Balance General Final</h3>\r\
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_balance_service__ = __webpack_require__("../../../../../src/app/services/balance.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_resultados_service__ = __webpack_require__("../../../../../src/app/services/resultados.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_desarrollo_producto_service__ = __webpack_require__("../../../../../src/app/services/desarrollo-producto.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_zona_service__ = __webpack_require__("../../../../../src/app/services/desarrollo-zona.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_auxiliar_service__ = __webpack_require__("../../../../../src/app/services/auxiliar.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_usuario_credito_service__ = __webpack_require__("../../../../../src/app/services/usuario-credito.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BalanceFinalComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2058,12 +2193,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+
+
+
+
 var BalanceFinalComponent = (function () {
-    function BalanceFinalComponent(_resultadosService, _balanceService, cp) {
+    function BalanceFinalComponent(_resultadosService, cp, _proyectoService, _balanceService, _auxiliarService, _desarrolloZona, router, _creditoService, _desarrolloProducto) {
         this._resultadosService = _resultadosService;
-        this._balanceService = _balanceService;
         this.cp = cp;
+        this._proyectoService = _proyectoService;
+        this._balanceService = _balanceService;
+        this._auxiliarService = _auxiliarService;
+        this._desarrolloZona = _desarrolloZona;
+        this.router = router;
+        this._creditoService = _creditoService;
+        this._desarrolloProducto = _desarrolloProducto;
+        this.openConf = false;
+        this.openBien = false;
+        this.openLoad = false;
+        this.alert = false;
+        this.opciones = false;
+        this.periodos = [];
         this._resultadosService.vender();
+        this._proyectoService.muestraCierrePeriodo();
     }
     BalanceFinalComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -2277,10 +2431,10 @@ BalanceFinalComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-final/balance-final.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-final/balance-final.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_resultados_service__["a" /* ResultadosService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_balance_service__["a" /* BalanceService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common__["CurrencyPipe"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common__["CurrencyPipe"]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_resultados_service__["a" /* ResultadosService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common__["CurrencyPipe"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common__["CurrencyPipe"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_balance_service__["a" /* BalanceService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_7__services_auxiliar_service__["a" /* AuxiliarService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__services_auxiliar_service__["a" /* AuxiliarService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_9__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__angular_router__["a" /* Router */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_8__services_usuario_credito_service__["a" /* UsuarioCreditoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__services_usuario_credito_service__["a" /* UsuarioCreditoService */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_5__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */]) === "function" && _j || Object])
 ], BalanceFinalComponent);
 
-var _a, _b, _c;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 //# sourceMappingURL=balance-final.component.js.map
 
 /***/ }),
@@ -2323,6 +2477,7 @@ module.exports = "<div class=\"row\">\r\n\r\n  <div class=\"col-lg-6 col-sm-12 \
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_zona_service__ = __webpack_require__("../../../../../src/app/services/desarrollo-zona.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_balance_service__ = __webpack_require__("../../../../../src/app/services/balance.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_zonas_service__ = __webpack_require__("../../../../../src/app/services/zonas.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BalanceHomeComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2342,8 +2497,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var BalanceHomeComponent = (function () {
-    function BalanceHomeComponent(_desarrolloProducto, _desarrolloZonaService, _CompraMaquinariaService, _productosService, _resultadosService, _dash, _balanceService, _demandaService) {
+    function BalanceHomeComponent(_desarrolloProducto, _desarrolloZonaService, _CompraMaquinariaService, _productosService, _resultadosService, _dash, _balanceService, _demandaService, _proyectoService) {
         var _this = this;
         this._desarrolloProducto = _desarrolloProducto;
         this._desarrolloZonaService = _desarrolloZonaService;
@@ -2353,6 +2509,7 @@ var BalanceHomeComponent = (function () {
         this._dash = _dash;
         this._balanceService = _balanceService;
         this._demandaService = _demandaService;
+        this._proyectoService = _proyectoService;
         this.productosZonaSinDesarrollar = [];
         this.productosZonaEnDesarrollo = [];
         this.productosZonaDesarrollados = [];
@@ -2395,6 +2552,7 @@ var BalanceHomeComponent = (function () {
         this.maquinarias = this._dash.returnMaquinarias();
         this.activos = this._balanceService.returnActivos();
         this.pasivos = this._balanceService.returnPasivos();
+        this._proyectoService.ocultaCierrePeriodo();
         this.zonas = this._demandaService.returnZonasNormales();
         console.log(this.activos, this.pasivos);
         setTimeout(function () {
@@ -2794,10 +2952,10 @@ BalanceHomeComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_producto_service__["a" /* ProductoService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_resultados_service__["a" /* ResultadosService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_dashboard_service__["a" /* DashboardService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_7__services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__services_balance_service__["a" /* BalanceService */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_8__services_zonas_service__["a" /* ZonasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__services_zonas_service__["a" /* ZonasService */]) === "function" && _h || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_producto_service__["a" /* ProductoService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_resultados_service__["a" /* ResultadosService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_dashboard_service__["a" /* DashboardService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_7__services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__services_balance_service__["a" /* BalanceService */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_8__services_zonas_service__["a" /* ZonasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__services_zonas_service__["a" /* ZonasService */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_9__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _j || Object])
 ], BalanceHomeComponent);
 
-var _a, _b, _c, _d, _e, _f, _g, _h;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 //# sourceMappingURL=balance-home.component.js.map
 
 /***/ }),
@@ -2833,6 +2991,7 @@ module.exports = "<h3 class=\"text-center\">Balance General</h3>\r\n\r\n<table c
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_resultados_service__ = __webpack_require__("../../../../../src/app/services/resultados.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BalanceInicialComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2845,11 +3004,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var BalanceInicialComponent = (function () {
-    function BalanceInicialComponent(_resultadosService) {
+    function BalanceInicialComponent(_resultadosService, _proyectoService) {
         this._resultadosService = _resultadosService;
+        this._proyectoService = _proyectoService;
         this.balanceInicial = this._resultadosService.balanceInicialAnterior();
         console.log(this.balanceInicial);
+        this._proyectoService.ocultaCierrePeriodo();
     }
     BalanceInicialComponent.prototype.ngOnInit = function () {
     };
@@ -2861,10 +3023,10 @@ BalanceInicialComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-inicial/balance-inicial.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-inicial/balance-inicial.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_resultados_service__["a" /* ResultadosService */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_resultados_service__["a" /* ResultadosService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _b || Object])
 ], BalanceInicialComponent);
 
-var _a;
+var _a, _b;
 //# sourceMappingURL=balance-inicial.component.js.map
 
 /***/ }),
@@ -2872,7 +3034,7 @@ var _a;
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/balance/balance.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "  <div style=\"z-index:10000;color:white;position:fixed; margin-top:-93px; margin-left:15%\">\r\n    <h4 class=\" text-center\">Periodo Corriendo: {{periodo}}</h4>\r\n  </div>\r\n\r\n  <button type=\"button\" class=\"btn btn-success\" (click)=\"openConf=true\"\r\n  style=\"z-index:10000;color:white;position:fixed; margin-top:-97px; margin-left:30%\">Cerrar Periodo</button>\r\n  <button  type=\"button\" class=\"btn btn-info\" (click)=\"openBalances()\"\r\n  style=\"z-index:1000000;color:white;position:fixed; margin-top:-97px; margin-left:40%\">Periodos Anteriores</button>\r\n\r\n  <div bsModal #modalPeriodos=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\"\r\n  style=\"z-index:100000\">\r\n    <div class=\"modal-dialog modal-sm\">\r\n      <div class=\"modal-content\">\r\n        <div class=\"modal-header\">\r\n          <h2 class=\"modal-title\">Periodos</h2>\r\n        </div>\r\n        <div class=\"modal-body\">\r\n          <div class=\"list-group\" >\r\n            <a class=\"list-group-item list-group-item-action \" *ngFor=\"let p of periodos\" (click)=\"transicion(p.numero)\">{{p.nombre}}</a>\r\n          </div>\r\n              <div class=\"modal-footer\">\r\n                <button  type=\"button\" class=\"btn btn-outline-danger\" (click)=\"modalPeriodos.hide()\">\r\n                Cancelar\r\n                </button>\r\n              </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <ngl-modal header=\"Confirmación\"  [(open)]=\"openConf\" size=\"x-small\" directional=\"false\">\r\n      <div body>\r\n        <div class=\"col-12 text-center container\">\r\n          <h2 style=\"margin-bottom:30px\">¿Esta seguro que deseas cerrar el periodo actual ?</h2>\r\n        </div>\r\n      </div>\r\n\r\n      <ng-template ngl-modal-footer>\r\n      <button class=\"btn btn-danger\" (click)=\"openConf=false\">Cancel</button>\r\n      <button class=\"btn btn-primary\" (click)=\"pasarPeriodo()\">Cerrar Periodo</button>\r\n      </ng-template>\r\n    </ngl-modal>\r\n\r\n\r\n    <ngl-modal header=\"Confirmación\"  [(open)]=\"openBien\" size=\"x-small\" directional=\"false\">\r\n      <div body>\r\n        <div class=\"col-12 text-center container\">\r\n          <h2 style=\"margin-bottom:30px\">Ha cerrado periodo satisfactoriamente</h2>\r\n        </div>\r\n      </div>\r\n\r\n      <ng-template ngl-modal-footer>\r\n      <button class=\"btn btn-primary\" (click)=\"modalPasarPeriodo()\">Aceptar</button>\r\n      </ng-template>\r\n    </ngl-modal>\r\n\r\n\r\n    <ngl-modal  [(open)]=\"openLoad\" size=\"small\" directional=\"false\">\r\n      <div body>\r\n        <h1 class=\"col-12 text-center\" >Cerrando Periodo</h1>\r\n        <h5 class=\"col-12 text-center\">Realzando Operacion</h5>\r\n        <div style=\"position:relative; height:6.25rem; z-index:0;\">\r\n          <ngl-spinner size=\"large\" type=\"brand\"></ngl-spinner>\r\n        </div>\r\n      </div>\r\n    </ngl-modal>\r\n\r\n\r\n\r\n    <ngl-modal header=\"Confirmación\"  [(open)]=\"alert\" size=\"x-small\" directional=\"false\">\r\n\r\n      <div body>\r\n        <div class=\"container\">\r\n          <h5 class=\"col-12 text-center\" style=\"margin-bottom:30px\">Tienes deuda, no puedes pasar de periodo, necesitas un prestamo</h5>\r\n            <div class=\"col-2 offset-5\">\r\n              <img  src=\"assets/img/credit.png\" class=\"img-fluid\">\r\n            </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n      <ng-template ngl-modal-footer>\r\n        <button class=\"btn btn-primary\" (click)=\"pasaCreditos()\">Acepta</button>\r\n\r\n    </ng-template>\r\n      </ngl-modal>\r\n"
+module.exports = ""
 
 /***/ }),
 
@@ -2920,22 +3082,25 @@ var BalanceComponent = (function () {
         this.router = router;
         this._creditoService = _creditoService;
         this._desarrolloProducto = _desarrolloProducto;
-        this.totalItems = 50;
-        this.smallnumPages = 0;
         this.opciones = false;
         this.periodos = [];
         this.openConf = false;
         this.openBien = false;
         this.openLoad = false;
         this.alert = false;
-        this.status = {
-            isFirstOpen: true,
-            isOpen: true
-        };
+        this.asignarBalance(localStorage.getItem('idProyecto'));
         this.balanceFinal = this._resultadosService.getBalanceFinal();
+        this.perAct = this._proyectoService.periodo;
     }
     BalanceComponent.prototype.ngOnInit = function () {
-        this.asignarBalance(localStorage.getItem('idProyecto'));
+        var _this = this;
+        setTimeout(function () {
+            _this._balanceService.getBalanceFinal().subscribe(function (data) {
+                if (data.success) {
+                    _this.balanceFinal = _this._resultadosService.getBalanceFinal();
+                }
+            });
+        }, 1500);
     };
     BalanceComponent.prototype.asignarBalance = function (idProyecto) {
         var _this = this;
@@ -3080,6 +3245,7 @@ module.exports = "\r\n\r\n<div class=\"row\">\r\n  <div class=\"offset-1 col-4\"
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/maquinaria.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_producto_service__ = __webpack_require__("../../../../../src/app/services/producto.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap_modal__ = __webpack_require__("../../../../ngx-bootstrap/modal/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CompraMaquinariaComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3095,12 +3261,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var CompraMaquinariaComponent = (function () {
-    function CompraMaquinariaComponent(_CompraMaquinariaService, _productosService, _maquinariaService) {
+    function CompraMaquinariaComponent(_CompraMaquinariaService, _productosService, _maquinariaService, _proyectoService) {
         var _this = this;
         this._CompraMaquinariaService = _CompraMaquinariaService;
         this._productosService = _productosService;
         this._maquinariaService = _maquinariaService;
+        this._proyectoService = _proyectoService;
         this.maquinas = new Array();
         this.directional = false;
         this.productos = new Array();
@@ -3125,6 +3293,7 @@ var CompraMaquinariaComponent = (function () {
             nombreMaq: null,
             imgMaq: null
         };
+        this._proyectoService.ocultaCierrePeriodo();
         this.productos = this._productosService.returnProductos();
         this.maquinas = this._maquinariaService.returnMPC();
         this.maquinasCompradas = this._CompraMaquinariaService.returnMaquinasCompradas();
@@ -3211,10 +3380,10 @@ CompraMaquinariaComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/compra-maquinaria/compra-maquinaria.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/compra-maquinaria/compra-maquinaria.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_producto_service__["a" /* ProductoService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__services_maquinaria_service__["a" /* MaquinariaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_maquinaria_service__["a" /* MaquinariaService */]) === "function" && _e || Object])
+    __metadata("design:paramtypes", [typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_producto_service__["a" /* ProductoService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__services_maquinaria_service__["a" /* MaquinariaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_maquinaria_service__["a" /* MaquinariaService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _f || Object])
 ], CompraMaquinariaComponent);
 
-var _a, _b, _c, _d, _e;
+var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=compra-maquinaria.component.js.map
 
 /***/ }),
@@ -3240,7 +3409,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-12\">\r\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\r\n<hr>\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-12\" style=\"height:500px\" *ngFor=\"let zona of graficas\" >\r\n    <div class=\"row\">\r\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\r\n\r\n  <div class=\"col-12\" style=\"height:400px;\">\r\n    <ngx-charts-line-chart\r\n         [scheme]=\"colorScheme\"\r\n         [results]=\"zona.graf\"\r\n         xAxis=\"true\"\r\n         legendTitle=\"Productos\"\r\n         yAxis=\"true\"\r\n         legend=\"true\"\r\n         showXAxisLabel=\"true\"\r\n         showYAxisLabel=\"true\"\r\n         xAxisLabel=\"Periodos\"\r\n         yAxisLabel=\"Demanda Potencial\"\r\n         autoScale=\"true\">\r\n       </ngx-charts-line-chart>\r\n  </div>\r\n    </div>\r\n\r\n\r\n\r\n\r\n  </div>\r\n\r\n</div>\r\n"
+module.exports = "<div class=\"col-12\">\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\n<hr>\n</div>\n\n\n<div class=\"row\">\n  <div class=\"col-12\" style=\"height:500px\" *ngFor=\"let zona of graficas\" >\n    <div class=\"row\">\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\n\n  <div class=\"col-12\" style=\"height:400px;\">\n    <ngx-charts-line-chart\n         [scheme]=\"colorScheme\"\n         [results]=\"zona.graf\"\n         xAxis=\"true\"\n         legendTitle=\"Productos\"\n         yAxis=\"true\"\n         legend=\"true\"\n         showXAxisLabel=\"true\"\n         showYAxisLabel=\"true\"\n         xAxisLabel=\"Periodos\"\n         yAxisLabel=\"Demanda Potencial\"\n         autoScale=\"true\">\n       </ngx-charts-line-chart>\n  </div>\n    </div>\n\n\n\n\n  </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -3426,6 +3595,7 @@ module.exports = "\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-4 offset
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_desarrollo_zona_service__ = __webpack_require__("../../../../../src/app/services/desarrollo-zona.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ngx_bootstrap_modal__ = __webpack_require__("../../../../ngx-bootstrap/modal/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DesarrolloMercadoComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3442,12 +3612,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var DesarrolloMercadoComponent = (function () {
-    function DesarrolloMercadoComponent(_zonasService, _desarrolloZonaService, _productoService) {
+    function DesarrolloMercadoComponent(_zonasService, _desarrolloZonaService, _productoService, _proyectoService) {
         var _this = this;
         this._zonasService = _zonasService;
         this._desarrolloZonaService = _desarrolloZonaService;
         this._productoService = _productoService;
+        this._proyectoService = _proyectoService;
         this.zonas = [];
         this.productos = [];
         this.productosZonaSinDesarrollar = [];
@@ -3456,6 +3628,7 @@ var DesarrolloMercadoComponent = (function () {
         this.openConf = false;
         this.openPago = false;
         this.openLoad = false;
+        this._proyectoService.ocultaCierrePeriodo();
         this.zonas = this._zonasService.returnZonasNormales();
         this.productos = this._productoService.returnProductos();
         this.productosZonaSinDesarrollar = this._desarrolloZonaService.returnProductosDeZonaSinDesarrollar();
@@ -3615,10 +3788,10 @@ DesarrolloMercadoComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/desarrollo-mercado/desarrollo-mercado.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/desarrollo-mercado/desarrollo-mercado.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services_zonas_service__["a" /* ZonasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_zonas_service__["a" /* ZonasService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */]) === "function" && _e || Object])
+    __metadata("design:paramtypes", [typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services_zonas_service__["a" /* ZonasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_zonas_service__["a" /* ZonasService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _f || Object])
 ], DesarrolloMercadoComponent);
 
-var _a, _b, _c, _d, _e;
+var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=desarrollo-mercado.component.js.map
 
 /***/ }),
@@ -3654,6 +3827,7 @@ module.exports = "<div class=\"row\">\r\n  <div class=\"col-4 offset-1\">\r\n   
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_desarrollo_producto_service__ = __webpack_require__("../../../../../src/app/services/desarrollo-producto.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DesarrolloProductoComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3666,10 +3840,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var DesarrolloProductoComponent = (function () {
-    function DesarrolloProductoComponent(_desarrolloProducto) {
+    function DesarrolloProductoComponent(_desarrolloProducto, _proyectoService) {
         var _this = this;
         this._desarrolloProducto = _desarrolloProducto;
+        this._proyectoService = _proyectoService;
         this.productosDesarollados = [];
         this.productosEnDesarrollo = [];
         this.productosSinDesarrollar = [];
@@ -3695,6 +3871,7 @@ var DesarrolloProductoComponent = (function () {
         this.openLoad = false;
         this.openPago = false;
         this.openLoadPago = false;
+        this._proyectoService.ocultaCierrePeriodo();
         this.productosSinDesarrollar = this._desarrolloProducto.returnProductosSinDesarrollar();
         this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
         this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
@@ -3764,10 +3941,10 @@ DesarrolloProductoComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/desarrollo-producto/desarrollo-producto.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/desarrollo-producto/desarrollo-producto.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _b || Object])
 ], DesarrolloProductoComponent);
 
-var _a;
+var _a, _b;
 //# sourceMappingURL=desarrollo-producto.component.js.map
 
 /***/ }),
@@ -3789,6 +3966,7 @@ module.exports = "<h4 class=\"text-center\">Estado de Resultados</h4>\r\n<hr>\r\
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__ = __webpack_require__("../../../../../src/app/services/resultados.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_balance_service__ = __webpack_require__("../../../../../src/app/services/balance.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_compra_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/compra-maquinaria.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EstadoResultadosComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3805,14 +3983,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var EstadoResultadosComponent = (function () {
-    function EstadoResultadosComponent(_operacionService, _productoService, _maqService, _balanceService, _resultadosService) {
+    function EstadoResultadosComponent(_operacionService, _productoService, _maqService, _balanceService, _resultadosService, _proyectoService) {
         var _this = this;
         this._operacionService = _operacionService;
         this._productoService = _productoService;
         this._maqService = _maqService;
         this._balanceService = _balanceService;
         this._resultadosService = _resultadosService;
+        this._proyectoService = _proyectoService;
         this.resultados = [];
         this.auxiliares = [];
         this.auxiliarC = [];
@@ -3821,6 +4001,7 @@ var EstadoResultadosComponent = (function () {
         this.intereses = [];
         this.maquinas = [];
         this.balanceFinal = [];
+        this._proyectoService.ocultaCierrePeriodo();
         this._resultadosService.vender();
         setTimeout(function () {
             _this._balanceService.getBalanceFinal().subscribe(function (data) {
@@ -4158,10 +4339,10 @@ EstadoResultadosComponent = __decorate([
         selector: 'app-estado-resultados',
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.html")
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__["a" /* ResultadosService */]) === "function" && _e || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__["a" /* ResultadosService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _f || Object])
 ], EstadoResultadosComponent);
 
-var _a, _b, _c, _d, _e;
+var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=estado-resultados.component.js.map
 
 /***/ }),
@@ -4198,6 +4379,7 @@ module.exports = "<div class=\"container\" style=\"height:800px;\">\r\n  <div cl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_usuario_credito_service__ = __webpack_require__("../../../../../src/app/services/usuario-credito.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FinanciamientoComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4211,9 +4393,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var FinanciamientoComponent = (function () {
-    function FinanciamientoComponent(_creditoService) {
+    function FinanciamientoComponent(_creditoService, _proyectoService) {
         this._creditoService = _creditoService;
+        this._proyectoService = _proyectoService;
         this.tablaA = [];
         this.creditosActivos = [];
         this.creditosSolicitados = [];
@@ -4227,6 +4411,7 @@ var FinanciamientoComponent = (function () {
             idCredito: null
         };
         this.confDeleteCredito = false;
+        this._proyectoService.ocultaCierrePeriodo();
         this.creditos = this._creditoService.returnCreditosU(localStorage.getItem('idUsuario'));
         this.creditosActivos = this._creditoService.arregloC();
         console.log("cActivos", this.creditos);
@@ -4340,10 +4525,10 @@ FinanciamientoComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_usuario_credito_service__["a" /* UsuarioCreditoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_usuario_credito_service__["a" /* UsuarioCreditoService */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_usuario_credito_service__["a" /* UsuarioCreditoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_usuario_credito_service__["a" /* UsuarioCreditoService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _b || Object])
 ], FinanciamientoComponent);
 
-var _a;
+var _a, _b;
 //# sourceMappingURL=financiamiento.component.js.map
 
 /***/ }),
@@ -4369,7 +4554,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/flujo/flujo.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<table class=\"table table-bordered  table-responsive\" >\n\n  <tbody>\n    <tr class=\"thead-inverse\">\n    <th colspan=\"2\">Presupuesto Global de Caja y Bancos</th>\n    </tr>\n\n\n\n\n    <tr>\n      <td>Saldo Inical</td>\n      <td class=\"text-right\" *ngFor=\"let balance of balanceInicial\">{{getCajaBancos() |currency:'USD':true:'1.0-0'}}</td>\n    </tr>\n\n    <tr>\n            <td colspan=\"2\"></td>\n    </tr>\n\n    <tr>\n      <th colspan=\"2\">Entradas </th>\n\n    </tr>\n\n    <tr>\n            <td colspan=\"2\"></td>\n    </tr>\n\n    <tr>\n      <td>Cobro por Ventas</td>\n      <td class=\"text-right\">{{getCobroVentas() |currency:'USD':true:'1.0-0'}}</td>\n\n\n    </tr>\n\n    <tr>\n      <td>Préstamos</td>\n      <td class=\"text-right\">{{getPAcuales() |currency:'USD':true:'1.0-0'}}</td>\n\n\n\n    </tr>\n\n    <tr>\n      <td>Intereses</td>\n      <td class=\"text-right\">-</td>\n\n\n\n\n    </tr>\n\n\n\n    <tr>\n      <td>Incremento de Capital</td>\n      <td class=\"text-right\">-</td>\n\n    </tr>\n\n    <tr>\n            <td colspan=\"\"></td>\n    </tr>\n\n\n    <tr>\n      <th>Disponible</th>\n      <th class=\"text-right\">{{getDisponible() |currency:'USD':true:'1.0-0'}}</th>\n\n    </tr>\n    <tr>\n            <td colspan=\"2\"></td>\n    </tr>\n\n    <tr>\n      <td colspan=\"2\">Salidas</td>\n    </tr>\n\n    <tr>\n      <td>Costo de Transformación</td>\n      <td class=\"text-right\">{{getCostoDeTransformacion() |currency:'USD':true:'1.0-0'}}</td>\n\n    </tr>\n\n    <tr>\n      <td>Costo de Distribución</td>\n      <td class=\"text-right\">{{getCostoDeDistribucion() |currency:'USD':true:'1.0-0'}}</td>\n\n    </tr>\n\n\n    <tr>\n      <td>Costo de Administrativo</td>\n      <td class=\"text-right\">{{getCostoAdministrativo() |currency:'USD':true:'1.0-0'}}</td>\n\n    </tr>\n\n    <tr>\n      <td>Gastos de Venta</td>\n      <td class=\"text-right\">{{getGastosVenta() |currency:'USD':true:'1.0-0'}}</td>\n    </tr>\n\n\n\n    <tr>\n      <td>Compra de Maquinaria</td>\n      <td class=\"text-right\">{{getCompraMaquinaria() |currency:'USD':true:'1.0-0'}}</td>\n\n\n    </tr>\n\n    <tr>\n      <td>Compras</td>\n      <td class=\"text-right\">{{getCompras() |currency:'USD':true:'1.0-0'}}</td>\n\n\n    </tr>\n\n    <tr>\n      <td>Intereses</td>\n      <td class=\"text-right\">{{getIntereses() |currency:'USD':true:'1.0-0'}}</td>\n\n    </tr>\n\n    <tr>\n      <td>Pago de Préstamos</td>\n      <td class=\"text-right\">{{getPagos() |currency:'USD':true:'1.0-0'}}</td>\n    </tr>\n\n    <tr>\n      <td>Dividendos</td>\n      <td class=\"text-right\">-</td>\n\n    </tr>\n    <tr>\n            <td colspan=\"2\"></td>\n    </tr>\n\n    <tr>\n      <td>PTU</td>\n      <td class=\"text-right\">{{getPTU() |currency:'USD':true:'1.0-0'}}</td>\n\n    </tr>\n\n    <tr>\n      <td>ISR</td>\n      <td class=\"text-right\">{{getISR() |currency:'USD':true:'1.0-0'}}</td>\n    </tr>\n\n    <tr>\n      <td>IVA</td>\n      <td class=\"text-right\">{{getIVA() |currency:'USD':true:'1.0-0'}}</td>\n    </tr>\n\n    <tr>\n      <td colspan=\"2\"></td>\n\n    </tr>\n\n    <tr>\n      <td>Total de Salidas</td>\n      <td class=\"text-right\">{{getSalidas() |currency:'USD':true:'1.0-0'}}</td>\n    </tr>\n\n    <tr>\n\n    </tr>\n\n    <tr>\n      <th>Saldo Final</th>\n      <th class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.cajaBancos |currency:'USD':true:'1.0-0'}}</th>\n    </tr>\n\n  </tbody>\n</table>\n"
+module.exports = "<table class=\"table table-bordered  table-responsive\" >\r\n\r\n  <tbody>\r\n    <tr class=\"thead-inverse\">\r\n    <th colspan=\"2\">Presupuesto Global de Caja y Bancos</th>\r\n    </tr>\r\n\r\n\r\n\r\n\r\n    <tr>\r\n      <td>Saldo Inical</td>\r\n      <td class=\"text-right\" *ngFor=\"let balance of balanceInicial\">{{getCajaBancos() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th colspan=\"2\">Entradas </th>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Cobro por Ventas</td>\r\n      <td class=\"text-right\">{{getCobroVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Préstamos</td>\r\n      <td class=\"text-right\">{{getPAcuales() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Intereses</td>\r\n      <td class=\"text-right\">-</td>\r\n\r\n\r\n\r\n\r\n    </tr>\r\n\r\n\r\n\r\n    <tr>\r\n      <td>Incremento de Capital</td>\r\n      <td class=\"text-right\">-</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n            <td colspan=\"\"></td>\r\n    </tr>\r\n\r\n\r\n    <tr>\r\n      <th>Disponible</th>\r\n      <th class=\"text-right\">{{getDisponible() |currency:'USD':true:'1.0-0'}}</th>\r\n\r\n    </tr>\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td colspan=\"2\">Salidas</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Costo de Transformación</td>\r\n      <td class=\"text-right\">{{getCostoDeTransformacion() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Costo de Distribución</td>\r\n      <td class=\"text-right\">{{getCostoDeDistribucion() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n\r\n    <tr>\r\n      <td>Costo de Administrativo</td>\r\n      <td class=\"text-right\">{{getCostoAdministrativo() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Gastos de Venta</td>\r\n      <td class=\"text-right\">{{getGastosVenta() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n\r\n\r\n    <tr>\r\n      <td>Compra de Maquinaria</td>\r\n      <td class=\"text-right\">{{getCompraMaquinaria() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Compras</td>\r\n      <td class=\"text-right\">{{getCompras() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Intereses</td>\r\n      <td class=\"text-right\">{{getIntereses() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Pago de Préstamos</td>\r\n      <td class=\"text-right\">{{getPagos() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Dividendos</td>\r\n      <td class=\"text-right\">-</td>\r\n\r\n    </tr>\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>PTU</td>\r\n      <td class=\"text-right\">{{getPTU() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>ISR</td>\r\n      <td class=\"text-right\">{{getISR() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>IVA</td>\r\n      <td class=\"text-right\">{{getIVA() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td colspan=\"2\"></td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Total de Salidas</td>\r\n      <td class=\"text-right\">{{getSalidas() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Saldo Final</th>\r\n      <th class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.cajaBancos |currency:'USD':true:'1.0-0'}}</th>\r\n    </tr>\r\n\r\n  </tbody>\r\n</table>\r\n"
 
 /***/ }),
 
@@ -4383,6 +4568,7 @@ module.exports = "<table class=\"table table-bordered  table-responsive\" >\n\n 
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__ = __webpack_require__("../../../../../src/app/services/resultados.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_balance_service__ = __webpack_require__("../../../../../src/app/services/balance.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_compra_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/compra-maquinaria.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FlujoComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4399,14 +4585,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var FlujoComponent = (function () {
-    function FlujoComponent(_operacionService, _productoService, _maqService, _balanceService, _resultadosService) {
+    function FlujoComponent(_operacionService, _productoService, _maqService, _balanceService, _resultadosService, _proyectoService) {
         var _this = this;
         this._operacionService = _operacionService;
         this._productoService = _productoService;
         this._maqService = _maqService;
         this._balanceService = _balanceService;
         this._resultadosService = _resultadosService;
+        this._proyectoService = _proyectoService;
         this.auxiliares = [];
         this.auxiliarC = [];
         this.auxiliarT = [];
@@ -4416,6 +4604,7 @@ var FlujoComponent = (function () {
         this.balanceFinal = [];
         this.auxiliaresAnteriores = [];
         this.prestamos = [];
+        this._proyectoService.ocultaCierrePeriodo();
         this._resultadosService.vender();
         setTimeout(function () {
             _this.auxiliares = _this._operacionService.returnAuxiliares();
@@ -4577,10 +4766,10 @@ FlujoComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/flujo/flujo.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/flujo/flujo.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__["a" /* ResultadosService */]) === "function" && _e || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__["a" /* ResultadosService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _f || Object])
 ], FlujoComponent);
 
-var _a, _b, _c, _d, _e;
+var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=flujo.component.js.map
 
 /***/ }),
@@ -4620,6 +4809,7 @@ module.exports = "<h3 class=\"text-center\">Resultados de Operacion</h3>\r\n\r\n
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_producto_service__ = __webpack_require__("../../../../../src/app/services/producto.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_balance_service__ = __webpack_require__("../../../../../src/app/services/balance.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OperacionComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4637,14 +4827,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var OperacionComponent = (function () {
-    function OperacionComponent(_productoService, _balanceService, _operacionService, _resultadosService, cp, dc) {
+    function OperacionComponent(_productoService, _balanceService, _operacionService, _resultadosService, cp, dc, _proyectoService) {
         this._productoService = _productoService;
         this._balanceService = _balanceService;
         this._operacionService = _operacionService;
         this._resultadosService = _resultadosService;
         this.cp = cp;
         this.dc = dc;
+        this._proyectoService = _proyectoService;
         this.productos = [];
         this.auxiliares = [];
         this.auxiliaresAnteriores = [];
@@ -4660,6 +4852,7 @@ var OperacionComponent = (function () {
         this.presGlobalCostoAdmon = false;
         this.presGlobalCostoVenta = false;
         this.presOtrosGastos = false;
+        this._proyectoService.ocultaCierrePeriodo();
         this._resultadosService.vender();
     }
     OperacionComponent.prototype.ngOnInit = function () {
@@ -5425,10 +5618,10 @@ OperacionComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/operacion/operacion.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/operacion/operacion.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_producto_service__["a" /* ProductoService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_resultados_service__["a" /* ResultadosService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__angular_common__["CurrencyPipe"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_common__["CurrencyPipe"]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__angular_common__["DecimalPipe"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_common__["DecimalPipe"]) === "function" && _f || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_producto_service__["a" /* ProductoService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_resultados_service__["a" /* ResultadosService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__angular_common__["CurrencyPipe"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_common__["CurrencyPipe"]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__angular_common__["DecimalPipe"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_common__["DecimalPipe"]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_6__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _g || Object])
 ], OperacionComponent);
 
-var _a, _b, _c, _d, _e, _f;
+var _a, _b, _c, _d, _e, _f, _g;
 //# sourceMappingURL=operacion.component.js.map
 
 /***/ }),
@@ -5454,7 +5647,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/proyecto-usuario.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-sidenav-p></app-sidenav-p>\r\n<div class=\"mainPage\">\r\n  <app-balance></app-balance>\r\n<router-outlet></router-outlet>\r\n</div>\r\n"
+module.exports = "<app-sidenav-p></app-sidenav-p>\r\n<div class=\"mainPage\">\r\n  <app-balance></app-balance>\r\n<router-outlet ></router-outlet>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -5578,6 +5771,7 @@ module.exports = "<table class=\"table table-bordered  table-responsive\" *ngFor
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_balance_service__ = __webpack_require__("../../../../../src/app/services/balance.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_resultados_service__ = __webpack_require__("../../../../../src/app/services/resultados.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PruebaComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5592,11 +5786,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var PruebaComponent = (function () {
-    function PruebaComponent(_resultadosService, _balanceService, cp) {
+    function PruebaComponent(_resultadosService, _balanceService, cp, _proyectoService) {
         this._resultadosService = _resultadosService;
         this._balanceService = _balanceService;
         this.cp = cp;
+        this._proyectoService = _proyectoService;
+        this._proyectoService.ocultaCierrePeriodo();
         this._resultadosService.vender();
         this.aplicacion = 0;
         this.origen = 0;
@@ -5636,10 +5833,10 @@ PruebaComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/prueba/prueba.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/prueba/prueba.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_resultados_service__["a" /* ResultadosService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_balance_service__["a" /* BalanceService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common__["CurrencyPipe"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common__["CurrencyPipe"]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_resultados_service__["a" /* ResultadosService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_balance_service__["a" /* BalanceService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common__["CurrencyPipe"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common__["CurrencyPipe"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _d || Object])
 ], PruebaComponent);
 
-var _a, _b, _c;
+var _a, _b, _c, _d;
 //# sourceMappingURL=prueba.component.js.map
 
 /***/ }),
@@ -5771,6 +5968,7 @@ module.exports = "<div class=\"row\">\r\n  <div class=\"container\">\r\n    <h1 
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_graficas_service__ = __webpack_require__("../../../../../src/app/services/graficas.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_dashboard_service__ = __webpack_require__("../../../../../src/app/services/dashboard.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VentaProductosComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5790,8 +5988,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var VentaProductosComponent = (function () {
-    function VentaProductosComponent(_operacionService, _zonasService, router, _productoService, _graficasService, _dash) {
+    function VentaProductosComponent(_operacionService, _zonasService, router, _productoService, _graficasService, _dash, _proyectoService) {
         var _this = this;
         this._operacionService = _operacionService;
         this._zonasService = _zonasService;
@@ -5799,6 +5998,7 @@ var VentaProductosComponent = (function () {
         this._productoService = _productoService;
         this._graficasService = _graficasService;
         this._dash = _dash;
+        this._proyectoService = _proyectoService;
         this.productosOperacion = [];
         this.productos = [];
         this.zonas = [];
@@ -5828,6 +6028,7 @@ var VentaProductosComponent = (function () {
         this.formsVentas = [];
         this.graficas = [];
         this.zonaSelected = { graf: null, nombreZona: null };
+        this._proyectoService.ocultaCierrePeriodo();
         this.zonas = this._graficasService.returnZonas();
         this.productos = this._productoService.returnProductos();
         this.productosOperacion = this._operacionService.returnProductosOperacion();
@@ -6068,10 +6269,10 @@ VentaProductosComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/venta-productos/venta-productos.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/venta-productos/venta-productos.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_zonas_service__["a" /* ZonasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_zonas_service__["a" /* ZonasService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_8__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__angular_router__["a" /* Router */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__services_graficas_service__["a" /* GraficasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_graficas_service__["a" /* GraficasService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_7__services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__services_dashboard_service__["a" /* DashboardService */]) === "function" && _g || Object])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_zonas_service__["a" /* ZonasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_zonas_service__["a" /* ZonasService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_8__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__angular_router__["a" /* Router */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__services_graficas_service__["a" /* GraficasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_graficas_service__["a" /* GraficasService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_7__services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__services_dashboard_service__["a" /* DashboardService */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_9__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _h || Object])
 ], VentaProductosComponent);
 
-var _a, _b, _c, _d, _e, _f, _g;
+var _a, _b, _c, _d, _e, _f, _g, _h;
 //# sourceMappingURL=venta-productos.component.js.map
 
 /***/ }),
@@ -6155,6 +6356,8 @@ var ProyectosComponent = (function () {
         this.confModal.show();
     };
     ProyectosComponent.prototype.entrarP = function () {
+        var _this = this;
+        setTimeout(function () { _this._proyectosService.changePeriodo(); }, 1000);
         this.confModal.hide();
         this._proyectosService.entrar();
     };
@@ -8918,6 +9121,7 @@ var ProyectosService = (function () {
         this._CompraMaquinariaService = _CompraMaquinariaService;
         this._usuarioZona = _usuarioZona;
         this.proyectos = new Array();
+        this.muestraPeriodo = true;
     }
     ProyectosService.prototype.establecerValores = function () {
         var _this = this;
@@ -8954,6 +9158,25 @@ var ProyectosService = (function () {
     };
     ProyectosService.prototype.buscarPeriodos = function (idProyecto) {
         return this.http.get('balance/' + idProyecto).map(function (res) { return res.json(); });
+    };
+    ProyectosService.prototype.muestraCierrePeriodo = function () {
+        this.muestraPeriodo = false;
+        console.log(this.muestraPeriodo);
+    };
+    ProyectosService.prototype.ocultaCierrePeriodo = function () {
+        this.muestraPeriodo = true;
+    };
+    ProyectosService.prototype.changePeriodo = function () {
+        var _this = this;
+        this.buscarPeriodos(localStorage.getItem('idProyecto')).subscribe(function (data) {
+            if (data.datos.length == 0) {
+                _this.periodo = 0;
+            }
+            else {
+                _this.periodo = parseInt(data.datos.length) - 1;
+                console.log("Peri", _this.periodo);
+            }
+        });
     };
     ProyectosService.prototype.asignarBalance = function (idProyecto) {
         var _this = this;

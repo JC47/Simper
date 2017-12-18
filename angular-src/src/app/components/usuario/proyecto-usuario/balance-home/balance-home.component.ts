@@ -7,6 +7,8 @@ import {DashboardService} from '../../../../services/dashboard.service';
 import {DesarrolloZonaService} from '../../../../services/desarrollo-zona.service';
 import {BalanceService} from '../../../../services/balance.service';
 import {ZonasService} from '../../../../services/zonas.service';
+import {ProyectosService} from '../../../../services/proyectos.service';
+
 
 
 @Component({
@@ -80,7 +82,8 @@ productosZonaSinDesGraf:any;
               private _resultadosService:ResultadosService,
               private _dash:DashboardService,
               private _balanceService:BalanceService,
-              private _demandaService:ZonasService) {
+              private _demandaService:ZonasService,
+            private _proyectoService:ProyectosService) {
     this.productos=this._productosService.returnProductos();
     this.productosSinDesarrollar = this._desarrolloProducto.returnProductosSinDesarrollar();
     this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
@@ -94,6 +97,7 @@ productosZonaSinDesGraf:any;
     this.maquinarias=this._dash.returnMaquinarias();
     this.activos = this._balanceService.returnActivos();
     this.pasivos = this._balanceService.returnPasivos();
+    this._proyectoService.ocultaCierrePeriodo()
       this.zonas=this._demandaService.returnZonasNormales();
 
     console.log(this.activos,this.pasivos);
