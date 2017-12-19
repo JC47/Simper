@@ -4575,6 +4575,8 @@ module.exports = "<table class=\"table table-bordered  table-responsive\" >\r\n\
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_balance_service__ = __webpack_require__("../../../../../src/app/services/balance.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_compra_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/compra-maquinaria.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_csv_Angular2_csv__ = __webpack_require__("../../../../angular2-csv/Angular2-csv.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_csv_Angular2_csv___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_angular2_csv_Angular2_csv__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FlujoComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4585,6 +4587,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -4610,6 +4613,112 @@ var FlujoComponent = (function () {
         this.balanceFinal = [];
         this.auxiliaresAnteriores = [];
         this.prestamos = [];
+        this.data = [
+            {
+                concepto: "Presupuesto Global de Caja y Bancos",
+                cantidad: "",
+            },
+            {
+                concepto: "",
+                cantidad: "",
+            },
+            {
+                concepto: "Saldo Inicial",
+                cantidad: "",
+            },
+            {
+                concepto: "Entradas",
+                cantidad: "",
+            },
+            {
+                concepto: "Cobro por Ventas",
+                cantidad: "",
+            },
+            {
+                concepto: "Préstamos",
+                cantidad: "",
+            },
+            {
+                concepto: "Intereses",
+                cantidad: "",
+            },
+            {
+                concepto: "Incremento de Capital",
+                cantidad: "",
+            },
+            {
+                concepto: "Salidas",
+                cantidad: "",
+            },
+            {
+                concepto: "Costo de Trasformación",
+                cantidad: "",
+            },
+            {
+                concepto: "Costo de Distribución",
+                cantidad: "",
+            },
+            {
+                concepto: "Costo Administrativo",
+                cantidad: "",
+            },
+            {
+                concepto: "Costo de Venta",
+                cantidad: "",
+            },
+            {
+                concepto: "Compra de Maquinaria",
+                cantidad: "",
+            },
+            {
+                concepto: "Compras",
+                cantidad: "",
+            },
+            {
+                concepto: "Intereses",
+                cantidad: "",
+            },
+            {
+                concepto: "Pago de Prestamos",
+                cantidad: "",
+            },
+            {
+                concepto: "Dividendos",
+                cantidad: "",
+            },
+            {
+                concepto: "",
+                cantidad: "",
+            },
+            {
+                concepto: "PTU",
+                cantidad: "",
+            },
+            {
+                concepto: "ISR",
+                cantidad: "",
+            },
+            {
+                concepto: "IVA",
+                cantidad: "",
+            },
+            {
+                concepto: "",
+                cantidad: "",
+            },
+            {
+                concepto: "Total de Salidas",
+                cantidad: "",
+            },
+            {
+                concepto: "Saldo Final",
+                cantidad: "",
+            },
+            {
+                concepto: "",
+                cantidad: "",
+            },
+        ];
         this._proyectoService.ocultaCierrePeriodo();
         this._resultadosService.vender();
         setTimeout(function () {
@@ -4870,6 +4979,7 @@ var FlujoComponent = (function () {
             }
         });
         doc.save("Estado de Resultados.pdf");
+        new __WEBPACK_IMPORTED_MODULE_7_angular2_csv_Angular2_csv__["Angular2Csv"](this.data, 'My Report');
     };
     return FlujoComponent;
 }());

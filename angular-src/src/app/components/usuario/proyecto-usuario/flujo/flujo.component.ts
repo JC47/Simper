@@ -5,6 +5,8 @@ import {ResultadosService} from '../../../../services/resultados.service';
 import {BalanceService} from '../../../../services/balance.service';
 import {CompraMaquinariaService} from '../../../../services/compra-maquinaria.service';
 import {ProyectosService} from '../../../../services/proyectos.service';
+import { Angular2Csv } from 'angular2-csv/Angular2-csv';
+
 declare var jsPDF: any;
 
 
@@ -24,6 +26,140 @@ export class FlujoComponent implements OnInit {
   balanceFinal = [];
   auxiliaresAnteriores = [];
   prestamos = [];
+
+  data = [
+  {
+    concepto: "Presupuesto Global de Caja y Bancos",
+    cantidad:"",
+
+  },
+  {
+    concepto: "",
+    cantidad:"",
+
+  },
+  {
+    concepto: "Saldo Inicial",
+    cantidad:"",
+
+  },
+  {
+    concepto: "Entradas",
+    cantidad:"",
+
+  },
+  {
+    concepto: "Cobro por Ventas",
+    cantidad:"",
+
+  },
+  {
+    concepto: "Préstamos",
+    cantidad:"",
+
+  },
+  {
+    concepto: "Intereses",
+    cantidad:"",
+
+  },
+  {
+    concepto: "Incremento de Capital",
+    cantidad:"",
+
+  },
+  {
+    concepto: "Salidas",
+    cantidad:"",
+
+  },
+  {
+    concepto: "Costo de Trasformación",
+    cantidad:"",
+
+  },
+  {
+    concepto: "Costo de Distribución",
+    cantidad:"",
+
+  },
+  {
+    concepto: "Costo Administrativo",
+    cantidad:"",
+
+  },
+  {
+    concepto: "Costo de Venta",
+    cantidad:"",
+
+  },
+  {
+    concepto: "Compra de Maquinaria",
+    cantidad:"",
+
+  },
+  {
+    concepto: "Compras",
+    cantidad:"",
+
+  },
+  {
+    concepto: "Intereses",
+    cantidad:"",
+
+  },
+  {
+    concepto: "Pago de Prestamos",
+    cantidad:"",
+
+  },
+  {
+    concepto: "Dividendos",
+    cantidad:"",
+
+  },
+  {
+    concepto: "",
+    cantidad:"",
+
+  },
+  {
+    concepto: "PTU",
+    cantidad:"",
+
+  },
+  {
+    concepto: "ISR",
+    cantidad:"",
+
+  },
+  {
+    concepto: "IVA",
+    cantidad:"",
+
+  },
+  {
+    concepto: "",
+    cantidad:"",
+
+  },
+
+  {
+    concepto: "Total de Salidas",
+    cantidad:"",
+
+  },
+  {
+    concepto: "Saldo Final",
+    cantidad:"",
+
+  },
+  {
+    concepto: "",
+    cantidad:"",
+
+  },
+];
 
   constructor(private _operacionService:OperacionService,
               private _productoService:ProductoService,
@@ -314,7 +450,7 @@ export class FlujoComponent implements OnInit {
       });
 
       doc.save("Estado de Resultados.pdf");
-
+      new Angular2Csv(this.data, 'My Report');
 
 
       }
