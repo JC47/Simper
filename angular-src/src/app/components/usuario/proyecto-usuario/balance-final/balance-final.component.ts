@@ -1,7 +1,13 @@
-import { Component, OnInit,ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit,ElementRef, ViewChild,Output,EventEmitter } from '@angular/core';
 import {BalanceService} from '../../../../services/balance.service';
 import {ResultadosService} from '../../../../services/resultados.service';
 import { CurrencyPipe } from '@angular/common';
+import {ProyectosService} from '../../../../services/proyectos.service';
+import {DesarrolloProductoService} from '../../../../services/desarrollo-producto.service';
+import {DesarrolloZonaService} from '../../../../services/desarrollo-zona.service';
+import {AuxiliarService} from '../../../../services/auxiliar.service';
+import { UsuarioCreditoService} from '../../../../services/usuario-credito.service';
+import { Router } from '@angular/router';
 
 // import * as jsPDF from 'jspdf'
 declare var jsPDF: any;
@@ -12,11 +18,30 @@ declare var jsPDF: any;
 })
 export class BalanceFinalComponent implements OnInit {
   balanceFinal:any;
+  openConf:boolean=false;
+  openBien:boolean=false;
+  openLoad:boolean=false;
+  alert:boolean=false;
+  opciones:boolean=false;
+  periodo:number;
+  periodos = [];
+
+
+
 
   constructor(private _resultadosService:ResultadosService,
-     private _balanceService:BalanceService,
-    private cp: CurrencyPipe) {
+    private cp: CurrencyPipe,
+    private _proyectoService:ProyectosService,
+    private _balanceService:BalanceService,
+    private _auxiliarService:AuxiliarService,
+    private _desarrolloZona:DesarrolloZonaService,
+    private router:Router,
+    private _creditoService:UsuarioCreditoService,
+    private _desarrolloProducto:DesarrolloProductoService) {
     this._resultadosService.vender();
+    this._proyectoService.muestraCierrePeriodo();
+
+
   }
 
   ngOnInit() {
@@ -301,5 +326,8 @@ doc.line(235, mar+0+anchCell*18+46, 255, mar+anchCell*18+46);
 
 doc.save("Balance Final.pdf")
   }
+
+
+
 
 }

@@ -12,4 +12,5 @@ export class ProyectoUsuarioComponent implements OnInit {
   ngOnInit() {
   }
 
+
 }

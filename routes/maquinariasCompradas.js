@@ -5,8 +5,6 @@ const variable = require("../models/variable");
 const maquinariaComprada = require('../models/maquinariaComprada');
 const auxiliar = require('../models/auxiliar');
 
-//Perro
-
 router.post('/modify', (req,res,next) => {
   Promise.resolve().then(function () {
     var json = req.body;
@@ -23,16 +21,21 @@ router.post('/modify', (req,res,next) => {
   });
 });
 
-//GET -> POST
-//idProyecto
-//numeroPeriodo
+//objeto de maquinarias donde las cantidades de maquinaria repetidas se vayan sumando
 router.post('/', (req, res, next) => {
   var idProyecto = req.body.idProyecto;
   var numeroPeriodo = req.body.numeroPeriodo;
 
-  Promise.resolve().then(function () {
-    return maquinariaComprada.getMaqMaqProyecto(idProyecto,numeroPeriodo);
-  }).then( function (data) {
+  Promise.join(maquinariaComprada.getIdMaqProyecto(idProyecto,numeroPeriodo),
+  maquinariaComprada.getMaqMaqProyecto(idProyecto,numeroPeriodo),
+  maquinariaComprada.getMaquinaria(),maquinariaComprada.getNombreMaqProd(idProyecto,numeroPeriodo),
+  function(idsmaqproyecto,maquinariaproyecto,maquinaria,nombremaqprod) {
+       return jsonMaquinariaProyecto(idsmaqproyecto,maquinariaproyecto,maquinaria,nombremaqprod);
+   })
+  // .then(function () {
+  //   return maquinariaComprada.getMaqMaqProyecto(idProyecto,numeroPeriodo);
+  // })
+  .then( function (data) {
     res.json({success: true, datos:data, msg:"Operacion exitosa"});
   })
   .catch(function (err) {
@@ -231,4 +234,81 @@ function aumentaCantidad(cantidad) {
     return cantidad;
 }
 
+function jsonMaquinariaProyecto(idsmaqproyecto,maquinariaproyecto,maquinaria,nombremaqprod) {
+  var repIdMaq = [];//almacena las veces que se repite un idMaquinaria en maquinariaproyecto
+
+  var i = 0;
+  while (i<idsmaqproyecto.length) {
+    var aux = 0;
+    for (var j = 0; j < maquinariaproyecto.length; j++) {
+      if (idsmaqproyecto[i].idMaquinaria == maquinariaproyecto[j].idMaquinaria) {
+        aux = aux +1;
+      }
+    }
+    repIdMaq.push(aux);
+    i++;
+  }
+
+console.log(repIdMaq);
+
+//suma cantidadProd
+
+/*
+var arrayCantidadProducida = [];
+var l = 0;
+  var aux2=0;
+
+while (l < repIdMaq.length) {
+  var sumaCantidadProd = 0;
+  for (var j = 0; j < repIdMaq[l]; j++) {
+    sumaCantidadProd = sumaCantidadProd + maquinariaproyecto[aux2].cantidadProd
+    aux2 = aux2 + 1;
+  }
+  arrayCantidadProducida.push(sumaCantidadProd);
+  l++;
+}
+
+console.log("arrayCantidadProducida: ",arrayCantidadProducida);
+*/
+
+//suma cantidad
+
+var arrayCantidad = [];
+var m = 0;
+var aux3=0;
+
+while (m < repIdMaq.length) {
+  var sumaCantidad = 0;
+  for (var j = 0; j < repIdMaq[m]; j++) {
+    sumaCantidad = sumaCantidad + maquinariaproyecto[aux3].Cantidad;
+    aux3 = aux3 + 1;
+  }
+  arrayCantidad.push(sumaCantidad);
+  m++;
+}
+
+console.log("arrayCantidad: ",arrayCantidad);
+
+var arrayMaquinarias = [];
+var k = 0;
+
+while (k < idsmaqproyecto.length) {
+  for (var i = 0; i < maquinaria.length; i++) {
+    if (idsmaqproyecto[k].idMaquinaria == maquinaria[i].idMaquinaria) {
+      var json = {
+
+        "idZona":idsmaqproyecto[k].idMaquinaria,
+        "nombreMaq":nombremaqprod[k].nombreMaq,
+        "Cantidad":arrayCantidad[k],
+        "Producto_idProducto":nombremaqprod[k].Producto_idProducto,
+        "cantidadProd":nombremaqprod[k].cantidadProd
+      }
+    arrayMaquinarias.push(json);
+    }
+  }
+  k++;
+}
+console.log(arrayMaquinarias);
+return arrayMaquinarias;
+}
 module.exports = router;

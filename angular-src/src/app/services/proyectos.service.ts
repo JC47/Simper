@@ -17,7 +17,8 @@ import { HttpModule } from '@angular/http';
 export class ProyectosService {
 
   proyectos:proyecto[]=new Array();
-
+  periodo:any;
+  muestraPeriodo:boolean=true;
   constructor(private http:Http, private _balanceService:BalanceService,
               private _usuarioMaquinariaService:UsuarioMaquinariaService,
               private _usuarioProductoService:UsuarioProductoService,
@@ -27,7 +28,12 @@ export class ProyectosService {
               private _desarrolloZonaService:DesarrolloZonaService,
               private _usuarioZonaService:UsuarioZonaService,
               private _CompraMaquinariaService:CompraMaquinariaService,
-              private _usuarioZona:UsuarioZonaService) { }
+              private _usuarioZona:UsuarioZonaService) {
+
+
+
+
+          }
 
   establecerValores(){
     this.proyectos.length = 0;
@@ -69,6 +75,28 @@ returnUsuarios(){
 
   buscarPeriodos(idProyecto){
     return this.http.get('balance/'+idProyecto).map(res => res.json());
+  }
+
+
+  muestraCierrePeriodo(){
+    this.muestraPeriodo=false;
+    console.log(this.muestraPeriodo)
+  }
+
+  ocultaCierrePeriodo(){
+    this.muestraPeriodo=true;
+  }
+
+  changePeriodo(){
+    this.buscarPeriodos(localStorage.getItem('idProyecto')).subscribe(data => {
+      if(data.datos.length == 0){
+        this.periodo=0
+      }
+      else{
+        this.periodo = parseInt(data.datos.length) - 1;
+        console.log("Peri",this.periodo);
+      }
+    });
   }
 
   asignarBalance(idProyecto){

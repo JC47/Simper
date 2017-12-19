@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {BalanceService} from '../../../../services/balance.service';
 import {ResultadosService} from '../../../../services/resultados.service';
 import { CurrencyPipe } from '@angular/common';
+import {ProyectosService} from '../../../../services/proyectos.service';
+
 
 // import * as jsPDF from 'jspdf'
 declare var jsPDF: any;
@@ -19,7 +21,9 @@ export class PruebaComponent implements OnInit {
 
   constructor(private _resultadosService:ResultadosService,
      private _balanceService:BalanceService,
-    private cp: CurrencyPipe) {
+    private cp: CurrencyPipe,
+  private _proyectoService:ProyectosService) {
+    this._proyectoService.ocultaCierrePeriodo()
     this._resultadosService.vender();
     this.aplicacion = 0;
     this.origen = 0;

@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DesarrolloProductoService } from '../../../../services/desarrollo-producto.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import {ProyectosService} from '../../../../services/proyectos.service';
+
 
 @Component({
   selector: 'app-desarrollo-producto',
@@ -36,7 +38,9 @@ export class DesarrolloProductoComponent implements OnInit {
   openPago:boolean=false;
   openLoadPago:boolean=false;
 
-  constructor(private _desarrolloProducto:DesarrolloProductoService) {
+  constructor(private _desarrolloProducto:DesarrolloProductoService,
+  private _proyectoService:ProyectosService) {
+    this._proyectoService.ocultaCierrePeriodo()
     this.productosSinDesarrollar = this._desarrolloProducto.returnProductosSinDesarrollar();
     this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
     this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();

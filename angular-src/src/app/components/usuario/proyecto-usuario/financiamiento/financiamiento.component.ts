@@ -2,6 +2,8 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { UsuarioCreditoService } from '../../../../services/usuario-credito.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ProyectosService} from '../../../../services/proyectos.service';
+
 
 
 
@@ -28,7 +30,9 @@ export class FinanciamientoComponent implements OnInit {
   }
   confDeleteCredito:boolean=false;
 
-  constructor(private _creditoService:UsuarioCreditoService) {
+  constructor(private _creditoService:UsuarioCreditoService,
+  private _proyectoService:ProyectosService) {
+    this._proyectoService.ocultaCierrePeriodo()
     this.creditos=this._creditoService.returnCreditosU(localStorage.getItem('idUsuario'));
     this.creditosActivos=this._creditoService.arregloC();
     console.log("cActivos",this.creditosActivos)

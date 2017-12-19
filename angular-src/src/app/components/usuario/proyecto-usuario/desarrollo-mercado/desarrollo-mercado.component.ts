@@ -5,6 +5,8 @@ import {DesarrolloZonaService} from '../../../../services/desarrollo-zona.servic
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {producto} from '../../../../app.interfaces';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import {ProyectosService} from '../../../../services/proyectos.service';
+
 
 
 @Component({
@@ -32,8 +34,9 @@ export class DesarrolloMercadoComponent implements OnInit {
 
   constructor(private _zonasService: ZonasService,
               private _desarrolloZonaService:DesarrolloZonaService,
-              private _productoService:ProductoService) {
-
+              private _productoService:ProductoService,
+            private _proyectoService:ProyectosService) {
+this._proyectoService.ocultaCierrePeriodo()
     this.zonas=this._zonasService.returnZonasNormales();
     this.productos=this._productoService.returnProductos();
     this.productosZonaSinDesarrollar = this._desarrolloZonaService.returnProductosDeZonaSinDesarrollar();

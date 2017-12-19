@@ -6,6 +6,11 @@ import {ProductoService} from '../../../../services/producto.service';
 import {BalanceService} from '../../../../services/balance.service';
 import {CurrencyPipe} from '@angular/common'
 import {DecimalPipe} from '@angular/common'
+import {ProyectosService} from '../../../../services/proyectos.service';
+
+
+
+
 declare var jsPDF: any;
 
 @Component({
@@ -38,7 +43,9 @@ export class OperacionComponent implements OnInit {
               private _operacionService:OperacionService,
               private _resultadosService:ResultadosService,
               private cp: CurrencyPipe,
-              private dc:DecimalPipe) {
+              private dc:DecimalPipe,
+            private _proyectoService:ProyectosService) {
+    this._proyectoService.ocultaCierrePeriodo()
     this._resultadosService.vender();
   }
 
