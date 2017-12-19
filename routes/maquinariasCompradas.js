@@ -297,7 +297,7 @@ while (k < idsmaqproyecto.length) {
     if (idsmaqproyecto[k].idMaquinaria == maquinaria[i].idMaquinaria) {
       var json = {
 
-        "idZona":idsmaqproyecto[k].idMaquinaria,
+        "idMaquinaria":idsmaqproyecto[k].idMaquinaria,
         "nombreMaq":nombremaqprod[k].nombreMaq,
         "Cantidad":arrayCantidad[k],
         "Producto_idProducto":nombremaqprod[k].Producto_idProducto,
