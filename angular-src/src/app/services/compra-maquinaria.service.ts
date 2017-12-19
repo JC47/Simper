@@ -20,13 +20,13 @@ export class CompraMaquinariaService {
    }
 
    establecerValores(){
-     this.maquinasCompradas.length = 0;
+     var m = [];
      this.getMaquinariaC().subscribe( data => {
        for(let key$ in data.datos){
-           this.maquinasCompradas.push(data.datos[key$]);
+           m.push(data.datos[key$]);
        }
      });
-     return this.maquinasCompradas;
+     return m;
    }
 
    returnMaquinasCompradas(){
@@ -46,30 +46,23 @@ export class CompraMaquinariaService {
    }
 
   compraMaquinaria(x,y){
-    this.cobrar(y).subscribe( data => {
-      console.log("Perro",data)
-    });
-    var maqC = [];
+    this.cobrar(y).subscribe();
+    var z = [];
     this.comprar(x).subscribe(data => {
-      for(let key$ in data.datos){
-        maqC.push(data.datos[key$]);
+      if(data.success){
+        z = this.establecerValores();
       }
     });
-    return maqC;
+    return z;
   }
 
   regresarMaquinaria(x,y){
-    this.undo(y).subscribe(data => {
-      console.log("Undo",data)
-    });
-    var maqC = [];
+    this.undo(y).subscribe();
+    var z = [];
     this.vuelta(x).subscribe(data => {
-      console.log("Vuelta",data)
-      for(let key$ in data.datos){
-        maqC.push(data.datos[key$]);
-      }
+      z = this.establecerValores();
     });
-    return maqC;
+    return z;
   }
 
   cobrar(x){

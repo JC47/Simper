@@ -65,12 +65,8 @@ var numeroPeriodo = req.body.Balance_numeroPeriodo;
       return maquinariaComprada.updateCantidad(idProyecto,idMaquinaria,numeroPeriodo,cantidad);
     }
   })
-  .then(function () {
-    var idProyecto = req.body.Proyectos_idProyecto;
-    return maquinariaComprada.getMaqMaqProyecto(idProyecto,numeroPeriodo);
-  })
-  .then( function (rows) {
-    res.json({success: true, datos:rows, msg:"Operacion exitosa"});
+  .then( function () {
+    res.json({success: true, msg:"Operacion exitosa"});
   })
   .catch(function (err) {
     console.log(err);
@@ -108,12 +104,8 @@ Promise.resolve().then(function () {
       return maquinariaComprada.updateCantidad(idProyecto,idMaquinaria,numeroPeriodo,cantidadN);
     }
   })
-  .then(function () {
-    var idProyecto = req.body.Proyectos_idProyecto;
-    return maquinariaComprada.getMaqMaqProyecto(idProyecto,numeroPeriodo);
-  })
-  .then( function (rows) {
-    res.json({success: true, datos:rows, msg:"Operacion exitosa"});
+  .then( function () {
+    res.json({success: true, msg:"Operacion exitosa"});
   })
   .catch(function (err) {
     console.log(err);
