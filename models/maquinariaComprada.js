@@ -33,6 +33,21 @@ module.exports.getMaqMaqProyecto = function(idProyecto,numeroPeriodo) {
   return querySql(query);
 }
 
+module.exports.getIdMaqProyecto = function (idProyecto,numeroPeriodo) {
+  var query = "select distinct(idMaquinaria) from maquinaria inner join maquinariaproyecto on maquinaria.idMaquinaria = maquinariaproyecto.Maquinaria_idMaquinaria and maquinariaproyecto.Proyectos_idProyecto = "+idProyecto+" where maquinariaproyecto.Balance_numeroPeriodo <= "+numeroPeriodo+" ";
+  return querySql(query);
+}
+
+module.exports.getNombreMaqProd = function (idProyecto,numeroPeriodo) {
+  var query = "select distinct nombreMaq,Producto_idProducto,cantidadProd from maquinaria inner join maquinariaproyecto on maquinaria.idMaquinaria = maquinariaproyecto.Maquinaria_idMaquinaria and maquinariaproyecto.Proyectos_idProyecto = "+idProyecto+" where maquinariaproyecto.Balance_numeroPeriodo <= "+numeroPeriodo+" ";
+  return querySql(query);
+}
+
+module.exports.getMaquinaria = function () {
+  var query = "select * from maquinaria";
+  return querySql(query);
+}
+
 module.exports.addMaquinariaProyecto = function (idProyecto,idMaquinaria,idProducto,cantidadValor,numeroPeriodo) {
   var queryMaqProy = "insert into maquinariaproyecto set Maquinaria_idMaquinaria = "+idMaquinaria+",Proyectos_idProyecto = "+idProyecto+",Cantidad = "+cantidadValor+",Maquinaria_idProducto = "+idProducto+",Balance_numeroPeriodo = " +numeroPeriodo+ "";
   return querySql(queryMaqProy);
