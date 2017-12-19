@@ -3,6 +3,7 @@ const router = express.Router();
 const config = require('../config/db');
 const operacion = require('../models/operacion');
 const auxiliar = require('../models/auxiliar');
+const variable = require("../models/variable");
 const Promise = require("bluebird");
 
 router.post('/register', (req, res, next) => {
@@ -295,7 +296,12 @@ router.post('/selling', (req,res,next) => {
   Promise.join(operacion.getProductoVendido(idProducto), auxiliar.getAuxiliarVenta(periodoAnterior,idProyecto,idProducto),
               operacion.getAlmacen(idProyecto,idProducto,numeroPeriodo),
               auxiliar.getAuxiliarVenta(numeroPeriodo,idProyecto,idProducto),operacion.getMaquinarias(idProducto,idProyecto),
-              function(producto,opAnterior,almacenActual,auxVenta,maquinas){
+              variable.getIVA(),variable.getClientes(),variable.getProveedores(),
+              function(producto,opAnterior,almacenActual,auxVenta,maquinas,iva,clientes,proveedores){
+    //Variables
+    var IVA = iva[0].valor
+    var Proveedores = proveedores[0].valor;
+    var Clientes = clientes[0].valor;
     //Se obtienen los datos necesarios
     var uniAlmacenadas = 0
     if(almacenActual.length != 0){
@@ -312,7 +318,7 @@ router.post('/selling', (req,res,next) => {
     //Ventas en efectivo
     var ventasCash = uniVendidas * producto[0].precioVenta;
     //IVA de las ventasz
-    var ivaVentas = ventas = ventasCash * .15;
+    var ivaVentas = ventas = ventasCash * IVA;
     //Unidades a producir
     var uniProd = uniVendidas + uniAlmacenadas - inventarioInicial;
     //Consumo de materias Primas
@@ -320,13 +326,13 @@ router.post('/selling', (req,res,next) => {
     //Consumo en efectivo --Materia Prima Cosumida de la tabla de Costo de Produccion y Ventas
     var cashMP = cMP * producto[0].costoUni;
     //IVA del consumo en efectivo
-    var IVAMP = (cashMP * .15)*(-1);
+    var IVAMP = (cashMP * IVA)*(-1);
     //Costo de transformación unitario
     var cTransUnitario = (producto[0].costosFijosFabri + cTransMaq + (uniProd * producto[0].costoVarUniFabri))/uniProd;
     //Costo de transformacion Total
     var cTransTotal = (cTransUnitario * uniProd) - cTransMaq;
     //IVA de transformacion
-    var IVATrans = (cTransTotal * .15)*(-1);
+    var IVATrans = (cTransTotal * IVA)*(-1);
     //Costo de Distribucion unitario
     var cDistribucionUnitario = (producto[0].gastosFijosDist/uniVendidas) + producto[0].costoVarUniDist;
     //Costo de Distribucion Total
@@ -334,13 +340,13 @@ router.post('/selling', (req,res,next) => {
     //Costo de Distribucion despues de Depreciaciones
     var cDistribucionTotalDep = cDistribucionTotal - producto[0].depDistribucion;
     //IVA de Distribucion
-    var IVADistribucion = (cDistribucionTotalDep * .15)*(-1);
+    var IVADistribucion = (cDistribucionTotalDep * IVA)*(-1);
     //Costo de Administracion Total
     var cAdminTotal = (producto[0].gastosFijosAdmon / uniVendidas)*uniVendidas;
     //Costo de Administracion despues de Depreciaciones
     var cAdminTotalDep = cAdminTotal - producto[0].depAdmon;
     //IVA de Administracion
-    var IVAAdmin = (cAdminTotalDep * .15)*(-1);
+    var IVAAdmin = (cAdminTotalDep * IVA)*(-1);
     //Costo de Produccion
     var cProduccion = cashMP + (cTransUnitario * uniProd);
     //Inventario Final de Articulo Terminado
@@ -353,15 +359,15 @@ router.post('/selling', (req,res,next) => {
     //Ganancia de ventas
     var ventas = ventasCash + ivaVentas;
     //Ventas por cobrar
-    var ventasXCobrar = ventas/12;
+    var ventasXCobrar = (ventas/360)*Clientes;
     //Ventas cobradas
-    var ventasOff = ventasXCobrar *11;
+    var ventasOff = ventas - ventasXCobrar;
     //Compras
     var compras = cashMP - IVAMP;
     //Compras por Pagar
-    var comprasXPagar = compras/12;
+    var comprasXPagar = (compras/360)*Proveedores;
     //Compras pagadas
-    var comprasOff = comprasXPagar*11;
+    var comprasOff = compras - comprasXPagar;
 
     //Validación de 0's
     if(uniAlmacenadas == 0 && uniVendidas == 0){

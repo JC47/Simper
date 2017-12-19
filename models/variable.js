@@ -16,6 +16,11 @@ module.exports.getVariables = function(){
   return querySql(sql);
 }
 
+module.exports.getAll = function(){
+  var sql = "select valor from variable";
+  return querySql(sql);
+}
+
 module.exports.getIVA = function(){
   var sql = "select valor from variable where concepto = 'IVA'";
   return querySql(sql);
