@@ -5,6 +5,7 @@ const productoZonaProyecto = require('../models/productozonaproyecto');
 const producto = require('../models/producto');
 const auxiliar = require('../models/auxiliar');
 const Promise = require("bluebird");
+const variable = require("../models/variable");
 
 router.post('/desarrollozona/', (req, res, next) => {
   Promise.resolve().then(function () {
@@ -221,13 +222,10 @@ router.post('/operacionespagardesarrollo', (req, res, next) => {
   var costoDesProd = req.body.costoDes;
   var idProducto = req.body.idProducto;
 
-  Promise.resolve().then(function () {
-//    return productoZonaProyecto.getBalance(idProyecto,numPeriodo);
-      return auxiliar.getAuxiliar(numPeriodo,idProyecto,idProducto);
-  })
-  .then(function (rows) {
+  Promise.join(auxiliar.getAuxiliar(numPeriodo,idProyecto,idProducto),variable.getIVA(),function(rows,variableIVA){
     var desMercado = 0;
     var IVAxGtos = 0;
+    var IVA = variableIVA[0].valor;
 
     if(rows.length > 0){
       desMercado += rows[0].desarrolloMercado;
@@ -235,14 +233,14 @@ router.post('/operacionespagardesarrollo', (req, res, next) => {
     }
 
     //IVA por Gatos de Venta
-    var IVAxGtosVenta = IVAxGastosVenta(costoDesProd);
+    var IVAxGtosVenta = IVAxGastosVenta(costoDesProd,IVA);
     //Otros gastos
     var desDeMercado = desarrolloMercado(desMercado,costoDesProd);
     //total pagos
     var tPagos = totalPagos(costoDesProd);
 
     var json = {
-      IVAGastosVenta: (IVAxGtos - IVAxGastosVenta(costoDesProd)),
+      IVAGastosVenta: (IVAxGtos - IVAxGastosVenta(costoDesProd,IVA)),
       desarrolloMercado: desMercado + costoDesProd
     }
 
@@ -254,12 +252,11 @@ router.post('/operacionespagardesarrollo', (req, res, next) => {
         Producto_idProducto:idProducto,
         Balance_numeroPeriodo:numPeriodo,
         Proyectos_idProyecto:idProyecto,
-        IVAGastosVenta: (IVAxGtos - IVAxGastosVenta(costoDesProd)),
+        IVAGastosVenta: (IVAxGtos - IVAxGastosVenta(costoDesProd,IVA)),
         desarrolloMercado: desMercado + costoDesProd
       }
       return auxiliar.addAuxiliar(json2);
     }
-
   })
   .then(function(){
     res.json({success: true, msg:"Operacion exitosa"});
@@ -281,22 +278,20 @@ router.post('/devolverpagardesarrollo', (req, res, next) => {
   var idProyecto = req.body.idProyecto;
   var numPeriodo = req.body.numeroPeriodo;
   var costoDesProd = req.body.costoDes;
+  var idProducto = req.body.idProducto;
 
-  Promise.resolve().then(function () {
-    return auxiliar.getAuxiliar(numPeriodo,idProyecto);
-  })
-  .then(function (rows) {
+  Promise.join(auxiliar.getAuxiliar(numPeriodo,idProyecto,idProducto),variable.getIVA(),function(rows,variableIVA)
+  {
     var desMercado = rows[0].desarrolloMercado;
-    var  IVAxPagar = rows[0].IVAPorPagar;
-    var IVAxGtos = rows[0].IVAGastosVenta
-    var  IVATot = rows[0].IVATotal;
+    var IVAxGtos = rows[0].IVAGastosVenta;
+    var IVA = variableIVA[0].valor;
 
     var json = {
-      IVAGastosVenta: unDoIVAGastosVenta(IVAxGtos,costoDesProd),
+      IVAGastosVenta: unDoIVAGastosVenta(IVAxGtos,costoDesProd,IVA),
       desarrolloMercado: unDoDesarrolloMercado(desMercado,costoDesProd)
     }
 
-    return auxiliar.setAuxiliar(numPeriodo,idProyecto,json);
+    return auxiliar.setAuxiliar(numPeriodo,idProyecto,idProducto,json);
   })
   .then(function(){
     res.json({success: true, msg:"Operacion exitosa"});
@@ -569,8 +564,8 @@ function desarrolloMercado(desMercado,costoDesProd) {//se van sumando los desarr
 }
 //este
 //300,000
-function IVAxGastosVenta(costoDesProd) {
-  return costoDesProd*0.15;
+function IVAxGastosVenta(costoDesProd,IVA) {
+  return costoDesProd*IVA;
 }
 
 //POR PAGAR es promedioMensual
@@ -608,14 +603,14 @@ function aumentaPeriodos(periodos) {
 
 //Operaciones: Deshacer pago de desarrollo
 
-function unDoIVAGastosVenta(IVAxGtos,costoDesProd) {
+function unDoIVAGastosVenta(IVAxGtos,costoDesProd,IVA) {
 
 var nvoIVAGtosVenta;
 
   if (IVAxGtos==0) {
     nvoIVAGtosVenta = 0;
   }else {
-    nvoIVAGtosVenta = ((IVAxGtos) - (IVAxGastosVenta(costoDesProd)));
+    nvoIVAGtosVenta = ((IVAxGtos) - (IVAxGastosVenta(costoDesProd,IVA)));
   }
   return nvoIVAGtosVenta;
 }

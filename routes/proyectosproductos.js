@@ -5,6 +5,7 @@ const proyectoProducto = require('../models/proyectoproducto');
 const producto = require('../models/producto');
 const Promise = require("bluebird");
 const auxiliar = require('../models/auxiliar');
+const variable = require("../models/variable");
 
 router.post('/desarrolloproducto', (req, res, next) => {
   Promise.resolve().then(function () {
@@ -182,22 +183,19 @@ router.post('/devolverpagardesarrollo', (req, res, next) => {
   var numPeriodo = req.body.numeroPeriodo;
   var costoDesProd = req.body.costoDes;
   var idProducto = req.body.idProducto;
+  Promise.join(auxiliar.getAuxiliar(numPeriodo,idProyecto,idProducto),variable.getIVA(), function(rows,variableIVA){
 
-  Promise.resolve().then(function () {
-    return auxiliar.getAuxiliarVenta(numPeriodo,idProyecto,idProducto);
-  })
-  .then(function (rows) {
     var desProducto = rows[0].desarrolloProducto;
     var IVAxGtos = rows[0].IVAGastosVenta;
+    var IVA = variableIVA[0].valor
 
     var json = {
-      IVAGastosVenta: unDoIVAGastosVenta(IVAxGtos,costoDesProd),
+      IVAGastosVenta: unDoIVAGastosVenta(IVAxGtos,costoDesProd,IVA),
       desarrolloProducto: unDoDesarrolloProducto(desProducto,costoDesProd)
     }
 
     return auxiliar.setAuxiliarVenta(numPeriodo,idProyecto,json);
-  })
-  .then(function(){
+  }).then(function(){
     res.json({success: true, msg:"Operacion exitosa"});
   })
   .catch(function (err) {
@@ -218,12 +216,10 @@ router.post('/operacionespagardesarrollo', (req, res, next) => {
   var costoDesProd = req.body.costoDes;
   var idProducto = req.body.idProducto;
 
-  Promise.resolve().then(function () {
-    return auxiliar.getAuxiliar(numPeriodo,idProyecto,idProducto);
-  })
-  .then(function (rows) {
+  Promise.join(auxiliar.getAuxiliar(numPeriodo,idProyecto,idProducto),variable.getIVA(), function(rows,variableIVA){
     var desProducto = 0;
     var IVAxGtos = 0;
+    var IVA = variableIVA[0].valor
 
     if(rows.length > 0){
       desProducto += rows[0].desarrolloProducto;
@@ -232,7 +228,7 @@ router.post('/operacionespagardesarrollo', (req, res, next) => {
 
 
     var json = {
-      IVAGastosVenta: (IVAxGtos - IVAxGastosVenta(costoDesProd)),
+      IVAGastosVenta: (IVAxGtos - IVAxGastosVenta(costoDesProd,IVA)),
       desarrolloProducto: desProducto + costoDesProd//desarrolloProducto(desProducto,costoDesProd),
     }
 
@@ -244,7 +240,7 @@ router.post('/operacionespagardesarrollo', (req, res, next) => {
         Producto_idProducto:idProducto,
         Balance_numeroPeriodo:numPeriodo,
         Proyectos_idProyecto:idProyecto,
-        IVAGastosVenta: (IVAxGtos - IVAxGastosVenta(costoDesProd)),
+        IVAGastosVenta: (IVAxGtos - IVAxGastosVenta(costoDesProd,IVA)),
         desarrolloProducto: desProducto + costoDesProd//desarrolloProducto(desProducto,costoDesProd),
       }
       return auxiliar.addAuxiliar(json2);
@@ -328,13 +324,13 @@ function desarrolloProducto(desProducto,costoDesProd) {//se van sumando los desa
 }
 //este
 //300,000
-function IVAxGastosVenta(costoDesProd) {
-  return costoDesProd*0.15;
+function IVAxGastosVenta(costoDesProd,IVA) {
+  return costoDesProd*IVA;
 }
 
 //POR PAGAR es promedioMensual
-function promedioMensual(costoDesProd){
-  var promMensual = IVAxGastosVenta(costoDesProd)/(12);
+function promedioMensual(costoDesProd,IVA){
+  var promMensual = IVAxGastosVenta(costoDesProd,IVA)/(12);
   return -(promMensual);
 }
 
@@ -346,14 +342,14 @@ function totalPagos(costoDesProd) {
 
 //Operaciones: Deshacer pago de desarrollo
 
-function unDoIVAGastosVenta(IVAxGtos,costoDesProd) {
+function unDoIVAGastosVenta(IVAxGtos,costoDesProd,IVA) {
 
 var nvoIVAGtosVenta;
 
   if (IVAxGtos==0) {
     nvoIVAGtosVenta = 0;
   }else {
-    nvoIVAGtosVenta = ((IVAxGtos) - (IVAxGastosVenta(costoDesProd)));
+    nvoIVAGtosVenta = ((IVAxGtos) - (IVAxGastosVenta(costoDesProd,IVA)));
   }
   return nvoIVAGtosVenta;
 }

@@ -7,9 +7,6 @@ const passport = require('passport');
 
 const app = express();
 
-//hola Calette
-//como estas
-//otro comentario de prueba hola Melo
 
 const proyectos = require('./routes/proyectos');
 const variables = require('./routes/variables');

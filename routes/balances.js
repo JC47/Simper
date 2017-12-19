@@ -185,11 +185,11 @@ router.post('/final', (req, res, next) => {
       }
     }
 
-    var cobroPorVentasCajaBancos = cuentasPorCobrar * 11;
+    var cobroPorVentasCajaBancos = getcobroPorVentas(auxesVentas);//cuentasPorCobrar * 11;
     var IVACajaBancos = IVAxEnterar * 11;
     var prestamosMasAnio = balanceBase[0].prestamosMasAnio + cantidadPrestada - PPagar;
     var prestamosMenosAnio = balanceBase[0].prestamosMenosAnio + cantidadPrestadaAmenosAnio - PPagarAmenosAnio;
-    var comprasCajaBancos = proveedores*11;
+    var comprasCajaBancos = getCompras(auxesVentas);//proveedores*11;
     var maqYdesarrollos = compraM + (-IVAGastos + desarrolloMercadoGlobal + desarrolloProductoGlobal);
     var depE = balanceBase[0].depEdif + (getDepEdif(auxesVentas) * .5);
     var depME = balanceBase[0].depMueblesEnseres + (getDepEdif(auxesVentas) * .5);
@@ -307,21 +307,35 @@ function getIVAxEnterar(aux,auxV){
   return ivaT/12;
 }
 
+function getCompras(auxesVentas){
+  var Comp = 0;
+  for (let key in auxV) {
+      Comp += auxV[key].comprasPagadas;
+  }
+  return CompTotal;
+}
+
 function getProveedores(auxV){
   var Comp = 0;
   for (let key in auxV) {
-      Comp += auxV[key].Compras;
+      Comp += auxV[key].ComprasPorPagar;
   }
-  var CompTotal = Comp/12;
+  return CompTotal;
+}
+
+function getcobroPorVentas(auxV){
+  var Comp = 0;
+  for (let key in auxV) {
+      Comp += auxV[key].VentasCobradas;
+  }
   return CompTotal;
 }
 
 function getCuentasPorCobrar(auxV){
   var Comp = 0;
   for (let key in auxV) {
-      Comp += auxV[key].Ventas;
+      Comp += auxV[key].VentasPorCobrar;
   }
-  var CompTotal = (Comp)/12;
   return CompTotal;
 }
 
