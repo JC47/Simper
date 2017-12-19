@@ -3409,7 +3409,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-12\">\r\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\r\n<hr>\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-12\" style=\"height:500px\" *ngFor=\"let zona of graficas\" >\r\n    <div class=\"row\">\r\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\r\n\r\n  <div class=\"col-12\" style=\"height:400px;\">\r\n    <ngx-charts-line-chart\r\n         [scheme]=\"colorScheme\"\r\n         [results]=\"zona.graf\"\r\n         xAxis=\"true\"\r\n         legendTitle=\"Productos\"\r\n         yAxis=\"true\"\r\n         legend=\"true\"\r\n         showXAxisLabel=\"true\"\r\n         showYAxisLabel=\"true\"\r\n         xAxisLabel=\"Periodos\"\r\n         yAxisLabel=\"Demanda Potencial\"\r\n         autoScale=\"true\">\r\n       </ngx-charts-line-chart>\r\n  </div>\r\n    </div>\r\n\r\n\r\n\r\n\r\n  </div>\r\n\r\n</div>\r\n"
+module.exports = "<div class=\"col-12\">\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\n<hr>\n</div>\n\n\n<div class=\"row\">\n  <div class=\"col-12\" style=\"height:500px\" *ngFor=\"let zona of graficas\" >\n    <div class=\"row\">\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\n\n  <div class=\"col-12\" style=\"height:400px;\">\n    <ngx-charts-line-chart\n         [scheme]=\"colorScheme\"\n         [results]=\"zona.graf\"\n         xAxis=\"true\"\n         legendTitle=\"Productos\"\n         yAxis=\"true\"\n         legend=\"true\"\n         showXAxisLabel=\"true\"\n         showYAxisLabel=\"true\"\n         xAxisLabel=\"Periodos\"\n         yAxisLabel=\"Demanda Potencial\"\n         autoScale=\"true\">\n       </ngx-charts-line-chart>\n  </div>\n    </div>\n\n\n\n\n  </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -4560,7 +4560,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/flujo/flujo.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<table class=\"table table-bordered  table-responsive\" >\r\n\r\n  <tbody>\r\n    <tr class=\"thead-inverse\">\r\n    <th colspan=\"2\">Presupuesto Global de Caja y Bancos</th>\r\n    </tr>\r\n\r\n\r\n\r\n\r\n    <tr>\r\n      <td>Saldo Inical</td>\r\n      <td class=\"text-right\" *ngFor=\"let balance of balanceInicial\">{{getCajaBancos() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th colspan=\"2\">Entradas </th>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Cobro por Ventas</td>\r\n      <td class=\"text-right\">{{getCobroVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Préstamos</td>\r\n      <td class=\"text-right\">{{getPAcuales() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Intereses</td>\r\n      <td class=\"text-right\">-</td>\r\n\r\n\r\n\r\n\r\n    </tr>\r\n\r\n\r\n\r\n    <tr>\r\n      <td>Incremento de Capital</td>\r\n      <td class=\"text-right\">-</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n            <td colspan=\"\"></td>\r\n    </tr>\r\n\r\n\r\n    <tr>\r\n      <th>Disponible</th>\r\n      <th class=\"text-right\">{{getDisponible() |currency:'USD':true:'1.0-0'}}</th>\r\n\r\n    </tr>\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td colspan=\"2\">Salidas</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Costo de Transformación</td>\r\n      <td class=\"text-right\">{{getCostoDeTransformacion() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Costo de Distribución</td>\r\n      <td class=\"text-right\">{{getCostoDeDistribucion() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n\r\n    <tr>\r\n      <td>Costo de Administrativo</td>\r\n      <td class=\"text-right\">{{getCostoAdministrativo() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Gastos de Venta</td>\r\n      <td class=\"text-right\">{{getGastosVenta() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n\r\n\r\n    <tr>\r\n      <td>Compra de Maquinaria</td>\r\n      <td class=\"text-right\">{{getCompraMaquinaria() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Compras</td>\r\n      <td class=\"text-right\">{{getCompras() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Intereses</td>\r\n      <td class=\"text-right\">{{getIntereses() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Pago de Préstamos</td>\r\n      <td class=\"text-right\">{{getPagos() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Dividendos</td>\r\n      <td class=\"text-right\">-</td>\r\n\r\n    </tr>\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>PTU</td>\r\n      <td class=\"text-right\">{{getPTU() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>ISR</td>\r\n      <td class=\"text-right\">{{getISR() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>IVA</td>\r\n      <td class=\"text-right\">{{getIVA() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td colspan=\"2\"></td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Total de Salidas</td>\r\n      <td class=\"text-right\">{{getSalidas() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Saldo Final</th>\r\n      <th class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.cajaBancos |currency:'USD':true:'1.0-0'}}</th>\r\n    </tr>\r\n\r\n  </tbody>\r\n</table>\r\n"
+module.exports = "<table class=\"table table-bordered  table-responsive\" >\r\n\r\n  <tbody>\r\n    <tr class=\"thead-inverse\">\r\n    <th colspan=\"2\">Presupuesto Global de Caja y Bancos</th>\r\n    </tr>\r\n\r\n\r\n\r\n\r\n    <tr>\r\n      <td>Saldo Inical</td>\r\n      <td class=\"text-right\" *ngFor=\"let balance of balanceInicial\">{{getCajaBancos() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th colspan=\"2\">Entradas </th>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Cobro por Ventas</td>\r\n      <td class=\"text-right\">{{getCobroVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Préstamos</td>\r\n      <td class=\"text-right\">{{getPAcuales() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Intereses</td>\r\n      <td class=\"text-right\">-</td>\r\n\r\n\r\n\r\n\r\n    </tr>\r\n\r\n\r\n\r\n    <tr>\r\n      <td>Incremento de Capital</td>\r\n      <td class=\"text-right\">-</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n            <td colspan=\"\"></td>\r\n    </tr>\r\n\r\n\r\n    <tr>\r\n      <th>Disponible</th>\r\n      <th class=\"text-right\">{{getDisponible() |currency:'USD':true:'1.0-0'}}</th>\r\n\r\n    </tr>\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td colspan=\"2\">Salidas</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Costo de Transformación</td>\r\n      <td class=\"text-right\">{{getCostoDeTransformacion() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Costo de Distribución</td>\r\n      <td class=\"text-right\">{{getCostoDeDistribucion() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n\r\n    <tr>\r\n      <td>Costo de Administrativo</td>\r\n      <td class=\"text-right\">{{getCostoAdministrativo() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Gastos de Venta</td>\r\n      <td class=\"text-right\">{{getGastosVenta() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n\r\n\r\n    <tr>\r\n      <td>Compra de Maquinaria</td>\r\n      <td class=\"text-right\">{{getCompraMaquinaria() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Compras</td>\r\n      <td class=\"text-right\">{{getCompras() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Intereses</td>\r\n      <td class=\"text-right\">{{getIntereses() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Pago de Préstamos</td>\r\n      <td class=\"text-right\">{{getPagos() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Dividendos</td>\r\n      <td class=\"text-right\">-</td>\r\n\r\n    </tr>\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>PTU</td>\r\n      <td class=\"text-right\">{{getPTU() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>ISR</td>\r\n      <td class=\"text-right\">{{getISR() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>IVA</td>\r\n      <td class=\"text-right\">{{getIVA() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td colspan=\"2\"></td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Total de Salidas</td>\r\n      <td class=\"text-right\">{{getSalidas() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Saldo Final</th>\r\n      <th class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.cajaBancos |currency:'USD':true:'1.0-0'}}</th>\r\n    </tr>\r\n\r\n  </tbody>\r\n</table>\r\n\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-4 offset-4\">\r\n    <button type=\"button\" class=\"btn btn-danger\" name=\"button\" (click)=\"PDFflujo()\">Exportar PDF</button>\r\n\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -4763,6 +4763,113 @@ var FlujoComponent = (function () {
         var s = 0;
         s = this.getCostoDeTransformacion() + this.getCostoDeDistribucion() + this.getCostoAdministrativo() + this.getCompras() + this.getIntereses() + this.getPagos() + this.getGastosVenta() + this.getCompraMaquinaria() + this.getIVA();
         return s;
+    };
+    FlujoComponent.prototype.PDFflujo = function () {
+        var doc = new jsPDF({
+            unit: 'mm',
+            format: [279, 215.9]
+        });
+        var columns = [
+            { title: "Concepto", dataKey: "cara" },
+            { title: "Saldo", dataKey: "saldo" }
+        ];
+        var rows = [
+            { "cara": "Saldo Inicial" },
+            { "cara": "", "saldo": "" },
+            { "cara": "Cobros por venta" },
+            { "cara": "Préstamos" },
+            { "cara": "Intereses" },
+            { "cara": "Incremento de Capital" },
+            { "cara": "", "saldo": "" },
+            { "cara": "Disponible" },
+            { "cara": "", "saldo": "" },
+            { "cara": "Costo de Transformación" },
+            { "cara": "Costo de Distribución" },
+            { "cara": "Costo de Administrativo" },
+            { "cara": "Gastos de Venta" },
+            { "cara": "Compra de Maquinaria" },
+            { "cara": "Compras" },
+            { "cara": "Intereses" },
+            { "cara": "Pago de Prestamos" },
+            { "cara": "Dividendos" },
+            { "cara": "", "saldo": "" },
+            { "cara": "PTU" },
+            { "cara": "ISR" },
+            { "cara": "IVA" },
+            { "cara": "", "saldo": "" },
+            { "cara": "Total de Salidas" },
+            { "cara": "Saldo Final" }
+        ];
+        var t = {
+            title: "Total",
+            dataKey: "t"
+        };
+        doc.autoTable(columns, rows, {
+            margin: { top: 40,
+                left: 15 },
+            tableWidth: 185,
+            headerStyles: { fillColor: 0 },
+            columnStyles: {
+                cara: { halign: 'left', columnWidth: 65 }
+            },
+            addPageContent: function (data) {
+                doc.setFontSize(15);
+                doc.setFontType("bold");
+                doc.text(107.9, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+                doc.setFontSize(13);
+                doc.text(107.9, 23, 'Presupuesto Global de Caja y Bancos', null, null, 'center');
+                doc.line(25, 27, 190, 27);
+            },
+            drawRow: function (row, data) {
+                // Colspan
+                doc.setFontStyle('bold');
+                doc.setFontSize(10);
+                if (row.index === 2) {
+                    doc.rect(data.settings.margin.left, row.y, data.table.width, 7, 'S');
+                    doc.autoTableText("Entradas", data.settings.margin.left + data.table.width / 2, row.y + row.height / 2, {
+                        halign: 'center',
+                        valign: 'middle'
+                    });
+                    data.cursor.y += 7;
+                }
+                else if (row.index === 9) {
+                    doc.rect(data.settings.margin.left, row.y, data.table.width, 7, 'S');
+                    doc.autoTableText("Salidas", data.settings.margin.left + data.table.width / 2, row.y + row.height / 2, {
+                        halign: 'center',
+                        valign: 'middle'
+                    });
+                    data.cursor.y += 7;
+                }
+                if (row.index % 5 === 0) {
+                    var posY = row.y + row.height * 6 + data.settings.margin.bottom;
+                    if (posY > doc.internal.pageSize.height) {
+                        data.addPage();
+                    }
+                }
+            },
+            drawCell: function (cell, data) {
+                // Rowspan
+                var rows = data.table.rows;
+                if (data.row.index == 0) {
+                    doc.setFillColor(176, 176, 176);
+                    doc.setFontType("bold");
+                }
+                else if (data.row.index == 24) {
+                    doc.setFillColor(176, 176, 176);
+                    doc.setFontType("bold");
+                }
+                else if (data.row.index == 7) {
+                    doc.setFillColor(176, 176, 176);
+                    doc.setFontType("bold");
+                }
+                else if (data.row.index == 23) {
+                    doc.setFillColor(176, 176, 176);
+                    doc.setFontType("bold");
+                }
+                ;
+            }
+        });
+        doc.save("Estado de Resultados.pdf");
     };
     return FlujoComponent;
 }());
@@ -8018,14 +8125,24 @@ var CompraMaquinariaService = (function () {
         return this.http.post('maquinariacomprada/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
     CompraMaquinariaService.prototype.compraMaquinaria = function (x, y) {
+        var _this = this;
         this.cobrar(y).subscribe();
-        this.comprar(x).subscribe();
-        return this.establecerValores();
+        var z = [];
+        this.comprar(x).subscribe(function (data) {
+            if (data.success) {
+                z = _this.establecerValores();
+            }
+        });
+        return z;
     };
     CompraMaquinariaService.prototype.regresarMaquinaria = function (x, y) {
+        var _this = this;
         this.undo(y).subscribe();
-        this.vuelta(x).subscribe();
-        return this.establecerValores();
+        var z = [];
+        this.vuelta(x).subscribe(function (data) {
+            z = _this.establecerValores();
+        });
+        return z;
     };
     CompraMaquinariaService.prototype.cobrar = function (x) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
