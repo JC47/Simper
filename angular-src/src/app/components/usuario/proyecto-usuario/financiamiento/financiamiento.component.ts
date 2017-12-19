@@ -2,6 +2,8 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { UsuarioCreditoService } from '../../../../services/usuario-credito.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ProyectosService} from '../../../../services/proyectos.service';
+
 
 
 
@@ -28,7 +30,9 @@ export class FinanciamientoComponent implements OnInit {
   }
   confDeleteCredito:boolean=false;
 
-  constructor(private _creditoService:UsuarioCreditoService) {
+  constructor(private _creditoService:UsuarioCreditoService,
+  private _proyectoService:ProyectosService) {
+    this._proyectoService.ocultaCierrePeriodo()
     this.creditos=this._creditoService.returnCreditosU(localStorage.getItem('idUsuario'));
     this.creditosActivos=this._creditoService.arregloC();
     console.log("cActivos",this.creditosActivos)
@@ -36,6 +40,9 @@ export class FinanciamientoComponent implements OnInit {
       'monto':new FormControl('',Validators.required),
       'idCredito':new FormControl('',Validators.required)
     });
+  }
+
+  ngOnInit() {
   }
 
   validaCredito(credito){
@@ -46,7 +53,6 @@ export class FinanciamientoComponent implements OnInit {
 
       }
     }
-    console.log("no esta pedido")
     return false;
 
   }
@@ -90,6 +96,7 @@ export class FinanciamientoComponent implements OnInit {
           this._creditoService.solicitarCredito(x).subscribe(data => {
             if(data.success){
               this.verAmortizacion(cantidad.idCredito);
+              this.actualizar();
             }
           });
         }else{
@@ -98,14 +105,7 @@ export class FinanciamientoComponent implements OnInit {
         }
       });
       this.openModalConf=false;
-      this.actualizarActivos();
     }
-  }
-
-  actualizarActivos(){
-    this._creditoService.validarP();
-    this.creditosActivos=this._creditoService.arregloC();
-    console.log("P",this.creditosActivos);
   }
 
   eliminarCreditoSolicitado(){
@@ -115,8 +115,12 @@ export class FinanciamientoComponent implements OnInit {
       idProyecto:parseInt(localStorage.getItem('idProyecto')),
       numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo'))
     };
-    this._creditoService.eliminarCredito(x).subscribe(data => {console.log(2,data);});
     this._creditoService.eliminarCreditoActivo(x).subscribe();
+    this._creditoService.eliminarCredito(x).subscribe(data => {
+      if(data.success){
+        this.actualizar();
+      }
+    });
   }
 
   verAmortizacion(idCredito){
@@ -146,7 +150,10 @@ export class FinanciamientoComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+
+
+  actualizar(){
+    this.creditosActivos = this._creditoService.arregloC();
   }
 
 }

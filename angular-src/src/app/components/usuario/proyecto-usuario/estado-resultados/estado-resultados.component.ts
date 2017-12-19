@@ -4,6 +4,9 @@ import {ProductoService} from '../../../../services/producto.service';
 import {ResultadosService} from '../../../../services/resultados.service';
 import {BalanceService} from '../../../../services/balance.service';
 import { CompraMaquinariaService } from '../../../../services/compra-maquinaria.service';
+import {ProyectosService} from '../../../../services/proyectos.service';
+
+
 declare var jsPDF: any;
 @Component({
   selector: 'app-estado-resultados',
@@ -25,7 +28,9 @@ export class EstadoResultadosComponent implements OnInit {
               private _productoService:ProductoService,
               private _maqService:CompraMaquinariaService,
               private _balanceService:BalanceService,
-              private _resultadosService:ResultadosService){
+              private _resultadosService:ResultadosService,
+            private _proyectoService:ProyectosService){
+              this._proyectoService.ocultaCierrePeriodo()
     this._resultadosService.vender();
     setTimeout(() => {
         this._balanceService.getBalanceFinal().subscribe( data => {

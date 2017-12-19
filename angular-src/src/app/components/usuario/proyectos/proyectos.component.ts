@@ -57,6 +57,7 @@ export class ProyectosComponent implements OnInit {
    }
 
    entrarP(){
+     setTimeout(()=>{this._proyectosService.changePeriodo()}, 1000);
      this.confModal.hide();
      this._proyectosService.entrar();
    }
