@@ -3345,24 +3345,27 @@ var CompraMaquinariaComponent = (function () {
         this.maquinasCompradas = this._CompraMaquinariaService.compraMaquinaria(x, y);
     };
     CompraMaquinariaComponent.prototype.regresar = function () {
-        if (this.maqSelectedLess.Balance_numeroPeriodo == parseInt(localStorage.getItem('numeroPeriodo'))) {
-            var x = {
-                Maquinaria_idMaquinaria: this.maqSelectedLess.idMaquinaria,
-                Balance_numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')),
-                Proyectos_idProyecto: parseInt(localStorage.getItem('idProyecto'))
-            };
-            var y = {
-                Balance_numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')),
-                Proyectos_idProyecto: parseInt(localStorage.getItem('idProyecto')),
-                idProducto: this.maqSelectedLess.Producto_idProducto,
-                costo: this.maqSelectedLess.costo,
-                dep: this.maqSelectedLess.depAcum
-            };
-            this.maquinasCompradas = this._CompraMaquinariaService.regresarMaquinaria(x, y);
-        }
-        else {
-            alert("No puedes regresar esa maquinaria");
-        }
+        var _this = this;
+        var x = {
+            Maquinaria_idMaquinaria: this.maqSelectedLess.idMaquinaria,
+            Balance_numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')),
+            Proyectos_idProyecto: parseInt(localStorage.getItem('idProyecto'))
+        };
+        var y = {
+            Balance_numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')),
+            Proyectos_idProyecto: parseInt(localStorage.getItem('idProyecto')),
+            idProducto: this.maqSelectedLess.Producto_idProducto,
+            costo: this.maqSelectedLess.costo,
+            dep: this.maqSelectedLess.depAcum
+        };
+        this._CompraMaquinariaService.validar(x).subscribe(function (data) {
+            if (data.success) {
+                _this.maquinasCompradas = _this._CompraMaquinariaService.regresarMaquinaria(x, y);
+            }
+            else {
+                alert(data.msg);
+            }
+        });
     };
     return CompraMaquinariaComponent;
 }());
@@ -3409,7 +3412,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-12\">\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\n<hr>\n</div>\n\n\n<div class=\"row\">\n  <div class=\"col-12\" style=\"height:500px\" *ngFor=\"let zona of graficas\" >\n    <div class=\"row\">\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\n\n  <div class=\"col-12\" style=\"height:400px;\">\n    <ngx-charts-line-chart\n         [scheme]=\"colorScheme\"\n         [results]=\"zona.graf\"\n         xAxis=\"true\"\n         legendTitle=\"Productos\"\n         yAxis=\"true\"\n         legend=\"true\"\n         showXAxisLabel=\"true\"\n         showYAxisLabel=\"true\"\n         xAxisLabel=\"Periodos\"\n         yAxisLabel=\"Demanda Potencial\"\n         autoScale=\"true\">\n       </ngx-charts-line-chart>\n  </div>\n    </div>\n\n\n\n\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"col-12\">\r\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\r\n<hr>\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-12\" style=\"height:500px\" *ngFor=\"let zona of graficas\" >\r\n    <div class=\"row\">\r\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\r\n\r\n  <div class=\"col-12\" style=\"height:400px;\">\r\n    <ngx-charts-line-chart\r\n         [scheme]=\"colorScheme\"\r\n         [results]=\"zona.graf\"\r\n         xAxis=\"true\"\r\n         legendTitle=\"Productos\"\r\n         yAxis=\"true\"\r\n         legend=\"true\"\r\n         showXAxisLabel=\"true\"\r\n         showYAxisLabel=\"true\"\r\n         xAxisLabel=\"Periodos\"\r\n         yAxisLabel=\"Demanda Potencial\"\r\n         autoScale=\"true\">\r\n       </ngx-charts-line-chart>\r\n  </div>\r\n    </div>\r\n\r\n\r\n\r\n\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -4052,6 +4055,7 @@ var EstadoResultadosComponent = (function () {
         if (this.auxiliares.length == 0) {
             for (var _i = 0, _a = this.maquinas; _i < _a.length; _i++) {
                 var m = _a[_i];
+                console.log(m.costo, m.depAcum, m.Cantidad);
                 T += ((m.costo * (m.depAcum / 100)) * m.Cantidad);
             }
         }
@@ -4613,112 +4617,6 @@ var FlujoComponent = (function () {
         this.balanceFinal = [];
         this.auxiliaresAnteriores = [];
         this.prestamos = [];
-        this.data = [
-            {
-                concepto: "Presupuesto Global de Caja y Bancos",
-                cantidad: "",
-            },
-            {
-                concepto: "",
-                cantidad: "",
-            },
-            {
-                concepto: "Saldo Inicial",
-                cantidad: "",
-            },
-            {
-                concepto: "Entradas",
-                cantidad: "",
-            },
-            {
-                concepto: "Cobro por Ventas",
-                cantidad: "",
-            },
-            {
-                concepto: "Préstamos",
-                cantidad: "",
-            },
-            {
-                concepto: "Intereses",
-                cantidad: "",
-            },
-            {
-                concepto: "Incremento de Capital",
-                cantidad: "",
-            },
-            {
-                concepto: "Salidas",
-                cantidad: "",
-            },
-            {
-                concepto: "Costo de Trasformación",
-                cantidad: "",
-            },
-            {
-                concepto: "Costo de Distribución",
-                cantidad: "",
-            },
-            {
-                concepto: "Costo Administrativo",
-                cantidad: "",
-            },
-            {
-                concepto: "Costo de Venta",
-                cantidad: "",
-            },
-            {
-                concepto: "Compra de Maquinaria",
-                cantidad: "",
-            },
-            {
-                concepto: "Compras",
-                cantidad: "",
-            },
-            {
-                concepto: "Intereses",
-                cantidad: "",
-            },
-            {
-                concepto: "Pago de Prestamos",
-                cantidad: "",
-            },
-            {
-                concepto: "Dividendos",
-                cantidad: "",
-            },
-            {
-                concepto: "",
-                cantidad: "",
-            },
-            {
-                concepto: "PTU",
-                cantidad: "",
-            },
-            {
-                concepto: "ISR",
-                cantidad: "",
-            },
-            {
-                concepto: "IVA",
-                cantidad: "",
-            },
-            {
-                concepto: "",
-                cantidad: "",
-            },
-            {
-                concepto: "Total de Salidas",
-                cantidad: "",
-            },
-            {
-                concepto: "Saldo Final",
-                cantidad: "",
-            },
-            {
-                concepto: "",
-                cantidad: "",
-            },
-        ];
         this._proyectoService.ocultaCierrePeriodo();
         this._resultadosService.vender();
         setTimeout(function () {
@@ -4873,6 +4771,14 @@ var FlujoComponent = (function () {
         s = this.getCostoDeTransformacion() + this.getCostoDeDistribucion() + this.getCostoAdministrativo() + this.getCompras() + this.getIntereses() + this.getPagos() + this.getGastosVenta() + this.getCompraMaquinaria() + this.getIVA();
         return s;
     };
+    FlujoComponent.prototype.getCajaBancosFinal = function () {
+        var c = 0;
+        for (var _i = 0, _a = this.balanceFinal; _i < _a.length; _i++) {
+            var b = _a[_i];
+            c += b.cajaBancos;
+        }
+        return c;
+    };
     FlujoComponent.prototype.PDFflujo = function () {
         var doc = new jsPDF({
             unit: 'mm',
@@ -4883,31 +4789,31 @@ var FlujoComponent = (function () {
             { title: "Saldo", dataKey: "saldo" }
         ];
         var rows = [
-            { "cara": "Saldo Inicial" },
+            { "cara": "Saldo Inicial", "saldo": this.getCajaBancos() },
             { "cara": "", "saldo": "" },
-            { "cara": "Cobros por venta" },
-            { "cara": "Préstamos" },
-            { "cara": "Intereses" },
-            { "cara": "Incremento de Capital" },
+            { "cara": "Cobros por venta", "saldo": this.getCobroVentas() },
+            { "cara": "Préstamos", "saldo": this.getPAcuales() },
+            { "cara": "Intereses", "saldo": this.getIntereses() },
+            { "cara": "Incremento de Capital", "saldo": "" },
             { "cara": "", "saldo": "" },
-            { "cara": "Disponible" },
+            { "cara": "Disponible", "saldo": this.getDisponible() },
             { "cara": "", "saldo": "" },
-            { "cara": "Costo de Transformación" },
-            { "cara": "Costo de Distribución" },
-            { "cara": "Costo de Administrativo" },
-            { "cara": "Gastos de Venta" },
-            { "cara": "Compra de Maquinaria" },
-            { "cara": "Compras" },
-            { "cara": "Intereses" },
-            { "cara": "Pago de Prestamos" },
-            { "cara": "Dividendos" },
+            { "cara": "Costo de Transformación", "saldo": this.getCostoDeTransformacion() },
+            { "cara": "Costo de Distribución", "saldo": this.getCostoDeDistribucion() },
+            { "cara": "Costo de Administrativo", "saldo": this.getCostoAdministrativo() },
+            { "cara": "Gastos de Venta", "saldo": this.getGastosVenta() },
+            { "cara": "Compra de Maquinaria", "saldo": this.getCompraMaquinaria() },
+            { "cara": "Compras", "saldo": this.getCompras() },
+            { "cara": "Intereses", "saldo": this.getIntereses() },
+            { "cara": "Pago de Prestamos", "saldo": this.getPagos() },
+            { "cara": "Dividendos", "saldo": "" },
             { "cara": "", "saldo": "" },
-            { "cara": "PTU" },
-            { "cara": "ISR" },
-            { "cara": "IVA" },
+            { "cara": "PTU", "saldo": this.getPTU() },
+            { "cara": "ISR", "saldo": this.getISR() },
+            { "cara": "IVA", "saldo": this.getIVA() },
             { "cara": "", "saldo": "" },
-            { "cara": "Total de Salidas" },
-            { "cara": "Saldo Final" }
+            { "cara": "Total de Salidas", "saldo": this.getSalidas() },
+            { "cara": "Saldo Final", "saldo": this.getCajaBancosFinal() }
         ];
         var t = {
             title: "Total",
@@ -4978,8 +4884,126 @@ var FlujoComponent = (function () {
                 ;
             }
         });
+        var dataCSV = [
+            {
+                concepto: "Presupuesto Global de Caja y Bancos",
+                cantidad: "",
+            },
+            {
+                concepto: "",
+                cantidad: "",
+            },
+            {
+                concepto: "Saldo Inicial",
+                cantidad: this.getCajaBancos(),
+            },
+            {
+                concepto: "Entradas",
+                cantidad: "",
+            },
+            {
+                concepto: "Cobro por Ventas",
+                cantidad: this.getCobroVentas(),
+            },
+            {
+                concepto: "Préstamos",
+                cantidad: this.getPAcuales(),
+            },
+            {
+                concepto: "Intereses",
+                cantidad: "",
+            },
+            {
+                concepto: "Incremento de Capital",
+                cantidad: "",
+            },
+            {
+                concepto: "",
+                cantidad: "",
+            },
+            {
+                concepto: "Disponible",
+                cantidad: this.getDisponible(),
+            },
+            {
+                concepto: "",
+                cantidad: "",
+            },
+            {
+                concepto: "Salidas",
+                cantidad: "",
+            },
+            {
+                concepto: "Costo de Trasformación",
+                cantidad: this.getCostoDeTransformacion(),
+            },
+            {
+                concepto: "Costo de Distribución",
+                cantidad: this.getCostoDeDistribucion(),
+            },
+            {
+                concepto: "Costo Administrativo",
+                cantidad: this.getCostoAdministrativo(),
+            },
+            {
+                concepto: "Costo de Venta",
+                cantidad: this.getGastosVenta(),
+            },
+            {
+                concepto: "Compra de Maquinaria",
+                cantidad: this.getCompraMaquinaria(),
+            },
+            {
+                concepto: "Compras",
+                cantidad: this.getCompras(),
+            },
+            {
+                concepto: "Intereses",
+                cantidad: this.getIntereses(),
+            },
+            {
+                concepto: "Pago de Prestamos",
+                cantidad: this.getPagos(),
+            },
+            {
+                concepto: "Dividendos",
+                cantidad: "",
+            },
+            {
+                concepto: "",
+                cantidad: "",
+            },
+            {
+                concepto: "PTU",
+                cantidad: this.getPTU(),
+            },
+            {
+                concepto: "ISR",
+                cantidad: this.getISR(),
+            },
+            {
+                concepto: "IVA",
+                cantidad: this.getIVA(),
+            },
+            {
+                concepto: "",
+                cantidad: "",
+            },
+            {
+                concepto: "Total de Salidas",
+                cantidad: this.getSalidas(),
+            },
+            {
+                concepto: "Saldo Final",
+                cantidad: this.getCajaBancosFinal(),
+            },
+            {
+                concepto: "",
+                cantidad: "",
+            },
+        ];
         doc.save("Estado de Resultados.pdf");
-        new __WEBPACK_IMPORTED_MODULE_7_angular2_csv_Angular2_csv__["Angular2Csv"](this.data, 'My Report');
+        new __WEBPACK_IMPORTED_MODULE_7_angular2_csv_Angular2_csv__["Angular2Csv"](dataCSV, 'My Report');
     };
     return FlujoComponent;
 }());
@@ -8256,19 +8280,26 @@ var CompraMaquinariaService = (function () {
         var _this = this;
         this.cobrar(y).subscribe();
         var z = [];
-        this.comprar(x).subscribe(function (data) {
-            if (data.success) {
-                z = _this.establecerValores();
-            }
+        this.comprar(x).subscribe(function (d) {
+            _this.getMaquinariaC().subscribe(function (data) {
+                for (var key$ in data.datos) {
+                    z.push(data.datos[key$]);
+                }
+            });
         });
+        console.log("Retorno", z);
         return z;
     };
     CompraMaquinariaService.prototype.regresarMaquinaria = function (x, y) {
         var _this = this;
         this.undo(y).subscribe();
         var z = [];
-        this.vuelta(x).subscribe(function (data) {
-            z = _this.establecerValores();
+        this.vuelta(x).subscribe(function (d) {
+            _this.getMaquinariaC().subscribe(function (data) {
+                for (var key$ in data.datos) {
+                    z.push(data.datos[key$]);
+                }
+            });
         });
         return z;
     };
@@ -8302,6 +8333,12 @@ var CompraMaquinariaService = (function () {
             'Content-Type': 'application/json'
         });
         return this.http.post('maquinariacomprada/undo/', x, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    CompraMaquinariaService.prototype.validar = function (x) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        return this.http.post('maquinariacomprada/validatecompra/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
     return CompraMaquinariaService;
 }());
