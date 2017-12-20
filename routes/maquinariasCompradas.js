@@ -312,7 +312,9 @@ while (k < idsmaqproyecto.length) {
         "nombreMaq":nombremaqprod[k].nombreMaq,
         "Cantidad":arrayCantidad[k],
         "Producto_idProducto":nombremaqprod[k].Producto_idProducto,
-        "cantidadProd":nombremaqprod[k].cantidadProd
+        "costo":nombremaqprod[k].costo,
+        "cantidadProd":nombremaqprod[k].cantidadProd,
+        "depAcum":nombremaqprod[k].depAcum
       }
     arrayMaquinarias.push(json);
     }
