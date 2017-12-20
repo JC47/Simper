@@ -39,7 +39,7 @@ module.exports.getIdMaqProyecto = function (idProyecto,numeroPeriodo) {
 }
 
 module.exports.getNombreMaqProd = function (idProyecto,numeroPeriodo) {
-  var query = "select distinct nombreMaq,Producto_idProducto,cantidadProd from maquinaria inner join maquinariaproyecto on maquinaria.idMaquinaria = maquinariaproyecto.Maquinaria_idMaquinaria and maquinariaproyecto.Proyectos_idProyecto = "+idProyecto+" where maquinariaproyecto.Balance_numeroPeriodo <= "+numeroPeriodo+" ";
+  var query = "select distinct nombreMaq,Producto_idProducto,cantidadProd,costo,cantidadProd,depAcum from maquinaria inner join maquinariaproyecto on maquinaria.idMaquinaria = maquinariaproyecto.Maquinaria_idMaquinaria and maquinariaproyecto.Proyectos_idProyecto = "+idProyecto+" where maquinariaproyecto.Balance_numeroPeriodo <= "+numeroPeriodo+" ";
   return querySql(query);
 }
 

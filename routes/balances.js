@@ -4,6 +4,7 @@ const balance = require('../models/balance');
 const operacion = require('../models/operacion');
 const auxiliar = require('../models/auxiliar');
 const prestamo = require('../models/prestamo');
+const variable = require("../models/variable");
 const Promise = require("bluebird");
 
 router.post('/register', (req, res, next) => {
@@ -94,7 +95,13 @@ router.post('/final', (req, res, next) => {
               prestamo.getFinanciamientos(idProyecto,numeroPeriodoActual),
               prestamo.getPagos(idProyecto,numeroPeriodoActual),
               auxiliar.getAuxiliares(numeroPeriodoActual,idProyecto),
-              auxiliar.getAuxiliaresVenta(numeroPeriodoActual,idProyecto), function(balanceBase,prestamos,pagos,auxCompleto,auxesVentas){
+              auxiliar.getAuxiliaresVenta(numeroPeriodoActual,idProyecto),
+              variable.getPTU(),variable.getISR(),
+              function(balanceBase,prestamos,pagos,auxCompleto,auxesVentas,ptu,isr){
+
+    //ISR Y PTU
+    var ISR_valor = isr[0].valor;
+    var PTU_valor = ptu[0].valor;
     //depreciacion del balance anterior
     depMAnterior = balanceBase[0].maqEquipo * .10;
 
@@ -177,8 +184,8 @@ router.post('/final', (req, res, next) => {
         utilidadVerdadera = utilidadEjercicio;
       }
       if(utilidadVerdadera > 0){
-        ISR = utilidadVerdadera * .34;
-        PTU = utilidadVerdadera * .10;
+        ISR = utilidadVerdadera * ISR_valor;
+        PTU = utilidadVerdadera * PTU_valor;
         imptsPorPagar = (ISR/12);
         ISRCajaBancos = imptsPorPagar * 11;
         utilidadEjercicio = utilidadEjercicio - ISR - PTU;
@@ -307,12 +314,12 @@ function getIVAxEnterar(aux,auxV){
   return ivaT/12;
 }
 
-function getCompras(auxesVentas){
+function getCompras(auxV){
   var Comp = 0;
   for (let key in auxV) {
       Comp += auxV[key].comprasPagadas;
   }
-  return CompTotal;
+  return Comp;
 }
 
 function getProveedores(auxV){
@@ -320,7 +327,7 @@ function getProveedores(auxV){
   for (let key in auxV) {
       Comp += auxV[key].ComprasPorPagar;
   }
-  return CompTotal;
+  return Comp;
 }
 
 function getcobroPorVentas(auxV){
@@ -328,7 +335,7 @@ function getcobroPorVentas(auxV){
   for (let key in auxV) {
       Comp += auxV[key].VentasCobradas;
   }
-  return CompTotal;
+  return Comp;
 }
 
 function getCuentasPorCobrar(auxV){
@@ -336,7 +343,7 @@ function getCuentasPorCobrar(auxV){
   for (let key in auxV) {
       Comp += auxV[key].VentasPorCobrar;
   }
-  return CompTotal;
+  return Comp;
 }
 
 function getMaquinariaBalance(auxCompleto) {

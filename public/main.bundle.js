@@ -3345,24 +3345,27 @@ var CompraMaquinariaComponent = (function () {
         this.maquinasCompradas = this._CompraMaquinariaService.compraMaquinaria(x, y);
     };
     CompraMaquinariaComponent.prototype.regresar = function () {
-        if (this.maqSelectedLess.Balance_numeroPeriodo == parseInt(localStorage.getItem('numeroPeriodo'))) {
-            var x = {
-                Maquinaria_idMaquinaria: this.maqSelectedLess.idMaquinaria,
-                Balance_numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')),
-                Proyectos_idProyecto: parseInt(localStorage.getItem('idProyecto'))
-            };
-            var y = {
-                Balance_numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')),
-                Proyectos_idProyecto: parseInt(localStorage.getItem('idProyecto')),
-                idProducto: this.maqSelectedLess.Producto_idProducto,
-                costo: this.maqSelectedLess.costo,
-                dep: this.maqSelectedLess.depAcum
-            };
-            this.maquinasCompradas = this._CompraMaquinariaService.regresarMaquinaria(x, y);
-        }
-        else {
-            alert("No puedes regresar esa maquinaria");
-        }
+        var _this = this;
+        var x = {
+            Maquinaria_idMaquinaria: this.maqSelectedLess.idMaquinaria,
+            Balance_numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')),
+            Proyectos_idProyecto: parseInt(localStorage.getItem('idProyecto'))
+        };
+        var y = {
+            Balance_numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')),
+            Proyectos_idProyecto: parseInt(localStorage.getItem('idProyecto')),
+            idProducto: this.maqSelectedLess.Producto_idProducto,
+            costo: this.maqSelectedLess.costo,
+            dep: this.maqSelectedLess.depAcum
+        };
+        this._CompraMaquinariaService.validar(x).subscribe(function (data) {
+            if (data.success) {
+                _this.maquinasCompradas = _this._CompraMaquinariaService.regresarMaquinaria(x, y);
+            }
+            else {
+                alert(data.msg);
+            }
+        });
     };
     return CompraMaquinariaComponent;
 }());
@@ -3409,7 +3412,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-12\">\r\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\r\n<hr>\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-12\" style=\"height:500px\" *ngFor=\"let zona of graficas\" >\r\n    <div class=\"row\">\r\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\r\n\r\n  <div class=\"col-12\" style=\"height:400px;\">\r\n    <ngx-charts-line-chart\r\n         [scheme]=\"colorScheme\"\r\n         [results]=\"zona.graf\"\r\n         xAxis=\"true\"\r\n         legendTitle=\"Productos\"\r\n         yAxis=\"true\"\r\n         legend=\"true\"\r\n         showXAxisLabel=\"true\"\r\n         showYAxisLabel=\"true\"\r\n         xAxisLabel=\"Periodos\"\r\n         yAxisLabel=\"Demanda Potencial\"\r\n         autoScale=\"true\">\r\n       </ngx-charts-line-chart>\r\n  </div>\r\n    </div>\r\n\r\n\r\n\r\n\r\n  </div>\r\n\r\n</div>\r\n"
+module.exports = "<div class=\"col-12\">\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\n<hr>\n</div>\n\n\n<div class=\"row\">\n  <div class=\"col-12\" style=\"height:500px\" *ngFor=\"let zona of graficas\" >\n    <div class=\"row\">\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\n\n  <div class=\"col-12\" style=\"height:400px;\">\n    <ngx-charts-line-chart\n         [scheme]=\"colorScheme\"\n         [results]=\"zona.graf\"\n         xAxis=\"true\"\n         legendTitle=\"Productos\"\n         yAxis=\"true\"\n         legend=\"true\"\n         showXAxisLabel=\"true\"\n         showYAxisLabel=\"true\"\n         xAxisLabel=\"Periodos\"\n         yAxisLabel=\"Demanda Potencial\"\n         autoScale=\"true\">\n       </ngx-charts-line-chart>\n  </div>\n    </div>\n\n\n\n\n  </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -4052,6 +4055,7 @@ var EstadoResultadosComponent = (function () {
         if (this.auxiliares.length == 0) {
             for (var _i = 0, _a = this.maquinas; _i < _a.length; _i++) {
                 var m = _a[_i];
+                console.log(m.costo, m.depAcum, m.Cantidad);
                 T += ((m.costo * (m.depAcum / 100)) * m.Cantidad);
             }
         }
@@ -4560,7 +4564,11 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/flujo/flujo.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<table class=\"table table-bordered  table-responsive\" >\r\n\r\n  <tbody>\r\n    <tr class=\"thead-inverse\">\r\n    <th colspan=\"2\">Presupuesto Global de Caja y Bancos</th>\r\n    </tr>\r\n\r\n\r\n\r\n\r\n    <tr>\r\n      <td>Saldo Inical</td>\r\n      <td class=\"text-right\" *ngFor=\"let balance of balanceInicial\">{{getCajaBancos() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th colspan=\"2\">Entradas </th>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Cobro por Ventas</td>\r\n      <td class=\"text-right\">{{getCobroVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Préstamos</td>\r\n      <td class=\"text-right\">{{getPAcuales() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Intereses</td>\r\n      <td class=\"text-right\">-</td>\r\n\r\n\r\n\r\n\r\n    </tr>\r\n\r\n\r\n\r\n    <tr>\r\n      <td>Incremento de Capital</td>\r\n      <td class=\"text-right\">-</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n            <td colspan=\"\"></td>\r\n    </tr>\r\n\r\n\r\n    <tr>\r\n      <th>Disponible</th>\r\n      <th class=\"text-right\">{{getDisponible() |currency:'USD':true:'1.0-0'}}</th>\r\n\r\n    </tr>\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td colspan=\"2\">Salidas</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Costo de Transformación</td>\r\n      <td class=\"text-right\">{{getCostoDeTransformacion() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Costo de Distribución</td>\r\n      <td class=\"text-right\">{{getCostoDeDistribucion() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n\r\n    <tr>\r\n      <td>Costo de Administrativo</td>\r\n      <td class=\"text-right\">{{getCostoAdministrativo() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Gastos de Venta</td>\r\n      <td class=\"text-right\">{{getGastosVenta() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n\r\n\r\n    <tr>\r\n      <td>Compra de Maquinaria</td>\r\n      <td class=\"text-right\">{{getCompraMaquinaria() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Compras</td>\r\n      <td class=\"text-right\">{{getCompras() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Intereses</td>\r\n      <td class=\"text-right\">{{getIntereses() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Pago de Préstamos</td>\r\n      <td class=\"text-right\">{{getPagos() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Dividendos</td>\r\n      <td class=\"text-right\">-</td>\r\n\r\n    </tr>\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>PTU</td>\r\n      <td class=\"text-right\">{{getPTU() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>ISR</td>\r\n      <td class=\"text-right\">{{getISR() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>IVA</td>\r\n      <td class=\"text-right\">{{getIVA() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td colspan=\"2\"></td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Total de Salidas</td>\r\n      <td class=\"text-right\">{{getSalidas() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Saldo Final</th>\r\n      <th class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.cajaBancos |currency:'USD':true:'1.0-0'}}</th>\r\n    </tr>\r\n\r\n  </tbody>\r\n</table>\r\n"
+<<<<<<< HEAD
+module.exports = "<table class=\"table table-bordered  table-responsive\" >\n\n  <tbody>\n    <tr class=\"thead-inverse\">\n    <th colspan=\"2\">Presupuesto Global de Caja y Bancos</th>\n    </tr>\n\n\n\n\n    <tr>\n      <td>Saldo Inical</td>\n      <td class=\"text-right\" *ngFor=\"let balance of balanceInicial\">{{getCajaBancos() |currency:'USD':true:'1.0-0'}}</td>\n    </tr>\n\n    <tr>\n            <td colspan=\"2\"></td>\n    </tr>\n\n    <tr>\n      <th colspan=\"2\">Entradas </th>\n\n    </tr>\n\n    <tr>\n            <td colspan=\"2\"></td>\n    </tr>\n\n    <tr>\n      <td>Cobro por Ventas</td>\n      <td class=\"text-right\">{{getCobroVentas() |currency:'USD':true:'1.0-0'}}</td>\n\n\n    </tr>\n\n    <tr>\n      <td>Préstamos</td>\n      <td class=\"text-right\">{{getPAcuales() |currency:'USD':true:'1.0-0'}}</td>\n\n\n\n    </tr>\n\n    <tr>\n      <td>Intereses</td>\n      <td class=\"text-right\">-</td>\n\n\n\n\n    </tr>\n\n\n\n    <tr>\n      <td>Incremento de Capital</td>\n      <td class=\"text-right\">-</td>\n\n    </tr>\n\n    <tr>\n            <td colspan=\"\"></td>\n    </tr>\n\n\n    <tr>\n      <th>Disponible</th>\n      <th class=\"text-right\">{{getDisponible() |currency:'USD':true:'1.0-0'}}</th>\n\n    </tr>\n    <tr>\n            <td colspan=\"2\"></td>\n    </tr>\n\n    <tr>\n      <td colspan=\"2\">Salidas</td>\n    </tr>\n\n    <tr>\n      <td>Costo de Transformación</td>\n      <td class=\"text-right\">{{getCostoDeTransformacion() |currency:'USD':true:'1.0-0'}}</td>\n\n    </tr>\n\n    <tr>\n      <td>Costo de Distribución</td>\n      <td class=\"text-right\">{{getCostoDeDistribucion() |currency:'USD':true:'1.0-0'}}</td>\n\n    </tr>\n\n\n    <tr>\n      <td>Costo de Administrativo</td>\n      <td class=\"text-right\">{{getCostoAdministrativo() |currency:'USD':true:'1.0-0'}}</td>\n\n    </tr>\n\n    <tr>\n      <td>Gastos de Venta</td>\n      <td class=\"text-right\">{{getGastosVenta() |currency:'USD':true:'1.0-0'}}</td>\n    </tr>\n\n\n\n    <tr>\n      <td>Compra de Maquinaria</td>\n      <td class=\"text-right\">{{getCompraMaquinaria() |currency:'USD':true:'1.0-0'}}</td>\n\n\n    </tr>\n\n    <tr>\n      <td>Compras</td>\n      <td class=\"text-right\">{{getCompras() |currency:'USD':true:'1.0-0'}}</td>\n\n\n    </tr>\n\n    <tr>\n      <td>Intereses</td>\n      <td class=\"text-right\">{{getIntereses() |currency:'USD':true:'1.0-0'}}</td>\n\n    </tr>\n\n    <tr>\n      <td>Pago de Préstamos</td>\n      <td class=\"text-right\">{{getPagos() |currency:'USD':true:'1.0-0'}}</td>\n    </tr>\n\n    <tr>\n      <td>Dividendos</td>\n      <td class=\"text-right\">-</td>\n\n    </tr>\n    <tr>\n            <td colspan=\"2\"></td>\n    </tr>\n\n    <tr>\n      <td>PTU</td>\n      <td class=\"text-right\">{{getPTU() |currency:'USD':true:'1.0-0'}}</td>\n\n    </tr>\n\n    <tr>\n      <td>ISR</td>\n      <td class=\"text-right\">{{getISR() |currency:'USD':true:'1.0-0'}}</td>\n    </tr>\n\n    <tr>\n      <td>IVA</td>\n      <td class=\"text-right\">{{getIVA() |currency:'USD':true:'1.0-0'}}</td>\n    </tr>\n\n    <tr>\n      <td colspan=\"2\"></td>\n\n    </tr>\n\n    <tr>\n      <td>Total de Salidas</td>\n      <td class=\"text-right\">{{getSalidas() |currency:'USD':true:'1.0-0'}}</td>\n    </tr>\n\n    <tr>\n\n    </tr>\n\n    <tr>\n      <th>Saldo Final</th>\n      <th class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.cajaBancos |currency:'USD':true:'1.0-0'}}</th>\n    </tr>\n\n  </tbody>\n</table>\n"
+=======
+module.exports = "<table class=\"table table-bordered  table-responsive\" >\r\n\r\n  <tbody>\r\n    <tr class=\"thead-inverse\">\r\n    <th colspan=\"2\">Presupuesto Global de Caja y Bancos</th>\r\n    </tr>\r\n\r\n\r\n\r\n\r\n    <tr>\r\n      <td>Saldo Inical</td>\r\n      <td class=\"text-right\" *ngFor=\"let balance of balanceInicial\">{{getCajaBancos() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th colspan=\"2\">Entradas </th>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Cobro por Ventas</td>\r\n      <td class=\"text-right\">{{getCobroVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Préstamos</td>\r\n      <td class=\"text-right\">{{getPAcuales() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Intereses</td>\r\n      <td class=\"text-right\">-</td>\r\n\r\n\r\n\r\n\r\n    </tr>\r\n\r\n\r\n\r\n    <tr>\r\n      <td>Incremento de Capital</td>\r\n      <td class=\"text-right\">-</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n            <td colspan=\"\"></td>\r\n    </tr>\r\n\r\n\r\n    <tr>\r\n      <th>Disponible</th>\r\n      <th class=\"text-right\">{{getDisponible() |currency:'USD':true:'1.0-0'}}</th>\r\n\r\n    </tr>\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td colspan=\"2\">Salidas</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Costo de Transformación</td>\r\n      <td class=\"text-right\">{{getCostoDeTransformacion() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Costo de Distribución</td>\r\n      <td class=\"text-right\">{{getCostoDeDistribucion() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n\r\n    <tr>\r\n      <td>Costo de Administrativo</td>\r\n      <td class=\"text-right\">{{getCostoAdministrativo() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Gastos de Venta</td>\r\n      <td class=\"text-right\">{{getGastosVenta() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n\r\n\r\n    <tr>\r\n      <td>Compra de Maquinaria</td>\r\n      <td class=\"text-right\">{{getCompraMaquinaria() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Compras</td>\r\n      <td class=\"text-right\">{{getCompras() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Intereses</td>\r\n      <td class=\"text-right\">{{getIntereses() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Pago de Préstamos</td>\r\n      <td class=\"text-right\">{{getPagos() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Dividendos</td>\r\n      <td class=\"text-right\">-</td>\r\n\r\n    </tr>\r\n    <tr>\r\n            <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>PTU</td>\r\n      <td class=\"text-right\">{{getPTU() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>ISR</td>\r\n      <td class=\"text-right\">{{getISR() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>IVA</td>\r\n      <td class=\"text-right\">{{getIVA() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td colspan=\"2\"></td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Total de Salidas</td>\r\n      <td class=\"text-right\">{{getSalidas() |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Saldo Final</th>\r\n      <th class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.cajaBancos |currency:'USD':true:'1.0-0'}}</th>\r\n    </tr>\r\n\r\n  </tbody>\r\n</table>\r\n\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-4 offset-4\">\r\n    <button type=\"button\" class=\"btn btn-danger\" name=\"button\" (click)=\"PDFflujo()\">Exportar PDF</button>\r\n\r\n  </div>\r\n\r\n</div>\r\n"
+>>>>>>> 8b022cafffd69cc8dfaac84eca1407f29897838a
 
 /***/ }),
 
@@ -4575,6 +4583,8 @@ module.exports = "<table class=\"table table-bordered  table-responsive\" >\r\n\
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_balance_service__ = __webpack_require__("../../../../../src/app/services/balance.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_compra_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/compra-maquinaria.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_csv_Angular2_csv__ = __webpack_require__("../../../../angular2-csv/Angular2-csv.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_csv_Angular2_csv___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_angular2_csv_Angular2_csv__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FlujoComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4585,6 +4595,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -4610,6 +4621,112 @@ var FlujoComponent = (function () {
         this.balanceFinal = [];
         this.auxiliaresAnteriores = [];
         this.prestamos = [];
+        this.data = [
+            {
+                concepto: "Presupuesto Global de Caja y Bancos",
+                cantidad: "",
+            },
+            {
+                concepto: "",
+                cantidad: "",
+            },
+            {
+                concepto: "Saldo Inicial",
+                cantidad: "",
+            },
+            {
+                concepto: "Entradas",
+                cantidad: "",
+            },
+            {
+                concepto: "Cobro por Ventas",
+                cantidad: "",
+            },
+            {
+                concepto: "Préstamos",
+                cantidad: "",
+            },
+            {
+                concepto: "Intereses",
+                cantidad: "",
+            },
+            {
+                concepto: "Incremento de Capital",
+                cantidad: "",
+            },
+            {
+                concepto: "Salidas",
+                cantidad: "",
+            },
+            {
+                concepto: "Costo de Trasformación",
+                cantidad: "",
+            },
+            {
+                concepto: "Costo de Distribución",
+                cantidad: "",
+            },
+            {
+                concepto: "Costo Administrativo",
+                cantidad: "",
+            },
+            {
+                concepto: "Costo de Venta",
+                cantidad: "",
+            },
+            {
+                concepto: "Compra de Maquinaria",
+                cantidad: "",
+            },
+            {
+                concepto: "Compras",
+                cantidad: "",
+            },
+            {
+                concepto: "Intereses",
+                cantidad: "",
+            },
+            {
+                concepto: "Pago de Prestamos",
+                cantidad: "",
+            },
+            {
+                concepto: "Dividendos",
+                cantidad: "",
+            },
+            {
+                concepto: "",
+                cantidad: "",
+            },
+            {
+                concepto: "PTU",
+                cantidad: "",
+            },
+            {
+                concepto: "ISR",
+                cantidad: "",
+            },
+            {
+                concepto: "IVA",
+                cantidad: "",
+            },
+            {
+                concepto: "",
+                cantidad: "",
+            },
+            {
+                concepto: "Total de Salidas",
+                cantidad: "",
+            },
+            {
+                concepto: "Saldo Final",
+                cantidad: "",
+            },
+            {
+                concepto: "",
+                cantidad: "",
+            },
+        ];
         this._proyectoService.ocultaCierrePeriodo();
         this._resultadosService.vender();
         setTimeout(function () {
@@ -4763,6 +4880,114 @@ var FlujoComponent = (function () {
         var s = 0;
         s = this.getCostoDeTransformacion() + this.getCostoDeDistribucion() + this.getCostoAdministrativo() + this.getCompras() + this.getIntereses() + this.getPagos() + this.getGastosVenta() + this.getCompraMaquinaria() + this.getIVA();
         return s;
+    };
+    FlujoComponent.prototype.PDFflujo = function () {
+        var doc = new jsPDF({
+            unit: 'mm',
+            format: [279, 215.9]
+        });
+        var columns = [
+            { title: "Concepto", dataKey: "cara" },
+            { title: "Saldo", dataKey: "saldo" }
+        ];
+        var rows = [
+            { "cara": "Saldo Inicial" },
+            { "cara": "", "saldo": "" },
+            { "cara": "Cobros por venta" },
+            { "cara": "Préstamos" },
+            { "cara": "Intereses" },
+            { "cara": "Incremento de Capital" },
+            { "cara": "", "saldo": "" },
+            { "cara": "Disponible" },
+            { "cara": "", "saldo": "" },
+            { "cara": "Costo de Transformación" },
+            { "cara": "Costo de Distribución" },
+            { "cara": "Costo de Administrativo" },
+            { "cara": "Gastos de Venta" },
+            { "cara": "Compra de Maquinaria" },
+            { "cara": "Compras" },
+            { "cara": "Intereses" },
+            { "cara": "Pago de Prestamos" },
+            { "cara": "Dividendos" },
+            { "cara": "", "saldo": "" },
+            { "cara": "PTU" },
+            { "cara": "ISR" },
+            { "cara": "IVA" },
+            { "cara": "", "saldo": "" },
+            { "cara": "Total de Salidas" },
+            { "cara": "Saldo Final" }
+        ];
+        var t = {
+            title: "Total",
+            dataKey: "t"
+        };
+        doc.autoTable(columns, rows, {
+            margin: { top: 40,
+                left: 15 },
+            tableWidth: 185,
+            headerStyles: { fillColor: 0 },
+            columnStyles: {
+                cara: { halign: 'left', columnWidth: 65 }
+            },
+            addPageContent: function (data) {
+                doc.setFontSize(15);
+                doc.setFontType("bold");
+                doc.text(107.9, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+                doc.setFontSize(13);
+                doc.text(107.9, 23, 'Presupuesto Global de Caja y Bancos', null, null, 'center');
+                doc.line(25, 27, 190, 27);
+            },
+            drawRow: function (row, data) {
+                // Colspan
+                doc.setFontStyle('bold');
+                doc.setFontSize(10);
+                if (row.index === 2) {
+                    doc.rect(data.settings.margin.left, row.y, data.table.width, 7, 'S');
+                    doc.autoTableText("Entradas", data.settings.margin.left + data.table.width / 2, row.y + row.height / 2, {
+                        halign: 'center',
+                        valign: 'middle'
+                    });
+                    data.cursor.y += 7;
+                }
+                else if (row.index === 9) {
+                    doc.rect(data.settings.margin.left, row.y, data.table.width, 7, 'S');
+                    doc.autoTableText("Salidas", data.settings.margin.left + data.table.width / 2, row.y + row.height / 2, {
+                        halign: 'center',
+                        valign: 'middle'
+                    });
+                    data.cursor.y += 7;
+                }
+                if (row.index % 5 === 0) {
+                    var posY = row.y + row.height * 6 + data.settings.margin.bottom;
+                    if (posY > doc.internal.pageSize.height) {
+                        data.addPage();
+                    }
+                }
+            },
+            drawCell: function (cell, data) {
+                // Rowspan
+                var rows = data.table.rows;
+                if (data.row.index == 0) {
+                    doc.setFillColor(176, 176, 176);
+                    doc.setFontType("bold");
+                }
+                else if (data.row.index == 24) {
+                    doc.setFillColor(176, 176, 176);
+                    doc.setFontType("bold");
+                }
+                else if (data.row.index == 7) {
+                    doc.setFillColor(176, 176, 176);
+                    doc.setFontType("bold");
+                }
+                else if (data.row.index == 23) {
+                    doc.setFillColor(176, 176, 176);
+                    doc.setFontType("bold");
+                }
+                ;
+            }
+        });
+        doc.save("Estado de Resultados.pdf");
+        new __WEBPACK_IMPORTED_MODULE_7_angular2_csv_Angular2_csv__["Angular2Csv"](this.data, 'My Report');
     };
     return FlujoComponent;
 }());
@@ -5780,7 +6005,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/prueba/prueba.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<table class=\"table table-bordered  table-responsive\" *ngFor=\"let balance of balanceFinal\">\r\n\r\n  <tbody>\r\n    <tr class=\"thead-inverse\">\r\n      <th  class=\"text-center\"></th>\r\n      <th  class=\"text-center \">Año Actual</th>\r\n      <th  class=\"text-center \">Año Anterior</th>\r\n      <th  class=\"text-center\">Aplicación</th>\r\n      <th  class=\"text-center\">Origen</th>\r\n    </tr>\r\n\r\n    <tr  class=\"thead-inverse\">\r\n      <th colspan=\"5\" class=\"text-center\">Derechos</th>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th colspan=\"5\" class=\"text-left\">A menos de un año</th>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Caja Bancos</td>\r\n      <td class=\"text-right\" >{{balance.cajaBancos |currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balanceI.cajaBancos |currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.cajaBancos,balanceI.cajaBancos) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.cajaBancos,balanceI.cajaBancos) |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Cuentas por Cobrar</td>\r\n      <td  class=\"text-right\">{{balance.cuentasPorCobrar|currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balanceI.cuentasPorCobrar|currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.cuentasPorCobrar,balanceI.cuentasPorCobrar)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.cuentasPorCobrar,balanceI.cuentasPorCobrar)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>IVA Acreditable</td>\r\n      <td class=\"text-right\">{{balance.IVAAcreditable|currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\"> {{balanceI.IVAAcreditable|currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\"></td>\r\n      <td  class=\"text-right\"></td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Almacen de Articulo Terminado</td>\r\n      <td class=\"text-right\">{{balance.almacenArtTerm|currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balanceI.almacenArtTerm|currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.almacenArtTerm,balanceI.almacenArtTerm) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.almacenArtTerm,balanceI.almacenArtTerm) |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Alamacén de Materiales</td>\r\n      <td class=\"text-right\">{{balance.almacenMateriales|currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balance.almacenMateriales|currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.almacenMateriales,balanceI.almacenMateriales)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.almacenMateriales,balanceI.almacenMateriales)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n\r\n    <tr>\r\n      <th class=\"text-left\" colspan=\"5\">A más de un año</th>\r\n    </tr>\r\n\r\n\r\n\r\n    <tr>\r\n      <td>Terrenos</td>\r\n      <td class=\"text-right\">{{balance.terreno|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balanceI.terreno|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.terreno,balanceI.terreno)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.terreno,balanceI.terreno)|currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Edificios e Instalaciones</td>\r\n      <td class=\"text-right\">{{balance.edifInsta|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balanceI.edifInsta|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.edifInsta,balanceI.edifInsta) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.edifInsta,balanceI.edifInstao) |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Depreciación Acumulada</td>\r\n      <td class=\"text-right\">{{-balance.depEdif|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.depEdif|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.depEdif,-balanceI.depEdif)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.depEdif,-balanceI.depEdif)|currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Maquinaria y Equipo</td>\r\n      <td class=\"text-right\">{{balance.maqEquipo|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balanceI.maqEquipo|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.maqEquipo,balanceI.maqEquipo)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.maqEquipo,balanceI.maqEquipo)|currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Depreciación Acumulada</td>\r\n      <td class=\"text-right\">{{-balance.depMaqEquipo|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.depMaqEquipo|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.depMaqEquipo,-balanceI.depMaqEquipo) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.depMaqEquipo,-balanceI.depMaqEquipo) |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Muebles y Enseres</td>\r\n      <td class=\"text-right\">{{balance.mueblesEnseres|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balanceI.mueblesEnseres|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.mueblesEnseres,balanceI.mueblesEnseres)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.mueblesEnseres,balanceI.mueblesEnseres)|currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Depreciación Acumulada</td>\r\n      <td class=\"text-right\">{{-balance.depMueblesEnseres|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.depMueblesEnseres|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.depMueblesEnseres,-balanceI.depMueblesEnseres)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.depMueblesEnseres,-balanceI.depMueblesEnseres)|currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Equipo de Transporte</td>\r\n      <td class=\"text-right\">{{balance.eqTrans|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balanceI.eqTrans|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.eqTrans,balanceI.eqTrans)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.eqTrans,balanceI.eqTrans)|currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Depreciación Acumulada</td>\r\n      <td class=\"text-right\">{{-balance.depEqTrans|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.depEqTrans|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.depEqTrans,-balanceI.depEqTrans)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.depEqTrans,-balanceI.depEqTrans)|currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n\r\n    <tr>\r\n      <th colspan=\"5\" class=\"text-left\">De Aplicación Diferida</th>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Pagos Hechos por anticipado</td>\r\n      <td class=\"text-right\">{{balance.pagosAnticipado|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balanceI.pagosAnticipado|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.pagosAnticipado,balanceI.pagosAnticipado)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.pagosAnticipado,balanceI.pagosAnticipado)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Gastos por Amortizar</td>\r\n      <td class=\"text-right\">{{balance.gastosAmortizacion|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balanceI.gastosAmortizacion|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.gastosAmortizacion,balanceI.gastosAmortizacion)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.gastosAmortizacion,balanceI.gastosAmortizacion)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n\r\n\r\n    <tr class=\"thead-inverse\">\r\n      <th class=\"text-center\" colspan=\"5\">Obligaciones</th>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <th colspan=\"5\" class=\"tex-left\">A menos de un Año</th>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>IVA por enterar</td>\r\n      <td class=\"text-right\">{{-balance.IVAPorEnterar|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.IVAPorEnterar|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.IVAPorEnterar,-balanceI.IVAPorEnterar)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.IVAPorEnterar,-balanceI.IVAPorEnterar)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Impuestos por Pagar</td>\r\n      <td class=\"text-right\">{{-balance.imptosPorPagar|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.imptosPorPagar|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.imptosPorPagar,-balanceI.imptosPorPagar)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.imptosPorPagar,-balanceI.imptosPorPagar)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Proveedores</td>\r\n      <td class=\"text-right\">{{-balance.proveedores|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.proveedores|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.proveedores,-balanceI.proveedores)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.proveedores,-balanceI.proveedores)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>PTU por Pagar</td>\r\n      <td class=\"text-right\">{{-balance.PTUPorPagar|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.PTUPorPagar|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.PTUPorPagar,-balanceI.PTUPorPagar)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.PTUPorPagar,-balanceI.PTUPorPagar)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Préstamos Bancarios</td>\r\n      <td class=\"text-right\">{{-balance.prestamosMenosAnio|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.prestamosMenosAnio|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.prestamosMenosAnio,-balanceI.prestamosMenosAnio)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.prestamosMenosAnio,-balanceI.prestamosMenosAnio)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <th colspan=\"5\" class=\"text-left\">A más de un Año</th>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Prestamos Totales</td>\r\n      <td class=\"text-right\">{{-balance.prestamosMasAnio|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.prestamosMasAnio|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.prestamosMasAnio,-balanceI.prestamosMasAnio)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.prestamosMasAnio,-balanceI.prestamosMasAnio)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr class=\"thead-inverse\">\r\n      <th colspan=\"5\" class=\"text-center\">Con los Accionistas</th>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Capital Social</td>\r\n      <td class=\"text-right\">{{-balance.capitalSocial|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.capitalSocial|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.capitalSocial,-balanceI.capitalSocial)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.capitalSocial,-balanceI.capitalSocial)|currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Reserva legal</td>\r\n      <td class=\"text-right\">{{-balance.reservaLegal|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.reservaLegal|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.reservaLegal,-balanceI.reservaLegal)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.reservaLegal,-balanceI.reservaLegal)|currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Utilidad Acumulada</td>\r\n      <td class=\"text-right\">{{-balance.utilidadAcum|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.utilidadEjercicio|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.utilidadAcum,-balanceI.utilidadEjercicio)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.utilidadAcum,-balanceI.utilidadEjercicio)|currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td >Utilidad del Ejercicio</td>\r\n        <td class=\"text-right\">{{-balance.utilidadEjercicio|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{0|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.utilidadEjercicio,0)|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.utilidadEjercicio,0)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Total</th>\r\n      <th class=\"text-right\">{{0|currency:'USD':true:'1.0-0'}}</th>\r\n      <th class=\"text-right\">{{0|currency:'USD':true:'1.0-0'}}</th>\r\n      <th class=\"text-right\">{{origen |currency:'USD':true:'1.0-0'}}</th>\r\n      <th class=\"text-right\">{{origen |currency:'USD':true:'1.0-0'}}</th>\r\n    </tr>\r\n\r\n  </tbody>\r\n</table>\r\n"
+module.exports = "<table class=\"table table-bordered  table-responsive\" *ngFor=\"let balance of balanceFinal\">\r\n\r\n  <tbody>\r\n    <tr class=\"thead-inverse\">\r\n      <th  class=\"text-center\"></th>\r\n      <th  class=\"text-center \">Año Actual</th>\r\n      <th  class=\"text-center \">Año Anterior</th>\r\n      <th  class=\"text-center\">Aplicación</th>\r\n      <th  class=\"text-center\">Origen</th>\r\n    </tr>\r\n\r\n    <tr  class=\"thead-inverse\">\r\n      <th colspan=\"5\" class=\"text-center\">Derechos</th>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th colspan=\"5\" class=\"text-left\">A menos de un año</th>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Caja Bancos</td>\r\n      <td class=\"text-right\" >{{balance.cajaBancos |currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balanceI.cajaBancos |currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.cajaBancos,balanceI.cajaBancos) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.cajaBancos,balanceI.cajaBancos) |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Cuentas por Cobrar</td>\r\n      <td  class=\"text-right\">{{balance.cuentasPorCobrar|currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balanceI.cuentasPorCobrar|currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.cuentasPorCobrar,balanceI.cuentasPorCobrar)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.cuentasPorCobrar,balanceI.cuentasPorCobrar)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>IVA Acreditable</td>\r\n      <td class=\"text-right\">{{balance.IVAAcreditable|currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\"> {{balanceI.IVAAcreditable|currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\"></td>\r\n      <td  class=\"text-right\"></td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Almacen de Articulo Terminado</td>\r\n      <td class=\"text-right\">{{balance.almacenArtTerm|currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balanceI.almacenArtTerm|currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.almacenArtTerm,balanceI.almacenArtTerm) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.almacenArtTerm,balanceI.almacenArtTerm) |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Alamacén de Materiales</td>\r\n      <td class=\"text-right\">{{balance.almacenMateriales|currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balance.almacenMateriales|currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.almacenMateriales,balanceI.almacenMateriales)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td  class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.almacenMateriales,balanceI.almacenMateriales)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n\r\n    <tr>\r\n      <th class=\"text-left\" colspan=\"5\">A más de un año</th>\r\n    </tr>\r\n\r\n\r\n\r\n    <tr>\r\n      <td>Terrenos</td>\r\n      <td class=\"text-right\">{{balance.terreno|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balanceI.terreno|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.terreno,balanceI.terreno)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.terreno,balanceI.terreno)|currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Edificios e Instalaciones</td>\r\n      <td class=\"text-right\">{{balance.edifInsta|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balanceI.edifInsta|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.edifInsta,balanceI.edifInsta) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.edifInsta,balanceI.edifInstao) |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Depreciación Acumulada</td>\r\n      <td class=\"text-right\">{{-balance.depEdif|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.depEdif|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.depEdif,-balanceI.depEdif)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.depEdif,-balanceI.depEdif)|currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Maquinaria y Equipo</td>\r\n      <td class=\"text-right\">{{balance.maqEquipo|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balanceI.maqEquipo|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.maqEquipo,balanceI.maqEquipo)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.maqEquipo,balanceI.maqEquipo)|currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Depreciación Acumulada</td>\r\n      <td class=\"text-right\">{{-balance.depMaqEquipo|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.depMaqEquipo|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.depMaqEquipo,-balanceI.depMaqEquipo) |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.depMaqEquipo,-balanceI.depMaqEquipo) |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Muebles y Enseres</td>\r\n      <td class=\"text-right\">{{balance.mueblesEnseres|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balanceI.mueblesEnseres|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.mueblesEnseres,balanceI.mueblesEnseres)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.mueblesEnseres,balanceI.mueblesEnseres)|currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Depreciación Acumulada</td>\r\n      <td class=\"text-right\">{{-balance.depMueblesEnseres|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.depMueblesEnseres|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.depMueblesEnseres,-balanceI.depMueblesEnseres)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.depMueblesEnseres,-balanceI.depMueblesEnseres)|currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Equipo de Transporte</td>\r\n      <td class=\"text-right\">{{balance.eqTrans|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balanceI.eqTrans|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.eqTrans,balanceI.eqTrans)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.eqTrans,balanceI.eqTrans)|currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Depreciación Acumulada</td>\r\n      <td class=\"text-right\">{{-balance.depEqTrans|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.depEqTrans|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.depEqTrans,-balanceI.depEqTrans)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.depEqTrans,-balanceI.depEqTrans)|currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n\r\n    <tr>\r\n      <th colspan=\"5\" class=\"text-left\">De Aplicación Diferida</th>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Pagos Hechos por anticipado</td>\r\n      <td class=\"text-right\">{{balance.pagosAnticipado|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balanceI.pagosAnticipado|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.pagosAnticipado,balanceI.pagosAnticipado)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.pagosAnticipado,balanceI.pagosAnticipado)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Gastos por Amortizar</td>\r\n      <td class=\"text-right\">{{balance.gastosAmortizacion|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{balanceI.gastosAmortizacion|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(balance.gastosAmortizacion,balanceI.gastosAmortizacion)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(balance.gastosAmortizacion,balanceI.gastosAmortizacion)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n\r\n\r\n    <tr class=\"thead-inverse\">\r\n      <th class=\"text-center\" colspan=\"5\">Obligaciones</th>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <th colspan=\"5\" class=\"tex-left\">A menos de un Año</th>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>IVA por enterar</td>\r\n      <td class=\"text-right\">{{-balance.IVAPorEnterar|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.IVAPorEnterar|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.IVAPorEnterar,-balanceI.IVAPorEnterar)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.IVAPorEnterar,-balanceI.IVAPorEnterar)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Impuestos por Pagar</td>\r\n      <td class=\"text-right\">{{-balance.imptosPorPagar|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.imptosPorPagar|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.imptosPorPagar,-balanceI.imptosPorPagar)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.imptosPorPagar,-balanceI.imptosPorPagar)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Proveedores</td>\r\n      <td class=\"text-right\">{{-balance.proveedores|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.proveedores|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.proveedores,-balanceI.proveedores)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.proveedores,-balanceI.proveedores)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>PTU por Pagar</td>\r\n      <td class=\"text-right\">{{-balance.PTUPorPagar|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.PTUPorPagar|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.PTUPorPagar,-balanceI.PTUPorPagar)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.PTUPorPagar,-balanceI.PTUPorPagar)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Préstamos Bancarios</td>\r\n      <td class=\"text-right\">{{-balance.prestamosMenosAnio|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.prestamosMenosAnio|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.prestamosMenosAnio,-balanceI.prestamosMenosAnio)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.prestamosMenosAnio,-balanceI.prestamosMenosAnio)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <th colspan=\"5\" class=\"text-left\">A más de un Año</th>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Prestamos Totales</td>\r\n      <td class=\"text-right\">{{-balance.prestamosMasAnio|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.prestamosMasAnio|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.prestamosMasAnio,-balanceI.prestamosMasAnio)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.prestamosMasAnio,-balanceI.prestamosMasAnio)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr class=\"thead-inverse\">\r\n      <th colspan=\"5\" class=\"text-center\">Con los Accionistas</th>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Capital Social</td>\r\n      <td class=\"text-right\">{{-balance.capitalSocial|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.capitalSocial|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.capitalSocial,-balanceI.capitalSocial)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.capitalSocial,-balanceI.capitalSocial)|currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Reserva legal</td>\r\n      <td class=\"text-right\">{{-balance.reservaLegal|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.reservaLegal|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.reservaLegal,-balanceI.reservaLegal)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.reservaLegal,-balanceI.reservaLegal)|currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Utilidad Acumulada</td>\r\n      <td class=\"text-right\">{{-balance.utilidadAcum|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{-balanceI.utilidadEjercicio|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.utilidadAcum,-balanceI.utilidadEjercicio)|currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.utilidadAcum,-balanceI.utilidadEjercicio)|currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td >Utilidad del Ejercicio</td>\r\n        <td class=\"text-right\">{{-balance.utilidadEjercicio|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{0|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getAplicacionCB(-balance.utilidadEjercicio,0)|currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" *ngFor=\"let balanceI of balanceInicial\">{{getOrigenCB(-balance.utilidadEjercicio,0)|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Total</th>\r\n      <th class=\"text-right\">{{0|currency:'USD':true:'1.0-0'}}</th>\r\n      <th class=\"text-right\">{{0|currency:'USD':true:'1.0-0'}}</th>\r\n      <th class=\"text-right\">{{origen |currency:'USD':true:'1.0-0'}}</th>\r\n      <th class=\"text-right\">{{origen |currency:'USD':true:'1.0-0'}}</th>\r\n    </tr>\r\n\r\n  </tbody>\r\n</table>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-4 offset-4\">\r\n    <button type=\"button\" class=\"btn btn-danger\" name=\"button\" (click)=\"PDFposicionComparativa()\">Exportar PDF</button>\r\n\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -5845,6 +6070,144 @@ var PruebaComponent = (function () {
         }
         this.origen += r;
         return r;
+    };
+    PruebaComponent.prototype.PDFposicionComparativa = function () {
+        var doc = new jsPDF({
+            unit: 'mm',
+            format: [279, 215.9]
+        });
+        var columns = [
+            { title: "", dataKey: "cara" },
+            { title: "Año Actual", dataKey: "actual" },
+            { title: "Año Anterior", dataKey: "anterior" },
+            { title: "Aplicación", dataKey: "aplicacion" },
+            { title: "Origen", dataKey: "origen" }
+        ];
+        var rows = [
+            { "cara": "Amenos de un Año" },
+            { "cara": "Caja Bancos" },
+            { "cara": "Cuentas por Cobrar" },
+            { "cara": "IVA Acreditable" },
+            { "cara": "Almacen de Articulo Terminado" },
+            { "cara": "Almacen de Materiales" },
+            { "cara": "A más de un año" },
+            { "cara": "Terrenos" },
+            { "cara": "Edificios e Instalaciones" },
+            { "cara": "Deprecicaicón Acumulada" },
+            { "cara": "Maquinaria y  Equipo" },
+            { "cara": "Depreciación Acumulada" },
+            { "cara": "Muebles y Enseres" },
+            { "cara": "Depresisción Acumulada" },
+            { "cara": "Equipo de Transporte" },
+            { "cara": "Depreciación Acumulada" },
+            { "cara": "De Aplicación Diferida" },
+            { "cara": "Pagos hechos por anticipado" },
+            { "cara": "Gastos por Amortizar" },
+            { "cara": "A menos de un año" },
+            { "cara": "IVA por Enterar" },
+            { "cara": "Impuestos por Pagar" },
+            { "cara": "Poveedores" },
+            { "cara": "PTU por Pagar" },
+            { "cara": "Prestamos Bancarios" },
+            { "cara": "A más de un año" },
+            { "cara": "Prestamos Totales" },
+            { "cara": "Capital Social" },
+            { "cara": "Reserva Legal" },
+            { "cara": "Utilidad Acumulada" },
+            { "cara": "Utilidad del Ejercicio" },
+            { "cara": "Total" },
+        ];
+        var t = {
+            title: "Total",
+            dataKey: "t"
+        };
+        doc.autoTable(columns, rows, {
+            margin: { top: 40,
+                left: 15 },
+            tableWidth: 185,
+            headerStyles: { fillColor: 0 },
+            columnStyles: {
+                cara: { halign: 'left', columnWidth: 65 }
+            },
+            addPageContent: function (data) {
+                doc.setFontSize(15);
+                doc.setFontType("bold");
+                doc.text(107.9, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+                doc.setFontSize(13);
+                doc.text(107.9, 23, 'Posición Comparativa', null, null, 'center');
+                doc.line(25, 27, 190, 27);
+            },
+            drawRow: function (row, data) {
+                // Colspan
+                doc.setFontStyle('bold');
+                doc.setFontSize(10);
+                if (row.index === 0) {
+                    doc.rect(data.settings.margin.left, row.y, data.table.width, 7, 'S');
+                    doc.autoTableText("Derechos", data.settings.margin.left + data.table.width / 2, row.y + row.height / 2, {
+                        halign: 'center',
+                        valign: 'middle'
+                    });
+                    data.cursor.y += 7;
+                }
+                else if (row.index === 19) {
+                    doc.rect(data.settings.margin.left, row.y, data.table.width, 7, 'S');
+                    doc.autoTableText("Obligaciones", data.settings.margin.left + data.table.width / 2, row.y + row.height / 2, {
+                        halign: 'center',
+                        valign: 'middle'
+                    });
+                    data.cursor.y += 7;
+                }
+                else if (row.index === 27) {
+                    doc.rect(data.settings.margin.left, row.y, data.table.width, 7, 'S');
+                    doc.autoTableText("Con los Accionistas", data.settings.margin.left + data.table.width / 2, row.y + row.height / 2, {
+                        halign: 'center',
+                        valign: 'middle'
+                    });
+                    data.cursor.y += 7;
+                }
+                if (row.index % 5 === 0) {
+                    var posY = row.y + row.height * 6 + data.settings.margin.bottom;
+                    if (posY > doc.internal.pageSize.height) {
+                        data.addPage();
+                    }
+                }
+            },
+            drawCell: function (cell, data) {
+                // Rowspan
+                if (data.column.dataKey === 'id') {
+                    if (data.row.index % 5 === 0) {
+                        doc.rect(cell.x, cell.y, data.table.width, cell.height * 5, 'S');
+                        doc.autoTableText(data.row.index / 5 + 1 + '', cell.x + cell.width / 2, cell.y + cell.height * 5 / 2, {
+                            halign: 'center',
+                            valign: 'middle'
+                        });
+                    }
+                    return false;
+                }
+                var rows = data.table.rows;
+                if (data.row.index == 0) {
+                    doc.setFillColor(176, 176, 176);
+                    doc.setFontType("bold");
+                }
+                else if (data.row.index == 6) {
+                    doc.setFillColor(176, 176, 176);
+                    doc.setFontType("bold");
+                }
+                else if (data.row.index == 16) {
+                    doc.setFillColor(176, 176, 176);
+                    doc.setFontType("bold");
+                }
+                else if (data.row.index == 19) {
+                    doc.setFillColor(176, 176, 176);
+                    doc.setFontType("bold");
+                }
+                else if (data.row.index == 25) {
+                    doc.setFillColor(176, 176, 176);
+                    doc.setFontType("bold");
+                }
+            }
+        });
+        doc.save("Estado de Resultados.pdf");
     };
     return PruebaComponent;
 }());
@@ -7883,19 +8246,50 @@ var CompraMaquinariaService = (function () {
         var _this = this;
         this.cobrar(y).subscribe();
         var z = [];
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        this.comprar(x).subscribe(function (d) {
+            _this.getMaquinariaC().subscribe(function (data) {
+                for (var key$ in data.datos) {
+                    z.push(data.datos[key$]);
+                }
+            });
+        });
+        console.log("Retorno", z);
+=======
+>>>>>>> 42129a821696831a1a0839f5790c09e360962daa
         this.comprar(x).subscribe(function (data) {
             if (data.success) {
                 z = _this.establecerValores();
             }
         });
+<<<<<<< HEAD
+=======
+>>>>>>> 8b022cafffd69cc8dfaac84eca1407f29897838a
+>>>>>>> 42129a821696831a1a0839f5790c09e360962daa
         return z;
     };
     CompraMaquinariaService.prototype.regresarMaquinaria = function (x, y) {
         var _this = this;
         this.undo(y).subscribe();
         var z = [];
+<<<<<<< HEAD
         this.vuelta(x).subscribe(function (data) {
             z = _this.establecerValores();
+=======
+<<<<<<< HEAD
+        this.vuelta(x).subscribe(function (d) {
+            _this.getMaquinariaC().subscribe(function (data) {
+                for (var key$ in data.datos) {
+                    z.push(data.datos[key$]);
+                }
+            });
+=======
+        this.vuelta(x).subscribe(function (data) {
+            z = _this.establecerValores();
+>>>>>>> 8b022cafffd69cc8dfaac84eca1407f29897838a
+>>>>>>> 42129a821696831a1a0839f5790c09e360962daa
         });
         return z;
     };
@@ -7929,6 +8323,12 @@ var CompraMaquinariaService = (function () {
             'Content-Type': 'application/json'
         });
         return this.http.post('maquinariacomprada/undo/', x, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    CompraMaquinariaService.prototype.validar = function (x) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        return this.http.post('maquinariacomprada/validatecompra/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
     return CompraMaquinariaService;
 }());

@@ -82,6 +82,7 @@ export class EstadoResultadosComponent implements OnInit {
     var T = 0;
     if(this.auxiliares.length == 0){
       for(let m of this.maquinas){
+        console.log(m.costo,m.depAcum,m.Cantidad)
         T += ((m.costo * (m.depAcum/100))*m.Cantidad);
       }
     }
