@@ -44,6 +44,25 @@ router.post('/', (req, res, next) => {
   });
 });
 
+router.post('/validatecompra',(req,res,next) => {
+  var idProyecto = req.body.Proyectos_idProyecto;
+  var idMaquinaria = req.body.Maquinaria_idMaquinaria;
+  var numeroPeriodo = req.body.Balance_numeroPeriodo;
+
+  Promise.resolve().then(function(){
+    return maquinariaComprada.getMaquinariaComprada(idProyecto, idMaquinaria, numeroPeriodo);
+  }).then(function(rows){
+    if(rows.length == 0){
+      res.json({success:false,msg:"No puedes devolver esa maquinaria"});
+    }
+    else{
+      res.json({success:true});
+    }
+  }).catch(function (err) {
+    res.json({success:false,msg:"Algo salió mal"});
+  });
+});
+
 router.post('/compra', (req, res, next) => {
 
 var idProyecto = req.body.Proyectos_idProyecto;

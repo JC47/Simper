@@ -117,24 +117,27 @@ comprar(){
   }
 
   regresar(){
-    if(this.maqSelectedLess.Balance_numeroPeriodo == parseInt(localStorage.getItem('numeroPeriodo'))){
-      var x = {
-        Maquinaria_idMaquinaria:this.maqSelectedLess.idMaquinaria,
-        Balance_numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo')),
-        Proyectos_idProyecto:parseInt(localStorage.getItem('idProyecto'))
-      }
-      var y = {
-        Balance_numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo')),
-        Proyectos_idProyecto:parseInt(localStorage.getItem('idProyecto')),
-        idProducto :this.maqSelectedLess.Producto_idProducto,
-        costo:this.maqSelectedLess.costo,
-        dep:this.maqSelectedLess.depAcum
-      }
-      this.maquinasCompradas = this._CompraMaquinariaService.regresarMaquinaria(x,y);
+    var x = {
+      Maquinaria_idMaquinaria:this.maqSelectedLess.idMaquinaria,
+      Balance_numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo')),
+      Proyectos_idProyecto:parseInt(localStorage.getItem('idProyecto'))
     }
-    else{
-      alert("No puedes regresar esa maquinaria");
+    var y = {
+      Balance_numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo')),
+      Proyectos_idProyecto:parseInt(localStorage.getItem('idProyecto')),
+      idProducto :this.maqSelectedLess.Producto_idProducto,
+      costo:this.maqSelectedLess.costo,
+      dep:this.maqSelectedLess.depAcum
     }
+
+    this._CompraMaquinariaService.validar(x).subscribe(data => {
+      if(data.success){
+        this.maquinasCompradas = this._CompraMaquinariaService.regresarMaquinaria(x,y);
+      }
+      else{
+        alert(data.msg);
+      }
+    });
   }
 
 
