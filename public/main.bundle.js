@@ -7880,14 +7880,24 @@ var CompraMaquinariaService = (function () {
         return this.http.post('maquinariacomprada/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
     CompraMaquinariaService.prototype.compraMaquinaria = function (x, y) {
+        var _this = this;
         this.cobrar(y).subscribe();
-        this.comprar(x).subscribe();
-        return this.establecerValores();
+        var z = [];
+        this.comprar(x).subscribe(function (data) {
+            if (data.success) {
+                z = _this.establecerValores();
+            }
+        });
+        return z;
     };
     CompraMaquinariaService.prototype.regresarMaquinaria = function (x, y) {
+        var _this = this;
         this.undo(y).subscribe();
-        this.vuelta(x).subscribe();
-        return this.establecerValores();
+        var z = [];
+        this.vuelta(x).subscribe(function (data) {
+            z = _this.establecerValores();
+        });
+        return z;
     };
     CompraMaquinariaService.prototype.cobrar = function (x) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
