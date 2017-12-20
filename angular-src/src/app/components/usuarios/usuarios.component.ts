@@ -14,6 +14,11 @@ import {UsuarioZonaService} from '../../services/usuario-zona.service';
 import {UsuarioProductoService} from '../../services/usuario-producto.service';
 import {ZonasService} from '../../services/zonas.service';
 import {UsuarioMaquinariaService} from '../../services/usuario-maquinaria.service';
+import {VariablesService} from '../../services/variables.service';
+
+
+
+
 
 
 @Component({
@@ -77,7 +82,15 @@ export class UsuariosComponent implements OnInit {
   newForm:FormGroup;
   editForm:FormGroup;
   variablesForm:FormGroup;
+  varsForm:FormGroup;
   Admin:admin;
+  variables:any;
+  variablesSelected:any={
+    concepto:null,
+    valor:null
+  };
+  openVarsGen:boolean=false;
+  openVarUnit:any=false;
 
   status: any = {
     isFirstOpen: true,
@@ -94,7 +107,9 @@ export class UsuariosComponent implements OnInit {
               private _usuarioMaquinariaService:UsuarioMaquinariaService,
               private _usuarioZonaService:UsuarioZonaService,
               private _maquinariaService:MaquinariaService,
-              private _zonasService: ZonasService) {
+              private _zonasService: ZonasService,
+            private _variablesService:VariablesService) {
+            this.variables = this._variablesService.returnVariables();
     this.idAdmin = localStorage.getItem('idAdmin');
     this.newForm= new FormGroup({
       'nombreUsuario':new FormControl('',Validators.required),
@@ -106,6 +121,12 @@ export class UsuariosComponent implements OnInit {
       'periodos':new FormControl('',Validators.required),
       'regresion':new FormControl('',Validators.required),
       'Administrador_idAdministrador': new FormControl(localStorage.getItem('idAdmin'))
+    });
+
+
+    this.varsForm= new FormGroup({
+      'concepto':new FormControl('',Validators.required),
+      'valor':new FormControl('',Validators.required)
     });
 
     this.editForm= new FormGroup({
@@ -486,6 +507,18 @@ export class UsuariosComponent implements OnInit {
        return maq.nombreCredito;
     }
     return "id no encontrado";
+  }
+
+  selectVariables(variables){
+      this.variablesSelected=variables;
+      this.varsForm.controls['concepto'].setValue(variables.concepto);
+      this.openVarsGen=false;
+      this.openVarUnit=true;
+  }
+
+
+  asignaVar(){
+    console.log(this.varsForm.value);
   }
 
 

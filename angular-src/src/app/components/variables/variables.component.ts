@@ -9,8 +9,8 @@ export class VariablesComponent implements OnInit {
 
   variables = [];
 
-  constructor(private _variablesService:VariablesService) {
-    this.variables = this._variablesService.returnVariables();
+  constructor() {
+    
   }
 
   ngOnInit() {
