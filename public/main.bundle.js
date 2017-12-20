@@ -5002,8 +5002,8 @@ var FlujoComponent = (function () {
                 cantidad: "",
             },
         ];
-        doc.save("Estado de Resultados.pdf");
-        new __WEBPACK_IMPORTED_MODULE_7_angular2_csv_Angular2_csv__["Angular2Csv"](dataCSV, 'My Report');
+        doc.save("Flujo de Efectivo.pdf");
+        new __WEBPACK_IMPORTED_MODULE_7_angular2_csv_Angular2_csv__["Angular2Csv"](dataCSV, 'Flujo de Efectivo');
     };
     return FlujoComponent;
 }());
@@ -7037,6 +7037,7 @@ var UsuariosComponent = (function () {
             'Administrador_idAdministrador': new __WEBPACK_IMPORTED_MODULE_7__angular_forms__["FormControl"](localStorage.getItem('idAdmin'))
         });
         this.varsForm = new __WEBPACK_IMPORTED_MODULE_7__angular_forms__["FormGroup"]({
+            'idVariable': new __WEBPACK_IMPORTED_MODULE_7__angular_forms__["FormControl"]('', __WEBPACK_IMPORTED_MODULE_7__angular_forms__["Validators"].required),
             'concepto': new __WEBPACK_IMPORTED_MODULE_7__angular_forms__["FormControl"]('', __WEBPACK_IMPORTED_MODULE_7__angular_forms__["Validators"].required),
             'valor': new __WEBPACK_IMPORTED_MODULE_7__angular_forms__["FormControl"]('', __WEBPACK_IMPORTED_MODULE_7__angular_forms__["Validators"].required)
         });
@@ -7367,11 +7368,20 @@ var UsuariosComponent = (function () {
     UsuariosComponent.prototype.selectVariables = function (variables) {
         this.variablesSelected = variables;
         this.varsForm.controls['concepto'].setValue(variables.concepto);
+        this.varsForm.controls['valor'].setValue(variables.valor);
+        this.varsForm.controls['idVariable'].setValue(variables.idVariable);
         this.openVarsGen = false;
         this.openVarUnit = true;
     };
     UsuariosComponent.prototype.asignaVar = function () {
-        console.log(this.varsForm.value);
+        var x = {
+            "concepto": this.varsForm.controls['concepto'].value,
+            "valor": this.varsForm.controls['valor'].value
+        };
+        var id = this.varsForm.controls['idVariable'].value;
+        this.variables = this._variablesService.editarVariable(x, id);
+        this.openVarUnit = false;
+        this.openVarsGen = true;
     };
     return UsuariosComponent;
 }());

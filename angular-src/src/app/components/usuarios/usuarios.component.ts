@@ -125,6 +125,7 @@ export class UsuariosComponent implements OnInit {
 
 
     this.varsForm= new FormGroup({
+      'idVariable':new FormControl('',Validators.required),
       'concepto':new FormControl('',Validators.required),
       'valor':new FormControl('',Validators.required)
     });
@@ -512,20 +513,23 @@ export class UsuariosComponent implements OnInit {
   selectVariables(variables){
       this.variablesSelected=variables;
       this.varsForm.controls['concepto'].setValue(variables.concepto);
+      this.varsForm.controls['valor'].setValue(variables.valor);
+      this.varsForm.controls['idVariable'].setValue(variables.idVariable);
       this.openVarsGen=false;
       this.openVarUnit=true;
   }
 
 
   asignaVar(){
-    console.log(this.varsForm.value);
+    var x = {
+      "concepto":this.varsForm.controls['concepto'].value,
+      "valor":this.varsForm.controls['valor'].value
+    }
+    var id = this.varsForm.controls['idVariable'].value;
+
+    this.variables = this._variablesService.editarVariable(x,id);
+    this.openVarUnit=false;
+    this.openVarsGen=true;
   }
-
-
-
-
-
-
-
-
+  
   }
