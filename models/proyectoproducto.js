@@ -41,19 +41,29 @@ module.exports.updateDesarrolladoPeriodos = function (periodos,idProyecto,idProd
   return querySql(queryDesarrollado);
 }
 
-module.exports.productosSinDesarrollar = function (idProyecto) {
-  var querySinDes = "select * from producto where not idProducto in (select Productos_idProducto from proyectoproducto where Proyectos_idProyecto = "+idProyecto+")";
-  return querySql(querySinDes);
+
+//productosSinDesarrollar
+module.exports.productosSinDesarrollar = function (idProyecto,numeroPeriodo) {
+  //var query = "select Productos_idProducto from proyectoproducto inner join producto on proyectoproducto.Productos_idProducto = producto.idProducto where desarrollado = 0 and Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" ";
+  var query = "select * from proyectoproducto inner join producto on proyectoproducto.Productos_idProducto = producto.idProducto where not Productos_idProducto in (select Productos_idProducto from proyectoproducto where desarrollado > 0 and Proyectos_idProyecto = "+idProyecto+") and Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" and desarrollado = 0";
+  return querySql(query);
 }
 
-module.exports.getProductosEnDesarrollo = function (idProyecto) {
-  var queryProdEnDes = "select * from producto inner join proyectoproducto on producto.idProducto = proyectoproducto.Productos_idProducto and proyectoproducto.Proyectos_idProyecto = "+idProyecto+" and proyectoproducto.desarrollado = 0 ";
-  return querySql(queryProdEnDes);
+// module.exports.productosSinDesarrollarOtrosPeriodos = function (idProyecto) {
+//   var query = "select distinct Productos_idProducto from proyectoproducto where desarrollado > 0 and Proyectos_idProyecto = "+idProyecto+"";
+//   return querySql(query);
+// }
+
+module.exports.getProductosEnDesarrollo = function (idProyecto,numeroPeriodo) {
+  //var queryProdEnDes = "select * from producto inner join proyectoproducto on producto.idProducto = proyectoproducto.Productos_idProducto and proyectoproducto.Proyectos_idProyecto = "+idProyecto+" and proyectoproducto.desarrollado = 0 ";
+  var query = "select * from proyectoproducto where not Productos_idProducto in (select Productos_idProducto from proyectoproducto where desarrollado >1 and Proyectos_idProyecto = "+idProyecto+") and Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" and desarrollado = 1";
+  return querySql(query);
 }
 
-module.exports.getProductosDesarrollados = function (idProyecto) {
-  var queryProdDes = "select * from producto inner join proyectoproducto on producto.idProducto = proyectoproducto.Productos_idProducto and proyectoproducto.Proyectos_idProyecto = "+idProyecto+" and proyectoproducto.desarrollado = 1 ";
-  return querySql(queryProdDes);
+module.exports.getProductosDesarrollados = function (idProyecto,numeroPeriodo) {
+  //var queryProdDes = "select * from producto inner join proyectoproducto on producto.idProducto = proyectoproducto.Productos_idProducto and proyectoproducto.Proyectos_idProyecto = "+idProyecto+" and proyectoproducto.desarrollado = 1 ";
+  var query = "select * from proyectoproducto inner join producto on proyectoproducto.Productos_idProducto = producto.idProducto where Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" and desarrollado = 2";
+  return querySql(query);
 }
 
 module.exports.desarollado = function (idProyecto, idProducto, desarrollado) {

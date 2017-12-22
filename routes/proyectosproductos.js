@@ -12,12 +12,12 @@ router.post('/desarrolloproducto', (req, res, next) => {
       var json = req.body;
       return proyectoProducto.addProyectoProducto(json);
   })
-  .then(function () {
-    var id = req.body.Proyectos_idProyecto;
-    return proyectoProducto.getProductosEnDesarrollo(id);
-  })
-  .then(function(rows){
-    res.json({success: true, msg:"Operacion exitosa", datos:rows});
+  // .then(function () {
+  //   var id = req.body.Proyectos_idProyecto;
+  //   return proyectoProducto.getProductosEnDesarrollo(id);
+  // })
+  .then(function(/*rows*/){
+    res.json({success: true, msg:"Operacion exitosa"/*, datos:rows*/});
   })
   .catch(function (err) {
     console.error("Log error: " + err);
@@ -79,11 +79,19 @@ var idProducto = req.body.Productos_idProducto;
 //productos que se encuentran en la tabla producto pero que no se encuentran
 // en proyectoProducto, e.i , aquellos productos que no se han desarrollado
 // ni estan en desarrollo
-router.get('/getproductossindesarrollar/:idProyecto', (req, res, next) => {
+router.post('/getproductossindesarrollar/', (req, res, next) => {
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+
+// Promise.join(proyectoProducto.productosSinDesarrollar(idProyecto,numeroPeriodo),
+// proyectoProducto.productosSinDesarrollarOtrosPeriodos(idProyecto),
+// function(productossindes,otrosperiodos) {
+//   return jsonProductosSinDesarrollar(productossindes,otrosperiodos);
+// })
+
   Promise.resolve()
   .then(function () {
-      var idProyecto = req.params.idProyecto;
-      return proyectoProducto.productosSinDesarrollar(idProyecto);
+      return proyectoProducto.productosSinDesarrollar(idProyecto,numeroPeriodo);
   })
   .then(function (data) {
       res.json({success: true,datos:data, msg:"Operacion exitosa"});
@@ -100,11 +108,14 @@ router.get('/getproductossindesarrollar/:idProyecto', (req, res, next) => {
 });
 
 //productos en vías de desarrollo, e.i, desarrollo = 0
-router.get('/getproductosendesarrollo/:idProyecto', (req, res, next) => {
+router.post('/getproductosendesarrollo/:idProyecto', (req, res, next) => {
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+
   Promise.resolve()
   .then(function () {
-      var idProyecto = req.params.idProyecto;
-      return proyectoProducto.getProductosEnDesarrollo(idProyecto);
+//      var idProyecto = req.params.idProyecto;
+      return proyectoProducto.getProductosEnDesarrollo(idProyecto,numeroPeriodo);
   })
   .then(function (data) {
       res.json({success: true,datos:data, msg:"Operacion exitosa"});
@@ -121,11 +132,13 @@ router.get('/getproductosendesarrollo/:idProyecto', (req, res, next) => {
 });
 
 //Productos que ya están desarrollados (desarrollado = 1)
-router.get('/getproductosdesarrollados/:idProyecto', (req, res, next) => {
+router.post('/getproductosdesarrollados/:idProyecto', (req, res, next) => {
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
   Promise.resolve()
   .then(function () {
-      var idProyecto = req.params.idProyecto;
-      return proyectoProducto.getProductosDesarrollados(idProyecto);
+//      var idProyecto = req.params.idProyecto;
+      return proyectoProducto.getProductosDesarrollados(idProyecto,numeroPeriodo);
   })
   .then(function (data) {
       res.json({success: true,datos:data, msg:"Operacion exitosa"});
@@ -398,5 +411,52 @@ function deshacerPeriodoDes(periodosdes) {
   }
   return nvoPeriodoDes;
 }
+//
+// function jsonProductosSinDesarrollar(productossindes,otrosperiodos) {
+//     var arrayProductosSinDes = [];
+//  // console.log("productossindes",productossindes);
+//  // console.log("otrosperiodos",otrosperiodos);
+//
+// // var array1 = [1,2,2,2,3];
+// // var array2 = [1,2,4];
+//
+// //productossindes = productossindes.filter(val => !otrosperiodos.includes(val));
+//
+// //console.log("array1",array1);
+//
+// //console.log("RESULTADO",productossindes);
+//     for (var i = 0; i < productossindes.length; i++) {
+//       for (var j = 0; j < otrosperiodos.length; j++) {
+//         if (productossindes[i].idProducto == otrosperiodos[j].Productos_idProducto ) {
+//           var json = {
+//           //  "Proyectos_idProyecto":productossindes[i].Proyectos_idProyecto,
+//             "Productos_idProducto":productossindes[i].Productos_idProducto,
+//             "numeroPeriodo":productossindes[i].numeroPeriodo,
+//             "desarrollado":productossindes[i].desarrollado,
+//             // "periodoInicio":productossindes[i].periodoInicio,
+//             // "ultimoPeriodoDes":productossindes[i].ultimoPeriodoDes,
+//             // "periodosDes":productossindes[i].periodosDes,
+//             // "nombreProd":productossindes[i].nombreProd,
+//             // "costoDes":productossindes[i].costoDes,
+//             // "tiempoDes":productossindes[i].tiempoDes,
+//             // "precioVenta":productossindes[i].precioVenta,
+//             // "costosFijosFabri":productossindes[i].costosFijosFabri,
+//             // "costoVarUniFabri":productossindes[i].costoVarUniFabri,
+//             // "gastosFijosDist":productossindes[i].gastosFijosDist,
+//             // "depDistribucion":productossindes[i].depDistribucion,
+//             // "costoVarUniDist":productossindes[i].costoVarUniDist,
+//             // "gastosFijosAdmon":productossindes[i].gastosFijosAdmon,
+//             // "depAdmon":productossindes[i].depAdmon,
+//             // "costosMPPUniProd":productossindes[i].costosMPPUniProd,
+//             // "uniMP":productossindes[i].uniMP,
+//             // "costoUni":productossindes[i].costoUni
+//           }
+//           arrayProductosSinDes.push(json);
+//         }
+//       }
+//     }
+//     return console.log("arrayProductosSinDes: ",arrayProductosSinDes);
+//
+// }
 
 module.exports = router;
