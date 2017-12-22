@@ -87,7 +87,6 @@ declare var require : any;
 import 'd3';
 import 'nvd3';
 import { EstadoResultadosComponent } from './components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component';
-import { VariablesComponent } from './components/variables/variables.component';
 import { DemandaPotencialComponent } from './components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component';
 import { FlujoComponent } from './components/usuario/proyecto-usuario/flujo/flujo.component';
 
@@ -122,7 +121,6 @@ import { FlujoComponent } from './components/usuario/proyecto-usuario/flujo/fluj
     OperacionComponent,
     EstadoResultadosComponent,
     FinanciamientoComponent,
-    VariablesComponent,
     DemandaPotencialComponent,
     FlujoComponent,
   ],
