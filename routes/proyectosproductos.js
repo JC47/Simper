@@ -108,7 +108,7 @@ router.post('/getproductossindesarrollar/', (req, res, next) => {
 });
 
 //productos en vías de desarrollo, e.i, desarrollo = 0
-router.post('/getproductosendesarrollo/:idProyecto', (req, res, next) => {
+router.post('/getproductosendesarrollo/', (req, res, next) => {
   var idProyecto = req.body.idProyecto;
   var numeroPeriodo = req.body.numeroPeriodo;
 
@@ -132,7 +132,7 @@ router.post('/getproductosendesarrollo/:idProyecto', (req, res, next) => {
 });
 
 //Productos que ya están desarrollados (desarrollado = 1)
-router.post('/getproductosdesarrollados/:idProyecto', (req, res, next) => {
+router.post('/getproductosdesarrollados/', (req, res, next) => {
   var idProyecto = req.body.idProyecto;
   var numeroPeriodo = req.body.numeroPeriodo;
   Promise.resolve()
