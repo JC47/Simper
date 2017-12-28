@@ -153,9 +153,8 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_71_nvd3__ = __webpack_require__("../../../../nvd3/build/nv.d3.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_71_nvd3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_71_nvd3__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_72__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_73__components_variables_variables_component__ = __webpack_require__("../../../../../src/app/components/variables/variables.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_74__components_usuario_proyecto_usuario_demanda_potencial_demanda_potencial_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_75__components_usuario_proyecto_usuario_flujo_flujo_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/flujo/flujo.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_73__components_usuario_proyecto_usuario_demanda_potencial_demanda_potencial_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_74__components_usuario_proyecto_usuario_flujo_flujo_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/flujo/flujo.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -245,7 +244,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-
 var AppModule = (function () {
     function AppModule() {
     }
@@ -283,9 +281,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_68__components_usuario_proyecto_usuario_operacion_operacion_component__["a" /* OperacionComponent */],
             __WEBPACK_IMPORTED_MODULE_72__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__["a" /* EstadoResultadosComponent */],
             __WEBPACK_IMPORTED_MODULE_58__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__["a" /* FinanciamientoComponent */],
-            __WEBPACK_IMPORTED_MODULE_73__components_variables_variables_component__["a" /* VariablesComponent */],
-            __WEBPACK_IMPORTED_MODULE_74__components_usuario_proyecto_usuario_demanda_potencial_demanda_potencial_component__["a" /* DemandaPotencialComponent */],
-            __WEBPACK_IMPORTED_MODULE_75__components_usuario_proyecto_usuario_flujo_flujo_component__["a" /* FlujoComponent */],
+            __WEBPACK_IMPORTED_MODULE_73__components_usuario_proyecto_usuario_demanda_potencial_demanda_potencial_component__["a" /* DemandaPotencialComponent */],
+            __WEBPACK_IMPORTED_MODULE_74__components_usuario_proyecto_usuario_flujo_flujo_component__["a" /* FlujoComponent */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_8_angular2_flash_messages__["FlashMessagesModule"],
@@ -1125,7 +1122,6 @@ var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__creditos_creditos_component__ = __webpack_require__("../../../../../src/app/components/creditos/creditos.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__zona_producto_zona_producto_component__ = __webpack_require__("../../../../../src/app/components/zona-producto/zona-producto.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__administradores_administradores_component__ = __webpack_require__("../../../../../src/app/components/administradores/administradores.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__variables_variables_component__ = __webpack_require__("../../../../../src/app/components/variables/variables.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ADMIN_ROUTES; });
 
 
@@ -1134,9 +1130,7 @@ var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 
 
 
-
 var ADMIN_ROUTES = [
-    { path: 'variables', component: __WEBPACK_IMPORTED_MODULE_7__variables_variables_component__["a" /* VariablesComponent */] },
     { path: 'productos', component: __WEBPACK_IMPORTED_MODULE_0__productos_productos_component__["a" /* ProductosComponent */] },
     { path: 'maquinarias', component: __WEBPACK_IMPORTED_MODULE_1__maquinarias_maquinarias_component__["a" /* MaquinariasComponent */] },
     { path: 'usuarios', component: __WEBPACK_IMPORTED_MODULE_3__usuarios_usuarios_component__["a" /* UsuariosComponent */] },
@@ -1894,7 +1888,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/sidenav/sidenav.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"nav-side-menu\">\r\n    <div class=\"brand\">Panel de Administración</div>\r\n    <i class=\"fa fa-bars fa-2x toggle-btn\" data-toggle=\"collapse\" data-target=\"#menu-content\"></i>\r\n\r\n        <div class=\"menu-list\">\r\n\r\n            <ul id=\"menu-content\" class=\"menu-content collapse out\">\r\n              <!-- <li [routerLink]=\"['home']\">\r\n                 <a >\r\n                 <i class=\"fa fa-home fa-lg\"></i>Home\r\n                 </a>\r\n               </li>\r\n -->\r\n\r\n\r\n\r\n\r\n                <li data-toggle=\"collapse\" data-target=\"#users\" class=\"collapsed\">\r\n                  <a href=\"#\"><i class=\"fa fa-navicon fa-lg\" routerLinkActive=\"active\"></i>Administración de Usuarios<span class=\"arrow\"></span></a>\r\n                </li>\r\n                <ul class=\"sub-menu collapse\" id=\"users\">\r\n                  <li [routerLink]=\"['administradores']\" >Administradores</li>\r\n                  <li [routerLink]=\"['usuarios']\">Usuarios</li>\r\n\r\n                </ul>\r\n\r\n\r\n                <li [routerLink]=\"['variables']\" routerLinkActive=\"active\">\r\n                   <a >\r\n                   <i class=\"fa fa-calendar fa-lg\"></i> Variables\r\n                   </a>\r\n                 </li>\r\n\r\n                <li [routerLink]=\"['productos']\" routerLinkActive=\"active\">\r\n                   <a >\r\n                   <i class=\"fa fa-cube fa-lg\"></i> Productos\r\n                   </a>\r\n                 </li>\r\n\r\n                 <li [routerLink]=\"['maquinarias']\">\r\n                    <a >\r\n                    <i class=\"fa fa-cogs fa-lg\"></i> Maquinarias\r\n                    </a>\r\n                  </li>\r\n\r\n\r\n                   <li [routerLink]=\"['creditos']\">\r\n                      <a >\r\n                      <i class=\"fa fa-credit-card fa-lg\"></i> Creditos\r\n                      </a>\r\n                    </li>\r\n\r\n                    <li data-toggle=\"collapse\" data-target=\"#service\" class=\"collapsed\">\r\n                      <a href=\"#\"><i class=\"fa fa-globe fa-lg\"></i>Mercado<span class=\"arrow\"></span></a>\r\n                    </li>\r\n                    <ul class=\"sub-menu collapse\" id=\"service\">\r\n                      <li [routerLink]=\"['zonas']\" ><i class=\"fa fa-map-marker fa-lg\"></i> Zonas de Demanda</li>\r\n                      <li [routerLink]=\"['demandas']\"><i class=\"fa fa-area-chart fa-lg\"></i> Demanda potencial por Zona</li>\r\n\r\n                    </ul>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n            </ul>\r\n     </div>\r\n</div>\r\n"
+module.exports = "<div class=\"nav-side-menu\">\r\n    <div class=\"brand\">Panel de Administración</div>\r\n    <i class=\"fa fa-bars fa-2x toggle-btn\" data-toggle=\"collapse\" data-target=\"#menu-content\"></i>\r\n\r\n        <div class=\"menu-list\">\r\n\r\n            <ul id=\"menu-content\" class=\"menu-content collapse out\">\r\n              <!-- <li [routerLink]=\"['home']\">\r\n                 <a >\r\n                 <i class=\"fa fa-home fa-lg\"></i>Home\r\n                 </a>\r\n               </li>\r\n -->\r\n\r\n\r\n\r\n\r\n                <li data-toggle=\"collapse\" data-target=\"#users\" class=\"collapsed\">\r\n                  <a href=\"#\"><i class=\"fa fa-navicon fa-lg\" routerLinkActive=\"active\"></i>Administración de Usuarios<span class=\"arrow\"></span></a>\r\n                </li>\r\n                <ul class=\"sub-menu collapse\" id=\"users\">\r\n                  <li [routerLink]=\"['administradores']\" >Administradores</li>\r\n                  <li [routerLink]=\"['usuarios']\">Usuarios</li>\r\n\r\n                </ul>\r\n\r\n                <li [routerLink]=\"['productos']\" routerLinkActive=\"active\">\r\n                   <a >\r\n                   <i class=\"fa fa-cube fa-lg\"></i> Productos\r\n                   </a>\r\n                 </li>\r\n\r\n                 <li [routerLink]=\"['maquinarias']\">\r\n                    <a >\r\n                    <i class=\"fa fa-cogs fa-lg\"></i> Maquinarias\r\n                    </a>\r\n                  </li>\r\n\r\n\r\n                   <li [routerLink]=\"['creditos']\">\r\n                      <a >\r\n                      <i class=\"fa fa-credit-card fa-lg\"></i> Creditos\r\n                      </a>\r\n                    </li>\r\n\r\n                    <li data-toggle=\"collapse\" data-target=\"#service\" class=\"collapsed\">\r\n                      <a href=\"#\"><i class=\"fa fa-globe fa-lg\"></i>Mercado<span class=\"arrow\"></span></a>\r\n                    </li>\r\n                    <ul class=\"sub-menu collapse\" id=\"service\">\r\n                      <li [routerLink]=\"['zonas']\" ><i class=\"fa fa-map-marker fa-lg\"></i> Zonas de Demanda</li>\r\n                      <li [routerLink]=\"['demandas']\"><i class=\"fa fa-area-chart fa-lg\"></i> Demanda potencial por Zona</li>\r\n\r\n                    </ul>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n            </ul>\r\n     </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2981,7 +2975,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/balance-inicial/balance-inicial.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h3 class=\"text-center\">Balance General</h3>\r\n\r\n<table class=\"table table-hover  table-responsive offset-2\" *ngFor=\"let balance of balanceInicial\">\r\n  <thead>\r\n    <tr>\r\n      <th colspan=\"6\" class=\"text-center\">Posición Financiera Final</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr class=\"thead-inverse\">\r\n      <th colspan=\"4\" class=\"text-center bg-primary\">A menos de un año</th>\r\n      <th colspan=\"2\" class=\"text-center bg-warning\">A menos de un año</th>\r\n    </tr>\r\n    <tr>\r\n      <td>Caja Bancos</td>\r\n      <td colspan=\"3\" class=\"text-right\">{{balance.cajaBancos|currency:'USD':true:'1.0-0'}}</td>\r\n      <td>IVA por enterar</td>\r\n      <td>{{balance.IVAPorEnterar | currency:'USD':true}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Cuentas por Cobrar</td>\r\n      <td colspan=\"3\" class=\"text-right\">{{balance.cuentasPorCobrar |currency:'USD':true:'1.0-0'}}</td>\r\n      <td>Impuestos por Pagar</td>\r\n      <td class=\"text-right\">{{balance.imptosPorPagar |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>IVA Acreditable</td>\r\n      <td colspan=\"3\" class=\"text-right\"> {{balance.IVAAcreditable |currency:'USD':true:'1.0-0'}}</td>\r\n      <td>Proveedores</td>\r\n      <td class=\"text-right\">{{balance.proveedores |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Almacen de Articulo Terminado</td>\r\n      <td colspan=\"3\" class=\"text-right\">{{balance.almacenArtTerm|currency:'USD':true:'1.0-0' }}</td>\r\n      <td>PTU por Pagar</td>\r\n      <td class=\"text-right\">{{balance.PTUPorPagar |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Alamacén de Materiales</td>\r\n      <td colspan=\"3\" class=\"text-right\">{{balance.almacenMateriales |currency:'USD':true:'1.0-0'}}</td>\r\n      <td>Préstamos Bancarios</td>\r\n      <td class=\"text-right\">{{balance.prestamosMenosAnio|currency:'USD':true:'1.0-0' }}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th class=\"text-center\">TOTAL</th>\r\n      <td colspan=\"3\" class=\"text-right\">{{balance.cajaBancos + balance.cuentasPorCobrar + balance.IVAAcreditable\r\n          + balance.almacenArtTerm + balance.almacenMateriales |currency:'USD':true:'1.0-0' }}</td>\r\n      <th class=\"text-center\">TOTAL</th>\r\n      <td class=\"text-right\">{{balance.IVAPorEnterar + balance.imptosPorPagar + balance.proveedores + balance.PTUPorPagar + balance.prestamosMenosAnio |currency:'USD':true:'1.0-0' }}</td>\r\n    </tr>\r\n\r\n    <tr class=\"thead-inverse\">\r\n      <th class=\"text-center bg-primary\" colspan=\"4\">A más de un año</th>\r\n      <th class=\"text-center bg-warning\">A más de un año</th>\r\n\r\n    </tr>\r\n\r\n    <tr class=\"thead-inverse\">\r\n      <th class=\"text-center bg-success\"></th>\r\n      <th class=\"text-center bg-success\">I.O.</th>\r\n      <th class=\"text-center bg-success\">Dep. Acum</th>\r\n      <th class=\"text-center bg-success\">Neto</th>\r\n    </tr>\r\n\r\n\r\n    <tr>\r\n      <td>Terrenos</td>\r\n      <td class=\"text-right\">{{balance.terreno |currency:'USD':true:'1.0-0' }}</td>\r\n      <td class=\"text-right\">{{balance.depTerreno |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\">{{balance.terreno - balance.depTerreno |currency:'USD':true:'1.0-0' }}</td>\r\n      <td>Prestamos Totales</td>\r\n      <td class=\"text-right\">{{balance.prestamosMasAnio |currency:'USD':true:'1.0-0' }}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Edificios e Instalaciones</td>\r\n      <td class=\"text-right\">{{balance.edifInsta |currency:'USD':true:'1.0-0' }}</td>\r\n      <td class=\"text-right\">{{balance.depEdif |currency:'USD':true:'1.0-0' }}</td>\r\n      <td class=\"text-right\">{{balance.edifInsta - balance.depEdif |currency:'USD':true:'1.0-0' }}</td>\r\n      <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Maquinaria y Equipo</td>\r\n      <td class=\"text-right\">{{balance.maqEquipo |currency:'USD':true:'1.0-0' }}</td>\r\n      <td class=\"text-right\">{{balance.depMaqEquipo |currency:'USD':true:'1.0-0' }}</td>\r\n      <td class=\"text-right\">{{balance.maqEquipo - balance.depMaqEquipo |currency:'USD':true:'1.0-0'}}</td>\r\n      <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Muebles y Enseres</td>\r\n      <td class=\"text-right\">{{balance.mueblesEnseres |currency:'USD':true:'1.0-0' }}</td>\r\n      <td class=\"text-right\">{{balance.depMueblesEnseres |currency:'USD':true:'1.0-0' }}</td>\r\n      <td class=\"text-right\">{{balance.mueblesEnseres - balance.depMueblesEnseres |currency:'USD':true:'1.0-0'}}</td>\r\n      <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Equipo de Transporte</td>\r\n      <td class=\"text-right\">{{balance.eqTrans|currency:'USD':true:'1.0-0' }}</td>\r\n      <td class=\"text-right\">{{balance.depEqTrans |currency:'USD':true:'1.0-0' }}</td>\r\n      <td class=\"text-right\">{{balance.eqTrans - balance.depEqTrans |currency:'USD':true:'1.0-0' }}</td>\r\n      <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th class=\"text-center\">TOTAL</th>\r\n      <td></td>\r\n      <td></td>\r\n      <td class=\"text-right\">{{balance.terreno + balance.edifInsta + balance.mueblesEnseres + balance.eqTrans + balance.maqEquipo - balance.depMaqEquipo - balance.depEdif - balance.depMueblesEnseres -balance.depEqTrans |currency:'USD':true:'1.0-0' }}</td>\r\n      <th class=\"text-center\">TOTAL</th>\r\n      <td class=\"text-right\">{{balance.prestamosMasAnio |currency:'USD':true:'1.0-0' }}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th colspan=\"4\" class=\"text-center\">De Aplicación Diferida</th>\r\n      <th class=\"text-center\" colspan=\"2\">Con los Accionistas</th>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Pagos Hechos por anticipado</td>\r\n      <td colspan=\"3\" class=\"text-right\">{{balance.pagosAnticipado|currency:'USD':true:'1.0-0' }}</td>\r\n      <td>Capital Social</td>\r\n      <td class=\"text-right\">{{balance.capitalSocial |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Gastos por Amortizar</td>\r\n      <td colspan=\"3\" class=\"text-right\">{{balance.gastosAmortizacion  |currency:'USD':true:'1.0-0'}}</td>\r\n      <td>Reserva legal</td>\r\n      <td class=\"text-right\">{{balance.reservaLegal  |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td colspan=\"4\"></td>\r\n      <td>Utilidad Acumulada</td>\r\n      <td class=\"text-right\">{{balance.utilidadAcum  |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td colspan=\"4\"></td>\r\n      <td >Utilidad del Ejercicio</td>\r\n      <td class=\"text-right\">{{balance.utilidadEjercicio  |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th class=\"text-center\">TOTAL</th>\r\n      <td colspan=\"3\" class=\"text-right\">{{balance.pagosAnticipado + balance.gastosAmortizacion |currency:'USD':true:'1.0-0'}}</td>\r\n      <th class=\"text-center\">TOTAL</th>\r\n      <td class=\"text-right\">{{balance.capitalSocial + balance.reservaLegal + balance.utilidadAcum + balance.utilidadEjercicio  |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n\r\n    <tr>\r\n      <th >Suma de los Derechos</th>\r\n      <td colspan=\"3\" class=\"text-right\">{{balance.pagosAnticipado + balance.gastosAmortizacion + balance.terreno\r\n        + balance.edifInsta + balance.mueblesEnseres + balance.eqTrans + balance.maqEquipo\r\n        + balance.cajaBancos + balance.cuentasPorCobrar + balance.IVAAcreditable + balance.almacenArtTerm\r\n        + balance.almacenMateriales - balance.depMaqEquipo - balance.depEdif - balance.depMueblesEnseres -balance.depEqTrans  |currency:'USD':true:'1.0-0'}}</td>\r\n      <td>Suma de las Obligaciones</td>\r\n      <td class=\"text-right\">{{balance.IVAPorEnterar + balance.imptosPorPagar + balance.proveedores + balance.PTUPorPagar\r\n        + balance.prestamosMenosAnio + balance.prestamosMasAnio + balance.capitalSocial + balance.reservaLegal\r\n        + balance.utilidadAcum + balance.utilidadEjercicio  |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Diferencia</th>\r\n      <td colspan=\"3\" class=\"text-right\">{{(balance.pagosAnticipado + balance.gastosAmortizacion + balance.terreno\r\n        + balance.edifInsta + balance.mueblesEnseres + balance.eqTrans + balance.maqEquipo\r\n        + balance.cajaBancos + balance.cuentasPorCobrar + balance.IVAAcreditable + balance.almacenArtTerm\r\n        + balance.almacenMateriales) - (balance.IVAPorEnterar + balance.imptosPorPagar + balance.proveedores + balance.PTUPorPagar\r\n          + balance.prestamosMenosAnio + balance.prestamosMasAnio + balance.capitalSocial + balance.reservaLegal\r\n          + balance.utilidadAcum + balance.utilidadEjercicio) - balance.depMaqEquipo - balance.depEdif - balance.depMueblesEnseres -balance.depEqTrans  |currency:'USD':true:'1.0-0'}}</td>\r\n      <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n  </tbody>\r\n</table>\r\n"
+module.exports = "<h3 class=\"text-center\">Balance General</h3>\r\n\r\n<table class=\"table table-hover  table-responsive offset-2\" *ngFor=\"let balance of balanceInicial\">\r\n  <thead>\r\n    <tr>\r\n      <th colspan=\"6\" class=\"text-center\">Posición Financiera Final</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr class=\"thead-inverse\">\r\n      <th colspan=\"4\" class=\"text-center bg-primary\">A menos de un año</th>\r\n      <th colspan=\"2\" class=\"text-center bg-warning\">A menos de un año</th>\r\n    </tr>\r\n    <tr>\r\n      <td>Caja Bancos</td>\r\n      <td colspan=\"3\" class=\"text-right\">{{balance.cajaBancos|currency:'USD':true:'1.0-0'}}</td>\r\n      <td>IVA por enterar</td>\r\n      <td>{{balance.IVAPorEnterar | currency:'USD':true}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Cuentas por Cobrar</td>\r\n      <td colspan=\"3\" class=\"text-right\">{{balance.cuentasPorCobrar |currency:'USD':true:'1.0-0'}}</td>\r\n      <td>Impuestos por Pagar</td>\r\n      <td class=\"text-right\">{{balance.imptosPorPagar |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>IVA Acreditable</td>\r\n      <td colspan=\"3\" class=\"text-right\"> {{balance.IVAAcreditable |currency:'USD':true:'1.0-0'}}</td>\r\n      <td>Proveedores</td>\r\n      <td class=\"text-right\">{{balance.proveedores |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Almacen de Articulo Terminado</td>\r\n      <td colspan=\"3\" class=\"text-right\">{{balance.almacenArtTerm|currency:'USD':true:'1.0-0' }}</td>\r\n      <td>PTU por Pagar</td>\r\n      <td class=\"text-right\">{{balance.PTUPorPagar |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Alamacén de Materiales</td>\r\n      <td colspan=\"3\" class=\"text-right\">{{balance.almacenMateriales |currency:'USD':true:'1.0-0'}}</td>\r\n      <td>Préstamos Bancarios</td>\r\n      <td class=\"text-right\">{{balance.prestamosMenosAnio|currency:'USD':true:'1.0-0' }}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th class=\"text-center\">TOTAL</th>\r\n      <td colspan=\"3\" class=\"text-right\">{{balance.cajaBancos + balance.cuentasPorCobrar + balance.IVAAcreditable\r\n          + balance.almacenArtTerm + balance.almacenMateriales |currency:'USD':true:'1.0-0' }}</td>\r\n      <th class=\"text-center\">TOTAL</th>\r\n      <td class=\"text-right\">{{balance.IVAPorEnterar + balance.imptosPorPagar + balance.proveedores + balance.PTUPorPagar + balance.prestamosMenosAnio |currency:'USD':true:'1.0-0' }}</td>\r\n    </tr>\r\n\r\n    <tr class=\"thead-inverse\">\r\n      <th class=\"text-center bg-primary\" colspan=\"4\">A más de un año</th>\r\n      <th class=\"text-center bg-warning\">A más de un año</th>\r\n\r\n    </tr>\r\n\r\n    <tr class=\"thead-inverse\">\r\n      <th class=\"text-center bg-success\"></th>\r\n      <th class=\"text-center bg-success\">I.O.</th>\r\n      <th class=\"text-center bg-success\">Dep. Acum</th>\r\n      <th class=\"text-center bg-success\">Neto</th>\r\n    </tr>\r\n\r\n\r\n    <tr>\r\n      <td>Terrenos</td>\r\n      <td class=\"text-right\">{{balance.terreno |currency:'USD':true:'1.0-0' }}</td>\r\n      <td class=\"text-right\">{{balance.depTerreno |currency:'USD':true:'1.0-0'}}</td>\r\n      <td class=\"text-right\">{{balance.terreno - balance.depTerreno |currency:'USD':true:'1.0-0' }}</td>\r\n      <td>Prestamos Totales</td>\r\n      <td class=\"text-right\">{{balance.prestamosMasAnio |currency:'USD':true:'1.0-0' }}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Edificios e Instalaciones</td>\r\n      <td class=\"text-right\">{{balance.edifInsta |currency:'USD':true:'1.0-0' }}</td>\r\n      <td class=\"text-right\">{{balance.depEdif |currency:'USD':true:'1.0-0' }}</td>\r\n      <td class=\"text-right\">{{balance.edifInsta - balance.depEdif |currency:'USD':true:'1.0-0' }}</td>\r\n      <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Maquinaria y Equipo</td>\r\n      <td class=\"text-right\">{{balance.maqEquipo |currency:'USD':true:'1.0-0' }}</td>\r\n      <td class=\"text-right\">{{balance.depMaqEquipo |currency:'USD':true:'1.0-0' }}</td>\r\n      <td class=\"text-right\">{{balance.maqEquipo - balance.depMaqEquipo |currency:'USD':true:'1.0-0'}}</td>\r\n      <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Muebles y Enseres</td>\r\n      <td class=\"text-right\">{{balance.mueblesEnseres |currency:'USD':true:'1.0-0' }}</td>\r\n      <td class=\"text-right\">{{balance.depMueblesEnseres |currency:'USD':true:'1.0-0' }}</td>\r\n      <td class=\"text-right\">{{balance.mueblesEnseres - balance.depMueblesEnseres |currency:'USD':true:'1.0-0'}}</td>\r\n      <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Equipo de Transporte</td>\r\n      <td class=\"text-right\">{{balance.eqTrans|currency:'USD':true:'1.0-0' }}</td>\r\n      <td class=\"text-right\">{{balance.depEqTrans |currency:'USD':true:'1.0-0' }}</td>\r\n      <td class=\"text-right\">{{balance.eqTrans - balance.depEqTrans |currency:'USD':true:'1.0-0' }}</td>\r\n      <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th class=\"text-center\">TOTAL</th>\r\n      <td></td>\r\n      <td></td>\r\n      <td class=\"text-right\">{{balance.terreno + balance.edifInsta + balance.mueblesEnseres + balance.eqTrans + balance.maqEquipo - balance.depMaqEquipo - balance.depEdif - balance.depMueblesEnseres -balance.depEqTrans |currency:'USD':true:'1.0-0' }}</td>\r\n      <th class=\"text-center\">TOTAL</th>\r\n      <td class=\"text-right\">{{balance.prestamosMasAnio |currency:'USD':true:'1.0-0' }}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th colspan=\"4\" class=\"text-center\">De Aplicación Diferida</th>\r\n      <th class=\"text-center\" colspan=\"2\">Con los Accionistas</th>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Pagos Hechos por anticipado</td>\r\n      <td colspan=\"3\" class=\"text-right\">{{balance.pagosAnticipado|currency:'USD':true:'1.0-0' }}</td>\r\n      <td>Capital Social</td>\r\n      <td class=\"text-right\">{{balance.capitalSocial |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td>Gastos por Amortizar</td>\r\n      <td colspan=\"3\" class=\"text-right\">{{balance.gastosAmortizacion  |currency:'USD':true:'1.0-0'}}</td>\r\n      <td>Reserva legal</td>\r\n      <td class=\"text-right\">{{balance.reservaLegal  |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td colspan=\"4\"></td>\r\n      <td>Utilidad Acumulada</td>\r\n      <td class=\"text-right\">{{balance.utilidadAcum  |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <td colspan=\"4\"></td>\r\n      <td >Utilidad del Ejercicio</td>\r\n      <td class=\"text-right\">{{balance.utilidadEjercicio  |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th class=\"text-center\">TOTAL</th>\r\n      <td colspan=\"3\" class=\"text-right\">{{balance.pagosAnticipado + balance.gastosAmortizacion |currency:'USD':true:'1.0-0'}}</td>\r\n      <th class=\"text-center\">TOTAL</th>\r\n      <td class=\"text-right\">{{balance.capitalSocial + balance.reservaLegal + balance.utilidadAcum + balance.utilidadEjercicio  |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n\r\n    <tr>\r\n      <th >Suma de los Derechos</th>\r\n      <td colspan=\"3\" class=\"text-right\">{{balance.pagosAnticipado + balance.gastosAmortizacion + balance.terreno\r\n        + balance.edifInsta + balance.mueblesEnseres + balance.eqTrans + balance.maqEquipo\r\n        + balance.cajaBancos + balance.cuentasPorCobrar + balance.IVAAcreditable + balance.almacenArtTerm\r\n        + balance.almacenMateriales - balance.depMaqEquipo - balance.depEdif - balance.depMueblesEnseres -balance.depEqTrans  |currency:'USD':true:'1.0-0'}}</td>\r\n      <td>Suma de las Obligaciones</td>\r\n      <td class=\"text-right\">{{balance.IVAPorEnterar + balance.imptosPorPagar + balance.proveedores + balance.PTUPorPagar\r\n        + balance.prestamosMenosAnio + balance.prestamosMasAnio + balance.capitalSocial + balance.reservaLegal\r\n        + balance.utilidadAcum + balance.utilidadEjercicio  |currency:'USD':true:'1.0-0'}}</td>\r\n    </tr>\r\n\r\n    <tr>\r\n      <th>Diferencia</th>\r\n      <td colspan=\"3\" class=\"text-right\">{{(balance.pagosAnticipado + balance.gastosAmortizacion + balance.terreno\r\n        + balance.edifInsta + balance.mueblesEnseres + balance.eqTrans + balance.maqEquipo\r\n        + balance.cajaBancos + balance.cuentasPorCobrar + balance.IVAAcreditable + balance.almacenArtTerm\r\n        + balance.almacenMateriales) - (balance.IVAPorEnterar + balance.imptosPorPagar + balance.proveedores + balance.PTUPorPagar\r\n          + balance.prestamosMenosAnio + balance.prestamosMasAnio + balance.capitalSocial + balance.reservaLegal\r\n          + balance.utilidadAcum + balance.utilidadEjercicio) - balance.depMaqEquipo - balance.depEdif - balance.depMueblesEnseres -balance.depEqTrans  |currency:'USD':true:'1.0-0'}}</td>\r\n      <td colspan=\"2\"></td>\r\n    </tr>\r\n\r\n  </tbody>\r\n</table>\r\n\r\n<div class=\"row\">\r\n  <button type=\"button\" (click)=\"descargaPDF()\"  class=\"btn btn-primary col-4 offset-4\">Exportar Resultado</button>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2992,6 +2986,7 @@ module.exports = "<h3 class=\"text-center\">Balance General</h3>\r\n\r\n<table c
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_resultados_service__ = __webpack_require__("../../../../../src/app/services/resultados.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BalanceInicialComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3005,15 +3000,211 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var BalanceInicialComponent = (function () {
-    function BalanceInicialComponent(_resultadosService, _proyectoService) {
+    function BalanceInicialComponent(_resultadosService, cp, _proyectoService) {
         this._resultadosService = _resultadosService;
+        this.cp = cp;
         this._proyectoService = _proyectoService;
         this.balanceInicial = this._resultadosService.balanceInicialAnterior();
         console.log(this.balanceInicial);
         this._proyectoService.ocultaCierrePeriodo();
     }
     BalanceInicialComponent.prototype.ngOnInit = function () {
+    };
+    BalanceInicialComponent.prototype.descargaPDF = function () {
+        var cajaBancos, cuentasPorCobrar, IVAAcreditable, almacenArtTerm, almacenMateriales, terreno, maqEquipo, edificios, mueblesEnseres, equipoTrans, pagosAnticipado, gastosAmortizacion, IVAPorEnterar, imptosPorPagar, proveedores, PTUPorPagar, prestamosMenosAnio, prestamosMasAnio, capitalSocial, reservaLegal, utilidadAcum, depMaqEquipo, depEdif, depTerreno, depEqTrans, depMueblesEnseres, utilidadEjercicio;
+        for (var _i = 0, _a = this.balanceInicial; _i < _a.length; _i++) {
+            var balance = _a[_i];
+            cajaBancos = balance.cajaBancos;
+            cuentasPorCobrar = balance.cuentasPorCobrar;
+            IVAAcreditable = balance.IVAAcreditable;
+            almacenArtTerm = balance.almacenArtTerm;
+            almacenMateriales = balance.almacenMateriales;
+            terreno = balance.terreno;
+            edificios = balance.edifInsta;
+            maqEquipo = balance.maqEquipo;
+            mueblesEnseres = balance.mueblesEnseres;
+            equipoTrans = balance.eqTrans;
+            pagosAnticipado = balance.pagosAnticipado;
+            gastosAmortizacion = balance.gastosAmortizacion;
+            IVAPorEnterar = balance.IVAPorEnterar;
+            imptosPorPagar = balance.imptosPorPagar;
+            proveedores = balance.proveedores;
+            PTUPorPagar = balance.PTUPorPagar;
+            prestamosMenosAnio = balance.prestamosMenosAnio;
+            prestamosMasAnio = balance.prestamosMasAnio;
+            capitalSocial = balance.capitalSocial;
+            reservaLegal = balance.reservaLegal;
+            utilidadAcum = balance.utilidadAcum;
+            utilidadEjercicio = balance.utilidadEjercicio;
+            depMaqEquipo = balance.depMaqEquipo;
+            depEdif = balance.depEdif;
+            depTerreno = balance.depTerreno;
+            depEqTrans = balance.depEqTrans;
+            depMueblesEnseres = balance.depMueblesEnseres;
+        }
+        var total1 = cajaBancos + cuentasPorCobrar + IVAAcreditable + almacenArtTerm + almacenMateriales;
+        var doc = new jsPDF({
+            orientation: 'landscape',
+            unit: 'mm',
+            format: [215.9, 279]
+        });
+        doc.setFontSize(15);
+        doc.setFontType("bold");
+        doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+        doc.setFontSize(13);
+        doc.text(139.5, 23, 'Posición Financiera Final del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
+        doc.line(50, 27, 228, 27);
+        doc.setFontSize(7);
+        var mar = 45;
+        var anchCell = 4;
+        //Activo
+        doc.text(10, 40, 'A menos de un año');
+        doc.line(10, 45, 120, 45);
+        doc.setFontType("normal");
+        doc.text(12, 48, 'Caja y Bancos');
+        doc.line(10, mar + anchCell * 1, 120, mar + anchCell * 1);
+        doc.text(120, 48, this.cp.transform(cajaBancos, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(12, 44 + anchCell * 2, 'Cuentas por Cobrar');
+        doc.line(10, mar + anchCell * 2, 120, mar + anchCell * 2);
+        doc.text(120, 44 + anchCell * 2, this.cp.transform(cuentasPorCobrar, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(12, 44 + anchCell * 3, 'IVA Acreditable');
+        doc.line(10, mar + anchCell * 3, 120, mar + anchCell * 3);
+        doc.text(120, 44 + anchCell * 3, this.cp.transform(IVAAcreditable, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(12, 44 + anchCell * 4, 'Almacén de Artículo Terminado');
+        doc.line(10, mar + anchCell * 4, 120, mar + anchCell * 4);
+        doc.text(120, 44 + anchCell * 4, this.cp.transform(almacenArtTerm, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(12, 44 + anchCell * 5, 'Almacen de Materiales');
+        doc.line(10, mar + anchCell * 5, 120, mar + anchCell * 5);
+        doc.text(120, 44 + anchCell * 5, this.cp.transform(almacenMateriales, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.setFontSize(8);
+        doc.setFontType("bold");
+        doc.text(12, 44 + anchCell * 6, 'Total');
+        doc.text(140, 44 + anchCell * 6, this.cp.transform(total1, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(10, 85, 'A más de un año');
+        doc.setFontType("normal");
+        doc.setFontSize(7);
+        doc.text(62, 44 + anchCell * 7 + 17, 'I.O.');
+        doc.text(82, 44 + anchCell * 7 + 17, 'Dep. Acum');
+        doc.line(10, 90, 120, 90);
+        var r = terreno - depTerreno;
+        doc.text(12, 44 + anchCell * 7 + 21, 'Terreno');
+        doc.line(10, mar + 0 + anchCell * 7 + 21, 120, mar + anchCell * 7 + 21);
+        doc.text(120, 44 + anchCell * 7 + 21, this.cp.transform(r, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(70, 44 + anchCell * 7 + 21, this.cp.transform(terreno, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(95, 44 + anchCell * 7 + 21, this.cp.transform(depTerreno, 'USD', true, '1.0-0'), null, null, 'right');
+        var r1 = edificios - depEdif;
+        doc.text(12, 44 + anchCell * 8 + 21, 'Edificios e Instalaciones');
+        doc.line(10, mar + 0 + anchCell * 8 + 21, 120, mar + anchCell * 8 + 21);
+        doc.text(120, 44 + anchCell * 8 + 21, this.cp.transform(r1, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(70, 44 + anchCell * 8 + 21, this.cp.transform(edificios, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(95, 44 + anchCell * 8 + 21, this.cp.transform(depEdif, 'USD', true, '1.0-0'), null, null, 'right');
+        var r2 = maqEquipo - depMaqEquipo;
+        doc.text(12, 44 + anchCell * 9 + 21, 'Maquinaria y Equipo');
+        doc.line(10, mar + 0 + anchCell * 9 + 21, 120, mar + anchCell * 9 + 21);
+        doc.text(120, 44 + anchCell * 9 + 21, this.cp.transform(r2, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(70, 44 + anchCell * 9 + 21, this.cp.transform(maqEquipo, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(95, 44 + anchCell * 9 + 21, this.cp.transform(depMaqEquipo, 'USD', true, '1.0-0'), null, null, 'right');
+        var r3 = mueblesEnseres - depMueblesEnseres;
+        doc.text(12, 44 + anchCell * 10 + 21, 'Muebles y Enseres');
+        doc.line(10, mar + 0 + anchCell * 10 + 21, 120, mar + anchCell * 10 + 21);
+        doc.text(120, 44 + anchCell * 10 + 21, this.cp.transform(r3, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(70, 44 + anchCell * 10 + 21, this.cp.transform(mueblesEnseres, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(95, 44 + anchCell * 10 + 21, this.cp.transform(depMueblesEnseres, 'USD', true, '1.0-0'), null, null, 'right');
+        var r4 = equipoTrans - depEqTrans;
+        doc.text(12, 44 + anchCell * 11 + 21, 'Equipo de Transportes');
+        doc.line(10, mar + 0 + anchCell * 11 + 21, 120, mar + anchCell * 11 + 21);
+        doc.text(120, 44 + anchCell * 11 + 21, this.cp.transform(r4, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(70, 44 + anchCell * 11 + 21, this.cp.transform(equipoTrans, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(95, 44 + anchCell * 11 + 21, this.cp.transform(depEqTrans, 'USD', true, '1.0-0'), null, null, 'right');
+        var rt = r + r1 + r2 + r3 + r4;
+        var rn = equipoTrans + mueblesEnseres + maqEquipo + edificios + terreno;
+        var rdep = depEdif + depMaqEquipo + depTerreno + depMueblesEnseres + depEqTrans;
+        doc.setFontSize(8);
+        doc.setFontType("bold");
+        doc.text(12, 44 + anchCell * 12 + 21, 'Total');
+        doc.text(140, 44 + anchCell * 12 + 21, this.cp.transform(rt, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(70, 44 + anchCell * 12 + 21, this.cp.transform(rn, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(95, 44 + anchCell * 12 + 21, this.cp.transform(rdep, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.setFontSize(7);
+        doc.text(10, 130, 'De Aplicación Difereida');
+        doc.line(10, 135, 120, 135);
+        doc.setFontType("normal");
+        doc.text(12, 44 + anchCell * 12 + 46, 'Pagos Hechos por Anticipado');
+        doc.line(10, mar + 0 + anchCell * 12 + 46, 120, mar + anchCell * 12 + 46);
+        doc.text(120, 44 + anchCell * 12 + 46, this.cp.transform(pagosAnticipado, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(12, 44 + anchCell * 13 + 46, 'Gastos por Amortizar');
+        doc.line(10, mar + 0 + anchCell * 13 + 46, 120, mar + anchCell * 13 + 46);
+        doc.text(120, 44 + anchCell * 13 + 46, this.cp.transform(gastosAmortizacion, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.setFontSize(8);
+        doc.setFontType("bold");
+        doc.text(12, 44 + anchCell * 14 + 46, 'Total');
+        doc.text(140, 44 + anchCell * 14 + 46, this.cp.transform((total1 + rt + pagosAnticipado + gastosAmortizacion), 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(12, 44 + anchCell * 18 + 46, 'Suma de los Derechos');
+        doc.text(140, 44 + anchCell * 18 + 46, this.cp.transform((total1 + rt + pagosAnticipado + gastosAmortizacion), 'USD', true, '1.0-0'), null, null, 'right');
+        doc.line(120, mar + 0 + anchCell * 18 + 46, 140, mar + anchCell * 18 + 46);
+        //Pasivo
+        doc.text(165, 40, 'A menos de un año');
+        doc.line(165, 45, 235, 45);
+        doc.setFontType("normal");
+        doc.text(167, 44 + anchCell * 1, 'IVA por enterar');
+        doc.text(235, 44 + anchCell * 1, this.cp.transform(IVAPorEnterar, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.line(165, mar + anchCell * 1, 235, mar + anchCell * 1);
+        doc.text(167, 44 + anchCell * 2, 'Impuestos por Pagar');
+        doc.text(235, 44 + anchCell * 2, this.cp.transform(imptosPorPagar, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.line(165, mar + anchCell * 2, 235, mar + anchCell * 2);
+        doc.text(167, 44 + anchCell * 3, 'Proveedores');
+        doc.text(235, 44 + anchCell * 3, this.cp.transform(proveedores, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.line(165, mar + anchCell * 3, 235, mar + anchCell * 3);
+        doc.text(167, 44 + anchCell * 4, 'PTU por Pagar');
+        doc.text(235, 44 + anchCell * 4, this.cp.transform(PTUPorPagar, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.line(165, mar + anchCell * 4, 235, mar + anchCell * 4);
+        doc.text(167, 44 + anchCell * 5, 'Prestamos Bancarios');
+        doc.text(235, 44 + anchCell * 5, this.cp.transform(prestamosMenosAnio, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.line(165, mar + anchCell * 5, 235, mar + anchCell * 5);
+        var t1 = IVAPorEnterar + imptosPorPagar + PTUPorPagar + proveedores + prestamosMenosAnio;
+        doc.setFontSize(8);
+        doc.setFontType("bold");
+        doc.text(167, 44 + anchCell * 6, 'Total');
+        doc.text(255, 44 + anchCell * 6, this.cp.transform(t1, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.setFontSize(7);
+        doc.text(165, 85, 'A más de un año');
+        doc.setFontType("normal");
+        doc.setFontSize(7);
+        doc.line(165, 90, 235, 90);
+        doc.text(167, 44 + anchCell * 7 + 21, 'Prestamos Bancarios');
+        doc.line(165, mar + 0 + anchCell * 7 + 21, 235, mar + anchCell * 7 + 21);
+        doc.text(235, 44 + anchCell * 7 + 21, this.cp.transform(prestamosMasAnio, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.setFontSize(8);
+        doc.setFontType("bold");
+        doc.text(167, 44 + anchCell * 8 + 21, 'Total');
+        doc.text(255, 44 + anchCell * 8 + 21, this.cp.transform(prestamosMasAnio, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(165, 115, 'Con los Accionistas');
+        doc.line(165, 122, 235, 122);
+        doc.setFontType("normal");
+        doc.setFontSize(7);
+        doc.text(167, 44 + anchCell * 9 + 45, 'Capital Social');
+        doc.line(165, mar + 0 + anchCell * 9 + 45, 235, mar + anchCell * 9 + 45);
+        doc.text(235, 44 + anchCell * 9 + 45, this.cp.transform(capitalSocial, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(167, 44 + anchCell * 10 + 45, 'Reserva Legal');
+        doc.line(165, mar + 0 + anchCell * 10 + 45, 235, mar + anchCell * 10 + 45);
+        doc.text(235, 44 + anchCell * 10 + 45, this.cp.transform(reservaLegal, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(167, 44 + anchCell * 11 + 45, 'Utilidad Acumulada');
+        doc.line(165, mar + 0 + anchCell * 11 + 45, 235, mar + anchCell * 11 + 45);
+        doc.text(235, 44 + anchCell * 11 + 45, this.cp.transform(utilidadAcum, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(167, 44 + anchCell * 12 + 45, 'Utilidad del Ejercicio');
+        doc.line(165, mar + 0 + anchCell * 12 + 45, 235, mar + anchCell * 12 + 45);
+        doc.text(235, 44 + anchCell * 12 + 45, this.cp.transform(utilidadEjercicio, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.setFontSize(8);
+        doc.setFontType("bold");
+        var tr = t1 + prestamosMasAnio + capitalSocial + reservaLegal + utilidadAcum + utilidadEjercicio;
+        doc.text(167, 44 + anchCell * 13 + 45, 'Total');
+        doc.text(255, 44 + anchCell * 13 + 45, this.cp.transform(tr, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.text(165, 44 + anchCell * 18 + 46, 'Suma de los Derechos');
+        doc.text(255, 44 + anchCell * 18 + 46, this.cp.transform(tr, 'USD', true, '1.0-0'), null, null, 'right');
+        doc.line(235, mar + 0 + anchCell * 18 + 46, 255, mar + anchCell * 18 + 46);
+        doc.save("Balance Inicial.pdf");
     };
     return BalanceInicialComponent;
 }());
@@ -3023,10 +3214,10 @@ BalanceInicialComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-inicial/balance-inicial.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-inicial/balance-inicial.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_resultados_service__["a" /* ResultadosService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_resultados_service__["a" /* ResultadosService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common__["CurrencyPipe"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common__["CurrencyPipe"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _c || Object])
 ], BalanceInicialComponent);
 
-var _a, _b;
+var _a, _b, _c;
 //# sourceMappingURL=balance-inicial.component.js.map
 
 /***/ }),
@@ -7443,49 +7634,6 @@ var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, 
 
 /***/ }),
 
-/***/ "../../../../../src/app/components/variables/variables.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "\r\n\r\n<h2>Variables</h2>\r\n<table class=\"table table-bordered table-responsive center-block\">\r\n  <tbody>\r\n    <tr>\r\n      <th>Concepto</th>\r\n      <th>Valor</th>\r\n      <th>\r\n    </tr>\r\n    <tr *ngFor=\"let t of variables\">\r\n      <td class=\"text-right\">{{t.concepto}}</td>\r\n      <td class=\"text-right\">{{t.valor}}</td>\r\n      <th><button class=\"btn btn-success\">Modificar</button></th>\r\n    </tr>\r\n  </tbody>\r\n</table>\r\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/components/variables/variables.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VariablesComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var VariablesComponent = (function () {
-    function VariablesComponent() {
-        this.variables = [];
-    }
-    VariablesComponent.prototype.ngOnInit = function () {
-    };
-    return VariablesComponent;
-}());
-VariablesComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'app-variables',
-        template: __webpack_require__("../../../../../src/app/components/variables/variables.component.html")
-    }),
-    __metadata("design:paramtypes", [])
-], VariablesComponent);
-
-//# sourceMappingURL=variables.component.js.map
-
-/***/ }),
-
 /***/ "../../../../../src/app/components/zona-producto/zona-producto.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8589,13 +8737,34 @@ var DesarrolloProductoService = (function () {
         return this.productosDesarollados;
     };
     DesarrolloProductoService.prototype.getProductosNoDesarrollados = function () {
-        return this.http.get('proyectoproducto/getproductossindesarrollar/' + localStorage.getItem('idProyecto')).map(function (res) { return res.json(); });
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        var x = {
+            idProyecto: localStorage.getItem('idProyecto'),
+            numeroPeriodo: localStorage.getItem('numeroPeriodo')
+        };
+        return this.http.post('proyectoproducto/getproductossindesarrollar/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
     DesarrolloProductoService.prototype.getProductosEnDesarrollo = function () {
-        return this.http.get('proyectoproducto/getproductosendesarrollo/' + localStorage.getItem('idProyecto')).map(function (res) { return res.json(); });
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        var x = {
+            idProyecto: localStorage.getItem('idProyecto'),
+            numeroPeriodo: localStorage.getItem('numeroPeriodo')
+        };
+        return this.http.post('proyectoproducto/getproductosendesarrollo/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
     DesarrolloProductoService.prototype.getProductosDesarrollados = function () {
-        return this.http.get('proyectoproducto/getproductosdesarrollados/' + localStorage.getItem('idProyecto')).map(function (res) { return res.json(); });
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        var x = {
+            idProyecto: localStorage.getItem('idProyecto'),
+            numeroPeriodo: localStorage.getItem('numeroPeriodo')
+        };
+        return this.http.post('proyectoproducto/getproductosdesarrollados/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
     DesarrolloProductoService.prototype.getTerminados = function () {
         return this.http.get('proyectoproducto/getterminados/' + localStorage.getItem('idProyecto')).map(function (res) { return res.json(); });
@@ -9638,7 +9807,20 @@ var ProyectosService = (function () {
                 var x = {
                     Proyectos_idProyecto: idProyecto,
                     Productos_idProducto: data.datos[key$].idProducto,
-                    desarrollado: 1,
+                    desarrollado: 2,
+                    periodoInicio: 0,
+                    ultimoPeriodoDes: 0,
+                    periodosDes: 0
+                };
+                _this._desarrolloProductoService.desarrollar(x).subscribe();
+            }
+        });
+        this._usuarioProductoService.getProductosNU(idUsuario).subscribe(function (data) {
+            for (var key$ in data.datos) {
+                var x = {
+                    Proyectos_idProyecto: idProyecto,
+                    Productos_idProducto: data.datos[key$].idProducto,
+                    desarrollado: 0,
                     periodoInicio: 0,
                     ultimoPeriodoDes: 0,
                     periodosDes: 0
@@ -10335,6 +10517,9 @@ var UsuarioProductoService = (function () {
             'Content-Type': 'application/json'
         });
         return this.http.get('usuariosproductos/' + idUsuario).map(function (res) { return res.json(); });
+    };
+    UsuarioProductoService.prototype.getProductosNU = function (idUsuario) {
+        return this.http.get('usuariosproductos/n/' + idUsuario).map(function (res) { return res.json(); });
     };
     UsuarioProductoService.prototype.eliminar = function (producto) {
         for (var i = 0; this.productosU.length > i; i++) {

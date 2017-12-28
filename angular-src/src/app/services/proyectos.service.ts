@@ -123,7 +123,21 @@ returnUsuarios(){
         var x = {
           Proyectos_idProyecto:idProyecto,
           Productos_idProducto:data.datos[key$].idProducto,
-          desarrollado:1,
+          desarrollado:2,
+          periodoInicio:0,
+          ultimoPeriodoDes:0,
+          periodosDes:0
+        }
+
+        this._desarrolloProductoService.desarrollar(x).subscribe();
+      }
+    });
+    this._usuarioProductoService.getProductosNU(idUsuario).subscribe(data => {
+      for(let key$ in data.datos){
+        var x = {
+          Proyectos_idProyecto:idProyecto,
+          Productos_idProducto:data.datos[key$].idProducto,
+          desarrollado:0,
           periodoInicio:0,
           ultimoPeriodoDes:0,
           periodosDes:0
