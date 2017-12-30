@@ -43,15 +43,36 @@ export class DesarrolloProductoService {
   }
 
   getProductosNoDesarrollados(){
-    return this.http.get('proyectoproducto/getproductossindesarrollar/'+localStorage.getItem('idProyecto')).map(res => res.json());
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:localStorage.getItem('numeroPeriodo')
+    }
+    return this.http.post('proyectoproducto/getproductossindesarrollar/',x,{headers}).map(res => res.json());
   }
 
   getProductosEnDesarrollo(){
-    return this.http.get('proyectoproducto/getproductosendesarrollo/'+localStorage.getItem('idProyecto')).map(res => res.json());
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:localStorage.getItem('numeroPeriodo')
+    }
+    return this.http.post('proyectoproducto/getproductosendesarrollo/',x,{headers}).map(res => res.json());
   }
 
   getProductosDesarrollados(){
-    return this.http.get('proyectoproducto/getproductosdesarrollados/'+localStorage.getItem('idProyecto')).map(res => res.json());
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:localStorage.getItem('numeroPeriodo')
+    }
+    return this.http.post('proyectoproducto/getproductosdesarrollados/',x,{headers}).map(res => res.json());
   }
 
   getTerminados(){

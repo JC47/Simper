@@ -39,6 +39,10 @@ export class UsuarioProductoService {
     return this.http.get('usuariosproductos/'+idUsuario).map(res => res.json());
   }
 
+  getProductosNU(idUsuario){
+    return this.http.get('usuariosproductos/n/'+idUsuario).map(res => res.json());
+  }
+
   eliminar(producto){
     for(let i=0;this.productosU.length>i;i++){
       if(this.productosU[i].idProducto==producto.idProducto){
