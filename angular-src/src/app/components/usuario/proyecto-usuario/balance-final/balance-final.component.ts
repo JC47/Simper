@@ -56,6 +56,100 @@ export class BalanceFinalComponent implements OnInit {
 
 
 
+descargaCSV(){
+
+  let cajaBancos,
+      cuentasPorCobrar,
+      IVAAcreditable,
+      almacenArtTerm,
+      almacenMateriales,
+      terreno,
+      maqEquipo,
+      edificios,
+      mueblesEnseres,
+      equipoTrans,
+      pagosAnticipado,
+      gastosAmortizacion,
+      IVAPorEnterar,
+      imptosPorPagar,
+      proveedores,
+      PTUPorPagar,
+      prestamosMenosAnio,
+      prestamosMasAnio,
+      capitalSocial,
+      reservaLegal,
+      utilidadAcum,
+      depMaqEquipo,
+      depEdif,
+      depTerreno,
+      depEqTrans,
+      depMueblesEnseres,
+      utilidadEjercicio;
+
+let data:any=[
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""},
+  {cara1:"",valor1:"",cara2:"",valor2:""}  
+]
+
+
+
+  for(let balance of this.balanceFinal){
+    cajaBancos=balance.cajaBancos;
+    cuentasPorCobrar=balance.cuentasPorCobrar;
+    IVAAcreditable=balance.IVAAcreditable;
+    almacenArtTerm=balance.almacenArtTerm;
+    almacenMateriales=balance.almacenMateriales
+    terreno=balance.terreno;
+    edificios=balance.edifInsta;
+    maqEquipo=balance.maqEquipo;
+    mueblesEnseres=balance.mueblesEnseres;
+    equipoTrans=balance.eqTrans;
+    pagosAnticipado=balance.pagosAnticipado;
+    gastosAmortizacion=balance.gastosAmortizacion;
+    IVAPorEnterar=balance.IVAPorEnterar;
+    imptosPorPagar=balance.imptosPorPagar;
+    proveedores=balance.proveedores;
+    PTUPorPagar=balance.PTUPorPagar;
+    prestamosMenosAnio=balance.prestamosMenosAnio;
+    prestamosMasAnio=balance.prestamosMasAnio;
+    capitalSocial=balance.capitalSocial;
+    reservaLegal=balance.reservaLegal;
+    utilidadAcum=balance.utilidadAcum;
+    utilidadEjercicio=balance.utilidadEjercicio;
+    depMaqEquipo=balance.depMaqEquipo;
+    depEdif=balance.depEdif;
+    depTerreno=balance.depTerreno;
+    depEqTrans=balance.depEqTrans;
+    depMueblesEnseres=balance.depMueblesEnseres;
+  }
+
+
+
+
+}
+
+
 
   descargaPDF(){
     let cajaBancos,

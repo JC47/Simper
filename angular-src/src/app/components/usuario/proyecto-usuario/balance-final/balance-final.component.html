@@ -5,8 +5,8 @@
 
     <tbody>
       <tr class="thead-inverse">
-        <th colspan="4" class="text-center bg-primary ">A menos de un año</th>
-        <th colspan="2" class="text-center bg-warning">A menos de un año</th>
+        <th colspan="4" class="text-center">A menos de un año</th>
+        <th colspan="2" class="text-center">A menos de un año</th>
       </tr>
       <tr>
         <td>Caja Bancos</td>
@@ -53,8 +53,8 @@
       </tr>
 
       <tr class="thead-inverse">
-        <th class="text-center bg-primary" colspan="4">A más de un año</th>
-        <th class="text-center bg-warning" colspan="2">A más de un año</th>
+        <th class="text-center " colspan="4">A más de un año</th>
+        <th class="text-center " colspan="2">A más de un año</th>
       </tr>
 
       <tr>
@@ -179,8 +179,24 @@
 
     </tbody>
   </table>
-  <div class="row">
-    <button type="button" (click)="descargaPDF()"  class="btn btn-primary col-4 offset-4">Exportar Resultado</button>
 
+
+
+
+
+</div>
+
+
+<div class="row align-items-center" style="margin-bottom:20px">
+  <div class="offset-9 col-1">
+    Exportar:
   </div>
+  <div class="col-1">
+    <ngl-icon icon="pdf" category="doctype" (click)="descargaPDF()" size="large"></ngl-icon>
+  </div>
+
+  <div class="col-1">
+    <ngl-icon icon="csv" category="doctype" (click)="CSValmacenArticuloTerminado()" size="large"></ngl-icon>
+  </div>
+
 </div>
