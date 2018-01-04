@@ -7,7 +7,7 @@ import {BalanceService} from '../../../../services/balance.service';
 import {CurrencyPipe} from '@angular/common'
 import {DecimalPipe} from '@angular/common'
 import {ProyectosService} from '../../../../services/proyectos.service';
-
+import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 
 
 
@@ -24,6 +24,7 @@ export class OperacionComponent implements OnInit {
   auxiliaresAnteriores=[];
   auxiliarC=[];
   opne:boolean=false;
+  openAll:boolean=false;
   almacenArticuloTerm:boolean=false;
   presGlobalVentas:boolean=false;
   presGlobalProduccion:boolean=false;
@@ -77,6 +78,36 @@ export class OperacionComponent implements OnInit {
        return producto.precioVenta;
     }
     return 0;
+  }
+
+
+  cerrarTodo(){
+      this.almacenArticuloTerm=false;
+      this.presGlobalVentas=false;
+      this.presGlobalProduccion=false;
+      this.presGlobalConsumoMP=false;
+      this.presGlobalComprasMP=false;
+      this.presGlobalCostoTrans=false;
+      this.presGlobalCostoDist=false;
+      this.presGlobalCostoAdmon=false;
+      this.presGlobalCostoVenta=false;
+      this.presOtrosGastos=false;
+
+  }
+
+  abrirTodo(){
+    this.openAll=true;
+    this.almacenArticuloTerm=true;
+    this.presGlobalVentas=true;
+    this.presGlobalProduccion=true;
+    this.presGlobalConsumoMP=true;
+    this.presGlobalComprasMP=true;
+    this.presGlobalCostoTrans=true;
+    this.presGlobalCostoDist=true;
+    this.presGlobalCostoAdmon=true;
+    this.presGlobalCostoVenta=true;
+    this.presOtrosGastos=true;
+
   }
 
   getMPPuniProd(id:number){
@@ -304,6 +335,33 @@ export class OperacionComponent implements OnInit {
 
     }
 
+
+  CSValmacenArticuloTerminado(){
+    let data:any=[
+      {prodcuto:"Producto",
+       unidades:"Unidades",
+       costoProd:"Costo de Producción",
+       total:"Total"
+      }
+    ];
+
+    for(let producto of this.auxiliaresAnteriores){
+      data.push({
+        prodcuto:producto.Producto_idProducto,
+         unidades:producto.unidadesAlmacenadas,
+         costoProd:producto.inventarioFinal / producto.unidadesAlmacenadas,
+         total:producto.inventarioFinal
+      })
+    }
+
+    new Angular2Csv(data, 'Almacen de Articulo Terminado');
+  }
+
+
+
+
+
+
   PDFpresupuestoGlobalComprasMP(){
     var doc= new jsPDF({
     orientation: 'landscape',
@@ -355,6 +413,29 @@ export class OperacionComponent implements OnInit {
     doc.save("Presupuesto Global de Compras de Materia Prima.pdf");
 
 
+
+    }
+    CSVpresupuestoGlobalComprasMP(){
+      let data=[
+        {
+          material:"Material",
+          cantidadComprar:"Cantidad a Comprar",
+          costoUni:"Costo Unitario",
+          importe:"Importe",
+          ivaA:"Iva Acreditable",
+          total:"Total"
+        },
+        {
+          material:1,
+          cantidadComprar:this.getUniMPTotal(),
+          costoUni:"69",
+          importe:this.getUniMPTotalCash(),
+          ivaA:this.getIVAMP(),
+          total:this.getTotalMP()
+        }
+      ];
+
+      new Angular2Csv(data, 'Presupuesto Global de Compras');
 
     }
 
@@ -428,6 +509,34 @@ export class OperacionComponent implements OnInit {
 
       }
 
+  CSVpresupuestoGlobalConsumoMP(){
+
+    let data:any=[
+    {
+      producto:"Producto",
+      cantidadUnit:"Cantidad Unitaria",
+      costoUni:"Costo Unitario",
+      unidadProd:"Unidades Producidas",
+      cantidad:"Cantidad",
+      importe:"Importe"
+    }];
+
+    for(let producto of this.auxiliares){
+      data.push(
+        {
+          producto:producto.Producto_idProducto,
+          cantidadUnit:producto.Producto_idProducto,
+          costoUni:producto.Producto_idProducto,
+          unidadProd:producto.unidadesProducidas,
+          cantidad:producto.Producto_idProducto*producto.unidadesProducidas,
+          importe:producto.Producto_idProducto*(this.getUniMP(producto.Producto_idProducto) * producto.unidadesProducidas)
+        }
+      )
+    }
+    new Angular2Csv(data, 'Presupuesto Global de Consumo de Materia Prima');
+
+  }
+
 
   PDFpresupuestoGlobalVentasIVA(){
     var doc= new jsPDF({
@@ -494,6 +603,47 @@ export class OperacionComponent implements OnInit {
     });
 
     doc.save("Presupuesto Global de Ventas e IVA.pdf");
+
+
+
+    }
+
+
+    CSVpresupuestoGlobalVentasIVA(){
+      let data:any=[
+        {
+          cara:""
+        },
+        {
+          cara:"Unidades a Vender"
+        },
+        {
+          cara:"Precio de Venta"
+        },
+        {
+          cara:"Venta en $"
+        },
+        {
+          cara:"IVA"
+        },
+        {
+          cara:"Importe"
+        }
+      ];
+
+
+      for(let producto of this.auxiliares){
+        data[0][this.getNameByIdProducto(producto.Producto_idProducto)]=this.getNameByIdProducto(producto.Producto_idProducto);
+        data[1][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.unidadesVendidas;
+        data[2][this.getNameByIdProducto(producto.Producto_idProducto)]=this.getPrecioVenta(producto.Producto_idProducto);
+        data[3][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.Ventas - producto.IVAxVentas;
+        data[4][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.IVAxVentas;
+        data[5][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.Ventas;
+      }
+
+      new Angular2Csv(data, 'Presupuesto Global de Ventas e IVA');
+
+
 
 
 
@@ -575,6 +725,48 @@ export class OperacionComponent implements OnInit {
       }
 
 
+      CSVpresupuestoGlobalProduccion(){
+
+
+        let data:any=[
+          {
+            producto:"Producto",
+            unidadesVender:"Unidades A Vender (+)",
+            invFinal:"Inventario Final (+)",
+            invInicial:"Inventario Inicial(-)",
+            unidadesProducir:"Unidades a Producir",
+            costUnitMP:"Costo Unitario (M.P.)",
+            cosTotalMP:"Costo Total (M.P.)",
+            costUnitTrans:"Costo Unitario (Trasnformación)",
+            cosTotalTrans:"Costo Total (Transformación)",
+            costProdUnit:"Costo de Producción Unitario",
+            costProdTot:"Costo de Producción Total"
+          }
+        ];
+
+
+        for(let producto of this.auxiliares){
+          data.push(
+            {
+              producto:producto.Producto_idProducto,
+              unidadesVender:producto.unidadesVendidas,
+              invFinal:producto.unidadesAlmacenadas,
+              invInicial:this.getUnidadesAlmacenadasAnterior(producto.Producto_idProducto),
+              unidadesProducir:producto.unidadesProducidas,
+              costUnitMP:this.getMPPuniProd(producto.Producto_idProducto),
+              cosTotalMP:producto.materiaCosumida,
+              costUnitTrans:((producto.costoTransformacionVentas + producto.costoTransformacionMaq)/producto.unidadesProducidas),
+              cosTotalTrans:(producto.costoTransformacionVentas + producto.costoTransformacionMaq),
+              costProdUnit:(this.getMPPuniProd(producto.Producto_idProducto) + (producto.costoTransformacionVentas + producto.costoTransformacionMaq)/producto.unidadesProducidas),
+              costProdTot:(producto.costoTransformacionVentas + producto.costoTransformacionMaq + producto.materiaCosumida)
+            }
+
+          )
+        }
+        new Angular2Csv(data, 'Presupuesto Global de Producción');
+      }
+
+
 
   PDFpresupuestoGlobalCostoTrans(){
   var doc= new jsPDF({
@@ -651,6 +843,39 @@ export class OperacionComponent implements OnInit {
   doc.save("Presupuesto Global de Costo de Trasnformacion.pdf");
 
 
+
+  }
+
+  CSVpresupuestoGlobalCostoTrans(){
+    let data:any=[
+      {cara:""},
+      {cara:"Unidades a Producir"},
+      {cara:"Costo de Transformación"},
+      {cara:"Menos: "},
+      {cara:"Depreciaciones"},
+      {cara:"Neto"},
+      {cara:"Menos partidas que no incluyen I.V.A."},
+      {cara:"Sueldos y Salarios"},
+      {cara:"Previsión Social"},
+      {cara:"Neto"},
+      {cara:"I.V.A."},
+      {cara:"Total a Pagar"},
+    ];
+
+    for(let producto of this.auxiliares){
+      data[0][this.getNameByIdProducto(producto.Producto_idProducto)]=this.getNameByIdProducto(producto.Producto_idProducto);
+      data[1][this.getNameByIdProducto(producto.Producto_idProducto)]=((producto.costoTransformacionVentas + producto.costoTransformacionMaq )/ producto.unidadesProducidas);
+      data[2][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.costoTransformacionMaq
+      data[4][this.getNameByIdProducto(producto.Producto_idProducto)]= producto.costoTransformacionMaq ;
+      data[5][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.costoTransformacionVentas
+      data[7][this.getNameByIdProducto(producto.Producto_idProducto)]=0
+      data[8][this.getNameByIdProducto(producto.Producto_idProducto)]=0
+      data[9][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.costoTransformacionVentas
+      data[10][this.getNameByIdProducto(producto.Producto_idProducto)]=-producto.IVATrans;
+      data[11][this.getNameByIdProducto(producto.Producto_idProducto)]=(producto.costoTransformacionVentas - producto.IVATrans);
+    }
+
+    new Angular2Csv(data, 'Presupuesto Global de Costo de Trasnformación');
 
   }
 
@@ -735,6 +960,40 @@ export class OperacionComponent implements OnInit {
 
     }
 
+    CSVpresupuestoGlobalCostoDist(){
+      let data:any=[
+        {cara:""},
+        {cara:"Unidades a Vender"},
+        {cara:"Costo Unitario Total"},
+        {cara:"Costo de Distribución"},
+        {cara:"Menos: "},
+        {cara:"Depreciaciones"},
+        {cara:"Neto"},
+        {cara:"Menos partidas que no incluyen I.V.A."},
+        {cara:"Sueldos y Salarios"},
+        {cara:"Previsión Social"},
+        {cara:"Neto"},
+        {cara:"I.V.A."},
+        {cara:"Total a Pagar"},
+      ];
+
+      for(let producto of this.auxiliares){
+        data[0][this.getNameByIdProducto(producto.Producto_idProducto)]=this.getNameByIdProducto(producto.Producto_idProducto);
+        data[1][this.getNameByIdProducto(producto.Producto_idProducto)]=(producto.costoDistribucion / producto.unidadesVendidas);
+        data[2][this.getNameByIdProducto(producto.Producto_idProducto)]= producto.costoDistribucion;
+        data[5][this.getNameByIdProducto(producto.Producto_idProducto)]=(producto.costoDistribucion - producto.costoDistDep)
+        data[6][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.costoDistDep
+        data[8][this.getNameByIdProducto(producto.Producto_idProducto)]=0
+        data[9][this.getNameByIdProducto(producto.Producto_idProducto)]=0
+        data[10][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.costoDistDep;
+        data[11][this.getNameByIdProducto(producto.Producto_idProducto)]=-producto.IVADist;
+        data[12][this.getNameByIdProducto(producto.Producto_idProducto)]=(producto.costoDistDep - producto.IVADist)
+      }
+
+      new Angular2Csv(data, 'Presupuesto Global de Costo de Distribución');
+
+    }
+
 
     PDFpresupuestoGlobalCostoAdmin(){
       var doc= new jsPDF({
@@ -816,6 +1075,42 @@ export class OperacionComponent implements OnInit {
       }
 
 
+      CSVpresupuestoGlobalCostoAdmin(){
+
+        let data:any=[
+          {cara:""},
+          {cara:"Unidades a Vender"},
+          {cara:"Costo Unitario Total"},
+          {cara:"Costo de Administración"},
+          {cara:"Menos: "},
+          {cara:"Depreciaciones"},
+          {cara:"Neto"},
+          {cara:"Menos partidas que no incluyen I.V.A."},
+          {cara:"Sueldos y Salarios"},
+          {cara:"Previsión Social"},
+          {cara:"Neto"},
+          {cara:"I.V.A."},
+          {cara:"Total a Pagar"},
+        ];
+
+        for(let producto of this.auxiliares){
+          data[0][this.getNameByIdProducto(producto.Producto_idProducto)]=this.getNameByIdProducto(producto.Producto_idProducto);
+          data[1][this.getNameByIdProducto(producto.Producto_idProducto)]=(producto.costoAdministrativo/producto.unidadesVendidas );
+          data[2][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.costoAdministrativo ;
+          data[5][this.getNameByIdProducto(producto.Producto_idProducto)]=(producto.costoAdministrativo - producto.costoAdminDep)
+          data[6][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.costoAdminDep
+          data[8][this.getNameByIdProducto(producto.Producto_idProducto)]=0
+          data[9][this.getNameByIdProducto(producto.Producto_idProducto)]=0
+          data[10][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.costoAdminDep;
+          data[11][this.getNameByIdProducto(producto.Producto_idProducto)]=-producto.IVAAdmon;
+          data[12][this.getNameByIdProducto(producto.Producto_idProducto)]=(producto.costoAdminDep - producto.IVAAdmon);
+        }
+
+        new Angular2Csv(data, 'Presupuesto Global de Costo de Administración');
+
+      }
+
+
 
       PDFpresupuestoGlobalOtrosGastos(){
         var doc= new jsPDF({
@@ -886,6 +1181,22 @@ export class OperacionComponent implements OnInit {
 
 
         }
+
+
+      CSVpresupuestoGlobalOtrosGastos(){
+        let data=[
+          {cara:""},
+          {cara:"Desarrollo de Producto"},
+          {cara:"Desarrollo de Mercado"}
+        ];
+
+        data[0]["total"]="Total";
+        data[1]["total"]=this.getTotalProducto();
+        data[2]["total"]=this.getTotalMercado();
+
+        new Angular2Csv(data, 'Presupuesto Global de Costo de Administración');
+
+      }
 
 
         PDFcostoProduccionVentas(){
@@ -960,6 +1271,37 @@ export class OperacionComponent implements OnInit {
 
 
           }
+
+
+          CSVcostoProduccionVentas(){
+            let data=[
+              {"cara":"I.I de Materia Prima"},
+              {"cara":"Compras"},
+              {"cara":"I.F. de Materia prima"},
+              {"cara":"Materia prima consumida"},
+              {"cara":"Mano de Obra y Gastos I.P."},
+              {"cara":"Costo de Producción"},
+              {"cara":"I.I. de Producto Terminado" },
+              {"cara":"I.F. de Producto Terminado" },
+              {"cara":"Costo de Ventas"}
+            ];
+
+            for(let producto of this.auxiliares){
+              data[0][this.getNameByIdProducto(producto.Producto_idProducto)]=0
+              data[1][this.getNameByIdProducto(producto.Producto_idProducto)]=0
+              data[2][this.getNameByIdProducto(producto.Producto_idProducto)]=0
+              data[3][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.materiaCosumida
+              data[4][this.getNameByIdProducto(producto.Producto_idProducto)]=(producto.costoTransformacionVentas + producto.costoTransformacionMaq)
+              data[5][this.getNameByIdProducto(producto.Producto_idProducto)]= (producto.materiaCosumida + producto.costoTransformacionVentas + producto.costoTransformacionMaq)
+              data[6][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.inventarioInicia
+              data[7][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.inventarioFinal
+              data[8][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.costoVentas
+            }
+            new Angular2Csv(data, 'Presupuesto Global de Producion y Ventas');
+
+
+          }
+
 
 
 

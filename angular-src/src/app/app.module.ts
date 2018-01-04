@@ -137,7 +137,7 @@ import { FlujoComponent } from './components/usuario/proyecto-usuario/flujo/fluj
     TabsModule.forRoot(),
     app_routing,
     CurrencyMaskModule,
-    NglModule.forRoot(),
+    NglModule.forRoot({svgPath: '../assets/icons'}),
     AccordionModule.forRoot(),
     NgbModule.forRoot(),
     PaginationModule.forRoot(),

@@ -1,27 +1,44 @@
-<h3 class="text-center">Resultados de Operacion</h3>
+<div class="row container">
+  <h3 class="text-center  col-4 offset-4">Resultados de Operacion</h3>
+  <div class="col-4">
+    <div class="row">
+      <button type="button" class="btn btn-primary offset-1 col-5 " (click)="abrirTodo()" >Abrir Todo</button>
+      <button type="button" class="btn btn-primary offset-1 col-5" (click)="cerrarTodo()">Cerrar Todo</button>
+    </div>
+  </div>
+
+
+</div>
+
+
+<div class="row container">
+  <hr style="margin-bottom:20px">
+</div>
 
 
 
 
 
-<div class="col-10 offset-1" style="margin-bottom:30px">
+
+
+<div class="col-10 offset-1" style="margin-bottom:20px">
   <ngl-section [(open)]="almacenArticuloTerm" title="Almacen de Articulo Terminado">
     <div class="row">
-      <div class="offset-3">
-        <table class="table table-bordered table-responsive">
+      <div class="offset-2 col-8  ">
+        <table class="table table-bordered ">
 
           <tbody>
             <tr>
               <th class="text-center">Producto</th>
               <th class="text-center">Unidades</th>
-              <th class="text-center">Costo de Producción</th>
+              <th class="text-center" style="width:100px">Costo de Producción</th>
               <th class="text-center">TOTAL</th>
             </tr>
 
             <tr *ngFor="let producto of auxiliaresAnteriores">
               <td>{{getNameByIdProducto(producto.Producto_idProducto)}}</td>
               <td class="text-right">{{producto.unidadesAlmacenadas}}</td>
-              <td class="text-right">{{getCostoAlmacen() |currency:'USD':true:'1.0-0'}}</td>
+              <td class="text-right" style="width:100px">{{getCostoAlmacen() |currency:'USD':true:'1.0-0'}}</td>
               <td class="text-right">{{producto.inventarioFinal |currency:'USD':true:'1.0-0'}}</td>
             </tr>
 
@@ -31,12 +48,17 @@
     </div>
 
     <div class="row align-items-center" style="margin-bottom:20px">
-      <div class="offset-8 col-1">
+      <div class="offset-6 col-1">
         Exportar:
       </div>
-      <div class="col-2">
-        <button type="button" class="btn btn-danger" (click)="PDFalmacenArticuloTerminado()">PDF</button>
+      <div class="col-1">
+        <ngl-icon icon="pdf" category="doctype" (click)="PDFalmacenArticuloTerminado()" size="large" style="cursor:pointer"></ngl-icon>
       </div>
+
+      <div class="col-1">
+        <ngl-icon icon="csv" category="doctype" (click)="CSValmacenArticuloTerminado()" size="large" style="cursor:pointer" ></ngl-icon>
+      </div>
+
     </div>
 
 
@@ -44,12 +66,11 @@
 </div>
 
 
-<div class="col-10 offset-1">
+<div class="col-10 offset-1" style="margin-bottom:20px">
   <ngl-section [(open)]="presGlobalVentas" title="Presupuesto Global de Ventas e IVA">
     <div class="row">
-      <div class="offset-2">
-        <table class="table table-bordered table-responsive">
-
+      <div class="col-10 offset-1">
+        <table class="table table-bordered">
           <tbody>
             <tr>
               <th class="text-center">Producto</th>
@@ -72,15 +93,22 @@
           </tbody>
         </table>
       </div>
+
     </div>
 
 
     <div class="row align-items-center" style="margin-bottom:20px">
-      <div class="offset-8 col-1">
+      <div class="offset-6 col-1">
         Exportar:
       </div>
-      <div class="col-2">
-        <button type="button" class="btn btn-danger" (click)=" PDFpresupuestoGlobalVentasIVA()">PDF</button>
+
+      <div class="col-1">
+        <ngl-icon icon="pdf" category="doctype" (click)=" PDFpresupuestoGlobalVentasIVA()" size="large" style="cursor:pointer"></ngl-icon>
+      </div>
+
+
+      <div class="col-1">
+        <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalVentasIVA()" size="large" style="cursor:pointer"></ngl-icon>
       </div>
     </div>
 
@@ -91,7 +119,7 @@
 </div>
 
 
-<div class="col-10 offset-1">
+<div class="col-10 offset-1" style="margin-bottom:20px">
   <ngl-section [(open)]="presGlobalProduccion" title="´Presupuesto Global de Producción">
     <div class="">
       <table class="table table-bordered table-responsive">
@@ -136,13 +164,20 @@
     </div>
 
 
-        <div class="row align-items-center" style="margin-bottom:20px">
-          <div class="offset-8 col-1">
+        <div class="row align-items-center" style="margin-bottom:20px" >
+          <div class="offset-6 col-1">
             Exportar:
           </div>
-          <div class="col-2">
-            <button type="button" class="btn btn-danger" (click)=" PDFpresupuestoGlobalProduccion()">PDF</button>
+
+          <div class="col-1">
+            <ngl-icon icon="pdf" category="doctype" (click)=" PDFpresupuestoGlobalProduccion()" size="large" style="cursor:pointer"></ngl-icon>
           </div>
+
+
+          <div class="col-1">
+            <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalProduccion()" size="large" style="cursor:pointer"></ngl-icon>
+          </div>
+
         </div>
 
 
@@ -154,10 +189,10 @@
 
 
 
-<div class="col-10 offset-1">
+<div class="col-10 offset-1" style="margin-bottom:20px">
   <ngl-section [(open)]="presGlobalConsumoMP" title="Presupuesto Global de Consumo de Materias Primas">
-    <div class="offset-2">
-      <table class="table table-bordered table-responsive">
+    <div class="offset-1 col-10">
+      <table class="table table-bordered ">
 
         <tbody>
           <tr>
@@ -186,12 +221,16 @@
 
 
         <div class="row align-items-center" style="margin-bottom:20px">
-          <div class="offset-8 col-1">
+          <div class="offset-6 col-1">
             Exportar:
           </div>
-          <div class="col-2">
-            <button type="button" class="btn btn-danger" (click)="PDFpresupuestoGlobalConsumoMP()">PDF</button>
+          <div class="col-1">
+            <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalConsumoMP()" size="large" style="cursor:pointer"></ngl-icon>
           </div>
+          <div class="col-1">
+            <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalConsumoMP()" size="large" style="cursor:pointer"></ngl-icon>
+          </div>
+
         </div>
 
 
@@ -201,11 +240,11 @@
 
 
 
-<div class="col-10 offset-1">
+<div class="col-10 offset-1" style="margin-bottom:20px">
   <ngl-section [(open)]="presGlobalComprasMP" title="Presupuesto Global Compras de Materias Primas e IVA">
     <div class="row">
-      <div class="offset-2">
-        <table class="table table-bordered table-responsive">
+      <div class="offset-2 col-8">
+        <table class="table table-bordered">
           <tbody>
             <tr>
               <th class="text-center align-middle" >Materiales </th>
@@ -236,11 +275,15 @@
     </div>
 
     <div class="row align-items-center" style="margin-bottom:20px">
-      <div class="offset-8 col-1">
+      <div class="offset-6 col-1">
         Exportar:
       </div>
-      <div class="col-2">
-        <button type="button" class="btn btn-danger" (click)="PDFpresupuestoGlobalComprasMP()">PDF</button>
+      <div class="col-1">
+        <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalComprasMP()" size="large" style="cursor:pointer"></ngl-icon>
+      </div>
+
+      <div class="col-1">
+        <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalComprasMP()" size="large" style="cursor:pointer"></ngl-icon>
       </div>
     </div>
 
@@ -251,7 +294,7 @@
 
 
 
-<div class="col-10 offset-1">
+<div class="col-10 offset-1" style="margin-bottom:20px">
   <ngl-section [(open)]="presGlobalCostoTrans" title="Presupuesto Global de Costo de Transformación">
   <div class="row">
     <div class="col-12">
@@ -299,11 +342,15 @@
 
 
   <div class="row align-items-center" style="margin-bottom:20px">
-    <div class="offset-8 col-1">
+    <div class="offset-6 col-1">
       Exportar:
     </div>
-    <div class="col-2">
-      <button type="button" class="btn btn-danger" (click)="PDFpresupuestoGlobalCostoTrans()">PDF</button>
+    <div class="col-1">
+      <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalCostoTrans()" size="large" style="cursor:pointer"></ngl-icon>
+    </div>
+
+    <div class="col-1">
+      <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalCostoTrans()" size="large" style="cursor:pointer"></ngl-icon>
     </div>
   </div>
 
@@ -314,7 +361,7 @@
 
 
 
-<div class="col-10 offset-1">
+<div class="col-10 offset-1" style="margin-bottom:20px">
   <ngl-section [(open)]="presGlobalCostoDist" title="Presupuesto Global de Costo de Distribución">
     <div class="offset-2">
       <table class="table table-bordered table-responsive ">
@@ -394,18 +441,30 @@
 
 
     <div class="row align-items-center" style="margin-bottom:20px">
-      <div class="offset-8 col-1">
+      <div class="offset-6 col-1">
         Exportar:
       </div>
-      <div class="col-2">
-        <button type="button" class="btn btn-danger" (click)="PDFpresupuestoGlobalCostoDist()">PDF</button>
+
+      <div class="col-1">
+        <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalCostoDist()" size="large" style="cursor:pointer"></ngl-icon>
       </div>
+
+
+
+
+      <div class="col-1">
+        <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalCostoDist()" size="large" style="cursor:pointer"></ngl-icon>
+      </div>
+
+
+
+
     </div>
 
   </ngl-section>
 </div>
 
-<div class="col-10 offset-1">
+<div class="col-10 offset-1" style="margin-bottom:20px">
   <ngl-section [(open)]="presGlobalCostoAdmon" title="Presupuesto Global de Costo de Administración">
     <div class="offset-2">
 
@@ -486,18 +545,25 @@
 
 
     <div class="row align-items-center" style="margin-bottom:20px">
-      <div class="offset-8 col-1">
+      <div class="offset-6 col-1">
         Exportar:
       </div>
-      <div class="col-2">
-        <button type="button" class="btn btn-danger" (click)="PDFpresupuestoGlobalCostoAdmin()">PDF</button>
+
+      <div class="col-1">
+        <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalCostoAdmin()" size="large" style="cursor:pointer"></ngl-icon>
       </div>
+
+
+      <div class="col-1">
+        <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalCostoAdmin()" size="large" style="cursor:pointer"></ngl-icon>
+      </div>
+
     </div>
 
   </ngl-section>
 </div>
 
-<div class="col-10 offset-1">
+<div class="col-10 offset-1" style="margin-bottom:20px">
   <ngl-section [(open)]="presOtrosGastos" title="Presupuesto Global de Otros Gastos">
     <div class="offset-2">
       <table class="table table-bordered table-responsive ">
@@ -531,9 +597,16 @@
       <div class="offset-8 col-1">
         Exportar:
       </div>
-      <div class="col-2">
-        <button type="button" class="btn btn-danger" (click)="PDFpresupuestoGlobalOtrosGastos()">PDF</button>
+
+      <div class="col-1">
+        <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalOtrosGastos()" size="large" style="cursor:pointer"></ngl-icon>
       </div>
+
+
+      <div class="col-1">
+        <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalOtrosGastos()" size="large" style="cursor:pointer"></ngl-icon>
+      </div>
+
     </div>
 
 
@@ -541,7 +614,7 @@
 </div>
 
 
-<div class="col-10 offset-1">
+<div class="col-10 offset-1" style="margin-bottom:20px">
   <ngl-section [(open)]="presGlobalCostoVenta" title="Costo de Producción y Ventas">
     <div class="offset-2">
       <table class="table table-bordered table-responsive ">
@@ -594,8 +667,15 @@
           <div class="offset-8 col-1">
             Exportar:
           </div>
-          <div class="col-2">
-            <button type="button" class="btn btn-danger" (click)="PDFcostoProduccionVentas()">PDF</button>
+
+
+          <div class="col-1">
+            <ngl-icon icon="pdf" category="doctype" (click)="PDFcostoProduccionVentas()" size="large" style="cursor:pointer" ></ngl-icon>
+          </div>
+
+
+          <div class="col-1">
+            <ngl-icon icon="csv" category="doctype" (click)="CSVcostoProduccionVentas()" size="large" style="cursor:pointer"></ngl-icon>
           </div>
         </div>
 

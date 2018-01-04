@@ -323,159 +323,169 @@ export class FlujoComponent implements OnInit {
 
       });
 
-      var dataCSV = [
-      {
-        concepto: "Presupuesto Global de Caja y Bancos",
-        cantidad:"",
-
-      },
-      {
-        concepto: "",
-        cantidad:"",
-
-      },
-      {
-        concepto: "Saldo Inicial",
-        cantidad:this.getCajaBancos(),
-
-      },
-      {
-        concepto: "Entradas",
-        cantidad:"",
-
-      },
-      {
-        concepto: "Cobro por Ventas",
-        cantidad:this.getCobroVentas(),
-
-      },
-      {
-        concepto: "Préstamos",
-        cantidad:this.getPAcuales(),
-
-      },
-      {
-        concepto: "Intereses",
-        cantidad:"",
-
-      },
-      {
-        concepto: "Incremento de Capital",
-        cantidad:"",
-
-      },
-      {
-        concepto: "",
-        cantidad:"",
-
-      },
-      {
-        concepto: "Disponible",
-        cantidad:this.getDisponible(),
-
-      },
-      {
-        concepto: "",
-        cantidad:"",
-
-      },
-      {
-        concepto: "Salidas",
-        cantidad:"",
-
-      },
-      {
-        concepto: "Costo de Trasformación",
-        cantidad:this.getCostoDeTransformacion(),
-      },
-      {
-        concepto: "Costo de Distribución",
-        cantidad:this.getCostoDeDistribucion(),
-
-      },
-      {
-        concepto: "Costo Administrativo",
-        cantidad:this.getCostoAdministrativo(),
-
-      },
-      {
-        concepto: "Costo de Venta",
-        cantidad:this.getGastosVenta(),
-
-      },
-      {
-        concepto: "Compra de Maquinaria",
-        cantidad:this.getCompraMaquinaria(),
-
-      },
-      {
-        concepto: "Compras",
-        cantidad:this.getCompras(),
-
-      },
-      {
-        concepto: "Intereses",
-        cantidad:this.getIntereses(),
-
-      },
-      {
-        concepto: "Pago de Prestamos",
-        cantidad:this.getPagos(),
-
-      },
-      {
-        concepto: "Dividendos",
-        cantidad:"",
-
-      },
-      {
-        concepto: "",
-        cantidad:"",
-
-      },
-      {
-        concepto: "PTU",
-        cantidad:this.getPTU(),
-
-      },
-      {
-        concepto: "ISR",
-        cantidad:this.getISR(),
-
-      },
-      {
-        concepto: "IVA",
-        cantidad:this.getIVA(),
-
-      },
-      {
-        concepto: "",
-        cantidad:"",
-
-      },
-
-      {
-        concepto: "Total de Salidas",
-        cantidad:this.getSalidas(),
-
-      },
-      {
-        concepto: "Saldo Final",
-        cantidad:this.getCajaBancosFinal(),
-
-      },
-      {
-        concepto: "",
-        cantidad:"",
-
-      },
-    ];
 
       doc.save("Flujo de Efectivo.pdf");
-      new Angular2Csv(dataCSV, 'Flujo de Efectivo');
+
 
 
       }
+
+
+      descargaCSV(){
+        var dataCSV = [
+        {
+          concepto: "Presupuesto Global de Caja y Bancos",
+          cantidad:"",
+
+        },
+        {
+          concepto: "",
+          cantidad:"",
+
+        },
+        {
+          concepto: "Saldo Inicial",
+          cantidad:this.getCajaBancos(),
+
+        },
+        {
+          concepto: "Entradas",
+          cantidad:"",
+
+        },
+        {
+          concepto: "Cobro por Ventas",
+          cantidad:this.getCobroVentas(),
+
+        },
+        {
+          concepto: "Préstamos",
+          cantidad:this.getPAcuales(),
+
+        },
+        {
+          concepto: "Intereses",
+          cantidad:"",
+
+        },
+        {
+          concepto: "Incremento de Capital",
+          cantidad:"",
+
+        },
+        {
+          concepto: "",
+          cantidad:"",
+
+        },
+        {
+          concepto: "Disponible",
+          cantidad:this.getDisponible(),
+
+        },
+        {
+          concepto: "",
+          cantidad:"",
+
+        },
+        {
+          concepto: "Salidas",
+          cantidad:"",
+
+        },
+        {
+          concepto: "Costo de Trasformación",
+          cantidad:this.getCostoDeTransformacion(),
+        },
+        {
+          concepto: "Costo de Distribución",
+          cantidad:this.getCostoDeDistribucion(),
+
+        },
+        {
+          concepto: "Costo Administrativo",
+          cantidad:this.getCostoAdministrativo(),
+
+        },
+        {
+          concepto: "Costo de Venta",
+          cantidad:this.getGastosVenta(),
+
+        },
+        {
+          concepto: "Compra de Maquinaria",
+          cantidad:this.getCompraMaquinaria(),
+
+        },
+        {
+          concepto: "Compras",
+          cantidad:this.getCompras(),
+
+        },
+        {
+          concepto: "Intereses",
+          cantidad:this.getIntereses(),
+
+        },
+        {
+          concepto: "Pago de Prestamos",
+          cantidad:this.getPagos(),
+
+        },
+        {
+          concepto: "Dividendos",
+          cantidad:"",
+
+        },
+        {
+          concepto: "",
+          cantidad:"",
+
+        },
+        {
+          concepto: "PTU",
+          cantidad:this.getPTU(),
+
+        },
+        {
+          concepto: "ISR",
+          cantidad:this.getISR(),
+
+        },
+        {
+          concepto: "IVA",
+          cantidad:this.getIVA(),
+
+        },
+        {
+          concepto: "",
+          cantidad:"",
+
+        },
+
+        {
+          concepto: "Total de Salidas",
+          cantidad:this.getSalidas(),
+
+        },
+        {
+          concepto: "Saldo Final",
+          cantidad:this.getCajaBancosFinal(),
+
+        },
+        {
+          concepto: "",
+          cantidad:"",
+
+        },
+      ];
+
+        new Angular2Csv(dataCSV, 'Flujo de Efectivo');
+
+      }
+
+
+
 
 
 }
