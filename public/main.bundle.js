@@ -10347,17 +10347,19 @@ var ProyectosService = (function () {
             }
         });
         this._usuarioProductoService.getProductosNU(idUsuario).subscribe(function (data) {
-            for (var key$ in data.datos) {
-                var x = {
-                    Proyectos_idProyecto: idProyecto,
-                    Productos_idProducto: data.datos[key$].idProducto,
-                    desarrollado: 0,
-                    periodoInicio: 0,
-                    ultimoPeriodoDes: 0,
-                    periodosDes: 0
-                };
-                _this._desarrolloProductoService.desarrollar(x).subscribe();
-            }
+            console.log(data);
+            // for(let key$ in data.datos){
+            //   var x = {
+            //     Proyectos_idProyecto:idProyecto,
+            //     Productos_idProducto:data.datos[key$].idProducto,
+            //     desarrollado:0,
+            //     periodoInicio:0,
+            //     ultimoPeriodoDes:0,
+            //     periodosDes:0
+            //   }
+            //
+            //   this._desarrolloProductoService.desarrollar(x).subscribe();
+            // }
         });
     };
     ProyectosService.prototype.entrar = function () {
