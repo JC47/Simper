@@ -24,6 +24,7 @@ export class OperacionComponent implements OnInit {
   auxiliaresAnteriores=[];
   auxiliarC=[];
   opne:boolean=false;
+  openAll:boolean=false;
   almacenArticuloTerm:boolean=false;
   presGlobalVentas:boolean=false;
   presGlobalProduccion:boolean=false;
@@ -77,6 +78,36 @@ export class OperacionComponent implements OnInit {
        return producto.precioVenta;
     }
     return 0;
+  }
+
+
+  cerrarTodo(){
+      this.almacenArticuloTerm=false;
+      this.presGlobalVentas=false;
+      this.presGlobalProduccion=false;
+      this.presGlobalConsumoMP=false;
+      this.presGlobalComprasMP=false;
+      this.presGlobalCostoTrans=false;
+      this.presGlobalCostoDist=false;
+      this.presGlobalCostoAdmon=false;
+      this.presGlobalCostoVenta=false;
+      this.presOtrosGastos=false;
+
+  }
+
+  abrirTodo(){
+    this.openAll=true;
+    this.almacenArticuloTerm=true;
+    this.presGlobalVentas=true;
+    this.presGlobalProduccion=true;
+    this.presGlobalConsumoMP=true;
+    this.presGlobalComprasMP=true;
+    this.presGlobalCostoTrans=true;
+    this.presGlobalCostoDist=true;
+    this.presGlobalCostoAdmon=true;
+    this.presGlobalCostoVenta=true;
+    this.presOtrosGastos=true;
+
   }
 
   getMPPuniProd(id:number){

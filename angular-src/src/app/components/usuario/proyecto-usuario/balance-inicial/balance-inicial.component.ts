@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ResultadosService} from '../../../../services/resultados.service';
 import {ProyectosService} from '../../../../services/proyectos.service';
 import { CurrencyPipe } from '@angular/common';
+import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 
 declare var jsPDF: any;
 @Component({
@@ -292,6 +293,109 @@ doc.text(255, 44+anchCell*18+46,  this.cp.transform(tr,'USD',true,'1.0-0'), null
 doc.line(235, mar+0+anchCell*18+46, 255, mar+anchCell*18+46);
 
 doc.save("Balance Inicial.pdf")
+  }
+
+
+  descargaCSV(){
+
+    let cajaBancos,
+        cuentasPorCobrar,
+        IVAAcreditable,
+        almacenArtTerm,
+        almacenMateriales,
+        terreno,
+        maqEquipo,
+        edificios,
+        mueblesEnseres,
+        equipoTrans,
+        pagosAnticipado,
+        gastosAmortizacion,
+        IVAPorEnterar,
+        imptosPorPagar,
+        proveedores,
+        PTUPorPagar,
+        prestamosMenosAnio,
+        prestamosMasAnio,
+        capitalSocial,
+        reservaLegal,
+        utilidadAcum,
+        depMaqEquipo,
+        depEdif,
+        depTerreno,
+        depEqTrans,
+        depMueblesEnseres,
+        utilidadEjercicio;
+        let total1=cajaBancos + cuentasPorCobrar + IVAAcreditable + almacenArtTerm + almacenMateriales
+        let total2=terreno + edificios + mueblesEnseres + equipoTrans + maqEquipo - depMaqEquipo - depEdif - depMueblesEnseres -depEqTrans
+        let sumaDerechos=pagosAnticipado + gastosAmortizacion + terreno
+          + edificios + mueblesEnseres + equipoTrans + maqEquipo
+          + cajaBancos + cuentasPorCobrar + IVAAcreditable + almacenArtTerm
+          + almacenMateriales - depMaqEquipo - depEdif - depMueblesEnseres -depEqTrans;
+      let total3=IVAPorEnterar + imptosPorPagar + proveedores + PTUPorPagar + prestamosMenosAnio
+
+
+
+
+    for(let balance of this.balanceInicial){
+      cajaBancos=balance.cajaBancos;
+      cuentasPorCobrar=balance.cuentasPorCobrar;
+      IVAAcreditable=balance.IVAAcreditable;
+      almacenArtTerm=balance.almacenArtTerm;
+      almacenMateriales=balance.almacenMateriales
+      terreno=balance.terreno;
+      edificios=balance.edifInsta;
+      maqEquipo=balance.maqEquipo;
+      mueblesEnseres=balance.mueblesEnseres;
+      equipoTrans=balance.eqTrans;
+      pagosAnticipado=balance.pagosAnticipado;
+      gastosAmortizacion=balance.gastosAmortizacion;
+      IVAPorEnterar=balance.IVAPorEnterar;
+      imptosPorPagar=balance.imptosPorPagar;
+      proveedores=balance.proveedores;
+      PTUPorPagar=balance.PTUPorPagar;
+      prestamosMenosAnio=balance.prestamosMenosAnio;
+      prestamosMasAnio=balance.prestamosMasAnio;
+      capitalSocial=balance.capitalSocial;
+      reservaLegal=balance.reservaLegal;
+      utilidadAcum=balance.utilidadAcum;
+      utilidadEjercicio=balance.utilidadEjercicio;
+      depMaqEquipo=balance.depMaqEquipo;
+      depEdif=balance.depEdif;
+      depTerreno=balance.depTerreno;
+      depEqTrans=balance.depEqTrans;
+      depMueblesEnseres=balance.depMueblesEnseres;
+    }
+
+    let data:any=[
+      {cara1:"A menos de un Año",             io:"", depAcum:"",  neto:"",    valor1:"",                                       cara2:"A menos de un año", valor2:""},
+      {cara1:"Caja Bancos",                   io:"", depAcum:"",  neto:"",    valor1:cajaBancos,                               cara2:"IVA por Enterar", valor2:IVAPorEnterar},
+      {cara1:"Cuentas por Cobrar",            io:"", depAcum:"",  neto:"",    valor1:cuentasPorCobrar,                         cara2:"Impuesto por Pagar", valor2:imptosPorPagar},
+      {cara1:"IVA Acreditable",               io:"", depAcum:"",  neto:"",    valor1:IVAAcreditable,                           cara2:"Proveedores", valor2:proveedores},
+      {cara1:"Almacen de Artículo Terminado", io:"", depAcum:"",  neto:"",    valor1:almacenArtTerm,                           cara2:"PTU por Pagar", valor2:PTUPorPagar},
+      {cara1:"Almacen de Materiales",         io:"", depAcum:"",  neto:"",    valor1:almacenMateriales,                        cara2:"Prestamos Bancarios", valor2:prestamosMenosAnio},
+      {cara1:"Total",                         io:"", depAcum:"",  neto:"",    valor1:total1,                                   cara2:"Total", valor2:total3},
+      {cara1:"A mas de un año",               io:"", depAcum:"",  neto:"",    valor1:"",                                       cara2:"A más de un Año", valor2:""},
+      {cara1:"",                              io:"", depAcum:"",  neto:"",    valor1:"",                                       cara2:"", valor2:""},
+      {cara1:"Terrenos",                      io:"", depAcum:"",  neto:"",    valor1:terreno,                                  cara2:"Prestamos Totales", valor2:prestamosMasAnio},
+      {cara1:"Edificios e Instalaciones",     io:"", depAcum:"",  neto:"",    valor1:edificios,                                cara2:"", valor2:""},
+      {cara1:"Maquinaria y Equipo",           io:"", depAcum:"",  neto:"",    valor1:maqEquipo,                                cara2:"", valor2:""},
+      {cara1:"Muebles y Enseres",             io:"", depAcum:"",  neto:"",    valor1:mueblesEnseres,                           cara2:"", valor2:""},
+      {cara1:"Equipo de Transporte",          io:"", depAcum:"",  neto:"",    valor1:equipoTrans,                              cara2:"", valor2:""},
+      {cara1:"Total",                         io:"", depAcum:"",  neto:"",    valor1:total2,                                   cara2:"Total", valor2:prestamosMasAnio},
+      {cara1:"De Aplicacion Difereida",       io:"", depAcum:"",  neto:"",    valor1:"",                                       cara2:"Con los Accionistas", valor2:""},
+      {cara1:"Pagos Hechos por Anticipado",   io:"", depAcum:"",  neto:"",    valor1:pagosAnticipado,                          cara2:"Capital Social", valor2:capitalSocial},
+      {cara1:"Gastos Por Amortizar",          io:"", depAcum:"",  neto:"",    valor1:gastosAmortizacion,                       cara2:"Reserva Legal", valor2:reservaLegal},
+      {cara1:"",                              io:"", depAcum:"",  neto:"",    valor1:"",                                       cara2:"Utilidad Acumulada", valor2:utilidadAcum},
+      {cara1:"",                              io:"", depAcum:"",  neto:"",    valor1:"",                                       cara2:"Utilidad del Ejercicio", valor2:utilidadEjercicio},
+
+      {cara1:"Total",                         io:"", depAcum:"",  neto:"",    valor1:pagosAnticipado + gastosAmortizacion,     cara2:"Total", valor2:""},
+      {cara1:"Suma de los Derechos",          io:"", depAcum:"",  neto:"",    valor1:sumaDerechos,                             cara2:"Suma de las Obligaciones", valor2:""}
+    ]
+
+      new Angular2Csv(data, 'Balance Final');
+
+
+
   }
 
 

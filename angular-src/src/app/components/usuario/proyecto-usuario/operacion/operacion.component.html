@@ -1,5 +1,21 @@
-<h3 class="text-center">Resultados de Operacion</h3>
-<hr style="margin-bottom:20px">
+<div class="row container">
+  <h3 class="text-center  col-4 offset-4">Resultados de Operacion</h3>
+  <div class="col-4">
+    <div class="row">
+      <button type="button" class="btn btn-primary offset-1 col-5 " (click)="abrirTodo()" >Abrir Todo</button>
+      <button type="button" class="btn btn-primary offset-1 col-5" (click)="cerrarTodo()">Cerrar Todo</button>
+    </div>
+  </div>
+
+
+</div>
+
+
+<div class="row container">
+  <hr style="margin-bottom:20px">
+</div>
+
+
 
 
 
@@ -36,11 +52,11 @@
         Exportar:
       </div>
       <div class="col-1">
-        <ngl-icon icon="pdf" category="doctype" (click)="PDFalmacenArticuloTerminado()" size="large"></ngl-icon>
+        <ngl-icon icon="pdf" category="doctype" (click)="PDFalmacenArticuloTerminado()" size="large" style="cursor:pointer"></ngl-icon>
       </div>
 
       <div class="col-1">
-        <ngl-icon icon="csv" category="doctype" (click)="CSValmacenArticuloTerminado()" size="large"></ngl-icon>
+        <ngl-icon icon="csv" category="doctype" (click)="CSValmacenArticuloTerminado()" size="large" style="cursor:pointer" ></ngl-icon>
       </div>
 
     </div>
@@ -87,12 +103,12 @@
       </div>
 
       <div class="col-1">
-        <ngl-icon icon="pdf" category="doctype" (click)=" PDFpresupuestoGlobalVentasIVA()" size="large"></ngl-icon>
+        <ngl-icon icon="pdf" category="doctype" (click)=" PDFpresupuestoGlobalVentasIVA()" size="large" style="cursor:pointer"></ngl-icon>
       </div>
 
 
       <div class="col-1">
-        <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalVentasIVA()" size="large"></ngl-icon>
+        <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalVentasIVA()" size="large" style="cursor:pointer"></ngl-icon>
       </div>
     </div>
 
@@ -154,12 +170,12 @@
           </div>
 
           <div class="col-1">
-            <ngl-icon icon="pdf" category="doctype" (click)=" PDFpresupuestoGlobalProduccion()" size="large"></ngl-icon>
+            <ngl-icon icon="pdf" category="doctype" (click)=" PDFpresupuestoGlobalProduccion()" size="large" style="cursor:pointer"></ngl-icon>
           </div>
 
 
           <div class="col-1">
-            <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalProduccion()" size="large"></ngl-icon>
+            <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalProduccion()" size="large" style="cursor:pointer"></ngl-icon>
           </div>
 
         </div>
@@ -209,10 +225,10 @@
             Exportar:
           </div>
           <div class="col-1">
-            <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalConsumoMP()" size="large"></ngl-icon>
+            <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalConsumoMP()" size="large" style="cursor:pointer"></ngl-icon>
           </div>
           <div class="col-1">
-            <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalConsumoMP()" size="large"></ngl-icon>
+            <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalConsumoMP()" size="large" style="cursor:pointer"></ngl-icon>
           </div>
 
         </div>
@@ -263,11 +279,11 @@
         Exportar:
       </div>
       <div class="col-1">
-        <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalComprasMP()" size="large"></ngl-icon>
+        <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalComprasMP()" size="large" style="cursor:pointer"></ngl-icon>
       </div>
 
       <div class="col-1">
-        <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalComprasMP()" size="large"></ngl-icon>
+        <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalComprasMP()" size="large" style="cursor:pointer"></ngl-icon>
       </div>
     </div>
 
@@ -330,11 +346,11 @@
       Exportar:
     </div>
     <div class="col-1">
-      <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalCostoTrans()" size="large"></ngl-icon>
+      <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalCostoTrans()" size="large" style="cursor:pointer"></ngl-icon>
     </div>
 
     <div class="col-1">
-      <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalCostoTrans()" size="large"></ngl-icon>
+      <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalCostoTrans()" size="large" style="cursor:pointer"></ngl-icon>
     </div>
   </div>
 
@@ -430,14 +446,14 @@
       </div>
 
       <div class="col-1">
-        <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalCostoDist()" size="large"></ngl-icon>
+        <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalCostoDist()" size="large" style="cursor:pointer"></ngl-icon>
       </div>
 
 
 
 
       <div class="col-1">
-        <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalCostoDist()" size="large"></ngl-icon>
+        <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalCostoDist()" size="large" style="cursor:pointer"></ngl-icon>
       </div>
 
 
@@ -534,12 +550,12 @@
       </div>
 
       <div class="col-1">
-        <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalCostoAdmin()" size="large"></ngl-icon>
+        <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalCostoAdmin()" size="large" style="cursor:pointer"></ngl-icon>
       </div>
 
 
       <div class="col-1">
-        <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalCostoAdmin()" size="large"></ngl-icon>
+        <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalCostoAdmin()" size="large" style="cursor:pointer"></ngl-icon>
       </div>
 
     </div>
@@ -583,12 +599,12 @@
       </div>
 
       <div class="col-1">
-        <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalOtrosGastos()" size="large"></ngl-icon>
+        <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalOtrosGastos()" size="large" style="cursor:pointer"></ngl-icon>
       </div>
 
 
       <div class="col-1">
-        <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalOtrosGastos()" size="large"></ngl-icon>
+        <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalOtrosGastos()" size="large" style="cursor:pointer"></ngl-icon>
       </div>
 
     </div>
@@ -654,12 +670,12 @@
 
 
           <div class="col-1">
-            <ngl-icon icon="pdf" category="doctype" (click)="PDFcostoProduccionVentas()" size="large"></ngl-icon>
+            <ngl-icon icon="pdf" category="doctype" (click)="PDFcostoProduccionVentas()" size="large" style="cursor:pointer" ></ngl-icon>
           </div>
 
 
           <div class="col-1">
-            <ngl-icon icon="csv" category="doctype" (click)="CSVcostoProduccionVentas()" size="large"></ngl-icon>
+            <ngl-icon icon="csv" category="doctype" (click)="CSVcostoProduccionVentas()" size="large" style="cursor:pointer"></ngl-icon>
           </div>
         </div>
 

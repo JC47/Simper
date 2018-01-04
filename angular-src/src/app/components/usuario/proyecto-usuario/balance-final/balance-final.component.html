@@ -1,7 +1,7 @@
 
 <h3 class="col-12 text-center">Balance General Final</h3>
 <div class="col-10 offset-1" >
-  <table class="table table-hover  table-responsive" *ngFor="let balance of balanceFinal">
+  <table class="table table-hover" *ngFor="let balance of balanceFinal">
 
     <tbody>
       <tr class="thead-inverse">
@@ -115,9 +115,9 @@
         <td class="text-right">{{balance.prestamosMasAnio|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
-      <tr class="">
-        <th colspan="4" class="text-center bg-primary">De Aplicación Diferida</th>
-        <th class="text-center bg-warning" colspan="2">Con los Accionistas</th>
+      <tr class="thead-inverse">
+        <th colspan="4" class="text-center ">De Aplicación Diferida</th>
+        <th class="text-center " colspan="2">Con los Accionistas</th>
       </tr>
 
       <tr>
@@ -196,7 +196,7 @@
   </div>
 
   <div class="col-1">
-    <ngl-icon icon="csv" category="doctype" (click)="CSValmacenArticuloTerminado()" size="large"></ngl-icon>
+    <ngl-icon icon="csv" category="doctype" (click)="descargaCSV()" size="large"></ngl-icon>
   </div>
 
 </div>
