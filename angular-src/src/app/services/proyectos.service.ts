@@ -133,6 +133,7 @@ returnUsuarios(){
       }
     });
     this._usuarioProductoService.getProductosNU(idUsuario).subscribe(data => {
+      console.log(data)
       for(let key$ in data.datos){
         var x = {
           Proyectos_idProyecto:idProyecto,
