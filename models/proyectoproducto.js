@@ -56,8 +56,11 @@ module.exports.getTiempoDes = function (idProducto) {
   return querySql(queryTiempoDes,idProducto);
 }
 
-
-
+//Toma los idProducto que estén en la tabla producto excluyendo a los productos que tiene asignado ya en usuarioproducto. Muestra los que no tiene asignado y están en producto
+module.exports.getIdProductoSinAsignar = function (idUsuario) {
+  var query = "select idProducto from producto where not idProducto in (select idProducto from usuarioproducto where idUsuario = "+idUsuario+")";
+  return querySql(query);
+}
 
 // module.exports.addDesarrolladosPeriodos = function (periodos,idProyecto,idProducto) {
 //   var query = "insert into proyectoProducto";
