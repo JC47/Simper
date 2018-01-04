@@ -32,14 +32,22 @@ router.post('/register/', (req, res, next) => {
 });
 //este es el que se va a modificar
 router.get('/n/:idUsuario', (req, res, next) => {
-  Promise.resolve().then( function () {
-    return usuarioProducto.getUsuarioProductoByIdUsuario(req.params.idUsuario);
-  }).then( function (rows) {
-    res.json({success: true, msg:"Operacion exitosa", datos:rows});
-  }).catch( function (err) {
-    console.log(err);
-    res.json({success:false, msg:"Fallo"});
+  var idUsuario = req.params.idUsuario
+  Promise.resolve().then(function () {
+      return usuarioProducto.getIdProductoSinAsignar(idUsuario);
   })
+  .then(function(rows){
+    res.json({success: true, msg:"Operacion exitosa", datos:rows});
+  })
+  .catch(function (err) {
+    console.error("Log error: " + err);
+    if (err instanceof Error) {
+      res.status(400).send("Error general");
+      console.log(err);
+    } else {
+      res.status(200).json({ "code": 1000, "message": err });
+    }
+  });
 });
 
 router.post('/delete/', (req, res, next) => {
