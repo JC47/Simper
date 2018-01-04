@@ -3,14 +3,41 @@ const db = require('../config/db');
 const querySql = db.querySql;
 const Promise = require("bluebird");
 
-module.exports.addProyectoProducto = function (json) {
-    var queryProyectoProd = "insert into ProyectoProducto set ?";
-    return querySql(queryProyectoProd, json);
+//Pagar desarrollo
+
+module.exports.getMaxNumeroPeriodo = function (idProyecto,idProducto) {
+  var query = "select max(numeroPeriodo) as maxnumperiodo from proyectoproducto where Proyectos_idProyecto = "+idProyecto+" and Productos_idProducto = "+idProducto+" ";
+  return querySql(query);
 }
 
-module.exports.getProyectoProducto = function (idProyecto) {
-    var proyectoProductoQuery = "select * from  ProyectoProducto where Proyectos_idProyecto = ?";
-    return querySql(proyectoProductoQuery,idProyecto);
+module.exports.getProyectoProducto = function (idProyecto,idProducto,numeroPeriodo) {
+    var query = "select * from  ProyectoProducto where Proyectos_idProyecto =  "+idProyecto+" and Productos_idProducto = "+idProducto+" and numeroPeriodo = "+numeroPeriodo+" ";
+    return querySql(query);
+}
+
+module.exports.addProyectoProducto = function (json) {
+    var query = "insert into ProyectoProducto set ?";
+    return querySql(query, json);
+}
+
+
+
+
+module.exports.getPeriodosDes = function (idProyecto,idProducto,numeroPeriodo) {
+  //console.log(idProyecto, idProducto);
+  var query = "select periodosDes from proyectoproducto where Proyectos_idProyecto = "+idProyecto+" and Productos_idProducto = "+idProducto+" and numeroPeriodo = "+numeroPeriodo+" ";
+  return querySql(query);
+}
+
+module.exports.updateDesarrolladoPeriodos = function (periodos,idProyecto,idProducto,numeroPeriodo) {
+//  console.log(periodos,idProyecto,idProducto);
+  var query = "update ProyectoProducto set periodosDes = "+periodos+" where Proyectos_idProyecto = "+idProyecto+" and Productos_idProducto = "+idProducto+" and numeroPeriodo = "+numeroPeriodo+" ";
+  return querySql(query);
+}
+
+module.exports.getUltimoNumeroPeriodo = function (idProducto,idProyecto) {
+    var query = "select max(numeroPeriodo) as ultimoNumeroPeriodo from proyectoproducto where Proyectos_idProyecto = "+idProyecto+" and Productos_idProducto = "+idProducto+" ";
+    return querySql(query);
 }
 
 module.exports.updateProyectoProducto = function (idProyecto,idProducto,ultimoPeriodo) {
@@ -29,18 +56,12 @@ module.exports.getTiempoDes = function (idProducto) {
   return querySql(queryTiempoDes,idProducto);
 }
 
-module.exports.getPeriodosDes = function (idProyecto,idProducto) {
-  console.log(idProyecto, idProducto);
-  var queryPeriodosDes = "select periodosDes from proyectoproducto where Proyectos_idProyecto = "+idProyecto+" and Productos_idProducto = "+idProducto+" ";
-  return querySql(queryPeriodosDes);
-}
 
-module.exports.updateDesarrolladoPeriodos = function (periodos,idProyecto,idProducto) {
-  console.log(periodos,idProyecto,idProducto);
-  var queryDesarrollado = "update ProyectoProducto set periodosDes = "+periodos+" where Proyectos_idProyecto = "+idProyecto+" and Productos_idProducto = "+idProducto+"";
-  return querySql(queryDesarrollado);
-}
 
+
+// module.exports.addDesarrolladosPeriodos = function (periodos,idProyecto,idProducto) {
+//   var query = "insert into proyectoProducto";
+// }
 
 //productosSinDesarrollar
 module.exports.productosSinDesarrollar = function (idProyecto,numeroPeriodo) {
@@ -71,15 +92,15 @@ module.exports.desarollado = function (idProyecto, idProducto, desarrollado) {
   return querySql(queryDes);
 }
 
-module.exports.getBalance = function (idProyecto,numPeriodo) {
-  var queryGetCajaBanco = "select * from balance where Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo = "+numPeriodo+" ";
-  return querySql(queryGetCajaBanco);
-};
-
-module.exports.updateBalance = function (idProyecto,numPeriodo,saldoF,IVAPorEnterarProd,utilidadEjercicioProd) {
-  var queryUpdateCajaBanco = "update balance set cajaBancos = "+saldoF+", IVAPorEnterar = "+IVAPorEnterarProd+", utilidadEjercicio = "+utilidadEjercicioProd+"  where Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo = "+numPeriodo+" ";
-  return querySql(queryUpdateCajaBanco);
-}
+// module.exports.getBalance = function (idProyecto,numPeriodo) {
+//   var queryGetCajaBanco = "select * from balance where Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo = "+numPeriodo+" ";
+//   return querySql(queryGetCajaBanco);
+// };
+//
+// module.exports.updateBalance = function (idProyecto,numPeriodo,saldoF,IVAPorEnterarProd,utilidadEjercicioProd) {
+//   var queryUpdateCajaBanco = "update balance set cajaBancos = "+saldoF+", IVAPorEnterar = "+IVAPorEnterarProd+", utilidadEjercicio = "+utilidadEjercicioProd+"  where Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo = "+numPeriodo+" ";
+//   return querySql(queryUpdateCajaBanco);
+// }
 
 module.exports.deleteProyectoProducto = function (idProyecto,idProducto) {
   var query = "delete from proyectoproducto where Proyectos_idProyecto = "+idProyecto+" and Productos_idProducto = "+idProducto+" ";

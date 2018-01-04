@@ -12,11 +12,7 @@ router.post('/desarrolloproducto', (req, res, next) => {
       var json = req.body;
       return proyectoProducto.addProyectoProducto(json);
   })
-  // .then(function () {
-  //   var id = req.body.Proyectos_idProyecto;
-  //   return proyectoProducto.getProductosEnDesarrollo(id);
-  // })
-  .then(function(/*rows*/){
+  .then(function(){
     res.json({success: true, msg:"Operacion exitosa"/*, datos:rows*/});
   })
   .catch(function (err) {
@@ -31,36 +27,48 @@ router.post('/desarrolloproducto', (req, res, next) => {
 });
 
 router.post('/pagardesarrollo', (req, res, next) => {
-  Promise.resolve().then(function () {
-    var idProyecto = req.body.Proyectos_idProyecto;
-    var idProducto = req.body.Productos_idProducto;
-    var ultimoPeriodo = req.body.ultimoPeriodoDes;
-    return proyectoProducto.updateProyectoProducto(idProyecto,idProducto,ultimoPeriodo);
-  })
-var idProyecto = req.body.Proyectos_idProyecto;
-var idProducto = req.body.Productos_idProducto;
+  var idProyecto = req.body.idProyecto;
+  var idProducto = req.body.idProducto;
+  var numeroPeriodo = req.body.numeroPeriodo;
 
-  Promise.join(proyectoProducto.getTiempoDes(idProducto),proyectoProducto.getPeriodosDes(idProyecto,idProducto),
-    function(tiempo, periodo) {
-      console.log("tiempo: " + tiempo[0].tiempoDes);
-      console.log("periodo: "+ periodo[0].periodosDes);
-      var tiempoDes = tiempo[0].tiempoDes;
-      var periodosDes = periodo[0].periodosDes;
-      return comparaTiempos(tiempoDes,periodosDes);
-      //return periodosDes;
-    })
-  .then(function (periodosDes) {
-    var idProyecto = req.body.Proyectos_idProyecto;
-    var idProducto = req.body.Productos_idProducto;
-    //var desarrollado = data.desarrollado;
-    var periodos = periodosDes;
-    console.log("periodos: "+periodos);
-    return proyectoProducto.updateDesarrolladoPeriodos(periodos,idProyecto,idProducto);
-   })
+  var tiempoDes;
+  var periodosDes
+  var maxnumeroperiodo;
+  var json;
+
+  Promise.join(proyectoProducto.getMaxNumeroPeriodo(idProyecto,idProducto),
+  proyectoProducto.getTiempoDes(idProducto),function (maxnumperiodo,tiempo) {
+
+    maxnumeroperiodo = maxnumperiodo[0].maxnumperiodo;
+    tiempoDes = tiempo[0].tiempoDes;
+    return proyectoProducto.getPeriodosDes(idProyecto,idProducto,maxnumeroperiodo)
+  })
+  .then(function (periodo) {
+    periodosDes = periodo[0].periodosDes;
+  })
+  .then(function () {
+    return proyectoProducto.getProyectoProducto(idProyecto,idProducto,maxnumeroperiodo);
+  })
+  .then(function (proyectoproducto) {
+
+    if (tiempoDes == periodosDes) {
+      return console.log("igual");
+    }else {
+      periodosDes = aumentaPeriodos(periodosDes);
+      json = {
+        "Proyectos_idProyecto":idProyecto,
+        "Productos_idProducto":idProducto,
+        "numeroPeriodo":numeroPeriodo,
+        "desarrollado":proyectoproducto[0].desarrollado,
+        "periodoInicio":proyectoproducto[0].periodoInicio,
+        "periodosDes":periodosDes
+      }
+      return proyectoProducto.addProyectoProducto(json);
+    }
+  })
 //regreso datos
   .then(function () {
-    var idProyecto = req.body.Proyectos_idProyecto;
-    return proyectoProducto.getProductosEnDesarrollo(idProyecto);
+    return proyectoProducto.getProductosEnDesarrollo(idProyecto,numeroPeriodo);
   })
   .then(function(datos){
     res.json({success: true, datos:datos, msg:"Operacion exitosa"});
@@ -82,13 +90,6 @@ var idProducto = req.body.Productos_idProducto;
 router.post('/getproductossindesarrollar/', (req, res, next) => {
   var idProyecto = req.body.idProyecto;
   var numeroPeriodo = req.body.numeroPeriodo;
-
-// Promise.join(proyectoProducto.productosSinDesarrollar(idProyecto,numeroPeriodo),
-// proyectoProducto.productosSinDesarrollarOtrosPeriodos(idProyecto),
-// function(productossindes,otrosperiodos) {
-//   return jsonProductosSinDesarrollar(productossindes,otrosperiodos);
-// })
-
   Promise.resolve()
   .then(function () {
       return proyectoProducto.productosSinDesarrollar(idProyecto,numeroPeriodo);
@@ -114,7 +115,6 @@ router.post('/getproductosendesarrollo/', (req, res, next) => {
 
   Promise.resolve()
   .then(function () {
-//      var idProyecto = req.params.idProyecto;
       return proyectoProducto.getProductosEnDesarrollo(idProyecto,numeroPeriodo);
   })
   .then(function (data) {
@@ -154,13 +154,65 @@ router.post('/getproductosdesarrollados/', (req, res, next) => {
   });
 });
 
-//Actualiza el valor de desarrollado de 0 (no desarrollado) a 1 (desarrollado)
-router.post('/desarrollado', (req, res, next) => {
+//Actualiza el valor de 0 (no desarrollado) a 1 (en desarrollado)
+router.post('/endesarrollo', (req, res, next) => {
+  var idProyecto = req.body.idProyecto;
+  var idProducto = req.body.idProducto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+  var desarollado = 1;
+
   Promise.resolve().then(function () {
-      var idProyecto = req.body.Proyectos_idProyecto;
-      var idProducto = req.body.Productos_idProducto;
-      var desarrollado = 1;
-      return proyectoProducto.desarollado(idProyecto, idProducto, desarrollado);
+    proyectoProducto.getMaxNumeroPeriodo(idProyecto,idProducto)
+  })
+  .then(function (maxnumperiodo) {
+    proyectoProducto.getProyectoProducto(idProyecto,idProducto,maxnumperiodo[0].maxnumperiodo);
+  })
+  .then(function (proyectoproducto) {
+    json = {
+      "Proyectos_idProyecto":idProyecto,
+      "Productos_idProducto":idProducto,
+      "numeroPeriodo":numeroPeriodo,
+      "desarrollado":desarollado,
+      "periodoInicio":proyectoproducto[0].periodoInicio,
+      "periodosDes":proyectoproducto[0].periodosDes
+    }
+  })
+  .then(function(){
+    res.json({success: true, msg:"Operacion exitosa"});
+  })
+  .catch(function (err) {
+    console.error("Log error: " + err);
+    if (err instanceof Error) {
+      res.status(400).send("Error general");
+      console.log(err);
+    } else {
+      res.status(200).json({ "code": 1000, "message": err });
+    }
+  });
+});
+
+//Actualiza el valor de 1 (en desarrollado) a 2 ( desarrollado)
+router.post('/desarrollado', (req, res, next) => {
+  var idProyecto = req.body.idProyecto;
+  var idProducto = req.body.idProducto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+  var desarollado = 2;
+
+  Promise.resolve().then(function () {
+    proyectoProducto.getMaxNumeroPeriodo(idProyecto,idProducto)
+  })
+  .then(function (maxnumperiodo) {
+    proyectoProducto.getProyectoProducto(idProyecto,idProducto,maxnumperiodo[0].maxnumperiodo);
+  })
+  .then(function (proyectoproducto) {
+    json = {
+      "Proyectos_idProyecto":idProyecto,
+      "Productos_idProducto":idProducto,
+      "numeroPeriodo":numeroPeriodo,
+      "desarrollado":desarollado,
+      "periodoInicio":proyectoproducto[0].periodoInicio,
+      "periodosDes":proyectoproducto[0].periodosDes
+    }
   })
   .then(function(){
     res.json({success: true, msg:"Operacion exitosa"});
@@ -411,52 +463,5 @@ function deshacerPeriodoDes(periodosdes) {
   }
   return nvoPeriodoDes;
 }
-//
-// function jsonProductosSinDesarrollar(productossindes,otrosperiodos) {
-//     var arrayProductosSinDes = [];
-//  // console.log("productossindes",productossindes);
-//  // console.log("otrosperiodos",otrosperiodos);
-//
-// // var array1 = [1,2,2,2,3];
-// // var array2 = [1,2,4];
-//
-// //productossindes = productossindes.filter(val => !otrosperiodos.includes(val));
-//
-// //console.log("array1",array1);
-//
-// //console.log("RESULTADO",productossindes);
-//     for (var i = 0; i < productossindes.length; i++) {
-//       for (var j = 0; j < otrosperiodos.length; j++) {
-//         if (productossindes[i].idProducto == otrosperiodos[j].Productos_idProducto ) {
-//           var json = {
-//           //  "Proyectos_idProyecto":productossindes[i].Proyectos_idProyecto,
-//             "Productos_idProducto":productossindes[i].Productos_idProducto,
-//             "numeroPeriodo":productossindes[i].numeroPeriodo,
-//             "desarrollado":productossindes[i].desarrollado,
-//             // "periodoInicio":productossindes[i].periodoInicio,
-//             // "ultimoPeriodoDes":productossindes[i].ultimoPeriodoDes,
-//             // "periodosDes":productossindes[i].periodosDes,
-//             // "nombreProd":productossindes[i].nombreProd,
-//             // "costoDes":productossindes[i].costoDes,
-//             // "tiempoDes":productossindes[i].tiempoDes,
-//             // "precioVenta":productossindes[i].precioVenta,
-//             // "costosFijosFabri":productossindes[i].costosFijosFabri,
-//             // "costoVarUniFabri":productossindes[i].costoVarUniFabri,
-//             // "gastosFijosDist":productossindes[i].gastosFijosDist,
-//             // "depDistribucion":productossindes[i].depDistribucion,
-//             // "costoVarUniDist":productossindes[i].costoVarUniDist,
-//             // "gastosFijosAdmon":productossindes[i].gastosFijosAdmon,
-//             // "depAdmon":productossindes[i].depAdmon,
-//             // "costosMPPUniProd":productossindes[i].costosMPPUniProd,
-//             // "uniMP":productossindes[i].uniMP,
-//             // "costoUni":productossindes[i].costoUni
-//           }
-//           arrayProductosSinDes.push(json);
-//         }
-//       }
-//     }
-//     return console.log("arrayProductosSinDes: ",arrayProductosSinDes);
-//
-// }
 
 module.exports = router;
