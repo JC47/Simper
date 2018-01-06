@@ -102,12 +102,10 @@ returnUsuarios(){
   asignarBalance(idProyecto){
     this.buscarPeriodos(idProyecto).subscribe(data => {
       if(data.datos.length == 0){
-        this.asignarMaquinaria(idProyecto,localStorage.getItem('idUsuario'));
-        this.asginarProductos(idProyecto,localStorage.getItem('idUsuario'));
-        this.asignarZonas(idProyecto,localStorage.getItem('idUsuario'));
         this.asginarPeriodoCero(idProyecto);
         localStorage.setItem('numeroPeriodo','1');
         localStorage.setItem('numeroRPeriodos','1');
+        this.asignarTodo(idProyecto);
       }
       else{
         var num = parseInt(data.datos.length) - 1;
@@ -115,6 +113,13 @@ returnUsuarios(){
         localStorage.setItem('numeroRPeriodos',num.toString());
       }
     });
+  }
+
+  asignarTodo(idProyecto){
+    this.asignarZonas(idProyecto,localStorage.getItem('idUsuario'));
+    this.asignarMaquinaria(idProyecto,localStorage.getItem('idUsuario'));
+    this.asginarProductos(idProyecto,localStorage.getItem('idUsuario'));
+    this.asignarProductos2(idProyecto,localStorage.getItem('idUsuario'));
   }
 
   asginarProductos(idProyecto, idUsuario){
@@ -125,25 +130,23 @@ returnUsuarios(){
           Productos_idProducto:data.datos[key$].idProducto,
           desarrollado:2,
           periodoInicio:0,
-          ultimoPeriodoDes:0,
           periodosDes:0
         }
-
         this._desarrolloProductoService.desarrollar(x).subscribe();
       }
     });
+  }
+
+  asignarProductos2(idProyecto, idUsuario){
     this._usuarioProductoService.getProductosNU(idUsuario).subscribe(data => {
-      console.log(data)
       for(let key$ in data.datos){
         var x = {
           Proyectos_idProyecto:idProyecto,
           Productos_idProducto:data.datos[key$].idProducto,
           desarrollado:0,
           periodoInicio:0,
-          ultimoPeriodoDes:0,
           periodosDes:0
         }
-
         this._desarrolloProductoService.desarrollar(x).subscribe();
       }
     });
@@ -190,8 +193,8 @@ returnUsuarios(){
     this.buscarDatosUsuario().subscribe(data => {
       for(let key$ in data){
         if(data[key$].idUsuario == localStorage.getItem('idUsuario')){
-          this.crearBalanceUno(idProyecto,data[key$],1).subscribe();
           this.crearBalanceCero(idProyecto,data[key$],0).subscribe();
+          this.crearBalanceUno(idProyecto,data[key$],1).subscribe();
           break;
         }
       }

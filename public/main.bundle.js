@@ -9323,8 +9323,9 @@ var DesarrolloProductoService = (function () {
         var x = {
             Proyectos_idProyecto: parseInt(localStorage.getItem('idProyecto')),
             Productos_idProducto: id,
-            periodoInicio: parseInt(localStorage.getItem('numeroPeriodo')),
-            ultimoPeriodoDes: parseInt(localStorage.getItem('numeroPeriodo'))
+            desarrollado: 1,
+            numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')),
+            periodoInicio: parseInt(localStorage.getItem('numeroPeriodo'))
         };
         for (var i = 0; this.productosSinDesarrollar.length > i; i++) {
             if (this.productosSinDesarrollar[i].idProducto == id) {
@@ -10317,12 +10318,10 @@ var ProyectosService = (function () {
         var _this = this;
         this.buscarPeriodos(idProyecto).subscribe(function (data) {
             if (data.datos.length == 0) {
-                _this.asignarMaquinaria(idProyecto, localStorage.getItem('idUsuario'));
-                _this.asginarProductos(idProyecto, localStorage.getItem('idUsuario'));
-                _this.asignarZonas(idProyecto, localStorage.getItem('idUsuario'));
                 _this.asginarPeriodoCero(idProyecto);
                 localStorage.setItem('numeroPeriodo', '1');
                 localStorage.setItem('numeroRPeriodos', '1');
+                _this.asignarTodo(idProyecto);
             }
             else {
                 var num = parseInt(data.datos.length) - 1;
@@ -10330,6 +10329,12 @@ var ProyectosService = (function () {
                 localStorage.setItem('numeroRPeriodos', num.toString());
             }
         });
+    };
+    ProyectosService.prototype.asignarTodo = function (idProyecto) {
+        this.asignarZonas(idProyecto, localStorage.getItem('idUsuario'));
+        this.asignarMaquinaria(idProyecto, localStorage.getItem('idUsuario'));
+        this.asginarProductos(idProyecto, localStorage.getItem('idUsuario'));
+        this.asignarProductos2(idProyecto, localStorage.getItem('idUsuario'));
     };
     ProyectosService.prototype.asginarProductos = function (idProyecto, idUsuario) {
         var _this = this;
@@ -10340,26 +10345,25 @@ var ProyectosService = (function () {
                     Productos_idProducto: data.datos[key$].idProducto,
                     desarrollado: 2,
                     periodoInicio: 0,
-                    ultimoPeriodoDes: 0,
                     periodosDes: 0
                 };
                 _this._desarrolloProductoService.desarrollar(x).subscribe();
             }
         });
+    };
+    ProyectosService.prototype.asignarProductos2 = function (idProyecto, idUsuario) {
+        var _this = this;
         this._usuarioProductoService.getProductosNU(idUsuario).subscribe(function (data) {
-            console.log(data);
-            // for(let key$ in data.datos){
-            //   var x = {
-            //     Proyectos_idProyecto:idProyecto,
-            //     Productos_idProducto:data.datos[key$].idProducto,
-            //     desarrollado:0,
-            //     periodoInicio:0,
-            //     ultimoPeriodoDes:0,
-            //     periodosDes:0
-            //   }
-            //
-            //   this._desarrolloProductoService.desarrollar(x).subscribe();
-            // }
+            for (var key$ in data.datos) {
+                var x = {
+                    Proyectos_idProyecto: idProyecto,
+                    Productos_idProducto: data.datos[key$].idProducto,
+                    desarrollado: 0,
+                    periodoInicio: 0,
+                    periodosDes: 0
+                };
+                _this._desarrolloProductoService.desarrollar(x).subscribe();
+            }
         });
     };
     ProyectosService.prototype.entrar = function () {
@@ -10403,8 +10407,8 @@ var ProyectosService = (function () {
         this.buscarDatosUsuario().subscribe(function (data) {
             for (var key$ in data) {
                 if (data[key$].idUsuario == localStorage.getItem('idUsuario')) {
-                    _this.crearBalanceUno(idProyecto, data[key$], 1).subscribe();
                     _this.crearBalanceCero(idProyecto, data[key$], 0).subscribe();
+                    _this.crearBalanceUno(idProyecto, data[key$], 1).subscribe();
                     break;
                 }
             }

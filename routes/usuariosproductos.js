@@ -50,6 +50,25 @@ router.get('/n/:idUsuario', (req, res, next) => {
   });
 });
 
+router.get('/:idUsuario', (req, res, next) => {
+  var idUsuario = req.params.idUsuario
+  Promise.resolve().then(function () {
+      return usuarioProducto.getUsuarioProductoByIdUsuario(idUsuario);
+  })
+  .then(function(rows){
+    res.json({success: true, msg:"Operacion exitosa", datos:rows});
+  })
+  .catch(function (err) {
+    console.error("Log error: " + err);
+    if (err instanceof Error) {
+      res.status(400).send("Error general");
+      console.log(err);
+    } else {
+      res.status(200).json({ "code": 1000, "message": err });
+    }
+  });
+});
+
 router.post('/delete/', (req, res, next) => {
   Promise.resolve()
   .then(function () {
