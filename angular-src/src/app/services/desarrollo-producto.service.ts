@@ -102,8 +102,9 @@ export class DesarrolloProductoService {
     var x = {
       Proyectos_idProyecto:parseInt(localStorage.getItem('idProyecto')),
       Productos_idProducto:id,
-      periodoInicio:parseInt(localStorage.getItem('numeroPeriodo')),
-      ultimoPeriodoDes:parseInt(localStorage.getItem('numeroPeriodo'))
+      desarrollado:1,
+      numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo')),
+      periodoInicio:parseInt(localStorage.getItem('numeroPeriodo'))
     }
     for(let i=0;this.productosSinDesarrollar.length>i;i++){
       if(this.productosSinDesarrollar[i].idProducto==id){

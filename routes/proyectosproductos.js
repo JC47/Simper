@@ -16,13 +16,8 @@ router.post('/desarrolloproducto', (req, res, next) => {
     res.json({success: true, msg:"Operacion exitosa"/*, datos:rows*/});
   })
   .catch(function (err) {
-    console.error("Log error: " + err);
-    if (err instanceof Error) {
-      res.status(400).send("Error general");
-      console.log(err);
-    } else {
-      res.status(200).json({ "code": 1000, "message": err });
-    }
+    console.error(err);
+    res.json({success: false, msg:"Operacion fallida"/*, datos:rows*/});
   });
 });
 
