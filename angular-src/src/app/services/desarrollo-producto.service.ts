@@ -6,40 +6,37 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class DesarrolloProductoService {
-  productosDesarollados:any[] = [];
-  productosEnDesarrollo:any[] = [];
-  productosSinDesarrollar:any[] = [];
 
   constructor(private http:Http) { }
 
   returnProductosSinDesarrollar(){
-    this.productosSinDesarrollar.length = 0;
+    var x = [];
     this.getProductosNoDesarrollados().subscribe(data => {
       for(let i in data.datos){
-        this.productosSinDesarrollar.push(data.datos[i]);
+        x.push(data.datos[i]);
       }
     });
-    return this.productosSinDesarrollar;
+    return x;
   }
 
   returnProductosEnDesarrollo(){
-    this.productosEnDesarrollo.length = 0;
+    var x = [];
     this.getProductosEnDesarrollo().subscribe(data => {
       for(let i in data.datos){
-        this.productosEnDesarrollo.push(data.datos[i]);
+        x.push(data.datos[i]);
       }
     });
-    return this.productosEnDesarrollo;
+    return x;
   }
 
   returnProductosDesarrollados(){
-    this.productosDesarollados.length = 0;
+    var x = [];
     this.getProductosDesarrollados().subscribe(data => {
       for(let i in data.datos){
-        this.productosDesarollados.push(data.datos[i]);
+        x.push(data.datos[i]);
       }
     });
-    return this.productosDesarollados;
+    return x;
   }
 
   getProductosNoDesarrollados(){
@@ -90,8 +87,9 @@ export class DesarrolloProductoService {
     this.getTerminados().subscribe(data => {
       for(let key$ in data.datos){
         var x = {
-          Proyectos_idProyecto:localStorage.getItem('idProyecto'),
-          Productos_idProducto:data.datos[key$].idProducto
+          numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo')),
+          idProyecto:localStorage.getItem('idProyecto'),
+          idProducto:data.datos[key$].idProducto
         }
         this.setDesarrollado(x).subscribe();
       }
@@ -106,11 +104,6 @@ export class DesarrolloProductoService {
       numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo')),
       periodoInicio:parseInt(localStorage.getItem('numeroPeriodo'))
     }
-    for(let i=0;this.productosSinDesarrollar.length>i;i++){
-      if(this.productosSinDesarrollar[i].idProducto==id){
-        this.productosSinDesarrollar.splice(i,1);
-      }
-    }
 
     var y = {
       idProyecto:parseInt(localStorage.getItem('idProyecto')),
@@ -118,14 +111,11 @@ export class DesarrolloProductoService {
       numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo')),
       costoDes:costo
     }
-    this.desarrollar(x).subscribe(data => {
-      for(let i in data.datos) {
-          this.productosEnDesarrollo[i] = data.datos[i];
-      }
-    });
+    this.desarrollar(x).subscribe();
 
     this.pagoBalance(y).subscribe();
 
+    return true;
   }
 
   pagoBalance(y){
@@ -155,12 +145,14 @@ export class DesarrolloProductoService {
       numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo')),
       costoDes:costo
     }
+    this.pagoBalance(y).subscribe();
+    var m = [];
     this.pd(x).subscribe( data => {
-      for(let i in data.datos) {
-          this.productosEnDesarrollo[i] = data.datos[i];
+      for(let key in data.datos){
+        m.push(data.datos[key]);
       }
     });
-    this.pagoBalance(y).subscribe();
+    return m;
   }
 
   pd(x){

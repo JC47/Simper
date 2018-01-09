@@ -199,16 +199,16 @@ router.post('/desarrollado', (req, res, next) => {
 
   Promise.resolve()
   .then(function () {
-    proyectoProducto.getMaxNumeroPeriodo(idProyecto,idProducto)
+    return proyectoProducto.getMaxNumeroPeriodo(idProyecto,idProducto)
   })
   .then(function (maxnumperiodo) {
-    proyectoProducto.getProyectoProducto(idProyecto,idProducto,maxnumperiodo[0].maxnumperiodo);
+    return proyectoProducto.getProyectoProducto(idProyecto,idProducto,maxnumperiodo[0].maxnumperiodo);
   })
   .then(function (proyectoproducto) {
     json = {
       "Proyectos_idProyecto":idProyecto,
       "Productos_idProducto":idProducto,
-      "numeroPeriodo":numeroPeriodo,
+      "numeroPeriodo":numeroPeriodo+1,
       "desarrollado":desarrollado,
       "periodoInicio":proyectoproducto[0].periodoInicio,
       "periodosDes":proyectoproducto[0].periodosDes

@@ -82,11 +82,10 @@ export class DesarrolloProductoComponent implements OnInit {
       this.openLoad=true;
       setTimeout(()=>{this.openLoad=false;
       }, 2000);
-      this._desarrolloProducto.comenzarDesarrollo(this.productoSelectedAdd.idProducto,this.productoSelectedAdd.costoDes);
-
-
-
-
+      var z = this._desarrolloProducto.comenzarDesarrollo(this.productoSelectedAdd.idProducto,this.productoSelectedAdd.costoDes);
+      if(z){
+        this.actualizar();
+      }
   }
 
   pagarDesarrollo(){
@@ -94,13 +93,13 @@ export class DesarrolloProductoComponent implements OnInit {
     this.openLoadPago=true;
     setTimeout(()=>this.openLoadPago=false, 2000);
 
-    this._desarrolloProducto.pagarDesarrollo(this.productoSelectedPago.idProducto,this.productoSelectedPago.costoDes)
+    this.productosEnDesarrollo = this._desarrolloProducto.pagarDesarrollo(this.productoSelectedPago.idProducto,this.productoSelectedPago.costoDes);
   }
 
 
   revisaPeriodo(producto){
-    console.log(producto.ultimoPeriodoDes==localStorage.getItem('numeroPeriodo'));
-    return producto.ultimoPeriodoDes==localStorage.getItem('numeroPeriodo');
+    console.log(producto.numeroPeriodo==localStorage.getItem('numeroPeriodo'));
+    return producto.numeroPeriodo==localStorage.getItem('numeroPeriodo');
   }
 
 
@@ -117,6 +116,12 @@ export class DesarrolloProductoComponent implements OnInit {
     this.productoSelectedAdd=producto;
 
 
+  }
+
+  actualizar(){
+    this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
+    this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
+    this.productosSinDesarrollar = this._desarrolloProducto.returnProductosSinDesarrollar();
   }
 
 }
