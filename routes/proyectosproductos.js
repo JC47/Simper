@@ -154,9 +154,10 @@ router.post('/endesarrollo', (req, res, next) => {
   var idProyecto = req.body.idProyecto;
   var idProducto = req.body.idProducto;
   var numeroPeriodo = req.body.numeroPeriodo;
-  var desarollado = 1;
+  var desarrollado = 1;
 
-  Promise.resolve().then(function () {
+  Promise.resolve()
+  .then(function () {
     proyectoProducto.getMaxNumeroPeriodo(idProyecto,idProducto)
   })
   .then(function (maxnumperiodo) {
@@ -167,10 +168,13 @@ router.post('/endesarrollo', (req, res, next) => {
       "Proyectos_idProyecto":idProyecto,
       "Productos_idProducto":idProducto,
       "numeroPeriodo":numeroPeriodo,
-      "desarrollado":desarollado,
+      "desarrollado":desarrollado,
       "periodoInicio":proyectoproducto[0].periodoInicio,
       "periodosDes":proyectoproducto[0].periodosDes
     }
+  })
+  .then(function (json) {
+    return proyectoProducto.addProyectoProducto(json);
   })
   .then(function(){
     res.json({success: true, msg:"Operacion exitosa"});
@@ -191,9 +195,10 @@ router.post('/desarrollado', (req, res, next) => {
   var idProyecto = req.body.idProyecto;
   var idProducto = req.body.idProducto;
   var numeroPeriodo = req.body.numeroPeriodo;
-  var desarollado = 2;
+  var desarrollado = 2;
 
-  Promise.resolve().then(function () {
+  Promise.resolve()
+  .then(function () {
     proyectoProducto.getMaxNumeroPeriodo(idProyecto,idProducto)
   })
   .then(function (maxnumperiodo) {
@@ -204,10 +209,14 @@ router.post('/desarrollado', (req, res, next) => {
       "Proyectos_idProyecto":idProyecto,
       "Productos_idProducto":idProducto,
       "numeroPeriodo":numeroPeriodo,
-      "desarrollado":desarollado,
+      "desarrollado":desarrollado,
       "periodoInicio":proyectoproducto[0].periodoInicio,
       "periodosDes":proyectoproducto[0].periodosDes
     }
+    return json;
+  })
+  .then(function (json) {
+    return proyectoProducto.addProyectoProducto(json);
   })
   .then(function(){
     res.json({success: true, msg:"Operacion exitosa"});
@@ -223,6 +232,7 @@ router.post('/desarrollado', (req, res, next) => {
   });
 });
 
+//Esto para qué?
 router.get('/getterminados/:idProyecto', (req, res, next) => {
   Promise.resolve().then(function () {
     return proyectoProducto.getTerminados(req.params.idProyecto);

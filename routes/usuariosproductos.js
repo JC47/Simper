@@ -7,8 +7,6 @@ const Promise = require("bluebird");
 //nombre: usuariosproductosn
 //todos los productos que no estén usuarioProducto pero que estén en producto get
 
-
-
 router.post('/register/', (req, res, next) => {
   Promise.resolve().then(function () {
       var dato = req.body;
