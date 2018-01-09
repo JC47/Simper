@@ -87,13 +87,6 @@ descargaCSV(){
       depEqTrans,
       depMueblesEnseres,
       utilidadEjercicio;
-      let total1=cajaBancos + cuentasPorCobrar + IVAAcreditable + almacenArtTerm + almacenMateriales
-      let total2=terreno + edificios + mueblesEnseres + equipoTrans + maqEquipo - depMaqEquipo - depEdif - depMueblesEnseres -depEqTrans
-      let sumaDerechos=pagosAnticipado + gastosAmortizacion + terreno
-        + edificios + mueblesEnseres + equipoTrans + maqEquipo
-        + cajaBancos + cuentasPorCobrar + IVAAcreditable + almacenArtTerm
-        + almacenMateriales - depMaqEquipo - depEdif - depMueblesEnseres -depEqTrans;
-    let total3=IVAPorEnterar + imptosPorPagar + proveedores + PTUPorPagar + prestamosMenosAnio
 
 
 
@@ -127,6 +120,14 @@ descargaCSV(){
     depEqTrans=balance.depEqTrans;
     depMueblesEnseres=balance.depMueblesEnseres;
   }
+
+  let total1=cajaBancos + cuentasPorCobrar + IVAAcreditable + almacenArtTerm + almacenMateriales
+  let total2=terreno + edificios + mueblesEnseres + equipoTrans + maqEquipo - depMaqEquipo - depEdif - depMueblesEnseres -depEqTrans
+  let sumaDerechos=pagosAnticipado + gastosAmortizacion + terreno
+    + edificios + mueblesEnseres + equipoTrans + maqEquipo
+    + cajaBancos + cuentasPorCobrar + IVAAcreditable + almacenArtTerm
+    + almacenMateriales - depMaqEquipo - depEdif - depMueblesEnseres -depEqTrans;
+let total3=IVAPorEnterar + imptosPorPagar + proveedores + PTUPorPagar + prestamosMenosAnio
 
   let data:any=[
     {cara1:"A menos de un Año",             io:"", depAcum:"",  neto:"",    valor1:"",                                       cara2:"A menos de un año", valor2:""},

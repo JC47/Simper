@@ -2228,13 +2228,6 @@ var BalanceFinalComponent = (function () {
     };
     BalanceFinalComponent.prototype.descargaCSV = function () {
         var cajaBancos, cuentasPorCobrar, IVAAcreditable, almacenArtTerm, almacenMateriales, terreno, maqEquipo, edificios, mueblesEnseres, equipoTrans, pagosAnticipado, gastosAmortizacion, IVAPorEnterar, imptosPorPagar, proveedores, PTUPorPagar, prestamosMenosAnio, prestamosMasAnio, capitalSocial, reservaLegal, utilidadAcum, depMaqEquipo, depEdif, depTerreno, depEqTrans, depMueblesEnseres, utilidadEjercicio;
-        var total1 = cajaBancos + cuentasPorCobrar + IVAAcreditable + almacenArtTerm + almacenMateriales;
-        var total2 = terreno + edificios + mueblesEnseres + equipoTrans + maqEquipo - depMaqEquipo - depEdif - depMueblesEnseres - depEqTrans;
-        var sumaDerechos = pagosAnticipado + gastosAmortizacion + terreno
-            + edificios + mueblesEnseres + equipoTrans + maqEquipo
-            + cajaBancos + cuentasPorCobrar + IVAAcreditable + almacenArtTerm
-            + almacenMateriales - depMaqEquipo - depEdif - depMueblesEnseres - depEqTrans;
-        var total3 = IVAPorEnterar + imptosPorPagar + proveedores + PTUPorPagar + prestamosMenosAnio;
         for (var _i = 0, _a = this.balanceFinal; _i < _a.length; _i++) {
             var balance = _a[_i];
             cajaBancos = balance.cajaBancos;
@@ -2265,6 +2258,13 @@ var BalanceFinalComponent = (function () {
             depEqTrans = balance.depEqTrans;
             depMueblesEnseres = balance.depMueblesEnseres;
         }
+        var total1 = cajaBancos + cuentasPorCobrar + IVAAcreditable + almacenArtTerm + almacenMateriales;
+        var total2 = terreno + edificios + mueblesEnseres + equipoTrans + maqEquipo - depMaqEquipo - depEdif - depMueblesEnseres - depEqTrans;
+        var sumaDerechos = pagosAnticipado + gastosAmortizacion + terreno
+            + edificios + mueblesEnseres + equipoTrans + maqEquipo
+            + cajaBancos + cuentasPorCobrar + IVAAcreditable + almacenArtTerm
+            + almacenMateriales - depMaqEquipo - depEdif - depMueblesEnseres - depEqTrans;
+        var total3 = IVAPorEnterar + imptosPorPagar + proveedores + PTUPorPagar + prestamosMenosAnio;
         var data = [
             { cara1: "A menos de un Año", io: "", depAcum: "", neto: "", valor1: "", cara2: "A menos de un año", valor2: "" },
             { cara1: "Caja Bancos", io: "", depAcum: "", neto: "", valor1: cajaBancos, cara2: "IVA por Enterar", valor2: IVAPorEnterar },
@@ -4242,18 +4242,21 @@ var DesarrolloProductoComponent = (function () {
         setTimeout(function () {
             _this.openLoad = false;
         }, 2000);
-        this._desarrolloProducto.comenzarDesarrollo(this.productoSelectedAdd.idProducto, this.productoSelectedAdd.costoDes);
+        var z = this._desarrolloProducto.comenzarDesarrollo(this.productoSelectedAdd.idProducto, this.productoSelectedAdd.costoDes);
+        if (z) {
+            this.actualizar();
+        }
     };
     DesarrolloProductoComponent.prototype.pagarDesarrollo = function () {
         var _this = this;
         this.openPago = false;
         this.openLoadPago = true;
         setTimeout(function () { return _this.openLoadPago = false; }, 2000);
-        this._desarrolloProducto.pagarDesarrollo(this.productoSelectedPago.idProducto, this.productoSelectedPago.costoDes);
+        this.productosEnDesarrollo = this._desarrolloProducto.pagarDesarrollo(this.productoSelectedPago.idProducto, this.productoSelectedPago.costoDes);
     };
     DesarrolloProductoComponent.prototype.revisaPeriodo = function (producto) {
-        console.log(producto.ultimoPeriodoDes == localStorage.getItem('numeroPeriodo'));
-        return producto.ultimoPeriodoDes == localStorage.getItem('numeroPeriodo');
+        console.log(producto.numeroPeriodo == localStorage.getItem('numeroPeriodo'));
+        return producto.numeroPeriodo == localStorage.getItem('numeroPeriodo');
     };
     DesarrolloProductoComponent.prototype.confPago = function (producto) {
         this.productoSelectedPago = producto;
@@ -4262,6 +4265,11 @@ var DesarrolloProductoComponent = (function () {
     DesarrolloProductoComponent.prototype.selectProducto = function (producto) {
         console.log(producto);
         this.productoSelectedAdd = producto;
+    };
+    DesarrolloProductoComponent.prototype.actualizar = function () {
+        this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
+        this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
+        this.productosSinDesarrollar = this._desarrolloProducto.returnProductosSinDesarrollar();
     };
     return DesarrolloProductoComponent;
 }());
@@ -9233,39 +9241,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var DesarrolloProductoService = (function () {
     function DesarrolloProductoService(http) {
         this.http = http;
-        this.productosDesarollados = [];
-        this.productosEnDesarrollo = [];
-        this.productosSinDesarrollar = [];
     }
     DesarrolloProductoService.prototype.returnProductosSinDesarrollar = function () {
-        var _this = this;
-        this.productosSinDesarrollar.length = 0;
+        var x = [];
         this.getProductosNoDesarrollados().subscribe(function (data) {
             for (var i in data.datos) {
-                _this.productosSinDesarrollar.push(data.datos[i]);
+                x.push(data.datos[i]);
             }
         });
-        return this.productosSinDesarrollar;
+        return x;
     };
     DesarrolloProductoService.prototype.returnProductosEnDesarrollo = function () {
-        var _this = this;
-        this.productosEnDesarrollo.length = 0;
+        var x = [];
         this.getProductosEnDesarrollo().subscribe(function (data) {
             for (var i in data.datos) {
-                _this.productosEnDesarrollo.push(data.datos[i]);
+                x.push(data.datos[i]);
             }
         });
-        return this.productosEnDesarrollo;
+        return x;
     };
     DesarrolloProductoService.prototype.returnProductosDesarrollados = function () {
-        var _this = this;
-        this.productosDesarollados.length = 0;
+        var x = [];
         this.getProductosDesarrollados().subscribe(function (data) {
             for (var i in data.datos) {
-                _this.productosDesarollados.push(data.datos[i]);
+                x.push(data.datos[i]);
             }
         });
-        return this.productosDesarollados;
+        return x;
     };
     DesarrolloProductoService.prototype.getProductosNoDesarrollados = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
@@ -9311,38 +9313,31 @@ var DesarrolloProductoService = (function () {
         this.getTerminados().subscribe(function (data) {
             for (var key$ in data.datos) {
                 var x = {
-                    Proyectos_idProyecto: localStorage.getItem('idProyecto'),
-                    Productos_idProducto: data.datos[key$].idProducto
+                    numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')),
+                    idProyecto: localStorage.getItem('idProyecto'),
+                    idProducto: data.datos[key$].idProducto
                 };
                 _this.setDesarrollado(x).subscribe();
             }
         });
     };
     DesarrolloProductoService.prototype.comenzarDesarrollo = function (id, costo) {
-        var _this = this;
         var x = {
             Proyectos_idProyecto: parseInt(localStorage.getItem('idProyecto')),
             Productos_idProducto: id,
-            periodoInicio: parseInt(localStorage.getItem('numeroPeriodo')),
-            ultimoPeriodoDes: parseInt(localStorage.getItem('numeroPeriodo'))
+            desarrollado: 1,
+            numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')),
+            periodoInicio: parseInt(localStorage.getItem('numeroPeriodo'))
         };
-        for (var i = 0; this.productosSinDesarrollar.length > i; i++) {
-            if (this.productosSinDesarrollar[i].idProducto == id) {
-                this.productosSinDesarrollar.splice(i, 1);
-            }
-        }
         var y = {
             idProyecto: parseInt(localStorage.getItem('idProyecto')),
             idProducto: id,
             numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')),
             costoDes: costo
         };
-        this.desarrollar(x).subscribe(function (data) {
-            for (var i in data.datos) {
-                _this.productosEnDesarrollo[i] = data.datos[i];
-            }
-        });
+        this.desarrollar(x).subscribe();
         this.pagoBalance(y).subscribe();
+        return true;
     };
     DesarrolloProductoService.prototype.pagoBalance = function (y) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
@@ -9357,11 +9352,10 @@ var DesarrolloProductoService = (function () {
         return this.http.post('proyectoproducto/desarrolloproducto/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
     DesarrolloProductoService.prototype.pagarDesarrollo = function (id, costo) {
-        var _this = this;
         var x = {
-            Proyectos_idProyecto: parseInt(localStorage.getItem('idProyecto')),
-            Productos_idProducto: id,
-            ultimoPeriodoDes: parseInt(localStorage.getItem('numeroPeriodo'))
+            idProyecto: parseInt(localStorage.getItem('idProyecto')),
+            idProducto: id,
+            numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo'))
         };
         var y = {
             idProducto: id,
@@ -9369,12 +9363,14 @@ var DesarrolloProductoService = (function () {
             numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')),
             costoDes: costo
         };
+        this.pagoBalance(y).subscribe();
+        var m = [];
         this.pd(x).subscribe(function (data) {
-            for (var i in data.datos) {
-                _this.productosEnDesarrollo[i] = data.datos[i];
+            for (var key in data.datos) {
+                m.push(data.datos[key]);
             }
         });
-        this.pagoBalance(y).subscribe();
+        return m;
     };
     DesarrolloProductoService.prototype.pd = function (x) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
@@ -10317,12 +10313,10 @@ var ProyectosService = (function () {
         var _this = this;
         this.buscarPeriodos(idProyecto).subscribe(function (data) {
             if (data.datos.length == 0) {
-                _this.asignarMaquinaria(idProyecto, localStorage.getItem('idUsuario'));
-                _this.asginarProductos(idProyecto, localStorage.getItem('idUsuario'));
-                _this.asignarZonas(idProyecto, localStorage.getItem('idUsuario'));
                 _this.asginarPeriodoCero(idProyecto);
                 localStorage.setItem('numeroPeriodo', '1');
                 localStorage.setItem('numeroRPeriodos', '1');
+                _this.asignarTodo(idProyecto);
             }
             else {
                 var num = parseInt(data.datos.length) - 1;
@@ -10330,6 +10324,12 @@ var ProyectosService = (function () {
                 localStorage.setItem('numeroRPeriodos', num.toString());
             }
         });
+    };
+    ProyectosService.prototype.asignarTodo = function (idProyecto) {
+        this.asignarZonas(idProyecto, localStorage.getItem('idUsuario'));
+        this.asignarMaquinaria(idProyecto, localStorage.getItem('idUsuario'));
+        this.asginarProductos(idProyecto, localStorage.getItem('idUsuario'));
+        this.asignarProductos2(idProyecto, localStorage.getItem('idUsuario'));
     };
     ProyectosService.prototype.asginarProductos = function (idProyecto, idUsuario) {
         var _this = this;
@@ -10340,12 +10340,14 @@ var ProyectosService = (function () {
                     Productos_idProducto: data.datos[key$].idProducto,
                     desarrollado: 2,
                     periodoInicio: 0,
-                    ultimoPeriodoDes: 0,
                     periodosDes: 0
                 };
                 _this._desarrolloProductoService.desarrollar(x).subscribe();
             }
         });
+    };
+    ProyectosService.prototype.asignarProductos2 = function (idProyecto, idUsuario) {
+        var _this = this;
         this._usuarioProductoService.getProductosNU(idUsuario).subscribe(function (data) {
             for (var key$ in data.datos) {
                 var x = {
@@ -10353,7 +10355,6 @@ var ProyectosService = (function () {
                     Productos_idProducto: data.datos[key$].idProducto,
                     desarrollado: 0,
                     periodoInicio: 0,
-                    ultimoPeriodoDes: 0,
                     periodosDes: 0
                 };
                 _this._desarrolloProductoService.desarrollar(x).subscribe();
@@ -10401,8 +10402,8 @@ var ProyectosService = (function () {
         this.buscarDatosUsuario().subscribe(function (data) {
             for (var key$ in data) {
                 if (data[key$].idUsuario == localStorage.getItem('idUsuario')) {
-                    _this.crearBalanceUno(idProyecto, data[key$], 1).subscribe();
                     _this.crearBalanceCero(idProyecto, data[key$], 0).subscribe();
+                    _this.crearBalanceUno(idProyecto, data[key$], 1).subscribe();
                     break;
                 }
             }
