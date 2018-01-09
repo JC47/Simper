@@ -3739,7 +3739,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-12\">\r\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\r\n<hr>\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-12\" style=\"height:500px\" *ngFor=\"let zona of graficas\" >\r\n    <div class=\"row\">\r\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\r\n\r\n  <div class=\"col-12\" style=\"height:400px;\">\r\n    <ngx-charts-line-chart\r\n         [scheme]=\"colorScheme\"\r\n         [results]=\"zona.graf\"\r\n         xAxis=\"true\"\r\n         legendTitle=\"Productos\"\r\n         yAxis=\"true\"\r\n         legend=\"true\"\r\n         showXAxisLabel=\"true\"\r\n         showYAxisLabel=\"true\"\r\n         xAxisLabel=\"Periodos\"\r\n         yAxisLabel=\"Demanda Potencial\"\r\n         autoScale=\"true\">\r\n       </ngx-charts-line-chart>\r\n  </div>\r\n    </div>\r\n\r\n\r\n\r\n\r\n  </div>\r\n\r\n</div>\r\n"
+module.exports = "<div class=\"col-12\">\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\n<hr>\n</div>\n\n\n<div class=\"row\">\n  <div class=\"col-12\" style=\"height:500px\" *ngFor=\"let zona of graficas\" >\n    <div class=\"row\">\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\n\n  <div class=\"col-12\" style=\"height:400px;\">\n    <ngx-charts-line-chart\n         [scheme]=\"colorScheme\"\n         [results]=\"zona.graf\"\n         xAxis=\"true\"\n         legendTitle=\"Productos\"\n         yAxis=\"true\"\n         legend=\"true\"\n         showXAxisLabel=\"true\"\n         showYAxisLabel=\"true\"\n         xAxisLabel=\"Periodos\"\n         yAxisLabel=\"Demanda Potencial\"\n         autoScale=\"true\">\n       </ngx-charts-line-chart>\n  </div>\n    </div>\n\n\n\n\n  </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -6846,40 +6846,104 @@ var PruebaComponent = (function () {
         doc.save("Estado de Resultados.pdf");
     };
     PruebaComponent.prototype.descargaCSV = function () {
+        var anterior;
+        var actual;
+        var origen;
+        var aplicacion;
+        for (var _i = 0, _a = this.balanceFinal; _i < _a.length; _i++) {
+            var balance = _a[_i];
+            anterior['cajaBancos'] = balance.cajaBancos;
+            anterior['cuentasPorCobrar'] = balance.cuentasPorCobrar;
+            anterior['IVAAcreditable'] = balance.IVAAcreditable;
+            anterior['almacenArtTerm'] = balance.almacenArtTerm;
+            anterior['almacenMateriales'] = balance.almacenMateriales;
+            anterior['terrenos'] = balance.terrenos;
+            anterior['edificios'] = balance.edifInsta;
+            anterior['depEdif'] = balance.depEdif;
+            anterior['maqEquipo'] = balance.maqEquipo;
+            anterior['depMaqEquipo'] = balance.depMaqEquipo;
+            anterior['mueblesEnseres'] = balance.mueblesEnseres;
+            anterior['depMueblesEnseres'] = balance.depMueblesEnseres;
+            anterior['equipoTrans'] = balance.eqTrans;
+            anterior['depEqTrans'] = balance.depEqTrans;
+            anterior['pagosAnticipado'] = balance.pagosAnticipado;
+            anterior['gastosAmortizacion'] = balance.gastosAmortizacion;
+            anterior['IVAPorEnterar'] = balance.IVAPorEnterar;
+            anterior['imptosPorPagar'] = balance.imptosPorPagar;
+            anterior['proveedores'] = balance.proveedores;
+            anterior['PTUPorPagar'] = balance.PTUPorPagar;
+            anterior['prestamosMenosAnio'] = balance.prestamosMenosAnio;
+            anterior['prestamosMasAnio'] = balance.prestamosMasAnio;
+            anterior['capitalSocial'] = balance.capitalSocial;
+            anterior['reservaLegal'] = balance.reservaLegal;
+            anterior['utilidadAcum'] = balance.utilidadAcum;
+            anterior['utilidadEjercicio'] = balance.utilidadEjercicio;
+            anterior['total'] = 0;
+        }
+        for (var _b = 0, _c = this.balanceInicial; _b < _c.length; _b++) {
+            var balance = _c[_b];
+            actual['cajaBancos'] = balance.cajaBancos;
+            actual['cuentasPorCobrar'] = balance.cuentasPorCobrar;
+            actual['IVAAcreditable'] = balance.IVAAcreditable;
+            actual['almacenArtTerm'] = balance.almacenArtTerm;
+            actual['almacenMateriales'] = balance.almacenMateriales;
+            actual['terrenos'] = balance.terrenos;
+            actual['edificios'] = balance.edifInsta;
+            actual['depEdif'] = balance.depEdif;
+            actual['maqEquipo'] = balance.maqEquipo;
+            actual['depMaqEquipo'] = balance.depMaqEquipo;
+            actual['mueblesEnseres'] = balance.mueblesEnseres;
+            actual['depMueblesEnseres'] = balance.depMueblesEnseres;
+            actual['equipoTrans'] = balance.eqTrans;
+            actual['depEqTrans'] = balance.depEqTrans;
+            actual['pagosAnticipado'] = balance.pagosAnticipado;
+            actual['gastosAmortizacion'] = balance.gastosAmortizacion;
+            actual['IVAPorEnterar'] = balance.IVAPorEnterar;
+            actual['imptosPorPagar'] = balance.imptosPorPagar;
+            actual['proveedores'] = balance.proveedores;
+            actual['PTUPorPagar'] = balance.PTUPorPagar;
+            actual['prestamosMenosAnio'] = balance.prestamosMenosAnio;
+            actual['prestamosMasAnio'] = balance.prestamosMasAnio;
+            actual['capitalSocial'] = balance.capitalSocial;
+            actual['reservaLegal'] = balance.reservaLegal;
+            actual['utilidadAcum'] = balance.utilidadAcum;
+            actual['utilidadEjercicio'] = balance.utilidadEjercicio;
+            actual['total'] = 0;
+        }
         var data = [
             { "cara": "", "actual": "Año Actual", "anterior": "Año Anterior", "aplicacion": "Aplicación", "origen": "Origen" },
-            { "cara": "Amenos de un Año" },
-            { "cara": "Caja Bancos" },
-            { "cara": "Cuentas por Cobrar" },
-            { "cara": "IVA Acreditable" },
-            { "cara": "Almacen de Articulo Terminado" },
-            { "cara": "Almacen de Materiales" },
-            { "cara": "A más de un año" },
-            { "cara": "Terrenos" },
-            { "cara": "Edificios e Instalaciones" },
-            { "cara": "Deprecicaicón Acumulada" },
-            { "cara": "Maquinaria y  Equipo" },
-            { "cara": "Depreciación Acumulada" },
-            { "cara": "Muebles y Enseres" },
-            { "cara": "Depresisción Acumulada" },
-            { "cara": "Equipo de Transporte" },
-            { "cara": "Depreciación Acumulada" },
-            { "cara": "De Aplicación Diferida" },
-            { "cara": "Pagos hechos por anticipado" },
-            { "cara": "Gastos por Amortizar" },
-            { "cara": "A menos de un año" },
-            { "cara": "IVA por Enterar" },
-            { "cara": "Impuestos por Pagar" },
-            { "cara": "Poveedores" },
-            { "cara": "PTU por Pagar" },
-            { "cara": "Prestamos Bancarios" },
-            { "cara": "A más de un año" },
-            { "cara": "Prestamos Totales" },
-            { "cara": "Capital Social" },
-            { "cara": "Reserva Legal" },
-            { "cara": "Utilidad Acumulada" },
-            { "cara": "Utilidad del Ejercicio" },
-            { "cara": "Total" },
+            { "cara": "Amenos de un Año", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Caja Bancos", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Cuentas por Cobrar", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "IVA Acreditable", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Almacen de Articulo Terminado", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Almacen de Materiales", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "A más de un año", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Terrenos", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Edificios e Instalaciones", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Deprecicaicón Acumulada", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Maquinaria y  Equipo", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Depreciación Acumulada", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Muebles y Enseres", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Depresisción Acumulada", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Equipo de Transporte", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Depreciación Acumulada", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "De Aplicación Diferida", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Pagos hechos por anticipado", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Gastos por Amortizar", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "A menos de un año", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "IVA por Enterar", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Impuestos por Pagar", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Poveedores", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "PTU por Pagar", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Prestamos Bancarios", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "A más de un año", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Prestamos Totales", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Capital Social", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Reserva Legal", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Utilidad Acumulada", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Utilidad del Ejercicio", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Total", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
         ];
         new __WEBPACK_IMPORTED_MODULE_5_angular2_csv_Angular2_csv__["Angular2Csv"](data, 'Posición Comparativa');
     };
