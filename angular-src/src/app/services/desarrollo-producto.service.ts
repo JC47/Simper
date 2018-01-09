@@ -144,9 +144,9 @@ export class DesarrolloProductoService {
 
   pagarDesarrollo(id, costo){
     var x = {
-      Proyectos_idProyecto:parseInt(localStorage.getItem('idProyecto')),
-      Productos_idProducto:id,
-      ultimoPeriodoDes:parseInt(localStorage.getItem('numeroPeriodo'))
+      idProyecto:parseInt(localStorage.getItem('idProyecto')),
+      idProducto:id,
+      numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo'))
     }
 
     var y = {
