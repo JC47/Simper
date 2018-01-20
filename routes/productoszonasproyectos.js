@@ -12,12 +12,9 @@ router.post('/desarrollozona/', (req, res, next) => {
       var json = req.body;
       return productoZonaProyecto.addProductoZonaProyecto(json);
   })
-  .then(function () {
-    var idZona = req.body.Zona_idZonas;
-    var idProyecto = req.body.Proyecto_idProyecto;
-    var idUsuario = req.body.Proyecto_Usuario_idUsuario;
-    return productoZonaProyecto.getProductoZonaProyecto(idZona,idProyecto,idUsuario);
-  })
+  // .then(function () {
+  //   return productoZonaProyecto.getProductoZonaProyecto(/*idZona,idProyecto,idUsuario*/);
+  // })
   .then(function(rows){
     res.json({success: true, msg:"Operacion exitosa", datos:rows});
   })
@@ -32,43 +29,62 @@ router.post('/desarrollozona/', (req, res, next) => {
   });
 });
 
-//AQUI
+
 router.post('/pagardesarrollozona', (req, res, next) => {
   var idProducto = req.body.Producto_idProducto;
   var idZona = req.body.Zona_idZonas;
   var idProyecto = req.body.Proyecto_idProyecto;
   var idUsuario = req.body.Proyecto_Usuario_idUsuario;
+  var numeroPeriodo = req.body.numeroPeriodo;
 
-  var ultimoPeriodo = req.body.ultimoPeriodoDes;
+  var tiempoDes;
+  var periodosDes
+  var maxnumeroperiodo;
+  var json;
 
-  Promise.join(productoZonaProyecto.getTiempoDesZona(idZona,idProducto),
-    productoZonaProyecto.getPeriodosDesProductoZonaProyecto(idProyecto,idProducto,idUsuario,idZona),
-    function(tiempo, periodo) {
-      console.log("tiempodes Zona: " + tiempo[0].tiempoDes);
-      console.log("periodosDes productozonaproyecto: "+ periodo[0].periodosDes);
-      var tiempoDes = tiempo[0].tiempoDes;
-      var periodosDes = periodo[0].periodosDes;
-      return comparaTiempos(tiempoDes,periodosDes);
-      //return periodosDes;
-    })
-  .then(function (periodosDes) {
-    var idProducto = req.body.Producto_idProducto;
-    var idZona = req.body.Zona_idZonas;
-    var idProyecto = req.body.Proyecto_idProyecto;
-    var idUsuario = req.body.Proyecto_Usuario_idUsuario;
-    var ultimoPeriodo = req.body.ultimoPeriodoDes;
-    var periodos = periodosDes;
+  Promise.join(
+    productoZonaProyecto.getMaxNumeroPeriodoProductoZonaProyecto(idProyecto,idProducto,idZona,idUsuario),
+    productoZonaProyecto.getTiempoDesZona(idZona,idProducto),
+    function (maxnumperiodo,tiempo) {
 
-    console.log("periodos aumentaPeriodos: "+periodos);
-    console.log("ultimoPeriodo: "+ultimoPeriodo);
-    return productoZonaProyecto.updateProductoZonaProyecto(idProducto,idZona,idProyecto,idUsuario,ultimoPeriodo,periodos);
+    maxnumeroperiodo = maxnumperiodo[0].maxnumperiodo;
+    tiempoDes = tiempo[0].tiempoDes;
+console.log("tiempoDes:: ",tiempo);
+console.log("maxnumeroperiodo:: ",maxnumperiodo);
+    return productoZonaProyecto.getPeriodosDesProductoZonaProyecto(idProyecto,idProducto,idUsuario,idZona,maxnumeroperiodo);
+//return console.log("ok");
    })
-//regreso datos
-  .then(function () {
-    return productoZonaProyecto.getProductoZonaProyectoEnDes();
+  .then(function (periodo) {
+    periodosDes = periodo[0].periodosDes;
   })
-  .then(function(datos){
-    res.json({success: true, datos:datos, msg:"Operacion exitosa"});
+  .then(function () {
+    return productoZonaProyecto.getProductoZonaProyecto(idProducto,idZona,idProyecto,idUsuario,maxnumeroperiodo);
+  })
+  .then(function (productozonaproyecto) {
+
+    if (tiempoDes == periodosDes) {
+      return console.log("igual");
+    }else {
+      periodosDes = aumentaPeriodos(periodosDes);
+      json = {
+        "Producto_idProducto":idProducto,
+        "Zona_idZonas":idZona,
+        "Proyecto_idProyecto":idProyecto,
+        "Proyecto_Usuario_idUsuario":idUsuario,
+        "numeroPeriodo":numeroPeriodo,
+        "desarrollado":productozonaproyecto[0].desarrollado,
+        "periodoInicio":productozonaproyecto[0].periodoInicio,
+        "periodosDes":periodosDes
+      }
+      return productoZonaProyecto.addProductoZonaProyecto(json);
+    }
+  })
+// FALTAN LAS CONSULTAS
+//   .then(function () {
+//     return proyectoProducto.getProductosEnDesarrollo(idProyecto,numeroPeriodo);
+//   })
+  .then(function(){
+    res.json({success: true, msg:"Operacion exitosa"});
   })
   .catch(function (err) {
     console.error("got error: " + err);

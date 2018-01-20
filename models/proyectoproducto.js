@@ -78,6 +78,11 @@ module.exports.getProductosEnDesarrollo = function (idProyecto,numeroPeriodo) {
   return querySql(query);
 }
 
+module.exports.getIdProductoInferiorNumPeriodo = function (idProyecto,numeroPeriodo) {
+  var query = "select distinct Productos_idProducto from proyectoproducto where Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+"";
+  return querySql(query);
+}
+
 module.exports.getProductosDesarrollados = function (idProyecto,numeroPeriodo) {
   //var queryProdDes = "select * from producto inner join proyectoproducto on producto.idProducto = proyectoproducto.Productos_idProducto and proyectoproducto.Proyectos_idProyecto = "+idProyecto+" and proyectoproducto.desarrollado = 1 ";
   var query = "select * from proyectoproducto inner join producto on proyectoproducto.Productos_idProducto = producto.idProducto where Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" and desarrollado = 2";
