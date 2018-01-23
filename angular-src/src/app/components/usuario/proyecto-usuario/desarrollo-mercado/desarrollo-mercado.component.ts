@@ -140,7 +140,7 @@ this._proyectoService.ocultaCierrePeriodo()
       Zona_idZonas:this.productoSelectedPago.idZona,
       Proyecto_idProyecto:localStorage.getItem('idProyecto'),
       Proyecto_Usuario_idUsuario:localStorage.getItem('idUsuario'),
-      ultimoPeriodoDes:localStorage.getItem('numeroPeriodo')
+      numeroPeriodo:localStorage.getItem('numeroPeriodo')
     }
     console.log("idProducto",this.productoSelectedPago.idProducto);
     this._desarrolloZonaService.Desarrollar(x).subscribe();
@@ -158,7 +158,7 @@ this._proyectoService.ocultaCierrePeriodo()
       Proyecto_idProyecto:localStorage.getItem('idProyecto'),
       Proyecto_Usuario_idUsuario:localStorage.getItem('idUsuario'),
       periodoInicio:localStorage.getItem('numeroPeriodo'),
-      ultimoPeriodoDes:localStorage.getItem('numeroPeriodo')
+      numeroPeriodo:localStorage.getItem('numeroPeriodo')
     }
     var costo = this.getCosto(producto.idZona,producto.idProducto);
     console.log("idProducto",producto.idProducto);

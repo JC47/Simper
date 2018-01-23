@@ -41,7 +41,9 @@ export class UsuarioZonaService {
     return this.http.get('usuariosproductoszonas/'+idUsuario).map(res => res.json());
   }
 
-
+  getZonasNU(idUsuario){
+    return this.http.get('usuariosproductoszonas/n/'+idUsuario).map(res => res.json());
+  }
 
   addZonaU(x){
     let headers = new Headers({

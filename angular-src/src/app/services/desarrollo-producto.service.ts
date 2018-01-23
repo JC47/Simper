@@ -58,7 +58,7 @@ export class DesarrolloProductoService {
       idProyecto:localStorage.getItem('idProyecto'),
       numeroPeriodo:localStorage.getItem('numeroPeriodo')
     }
-    return this.http.post('proyectoproducto/getproductosendesarrollo/',x,{headers}).map(res => res.json());
+    return this.http.post('proyectoproducto/jsonendes/',x,{headers}).map(res => res.json());
   }
 
   getProductosDesarrollados(){

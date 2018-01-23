@@ -17,3 +17,10 @@ module.exports.deleteUsuarioProductoZona = function (idUsuario,idAdministrador,i
   var query = "delete from usuarioproductozona where idUsuario = "+idUsuario+" and idAdministrador = "+idAdministrador+" and idProducto = "+idProducto+" and idZona = " + idZona +" ";
   return querySql(query);
 }
+
+//Arregla esta consulta por favor
+
+module.exports.getIdProductoZonasSinAsignar = function (idUsuario) {
+  var query = "select Producto_idProducto,Zona_idZona from productozona where not Producto_idProducto in (select idProducto from usuarioproductozona where idUsuario = "+idUsuario+") and not Zona_idZona in (select idZona from usuarioproductozona where idUsuario = "+idUsuario+")";
+  return querySql(query);
+}

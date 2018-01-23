@@ -1237,7 +1237,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"background-image:url('assets/img/fondo1.jpeg');background-attachment: fixed;background-size:cover;\r\noverflow:hidden; margin-top:80px;height:600px\">\r\n  <!-- <div class=\"container\" style=\"margin-top:120px;\"> -->\r\n          <!-- <div class=\"card card-container\">\r\n              <img id=\"profile-img\" class=\"profile-img-card\" src=\"//ssl.gstatic.com/accounts/ui/avatar_2x.png\" />\r\n              <p id=\"profile-name\" class=\"profile-name-card\"></p>\r\n              <form class=\"form-signin\" [formGroup]=\"login\" (ngSubmit)=\"onLoginSubmit()\">\r\n                  <span id=\"reauth-email\" class=\"reauth-email\"></span>\r\n                  <input type=\"text\" class=\"form-control\" placeholder=\"Nombre de Usuario\" formControlName=\"username\" required autofocus>\r\n                  <input type=\"password\" class=\"form-control\" placeholder=\"Contraseña\" formControlName=\"password\" required>\r\n                    <button class=\"btn btn-lg btn-primary btn-block btn-signin\" type=\"submit\">Entrar</button>\r\n              </form>\r\n          </div> -->\r\n\r\n          <h1 style=\"margin-top:60px;color:#005689\">Vision y Sensibilidad en los Negocios</h1>\r\n          <div class=\"login-form\" >\r\n     <img src=\"assets/img/perfil.jpg\" class=\"img-log\" alt=\"\">\r\n     <form [formGroup]=\"login\" (ngSubmit)=\"onLoginSubmit()\">\r\n       <div class=\"form-group \">\r\n         <input type=\"text\" class=\"form-control\" placeholder=\"Usuario \" formControlName=\"username\"\r\n         [ngClass]=\"{'wrong-entry':!validUser}\">\r\n\r\n       </div>\r\n       <div class=\"form-group log-status\">\r\n         <input type=\"password\" class=\"form-control\" placeholder=\"Contraseña\" formControlName=\"password\"\r\n         [ngClass]=\"{'wrong-entry':!validPass}\">\r\n       </div>\r\n        <span *ngIf=\"!validPass\" class=\"alert\">Contraseña Incorrecta</span>\r\n        <span *ngIf=\"!validUser\" class=\"alert\">Usuario Incorrecto</span>\r\n       <button type=\"submit\" class=\"log-btn\" >Entrar</button>\r\n     </form>\r\n\r\n\r\n\r\n   </div>\r\n\r\n\r\n\r\n\r\n\r\n</div>\r\n"
+module.exports = "<div style=\"background-image:url('assets/img/fondo1.jpeg');background-attachment: fixed;background-size:cover;overflow:hidden; margin-top:80px;height:600px\">\r\n  <h1 style=\"margin-top:60px;color:#005689\">Vision y Sensibilidad en los Negocios</h1>\r\n      <div class=\"login-form\" >\r\n\r\n         <img src=\"assets/img/perfil.jpg\" class=\"img-log\" alt=\"\">\r\n\r\n         <form [formGroup]=\"login\" (ngSubmit)=\"onLoginSubmit()\">\r\n\r\n           <div class=\"form-group \">\r\n             <input type=\"text\" class=\"form-control\" placeholder=\"Usuario \" formControlName=\"username\"\r\n             [ngClass]=\"{'wrong-entry':!validUser}\">\r\n           </div>\r\n\r\n           <div class=\"form-group log-status\">\r\n             <input type=\"password\" class=\"form-control\" placeholder=\"Contraseña\" formControlName=\"password\"\r\n             [ngClass]=\"{'wrong-entry':!validPass}\">\r\n           </div>\r\n\r\n            <span *ngIf=\"!validPass\" class=\"alert\">Contraseña Incorrecta</span>\r\n            <span *ngIf=\"!validUser\" class=\"alert\">Usuario Incorrecto</span>\r\n           <button type=\"submit\" class=\"log-btn\" >Entrar</button>\r\n\r\n         </form>\r\n     </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -4050,7 +4050,7 @@ var DesarrolloMercadoComponent = (function () {
             Zona_idZonas: this.productoSelectedPago.idZona,
             Proyecto_idProyecto: localStorage.getItem('idProyecto'),
             Proyecto_Usuario_idUsuario: localStorage.getItem('idUsuario'),
-            ultimoPeriodoDes: localStorage.getItem('numeroPeriodo')
+            numeroPeriodo: localStorage.getItem('numeroPeriodo')
         };
         console.log("idProducto", this.productoSelectedPago.idProducto);
         this._desarrolloZonaService.Desarrollar(x).subscribe();
@@ -4068,7 +4068,7 @@ var DesarrolloMercadoComponent = (function () {
             Proyecto_idProyecto: localStorage.getItem('idProyecto'),
             Proyecto_Usuario_idUsuario: localStorage.getItem('idUsuario'),
             periodoInicio: localStorage.getItem('numeroPeriodo'),
-            ultimoPeriodoDes: localStorage.getItem('numeroPeriodo')
+            numeroPeriodo: localStorage.getItem('numeroPeriodo')
         };
         var costo = this.getCosto(producto.idZona, producto.idProducto);
         console.log("idProducto", producto.idProducto);
@@ -9287,7 +9287,7 @@ var DesarrolloProductoService = (function () {
             idProyecto: localStorage.getItem('idProyecto'),
             numeroPeriodo: localStorage.getItem('numeroPeriodo')
         };
-        return this.http.post('proyectoproducto/getproductosendesarrollo/', x, { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.post('proyectoproducto/jsonendes/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
     DesarrolloProductoService.prototype.getProductosDesarrollados = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
@@ -9494,7 +9494,8 @@ var DesarrolloZonaService = (function () {
     DesarrolloZonaService.prototype.getProductosDeZonaSinDesarrollar = function () {
         var x = {
             Proyecto_idProyecto: parseInt(localStorage.getItem('idProyecto')),
-            Proyecto_Usuario_idUsuario: parseInt(localStorage.getItem('idUsuario'))
+            Proyecto_Usuario_idUsuario: parseInt(localStorage.getItem('idUsuario')),
+            numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo'))
         };
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
             'Content-Type': 'application/json'
@@ -9504,7 +9505,8 @@ var DesarrolloZonaService = (function () {
     DesarrolloZonaService.prototype.getProductosDeZonaEnDesarrollo = function () {
         var x = {
             Proyecto_idProyecto: parseInt(localStorage.getItem('idProyecto')),
-            Proyecto_Usuario_idUsuario: parseInt(localStorage.getItem('idUsuario'))
+            Proyecto_Usuario_idUsuario: parseInt(localStorage.getItem('idUsuario')),
+            numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo'))
         };
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
             'Content-Type': 'application/json'
@@ -9543,7 +9545,7 @@ var DesarrolloZonaService = (function () {
     DesarrolloZonaService.prototype.getProductosDeZonaDesarrollados = function () {
         var x = {
             Proyecto_idProyecto: parseInt(localStorage.getItem('idProyecto')),
-            Proyecto_Usuario_idUsuario: parseInt(localStorage.getItem('idUsuario'))
+            numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo'))
         };
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
             'Content-Type': 'application/json'
@@ -10330,6 +10332,7 @@ var ProyectosService = (function () {
         this.asignarMaquinaria(idProyecto, localStorage.getItem('idUsuario'));
         this.asginarProductos(idProyecto, localStorage.getItem('idUsuario'));
         this.asignarProductos2(idProyecto, localStorage.getItem('idUsuario'));
+        this.asignarZonas2(idProyecto, localStorage.getItem('idUsuario'));
     };
     ProyectosService.prototype.asginarProductos = function (idProyecto, idUsuario) {
         var _this = this;
@@ -10373,9 +10376,27 @@ var ProyectosService = (function () {
                     Zona_idZonas: data.datos[key$].idZona,
                     Proyecto_idProyecto: idProyecto,
                     Proyecto_Usuario_idUsuario: idUsuario,
-                    desarrollado: 1,
+                    numeroPeriodo: 0,
+                    desarrollado: 2,
                     periodoInicio: 0,
-                    ultimoPeriodoDes: 0,
+                    periodosDes: 0
+                };
+                _this._desarrolloZonaService.addZona(x).subscribe();
+            }
+        });
+    };
+    ProyectosService.prototype.asignarZonas2 = function (idProyecto, idUsuario) {
+        var _this = this;
+        this._usuarioZonaService.getZonasNU(idUsuario).subscribe(function (data) {
+            for (var key$ in data.datos) {
+                var x = {
+                    Producto_idProducto: data.datos[key$].Producto_idProducto,
+                    Zona_idZonas: data.datos[key$].Zona_idZona,
+                    Proyecto_idProyecto: idProyecto,
+                    Proyecto_Usuario_idUsuario: idUsuario,
+                    numeroPeriodo: 0,
+                    desarrollado: 0,
+                    periodoInicio: 0,
                     periodosDes: 0
                 };
                 _this._desarrolloZonaService.addZona(x).subscribe();
@@ -11133,6 +11154,9 @@ var UsuarioZonaService = (function () {
     };
     UsuarioZonaService.prototype.getZonasU = function (idUsuario) {
         return this.http.get('usuariosproductoszonas/' + idUsuario).map(function (res) { return res.json(); });
+    };
+    UsuarioZonaService.prototype.getZonasNU = function (idUsuario) {
+        return this.http.get('usuariosproductoszonas/n/' + idUsuario).map(function (res) { return res.json(); });
     };
     UsuarioZonaService.prototype.addZonaU = function (x) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
