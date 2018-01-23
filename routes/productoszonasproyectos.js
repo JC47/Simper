@@ -30,7 +30,7 @@ router.post('/desarrollozona/', (req, res, next) => {
 });
 
 
-router.post('/pagardesarrollozona', (req, res, next) => {
+router.post('/pagardesarrollozona/', (req, res, next) => {
   var idProducto = req.body.Producto_idProducto;
   var idZona = req.body.Zona_idZonas;
   var idProyecto = req.body.Proyecto_idProyecto;
@@ -97,35 +97,14 @@ console.log("maxnumeroperiodo:: ",maxnumperiodo);
   });
 });
 
-//Actualiza el valor de desarrollado de 0 (no desarrollado) a 1 (desarrollado)
-router.post('/desarrolladoproductozonaproyecto', (req, res, next) => {
-  Promise.resolve().then(function () {
-      var idProducto = req.body.Producto_idProducto;
-      var idZona = req.body.Zona_idZonas;
-      var idProyecto = req.body.Proyecto_idProyecto;
-      var idUsuario = req.body.Proyecto_Usuario_idUsuario;
-      var desarrollado = 1;
-      return productoZonaProyecto.desarolladoProductoZonaProyecto(idProducto,idZona,idProyecto,idUsuario,desarrollado);
-  })
-  .then(function(){
-    res.json({success: true, msg:"Operacion exitosa"});
-  })
-  .catch(function (err) {
-    console.error("Log error: " + err);
-    if (err instanceof Error) {
-      res.status(400).send("Error general");
-      console.log(err);
-    } else {
-      res.status(200).json({ "code": 1000, "message": err });
-    }
-  });
-});
-
 router.post('/productossindesarrollar/', (req, res, next) => {
+
   var idProyecto = req.body.Proyecto_idProyecto;
   var idUsuario = req.body.Proyecto_Usuario_idUsuario;
-  Promise.join(productoZonaProyecto.getProductosSinDesarrollar(idProyecto,idUsuario),
-  productoZonaProyecto.getIdZonaSinDes(idProyecto,idUsuario),
+  var numeroPeriodo = req.body.numeroPeriodo;
+
+  Promise.join(productoZonaProyecto.getProductosSinDesarrollar(idProyecto,numeroPeriodo,idUsuario),
+  productoZonaProyecto.getIdZonaSinDes(idProyecto,numeroPeriodo,idUsuario),
   productoZonaProyecto.getZonas(),function(productozonasindes, idszonasindes,zonas) {
       return jsonProductosSinDesarrollar(productozonasindes,idszonasindes,zonas);
      })
@@ -148,12 +127,18 @@ router.post('/productosendesarrollo/', (req, res, next) => {
 
   var idProyecto = req.body.Proyecto_idProyecto;
   var idUsuario = req.body.Proyecto_Usuario_idUsuario;
+  var numeroPeriodo = req.body.numeroPeriodo;
 
-  Promise.join(productoZonaProyecto.getProductosEnDesarrollo(idProyecto,idUsuario),
-  productoZonaProyecto.getIdZonasEnDes(idProyecto,idUsuario),
-  productoZonaProyecto.getZonas(),productoZonaProyecto.getProductosEnDesEnZona(idProyecto,idUsuario),
-  function(productosendes, idszonasdes, zonas, productosendesenzona) {
-      return jsonProductosEnDesarrollo(productosendes, idszonasdes, zonas, productosendesenzona);
+  Promise.join(productoZonaProyecto.getProductosEnDesarrollo(idProyecto,numeroPeriodo,idUsuario),
+  productoZonaProyecto.getIdZonasEnDes(idProyecto,numeroPeriodo,idUsuario),
+  productoZonaProyecto.getZonas(),
+  //productoZonaProyecto.getProductosEnDesEnZona(idProyecto,idUsuario),
+  function(productosendes, idszonasdes, zonas/*, productosendesenzona*/) {
+    // console.log("productosendes:: ",productosendes);
+    // console.log("idszonasdes:: ",idszonasdes);
+    // console.log("zonas:: ",zonas);
+
+      return jsonProductosEnDesarrollo(productosendes, idszonasdes, zonas/*, productosendesenzona*/);
      })
   .then(function (rows) {
       res.json({success: true, datos:rows, msg:"Operacion exitosa"});
@@ -169,35 +154,61 @@ router.post('/productosendesarrollo/', (req, res, next) => {
   });
 });
 
-router.get('/terminados/:idProyecto', (req, res, next) => {
-  Promise.resolve().then(function () {
-    return productoZonaProyecto.getTerminados(req.params.idProyecto);
-  }).then( function(rows) {
-    res.json({success:true, msg:"Operacion exitosa", datos:rows});
-  }).catch( function (err) {
-    console.log(err);
-    res.json({success:false, msg:"Fallo"});
-  })
-})
-
 //Productos que ya están desarrollados (desarrollado = 1)
 router.post('/productosdesarrollados/', (req, res, next) => {
 
   var idProyecto = req.body.Proyecto_idProyecto;
-  var idUsuario = req.body.Proyecto_Usuario_idUsuario;
+//  var idUsuario = req.body.Proyecto_Usuario_idUsuario;
+  var numeroPeriodo = req.body.numeroPeriodo;
 
-  Promise.join(productoZonaProyecto.getProductosDesarrollados(idProyecto,idUsuario),
-  productoZonaProyecto.getIdZonasDes(idProyecto,idUsuario),
-  productoZonaProyecto.getZonas(), productoZonaProyecto.getProductosDesEnZona(idProyecto,idUsuario),
-  function(productosdes, idszonasdes, zonas, productosdesenzona) {
+  Promise.join(productoZonaProyecto.getProductosDesarrollados(idProyecto,numeroPeriodo),
+  productoZonaProyecto.getIdZonasDes(idProyecto,numeroPeriodo),
+  productoZonaProyecto.getZonas(),
+  //productoZonaProyecto.getProductosDesEnZona(idProyecto,idUsuario),
+  function(productosdes, idszonasdes, zonas/*, productosdesenzona*/) {
 
-      return jsonProductosDesarrollados(productosdes, idszonasdes,zonas, productosdesenzona);
+      return jsonProductosDesarrollados(productosdes, idszonasdes,zonas/*, productosdesenzona*/);
      })
   .then(function (rows) {
       res.json({success: true, datos:rows, msg:"Operacion exitosa"});
   })
   .catch(function (err) {
     console.error("got error: " + err);
+    if (err instanceof Error) {
+      res.status(400).send("Error general");
+      console.log(err);
+    } else {
+      res.status(200).json({ "code": 1000, "message": err });
+    }
+  });
+});
+
+// router.get('/terminados/:idProyecto', (req, res, next) => {
+//   Promise.resolve().then(function () {
+//     return productoZonaProyecto.getTerminados(req.params.idProyecto);
+//   }).then( function(rows) {
+//     res.json({success:true, msg:"Operacion exitosa", datos:rows});
+//   }).catch( function (err) {
+//     console.log(err);
+//     res.json({success:false, msg:"Fallo"});
+//   })
+// })
+
+//Actualiza el valor de desarrollado de 0 (no desarrollado) a 1 (desarrollado)
+router.post('/desarrolladoproductozonaproyecto', (req, res, next) => {
+  Promise.resolve().then(function () {
+      var idProducto = req.body.Producto_idProducto;
+      var idZona = req.body.Zona_idZonas;
+      var idProyecto = req.body.Proyecto_idProyecto;
+      var idUsuario = req.body.Proyecto_Usuario_idUsuario;
+      var desarrollado = 1;
+      return productoZonaProyecto.desarolladoProductoZonaProyecto(idProducto,idZona,idProyecto,idUsuario,desarrollado);
+  })
+  .then(function(){
+    res.json({success: true, msg:"Operacion exitosa"});
+  })
+  .catch(function (err) {
+    console.error("Log error: " + err);
     if (err instanceof Error) {
       res.status(400).send("Error general");
       console.log(err);
@@ -385,14 +396,14 @@ function jsonDesarrollados(idszonas, desarrollados) {
 
 //PRODUCTOS DESARROLLADOS
 
-function jsonProductosDesarrollados(productosdes, idszonasdes,zonas, productosdesenzona) {
+function jsonProductosDesarrollados(productosdes, idszonasdes,zonas/*, productosdesenzona*/) {
   var repIdProductosDes = [];//almacena las veces que se repite un idZona en productosdes
 
   var i = 0;
   while (i<idszonasdes.length) {
     var aux = 0;
     for (var j = 0; j < productosdes.length; j++) {
-      if (idszonasdes[i].Zona_idZonas == productosdes[j].Zona_idZonas) {
+      if (idszonasdes[i].Zona_idZona == productosdes[j].Zona_idZona) {
         aux = aux +1;
       }
     }
@@ -407,9 +418,9 @@ var k = 0;
 
 while (k < idszonasdes.length) {
   for (var i = 0; i < zonas.length; i++) {
-    if (idszonasdes[k].Zona_idZonas == zonas[i].idZona) {
+    if (idszonasdes[k].Zona_idZona == zonas[i].idZona) {
       var json = {
-        "idZona":idszonasdes[k].Zona_idZonas,
+        "idZona":idszonasdes[k].Zona_idZona,
         "nombreZona":zonas[i].nombreZona,
         "productosDes":[]
       }
@@ -423,26 +434,26 @@ while (k < idszonasdes.length) {
 var aux2 = 0;
 for (var j = 0; j < repIdProductosDes.length; j++) {
   for (var k = 0; k < (repIdProductosDes[j]); k++) {
-    productosDes[j]['productosDes'].push(productosdesenzona[aux2].Producto_idProducto);
+    productosDes[j]['productosDes'].push(productosdes[aux2].Producto_idProducto);
    aux2 = aux2 + 1;
    console.log("aux2: "+aux2);
   }
 }
-//console.log(productosDes);
+console.log(productosDes);
 return productosDes;
 }
 
 
 //PRODUCTOS EN DESARROLLO
 
-function jsonProductosEnDesarrollo(productosendes, idszonasendes,zonas, productosendesenzona) {
+function jsonProductosEnDesarrollo(productosendes, idszonasendes,zonas/*, productosendesenzona*/) {
   var repIdProductosEnDes = [];//almacena las veces que se repite un idZona en productosdes
 
   var i = 0;
   while (i<idszonasendes.length) {
     var aux = 0;
     for (var j = 0; j < productosendes.length; j++) {
-      if (idszonasendes[i].Zona_idZonas == productosendes[j].Zona_idZonas) {
+      if (idszonasendes[i].Zona_idZona == productosendes[j].Zona_idZona) {
         aux = aux +1;
       }
     }
@@ -457,9 +468,9 @@ var k = 0;
 
 while (k < idszonasendes.length) {
   for (var i = 0; i < zonas.length; i++) {
-    if (idszonasendes[k].Zona_idZonas == zonas[i].idZona) {
+    if (idszonasendes[k].Zona_idZona == zonas[i].idZona) {
       var json = {
-        "idZona":idszonasendes[k].Zona_idZonas,
+        "idZona":idszonasendes[k].Zona_idZona,
         "nombreZona":zonas[i].nombreZona,
         "productosEnDes":[]
       }
@@ -468,16 +479,16 @@ while (k < idszonasendes.length) {
   }
   k++;
 }
-//console.log(productosDes);
+//console.log(productosEnDes);
 
 var aux2 = 0;
 for (var j = 0; j < repIdProductosEnDes.length; j++) {
   for (var k = 0; k < (repIdProductosEnDes[j]); k++) {
     var json = {
-      "idProducto":productosendesenzona[aux2].Producto_idProducto,
-      "periodosDes":productosendesenzona[aux2].periodosDes,
-      "tiempoDes":productosendesenzona[aux2].tiempoDes,
-      "ultimoPeriodoDes":productosendesenzona[aux2].ultimoPeriodoDes
+      "idProducto":productosendes[aux2].Producto_idProducto,
+      "periodosDes":productosendes[aux2].periodosDes,
+      "tiempoDes":productosendes[aux2].tiempoDes,
+      "ultimoPeriodoDes":productosendes[aux2].ultimoPeriodoDes
     }
     productosEnDes[j]['productosEnDes'].push(json);
    aux2 = aux2 + 1;
