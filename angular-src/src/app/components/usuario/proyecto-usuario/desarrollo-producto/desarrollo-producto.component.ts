@@ -89,11 +89,15 @@ export class DesarrolloProductoComponent implements OnInit {
   }
 
   pagarDesarrollo(){
+    var z = this._desarrolloProducto.pagarDesarrollo(this.productoSelectedPago.Productos_idProducto,this.productoSelectedPago.costoDes);
     this.openPago=false;
     this.openLoadPago=true;
-    setTimeout(()=>this.openLoadPago=false, 2000);
-
-    this.productosEnDesarrollo = this._desarrolloProducto.pagarDesarrollo(this.productoSelectedPago.idProducto,this.productoSelectedPago.costoDes);
+    setTimeout(()=>{
+      this.openLoadPago=false;
+      if(z){
+        this.actualizar2();
+      }
+    }, 2000);
   }
 
 
@@ -122,6 +126,11 @@ export class DesarrolloProductoComponent implements OnInit {
     this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
     this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
     this.productosSinDesarrollar = this._desarrolloProducto.returnProductosSinDesarrollar();
+  }
+
+  actualizar2(){
+    this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
+    console.log("Pago",this.productosEnDesarrollo)
   }
 
 }

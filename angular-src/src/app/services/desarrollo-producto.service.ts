@@ -26,6 +26,7 @@ export class DesarrolloProductoService {
         x.push(data.datos[i]);
       }
     });
+    console.log("Consulta",x)
     return x;
   }
 
@@ -73,7 +74,11 @@ export class DesarrolloProductoService {
   }
 
   getTerminados(){
-    return this.http.get('proyectoproducto/getterminados/'+localStorage.getItem('idProyecto')).map(res => res.json());
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:localStorage.getItem('numeroPeriodo')
+    }
+    return this.http.post('proyectoproducto/getterminados/',x).map(res => res.json());
   }
 
   setDesarrollado(x){
@@ -146,13 +151,9 @@ export class DesarrolloProductoService {
       costoDes:costo
     }
     this.pagoBalance(y).subscribe();
-    var m = [];
-    this.pd(x).subscribe( data => {
-      for(let key in data.datos){
-        m.push(data.datos[key]);
-      }
-    });
-    return m;
+    this.pd(x).subscribe();
+
+    return true;
   }
 
   pd(x){

@@ -4249,10 +4249,15 @@ var DesarrolloProductoComponent = (function () {
     };
     DesarrolloProductoComponent.prototype.pagarDesarrollo = function () {
         var _this = this;
+        var z = this._desarrolloProducto.pagarDesarrollo(this.productoSelectedPago.Productos_idProducto, this.productoSelectedPago.costoDes);
         this.openPago = false;
         this.openLoadPago = true;
-        setTimeout(function () { return _this.openLoadPago = false; }, 2000);
-        this.productosEnDesarrollo = this._desarrolloProducto.pagarDesarrollo(this.productoSelectedPago.idProducto, this.productoSelectedPago.costoDes);
+        setTimeout(function () {
+            _this.openLoadPago = false;
+            if (z) {
+                _this.actualizar2();
+            }
+        }, 2000);
     };
     DesarrolloProductoComponent.prototype.revisaPeriodo = function (producto) {
         console.log(producto.numeroPeriodo == localStorage.getItem('numeroPeriodo'));
@@ -4270,6 +4275,10 @@ var DesarrolloProductoComponent = (function () {
         this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
         this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
         this.productosSinDesarrollar = this._desarrolloProducto.returnProductosSinDesarrollar();
+    };
+    DesarrolloProductoComponent.prototype.actualizar2 = function () {
+        this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
+        console.log("Pago", this.productosEnDesarrollo);
     };
     return DesarrolloProductoComponent;
 }());
@@ -9258,6 +9267,7 @@ var DesarrolloProductoService = (function () {
                 x.push(data.datos[i]);
             }
         });
+        console.log("Consulta", x);
         return x;
     };
     DesarrolloProductoService.prototype.returnProductosDesarrollados = function () {
@@ -9300,7 +9310,11 @@ var DesarrolloProductoService = (function () {
         return this.http.post('proyectoproducto/getproductosdesarrollados/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
     DesarrolloProductoService.prototype.getTerminados = function () {
-        return this.http.get('proyectoproducto/getterminados/' + localStorage.getItem('idProyecto')).map(function (res) { return res.json(); });
+        var x = {
+            idProyecto: localStorage.getItem('idProyecto'),
+            numeroPeriodo: localStorage.getItem('numeroPeriodo')
+        };
+        return this.http.post('proyectoproducto/getterminados/', x).map(function (res) { return res.json(); });
     };
     DesarrolloProductoService.prototype.setDesarrollado = function (x) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
@@ -9364,13 +9378,8 @@ var DesarrolloProductoService = (function () {
             costoDes: costo
         };
         this.pagoBalance(y).subscribe();
-        var m = [];
-        this.pd(x).subscribe(function (data) {
-            for (var key in data.datos) {
-                m.push(data.datos[key]);
-            }
-        });
-        return m;
+        this.pd(x).subscribe();
+        return true;
     };
     DesarrolloProductoService.prototype.pd = function (x) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
@@ -10316,9 +10325,11 @@ var ProyectosService = (function () {
         this.buscarPeriodos(idProyecto).subscribe(function (data) {
             if (data.datos.length == 0) {
                 _this.asginarPeriodoCero(idProyecto);
-                localStorage.setItem('numeroPeriodo', '1');
-                localStorage.setItem('numeroRPeriodos', '1');
-                _this.asignarTodo(idProyecto);
+                setTimeout(function () {
+                    localStorage.setItem('numeroPeriodo', '1');
+                    localStorage.setItem('numeroRPeriodos', '1');
+                    _this.asignarTodo(idProyecto);
+                }, 500);
             }
             else {
                 var num = parseInt(data.datos.length) - 1;
@@ -10328,11 +10339,14 @@ var ProyectosService = (function () {
         });
     };
     ProyectosService.prototype.asignarTodo = function (idProyecto) {
-        this.asignarZonas(idProyecto, localStorage.getItem('idUsuario'));
         this.asignarMaquinaria(idProyecto, localStorage.getItem('idUsuario'));
         this.asginarProductos(idProyecto, localStorage.getItem('idUsuario'));
         this.asignarProductos2(idProyecto, localStorage.getItem('idUsuario'));
+        this.asignarTZ(idProyecto);
+    };
+    ProyectosService.prototype.asignarTZ = function (idProyecto) {
         this.asignarZonas2(idProyecto, localStorage.getItem('idUsuario'));
+        this.asignarZonas(idProyecto, localStorage.getItem('idUsuario'));
     };
     ProyectosService.prototype.asginarProductos = function (idProyecto, idUsuario) {
         var _this = this;

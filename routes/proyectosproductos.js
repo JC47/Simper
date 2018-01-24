@@ -65,8 +65,8 @@ router.post('/pagardesarrollo', (req, res, next) => {
   // .then(function () {
   //   return proyectoProducto.getProductosEnDesarrollo(idProyecto,numeroPeriodo);
   // })
-  .then(function(datos){
-    res.json({success: true, datos:datos, msg:"Operacion exitosa"});
+  .then(function(){
+    res.json({success: true, msg:"Operacion exitosa"});
   })
   .catch(function (err) {
     console.error("got error: " + err);
@@ -261,9 +261,11 @@ router.post('/desarrollado', (req, res, next) => {
 });
 
 //Esto para qué?
-router.get('/getterminados/:idProyecto', (req, res, next) => {
+router.post('/getterminados', (req, res, next) => {
   Promise.resolve().then(function () {
-    return proyectoProducto.getTerminados(req.params.idProyecto);
+    var idp = req.body.idProyecto;
+    var np = req.body.numeroPeriodo;
+    return proyectoProducto.getTerminados(idp,np);
   }).then( function (rows) {
     res.json({success: true, datos:rows, msg:"Operacion exitosa"});
   })
