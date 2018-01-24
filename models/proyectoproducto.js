@@ -79,7 +79,8 @@ module.exports.getProductosEnDesarrollo = function (idProyecto,numeroPeriodo) {
 }
 
 module.exports.getIdProductoInferiorNumPeriodo = function (idProyecto,numeroPeriodo) {
-  var query = "select distinct Productos_idProducto from proyectoproducto where Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+"";
+  //var query = "select distinct Productos_idProducto from proyectoproducto where Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+"";
+  var query = "select distinct Productos_idProducto from proyectoproducto where not Productos_idProducto in (select Productos_idProducto from proyectoproducto where desarrollado >1 and Proyectos_idProyecto = "+idProyecto+") and Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" and desarrollado = 1;";
   return querySql(query);
 }
 
