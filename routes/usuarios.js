@@ -8,6 +8,7 @@ const usuario = require('../models/usuario');
 router.post('/register', (req, res, next) => {
   Promise.resolve().then(function () {
 
+
     var nombreUsuario = req.body.nombreUsuario;
     var apPat = req.body.apPat;
     var apMat = req.body.apMat;

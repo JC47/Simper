@@ -15,6 +15,7 @@ import {UsuarioProductoService} from '../../services/usuario-producto.service';
 import {ZonasService} from '../../services/zonas.service';
 import {UsuarioMaquinariaService} from '../../services/usuario-maquinaria.service';
 import {VariablesService} from '../../services/variables.service';
+import { FileUploader } from 'ng2-file-upload';
 
 
 
@@ -109,6 +110,7 @@ export class UsuariosComponent implements OnInit {
               private _maquinariaService:MaquinariaService,
               private _zonasService: ZonasService,
             private _variablesService:VariablesService) {
+
             this.variables = this._variablesService.returnVariables();
     this.idAdmin = localStorage.getItem('idAdmin');
     this.newForm= new FormGroup({
@@ -169,6 +171,8 @@ export class UsuariosComponent implements OnInit {
       'prestamosMasAnio':new FormControl('',Validators.required)
     });
   }
+
+   public uploader:FileUploader = new FileUploader({url:'usuario/register/'});
 
   getAdministrador(id){
     for(let admin of this.administradores){
@@ -531,5 +535,5 @@ export class UsuariosComponent implements OnInit {
     this.openVarUnit=false;
     this.openVarsGen=true;
   }
-  
+
   }
