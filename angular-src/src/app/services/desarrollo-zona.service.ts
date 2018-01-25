@@ -92,7 +92,8 @@ export class DesarrolloZonaService {
   getProductosDeZonaSinDesarrollar(){
     var x = {
       Proyecto_idProyecto: parseInt(localStorage.getItem('idProyecto')),
-      Proyecto_Usuario_idUsuario: parseInt(localStorage.getItem('idUsuario'))
+      Proyecto_Usuario_idUsuario: parseInt(localStorage.getItem('idUsuario')),
+      numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo'))
     }
     let headers = new Headers({
       'Content-Type':'application/json'
@@ -103,7 +104,8 @@ export class DesarrolloZonaService {
   getProductosDeZonaEnDesarrollo(){
     var x = {
       Proyecto_idProyecto: parseInt(localStorage.getItem('idProyecto')),
-      Proyecto_Usuario_idUsuario: parseInt(localStorage.getItem('idUsuario'))
+      Proyecto_Usuario_idUsuario: parseInt(localStorage.getItem('idUsuario')),
+      numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo'))
     }
     let headers = new Headers({
       'Content-Type':'application/json'
@@ -147,7 +149,7 @@ export class DesarrolloZonaService {
   getProductosDeZonaDesarrollados(){
     var x = {
       Proyecto_idProyecto: parseInt(localStorage.getItem('idProyecto')),
-      Proyecto_Usuario_idUsuario: parseInt(localStorage.getItem('idUsuario'))
+      numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo'))
     }
     let headers = new Headers({
       'Content-Type':'application/json'

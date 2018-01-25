@@ -8,25 +8,10 @@ module.exports.addProductoZonaProyecto = function (json) {
   return querySql(query, json);
 }
 
-module.exports.getProductoZonaProyecto = function () {
-  var query = "select * from productozonaproyecto";
-  return querySql(query);
-}
-
 module.exports.getTerminados = function(idProyecto){
   var query = "select * from productozona inner join productozonaproyecto on productozona.Producto_idProducto = productozonaproyecto.Producto_idProducto and productozonaproyecto.Proyecto_idProyecto = " + idProyecto +" and productozonaproyecto.periodosDes = productozona.tiempoDes and productozonaproyecto.desarrollado = 0 and productozonaproyecto.Zona_idZonas = productozona.Zona_idZona";
   console.log(query);
   return querySql(query);
-}
-//AQUI
-module.exports.getTiempoDesZona = function (idZona,idProducto) {
-  var queryTiempoDes = "select tiempoDes from productozona where Zona_idZona = "+idZona+" and Producto_idProducto = "+idProducto+" ";
-  return querySql(queryTiempoDes);
-}
-
-module.exports.getPeriodosDesProductoZonaProyecto = function (idProyecto,idProducto,idUsuario,idZona) {
-  var queryPeriodosDes = "select periodosDes from productozonaproyecto where Proyecto_idProyecto = "+idProyecto+" and Producto_idProducto = "+idProducto+" and Proyecto_Usuario_idUsuario = "+idUsuario+" and Zona_idZonas = "+idZona+"  ";
-  return querySql(queryPeriodosDes);
 }
 //select periodosDes from productozonaproyecto where Proyecto_idProyecto = 8 and Producto_idProducto = 4
 
@@ -52,14 +37,15 @@ module.exports.getProductoZonaProyectoByIdProyectoByIdUsuario = function (idProy
 
 //PRODUCTOS SIN DESARROLLAR
 //indica los productos que se encuentran en productozona pero no en productozonaproyecto con más cositas
-module.exports.getProductosSinDesarrollar = function (idProyecto,idUsuario) {
-var query = "select * from proyectoproducto inner join productozona inner join zona on proyectoproducto.Productos_idProducto = productozona.Producto_idProducto and productozona.Zona_idZona = zona.idZona and proyectoproducto.desarrollado = 1 and proyectoproducto.Proyectos_idProyecto = "+idProyecto+" where not (productozona.Producto_idProducto,productozona.Zona_idZona ) in (select Producto_idProducto, Zona_idZonas from productozonaproyecto where Proyecto_idProyecto = "+idProyecto+" and Proyecto_Usuario_idUsuario = "+idUsuario+") order by idZona";
-// and productozonaproyecto.desarrollado = 0
+module.exports.getProductosSinDesarrollar = function (idProyecto,numeroPeriodo,idUsuario) {
+//var query = "select * from proyectoproducto inner join productozona inner join zona on proyectoproducto.Productos_idProducto = productozona.Producto_idProducto and productozona.Zona_idZona = zona.idZona and proyectoproducto.desarrollado = 1 and proyectoproducto.Proyectos_idProyecto = "+idProyecto+" where not (productozona.Producto_idProducto,productozona.Zona_idZona ) in (select Producto_idProducto, Zona_idZonas from productozonaproyecto where Proyecto_idProyecto = "+idProyecto+" and //Proyecto_Usuario_idUsuario = "+idUsuario+") order by idZona";
+var query = "select * from proyectoproducto inner join productozona inner join zona on proyectoproducto.Productos_idProducto = productozona.Producto_idProducto and productozona.Zona_idZona = zona.idZona and Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" and desarrollado= 0 where not (productozona.Producto_idProducto, productozona.Zona_idZona) in (select distinct Producto_idProducto, Zona_idZonas from productozonaproyecto where desarrollado>0 and Proyecto_idProyecto = "+idProyecto+" and Proyecto_Usuario_idUsuario = "+idUsuario+" and numeroPeriodo <= "+numeroPeriodo+") order by Zona_idZona";
   return querySql(query);
 }
 //indica el numero de objeto dependiendo el resultado que se van a crear
-module.exports.getIdZonaSinDes = function (idProyecto,idUsuario) {
-  var query = "select distinct(productozona.Zona_idZona) from proyectoproducto inner join productozona inner join zona on proyectoproducto.Productos_idProducto = productozona.Producto_idProducto and productozona.Zona_idZona = zona.idZona and proyectoproducto.desarrollado = 1 and proyectoproducto.Proyectos_idProyecto = "+idProyecto+" where not (productozona.Producto_idProducto,productozona.Zona_idZona ) in (select Producto_idProducto, Zona_idZonas from productozonaproyecto where Proyecto_idProyecto = "+idProyecto+" and Proyecto_Usuario_idUsuario = "+idUsuario+")";
+module.exports.getIdZonaSinDes = function (idProyecto,numeroPeriodo,idUsuario) {
+//  var query = "select distinct(productozona.Zona_idZona) from proyectoproducto inner join productozona inner join zona on proyectoproducto.Productos_idProducto = productozona.Producto_idProducto and productozona.Zona_idZona = zona.idZona and proyectoproducto.desarrollado = 1 and proyectoproducto.Proyectos_idProyecto = "+idProyecto+" where not (productozona.Producto_idProducto,productozona.Zona_idZona ) in (select Producto_idProducto, Zona_idZonas from productozonaproyecto where //Proyecto_idProyecto = "+idProyecto+" and Proyecto_Usuario_idUsuario = "+idUsuario+")";
+var query = "select distinct(productozona.Zona_idZona) from proyectoproducto inner join productozona inner join zona on proyectoproducto.Productos_idProducto = productozona.Producto_idProducto and productozona.Zona_idZona = zona.idZona and Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" and desarrollado= 0 where not (productozona.Producto_idProducto, productozona.Zona_idZona) in (select distinct Producto_idProducto, Zona_idZonas from productozonaproyecto where desarrollado>0 and Proyecto_idProyecto = "+idProyecto+" and Proyecto_Usuario_idUsuario = "+idUsuario+" and numeroPeriodo <= "+numeroPeriodo+") order by Zona_idZona";
   return querySql(query);
 }
 //lo usamos para compración y extraer dato de nombreZona
@@ -70,35 +56,39 @@ module.exports.getZonas = function () {
 
 //PRODUCTOS EN DESARROLLO
 
-module.exports.getProductosEnDesEnZona = function (idProyecto,idUsuario) {
-  var query = "select distinct Producto_idProducto,Zona_idZonas,ultimoPeriodoDes,periodosDes,tiempoDes from productozonaproyecto inner join zona on productozonaproyecto.Zona_idZonas = zona.idZona inner join producto on productozonaproyecto.Producto_idProducto = producto.idProducto where productozonaproyecto.Proyecto_idProyecto = "+idProyecto+" and productozonaproyecto.Proyecto_Usuario_idUsuario = "+idUsuario+" and productozonaproyecto.desarrollado = 0 order by Zona_idZonas";
+// module.exports.getProductosEnDesEnZona = function (idProyecto,idUsuario) {
+//   var query = "select distinct Producto_idProducto,Zona_idZonas,ultimoPeriodoDes,periodosDes,tiempoDes from productozonaproyecto inner join zona on productozonaproyecto.Zona_idZonas = zona.idZona inner join producto on productozonaproyecto.Producto_idProducto = producto.idProducto where productozonaproyecto.Proyecto_idProyecto = "+idProyecto+" and productozonaproyecto.Proyecto_Usuario_idUsuario = "+idUsuario+" and productozonaproyecto.desarrollado = 0 order by Zona_idZonas";
+//   return querySql(query);
+// }
+
+module.exports.getProductosEnDesarrollo = function (idProyecto,numeroPeriodo,idUsuario) {
+  //var query = "select * from productozonaproyecto inner join zona on productozonaproyecto.Zona_idZonas = zona.idZona where productozonaproyecto.Proyecto_idProyecto = "+idProyecto+"  and productozonaproyecto.Proyecto_Usuario_idUsuario = "+idUsuario+"  and productozonaproyecto.desarrollado = 0";
+  var query = "select * from proyectoproducto inner join productozona inner join zona on proyectoproducto.Productos_idProducto = productozona.Producto_idProducto and productozona.Zona_idZona = zona.idZona and Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" and desarrollado= 1 where not (productozona.Producto_idProducto, productozona.Zona_idZona) in (select distinct Producto_idProducto, Zona_idZonas from productozonaproyecto where desarrollado>1 and Proyecto_idProyecto = "+idProyecto+" and Proyecto_Usuario_idUsuario = "+idUsuario+" and numeroPeriodo <= "+numeroPeriodo+")";
   return querySql(query);
 }
 
-module.exports.getProductosEnDesarrollo = function (idProyecto,idUsuario) {
-  var query = "select * from productozonaproyecto inner join zona on productozonaproyecto.Zona_idZonas = zona.idZona where productozonaproyecto.Proyecto_idProyecto = "+idProyecto+"  and productozonaproyecto.Proyecto_Usuario_idUsuario = "+idUsuario+"  and productozonaproyecto.desarrollado = 0";
-  return querySql(query);
-}
-
-module.exports.getIdZonasEnDes = function (idProyecto,idUsuario) {
-  var query = "select distinct(Zona_idZonas) from productozonaproyecto inner join zona on productozonaproyecto.Zona_idZonas = zona.idZona where productozonaproyecto.Proyecto_idProyecto = "+idProyecto+" and productozonaproyecto.Proyecto_Usuario_idUsuario = "+idUsuario+"  and productozonaproyecto.desarrollado = 0";
+module.exports.getIdZonasEnDes = function (idProyecto,numeroPeriodo,idUsuario) {
+//  var query = "select distinct(Zona_idZonas) from productozonaproyecto inner join zona on productozonaproyecto.Zona_idZonas = zona.idZona where productozonaproyecto.Proyecto_idProyecto = "+idProyecto+" and productozonaproyecto.Proyecto_Usuario_idUsuario = "+idUsuario+"  and productozonaproyecto.desarrollado = 0";
+  var query = "select distinct(productozona.Zona_idZona) from proyectoproducto inner join productozona inner join zona on proyectoproducto.Productos_idProducto = productozona.Producto_idProducto and productozona.Zona_idZona = zona.idZona and Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" and desarrollado= 1 where not (productozona.Producto_idProducto, productozona.Zona_idZona) in (select distinct Producto_idProducto, Zona_idZonas from productozonaproyecto where desarrollado>1 and Proyecto_idProyecto = "+idProyecto+" and Proyecto_Usuario_idUsuario = "+idUsuario+" and numeroPeriodo <= "+numeroPeriodo+") order by Zona_idZona";
   return querySql(query);
 }
 
 //PRODUCTOS DESARROLLADOS
 
-module.exports.getProductosDesEnZona = function (idProyecto,idUsuario) {
-  var query = "select distinct Producto_idProducto,Zona_idZonas from productozonaproyecto inner join zona on productozonaproyecto.Zona_idZonas = zona.idZona where productozonaproyecto.Proyecto_idProyecto = "+idProyecto+" and productozonaproyecto.Proyecto_Usuario_idUsuario = "+idUsuario+" and productozonaproyecto.desarrollado = 1 order by Zona_idZonas";
+// module.exports.getProductosDesEnZona = function (idProyecto,idUsuario) {
+//   var query = "select distinct Producto_idProducto,Zona_idZonas from productozonaproyecto inner join zona on productozonaproyecto.Zona_idZonas = zona.idZona where productozonaproyecto.Proyecto_idProyecto = "+idProyecto+" and productozonaproyecto.Proyecto_Usuario_idUsuario = "+idUsuario+" and productozonaproyecto.desarrollado = 1 order by Zona_idZonas";
+//   return querySql(query);
+// }
+
+module.exports.getProductosDesarrollados = function (idProyecto,numeroPeriodo) {
+//  var query = "select * from productozonaproyecto inner join zona on productozonaproyecto.Zona_idZonas = zona.idZona where productozonaproyecto.Proyecto_idProyecto = "+idProyecto+"  and productozonaproyecto.Proyecto_Usuario_idUsuario = "+idUsuario+"  and productozonaproyecto.desarrollado = 1";
+var query = "select * from proyectoproducto inner join productozona inner join zona on proyectoproducto.Productos_idProducto = productozona.Producto_idProducto and productozona.Zona_idZona = zona.idZona where Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" and desarrollado= 2";
   return querySql(query);
 }
 
-module.exports.getProductosDesarrollados = function (idProyecto,idUsuario) {
-  var query = "select * from productozonaproyecto inner join zona on productozonaproyecto.Zona_idZonas = zona.idZona where productozonaproyecto.Proyecto_idProyecto = "+idProyecto+"  and productozonaproyecto.Proyecto_Usuario_idUsuario = "+idUsuario+"  and productozonaproyecto.desarrollado = 1";
-  return querySql(query);
-}
-
-module.exports.getIdZonasDes = function (idProyecto,idUsuario) {
-  var query = "select distinct(Zona_idZonas) from productozonaproyecto inner join zona on productozonaproyecto.Zona_idZonas = zona.idZona where productozonaproyecto.Proyecto_idProyecto = "+idProyecto+" and productozonaproyecto.Proyecto_Usuario_idUsuario = "+idUsuario+"  and productozonaproyecto.desarrollado = 1";
+module.exports.getIdZonasDes = function (idProyecto,numeroPeriodo) {
+//  var query = "select distinct(Zona_idZonas) from productozonaproyecto inner join zona on productozonaproyecto.Zona_idZonas = zona.idZona where productozonaproyecto.Proyecto_idProyecto = "+idProyecto+" and productozonaproyecto.Proyecto_Usuario_idUsuario = "+idUsuario+"  and productozonaproyecto.desarrollado = 1";
+var query = "select * from proyectoproducto inner join productozona inner join zona on proyectoproducto.Productos_idProducto = productozona.Producto_idProducto and productozona.Zona_idZona = zona.idZona where Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" and desarrollado= 2 order by Zona_idZona";
   return querySql(query);
 }
 
@@ -127,5 +117,26 @@ module.exports.getDesarrollados = function (idUsuario,idProyecto) {
 
 module.exports.getProductoZonaProyectoEnDes = function () {
   var query = "select * from productozonaproyecto where desarrollado = 0";
+  return querySql(query);
+}
+
+//pagardesarrollozona
+module.exports.getMaxNumeroPeriodoProductoZonaProyecto = function (idProyecto,idProducto,idZona,idUsuario) {
+  var query = "select max(numeroPeriodo) as maxnumperiodo from productozonaproyecto where Proyecto_idProyecto = "+idProyecto+" and Producto_idProducto = "+idProducto+" and Zona_idZonas = "+idZona+" and Proyecto_Usuario_idUsuario = "+idUsuario+" ";
+  return querySql(query);
+}
+
+module.exports.getTiempoDesZona = function (idZona,idProducto) {
+  var query = "select tiempoDes from productozona where Zona_idZona = "+idZona+" and Producto_idProducto = "+idProducto+" ";
+  return querySql(query);
+}
+
+module.exports.getPeriodosDesProductoZonaProyecto = function (idProyecto,idProducto,idUsuario,idZona,numeroPeriodo) {
+  var query = "select periodosDes from productozonaproyecto where Proyecto_idProyecto = "+idProyecto+" and Producto_idProducto = "+idProducto+" and Proyecto_Usuario_idUsuario = "+idUsuario+" and Zona_idZonas = "+idZona+" and numeroPeriodo = "+numeroPeriodo+" ";
+  return querySql(query);
+}
+
+module.exports.getProductoZonaProyecto = function (idProducto,idZona,idProyecto,idUsuario,numeroPeriodo) {
+  var query = "select * from productozonaproyecto where Producto_idProducto = "+idProducto+" and Zona_idZonas = "+idZona+" and Proyecto_idProyecto = "+idProyecto+" and Proyecto_Usuario_idUsuario = "+idUsuario+" and numeroPeriodo = "+numeroPeriodo+"  ";
   return querySql(query);
 }

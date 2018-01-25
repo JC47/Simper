@@ -62,11 +62,39 @@ router.post('/pagardesarrollo', (req, res, next) => {
     }
   })
 //regreso datos
-  .then(function () {
-    return proyectoProducto.getProductosEnDesarrollo(idProyecto,numeroPeriodo);
+  // .then(function () {
+  //   return proyectoProducto.getProductosEnDesarrollo(idProyecto,numeroPeriodo);
+  // })
+  .then(function(){
+    res.json({success: true, msg:"Operacion exitosa"});
   })
-  .then(function(datos){
-    res.json({success: true, datos:datos, msg:"Operacion exitosa"});
+  .catch(function (err) {
+    console.error("got error: " + err);
+    if (err instanceof Error) {
+      res.status(400).send("Error general");
+      console.log(err);
+    } else {
+      res.status(200).json({ "code": 1000, "message": err });
+    }
+  });
+});
+//NOTA:
+//Ruta que se debe llamar para verl un arreglo de objetos con los productos actualizados
+// a la hora de pagarlos
+//Debe llamarse a la ruta exactamente después de llamar a "pagardesarrollo"
+router.post('/jsonendes', (req, res, next) => {
+
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+//  var idProducto = req.body.idProducto;
+
+  Promise.join(proyectoProducto.getProductosEnDesarrollo(idProyecto,numeroPeriodo),
+  proyectoProducto.getIdProductoInferiorNumPeriodo(idProyecto,numeroPeriodo), function(productosendes,idsproductos){
+
+    return jsonProductosEnDesarrollo(productosendes,idsproductos);
+
+  }).then(function(data){
+    res.json({success: true, datos:data, msg:"Operacion exitosa"});
   })
   .catch(function (err) {
     console.error("got error: " + err);
@@ -233,9 +261,11 @@ router.post('/desarrollado', (req, res, next) => {
 });
 
 //Esto para qué?
-router.get('/getterminados/:idProyecto', (req, res, next) => {
+router.post('/getterminados', (req, res, next) => {
   Promise.resolve().then(function () {
-    return proyectoProducto.getTerminados(req.params.idProyecto);
+    var idp = req.body.idProyecto;
+    var np = req.body.numeroPeriodo;
+    return proyectoProducto.getTerminados(idp,np);
   }).then( function (rows) {
     res.json({success: true, datos:rows, msg:"Operacion exitosa"});
   })
@@ -467,6 +497,91 @@ function deshacerPeriodoDes(periodosdes) {
     nvoPeriodoDes = 0;//bandera de condición, si es cero, se eliminará
   }
   return nvoPeriodoDes;
+}
+
+function jsonDesarrollados(idszonas, desarrollados) {
+  var repIdProductosDes = [];//almacena las veces que se repite un idZona en desarrollados
+  var i = 0;
+  while (i<idszonas.length) {
+    var aux = 0;
+    for (var j = 0; j < desarrollados.length; j++) {
+      if (idszonas[i].Zona_idZonas == desarrollados[j].Zona_idZonas) {
+        aux = aux +1;
+      }
+    }
+    repIdProductosDes.push(aux);
+    i++;
+  }
+  // console.log(repIdProductosDes);
+
+  var productosenzonas = [];
+  for (var i = 0; i < idszonas.length; i++) {
+      var json = {
+        "idZona":idszonas[i].Zona_idZonas,
+        "productosDes":[]
+      }
+      productosenzonas.push(json);
+    }
+//    console.log(productosenzonas);
+
+    var aux2 = 0;
+    for (var j = 0; j < repIdProductosDes.length; j++) {
+      for (var k = 0; k < (repIdProductosDes[j]); k++) {
+        productosenzonas[j]['productosDes'].push(desarrollados[aux2].Producto_idProducto);
+       aux2 = aux2 + 1;
+      }
+    }
+    //console.log(productosenzonas);
+    return productosenzonas;
+}
+
+function jsonProductosEnDesarrollo(productosendes,idsproductos){
+  var repIdProductosEnDes = [];//almacena las veces que se repite un idProducto en zonas de la tabla productozonaproyecto join producto
+  var i = 0;
+
+  while (i<idsproductos.length) {
+    var aux = 0;
+    for (var j = 0; j < productosendes.length; j++) {
+      if (idsproductos[i].Productos_idProducto == productosendes[j].Productos_idProducto) {
+        aux = aux +1;
+      }
+    }
+    repIdProductosEnDes.push(aux);
+    i++;
+  }
+
+// var i=0;
+//
+// while (i<repIdProductosEnDes.length) {
+//
+//   repIdProductosEnDes
+//
+// }
+var counter = 0;
+var arrayProductosEnDes = [];
+// var json;
+
+//console.log("productosendes",productosendes[counter]);
+
+for (var k = 0; k < repIdProductosEnDes.length; k++) {
+  for (var l = 0; l < repIdProductosEnDes[k]; l++) {
+    counter = counter + 1;
+  }
+      console.log("counter: ", counter);
+//      console.log("productosendes",productosendes[counter-1]);
+  var json = {
+    "Productos_idProducto":productosendes[counter-1].Productos_idProducto,
+    "nombreProd":productosendes[counter-1].nombreProd,
+    "costoDes":productosendes[counter-1].costoDes,
+    "tiempoDes":productosendes[counter-1].tiempoDes,
+    "periodosDes":productosendes[counter-1].periodosDes,
+    "numeroPeriodo":productosendes[counter-1].numeroPeriodo
+  }
+    arrayProductosEnDes.push(json);
+}
+return arrayProductosEnDes;
+//return console.log("arrayProductosEnDes",arrayProductosEnDes);
+//  return console.log(repIdProductosEnDes);
 }
 
 module.exports = router;

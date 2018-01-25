@@ -38,6 +38,17 @@ router.get('/:idUsuario', (req, res, next) => {
   });
 });
 
+router.get('/n/:idUsuario', (req, res, next) => {
+  Promise.resolve().then( function () {
+    return usuarioProductoZona.getIdProductoZonasSinAsignar(req.params.idUsuario);
+  }).then( function (rows) {
+    res.json({success: true, msg:"Operacion exitosa", datos:rows});
+  }).catch( function (err) {
+    console.log(err);
+    res.json({success:false, msg:"No completado"});
+  });
+});
+
 router.post('/delete/', (req, res, next) => {
   Promise.resolve().then(function () {
       var idUsuario = req.body.idUsuario;

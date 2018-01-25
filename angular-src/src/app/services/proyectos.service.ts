@@ -103,9 +103,11 @@ returnUsuarios(){
     this.buscarPeriodos(idProyecto).subscribe(data => {
       if(data.datos.length == 0){
         this.asginarPeriodoCero(idProyecto);
-        localStorage.setItem('numeroPeriodo','1');
-        localStorage.setItem('numeroRPeriodos','1');
-        this.asignarTodo(idProyecto);
+        setTimeout(()=>{
+          localStorage.setItem('numeroPeriodo','1');
+          localStorage.setItem('numeroRPeriodos','1');
+          this.asignarTodo(idProyecto);
+        }, 500);
       }
       else{
         var num = parseInt(data.datos.length) - 1;
@@ -116,10 +118,15 @@ returnUsuarios(){
   }
 
   asignarTodo(idProyecto){
-    this.asignarZonas(idProyecto,localStorage.getItem('idUsuario'));
     this.asignarMaquinaria(idProyecto,localStorage.getItem('idUsuario'));
     this.asginarProductos(idProyecto,localStorage.getItem('idUsuario'));
     this.asignarProductos2(idProyecto,localStorage.getItem('idUsuario'));
+    this.asignarTZ(idProyecto);
+  }
+
+  asignarTZ(idProyecto){
+    this.asignarZonas2(idProyecto,localStorage.getItem('idUsuario'));
+    this.asignarZonas(idProyecto,localStorage.getItem('idUsuario'));
   }
 
   asginarProductos(idProyecto, idUsuario){
@@ -164,9 +171,27 @@ returnUsuarios(){
           Zona_idZonas:data.datos[key$].idZona,
           Proyecto_idProyecto:idProyecto,
           Proyecto_Usuario_idUsuario:idUsuario,
-          desarrollado:1,
+          numeroPeriodo:0,
+          desarrollado:2,
           periodoInicio:0,
-          ultimoPeriodoDes:0,
+          periodosDes:0
+        }
+        this._desarrolloZonaService.addZona(x).subscribe();
+      }
+    });
+  }
+
+  asignarZonas2(idProyecto, idUsuario){
+    this._usuarioZonaService.getZonasNU(idUsuario).subscribe(data => {
+      for(let key$ in data.datos){
+        var x = {
+          Producto_idProducto:data.datos[key$].Producto_idProducto,
+          Zona_idZonas:data.datos[key$].Zona_idZona,
+          Proyecto_idProyecto:idProyecto,
+          Proyecto_Usuario_idUsuario:idUsuario,
+          numeroPeriodo:0,
+          desarrollado:0,
+          periodoInicio:0,
           periodosDes:0
         }
         this._desarrolloZonaService.addZona(x).subscribe();

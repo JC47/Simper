@@ -45,9 +45,9 @@ module.exports.updateProyectoProducto = function (idProyecto,idProducto,ultimoPe
   return querySql(queryProyectoProd);
 }
 
-module.exports.getTerminados = function (idProyecto) {
-  var query = "select idProducto from producto inner join proyectoproducto on producto.idProducto = proyectoproducto.Productos_idProducto and proyectoproducto.Proyectos_idProyecto = "+idProyecto+" and proyectoproducto.periodosDes = producto.tiempoDes "
-  return querySql(query,idProyecto);
+module.exports.getTerminados = function (idProyecto,numeroPeriodo) {
+  var query = "select idProducto from producto inner join proyectoproducto on producto.idProducto = proyectoproducto.Productos_idProducto and proyectoproducto.Proyectos_idProyecto = "+idProyecto+" and proyectoproducto.periodosDes = producto.tiempoDes and proyectoproducto.numeroPeriodo = "+numeroPeriodo+" and proyectoproducto.desarrollado = 1";
+  return querySql(query);
 }
 
 module.exports.getTiempoDes = function (idProducto) {
@@ -75,6 +75,12 @@ module.exports.productosSinDesarrollar = function (idProyecto,numeroPeriodo) {
 module.exports.getProductosEnDesarrollo = function (idProyecto,numeroPeriodo) {
   //var queryProdEnDes = "select * from producto inner join proyectoproducto on producto.idProducto = proyectoproducto.Productos_idProducto and proyectoproducto.Proyectos_idProyecto = "+idProyecto+" and proyectoproducto.desarrollado = 0 ";
   var query = "select * from proyectoproducto inner join producto on proyectoproducto.Productos_idProducto = producto.idProducto where not Productos_idProducto in (select Productos_idProducto from proyectoproducto where desarrollado >1 and Proyectos_idProyecto = "+idProyecto+") and Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" and desarrollado = 1";
+  return querySql(query);
+}
+
+module.exports.getIdProductoInferiorNumPeriodo = function (idProyecto,numeroPeriodo) {
+  //var query = "select distinct Productos_idProducto from proyectoproducto where Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+"";
+  var query = "select distinct Productos_idProducto from proyectoproducto where not Productos_idProducto in (select Productos_idProducto from proyectoproducto where desarrollado >1 and Proyectos_idProyecto = "+idProyecto+") and Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" and desarrollado = 1;";
   return querySql(query);
 }
 
