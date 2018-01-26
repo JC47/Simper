@@ -27,9 +27,9 @@
     </li>
 
     <li class="nav-item " style="margin-right:40px;margin-bottom:10px">
-      <button [hidden]="_proyectoService.muestraPeriodo"  type="button" class="btn btn-info" (click)="openBalances()">Periodos Anteriores</button>
+      <button [hidden]="_proyectoService.muestraPeriodo"  type="button" class="btn btn-info" (click)="openPeriodos=true">Periodos Anteriores</button>
     </li>
-  
+
 
   </ul>
 
@@ -114,6 +114,19 @@
                   </div>
                 </ngl-modal>
 
+
+                <ngl-modal  [(open)]="openPeriodos" size="small" directional="false">
+                  <div body>
+                    <div class="list-group" >
+                      <a class="list-group-item list-group-item-action " *ngFor="let p of periodos" >{{p.nombre}} <button class="btn btn-primary left">Visualizar</button><button class="btn btn-success">Editar</button></a>
+                    </div>
+                        <div class="modal-footer">
+                          <button  type="button" class="btn btn-outline-danger" (click)="modalPeriodos.hide()">
+                          Cancelar
+                          </button>
+                        </div>
+                  </div>
+                </ngl-modal>
 
 
 

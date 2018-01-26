@@ -220,18 +220,22 @@ export class PruebaComponent implements OnInit {
     }
 
     descargaCSV(){
-      let anterior:any;
-      let actual:any;
+      let anterior:any={
+        cajaBancos:null
+      };
+      let actual:any={
+        cajaBancos:null
+      };
       let origen:any;
       let aplicacion:any
 
       for(let balance of this.balanceFinal){
-        anterior['cajaBancos']=balance.cajaBancos;
+        anterior["cajaBancos"]=balance.cajaBancos;
         anterior['cuentasPorCobrar']=balance.cuentasPorCobrar
         anterior['IVAAcreditable']=balance.IVAAcreditable
         anterior['almacenArtTerm']=balance.almacenArtTerm
         anterior['almacenMateriales']=balance.almacenMateriales
-        anterior['terrenos']=balance.terrenos
+        anterior['terrenos']=balance.terreno
         anterior['edificios']=balance.edifInsta
         anterior['depEdif']=balance.depEdif
         anterior['maqEquipo']=balance.maqEquipo
@@ -261,14 +265,14 @@ export class PruebaComponent implements OnInit {
         actual['IVAAcreditable']=balance.IVAAcreditable
         actual['almacenArtTerm']=balance.almacenArtTerm
         actual['almacenMateriales']=balance.almacenMateriales
-        actual['terrenos']=balance.terrenos
+        actual['terrenos']=balance.terreno
         actual['edificios']=balance.edifInsta
         actual['depEdif']=balance.depEdif
         actual['maqEquipo']=balance.maqEquipo
         actual['depMaqEquipo']=balance.depMaqEquipo
         actual['mueblesEnseres']=balance.mueblesEnseres
         actual['depMueblesEnseres']=balance.depMueblesEnseres
-        actual['equipoTrans']=balance.eqTrans
+        actual['eqTrans']=balance.eqTrans
         actual['depEqTrans']=balance.depEqTrans
         actual['pagosAnticipado']=balance.pagosAnticipado
         actual['gastosAmortizacion']=balance.gastosAmortizacion
@@ -284,9 +288,6 @@ export class PruebaComponent implements OnInit {
         actual['utilidadEjercicio']=balance.utilidadEjercicio
         actual['total']=0
       }
-
-
-
 
       let data=[
         {"cara":"","actual":"Año Actual","anterior":"Año Anterior","aplicacion":"Aplicación","origen":"Origen"},
@@ -314,14 +315,14 @@ export class PruebaComponent implements OnInit {
         {"cara":"Impuestos por Pagar", "actual":actual.imptosPorPagar, "anterior":anterior.imptosPorPagar, "aplicacion":this.getAplicacionCB(actual.imptosPorPagar,anterior.imptosPorPagar),"origen":this.getOrigenCB(actual.imptosPorPagar,anterior.imptosPorPagar)},
         {"cara":"Poveedores", "actual":actual.proveedores, "anterior":anterior.proveedores, "aplicacion":this.getAplicacionCB(actual.proveedores,anterior.proveedores),"origen":this.getOrigenCB(actual.proveedores,anterior.proveedores)},
         {"cara":"PTU por Pagar", "actual":actual.proveedores, "anterior":anterior.proveedores, "aplicacion":this.getAplicacionCB(actual.proveedores,anterior.proveedores),"origen":this.getOrigenCB(actual.proveedores,anterior.proveedores)},
-        {"cara":"Prestamos Bancarios", "actual":actual.prestamosMenosAnio, "anterior":anterior.prestamosMasAnio, "aplicacion":this.getAplicacionCB(actual.prestamosMenosAnio,anterior.prestamosMasAnio),"origen":this.getOrigenCB(actual.prestamosMenosAnio,anterior.prestamosMasAnio)},
+        {"cara":"Prestamos Bancarios", "actual":actual.prestamosMenosAnio, "anterior":anterior.prestamosMenosAnio, "aplicacion":this.getAplicacionCB(actual.prestamosMenosAnio,anterior.prestamosMenosAnio),"origen":this.getOrigenCB(actual.prestamosMenosAnio,anterior.prestamosMenosAnio)},
         {"cara":"A más de un año", "actual":"", "anterior":"", "aplicacion":"","origen":""},
-        {"cara":"Prestamos Totales", "actual":"", "anterior":"", "aplicacion":"","origen":""},
-        {"cara":"Capital Social", "actual":"", "anterior":"", "aplicacion":"","origen":""},
-        {"cara":"Reserva Legal", "actual":"", "anterior":"", "aplicacion":"","origen":""},
-        {"cara":"Utilidad Acumulada", "actual":"", "anterior":"", "aplicacion":"","origen":""},
-        {"cara":"Utilidad del Ejercicio", "actual":"", "anterior":"", "aplicacion":"","origen":""},
-        {"cara":"Total", "actual":"", "anterior":"", "aplicacion":"","origen":""},
+        {"cara":"Prestamos Totales", "actual":actual.prestamosMasAnio, "anterior":anterior.prestamosMasAnio, "aplicacion":this.getAplicacionCB(actual.prestamosMasAnio,anterior.prestamosMasAnio),"origen":this.getOrigenCB(actual.prestamosMasAnio,anterior.prestamosMasAnio)},
+        {"cara":"Capital Social", "actual":actual.capitalSocial, "anterior":anterior.capitalSocial, "aplicacion":this.getAplicacionCB(actual.capitalSocial,anterior.capitalSocial),"origen":this.getOrigenCB(actual.capitalSocial,anterior.capitalSocial)},
+        {"cara":"Reserva Legal", "actual":actual.reservaLegal, "anterior":anterior.reservaLegal, "aplicacion":this.getAplicacionCB(actual.reservaLegal,anterior.reservaLegal),"origen":this.getOrigenCB(actual.reservaLegal,anterior.reservaLegal)},
+        {"cara":"Utilidad Acumulada", "actual":actual.utilidadAcum, "anterior":anterior.utilidadAcum, "aplicacion":this.getAplicacionCB(actual.utilidadAcum,anterior.utilidadAcum),"origen":this.getOrigenCB(actual.utilidadAcum,anterior.utilidadAcum)},
+        {"cara":"Utilidad del Ejercicio", "actual":actual.utilidadEjercicio, "anterior":anterior.utilidadEjercicio, "aplicacion":this.getAplicacionCB(actual.utilidadEjercicio,anterior.utilidadEjercicio),"origen":this.getOrigenCB(actual.utilidadEjercicio,anterior.utilidadEjercicio)},
+        {"cara":"Total", "actual":0, "anterior":0, "aplicacion":this.origen,"origen":this.origen},
       ]
         new Angular2Csv(data, 'Posición Comparativa');
     }
