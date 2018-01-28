@@ -45,9 +45,9 @@ module.exports.updateProyectoProducto = function (idProyecto,idProducto,ultimoPe
   return querySql(queryProyectoProd);
 }
 
-module.exports.getTerminados = function (idProyecto) {
-  var query = "select idProducto from producto inner join proyectoproducto on producto.idProducto = proyectoproducto.Productos_idProducto and proyectoproducto.Proyectos_idProyecto = "+idProyecto+" and proyectoproducto.periodosDes = producto.tiempoDes "
-  return querySql(query,idProyecto);
+module.exports.getTerminados = function (idProyecto,numeroPeriodo) {
+  var query = "select idProducto from producto inner join proyectoproducto on producto.idProducto = proyectoproducto.Productos_idProducto and proyectoproducto.Proyectos_idProyecto = "+idProyecto+" and proyectoproducto.periodosDes = producto.tiempoDes and proyectoproducto.numeroPeriodo = "+numeroPeriodo+" and proyectoproducto.desarrollado = 1";
+  return querySql(query);
 }
 
 module.exports.getTiempoDes = function (idProducto) {

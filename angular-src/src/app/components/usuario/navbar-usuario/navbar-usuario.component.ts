@@ -27,6 +27,7 @@ export class NavbarUsuarioComponent implements OnInit {
   opciones:boolean=false;
   periodo:number;
   periodos = [];
+  openPeriodos:boolean=false;
   constructor(private authService: AuthService, private router:Router,
     private _resultadosService:ResultadosService,
     private _proyectoService:ProyectosService,
@@ -83,10 +84,7 @@ export class NavbarUsuarioComponent implements OnInit {
     }
 
 
-    openBalances(){
-      //this.modalPeriodos.show();
 
-    }
 
     pasaCreditos(){
       this.router.navigate(['Usuario/proyecto/financiamiento']);

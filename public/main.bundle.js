@@ -109,52 +109,54 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__services_usuario_credito_service__ = __webpack_require__("../../../../../src/app/services/usuario-credito.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__services_usuario_producto_service__ = __webpack_require__("../../../../../src/app/services/usuario-producto.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__services_usuario_zona_service__ = __webpack_require__("../../../../../src/app/services/usuario-zona.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__services_desarrollo_producto_service__ = __webpack_require__("../../../../../src/app/services/desarrollo-producto.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__services_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/maquinaria.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__services_producto_service__ = __webpack_require__("../../../../../src/app/services/producto.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__services_variables_service__ = __webpack_require__("../../../../../src/app/services/variables.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__services_creditos_service__ = __webpack_require__("../../../../../src/app/services/creditos.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__services_zonas_service__ = __webpack_require__("../../../../../src/app/services/zonas.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__services_operacion_service__ = __webpack_require__("../../../../../src/app/services/operacion.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__services_balance_service__ = __webpack_require__("../../../../../src/app/services/balance.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__services_resultados_service__ = __webpack_require__("../../../../../src/app/services/resultados.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__services_dashboard_service__ = __webpack_require__("../../../../../src/app/services/dashboard.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__components_zona_producto_zona_producto_component__ = __webpack_require__("../../../../../src/app/components/zona-producto/zona-producto.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__components_usuario_proyecto_usuario_desarrollo_mercado_desarrollo_mercado_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/desarrollo-mercado/desarrollo-mercado.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__components_usuario_proyecto_usuario_desarrollo_producto_desarrollo_producto_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/desarrollo-producto/desarrollo-producto.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__components_usuario_proyecto_usuario_venta_productos_venta_productos_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/venta-productos/venta-productos.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__components_usuario_proyecto_usuario_compra_maquinaria_compra_maquinaria_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/compra-maquinaria/compra-maquinaria.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__components_navbar_navbar_component__ = __webpack_require__("../../../../../src/app/components/navbar/navbar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__components_usuario_proyecto_usuario_balance_balance_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance/balance.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__components_sidenav_sidenav_component__ = __webpack_require__("../../../../../src/app/components/sidenav/sidenav.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__components_productos_productos_component__ = __webpack_require__("../../../../../src/app/components/productos/productos.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__components_maquinarias_maquinarias_component__ = __webpack_require__("../../../../../src/app/components/maquinarias/maquinarias.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__components_creditos_creditos_component__ = __webpack_require__("../../../../../src/app/components/creditos/creditos.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_53__components_demandas_demandas_component__ = __webpack_require__("../../../../../src/app/components/demandas/demandas.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_54__components_usuarios_usuarios_component__ = __webpack_require__("../../../../../src/app/components/usuarios/usuarios.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_55__components_home_home_component__ = __webpack_require__("../../../../../src/app/components/home/home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__components_usuario_proyectos_proyectos_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyectos/proyectos.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_57__components_administradores_administradores_component__ = __webpack_require__("../../../../../src/app/components/administradores/administradores.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_58__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_59__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_60_ng_lightning_ng_lightning__ = __webpack_require__("../../../../ng-lightning/ng-lightning.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_61__components_usuario_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/usuario.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_62__components_usuario_navbar_usuario_navbar_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/navbar-usuario/navbar-usuario.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_63__components_usuario_proyecto_usuario_proyecto_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/proyecto-usuario.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_64__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_65__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-inicial/balance-inicial.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_66__components_usuario_proyecto_usuario_balance_final_balance_final_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-final/balance-final.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_67__components_usuario_proyecto_usuario_balance_home_balance_home_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_68__components_usuario_proyecto_usuario_operacion_operacion_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/operacion/operacion.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_69__components_usuario_proyecto_usuario_prueba_prueba_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/prueba/prueba.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_70_d3__ = __webpack_require__("../../../../d3/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_71_nvd3__ = __webpack_require__("../../../../nvd3/build/nv.d3.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_71_nvd3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_71_nvd3__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_72__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_73__components_usuario_proyecto_usuario_demanda_potencial_demanda_potencial_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_74__components_usuario_proyecto_usuario_flujo_flujo_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/flujo/flujo.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30_ng2_file_upload__ = __webpack_require__("../../../../ng2-file-upload/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30_ng2_file_upload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_30_ng2_file_upload__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__services_desarrollo_producto_service__ = __webpack_require__("../../../../../src/app/services/desarrollo-producto.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__services_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/maquinaria.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__services_producto_service__ = __webpack_require__("../../../../../src/app/services/producto.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__services_variables_service__ = __webpack_require__("../../../../../src/app/services/variables.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__services_creditos_service__ = __webpack_require__("../../../../../src/app/services/creditos.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__services_zonas_service__ = __webpack_require__("../../../../../src/app/services/zonas.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__services_operacion_service__ = __webpack_require__("../../../../../src/app/services/operacion.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__services_balance_service__ = __webpack_require__("../../../../../src/app/services/balance.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__services_resultados_service__ = __webpack_require__("../../../../../src/app/services/resultados.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__services_dashboard_service__ = __webpack_require__("../../../../../src/app/services/dashboard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__components_zona_producto_zona_producto_component__ = __webpack_require__("../../../../../src/app/components/zona-producto/zona-producto.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__components_usuario_proyecto_usuario_desarrollo_mercado_desarrollo_mercado_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/desarrollo-mercado/desarrollo-mercado.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__components_usuario_proyecto_usuario_desarrollo_producto_desarrollo_producto_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/desarrollo-producto/desarrollo-producto.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__components_usuario_proyecto_usuario_venta_productos_venta_productos_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/venta-productos/venta-productos.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__components_usuario_proyecto_usuario_compra_maquinaria_compra_maquinaria_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/compra-maquinaria/compra-maquinaria.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__components_navbar_navbar_component__ = __webpack_require__("../../../../../src/app/components/navbar/navbar.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__components_usuario_proyecto_usuario_balance_balance_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance/balance.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__components_sidenav_sidenav_component__ = __webpack_require__("../../../../../src/app/components/sidenav/sidenav.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__components_productos_productos_component__ = __webpack_require__("../../../../../src/app/components/productos/productos.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__components_maquinarias_maquinarias_component__ = __webpack_require__("../../../../../src/app/components/maquinarias/maquinarias.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_53__components_creditos_creditos_component__ = __webpack_require__("../../../../../src/app/components/creditos/creditos.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_54__components_demandas_demandas_component__ = __webpack_require__("../../../../../src/app/components/demandas/demandas.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_55__components_usuarios_usuarios_component__ = __webpack_require__("../../../../../src/app/components/usuarios/usuarios.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__components_home_home_component__ = __webpack_require__("../../../../../src/app/components/home/home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_57__components_usuario_proyectos_proyectos_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyectos/proyectos.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_58__components_administradores_administradores_component__ = __webpack_require__("../../../../../src/app/components/administradores/administradores.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_59__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_60__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_61_ng_lightning_ng_lightning__ = __webpack_require__("../../../../ng-lightning/ng-lightning.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_62__components_usuario_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/usuario.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_63__components_usuario_navbar_usuario_navbar_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/navbar-usuario/navbar-usuario.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_64__components_usuario_proyecto_usuario_proyecto_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/proyecto-usuario.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_65__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_66__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-inicial/balance-inicial.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_67__components_usuario_proyecto_usuario_balance_final_balance_final_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-final/balance-final.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_68__components_usuario_proyecto_usuario_balance_home_balance_home_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_69__components_usuario_proyecto_usuario_operacion_operacion_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/operacion/operacion.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_70__components_usuario_proyecto_usuario_prueba_prueba_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/prueba/prueba.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_71_d3__ = __webpack_require__("../../../../d3/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_72_nvd3__ = __webpack_require__("../../../../nvd3/build/nv.d3.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_72_nvd3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_72_nvd3__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_73__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_74__components_usuario_proyecto_usuario_demanda_potencial_demanda_potencial_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_75__components_usuario_proyecto_usuario_flujo_flujo_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/flujo/flujo.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -185,6 +187,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 //Rutas
 
 //Servicios
+
 
 
 
@@ -252,37 +255,38 @@ var AppModule = (function () {
 AppModule = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_41__app_component__["a" /* AppComponent */],
-            __WEBPACK_IMPORTED_MODULE_47__components_navbar_navbar_component__["a" /* NavbarComponent */],
-            __WEBPACK_IMPORTED_MODULE_59__components_login_login_component__["a" /* LoginComponent */],
-            __WEBPACK_IMPORTED_MODULE_49__components_sidenav_sidenav_component__["a" /* SidenavComponent */],
-            __WEBPACK_IMPORTED_MODULE_48__components_usuario_proyecto_usuario_balance_balance_component__["a" /* BalanceComponent */],
-            __WEBPACK_IMPORTED_MODULE_42__components_zona_producto_zona_producto_component__["a" /* ZonaProductoComponent */],
-            __WEBPACK_IMPORTED_MODULE_50__components_productos_productos_component__["a" /* ProductosComponent */],
-            __WEBPACK_IMPORTED_MODULE_51__components_maquinarias_maquinarias_component__["a" /* MaquinariasComponent */],
-            __WEBPACK_IMPORTED_MODULE_56__components_usuario_proyectos_proyectos_component__["a" /* ProyectosComponent */],
-            __WEBPACK_IMPORTED_MODULE_52__components_creditos_creditos_component__["a" /* CreditosComponent */],
-            __WEBPACK_IMPORTED_MODULE_69__components_usuario_proyecto_usuario_prueba_prueba_component__["a" /* PruebaComponent */],
-            __WEBPACK_IMPORTED_MODULE_53__components_demandas_demandas_component__["a" /* DemandasComponent */],
-            __WEBPACK_IMPORTED_MODULE_54__components_usuarios_usuarios_component__["a" /* UsuariosComponent */],
-            __WEBPACK_IMPORTED_MODULE_43__components_usuario_proyecto_usuario_desarrollo_mercado_desarrollo_mercado_component__["a" /* DesarrolloMercadoComponent */],
-            __WEBPACK_IMPORTED_MODULE_44__components_usuario_proyecto_usuario_desarrollo_producto_desarrollo_producto_component__["a" /* DesarrolloProductoComponent */],
-            __WEBPACK_IMPORTED_MODULE_45__components_usuario_proyecto_usuario_venta_productos_venta_productos_component__["a" /* VentaProductosComponent */],
-            __WEBPACK_IMPORTED_MODULE_46__components_usuario_proyecto_usuario_compra_maquinaria_compra_maquinaria_component__["a" /* CompraMaquinariaComponent */],
-            __WEBPACK_IMPORTED_MODULE_55__components_home_home_component__["a" /* HomeComponent */],
-            __WEBPACK_IMPORTED_MODULE_57__components_administradores_administradores_component__["a" /* AdministradoresComponent */],
-            __WEBPACK_IMPORTED_MODULE_61__components_usuario_usuario_component__["a" /* UsuarioComponent */],
-            __WEBPACK_IMPORTED_MODULE_62__components_usuario_navbar_usuario_navbar_usuario_component__["a" /* NavbarUsuarioComponent */],
-            __WEBPACK_IMPORTED_MODULE_63__components_usuario_proyecto_usuario_proyecto_usuario_component__["a" /* ProyectoUsuarioComponent */],
-            __WEBPACK_IMPORTED_MODULE_64__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__["a" /* SidenavPComponent */],
-            __WEBPACK_IMPORTED_MODULE_65__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__["a" /* BalanceInicialComponent */],
-            __WEBPACK_IMPORTED_MODULE_66__components_usuario_proyecto_usuario_balance_final_balance_final_component__["a" /* BalanceFinalComponent */],
-            __WEBPACK_IMPORTED_MODULE_67__components_usuario_proyecto_usuario_balance_home_balance_home_component__["a" /* BalanceHomeComponent */],
-            __WEBPACK_IMPORTED_MODULE_68__components_usuario_proyecto_usuario_operacion_operacion_component__["a" /* OperacionComponent */],
-            __WEBPACK_IMPORTED_MODULE_72__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__["a" /* EstadoResultadosComponent */],
-            __WEBPACK_IMPORTED_MODULE_58__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__["a" /* FinanciamientoComponent */],
-            __WEBPACK_IMPORTED_MODULE_73__components_usuario_proyecto_usuario_demanda_potencial_demanda_potencial_component__["a" /* DemandaPotencialComponent */],
-            __WEBPACK_IMPORTED_MODULE_74__components_usuario_proyecto_usuario_flujo_flujo_component__["a" /* FlujoComponent */],
+            __WEBPACK_IMPORTED_MODULE_42__app_component__["a" /* AppComponent */],
+            __WEBPACK_IMPORTED_MODULE_48__components_navbar_navbar_component__["a" /* NavbarComponent */],
+            __WEBPACK_IMPORTED_MODULE_30_ng2_file_upload__["FileSelectDirective"],
+            __WEBPACK_IMPORTED_MODULE_60__components_login_login_component__["a" /* LoginComponent */],
+            __WEBPACK_IMPORTED_MODULE_50__components_sidenav_sidenav_component__["a" /* SidenavComponent */],
+            __WEBPACK_IMPORTED_MODULE_49__components_usuario_proyecto_usuario_balance_balance_component__["a" /* BalanceComponent */],
+            __WEBPACK_IMPORTED_MODULE_43__components_zona_producto_zona_producto_component__["a" /* ZonaProductoComponent */],
+            __WEBPACK_IMPORTED_MODULE_51__components_productos_productos_component__["a" /* ProductosComponent */],
+            __WEBPACK_IMPORTED_MODULE_52__components_maquinarias_maquinarias_component__["a" /* MaquinariasComponent */],
+            __WEBPACK_IMPORTED_MODULE_57__components_usuario_proyectos_proyectos_component__["a" /* ProyectosComponent */],
+            __WEBPACK_IMPORTED_MODULE_53__components_creditos_creditos_component__["a" /* CreditosComponent */],
+            __WEBPACK_IMPORTED_MODULE_70__components_usuario_proyecto_usuario_prueba_prueba_component__["a" /* PruebaComponent */],
+            __WEBPACK_IMPORTED_MODULE_54__components_demandas_demandas_component__["a" /* DemandasComponent */],
+            __WEBPACK_IMPORTED_MODULE_55__components_usuarios_usuarios_component__["a" /* UsuariosComponent */],
+            __WEBPACK_IMPORTED_MODULE_44__components_usuario_proyecto_usuario_desarrollo_mercado_desarrollo_mercado_component__["a" /* DesarrolloMercadoComponent */],
+            __WEBPACK_IMPORTED_MODULE_45__components_usuario_proyecto_usuario_desarrollo_producto_desarrollo_producto_component__["a" /* DesarrolloProductoComponent */],
+            __WEBPACK_IMPORTED_MODULE_46__components_usuario_proyecto_usuario_venta_productos_venta_productos_component__["a" /* VentaProductosComponent */],
+            __WEBPACK_IMPORTED_MODULE_47__components_usuario_proyecto_usuario_compra_maquinaria_compra_maquinaria_component__["a" /* CompraMaquinariaComponent */],
+            __WEBPACK_IMPORTED_MODULE_56__components_home_home_component__["a" /* HomeComponent */],
+            __WEBPACK_IMPORTED_MODULE_58__components_administradores_administradores_component__["a" /* AdministradoresComponent */],
+            __WEBPACK_IMPORTED_MODULE_62__components_usuario_usuario_component__["a" /* UsuarioComponent */],
+            __WEBPACK_IMPORTED_MODULE_63__components_usuario_navbar_usuario_navbar_usuario_component__["a" /* NavbarUsuarioComponent */],
+            __WEBPACK_IMPORTED_MODULE_64__components_usuario_proyecto_usuario_proyecto_usuario_component__["a" /* ProyectoUsuarioComponent */],
+            __WEBPACK_IMPORTED_MODULE_65__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__["a" /* SidenavPComponent */],
+            __WEBPACK_IMPORTED_MODULE_66__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__["a" /* BalanceInicialComponent */],
+            __WEBPACK_IMPORTED_MODULE_67__components_usuario_proyecto_usuario_balance_final_balance_final_component__["a" /* BalanceFinalComponent */],
+            __WEBPACK_IMPORTED_MODULE_68__components_usuario_proyecto_usuario_balance_home_balance_home_component__["a" /* BalanceHomeComponent */],
+            __WEBPACK_IMPORTED_MODULE_69__components_usuario_proyecto_usuario_operacion_operacion_component__["a" /* OperacionComponent */],
+            __WEBPACK_IMPORTED_MODULE_73__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__["a" /* EstadoResultadosComponent */],
+            __WEBPACK_IMPORTED_MODULE_59__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__["a" /* FinanciamientoComponent */],
+            __WEBPACK_IMPORTED_MODULE_74__components_usuario_proyecto_usuario_demanda_potencial_demanda_potencial_component__["a" /* DemandaPotencialComponent */],
+            __WEBPACK_IMPORTED_MODULE_75__components_usuario_proyecto_usuario_flujo_flujo_component__["a" /* FlujoComponent */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_8_angular2_flash_messages__["FlashMessagesModule"],
@@ -297,7 +301,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_9_ngx_bootstrap_tabs__["a" /* TabsModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_16__app_routes__["a" /* app_routing */],
             __WEBPACK_IMPORTED_MODULE_12_ng2_currency_mask__["CurrencyMaskModule"],
-            __WEBPACK_IMPORTED_MODULE_60_ng_lightning_ng_lightning__["a" /* NglModule */].forRoot({ svgPath: '../assets/icons' }),
+            __WEBPACK_IMPORTED_MODULE_61_ng_lightning_ng_lightning__["a" /* NglModule */].forRoot({ svgPath: '../assets/icons' }),
             __WEBPACK_IMPORTED_MODULE_6_ngx_bootstrap__["c" /* AccordionModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_6_ngx_bootstrap__["d" /* PaginationModule */].forRoot(),
@@ -314,31 +318,31 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_7__angular_common__["CurrencyPipe"],
             __WEBPACK_IMPORTED_MODULE_7__angular_common__["DatePipe"],
             __WEBPACK_IMPORTED_MODULE_7__angular_common__["DecimalPipe"],
-            __WEBPACK_IMPORTED_MODULE_30__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */],
-            __WEBPACK_IMPORTED_MODULE_37__services_balance_service__["a" /* BalanceService */],
+            __WEBPACK_IMPORTED_MODULE_31__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */],
+            __WEBPACK_IMPORTED_MODULE_38__services_balance_service__["a" /* BalanceService */],
             __WEBPACK_IMPORTED_MODULE_27__services_usuario_credito_service__["a" /* UsuarioCreditoService */],
             __WEBPACK_IMPORTED_MODULE_21__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */],
-            __WEBPACK_IMPORTED_MODULE_40__services_dashboard_service__["a" /* DashboardService */],
-            __WEBPACK_IMPORTED_MODULE_39__services_resultados_service__["a" /* ResultadosService */],
+            __WEBPACK_IMPORTED_MODULE_41__services_dashboard_service__["a" /* DashboardService */],
+            __WEBPACK_IMPORTED_MODULE_40__services_resultados_service__["a" /* ResultadosService */],
             __WEBPACK_IMPORTED_MODULE_19__services_auxiliar_service__["a" /* AuxiliarService */],
-            __WEBPACK_IMPORTED_MODULE_33__services_variables_service__["a" /* VariablesService */],
+            __WEBPACK_IMPORTED_MODULE_34__services_variables_service__["a" /* VariablesService */],
             __WEBPACK_IMPORTED_MODULE_20__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */],
-            __WEBPACK_IMPORTED_MODULE_35__services_zonas_service__["a" /* ZonasService */],
+            __WEBPACK_IMPORTED_MODULE_36__services_zonas_service__["a" /* ZonasService */],
             __WEBPACK_IMPORTED_MODULE_25__services_resultados_operacion_service__["a" /* ResultadosOperacionService */],
-            __WEBPACK_IMPORTED_MODULE_36__services_operacion_service__["a" /* OperacionService */],
+            __WEBPACK_IMPORTED_MODULE_37__services_operacion_service__["a" /* OperacionService */],
             __WEBPACK_IMPORTED_MODULE_26__services_usuario_maquinaria_service__["a" /* UsuarioMaquinariaService */],
             __WEBPACK_IMPORTED_MODULE_28__services_usuario_producto_service__["a" /* UsuarioProductoService */],
             __WEBPACK_IMPORTED_MODULE_29__services_usuario_zona_service__["a" /* UsuarioZonaService */],
             __WEBPACK_IMPORTED_MODULE_24__services_graficas_service__["a" /* GraficasService */],
-            __WEBPACK_IMPORTED_MODULE_38__services_proyectos_service__["a" /* ProyectosService */],
+            __WEBPACK_IMPORTED_MODULE_39__services_proyectos_service__["a" /* ProyectosService */],
             __WEBPACK_IMPORTED_MODULE_22__services_administradores_service__["a" /* AdministradoresService */],
-            __WEBPACK_IMPORTED_MODULE_31__services_maquinaria_service__["a" /* MaquinariaService */],
-            __WEBPACK_IMPORTED_MODULE_32__services_producto_service__["a" /* ProductoService */],
-            __WEBPACK_IMPORTED_MODULE_34__services_creditos_service__["a" /* CreditosService */],
+            __WEBPACK_IMPORTED_MODULE_32__services_maquinaria_service__["a" /* MaquinariaService */],
+            __WEBPACK_IMPORTED_MODULE_33__services_producto_service__["a" /* ProductoService */],
+            __WEBPACK_IMPORTED_MODULE_35__services_creditos_service__["a" /* CreditosService */],
             __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__["b" /* NgbActiveModal */],
             __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__["c" /* NgbModalRef */]
         ],
-        bootstrap: [__WEBPACK_IMPORTED_MODULE_41__app_component__["a" /* AppComponent */]]
+        bootstrap: [__WEBPACK_IMPORTED_MODULE_42__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
 
@@ -1949,7 +1953,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/navbar-usuario/navbar-usuario.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n\r\n<div *ngIf=\"usuario\">\r\n\r\n<nav class=\"navbar navbar-toggleable-md navbar-light bg-faded fixed-top navbar-inverse\" style=\"background-color:#007CB9;height:110px;\">\r\n\r\n  <button class=\"navbar-toggler navbar-toggler-right\" type=\"button\"\r\n  data-toggle=\"collapse\" data-target=\"#navbarTogglerDemo01\" aria-controls=\"navbarTogglerDemo01\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n     <span class=\"navbar-toggler-icon\"></span>\r\n   </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarTogglerDemo01\">\r\n  <span class=\"navbar-brand\" style=\"margin-left:30px;\">\r\n         <img class=\"img-fluid rounded-circle\" style=\"width:80px;\"\r\n         src=\"assets/img/user.png\"> {{usuario.nombreUsuario}} {{usuario.apPat}}\r\n    </span>\r\n\r\n\r\n  <ul class=\"nav navbar-nav navbar-right ml-auto\" style=\"margin-top:23px\"    >\r\n\r\n    <li class=\"nav-item pull-left\" style=\"margin-right:25px; margin-bottom:10px\">\r\n      <h4 style=\"color:white\"  >Periodo Corriendo: {{this._proyectoService.periodo}}</h4>\r\n    </li>\r\n\r\n    <li class=\"nav-item pull-left\" style=\"margin-right:20px; margin-bottom:10px\" >\r\n      <button  [hidden]=\"_proyectoService.muestraPeriodo\"    type=\"button\" class=\"btn btn-success navbar-right\" (click)=\"openConf=true\">Cerrar Periodo</button>\r\n    </li>\r\n\r\n    <li class=\"nav-item \" style=\"margin-right:40px;margin-bottom:10px\">\r\n      <button [hidden]=\"_proyectoService.muestraPeriodo\"  type=\"button\" class=\"btn btn-info\" (click)=\"openBalances()\">Periodos Anteriores</button>\r\n    </li>\r\n  \r\n\r\n  </ul>\r\n\r\n  <ul class=\"nav navbar-nav ml-auto\" style=\"margin-top:23px\">\r\n        <li class=\"nav-item \" style=\"margin-right:20px\">\r\n          <button  class=\"btn btn-danger\"><i class=\"fa fa-bell fa-lg\"></i></button>\r\n        </li>\r\n\r\n        <li class=\"nav-item \" style=\"margin-right:20px\">\r\n          <button  class=\"btn btn-success \" (click)=\"logOut()\"><i class=\"fa fa-sign-out fa-lg\"></i></button>\r\n\r\n        </li>\r\n  </ul>\r\n</div>\r\n\r\n\r\n</nav>\r\n\r\n</div>\r\n\r\n\r\n<ngl-modal header=\"Confirmación\"  [(open)]=\"openConf\" size=\"x-small\" directional=\"false\">\r\n    <div body>\r\n      <div class=\"col-12 text-center container\">\r\n        <h2 style=\"margin-bottom:30px\">¿Esta seguro que deseas cerrar el periodo actual ?</h2>\r\n      </div>\r\n    </div>\r\n\r\n    <ng-template ngl-modal-footer>\r\n    <button class=\"btn btn-danger\" (click)=\"openConf=false\">Cancel</button>\r\n    <button class=\"btn btn-primary\" (click)=\"pasarPeriodo()\">Cerrar Periodo</button>\r\n    </ng-template>\r\n  </ngl-modal>\r\n\r\n\r\n\r\n\r\n      <ngl-modal header=\"Confirmación\"  [(open)]=\"openBien\" size=\"x-small\" directional=\"false\">\r\n        <div body>\r\n          <div class=\"col-12 text-center container\">\r\n            <h2 style=\"margin-bottom:30px\">Ha cerrado periodo satisfactoriamente</h2>\r\n          </div>\r\n        </div>\r\n\r\n        <ng-template ngl-modal-footer>\r\n        <button class=\"btn btn-primary\" (click)=\"modalPasarPeriodo()\">Aceptar</button>\r\n        </ng-template>\r\n      </ngl-modal>\r\n\r\n\r\n\r\n          <ngl-modal header=\"Confirmación\"  [(open)]=\"alert\" size=\"x-small\" directional=\"false\">\r\n\r\n            <div body>\r\n              <div class=\"container\">\r\n                <h5 class=\"col-12 text-center\" style=\"margin-bottom:30px\">Tienes deuda, no puedes pasar de periodo, necesitas un prestamo</h5>\r\n                  <div class=\"col-2 offset-5\">\r\n                    <img  src=\"assets/img/credit.png\" class=\"img-fluid\">\r\n                  </div>\r\n\r\n              </div>\r\n            </div>\r\n\r\n            <ng-template ngl-modal-footer>\r\n              <button class=\"btn btn-primary\" (click)=\"pasaCreditos()\">Acepta</button>\r\n\r\n          </ng-template>\r\n            </ngl-modal>\r\n\r\n\r\n\r\n\r\n\r\n\r\n                <ngl-modal  [(open)]=\"openLoad\" size=\"small\" directional=\"false\">\r\n                  <div body>\r\n                    <h1 class=\"col-12 text-center\" >Cerrando Periodo</h1>\r\n                    <h5 class=\"col-12 text-center\">Realzando Operacion</h5>\r\n                    <div style=\"position:relative; height:6.25rem; z-index:0;\">\r\n                      <ngl-spinner size=\"large\" type=\"brand\"></ngl-spinner>\r\n                    </div>\r\n                  </div>\r\n                </ngl-modal>\r\n\r\n\r\n\r\n\r\n                <div bsModal #modalPeriodos=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\"\r\n                style=\"z-index:100000\">\r\n                  <div class=\"modal-dialog modal-sm\">\r\n                    <div class=\"modal-content\">\r\n                      <div class=\"modal-header\">\r\n                        <h2 class=\"modal-title\">Periodos</h2>\r\n                      </div>\r\n                      <div class=\"modal-body\">\r\n                        <div class=\"list-group\" >\r\n                          <a class=\"list-group-item list-group-item-action \" *ngFor=\"let p of periodos\" (click)=\"transicion(p.numero)\">{{p.nombre}}</a>\r\n                        </div>\r\n                            <div class=\"modal-footer\">\r\n                              <button  type=\"button\" class=\"btn btn-outline-danger\" (click)=\"modalPeriodos.hide()\">\r\n                              Cancelar\r\n                              </button>\r\n                            </div>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n"
+module.exports = "\r\n\r\n<div *ngIf=\"usuario\">\r\n\r\n<nav class=\"navbar navbar-toggleable-md navbar-light bg-faded fixed-top navbar-inverse\" style=\"background-color:#007CB9;height:110px;\">\r\n\r\n  <button class=\"navbar-toggler navbar-toggler-right\" type=\"button\"\r\n  data-toggle=\"collapse\" data-target=\"#navbarTogglerDemo01\" aria-controls=\"navbarTogglerDemo01\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n     <span class=\"navbar-toggler-icon\"></span>\r\n   </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarTogglerDemo01\">\r\n  <span class=\"navbar-brand\" style=\"margin-left:30px;\">\r\n         <img class=\"img-fluid rounded-circle\" style=\"width:80px;\"\r\n         src=\"assets/img/user.png\"> {{usuario.nombreUsuario}} {{usuario.apPat}}\r\n    </span>\r\n\r\n\r\n  <ul class=\"nav navbar-nav navbar-right ml-auto\" style=\"margin-top:23px\"    >\r\n\r\n    <li class=\"nav-item pull-left\" style=\"margin-right:25px; margin-bottom:10px\">\r\n      <h4 style=\"color:white\"  >Periodo Corriendo: {{this._proyectoService.periodo}}</h4>\r\n    </li>\r\n\r\n    <li class=\"nav-item pull-left\" style=\"margin-right:20px; margin-bottom:10px\" >\r\n      <button  [hidden]=\"_proyectoService.muestraPeriodo\"    type=\"button\" class=\"btn btn-success navbar-right\" (click)=\"openConf=true\">Cerrar Periodo</button>\r\n    </li>\r\n\r\n    <li class=\"nav-item \" style=\"margin-right:40px;margin-bottom:10px\">\r\n      <button [hidden]=\"_proyectoService.muestraPeriodo\"  type=\"button\" class=\"btn btn-info\" (click)=\"openPeriodos=true\">Periodos Anteriores</button>\r\n    </li>\r\n\r\n\r\n  </ul>\r\n\r\n  <ul class=\"nav navbar-nav ml-auto\" style=\"margin-top:23px\">\r\n        <li class=\"nav-item \" style=\"margin-right:20px\">\r\n          <button  class=\"btn btn-danger\"><i class=\"fa fa-bell fa-lg\"></i></button>\r\n        </li>\r\n\r\n        <li class=\"nav-item \" style=\"margin-right:20px\">\r\n          <button  class=\"btn btn-success \" (click)=\"logOut()\"><i class=\"fa fa-sign-out fa-lg\"></i></button>\r\n\r\n        </li>\r\n  </ul>\r\n</div>\r\n\r\n\r\n</nav>\r\n\r\n</div>\r\n\r\n\r\n<ngl-modal header=\"Confirmación\"  [(open)]=\"openConf\" size=\"x-small\" directional=\"false\">\r\n    <div body>\r\n      <div class=\"col-12 text-center container\">\r\n        <h2 style=\"margin-bottom:30px\">¿Esta seguro que deseas cerrar el periodo actual ?</h2>\r\n      </div>\r\n    </div>\r\n\r\n    <ng-template ngl-modal-footer>\r\n    <button class=\"btn btn-danger\" (click)=\"openConf=false\">Cancel</button>\r\n    <button class=\"btn btn-primary\" (click)=\"pasarPeriodo()\">Cerrar Periodo</button>\r\n    </ng-template>\r\n  </ngl-modal>\r\n\r\n\r\n\r\n\r\n      <ngl-modal header=\"Confirmación\"  [(open)]=\"openBien\" size=\"x-small\" directional=\"false\">\r\n        <div body>\r\n          <div class=\"col-12 text-center container\">\r\n            <h2 style=\"margin-bottom:30px\">Ha cerrado periodo satisfactoriamente</h2>\r\n          </div>\r\n        </div>\r\n\r\n        <ng-template ngl-modal-footer>\r\n        <button class=\"btn btn-primary\" (click)=\"modalPasarPeriodo()\">Aceptar</button>\r\n        </ng-template>\r\n      </ngl-modal>\r\n\r\n\r\n\r\n          <ngl-modal header=\"Confirmación\"  [(open)]=\"alert\" size=\"x-small\" directional=\"false\">\r\n\r\n            <div body>\r\n              <div class=\"container\">\r\n                <h5 class=\"col-12 text-center\" style=\"margin-bottom:30px\">Tienes deuda, no puedes pasar de periodo, necesitas un prestamo</h5>\r\n                  <div class=\"col-2 offset-5\">\r\n                    <img  src=\"assets/img/credit.png\" class=\"img-fluid\">\r\n                  </div>\r\n\r\n              </div>\r\n            </div>\r\n\r\n            <ng-template ngl-modal-footer>\r\n              <button class=\"btn btn-primary\" (click)=\"pasaCreditos()\">Acepta</button>\r\n\r\n          </ng-template>\r\n            </ngl-modal>\r\n\r\n\r\n\r\n\r\n\r\n\r\n                <ngl-modal  [(open)]=\"openLoad\" size=\"small\" directional=\"false\">\r\n                  <div body>\r\n                    <h1 class=\"col-12 text-center\" >Cerrando Periodo</h1>\r\n                    <h5 class=\"col-12 text-center\">Realzando Operacion</h5>\r\n                    <div style=\"position:relative; height:6.25rem; z-index:0;\">\r\n                      <ngl-spinner size=\"large\" type=\"brand\"></ngl-spinner>\r\n                    </div>\r\n                  </div>\r\n                </ngl-modal>\r\n\r\n\r\n                <ngl-modal  [(open)]=\"openPeriodos\" size=\"small\" directional=\"false\">\r\n                  <div body>\r\n                    <div class=\"list-group\" >\r\n                      <a class=\"list-group-item list-group-item-action \" *ngFor=\"let p of periodos\" >{{p.nombre}} <button class=\"btn btn-primary left\">Visualizar</button><button class=\"btn btn-success\">Editar</button></a>\r\n                    </div>\r\n                        <div class=\"modal-footer\">\r\n                          <button  type=\"button\" class=\"btn btn-outline-danger\" (click)=\"modalPeriodos.hide()\">\r\n                          Cancelar\r\n                          </button>\r\n                        </div>\r\n                  </div>\r\n                </ngl-modal>\r\n\r\n\r\n\r\n                <div bsModal #modalPeriodos=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\"\r\n                style=\"z-index:100000\">\r\n                  <div class=\"modal-dialog modal-sm\">\r\n                    <div class=\"modal-content\">\r\n                      <div class=\"modal-header\">\r\n                        <h2 class=\"modal-title\">Periodos</h2>\r\n                      </div>\r\n                      <div class=\"modal-body\">\r\n                        <div class=\"list-group\" >\r\n                          <a class=\"list-group-item list-group-item-action \" *ngFor=\"let p of periodos\" (click)=\"transicion(p.numero)\">{{p.nombre}}</a>\r\n                        </div>\r\n                            <div class=\"modal-footer\">\r\n                              <button  type=\"button\" class=\"btn btn-outline-danger\" (click)=\"modalPeriodos.hide()\">\r\n                              Cancelar\r\n                              </button>\r\n                            </div>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n"
 
 /***/ }),
 
@@ -2004,6 +2008,7 @@ var NavbarUsuarioComponent = (function () {
         this.alert = false;
         this.opciones = false;
         this.periodos = [];
+        this.openPeriodos = false;
         this._resultadosService.vender();
         this.asignarBalance(localStorage.getItem('idProyecto'));
     }
@@ -2043,9 +2048,6 @@ var NavbarUsuarioComponent = (function () {
                 }
             }
         });
-    };
-    NavbarUsuarioComponent.prototype.openBalances = function () {
-        //this.modalPeriodos.show();
     };
     NavbarUsuarioComponent.prototype.pasaCreditos = function () {
         this.router.navigate(['Usuario/proyecto/financiamiento']);
@@ -3739,7 +3741,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-12\">\r\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\r\n<hr>\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-12\" style=\"height:500px\" *ngFor=\"let zona of graficas\" >\r\n    <div class=\"row\">\r\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\r\n\r\n  <div class=\"col-12\" style=\"height:400px;\">\r\n    <ngx-charts-line-chart\r\n         [scheme]=\"colorScheme\"\r\n         [results]=\"zona.graf\"\r\n         xAxis=\"true\"\r\n         legendTitle=\"Productos\"\r\n         yAxis=\"true\"\r\n         legend=\"true\"\r\n         showXAxisLabel=\"true\"\r\n         showYAxisLabel=\"true\"\r\n         xAxisLabel=\"Periodos\"\r\n         yAxisLabel=\"Demanda Potencial\"\r\n         autoScale=\"true\">\r\n       </ngx-charts-line-chart>\r\n  </div>\r\n    </div>\r\n\r\n\r\n\r\n\r\n  </div>\r\n\r\n</div>\r\n"
+module.exports = "<div class=\"col-12\">\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\n<hr>\n</div>\n\n\n<div class=\"row\">\n  <div class=\"col-12\" style=\"height:500px\" *ngFor=\"let zona of graficas\" >\n    <div class=\"row\">\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\n\n  <div class=\"col-12\" style=\"height:400px;\">\n    <ngx-charts-line-chart\n         [scheme]=\"colorScheme\"\n         [results]=\"zona.graf\"\n         xAxis=\"true\"\n         legendTitle=\"Productos\"\n         yAxis=\"true\"\n         legend=\"true\"\n         showXAxisLabel=\"true\"\n         showYAxisLabel=\"true\"\n         xAxisLabel=\"Periodos\"\n         yAxisLabel=\"Demanda Potencial\"\n         autoScale=\"true\">\n       </ngx-charts-line-chart>\n  </div>\n    </div>\n\n\n\n\n  </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -4249,10 +4251,15 @@ var DesarrolloProductoComponent = (function () {
     };
     DesarrolloProductoComponent.prototype.pagarDesarrollo = function () {
         var _this = this;
+        var z = this._desarrolloProducto.pagarDesarrollo(this.productoSelectedPago.Productos_idProducto, this.productoSelectedPago.costoDes);
         this.openPago = false;
         this.openLoadPago = true;
-        setTimeout(function () { return _this.openLoadPago = false; }, 2000);
-        this.productosEnDesarrollo = this._desarrolloProducto.pagarDesarrollo(this.productoSelectedPago.idProducto, this.productoSelectedPago.costoDes);
+        setTimeout(function () {
+            _this.openLoadPago = false;
+            if (z) {
+                _this.actualizar2();
+            }
+        }, 2000);
     };
     DesarrolloProductoComponent.prototype.revisaPeriodo = function (producto) {
         console.log(producto.numeroPeriodo == localStorage.getItem('numeroPeriodo'));
@@ -4270,6 +4277,10 @@ var DesarrolloProductoComponent = (function () {
         this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
         this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
         this.productosSinDesarrollar = this._desarrolloProducto.returnProductosSinDesarrollar();
+    };
+    DesarrolloProductoComponent.prototype.actualizar2 = function () {
+        this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
+        console.log("Pago", this.productosEnDesarrollo);
     };
     return DesarrolloProductoComponent;
 }());
@@ -6854,18 +6865,22 @@ var PruebaComponent = (function () {
         doc.save("Estado de Resultados.pdf");
     };
     PruebaComponent.prototype.descargaCSV = function () {
-        var anterior;
-        var actual;
+        var anterior = {
+            cajaBancos: null
+        };
+        var actual = {
+            cajaBancos: null
+        };
         var origen;
         var aplicacion;
         for (var _i = 0, _a = this.balanceFinal; _i < _a.length; _i++) {
             var balance = _a[_i];
-            anterior['cajaBancos'] = balance.cajaBancos;
+            anterior["cajaBancos"] = balance.cajaBancos;
             anterior['cuentasPorCobrar'] = balance.cuentasPorCobrar;
             anterior['IVAAcreditable'] = balance.IVAAcreditable;
             anterior['almacenArtTerm'] = balance.almacenArtTerm;
             anterior['almacenMateriales'] = balance.almacenMateriales;
-            anterior['terrenos'] = balance.terrenos;
+            anterior['terrenos'] = balance.terreno;
             anterior['edificios'] = balance.edifInsta;
             anterior['depEdif'] = balance.depEdif;
             anterior['maqEquipo'] = balance.maqEquipo;
@@ -6895,14 +6910,14 @@ var PruebaComponent = (function () {
             actual['IVAAcreditable'] = balance.IVAAcreditable;
             actual['almacenArtTerm'] = balance.almacenArtTerm;
             actual['almacenMateriales'] = balance.almacenMateriales;
-            actual['terrenos'] = balance.terrenos;
+            actual['terrenos'] = balance.terreno;
             actual['edificios'] = balance.edifInsta;
             actual['depEdif'] = balance.depEdif;
             actual['maqEquipo'] = balance.maqEquipo;
             actual['depMaqEquipo'] = balance.depMaqEquipo;
             actual['mueblesEnseres'] = balance.mueblesEnseres;
             actual['depMueblesEnseres'] = balance.depMueblesEnseres;
-            actual['equipoTrans'] = balance.eqTrans;
+            actual['eqTrans'] = balance.eqTrans;
             actual['depEqTrans'] = balance.depEqTrans;
             actual['pagosAnticipado'] = balance.pagosAnticipado;
             actual['gastosAmortizacion'] = balance.gastosAmortizacion;
@@ -6921,37 +6936,37 @@ var PruebaComponent = (function () {
         var data = [
             { "cara": "", "actual": "Año Actual", "anterior": "Año Anterior", "aplicacion": "Aplicación", "origen": "Origen" },
             { "cara": "Amenos de un Año", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Caja Bancos", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Cuentas por Cobrar", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "IVA Acreditable", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Almacen de Articulo Terminado", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Almacen de Materiales", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Caja Bancos", "actual": actual.cajaBancos, "anterior": anterior.cajaBancos, "aplicacion": this.getAplicacionCB(actual.cajaBancos, anterior.cajaBancos), "origen": this.getOrigenCB(actual.cajaBancos, anterior.cajaBancos) },
+            { "cara": "Cuentas por Cobrar", "actual": actual.cuentasPorCobrar, "anterior": anterior.cuentasPorCobrar, "aplicacion": this.getAplicacionCB(actual.cuentasPorCobrar, anterior.cuentasPorCobrar), "origen": this.getOrigenCB(actual.cuentasPorCobrar, anterior.cuentasPorCobrar) },
+            { "cara": "IVA Acreditable", "actual": actual.IVAAcredita, "anterior": anterior.IVAAcreditable, "aplicacion": this.getAplicacionCB(actual.IVAAcreditable, anterior.IVAAcreditable), "origen": this.getOrigenCB(actual.IVAAcreditable, anterior.IVAAcreditable) },
+            { "cara": "Almacen de Articulo Terminado", "actual": actual.almacenArtTerm, "anterior": anterior.almacenArtTerm, "aplicacion": this.getAplicacionCB(actual.almacenArtTerm, anterior.almacenArtTerm), "origen": this.getOrigenCB(actual.almacenArtTerm, anterior.almacenArtTerm) },
+            { "cara": "Almacen de Materiales", "actual": actual.almacenMateriales, "anterior": anterior.almacenMateriales, "aplicacion": this.getAplicacionCB(actual.almacenMateriales, anterior.almacenMateriales), "origen": this.getOrigenCB(actual.almacenMateriales, anterior.almacenMateriales) },
             { "cara": "A más de un año", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Terrenos", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Edificios e Instalaciones", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Deprecicaicón Acumulada", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Maquinaria y  Equipo", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Depreciación Acumulada", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Muebles y Enseres", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Depresisción Acumulada", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Equipo de Transporte", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Depreciación Acumulada", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Terrenos", "actual": actual.terrenos, "anterior": anterior.terrenos, "aplicacion": this.getAplicacionCB(actual.terrenos, anterior.terrenos), "origen": this.getOrigenCB(actual.terrenos, anterior.terrenos) },
+            { "cara": "Edificios e Instalaciones", "actual": actual.edificios, "anterior": anterior.edificios, "aplicacion": this.getAplicacionCB(actual.edificios, anterior.edificios), "origen": this.getOrigenCB(actual.edificios, anterior.edificios) },
+            { "cara": "Deprecicaicón Acumulada", "actual": actual.depEdif, "anterior": anterior.depEdif, "aplicacion": this.getAplicacionCB(actual.depEdif, anterior.depEdif), "origen": this.getOrigenCB(actual.depEdif, anterior.depEdif) },
+            { "cara": "Maquinaria y  Equipo", "actual": actual.maqEquipo, "anterior": anterior.maqEquipo, "aplicacion": this.getAplicacionCB(actual.maqEquipo, anterior.maqEquipo), "origen": this.getOrigenCB(actual.maqEquipo, anterior.maqEquipo) },
+            { "cara": "Depreciación Acumulada", "actual": actual.depMaqEquipo, "anterior": anterior.depMaqEquipo, "aplicacion": this.getAplicacionCB(actual.depMaqEquipo, anterior.depMaqEquipo), "origen": this.getOrigenCB(actual.depMaqEquipo, anterior.depMaqEquipo) },
+            { "cara": "Muebles y Enseres", "actual": actual.mueblesEnseres, "anterior": anterior.mueblesEnseres, "aplicacion": this.getAplicacionCB(actual.mueblesEnseres, anterior.mueblesEnseres), "origen": this.getOrigenCB(actual.mueblesEnseres, anterior.mueblesEnseres) },
+            { "cara": "Depreciación Acumulada", "actual": actual.depMueblesEnseres, "anterior": anterior.depMueblesEnseres, "aplicacion": this.getAplicacionCB(actual.depMueblesEnseres, anterior.depMueblesEnseres), "origen": this.getOrigenCB(actual.depMueblesEnseres, anterior.depMueblesEnseres) },
+            { "cara": "Equipo de Transporte", "actual": actual.eqTrans, "anterior": anterior.eqTrans, "aplicacion": this.getAplicacionCB(actual.eqTrans, anterior.eqTrans), "origen": this.getOrigenCB(actual.eqTrans, anterior.eqTrans) },
+            { "cara": "Depreciación Acumulada", "actual": actual.depEqTrans, "anterior": anterior.depEqTrans, "aplicacion": this.getAplicacionCB(actual.depEqTrans, anterior.depEqTrans), "origen": this.getOrigenCB(actual.depEqTrans, anterior.depEqTrans) },
             { "cara": "De Aplicación Diferida", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Pagos hechos por anticipado", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Gastos por Amortizar", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Pagos hechos por anticipado", "actual": actual.pagosAnticipado, "anterior": anterior.pagosAnticipado, "aplicacion": this.getAplicacionCB(actual.pagosAnticipado, anterior.pagosAnticipado), "origen": this.getOrigenCB(actual.pagosAnticipado, anterior.pagosAnticipado) },
+            { "cara": "Gastos por Amortizar", "actual": actual.gastosAmortizacion, "anterior": anterior.gastosAmortizacion, "aplicacion": this.getAplicacionCB(actual.gastosAmortizacion, anterior.gastosAmortizacion), "origen": this.getOrigenCB(actual.gastosAmortizacion, anterior.gastosAmortizacion) },
             { "cara": "A menos de un año", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "IVA por Enterar", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Impuestos por Pagar", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Poveedores", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "PTU por Pagar", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Prestamos Bancarios", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "IVA por Enterar", "actual": actual.IVAPorEnterar, "anterior": anterior.IVAPorEnterar, "aplicacion": this.getAplicacionCB(actual.IVAPorEnterar, anterior.IVAPorEnterar), "origen": this.getOrigenCB(actual.IVAPorEnterar, anterior.IVAPorEnterar) },
+            { "cara": "Impuestos por Pagar", "actual": actual.imptosPorPagar, "anterior": anterior.imptosPorPagar, "aplicacion": this.getAplicacionCB(actual.imptosPorPagar, anterior.imptosPorPagar), "origen": this.getOrigenCB(actual.imptosPorPagar, anterior.imptosPorPagar) },
+            { "cara": "Poveedores", "actual": actual.proveedores, "anterior": anterior.proveedores, "aplicacion": this.getAplicacionCB(actual.proveedores, anterior.proveedores), "origen": this.getOrigenCB(actual.proveedores, anterior.proveedores) },
+            { "cara": "PTU por Pagar", "actual": actual.proveedores, "anterior": anterior.proveedores, "aplicacion": this.getAplicacionCB(actual.proveedores, anterior.proveedores), "origen": this.getOrigenCB(actual.proveedores, anterior.proveedores) },
+            { "cara": "Prestamos Bancarios", "actual": actual.prestamosMenosAnio, "anterior": anterior.prestamosMenosAnio, "aplicacion": this.getAplicacionCB(actual.prestamosMenosAnio, anterior.prestamosMenosAnio), "origen": this.getOrigenCB(actual.prestamosMenosAnio, anterior.prestamosMenosAnio) },
             { "cara": "A más de un año", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Prestamos Totales", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Capital Social", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Reserva Legal", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Utilidad Acumulada", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Utilidad del Ejercicio", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Total", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Prestamos Totales", "actual": actual.prestamosMasAnio, "anterior": anterior.prestamosMasAnio, "aplicacion": this.getAplicacionCB(actual.prestamosMasAnio, anterior.prestamosMasAnio), "origen": this.getOrigenCB(actual.prestamosMasAnio, anterior.prestamosMasAnio) },
+            { "cara": "Capital Social", "actual": actual.capitalSocial, "anterior": anterior.capitalSocial, "aplicacion": this.getAplicacionCB(actual.capitalSocial, anterior.capitalSocial), "origen": this.getOrigenCB(actual.capitalSocial, anterior.capitalSocial) },
+            { "cara": "Reserva Legal", "actual": actual.reservaLegal, "anterior": anterior.reservaLegal, "aplicacion": this.getAplicacionCB(actual.reservaLegal, anterior.reservaLegal), "origen": this.getOrigenCB(actual.reservaLegal, anterior.reservaLegal) },
+            { "cara": "Utilidad Acumulada", "actual": actual.utilidadAcum, "anterior": anterior.utilidadAcum, "aplicacion": this.getAplicacionCB(actual.utilidadAcum, anterior.utilidadAcum), "origen": this.getOrigenCB(actual.utilidadAcum, anterior.utilidadAcum) },
+            { "cara": "Utilidad del Ejercicio", "actual": actual.utilidadEjercicio, "anterior": anterior.utilidadEjercicio, "aplicacion": this.getAplicacionCB(actual.utilidadEjercicio, anterior.utilidadEjercicio), "origen": this.getOrigenCB(actual.utilidadEjercicio, anterior.utilidadEjercicio) },
+            { "cara": "Total", "actual": 0, "anterior": 0, "aplicacion": this.origen, "origen": this.origen },
         ];
         new __WEBPACK_IMPORTED_MODULE_5_angular2_csv_Angular2_csv__["Angular2Csv"](data, 'Posición Comparativa');
     };
@@ -7676,6 +7691,8 @@ module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <h2 
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__services_zonas_service__ = __webpack_require__("../../../../../src/app/services/zonas.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__services_usuario_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/usuario-maquinaria.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__services_variables_service__ = __webpack_require__("../../../../../src/app/services/variables.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ng2_file_upload__ = __webpack_require__("../../../../ng2-file-upload/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ng2_file_upload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16_ng2_file_upload__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UsuariosComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7686,6 +7703,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -7753,6 +7771,7 @@ var UsuariosComponent = (function () {
             isFirstOpen: true,
             isOpen: true
         };
+        this.uploader = new __WEBPACK_IMPORTED_MODULE_16_ng2_file_upload__["FileUploader"]({ url: 'usuario/register/' });
         this.variables = this._variablesService.returnVariables();
         this.idAdmin = localStorage.getItem('idAdmin');
         this.newForm = new __WEBPACK_IMPORTED_MODULE_7__angular_forms__["FormGroup"]({
@@ -9258,6 +9277,7 @@ var DesarrolloProductoService = (function () {
                 x.push(data.datos[i]);
             }
         });
+        console.log("Consulta", x);
         return x;
     };
     DesarrolloProductoService.prototype.returnProductosDesarrollados = function () {
@@ -9300,7 +9320,11 @@ var DesarrolloProductoService = (function () {
         return this.http.post('proyectoproducto/getproductosdesarrollados/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
     DesarrolloProductoService.prototype.getTerminados = function () {
-        return this.http.get('proyectoproducto/getterminados/' + localStorage.getItem('idProyecto')).map(function (res) { return res.json(); });
+        var x = {
+            idProyecto: localStorage.getItem('idProyecto'),
+            numeroPeriodo: localStorage.getItem('numeroPeriodo')
+        };
+        return this.http.post('proyectoproducto/getterminados/', x).map(function (res) { return res.json(); });
     };
     DesarrolloProductoService.prototype.setDesarrollado = function (x) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
@@ -9364,13 +9388,8 @@ var DesarrolloProductoService = (function () {
             costoDes: costo
         };
         this.pagoBalance(y).subscribe();
-        var m = [];
-        this.pd(x).subscribe(function (data) {
-            for (var key in data.datos) {
-                m.push(data.datos[key]);
-            }
-        });
-        return m;
+        this.pd(x).subscribe();
+        return true;
     };
     DesarrolloProductoService.prototype.pd = function (x) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
@@ -10316,9 +10335,11 @@ var ProyectosService = (function () {
         this.buscarPeriodos(idProyecto).subscribe(function (data) {
             if (data.datos.length == 0) {
                 _this.asginarPeriodoCero(idProyecto);
-                localStorage.setItem('numeroPeriodo', '1');
-                localStorage.setItem('numeroRPeriodos', '1');
-                _this.asignarTodo(idProyecto);
+                setTimeout(function () {
+                    localStorage.setItem('numeroPeriodo', '1');
+                    localStorage.setItem('numeroRPeriodos', '1');
+                    _this.asignarTodo(idProyecto);
+                }, 500);
             }
             else {
                 var num = parseInt(data.datos.length) - 1;
@@ -10328,11 +10349,14 @@ var ProyectosService = (function () {
         });
     };
     ProyectosService.prototype.asignarTodo = function (idProyecto) {
-        this.asignarZonas(idProyecto, localStorage.getItem('idUsuario'));
         this.asignarMaquinaria(idProyecto, localStorage.getItem('idUsuario'));
         this.asginarProductos(idProyecto, localStorage.getItem('idUsuario'));
         this.asignarProductos2(idProyecto, localStorage.getItem('idUsuario'));
+        this.asignarTZ(idProyecto);
+    };
+    ProyectosService.prototype.asignarTZ = function (idProyecto) {
         this.asignarZonas2(idProyecto, localStorage.getItem('idUsuario'));
+        this.asignarZonas(idProyecto, localStorage.getItem('idUsuario'));
     };
     ProyectosService.prototype.asginarProductos = function (idProyecto, idUsuario) {
         var _this = this;
