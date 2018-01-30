@@ -118,7 +118,7 @@
                 <ngl-modal  [(open)]="openPeriodos" size="small" directional="false">
                   <div body>
                     <div class="list-group" >
-                      <a class="list-group-item list-group-item-action " *ngFor="let p of periodos" >{{p.nombre}} <button class="btn btn-primary left">Visualizar</button><button class="btn btn-success">Editar</button></a>
+                      <a class="list-group-item list-group-item-action " *ngFor="let p of this._proyectoService.periodos" >{{p.nombre}} <button class="btn btn-primary left" (click)="this._proyectoService.ver(p.numero)">Visualizar</button><button class="btn btn-success" (click)="this._proyectoService.editar(p.numero)">Editar</button></a>
                     </div>
                         <div class="modal-footer">
                           <button  type="button" class="btn btn-outline-danger" (click)="modalPeriodos.hide()">

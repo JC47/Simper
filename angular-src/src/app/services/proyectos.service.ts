@@ -18,6 +18,7 @@ export class ProyectosService {
 
   proyectos:proyecto[]=new Array();
   periodo:any;
+  periodos=[];
   muestraPeriodo:boolean=true;
   constructor(private http:Http, private _balanceService:BalanceService,
               private _usuarioMaquinariaService:UsuarioMaquinariaService,
@@ -88,15 +89,36 @@ returnUsuarios(){
   }
 
   changePeriodo(){
+    this.periodos.length = 0;
     this.buscarPeriodos(localStorage.getItem('idProyecto')).subscribe(data => {
       if(data.datos.length == 0){
-        this.periodo=0
+        this.periodo=0;
       }
       else{
         this.periodo = parseInt(data.datos.length) - 1;
-        console.log("Peri",this.periodo);
+        for(let key$ in data.datos){
+          if(data.datos[key$].numeroPeriodo != 0){
+            var y = {
+              nombre:"Periodo "+(data.datos[key$].numeroPeriodo),
+              numero:(data.datos[key$].numeroPeriodo)
+            }
+            this.periodos.push(y);
+          }
+        }
       }
     });
+  }
+
+  ver(numero){
+    this.periodo = numero;
+    localStorage.setItem('numeroPeriodo', numero);
+    this.router.navigate(['Usuario/proyecto/home']);
+  }
+
+  editar(numero){
+    this.periodo = numero;
+    localStorage.setItem('numeroPeriodo', numero);
+    this.router.navigate(['Usuario/proyecto/home']);
   }
 
   asignarBalance(idProyecto){
