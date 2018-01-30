@@ -106,6 +106,9 @@ router.post('/productossindesarrollar/', (req, res, next) => {
   Promise.join(productoZonaProyecto.getProductosSinDesarrollar(idProyecto,numeroPeriodo,idUsuario),
   productoZonaProyecto.getIdZonaSinDes(idProyecto,numeroPeriodo,idUsuario),
   productoZonaProyecto.getZonas(),function(productozonasindes, idszonasindes,zonas) {
+    console.log("productozonasindes:: ",productozonasindes);
+    console.log("idszonasindes:: ",idszonasindes);
+    console.log("zonas:: ",zonas);
       return jsonProductosSinDesarrollar(productozonasindes,idszonasindes,zonas);
      })
   .then(function (rows) {
@@ -123,22 +126,23 @@ router.post('/productossindesarrollar/', (req, res, next) => {
 });
 
 //productos en vías de desarrollo, e.i, desarrollo = 0
+
 router.post('/productosendesarrollo/', (req, res, next) => {
 
   var idProyecto = req.body.Proyecto_idProyecto;
   var idUsuario = req.body.Proyecto_Usuario_idUsuario;
   var numeroPeriodo = req.body.numeroPeriodo;
 
-  Promise.join(productoZonaProyecto.getProductosEnDesarrollo(idProyecto,numeroPeriodo,idUsuario),
+  Promise.join(
+  productoZonaProyecto.getProductosEnDesarrollo(idProyecto,numeroPeriodo,idUsuario),
   productoZonaProyecto.getIdZonasEnDes(idProyecto,numeroPeriodo,idUsuario),
   productoZonaProyecto.getZonas(),
-  //productoZonaProyecto.getProductosEnDesEnZona(idProyecto,idUsuario),
-  function(productosendes, idszonasdes, zonas/*, productosendesenzona*/) {
-    // console.log("productosendes:: ",productosendes);
-    // console.log("idszonasdes:: ",idszonasdes);
-    // console.log("zonas:: ",zonas);
+  function(productosendes, idszonasdes, zonas) {
+    console.log("productosendes",productosendes);
+    console.log("idszonasdes",idszonasdes);
+    console.log("zonas",zonas);
 
-      return jsonProductosEnDesarrollo(productosendes, idszonasdes, zonas/*, productosendesenzona*/);
+     return jsonProductosEnDesarrollo(productosendes, idszonasdes, zonas);
      })
   .then(function (rows) {
       res.json({success: true, datos:rows, msg:"Operacion exitosa"});
@@ -158,11 +162,11 @@ router.post('/productosendesarrollo/', (req, res, next) => {
 router.post('/productosdesarrollados/', (req, res, next) => {
 
   var idProyecto = req.body.Proyecto_idProyecto;
-//  var idUsuario = req.body.Proyecto_Usuario_idUsuario;
+  var idUsuario = req.body.Proyecto_Usuario_idUsuario;
   var numeroPeriodo = req.body.numeroPeriodo;
 
-  Promise.join(productoZonaProyecto.getProductosDesarrollados(idProyecto,numeroPeriodo),
-  productoZonaProyecto.getIdZonasDes(idProyecto,numeroPeriodo),
+  Promise.join(productoZonaProyecto.getProductosDesarrollados(idProyecto,numeroPeriodo,idUsuario),
+  productoZonaProyecto.getIdZonasDes(idProyecto,numeroPeriodo,idUsuario),
   productoZonaProyecto.getZonas(),
   //productoZonaProyecto.getProductosDesEnZona(idProyecto,idUsuario),
   function(productosdes, idszonasdes, zonas/*, productosdesenzona*/) {
@@ -403,7 +407,7 @@ function jsonProductosDesarrollados(productosdes, idszonasdes,zonas/*, productos
   while (i<idszonasdes.length) {
     var aux = 0;
     for (var j = 0; j < productosdes.length; j++) {
-      if (idszonasdes[i].Zona_idZona == productosdes[j].Zona_idZona) {
+      if (idszonasdes[i].Zona_idZonas == productosdes[j].Zona_idZonas) {
         aux = aux +1;
       }
     }
@@ -418,9 +422,9 @@ var k = 0;
 
 while (k < idszonasdes.length) {
   for (var i = 0; i < zonas.length; i++) {
-    if (idszonasdes[k].Zona_idZona == zonas[i].idZona) {
+    if (idszonasdes[k].Zona_idZonas == zonas[i].idZona) {
       var json = {
-        "idZona":idszonasdes[k].Zona_idZona,
+        "idZona":idszonasdes[k].Zona_idZonas,
         "nombreZona":zonas[i].nombreZona,
         "productosDes":[]
       }
@@ -453,7 +457,7 @@ function jsonProductosEnDesarrollo(productosendes, idszonasendes,zonas/*, produc
   while (i<idszonasendes.length) {
     var aux = 0;
     for (var j = 0; j < productosendes.length; j++) {
-      if (idszonasendes[i].Zona_idZona == productosendes[j].Zona_idZona) {
+      if (idszonasendes[i].Zona_idZonas == productosendes[j].Zona_idZonas) {
         aux = aux +1;
       }
     }
@@ -468,9 +472,9 @@ var k = 0;
 
 while (k < idszonasendes.length) {
   for (var i = 0; i < zonas.length; i++) {
-    if (idszonasendes[k].Zona_idZona == zonas[i].idZona) {
+    if (idszonasendes[k].Zona_idZonas == zonas[i].idZona) {
       var json = {
-        "idZona":idszonasendes[k].Zona_idZona,
+        "idZona":idszonasendes[k].Zona_idZonas,
         "nombreZona":zonas[i].nombreZona,
         "productosEnDes":[]
       }
@@ -509,7 +513,7 @@ function jsonProductosSinDesarrollar(productozonasindes,idszonasindes,zonas) {
   while (i<idszonasindes.length) {
     var aux = 0;
     for (var j = 0; j < productozonasindes.length; j++) {
-      if (idszonasindes[i].Zona_idZona == productozonasindes[j].Zona_idZona) {
+      if (idszonasindes[i].Zona_idZonas == productozonasindes[j].Zona_idZonas) {
         aux = aux +1;
       }
     }
@@ -522,9 +526,9 @@ var k = 0;
 
 while (k < idszonasindes.length) {
   for (var i = 0; i < zonas.length; i++) {
-    if (idszonasindes[k].Zona_idZona == zonas[i].idZona) {
+    if (idszonasindes[k].Zona_idZonas == zonas[i].idZona) {
       var json = {
-        "idZona":idszonasindes[k].Zona_idZona,
+        "idZona":idszonasindes[k].Zona_idZonas,
         "nombreZona":zonas[i].nombreZona,
         "productosSinDes":[]
       }
