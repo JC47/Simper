@@ -144,7 +144,7 @@ export class NavbarUsuarioComponent implements OnInit {
                   localStorage.setItem('numeroPeriodo',periodoNuevo.toString());
                   localStorage.setItem('numeroRPeriodos',periodoNuevo.toString());
                   this.periodo = this.periodo + 1 ;
-                  this._proyectoService.changePeriodo()
+                  this._proyectoService.changePeriodo();
                   setTimeout(() => {
                     console.log("Peri",this._proyectoService.periodo)
                   }, 1000);
