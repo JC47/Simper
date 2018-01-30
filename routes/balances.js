@@ -232,6 +232,10 @@ router.post('/final', (req, res, next) => {
   })
 });
 
+router.post('/eliminarperiodos', (req,res,next) => {
+  
+});
+
 
 router.get('/:id', (req,res,next) => {
   Promise.resolve().then( function () {

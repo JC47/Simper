@@ -18,12 +18,8 @@ export class ProyectosService {
 
   proyectos:proyecto[]=new Array();
   periodo:any;
-<<<<<<< HEAD
   periodos=[];
   muestraPeriodo:boolean=true;
-=======
-  muestraPeriodo:boolean=false;
->>>>>>> 5c2003df64fc4aea1f4ed66022b18662cc91b694
   constructor(private http:Http, private _balanceService:BalanceService,
               private _usuarioMaquinariaService:UsuarioMaquinariaService,
               private _usuarioProductoService:UsuarioProductoService,
