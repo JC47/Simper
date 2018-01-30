@@ -26,12 +26,12 @@ module.exports.desarolladoProductoZonaProyecto = function (idProducto,idZona,idP
 }
 
 module.exports.getIdProductoFromProductoZonaProyecto = function (idProyecto,idUsuario) {
-  var query = "select distinct(Producto_idProducto) from productozonaproyecto where Proyecto_idProyecto = "+idProyecto+" and Proyecto_Usuario_idUsuario = "+idUsuario+" and desarrollado = 1";
+  var query = "select distinct(Producto_idProducto) from productozonaproyecto where Proyecto_idProyecto = "+idProyecto+" and Proyecto_Usuario_idUsuario = "+idUsuario+" and desarrollado = 2";
   return querySql(query);
 }
 
 module.exports.getProductoZonaProyectoByIdProyectoByIdUsuario = function (idProyecto,idUsuario) {
-  var query = "select * from productozonaproyecto where Proyecto_idProyecto = "+idProyecto+" and Proyecto_Usuario_idUsuario = "+idUsuario+" and desarrollado = 1 ";
+  var query = "select * from productozonaproyecto where Proyecto_idProyecto = "+idProyecto+" and Proyecto_Usuario_idUsuario = "+idUsuario+" and desarrollado = 2 ";
   return querySql(query);
 }
 

@@ -12,8 +12,10 @@ router.post('/productoszonademandadesarrollados/', (req, res, next) => {
   var idProyecto = req.body.Proyecto_idProyecto;
   var numeroPeriodo = req.body.numPeriodo;
 
-  Promise.join(dashboard.getProductosZonaDemandaDesarrollados(numeroPeriodo,idUsuario,idProyecto),
-  dashboard.getDistinctIdProductoDesarrollados(numeroPeriodo,idUsuario,idProyecto),function(productoszonasdemandasdes,idsproductos) {
+  Promise.join(
+    dashboard.getProductosZonaDemandaDesarrollados(numeroPeriodo,idUsuario,idProyecto),
+    dashboard.getDistinctIdProductoDesarrollados(numeroPeriodo,idUsuario,idProyecto),
+    function(productoszonasdemandasdes,idsproductos) {
       return jsonProductosZonasDemandasDesarollados(productoszonasdemandasdes,idsproductos);
      })
   .then(function (rows) {
