@@ -49,8 +49,9 @@
 
 <div class="col-2">
   <button type="button" class="offset-1 col-10 btn btn-primary "
-  style="margin-top:130px"
+  style="margin-top:250px"
   (click)="openConf=true"><i class="material-icons">keyboard_arrow_right</i></button>
+
 
 
 </div>
@@ -155,15 +156,17 @@
           </div>
         </div>
         <div class="card-footer" style="margin-top:20px;">
-          <div class="col-12" *ngFor="let producto of zona.productosEnDes"
-          style="height:110px;" class="card">
+          <div class="col-12 card" *ngFor="let producto of zona.productosEnDes"
+          style="height:110px;" >
           <div class="row align-items-center" >
 
               <button type="button" (click)="confPagoF(zona.idZona,producto.idProducto,zona.nombreZona)"
-              class="btn btn-primary col-3" [disabled]="validaPago(producto)">Pagar</button>
+              class="btn btn-primary col-4" *ngIf="validaPago(producto)">Pagar</button>
+              <button type="button"
+              class="btn btn-danger col-4" *ngIf="!validaPago(producto)">Cancelar</button>
 
-            <div class="col-9" style="margin-top:14px">
-              <h5>{{getNameById(producto.idProducto)}}</h5>
+            <div class="col-8" style="margin-top:14px">
+              <h6>{{getNameById(producto.idProducto)}}</h6>
               <h6>Pago de Desarrollo: <br><b>{{ getCosto(zona.idZona,producto.idProducto) | currency:'USD':true }}</b></h6>
               <h6>Periodos de Desarrollo: {{getTiempo(zona.idZona,producto.idProducto)}}</h6>
             </div>

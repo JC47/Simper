@@ -13,6 +13,7 @@ export class DesarrolloProductoComponent implements OnInit {
   productosDesarollados:any[] = [];
   productosEnDesarrollo:any[] = [];
   productosSinDesarrollar:any[] = [];
+  productoDeleted:any;
   productoSelectedAdd:any={
     costoDes:null,
     costoUni:null,
@@ -44,7 +45,7 @@ export class DesarrolloProductoComponent implements OnInit {
     this.productosSinDesarrollar = this._desarrolloProducto.returnProductosSinDesarrollar();
     this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
     this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
-    console.log("array en desarrolloo",this.productosEnDesarrollo);
+    console.log("array en desarrolloo",this.productosDesarollados);
     setTimeout(()=>{
       if(this.productosSinDesarrollar.length==0){
         console.log("ARREGLO VACIO");
@@ -119,6 +120,10 @@ export class DesarrolloProductoComponent implements OnInit {
     console.log(producto)
     this.productoSelectedAdd=producto;
 
+
+  }
+
+  selectProductoDelete(){
 
   }
 

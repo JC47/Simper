@@ -26,7 +26,7 @@
   </div>
 
   <div class="col-2">
-    <button type="button" class="btn btn-primary col-10 offset-1" style="margin-top:300px;"
+    <button type="button" class="btn btn-primary col-10 offset-1" style="margin-top:250px;"
     (click)="openConf=true"><i class="material-icons">keyboard_arrow_right</i></button>
   </div>
 
@@ -89,11 +89,14 @@
         </div> -->
         <div class="card" *ngFor="let producto of productosEnDesarrollo">
           <div class="card-block">
-            <div class="row">
-              <img  src="assets/img/box.png" style="height:70px;margin-left:10px;margin-top:10px">
+            <div class="row align-items-center">
+              <div class="col-3">
+                  <img  src="assets/img/box.png" class="img-fluid">
+              </div>
 
-              <div class="col-7">
-                <h4 class="card-title">{{producto.nombreProd}}</h4>
+
+              <div class="col-6">
+                <h5 class="card-title">{{producto.nombreProd}}</h5>
                 <h6 class="card-subtitle">Costo: <b>{{ producto.costoDes | currency:'USD':true }}</b> </h6>
                 <h6 class="card-subtitle" style="margin-top:5px">Tiempo de desarrollo: {{producto.tiempoDes}}</h6>
                 <h6 class="card-subtitle" style="margin-top:5px">Tiempo desarrollado: {{producto.periodosDes}}</h6>
@@ -101,7 +104,9 @@
               </div>
 
               <button type="button" (click)="confPago(producto)"
-              class="btn btn-primary" [disabled]="revisaPeriodo(producto)">Pagar</button>
+              class="btn btn-primary col-3" *ngIf="!revisaPeriodo(producto)" style="font-size:15px">Pagar</button>
+              <button type="button"
+              class="btn btn-danger col-3" *ngIf="revisaPeriodo(producto)" style="font-size:15px">Cancelar</button>
 
 
             </div>

@@ -66,7 +66,76 @@ export class PruebaComponent implements OnInit {
     format: [279,215.9]
 
 
+
   });
+
+    let anterior:any;
+    let actual:any;
+    let origen:any;
+    let aplicacion:any;
+
+
+
+    for(let balance of this.balanceFinal){
+      anterior["cajaBancos"]=balance.cajaBancos;
+      anterior['cuentasPorCobrar']=balance.cuentasPorCobrar
+      anterior['IVAAcreditable']=balance.IVAAcreditable
+      anterior['almacenArtTerm']=balance.almacenArtTerm
+      anterior['almacenMateriales']=balance.almacenMateriales
+      anterior['terrenos']=balance.terreno
+      anterior['edificios']=balance.edifInsta
+      anterior['depEdif']=balance.depEdif
+      anterior['maqEquipo']=balance.maqEquipo
+      anterior['depMaqEquipo']=balance.depMaqEquipo
+      anterior['mueblesEnseres']=balance.mueblesEnseres
+      anterior['depMueblesEnseres']=balance.depMueblesEnseres
+      anterior['equipoTrans']=balance.eqTrans
+      anterior['depEqTrans']=balance.depEqTrans
+      anterior['pagosAnticipado']=balance.pagosAnticipado
+      anterior['gastosAmortizacion']=balance.gastosAmortizacion
+      anterior['IVAPorEnterar']=balance.IVAPorEnterar
+      anterior['imptosPorPagar']=balance.imptosPorPagar
+      anterior['proveedores']=balance.proveedores
+      anterior['PTUPorPagar']=balance.PTUPorPagar
+      anterior['prestamosMenosAnio']=balance.prestamosMenosAnio
+      anterior['prestamosMasAnio']=balance.prestamosMasAnio
+      anterior['capitalSocial']=balance.capitalSocial
+      anterior['reservaLegal']=balance.reservaLegal
+      anterior['utilidadAcum']=balance.utilidadAcum
+      anterior['utilidadEjercicio']=balance.utilidadEjercicio
+      anterior['total']=0
+    }
+
+    for(let balance of this.balanceInicial){
+      actual['cajaBancos']=balance.cajaBancos;
+      actual['cuentasPorCobrar']=balance.cuentasPorCobrar
+      actual['IVAAcreditable']=balance.IVAAcreditable
+      actual['almacenArtTerm']=balance.almacenArtTerm
+      actual['almacenMateriales']=balance.almacenMateriales
+      actual['terrenos']=balance.terreno
+      actual['edificios']=balance.edifInsta
+      actual['depEdif']=balance.depEdif
+      actual['maqEquipo']=balance.maqEquipo
+      actual['depMaqEquipo']=balance.depMaqEquipo
+      actual['mueblesEnseres']=balance.mueblesEnseres
+      actual['depMueblesEnseres']=balance.depMueblesEnseres
+      actual['eqTrans']=balance.eqTrans
+      actual['depEqTrans']=balance.depEqTrans
+      actual['pagosAnticipado']=balance.pagosAnticipado
+      actual['gastosAmortizacion']=balance.gastosAmortizacion
+      actual['IVAPorEnterar']=balance.IVAPorEnterar
+      actual['imptosPorPagar']=balance.imptosPorPagar
+      actual['proveedores']=balance.proveedores
+      actual['PTUPorPagar']=balance.PTUPorPagar
+      actual['prestamosMenosAnio']=balance.prestamosMenosAnio
+      actual['prestamosMasAnio']=balance.prestamosMasAnio
+      actual['capitalSocial']=balance.capitalSocial
+      actual['reservaLegal']=balance.reservaLegal
+      actual['utilidadAcum']=balance.utilidadAcum
+      actual['utilidadEjercicio']=balance.utilidadEjercicio
+      actual['total']=0
+    }
+
 
     var columns = [
     {title: "", dataKey: "cara"},
@@ -77,40 +146,43 @@ export class PruebaComponent implements OnInit {
 
 
     var rows = [
-    {"cara":"Amenos de un Año"},
-    {"cara":"Caja Bancos"},
-    {"cara":"Cuentas por Cobrar"},
-    {"cara":"IVA Acreditable"},
-    {"cara":"Almacen de Articulo Terminado"},
-    {"cara":"Almacen de Materiales"},
-    {"cara":"A más de un año"},
-    {"cara":"Terrenos"},
-    {"cara":"Edificios e Instalaciones" },
-    {"cara":"Deprecicaicón Acumulada"},
-    {"cara":"Maquinaria y  Equipo" },
-    {"cara":"Depreciación Acumulada"},
-    {"cara":"Muebles y Enseres"},
-    {"cara":"Depresisción Acumulada"},
-    {"cara":"Equipo de Transporte"},
-    {"cara":"Depreciación Acumulada"},
-    {"cara":"De Aplicación Diferida"},
-    {"cara":"Pagos hechos por anticipado"},
-    {"cara":"Gastos por Amortizar"},
-    {"cara":"A menos de un año"},
-    {"cara":"IVA por Enterar"},
-    {"cara":"Impuestos por Pagar"},
-    {"cara":"Poveedores"},
-    {"cara":"PTU por Pagar"},
-    {"cara":"Prestamos Bancarios"},
-    {"cara":"A más de un año"},
-    {"cara":"Prestamos Totales"},
-    {"cara":"Capital Social"},
-    {"cara":"Reserva Legal"},
-    {"cara":"Utilidad Acumulada"},
-    {"cara":"Utilidad del Ejercicio"},
-    {"cara":"Total"},
+    {"cara":"Amenos de un Año", "actual":"","anterior":"","aplicacion":"", "origen":""},
+    {"cara":"Amenos de un Año", "actual":"", "anterior":"", "aplicacion":"","origen":""},
+    {"cara":"Caja Bancos", "actual":actual.cajaBancos, "anterior":anterior.cajaBancos, "aplicacion":this.getAplicacionCB(actual.cajaBancos,anterior.cajaBancos),"origen":this.getOrigenCB(actual.cajaBancos,anterior.cajaBancos)},
+    {"cara":"Cuentas por Cobrar", "actual":actual.cuentasPorCobrar, "anterior":anterior.cuentasPorCobrar, "aplicacion":this.getAplicacionCB(actual.cuentasPorCobrar,anterior.cuentasPorCobrar),"origen":this.getOrigenCB(actual.cuentasPorCobrar,anterior.cuentasPorCobrar)},
+    {"cara":"IVA Acreditable", "actual":actual.IVAAcredita, "anterior":anterior.IVAAcreditable, "aplicacion":this.getAplicacionCB(actual.IVAAcreditable,anterior.IVAAcreditable),"origen":this.getOrigenCB(actual.IVAAcreditable,anterior.IVAAcreditable)},
+    {"cara":"Almacen de Articulo Terminado", "actual":actual.almacenArtTerm, "anterior":anterior.almacenArtTerm, "aplicacion":this.getAplicacionCB(actual.almacenArtTerm,anterior.almacenArtTerm),"origen":this.getOrigenCB(actual.almacenArtTerm,anterior.almacenArtTerm)},
+    {"cara":"Almacen de Materiales", "actual":actual.almacenMateriales, "anterior":anterior.almacenMateriales, "aplicacion":this.getAplicacionCB(actual.almacenMateriales,anterior.almacenMateriales),"origen":this.getOrigenCB(actual.almacenMateriales,anterior.almacenMateriales)},
+    {"cara":"A más de un año", "actual":"", "anterior":"", "aplicacion":"","origen":""},
+    {"cara":"Terrenos", "actual":actual.terrenos, "anterior":anterior.terrenos, "aplicacion":this.getAplicacionCB(actual.terrenos,anterior.terrenos),"origen":this.getOrigenCB(actual.terrenos,anterior.terrenos)},
+    {"cara":"Edificios e Instalaciones", "actual":actual.edificios, "anterior":anterior.edificios, "aplicacion":this.getAplicacionCB(actual.edificios,anterior.edificios),"origen":this.getOrigenCB(actual.edificios,anterior.edificios)},
+    {"cara":"Deprecicaicón Acumulada", "actual":actual.depEdif, "anterior":anterior.depEdif, "aplicacion":this.getAplicacionCB(actual.depEdif,anterior.depEdif),"origen":this.getOrigenCB(actual.depEdif,anterior.depEdif)},
+    {"cara":"Maquinaria y  Equipo", "actual":actual.maqEquipo, "anterior":anterior.maqEquipo, "aplicacion":this.getAplicacionCB(actual.maqEquipo,anterior.maqEquipo),"origen":this.getOrigenCB(actual.maqEquipo,anterior.maqEquipo) },
+    {"cara":"Depreciación Acumulada", "actual":actual.depMaqEquipo, "anterior":anterior.depMaqEquipo, "aplicacion":this.getAplicacionCB(actual.depMaqEquipo,anterior.depMaqEquipo),"origen":this.getOrigenCB(actual.depMaqEquipo,anterior.depMaqEquipo)},
+    {"cara":"Muebles y Enseres", "actual":actual.mueblesEnseres, "anterior":anterior.mueblesEnseres, "aplicacion":this.getAplicacionCB(actual.mueblesEnseres,anterior.mueblesEnseres),"origen":this.getOrigenCB(actual.mueblesEnseres,anterior.mueblesEnseres)},
+    {"cara":"Depreciación Acumulada", "actual":actual.depMueblesEnseres, "anterior":anterior.depMueblesEnseres, "aplicacion":this.getAplicacionCB(actual.depMueblesEnseres,anterior.depMueblesEnseres),"origen":this.getOrigenCB(actual.depMueblesEnseres,anterior.depMueblesEnseres)},
+    {"cara":"Equipo de Transporte", "actual":actual.eqTrans, "anterior":anterior.eqTrans, "aplicacion":this.getAplicacionCB(actual.eqTrans,anterior.eqTrans),"origen":this.getOrigenCB(actual.eqTrans,anterior.eqTrans)},
+    {"cara":"Depreciación Acumulada", "actual":actual.depEqTrans, "anterior":anterior.depEqTrans, "aplicacion":this.getAplicacionCB(actual.depEqTrans,anterior.depEqTrans),"origen":this.getOrigenCB(actual.depEqTrans,anterior.depEqTrans)},
+    {"cara":"De Aplicación Diferida", "actual":"", "anterior":"", "aplicacion":"","origen":""},
+    {"cara":"Pagos hechos por anticipado", "actual":actual.pagosAnticipado, "anterior":anterior.pagosAnticipado, "aplicacion":this.getAplicacionCB(actual.pagosAnticipado,anterior.pagosAnticipado),"origen":this.getOrigenCB(actual.pagosAnticipado,anterior.pagosAnticipado)},
+    {"cara":"Gastos por Amortizar", "actual":actual.gastosAmortizacion, "anterior":anterior.gastosAmortizacion, "aplicacion":this.getAplicacionCB(actual.gastosAmortizacion,anterior.gastosAmortizacion),"origen":this.getOrigenCB(actual.gastosAmortizacion,anterior.gastosAmortizacion)},
+    {"cara":"A menos de un año", "actual":"", "anterior":"", "aplicacion":"","origen":""},
+    {"cara":"IVA por Enterar", "actual":actual.IVAPorEnterar, "anterior":anterior.IVAPorEnterar, "aplicacion":this.getAplicacionCB(actual.IVAPorEnterar,anterior.IVAPorEnterar),"origen":this.getOrigenCB(actual.IVAPorEnterar,anterior.IVAPorEnterar)},
+    {"cara":"Impuestos por Pagar", "actual":actual.imptosPorPagar, "anterior":anterior.imptosPorPagar, "aplicacion":this.getAplicacionCB(actual.imptosPorPagar,anterior.imptosPorPagar),"origen":this.getOrigenCB(actual.imptosPorPagar,anterior.imptosPorPagar)},
+    {"cara":"Poveedores", "actual":actual.proveedores, "anterior":anterior.proveedores, "aplicacion":this.getAplicacionCB(actual.proveedores,anterior.proveedores),"origen":this.getOrigenCB(actual.proveedores,anterior.proveedores)},
+    {"cara":"PTU por Pagar", "actual":actual.proveedores, "anterior":anterior.proveedores, "aplicacion":this.getAplicacionCB(actual.proveedores,anterior.proveedores),"origen":this.getOrigenCB(actual.proveedores,anterior.proveedores)},
+    {"cara":"Prestamos Bancarios", "actual":actual.prestamosMenosAnio, "anterior":anterior.prestamosMenosAnio, "aplicacion":this.getAplicacionCB(actual.prestamosMenosAnio,anterior.prestamosMenosAnio),"origen":this.getOrigenCB(actual.prestamosMenosAnio,anterior.prestamosMenosAnio)},
+    {"cara":"A más de un año", "actual":"", "anterior":"", "aplicacion":"","origen":""},
+    {"cara":"Prestamos Totales", "actual":actual.prestamosMasAnio, "anterior":anterior.prestamosMasAnio, "aplicacion":this.getAplicacionCB(actual.prestamosMasAnio,anterior.prestamosMasAnio),"origen":this.getOrigenCB(actual.prestamosMasAnio,anterior.prestamosMasAnio)},
+    {"cara":"Capital Social", "actual":actual.capitalSocial, "anterior":anterior.capitalSocial, "aplicacion":this.getAplicacionCB(actual.capitalSocial,anterior.capitalSocial),"origen":this.getOrigenCB(actual.capitalSocial,anterior.capitalSocial)},
+    {"cara":"Reserva Legal", "actual":actual.reservaLegal, "anterior":anterior.reservaLegal, "aplicacion":this.getAplicacionCB(actual.reservaLegal,anterior.reservaLegal),"origen":this.getOrigenCB(actual.reservaLegal,anterior.reservaLegal)},
+    {"cara":"Utilidad Acumulada", "actual":actual.utilidadAcum, "anterior":anterior.utilidadAcum, "aplicacion":this.getAplicacionCB(actual.utilidadAcum,anterior.utilidadAcum),"origen":this.getOrigenCB(actual.utilidadAcum,anterior.utilidadAcum)},
+    {"cara":"Utilidad del Ejercicio", "actual":actual.utilidadEjercicio, "anterior":anterior.utilidadEjercicio, "aplicacion":this.getAplicacionCB(actual.utilidadEjercicio,anterior.utilidadEjercicio),"origen":this.getOrigenCB(actual.utilidadEjercicio,anterior.utilidadEjercicio)},
+    {"cara":"Total", "actual":0, "anterior":0, "aplicacion":this.origen,"origen":this.origen},
 
     ];
+
+
 
     var t = {
       title:"Total",
@@ -220,14 +292,10 @@ export class PruebaComponent implements OnInit {
     }
 
     descargaCSV(){
-      let anterior:any={
-        cajaBancos:null
-      };
-      let actual:any={
-        cajaBancos:null
-      };
+      let anterior:any;
+      let actual:any;
       let origen:any;
-      let aplicacion:any
+      let aplicacion:any;
 
       for(let balance of this.balanceFinal){
         anterior["cajaBancos"]=balance.cajaBancos;
