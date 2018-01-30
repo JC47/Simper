@@ -10274,8 +10274,12 @@ var ProyectosService = (function () {
         this._CompraMaquinariaService = _CompraMaquinariaService;
         this._usuarioZona = _usuarioZona;
         this.proyectos = new Array();
+<<<<<<< HEAD
         this.periodos = [];
         this.muestraPeriodo = true;
+=======
+        this.muestraPeriodo = false;
+>>>>>>> 5c2003df64fc4aea1f4ed66022b18662cc91b694
     }
     ProyectosService.prototype.establecerValores = function () {
         var _this = this;
