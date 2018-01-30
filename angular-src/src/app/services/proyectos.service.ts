@@ -18,7 +18,7 @@ export class ProyectosService {
 
   proyectos:proyecto[]=new Array();
   periodo:any;
-  muestraPeriodo:boolean=true;
+  muestraPeriodo:boolean=false;
   constructor(private http:Http, private _balanceService:BalanceService,
               private _usuarioMaquinariaService:UsuarioMaquinariaService,
               private _usuarioProductoService:UsuarioProductoService,

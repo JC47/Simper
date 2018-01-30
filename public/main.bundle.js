@@ -10273,7 +10273,7 @@ var ProyectosService = (function () {
         this._CompraMaquinariaService = _CompraMaquinariaService;
         this._usuarioZona = _usuarioZona;
         this.proyectos = new Array();
-        this.muestraPeriodo = true;
+        this.muestraPeriodo = false;
     }
     ProyectosService.prototype.establecerValores = function () {
         var _this = this;
