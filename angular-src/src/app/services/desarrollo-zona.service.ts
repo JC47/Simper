@@ -10,15 +10,7 @@ export class DesarrolloZonaService {
   constructor(private http:Http) { }
 
   comenzarDesarrolloZona(x){
-    this.addZona(x).subscribe(data => {
-      if(data.success){
-        this.getProductosDeZonaEnDesarrollo().subscribe(data => {
-          for(let key$ in data.datos){
-            this.productosZonaEnDesarrollo[key$] = data.datos[key$];
-          }
-        });
-      }
-    });
+    this.addZona(x).subscribe();
   }
 
   addZona(x){
@@ -60,33 +52,33 @@ export class DesarrolloZonaService {
   }
 
   returnProductosDeZonaSinDesarrollar(){
-    this.productosZonaSinDesarrollar.length = 0;
+    var x = []
     this.getProductosDeZonaSinDesarrollar().subscribe(data => {
       for(let key$ in data.datos){
-        this.productosZonaSinDesarrollar.push(data.datos[key$]);
+        x.push(data.datos[key$]);
       }
     });
-    return this.productosZonaSinDesarrollar;
+    return x;
   }
 
   returnProductosDeZonaEnDesarrollo(){
-    this.productosZonaEnDesarrollo.length = 0;
+    var x =[];
     this.getProductosDeZonaEnDesarrollo().subscribe(data => {
       for(let key$ in data.datos){
-        this.productosZonaEnDesarrollo.push(data.datos[key$]);
+        x.push(data.datos[key$]);
       }
     });
-    return this.productosZonaEnDesarrollo;
+    return x;
   }
 
   returnProductosDeZonaDesarrollados(){
-    this.productosZonaDesarrollados.length = 0;
+    var x = []
     this.getProductosDeZonaDesarrollados().subscribe(data => {
       for(let key$ in data.datos){
-        this.productosZonaDesarrollados.push(data.datos[key$]);
+        x.push(data.datos[key$]);
       }
     });
-    return this.productosZonaDesarrollados;
+    return x;
   }
 
   getProductosDeZonaSinDesarrollar(){
