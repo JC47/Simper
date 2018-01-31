@@ -36,6 +36,7 @@ export class DesarrolloMercadoComponent implements OnInit {
               private _desarrolloZonaService:DesarrolloZonaService,
               private _productoService:ProductoService,
             private _proyectoService:ProyectosService) {
+              console.log()
 this._proyectoService.ocultaCierrePeriodo()
     this.zonas=this._zonasService.returnZonasNormales();
     this.productos=this._productoService.returnProductos();

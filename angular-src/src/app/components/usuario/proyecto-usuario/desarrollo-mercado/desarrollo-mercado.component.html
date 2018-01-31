@@ -161,9 +161,9 @@
           <div class="row align-items-center" >
 
               <button type="button" (click)="confPagoF(zona.idZona,producto.idProducto,zona.nombreZona)"
-              class="btn btn-primary col-4" *ngIf="validaPago(producto)">Pagar</button>
+              class="btn btn-primary col-4" *ngIf="!validaPago(producto)">Pagar</button>
               <button type="button"
-              class="btn btn-danger col-4" *ngIf="!validaPago(producto)">Cancelar</button>
+              class="btn btn-danger col-4" *ngIf="validaPago(producto)">Cancelar</button>
 
             <div class="col-8" style="margin-top:14px">
               <h6>{{getNameById(producto.idProducto)}}</h6>
