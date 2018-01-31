@@ -127,6 +127,18 @@ returnUsuarios(){
   editar(numero){
     this.periodo = numero;
     this.deletePeriodos(numero).subscribe();
+    this.buscarPeriodos(localStorage.getItem('idProyecto')).subscribe(data =>{
+      this.periodos.length = 0;
+      for(let key$ in data.datos){
+        if(data.datos[key$].numeroPeriodo != 0){
+          var y = {
+            nombre:"Periodo "+(data.datos[key$].numeroPeriodo),
+            numero:(data.datos[key$].numeroPeriodo)
+          }
+          this.periodos.push(y);
+        }
+      }
+    });
     setTimeout(() => {
       localStorage.setItem('numeroPeriodo', numero);
       localStorage.setItem('numeroRPeriodos', numero);
