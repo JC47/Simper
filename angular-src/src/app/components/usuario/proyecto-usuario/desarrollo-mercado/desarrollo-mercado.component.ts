@@ -90,10 +90,12 @@ this._proyectoService.ocultaCierrePeriodo()
 
 
   validaPago(producto){
-    if(producto.ultimoPeriodoDes==localStorage.getItem('numeroPeriodo'))
+    if(producto.numeroPeriodo==localStorage.getItem('numeroPeriodo')){
       return true
-    else
+    }
+    else{
       return false
+    }
   }
 
 
