@@ -331,6 +331,18 @@ returnUsuarios(){
     return this.http.post('balance/register/', Balance, {headers}).map( res => res.json());
   }
 
+  deletePeriodos(){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      periodoMenor:localStorage.getItem('numeroPeriodo'),
+      periodoMayor:localStorage.getItem('numeroRPeriodo')
+    }
+    return this.http.post('balance/eliminarperiodos/', x, {headers}).map( res => res.json());
+  }
+
   addProyecto(proyecto:proyecto){
     let headers = new Headers({
       'Content-Type':'application/json'
