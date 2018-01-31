@@ -3774,7 +3774,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-12\">\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\n<hr>\n</div>\n\n\n<div class=\"row\">\n  <div class=\"col-12\" style=\"height:500px\" *ngFor=\"let zona of graficas\" >\n    <div class=\"row\">\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\n\n  <div class=\"col-12\" style=\"height:400px;\">\n    <ngx-charts-line-chart\n         [scheme]=\"colorScheme\"\n         [results]=\"zona.graf\"\n         xAxis=\"true\"\n         legendTitle=\"Productos\"\n         yAxis=\"true\"\n         legend=\"true\"\n         showXAxisLabel=\"true\"\n         showYAxisLabel=\"true\"\n         xAxisLabel=\"Periodos\"\n         yAxisLabel=\"Demanda Potencial\"\n         autoScale=\"true\">\n       </ngx-charts-line-chart>\n  </div>\n    </div>\n\n\n\n\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"col-12\">\r\n<h3 class=\"text-center col-12\">Demanda Potencial</h3>\r\n<hr>\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-12\" style=\"height:500px\" *ngFor=\"let zona of graficas\" >\r\n    <div class=\"row\">\r\n      <h4 class=\"col-12 text-center\">{{zona.nombreZona}}</h4>\r\n\r\n  <div class=\"col-12\" style=\"height:400px;\">\r\n    <ngx-charts-line-chart\r\n         [scheme]=\"colorScheme\"\r\n         [results]=\"zona.graf\"\r\n         xAxis=\"true\"\r\n         legendTitle=\"Productos\"\r\n         yAxis=\"true\"\r\n         legend=\"true\"\r\n         showXAxisLabel=\"true\"\r\n         showYAxisLabel=\"true\"\r\n         xAxisLabel=\"Periodos\"\r\n         yAxisLabel=\"Demanda Potencial\"\r\n         autoScale=\"true\">\r\n       </ngx-charts-line-chart>\r\n  </div>\r\n    </div>\r\n\r\n\r\n\r\n\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -3993,7 +3993,6 @@ var DesarrolloMercadoComponent = (function () {
         this.openConf = false;
         this.openPago = false;
         this.openLoad = false;
-        console.log();
         this._proyectoService.ocultaCierrePeriodo();
         this.zonas = this._zonasService.returnZonasNormales();
         this.productos = this._productoService.returnProductos();
@@ -4079,8 +4078,6 @@ var DesarrolloMercadoComponent = (function () {
         var _this = this;
         this.openPago = false;
         this.openLoad = true;
-        setTimeout(function () { return _this.openLoad = false; }, 2000);
-        console.log(this.productoSelectedPago.idProducto);
         var costo = this.getCosto(this.productoSelectedPago.idZona, this.productoSelectedPago.idProducto);
         var x = {
             Producto_idProducto: this.productoSelectedPago.idProducto,
@@ -4089,16 +4086,17 @@ var DesarrolloMercadoComponent = (function () {
             Proyecto_Usuario_idUsuario: localStorage.getItem('idUsuario'),
             numeroPeriodo: localStorage.getItem('numeroPeriodo')
         };
-        console.log("idProducto", this.productoSelectedPago.idProducto);
         this._desarrolloZonaService.Desarrollar(x).subscribe();
         this._desarrolloZonaService.cobrarDesarrollo(costo, this.productoSelectedPago.idProducto).subscribe();
+        setTimeout(function () {
+            _this.openLoad = false;
+            _this.actualizar();
+        }, 2000);
     };
     DesarrolloMercadoComponent.prototype.desarrollaZona = function (producto) {
         var _this = this;
         this.openConf = false;
         this.openLoad = true;
-        setTimeout(function () { return _this.openLoad = false; }, 2000);
-        this.quitaProducto(producto.idZona, producto.idProducto);
         var x = {
             Producto_idProducto: producto.idProducto,
             Zona_idZonas: producto.idZona,
@@ -4108,9 +4106,12 @@ var DesarrolloMercadoComponent = (function () {
             numeroPeriodo: localStorage.getItem('numeroPeriodo')
         };
         var costo = this.getCosto(producto.idZona, producto.idProducto);
-        console.log("idProducto", producto.idProducto);
         this._desarrolloZonaService.cobrarDesarrollo(costo, producto.idProducto).subscribe();
         this._desarrolloZonaService.comenzarDesarrolloZona(x);
+        setTimeout(function () {
+            _this.openLoad = false;
+            _this.actualizar();
+        }, 2000);
     };
     DesarrolloMercadoComponent.prototype.quitaProducto = function (zona, producto) {
         for (var i in this.productosZonaSinDesarrollar) {
@@ -4138,6 +4139,10 @@ var DesarrolloMercadoComponent = (function () {
             nombreZona: nombreZona
         };
         console.log(this.productoSelectedAdd);
+    };
+    DesarrolloMercadoComponent.prototype.actualizar = function () {
+        this.productosZonaSinDesarrollar = this._desarrolloZonaService.returnProductosDeZonaSinDesarrollar();
+        this.productosZonaEnDesarrollo = this._desarrolloZonaService.returnProductosDeZonaEnDesarrollo();
     };
     return DesarrolloMercadoComponent;
 }());
@@ -9608,16 +9613,7 @@ var DesarrolloZonaService = (function () {
         this.productosZonaDesarrollados = [];
     }
     DesarrolloZonaService.prototype.comenzarDesarrolloZona = function (x) {
-        var _this = this;
-        this.addZona(x).subscribe(function (data) {
-            if (data.success) {
-                _this.getProductosDeZonaEnDesarrollo().subscribe(function (data) {
-                    for (var key$ in data.datos) {
-                        _this.productosZonaEnDesarrollo[key$] = data.datos[key$];
-                    }
-                });
-            }
-        });
+        this.addZona(x).subscribe();
     };
     DesarrolloZonaService.prototype.addZona = function (x) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
@@ -9654,34 +9650,31 @@ var DesarrolloZonaService = (function () {
         return this.http.post('productoszonasproyectos/operacionespagardesarrollo/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
     DesarrolloZonaService.prototype.returnProductosDeZonaSinDesarrollar = function () {
-        var _this = this;
-        this.productosZonaSinDesarrollar.length = 0;
+        var x = [];
         this.getProductosDeZonaSinDesarrollar().subscribe(function (data) {
             for (var key$ in data.datos) {
-                _this.productosZonaSinDesarrollar.push(data.datos[key$]);
+                x.push(data.datos[key$]);
             }
         });
-        return this.productosZonaSinDesarrollar;
+        return x;
     };
     DesarrolloZonaService.prototype.returnProductosDeZonaEnDesarrollo = function () {
-        var _this = this;
-        this.productosZonaEnDesarrollo.length = 0;
+        var x = [];
         this.getProductosDeZonaEnDesarrollo().subscribe(function (data) {
             for (var key$ in data.datos) {
-                _this.productosZonaEnDesarrollo.push(data.datos[key$]);
+                x.push(data.datos[key$]);
             }
         });
-        return this.productosZonaEnDesarrollo;
+        return x;
     };
     DesarrolloZonaService.prototype.returnProductosDeZonaDesarrollados = function () {
-        var _this = this;
-        this.productosZonaDesarrollados.length = 0;
+        var x = [];
         this.getProductosDeZonaDesarrollados().subscribe(function (data) {
             for (var key$ in data.datos) {
-                _this.productosZonaDesarrollados.push(data.datos[key$]);
+                x.push(data.datos[key$]);
             }
         });
-        return this.productosZonaDesarrollados;
+        return x;
     };
     DesarrolloZonaService.prototype.getProductosDeZonaSinDesarrollar = function () {
         var x = {
