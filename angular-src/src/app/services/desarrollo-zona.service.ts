@@ -120,7 +120,11 @@ export class DesarrolloZonaService {
           Producto_idProducto:data.datos[key$].Producto_idProducto,
           Zona_idZonas:data.datos[key$].Zona_idZonas,
           Proyecto_idProyecto:data.datos[key$].Proyecto_idProyecto,
-          Proyecto_Usuario_idUsuario:data.datos[key$].Proyecto_Usuario_idUsuario
+          Proyecto_Usuario_idUsuario:data.datos[key$].Proyecto_Usuario_idUsuario,
+          numeroPeriodo:(parseInt(localStorage.getItem('numeroPeriodo'))+1),
+          desarrollado:2,
+          periodoInicio:data.datos[key$].periodoInicio,
+          periodosDes:data.datos[key$].periodosDes
         }
         this.zonaDesarrollada(x).subscribe();
       }

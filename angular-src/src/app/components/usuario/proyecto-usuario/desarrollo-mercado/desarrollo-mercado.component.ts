@@ -67,10 +67,6 @@ this._proyectoService.ocultaCierrePeriodo()
     this.zonaForm=new FormGroup({
       'idProducto':new FormControl('',Validators.required)
     });
-
-
-
-    console.log(this.productosZonaDesarrollados);
    }
 
   ngOnInit() {
