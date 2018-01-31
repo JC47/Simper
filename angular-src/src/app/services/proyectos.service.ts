@@ -126,8 +126,13 @@ returnUsuarios(){
 
   editar(numero){
     this.periodo = numero;
-    localStorage.setItem('numeroPeriodo', numero);
-    this.router.navigate(['Usuario/proyecto/home']);
+    this.deletePeriodos(numero).subscribe();
+    setTimeout(() => {
+      localStorage.setItem('numeroPeriodo', numero);
+      localStorage.setItem('numeroRPeriodos', numero);
+      this.router.navigate(['Usuario/proyecto/home']);
+    },300);
+
   }
 
   asignarBalance(idProyecto){
@@ -335,14 +340,14 @@ returnUsuarios(){
     return this.http.post('balance/register/', Balance, {headers}).map( res => res.json());
   }
 
-  deletePeriodos(){
+  deletePeriodos(m){
     let headers = new Headers({
       'Content-Type':'application/json'
     });
     var x = {
       idProyecto:localStorage.getItem('idProyecto'),
-      periodoMenor:localStorage.getItem('numeroPeriodo'),
-      periodoMayor:localStorage.getItem('numeroRPeriodo')
+      periodoMenor:m,
+      periodoMayor:localStorage.getItem('numeroRPeriodos')
     }
     return this.http.post('balance/eliminarperiodos/', x, {headers}).map( res => res.json());
   }
