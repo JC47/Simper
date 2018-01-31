@@ -19,7 +19,8 @@ export class ProyectosService {
   proyectos:proyecto[]=new Array();
   periodo:any;
   periodos=[];
-  muestraPeriodo:boolean=true;
+  muestraPeriodo:boolean=false;
+  muestraPeriodoCorriendo:boolean=false;
   constructor(private http:Http, private _balanceService:BalanceService,
               private _usuarioMaquinariaService:UsuarioMaquinariaService,
               private _usuarioProductoService:UsuarioProductoService,
@@ -82,6 +83,10 @@ returnUsuarios(){
   muestraCierrePeriodo(){
     this.muestraPeriodo=false;
     console.log(this.muestraPeriodo)
+  }
+
+  muestraPCorriendo(){
+    this.muestraPeriodoCorriendo=true;
   }
 
   ocultaCierrePeriodo(){

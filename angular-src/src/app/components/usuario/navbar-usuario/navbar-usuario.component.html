@@ -19,7 +19,7 @@
   <ul class="nav navbar-nav navbar-right ml-auto" style="margin-top:23px"    >
 
     <li class="nav-item pull-left" style="margin-right:25px; margin-bottom:10px">
-      <h4 style="color:white"  >Periodo Corriendo: {{this._proyectoService.periodo}}</h4>
+      <h4 style="color:white" *ngIf="_proyectoService.muestraPeriodoCorriendo" >Periodo Corriendo: {{this._proyectoService.periodo}}</h4>
     </li>
 
     <li class="nav-item pull-left" style="margin-right:20px; margin-bottom:10px" >
@@ -94,7 +94,8 @@
             </div>
 
             <ng-template ngl-modal-footer>
-              <button class="btn btn-primary" (click)="pasaCreditos()">Acepta</button>
+              <button class="btn btn-primary" (click)="pasaCreditos()">Ir a prestamos</button>
+                <button class="btn btn-danger" (click)="alert=false">Cancelar</button>
 
           </ng-template>
             </ngl-modal>
@@ -118,10 +119,30 @@
                 <ngl-modal  [(open)]="openPeriodos" size="small" directional="false">
                   <div body>
                     <div class="list-group" >
-                      <a class="list-group-item list-group-item-action " *ngFor="let p of this._proyectoService.periodos" >{{p.nombre}} <button class="btn btn-primary left" (click)="this._proyectoService.ver(p.numero)">Visualizar</button><button class="btn btn-success" (click)="this._proyectoService.editar(p.numero)">Editar</button></a>
+                      <a class="list-group-item list-group-item-action col-12" *ngFor="let p of this._proyectoService.periodos" >{{p.nombre}}
+                        <button class="btn btn-primary offset-3 col-3" (click)="visualizaPeriodo(p.numero)">Visualizar</button>
+                        <button class="btn btn-success col-3 offset-1" (click)="selectEditaPeriodo(p.numero)">Editar</button>
+                      </a>
                     </div>
                         <div class="modal-footer">
-                          <button  type="button" class="btn btn-outline-danger" (click)="modalPeriodos.hide()">
+                          <button  type="button" class="btn btn-outline-danger" (click)="openPeriodos=false">
+                          Cancelar
+                          </button>
+                        </div>
+                  </div>
+                </ngl-modal>
+
+
+                <ngl-modal  header="Confirmación" [(open)]="confEditaPeriodos" size="small" directional="false">
+                  <div body>
+                    <div class="row">
+                      <h4 class="col-12 text-center">Al ir a editar un periodo, los resultados de los periodos subsecuentes se borrarán, ¿estás seguro de querer editarlo?</h4>
+                    </div>
+                        <div class="modal-footer">
+                          <button  type="button" class="btn btn-primary" (click)="editaPeriodo()">
+                          Editar
+                          </button>
+                          <button  type="button" class="btn btn-danger" (click)="confEditaPeriodos=false;openPeriodos=true">
                           Cancelar
                           </button>
                         </div>
@@ -130,23 +151,12 @@
 
 
 
-                <div bsModal #modalPeriodos="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
-                style="z-index:100000">
-                  <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h2 class="modal-title">Periodos</h2>
-                      </div>
-                      <div class="modal-body">
-                        <div class="list-group" >
-                          <a class="list-group-item list-group-item-action " *ngFor="let p of periodos" (click)="transicion(p.numero)">{{p.nombre}}</a>
-                        </div>
-                            <div class="modal-footer">
-                              <button  type="button" class="btn btn-outline-danger" (click)="modalPeriodos.hide()">
-                              Cancelar
-                              </button>
-                            </div>
-                      </div>
+                <ngl-modal  [(open)]="openLoadDatos" size="small" directional="false">
+                  <div body>
+                    <h1 class="col-12 text-center" >Cargando Datos</h1>
+                    <h5 class="col-12 text-center">Pasando Periodo</h5>
+                    <div style="position:relative; height:6.25rem; z-index:0;">
+                      <ngl-spinner size="large" type="brand"></ngl-spinner>
                     </div>
                   </div>
-                </div>
+                </ngl-modal>
