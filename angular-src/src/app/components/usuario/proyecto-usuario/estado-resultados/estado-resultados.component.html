@@ -90,8 +90,16 @@
 
 </div>
 
-<div class="row">
-  <div class="col-4 offset-4">
-    <button type="button" class="btn btn-primary" (click)="PDFestadoDeResultados()">Exportar a PDF</button>
+<div class="row align-items-center" style="margin-bottom:20px">
+  <div class="offset-9 col-1">
+    Exportar:
   </div>
+  <div class="col-1">
+    <ngl-icon icon="pdf" category="doctype" (click)="PDFestadoDeResultados()" size="large"></ngl-icon>
+  </div>
+
+  <div class="col-1">
+    <ngl-icon icon="csv" category="doctype" (click)="CSVestado()" size="large"></ngl-icon>
+  </div>
+
 </div>

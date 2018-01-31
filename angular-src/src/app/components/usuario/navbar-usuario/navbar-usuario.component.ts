@@ -54,6 +54,8 @@ export class NavbarUsuarioComponent implements OnInit {
   }
 
   logOut(){
+    this._proyectoService.ocultaCierrePeriodo();
+    this._proyectoService.oculataPCorriendo();
     this.authService.logoutUsuario();
     this.router.navigate(['login']);
   }

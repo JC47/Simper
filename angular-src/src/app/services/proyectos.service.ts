@@ -89,6 +89,10 @@ returnUsuarios(){
     this.muestraPeriodoCorriendo=true;
   }
 
+  oculataPCorriendo(){
+    this.muestraPeriodoCorriendo=false;
+  }
+
   ocultaCierrePeriodo(){
     this.muestraPeriodo=true;
   }
