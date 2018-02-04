@@ -10527,19 +10527,19 @@ var ProyectosService = (function () {
         var _this = this;
         this.periodo = numero;
         this.deletePeriodos(numero).subscribe();
-        this.buscarPeriodos(localStorage.getItem('idProyecto')).subscribe(function (data) {
-            _this.periodos.length = 0;
-            for (var key$ in data.datos) {
-                if (data.datos[key$].numeroPeriodo != 0) {
-                    var y = {
-                        nombre: "Periodo " + (data.datos[key$].numeroPeriodo),
-                        numero: (data.datos[key$].numeroPeriodo)
-                    };
-                    _this.periodos.push(y);
-                }
-            }
-        });
         setTimeout(function () {
+            _this.buscarPeriodos(localStorage.getItem('idProyecto')).subscribe(function (data) {
+                _this.periodos.length = 0;
+                for (var key$ in data.datos) {
+                    if (data.datos[key$].numeroPeriodo != 0) {
+                        var y = {
+                            nombre: "Periodo " + (data.datos[key$].numeroPeriodo),
+                            numero: (data.datos[key$].numeroPeriodo)
+                        };
+                        _this.periodos.push(y);
+                    }
+                }
+            });
             localStorage.setItem('numeroPeriodo', numero);
             localStorage.setItem('numeroRPeriodos', numero);
             _this.router.navigate(['Usuario/proyecto/home']);
