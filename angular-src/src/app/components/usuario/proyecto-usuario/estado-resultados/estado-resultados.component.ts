@@ -5,6 +5,7 @@ import {ResultadosService} from '../../../../services/resultados.service';
 import {BalanceService} from '../../../../services/balance.service';
 import { CompraMaquinariaService } from '../../../../services/compra-maquinaria.service';
 import {ProyectosService} from '../../../../services/proyectos.service';
+import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 
 
 declare var jsPDF: any;
@@ -369,6 +370,79 @@ export class EstadoResultadosComponent implements OnInit {
   });
 
   doc.save("Estado de Resultados.pdf");
+
+
+
+  }
+
+
+
+  CSVestado(){
+    let data=[
+      {"cara":""},
+      {"cara":"Ventas Netas"},
+      {"cara":"Costo de Ventas"},
+      {"cara":""},
+      {"cara":"Utilidad Bruta"},
+      {"cara":""},
+      {"cara":"Costo de Distribución"},
+      {"cara":"Otros Gastos"},
+      {"cara":"Gastos de Administración"},
+      {"cara":""},
+      {"cara":""},
+      {"cara":"Utilidad en Operación" },
+      {"cara":""},
+      {"cara":"Intereses" },
+      {"cara":""},
+      {"cara":"Utilidad antes de Impuestos"},
+      {"cara":""},
+      {"cara":"ISR"},
+      {"cara":"PTU"},
+      {"cara":""},
+      {"cara":"Utilidad del Ejercicio"},
+    ];
+
+
+    for(let producto of this.resultados){
+      var x = this.getNameByIdProducto(producto);
+
+
+      data[0][x] = this.getNameByIdProducto(producto)
+      data[1][x] = this.getVentasNetas(producto)
+      data[2][x] = this.getCostoVentas(producto)
+      data[4][x] = this.getUtilidadParcial(producto)
+      data[6][x] = this.getDistParcial(producto)
+      data[7][x] = this.getOtrosGastosParcial(producto)
+      data[8][x] = this.getAdminParcial(producto)
+      data[11][x] = this.getUtilidadAntesParcial(producto)
+      data[13][x] = "-";
+      data[15][x] = this.getUtilidadAntesParcial(producto)
+      data[17][x] = "-";
+      data[18][x] = "-";
+      data[20][x] = "-";
+    }
+
+    data[1]["total"] = "Total"
+    data[1]["total"] = this.getTotalVentas()
+    data[2]["total"] = this.getTotalCostosVentas()
+    data[4]["total"] = this.getUtilidadBruta()
+    data[6]["total"] = this.getDistTotal()
+    for(let item of this.auxiliarT){
+      data[7]["total"] = item
+      data[11]["total"] = (this.getUtilidadAntes() - item)
+    }
+    data[8]["total"] = this.getAdminTotal()
+    for(let aux of this.intereses){
+      data[12]["total"] = aux.toString();
+    }
+    data[15]["total"] = this.getUtilidad2()
+    data[17]["total"] = this.getISR()
+    data[18]["total"] = this.getPTU()
+    data[20]["total"] = (this.getUtilidad2() - this.getISR() - this.getPTU())
+
+
+
+    new Angular2Csv(data, 'Estado de Resultados');
 
 
 

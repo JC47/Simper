@@ -19,7 +19,8 @@ export class ProyectosService {
   proyectos:proyecto[]=new Array();
   periodo:any;
   periodos=[];
-  muestraPeriodo:boolean=true;
+  muestraPeriodo:boolean=false;
+  muestraPeriodoCorriendo:boolean=false;
   constructor(private http:Http, private _balanceService:BalanceService,
               private _usuarioMaquinariaService:UsuarioMaquinariaService,
               private _usuarioProductoService:UsuarioProductoService,
@@ -84,6 +85,14 @@ returnUsuarios(){
     console.log(this.muestraPeriodo)
   }
 
+  muestraPCorriendo(){
+    this.muestraPeriodoCorriendo=true;
+  }
+
+  oculataPCorriendo(){
+    this.muestraPeriodoCorriendo=false;
+  }
+
   ocultaCierrePeriodo(){
     this.muestraPeriodo=true;
   }
@@ -117,8 +126,25 @@ returnUsuarios(){
 
   editar(numero){
     this.periodo = numero;
-    localStorage.setItem('numeroPeriodo', numero);
-    this.router.navigate(['Usuario/proyecto/home']);
+    this.deletePeriodos(numero).subscribe();
+    this.buscarPeriodos(localStorage.getItem('idProyecto')).subscribe(data =>{
+      this.periodos.length = 0;
+      for(let key$ in data.datos){
+        if(data.datos[key$].numeroPeriodo != 0){
+          var y = {
+            nombre:"Periodo "+(data.datos[key$].numeroPeriodo),
+            numero:(data.datos[key$].numeroPeriodo)
+          }
+          this.periodos.push(y);
+        }
+      }
+    });
+    setTimeout(() => {
+      localStorage.setItem('numeroPeriodo', numero);
+      localStorage.setItem('numeroRPeriodos', numero);
+      this.router.navigate(['Usuario/proyecto/home']);
+    },300);
+
   }
 
   asignarBalance(idProyecto){
@@ -326,14 +352,14 @@ returnUsuarios(){
     return this.http.post('balance/register/', Balance, {headers}).map( res => res.json());
   }
 
-  deletePeriodos(){
+  deletePeriodos(m){
     let headers = new Headers({
       'Content-Type':'application/json'
     });
     var x = {
       idProyecto:localStorage.getItem('idProyecto'),
-      periodoMenor:localStorage.getItem('numeroPeriodo'),
-      periodoMayor:localStorage.getItem('numeroRPeriodo')
+      periodoMenor:m,
+      periodoMayor:localStorage.getItem('numeroRPeriodos')
     }
     return this.http.post('balance/eliminarperiodos/', x, {headers}).map( res => res.json());
   }

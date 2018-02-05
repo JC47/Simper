@@ -9,7 +9,7 @@ module.exports.addProductoZonaProyecto = function (json) {
 }
 
 module.exports.getTerminados = function(idProyecto){
-  var query = "select * from productozona inner join productozonaproyecto on productozona.Producto_idProducto = productozonaproyecto.Producto_idProducto and productozonaproyecto.Proyecto_idProyecto = " + idProyecto +" and productozonaproyecto.periodosDes = productozona.tiempoDes and productozonaproyecto.desarrollado = 0 and productozonaproyecto.Zona_idZonas = productozona.Zona_idZona";
+  var query = "select * from productozona inner join productozonaproyecto on productozona.Producto_idProducto = productozonaproyecto.Producto_idProducto and productozonaproyecto.Proyecto_idProyecto = " + idProyecto +" and productozonaproyecto.periodosDes = productozona.tiempoDes and productozonaproyecto.desarrollado = 1 and productozonaproyecto.Zona_idZonas = productozona.Zona_idZona";
   console.log(query);
   return querySql(query);
 }

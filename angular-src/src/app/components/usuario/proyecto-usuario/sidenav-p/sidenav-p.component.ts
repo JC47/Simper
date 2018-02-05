@@ -27,6 +27,8 @@ export class SidenavPComponent implements OnInit {
   }
 
   verProyectos(){
+    this._proyectosS.ocultaCierrePeriodo();
+    this._proyectosS.oculataPCorriendo();
     localStorage.removeItem('numeroPeriodo');
     localStorage.removeItem('idProyecto');
     localStorage.removeItem('numeroRPeriodos');

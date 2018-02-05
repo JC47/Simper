@@ -27,6 +27,11 @@ module.exports.getActivos = function(idProyecto, numeroPeriodo){
   return querySql(sql);
 }
 
+module.exports.deleteBalanceR = function(idProyecto,pm,pMas){
+  const sql = "delete from balance where Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo > "+pm+" and numeroPeriodo <= "+pMas+"";
+  return querySql(sql);
+}
+
 module.exports.getPasivos = function(idProyecto, numeroPeriodo){
   const sql = "select IVAPorEnterar,imptosPorPagar,prestamosMenosAnio,prestamosMasAnio from Balance where Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+"";
   return querySql(sql);

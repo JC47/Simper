@@ -67,10 +67,6 @@ this._proyectoService.ocultaCierrePeriodo()
     this.zonaForm=new FormGroup({
       'idProducto':new FormControl('',Validators.required)
     });
-
-
-
-    console.log(this.productosZonaDesarrollados);
    }
 
   ngOnInit() {
@@ -94,10 +90,12 @@ this._proyectoService.ocultaCierrePeriodo()
 
 
   validaPago(producto){
-    if(producto.ultimoPeriodoDes==localStorage.getItem('numeroPeriodo'))
+    if(producto.numeroPeriodo==localStorage.getItem('numeroPeriodo')){
       return true
-    else
+    }
+    else{
       return false
+    }
   }
 
 
@@ -132,8 +130,6 @@ this._proyectoService.ocultaCierrePeriodo()
     this.openPago=false;
     this.openLoad=true;
 
-    setTimeout(()=>this.openLoad=false,2000);
-    console.log(this.productoSelectedPago.idProducto)
     var costo = this.getCosto(this.productoSelectedPago.idZona,this.productoSelectedPago.idProducto);
     var x = {
       Producto_idProducto:this.productoSelectedPago.idProducto,
@@ -142,16 +138,19 @@ this._proyectoService.ocultaCierrePeriodo()
       Proyecto_Usuario_idUsuario:localStorage.getItem('idUsuario'),
       numeroPeriodo:localStorage.getItem('numeroPeriodo')
     }
-    console.log("idProducto",this.productoSelectedPago.idProducto);
     this._desarrolloZonaService.Desarrollar(x).subscribe();
     this._desarrolloZonaService.cobrarDesarrollo(costo,this.productoSelectedPago.idProducto).subscribe();
+
+    setTimeout(()=>{
+      this.openLoad=false;
+      this.actualizar();
+    },2000);
+
   }
 
   desarrollaZona(producto){
     this.openConf=false;
     this.openLoad=true;
-    setTimeout(()=>this.openLoad=false,2000);
-    this.quitaProducto(producto.idZona,producto.idProducto);
     var x = {
       Producto_idProducto:producto.idProducto,
       Zona_idZonas:producto.idZona,
@@ -161,9 +160,13 @@ this._proyectoService.ocultaCierrePeriodo()
       numeroPeriodo:localStorage.getItem('numeroPeriodo')
     }
     var costo = this.getCosto(producto.idZona,producto.idProducto);
-    console.log("idProducto",producto.idProducto);
     this._desarrolloZonaService.cobrarDesarrollo(costo,producto.idProducto).subscribe();
     this._desarrolloZonaService.comenzarDesarrolloZona(x);
+
+    setTimeout(()=>{
+      this.openLoad=false;
+      this.actualizar();
+    },2000);
   }
 
   quitaProducto(zona,producto){
@@ -196,6 +199,11 @@ this._proyectoService.ocultaCierrePeriodo()
       nombreZona:nombreZona
     };
       console.log(this.productoSelectedAdd);
+  }
+
+  actualizar(){
+    this.productosZonaSinDesarrollar = this._desarrolloZonaService.returnProductosDeZonaSinDesarrollar();
+    this.productosZonaEnDesarrollo = this._desarrolloZonaService.returnProductosDeZonaEnDesarrollo();
   }
 
 }

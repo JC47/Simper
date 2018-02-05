@@ -23,10 +23,13 @@ export class NavbarUsuarioComponent implements OnInit {
   openConf:boolean=false;
   openBien:boolean=false;
   openLoad:boolean=false;
+  openLoadDatos:boolean=false;
   alert:boolean=false;
+  numeroPeriodoSelected:any;
   opciones:boolean=false;
   periodo:number;
   periodos = [];
+  confEditaPeriodos:boolean=false;
   openPeriodos:boolean=false;
   constructor(private authService: AuthService, private router:Router,
     private _resultadosService:ResultadosService,
@@ -37,6 +40,7 @@ export class NavbarUsuarioComponent implements OnInit {
     private _desarrolloProducto:DesarrolloProductoService,
     private _creditoService:UsuarioCreditoService) {
       this._resultadosService.vender();
+      this._proyectoService.ocultaCierrePeriodo()
   this.asignarBalance(localStorage.getItem('idProyecto')); }
 
   ngOnInit() {
@@ -50,6 +54,8 @@ export class NavbarUsuarioComponent implements OnInit {
   }
 
   logOut(){
+    this._proyectoService.ocultaCierrePeriodo();
+    this._proyectoService.oculataPCorriendo();
     this.authService.logoutUsuario();
     this.router.navigate(['login']);
   }
@@ -94,6 +100,28 @@ export class NavbarUsuarioComponent implements OnInit {
     modalPasarPeriodo(){
       this.openBien=false;
       this.router.navigate(['Usuario/proyecto/home']);
+    }
+
+    selectEditaPeriodo(p){
+      this.numeroPeriodoSelected=p;
+      this.confEditaPeriodos=true;
+      this.openPeriodos=false;
+      //this._proyectoService.editar(p.numero)
+    }
+
+    editaPeriodo(){
+      this.openLoadDatos=true;
+      this.confEditaPeriodos=false;
+      setTimeout(()=>{this.openLoadDatos=false}, 1000);
+      this._proyectoService.editar(this.numeroPeriodoSelected)
+
+    }
+
+    visualizaPeriodo(p){
+      this.openLoadDatos=true;
+      this.openPeriodos=false;
+      setTimeout(()=>{this.openLoadDatos=false}, 1000);
+      this._proyectoService.ver(p)
     }
 
     transicion(numero){

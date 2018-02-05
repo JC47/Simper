@@ -187,26 +187,22 @@ router.post('/productosdesarrollados/', (req, res, next) => {
   });
 });
 
-// router.get('/terminados/:idProyecto', (req, res, next) => {
-//   Promise.resolve().then(function () {
-//     return productoZonaProyecto.getTerminados(req.params.idProyecto);
-//   }).then( function(rows) {
-//     res.json({success:true, msg:"Operacion exitosa", datos:rows});
-//   }).catch( function (err) {
-//     console.log(err);
-//     res.json({success:false, msg:"Fallo"});
-//   })
-// })
+router.get('/terminados/:idProyecto', (req, res, next) => {
+  Promise.resolve().then(function () {
+    return productoZonaProyecto.getTerminados(req.params.idProyecto);
+  }).then( function(rows) {
+    res.json({success:true, msg:"Operacion exitosa", datos:rows});
+  }).catch( function (err) {
+    console.log(err);
+    res.json({success:false, msg:"Fallo"});
+  })
+})
 
 //Actualiza el valor de desarrollado de 0 (no desarrollado) a 1 (desarrollado)
 router.post('/desarrolladoproductozonaproyecto', (req, res, next) => {
   Promise.resolve().then(function () {
-      var idProducto = req.body.Producto_idProducto;
-      var idZona = req.body.Zona_idZonas;
-      var idProyecto = req.body.Proyecto_idProyecto;
-      var idUsuario = req.body.Proyecto_Usuario_idUsuario;
-      var desarrollado = 1;
-      return productoZonaProyecto.desarolladoProductoZonaProyecto(idProducto,idZona,idProyecto,idUsuario,desarrollado);
+    var json = req.body;
+    return productoZonaProyecto.addProductoZonaProyecto(json);
   })
   .then(function(){
     res.json({success: true, msg:"Operacion exitosa"});
@@ -510,8 +506,7 @@ for (var j = 0; j < repIdProductosEnDes.length; j++) {
           "idProducto":productosendes[counter-1].Producto_idProducto,
           "periodosDes":productosendes[counter-1].periodosDes,
           "tiempoDes":productosendes[counter-1].tiempoDes,
-          "ultimoPeriodoDes":productosendes[counter-1].ultimoPeriodoDes
-  }
+          "ultimoPeriodoDes":productosendes[counter-1].ultimoPeriodoDes  }
     productosEnDes[j]['productosEnDes'].push(json);
 }
 

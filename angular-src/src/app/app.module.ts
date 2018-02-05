@@ -18,7 +18,11 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
 import { AngularDraggableModule } from 'angular2-draggable';
 import { NG2D3Module } from 'ng2d3';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
-import {DecimalPipe} from '@angular/common'
+import {DecimalPipe} from '@angular/common';
+import {ColorPickerModule} from 'angular4-color-picker';
+
+
+
 //Rutas
 import {app_routing} from './app.routes'
 
@@ -130,6 +134,7 @@ import { FlujoComponent } from './components/usuario/proyecto-usuario/flujo/fluj
     BrowserModule,
     NvD3Module,
     NG2D3Module,
+    ColorPickerModule,
     BrowserAnimationsModule,
     AngularDraggableModule,
     NgxChartsModule,

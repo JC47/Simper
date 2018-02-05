@@ -233,23 +233,16 @@ router.post('/final', (req, res, next) => {
 });
 
 router.post('/eliminarperiodos', (req,res,next) => {
-  var numeroProyecto = req.body.numeroProyecto;
-	var numeroPeriodoMayor = req.body.numeroPeriodoMayor;
-	var numeroPeriodoMenor = req.body.numeroPeriodoMenor;
-
-  Promise.resolve()
-  .then(function () {
-
-  })
-  .then(function () {
-
-  })
-  .then( function (rows) {
-    res.json({success: true, datos:rows, msg:"Operacion exitosa"});
-  })
-  .catch(function (err) {
+  Promise.resolve().then(function() {
+    var idProyecto = req.body.idProyecto;
+    var pm = req.body.periodoMenor;
+    var pMas = req.body.periodoMayor;
+    return balance.deleteBalanceR(idProyecto,pm,pMas);
+  }).then(function() {
+    res.json({success:true, msg:"Bien"});
+  }).catch(function(err) {
     console.log(err);
-    res.json({success:false, msg:"Operacion incompleta"});
+    res.json({success:false, msg:"Mal"});
   });
 });
 

@@ -55,7 +55,7 @@
 
 </div>
 <!--- +++++++++++++++++++++++++++ Formulario para agregar +++++++++++++++++++++++++++++++++++++++++ -->
-<div ngDraggable bsModal #modalNew="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div bsModal #modalNew="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-">
     <div class="modal-content">
       <div class="modal-header">
@@ -332,6 +332,13 @@
             </div>
           </div>
 
+          <div class="form-group row text-center">
+            <label class="col-5 col-form-label">Color: </label>
+            <input [(colorPicker)]="color" cpPosition='left'  cpOutputFormat='hex' cpPositionOffset="50%" [style.background]="color" [value]="color"/>
+          </div>
+
+
+
 
 
 
@@ -372,7 +379,7 @@
 
 
 <!--- Modal de edición +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<div ngDraggable bsModal #modalEdit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div bsModal #modalEdit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
@@ -667,6 +674,11 @@
             *ngIf="!editForm.controls['costoUni'].valid">
               El costo es requerido
             </div>
+          </div>
+
+          <div class="form-group row text-center">
+            <label class="col-5 col-form-label">Color: </label>
+            <input [(colorPicker)]="color" cpPosition='left'  cpOutputFormat='hex' cpPositionOffset="50%" [style.background]="color" [value]="color"/>
           </div>
 
 

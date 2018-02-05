@@ -54,6 +54,7 @@ export class ProyectosComponent implements OnInit {
      this._proyectosService.asignarBalance(idProyecto);
      localStorage.setItem('idProyecto',idProyecto);
      this.confModal.show();
+     this._proyectosService.muestraPCorriendo();
    }
 
    entrarP(){

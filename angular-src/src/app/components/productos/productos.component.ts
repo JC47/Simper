@@ -29,6 +29,7 @@ export class ProductosComponent implements OnInit {
   newForm:FormGroup;
   editForm:FormGroup;
   imgDirec:string;
+  color:any;
 
 
 
@@ -70,7 +71,8 @@ export class ProductosComponent implements OnInit {
         'gastosFijosAdmon':new FormControl('',Validators.required),
         'costosMPPUniProd':new FormControl('',Validators.required),
         'uniMP':new FormControl('',Validators.required),
-        'costoUni':new FormControl('',Validators.required)
+        'costoUni':new FormControl('',Validators.required),
+        'color':new FormControl('')
 
       });
 
@@ -89,7 +91,8 @@ export class ProductosComponent implements OnInit {
         'gastosFijosAdmon':new FormControl('',Validators.required),
         'costosMPPUniProd':new FormControl('',Validators.required),
         'uniMP':new FormControl('',Validators.required),
-        'costoUni':new FormControl('',Validators.required)
+        'costoUni':new FormControl('',Validators.required),
+        'color':new FormControl('')
 
       });
 
@@ -106,6 +109,8 @@ export class ProductosComponent implements OnInit {
 
   guarda(producto:producto){
 
+    producto["color"]=this.color
+      console.log(producto)
     if(!this.buscaRepetidos(producto)){
       this._productoService.guardarProducto(producto);
       this.alerts.push({
