@@ -479,21 +479,37 @@ while (k < idszonasendes.length) {
   }
   k++;
 }
-//console.log(productosEnDes);
 
-var aux2 = 0;
+// var aux2 = 0;
+// for (var j = 0; j < repIdProductosEnDes.length; j++) {
+//   for (var k = 0; k < (repIdProductosEnDes[j]); k++) {
+//     var json = {
+//       "idProducto":productosendes[aux2].Producto_idProducto,
+//       "periodosDes":productosendes[aux2].periodosDes,
+//       "tiempoDes":productosendes[aux2].tiempoDes,
+//       "ultimoPeriodoDes":productosendes[aux2].ultimoPeriodoDes
+//     }
+//     productosEnDes[j]['productosEnDes'].push(json);
+//    aux2 = aux2 + 1;
+//   }
+// }
+var counter = 0;
+var arrayProductosEnDes = [];
+
 for (var j = 0; j < repIdProductosEnDes.length; j++) {
-  for (var k = 0; k < (repIdProductosEnDes[j]); k++) {
-    var json = {
-      "idProducto":productosendes[aux2].Producto_idProducto,
-      "periodosDes":productosendes[aux2].periodosDes,
-      "tiempoDes":productosendes[aux2].tiempoDes,
-      "numeroPeriodo":productosendes[aux2].numeroPeriodo
-    }
-    productosEnDes[j]['productosEnDes'].push(json);
-   aux2 = aux2 + 1;
+  for (var k = 0; k < repIdProductosEnDes[j]; k++) {
+    counter = counter + 1;
   }
+      console.log("counter: ", counter);
+//      console.log("productosendes",productosendes[counter-1]);
+  var json = {
+          "idProducto":productosendes[counter-1].Producto_idProducto,
+          "periodosDes":productosendes[counter-1].periodosDes,
+          "tiempoDes":productosendes[counter-1].tiempoDes,
+          "ultimoPeriodoDes":productosendes[counter-1].ultimoPeriodoDes  }
+    productosEnDes[j]['productosEnDes'].push(json);
 }
+
 //console.log(productosDes);
   return productosEnDes;
 }
