@@ -26,6 +26,28 @@ export class DesarrolloZonaService {
     });
   }
 
+  undoTotal(x){
+    var a = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:localStorage.getItem('numeroPeriodo'),
+      costoDes:x.costoDes,
+      idProducto:x.idProducto
+    }
+
+    var b = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:localStorage.getItem('numeroPeriodo'),
+      idProducto:x.idProducto,
+      idZona:x.idZona,
+      idUsuario:localStorage.getItem('idUsuario')
+    }
+
+    this.undoBalance(a).subscribe();
+    this.undoTabla(b).subscribe();
+
+    return true;
+  }
+
   getDemanda(nP, idZ, idP){
     var x = {
       numPeriodo:nP,
@@ -129,6 +151,20 @@ export class DesarrolloZonaService {
       'Content-Type':'application/json'
     });
     return this.http.post('productoszonasproyectos/pagardesarrollozona/',x, {headers}).map(res => res.json());
+  }
+
+  undoTabla(x){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    return this.http.post('productoszonasproyectos/deshacer/',x, {headers}).map(res => res.json());
+  }
+
+  undoBalance(x){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    return this.http.post('productoszonasproyectos/devolverpagardesarrollo/',x, {headers}).map(res => res.json());
   }
 
   zonaDesarrollada(x){

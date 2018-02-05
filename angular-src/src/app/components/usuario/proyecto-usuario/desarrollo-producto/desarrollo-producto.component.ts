@@ -101,6 +101,15 @@ export class DesarrolloProductoComponent implements OnInit {
     }, 2000);
   }
 
+  deshacer(producto){
+    var z = this._desarrolloProducto.deshacerDesarrollo(producto.Productos_idProducto,producto.costoDes);
+    setTimeout(()=>{
+      if(z){
+        this.actualizar();
+      }
+    }, 500);
+  }
+
 
   revisaPeriodo(producto){
     console.log(producto.numeroPeriodo==localStorage.getItem('numeroPeriodo'));
@@ -128,14 +137,12 @@ export class DesarrolloProductoComponent implements OnInit {
   }
 
   actualizar(){
-    this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
     this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
     this.productosSinDesarrollar = this._desarrolloProducto.returnProductosSinDesarrollar();
   }
 
   actualizar2(){
     this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
-    console.log("Pago",this.productosEnDesarrollo)
   }
 
 }

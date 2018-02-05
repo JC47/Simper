@@ -105,7 +105,7 @@
 
               <button type="button" (click)="confPago(producto)"
               class="btn btn-primary col-3" *ngIf="!revisaPeriodo(producto)" style="font-size:15px">Pagar</button>
-              <button type="button"
+              <button type="button" (click)="deshacer(producto)"
               class="btn btn-danger col-3" *ngIf="revisaPeriodo(producto)" style="font-size:15px">Cancelar</button>
 
 

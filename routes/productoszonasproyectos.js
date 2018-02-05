@@ -325,12 +325,25 @@ router.post('/devolverpagardesarrollo', (req, res, next) => {
   })
   .catch(function (err) {
     console.error("got error: " + err);
-    if (err instanceof Error) {
-      res.status(400).send("Error general");
-      console.log(err);
-    } else {
-      res.status(200).json({ "code": 1000, "message": err });
-    }
+    res.json({success: false, msg:"Operacion fallida"});
+  });
+});
+
+router.post('/deshacer', (req,res,next) => {
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+  var idProducto = req.body.idProducto;
+  var idZona = req.body.idZona;
+  var idUsuario = req.body.idUsuario;
+
+  Promise.resolve().then(function() {
+    return productoZonaProyecto.deleteProductoZona(idProyecto,idProducto,idZona,numeroPeriodo,idUsuario);
+  }).then(function(){
+    res.json({success: true, msg:"Operacion exitosa"});
+  })
+  .catch(function (err) {
+    console.error("got error: " + err);
+    res.json({success: false, msg:"Operacion fallida"});
   });
 });
 
@@ -653,7 +666,7 @@ var nvoIVAGtosVenta;
   if (IVAxGtos==0) {
     nvoIVAGtosVenta = 0;
   }else {
-    nvoIVAGtosVenta = ((IVAxGtos) - (IVAxGastosVenta(costoDesProd,IVA)));
+    nvoIVAGtosVenta = ((IVAxGtos) + (IVAxGastosVenta(costoDesProd,IVA)));
   }
   return nvoIVAGtosVenta;
 }

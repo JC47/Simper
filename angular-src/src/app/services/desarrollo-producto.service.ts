@@ -123,11 +123,45 @@ export class DesarrolloProductoService {
     return true;
   }
 
+  deshacerDesarrollo(id, costo){
+    var x = {
+      idProyecto:parseInt(localStorage.getItem('idProyecto')),
+      idProducto:id,
+      numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo')),
+      costoDes:costo
+    }
+
+    var y = {
+      idProyecto:parseInt(localStorage.getItem('idProyecto')),
+      idProducto:id,
+      numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo'))
+    }
+
+    this.undoBancos(x).subscribe();
+    this.undoTabla(y).subscribe();
+
+    return true;
+  }
+
   pagoBalance(y){
     let headers = new Headers({
       'Content-Type':'application/json'
     });
     return this.http.post('proyectoproducto/operacionespagardesarrollo/',y, {headers}).map(res => res.json());
+  }
+
+  undoBancos(y){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    return this.http.post('proyectoproducto/devolverpagardesarrollo/',y, {headers}).map(res => res.json());
+  }
+
+  undoTabla(y){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    return this.http.post('proyectoproducto/deshacerperiododesarrollado/',y, {headers}).map(res => res.json());
   }
 
   desarrollar(x){
