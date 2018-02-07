@@ -162,7 +162,7 @@
 
               <button type="button" (click)="confPagoF(zona.idZona,producto.idProducto,zona.nombreZona)"
               class="btn btn-primary col-4" *ngIf="!validaPago(producto)">Pagar</button>
-              <button type="button"
+              <button type="button" (click)="deshacer(zona.idZona,producto.idProducto)"
               class="btn btn-danger col-4" *ngIf="validaPago(producto)">Cancelar</button>
 
             <div class="col-8" style="margin-top:14px">

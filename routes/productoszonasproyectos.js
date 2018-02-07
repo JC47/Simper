@@ -325,12 +325,25 @@ router.post('/devolverpagardesarrollo', (req, res, next) => {
   })
   .catch(function (err) {
     console.error("got error: " + err);
-    if (err instanceof Error) {
-      res.status(400).send("Error general");
-      console.log(err);
-    } else {
-      res.status(200).json({ "code": 1000, "message": err });
-    }
+    res.json({success: false, msg:"Operacion fallida"});
+  });
+});
+
+router.post('/deshacer', (req,res,next) => {
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+  var idProducto = req.body.idProducto;
+  var idZona = req.body.idZona;
+  var idUsuario = req.body.idUsuario;
+
+  Promise.resolve().then(function() {
+    return productoZonaProyecto.deleteProductoZona(idProyecto,idProducto,idZona,numeroPeriodo,idUsuario);
+  }).then(function(){
+    res.json({success: true, msg:"Operacion exitosa"});
+  })
+  .catch(function (err) {
+    console.error("got error: " + err);
+    res.json({success: false, msg:"Operacion fallida"});
   });
 });
 
@@ -479,21 +492,37 @@ while (k < idszonasendes.length) {
   }
   k++;
 }
-//console.log(productosEnDes);
 
-var aux2 = 0;
+// var aux2 = 0;
+// for (var j = 0; j < repIdProductosEnDes.length; j++) {
+//   for (var k = 0; k < (repIdProductosEnDes[j]); k++) {
+//     var json = {
+//       "idProducto":productosendes[aux2].Producto_idProducto,
+//       "periodosDes":productosendes[aux2].periodosDes,
+//       "tiempoDes":productosendes[aux2].tiempoDes,
+//       "ultimoPeriodoDes":productosendes[aux2].ultimoPeriodoDes
+//     }
+//     productosEnDes[j]['productosEnDes'].push(json);
+//    aux2 = aux2 + 1;
+//   }
+// }
+var counter = 0;
+var arrayProductosEnDes = [];
+
 for (var j = 0; j < repIdProductosEnDes.length; j++) {
-  for (var k = 0; k < (repIdProductosEnDes[j]); k++) {
-    var json = {
-      "idProducto":productosendes[aux2].Producto_idProducto,
-      "periodosDes":productosendes[aux2].periodosDes,
-      "tiempoDes":productosendes[aux2].tiempoDes,
-      "numeroPeriodo":productosendes[aux2].numeroPeriodo
-    }
-    productosEnDes[j]['productosEnDes'].push(json);
-   aux2 = aux2 + 1;
+  for (var k = 0; k < repIdProductosEnDes[j]; k++) {
+    counter = counter + 1;
   }
+      console.log("counter: ", counter);
+//      console.log("productosendes",productosendes[counter-1]);
+  var json = {
+          "idProducto":productosendes[counter-1].Producto_idProducto,
+          "periodosDes":productosendes[counter-1].periodosDes,
+          "tiempoDes":productosendes[counter-1].tiempoDes,
+          "numeroPeriodo":productosendes[counter-1].numeroPeriodo  }
+    productosEnDes[j]['productosEnDes'].push(json);
 }
+
 //console.log(productosDes);
   return productosEnDes;
 }
@@ -637,7 +666,7 @@ var nvoIVAGtosVenta;
   if (IVAxGtos==0) {
     nvoIVAGtosVenta = 0;
   }else {
-    nvoIVAGtosVenta = ((IVAxGtos) - (IVAxGastosVenta(costoDesProd,IVA)));
+    nvoIVAGtosVenta = ((IVAxGtos) + (IVAxGastosVenta(costoDesProd,IVA)));
   }
   return nvoIVAGtosVenta;
 }

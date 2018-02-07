@@ -95,17 +95,12 @@ module.exports.desarollado = function (idProyecto, idProducto, desarrollado) {
   return querySql(queryDes);
 }
 
-// module.exports.getBalance = function (idProyecto,numPeriodo) {
-//   var queryGetCajaBanco = "select * from balance where Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo = "+numPeriodo+" ";
-//   return querySql(queryGetCajaBanco);
-// };
-//
-// module.exports.updateBalance = function (idProyecto,numPeriodo,saldoF,IVAPorEnterarProd,utilidadEjercicioProd) {
-//   var queryUpdateCajaBanco = "update balance set cajaBancos = "+saldoF+", IVAPorEnterar = "+IVAPorEnterarProd+", utilidadEjercicio = "+utilidadEjercicioProd+"  where Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo = "+numPeriodo+" ";
-//   return querySql(queryUpdateCajaBanco);
-// }
-
 module.exports.deleteProyectoProducto = function (idProyecto,idProducto) {
   var query = "delete from proyectoproducto where Proyectos_idProyecto = "+idProyecto+" and Productos_idProducto = "+idProducto+" ";
+  return querySql(query);
+}
+
+module.exports.undo = function(idProyecto, idProducto, numeroPeriodo) {
+  var query = "delete from proyectoproducto where  Proyectos_idProyecto = "+idProyecto+" and Productos_idProducto = "+idProducto+" and numeroPeriodo = " +numeroPeriodo+" ";
   return querySql(query);
 }

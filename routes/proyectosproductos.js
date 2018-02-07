@@ -293,8 +293,8 @@ router.post('/devolverpagardesarrollo', (req, res, next) => {
       IVAGastosVenta: unDoIVAGastosVenta(IVAxGtos,costoDesProd,IVA),
       desarrolloProducto: unDoDesarrolloProducto(desProducto,costoDesProd)
     }
-
-    return auxiliar.setAuxiliarVenta(numPeriodo,idProyecto,json);
+    console.log("Producto",idProducto);
+    return auxiliar.setAuxiliar(numPeriodo,idProyecto,idProducto,json);
   }).then(function(){
     res.json({success: true, msg:"Operacion exitosa"});
   })
@@ -365,21 +365,10 @@ router.post('/deshacerperiododesarrollado', (req, res, next) => {
 
   var idProyecto = req.body.idProyecto;
   var idProducto = req.body.idProducto;
+  var numeroPeriodo = req.body.numeroPeriodo
 
   Promise.resolve().then(function () {
-    return proyectoProducto.getPeriodosDes(idProyecto,idProducto);
-  })
-  .then(function (periodosdes) {
-//    console.log("rows: "+periodosdes);
-//    console.log("periodosDes: "+ periodosdes[0].periodosDes);
-
-    var periodos = deshacerPeriodoDes(periodosdes[0].periodosDes);
-
-    if (periodos!=0) {// update
-      return proyectoProducto.updateDesarrolladoPeriodos(periodos,idProyecto,idProducto);
-    }else {//es cero y se elimina
-      return proyectoProducto.deleteProyectoProducto(idProyecto,idProducto);
-    }
+    return proyectoProducto.undo(idProyecto,idProducto,numeroPeriodo);
   })
   .then(function(){
     res.json({success: true, msg:"Operacion exitosa"});
@@ -449,7 +438,7 @@ var nvoIVAGtosVenta;
   if (IVAxGtos==0) {
     nvoIVAGtosVenta = 0;
   }else {
-    nvoIVAGtosVenta = ((IVAxGtos) - (IVAxGastosVenta(costoDesProd,IVA)));
+    nvoIVAGtosVenta = ((IVAxGtos) + (IVAxGastosVenta(costoDesProd,IVA)));
   }
   return nvoIVAGtosVenta;
 }

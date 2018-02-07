@@ -148,6 +148,22 @@ this._proyectoService.ocultaCierrePeriodo()
 
   }
 
+  deshacer(idZona, idProducto){
+    var x = {
+      idZona:idZona,
+      idProducto:idProducto,
+      costoDes: this.getCosto(idZona,idProducto)
+    }
+
+    var z = this._desarrolloZonaService.undoTotal(x);
+
+    setTimeout(()=>{
+      if(z){
+        this.actualizar();
+      }
+    }, 500);
+  }
+
   desarrollaZona(producto){
     this.openConf=false;
     this.openLoad=true;
