@@ -185,6 +185,7 @@ export class UsuariosComponent implements OnInit {
   ngOnInit() {
     this.administradores = this._administradoresService.returnAdministradores();
     this.usuarios=this._usuariosService.returnUsuarios();
+    console.log(this.usuarios);
     this.proyectos = this._usuariosService.returnProyectos();
   }
 
@@ -192,6 +193,7 @@ export class UsuariosComponent implements OnInit {
 
 
   guarda(usuario){
+    console.log(usuario)
     if(!this.buscaRepetidos(usuario)){
       this._usuariosService.guardarUsuario(usuario);
       this.modalNew.hide();

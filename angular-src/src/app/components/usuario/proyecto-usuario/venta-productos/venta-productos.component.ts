@@ -334,7 +334,12 @@ openModalVenta(idZona,idProducto){
 
     }
 
-
+    validaVi(){
+      if(localStorage.getItem('numeroPeriodo')==localStorage.getItem('numeroRPeriodos'))
+        return false
+      else
+        return true
+    }
 
 
 

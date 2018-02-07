@@ -198,6 +198,7 @@ for (var j = 0; j < repIdZonas.length; j++) {
   for (var k = 0; k < (repIdZonas[j]); k++) {
     var producto = {
       "idProducto":idproductoenzona[aux2].Producto_idProducto,
+      "color":idproductoenzona[aux2].color,
       "periodos":[]
     }
     zonaArray[j]['productos'].push(producto);

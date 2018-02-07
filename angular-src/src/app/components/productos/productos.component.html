@@ -20,7 +20,7 @@
 <!--++++++++++++++++++++++++++++++   Tarjeta de Producto    +++++++++++++++++++++++++++++++++++-->
 
 <div class="card-columns" >
-  <div class="card " *ngFor="let producto of productos">
+  <div class="card " *ngFor="let producto of productos" [ngStyle]="{'border-color': producto.color}">
 
 
     <div class="card-block">
@@ -334,7 +334,9 @@
 
           <div class="form-group row text-center">
             <label class="col-5 col-form-label">Color: </label>
-            <input [(colorPicker)]="color" cpPosition='left'  cpOutputFormat='hex' cpPositionOffset="50%" [style.background]="color" [value]="color"/>
+            <div class="input-group col-6">
+              <input [(colorPicker)]="color" cpPosition='left'  cpOutputFormat='hex' cpPositionOffset="50%" [style.background]="color" [value]="color"/>
+            </div>
           </div>
 
 
@@ -678,7 +680,9 @@
 
           <div class="form-group row text-center">
             <label class="col-5 col-form-label">Color: </label>
-            <input [(colorPicker)]="color" cpPosition='left'  cpOutputFormat='hex' cpPositionOffset="50%" [style.background]="color" [value]="color"/>
+            <div class="input-group col-6">
+              <input [(colorPicker)]="color" cpPosition='left'  cpOutputFormat='hex' cpPositionOffset="10%" [style.background]="color" [value]="color"/>
+            </div>
           </div>
 
 

@@ -47,7 +47,7 @@ export class FinanciamientoComponent implements OnInit {
 
   validaCredito(credito){
     for(let credit of this.creditosActivos){
-      if(credito.idCredito==credit.idCredito){
+      if(credito.idCredito==credit.idCredito || this.validaVi()){
         console.log("esta pedidio")
         return true;
 
@@ -155,5 +155,16 @@ export class FinanciamientoComponent implements OnInit {
   actualizar(){
     this.creditosActivos = this._creditoService.arregloC();
   }
+
+
+  validaVi(){
+    if(localStorage.getItem('numeroPeriodo')==localStorage.getItem('numeroRPeriodos'))
+      return false
+    else
+      return true
+  }
+
+
+
 
 }

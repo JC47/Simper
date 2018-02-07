@@ -26,7 +26,7 @@
 
                       <tr>
                         <th>Periodo</th>
-                        <th *ngFor="let periodo of producto.periodos" class="text-center table-info">{{periodo.numPeriodo}}</th>
+                        <th *ngFor="let periodo of producto.periodos" class="text-center table-info"  [ngStyle]="{'background':producto.color }">{{periodo.numPeriodo}}</th>
                       </tr>
 
                     </thead>
