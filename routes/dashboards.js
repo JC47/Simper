@@ -78,6 +78,7 @@ while (k < idsproductos.length) {
   //  if (idsproductos[k].Producto_idProducto == productoszonasdemandasdes[i].Producto_idProducto) {
       var json = {
         "idProducto":idsproductos[k].Producto_idProducto,
+        "color":idsproductos[k].color,
         "zonas":[]
       }
     productosDes.push(json);
@@ -129,6 +130,7 @@ while (k < idsproductos.length) {
   //  if (idsproductos[k].Producto_idProducto == productoszonasdemandasdes[i].Producto_idProducto) {
       var json = {
         "idProducto":idsproductos[k].Producto_idProducto,
+        "color":idsproductos[k].color,
         "maquinas":[]
       }
     maquinariaProd.push(json);
