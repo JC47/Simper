@@ -245,7 +245,7 @@
               </div>
             </div>
 
-            <div class="form-group row text-center" >
+            <!-- <div class="form-group row text-center" >
               <label class="col-5 col-form-label">Modificacion de periodos anteriores</label>
               <div class="col-6 has-success"
               [ngClass]="{'has-danger': !newForm.get('regresion').valid}">
@@ -259,7 +259,31 @@
                          El valor es requerido
                        </div>
               </div>
-            </div>
+            </div> -->
+
+
+
+            <fieldset class="form-group row">
+              <div class="row">
+       <label class="col-form-legend col-5 text-center">Modificacion de periodos anteriores:</label>
+
+
+           <div class="col-3">
+             <label class="form-check-label">
+               <input class=" text-center" type="radio" name="regresion"  value="0" checked formControlName="regresion">
+               No
+             </label>
+           </div>
+           <div class=" col-3 ">
+             <label class="form-check-label text-center">
+               <input  type="radio" name="regresion" value="1" formControlName="regresion">
+               Si
+             </label>
+           </div>
+
+
+       </div>
+     </fieldset>
 
 
 
@@ -475,21 +499,27 @@
             </div>
           </div>
 
-          <div class="form-group row text-center" >
-            <label class="col-5 col-form-label">Modificacion de periodos anteriores</label>
-            <div class="col-6 has-success"
-            [ngClass]="{'has-danger': !editForm.get('regresion').valid}">
+          <fieldset class="form-group row">
+            <div class="row">
+     <label class="col-form-label col-5 text-center">Modificacion de periodos anteriores:</label>
 
 
-              <input class="form-control"
-                     type="number"
-                     formControlName="regresion" >
-                     <div class="form-control-feedback" style="font-size:10px;"
-                     *ngIf="!editForm.controls['regresion'].valid">
-                       El valor es requerido
-                     </div>
-            </div>
-          </div>
+         <div class="col-3">
+           <label class="form-check-label">
+             <input class=" text-center" type="radio" name="regresion" checked  value="0" checked formControlName="regresion">
+             No
+           </label>
+         </div>
+         <div class=" col-3 ">
+           <label class="form-check-label text-center">
+             <input  type="radio" name="regresion" value="1" formControlName="regresion">
+             Si
+           </label>
+         </div>
+
+
+     </div>
+   </fieldset>
 
 
               <input class="form-control"

@@ -103,7 +103,9 @@ productosZonaSinDesGraf:any;
     console.log(this.activos,this.pasivos);
 
     setTimeout(()=>{
-      console.log("prod des zONA",this.productosZonaDesarrollados,this.productosZonaSinDesarrollar)
+      console.log("Maquinarias y demanda",this.maquinarias,this.demandas)
+      console.log("prod des zONA",this.productosZonaEnDesarrollo)
+      console.log("Des prod",this.productosEnDesarrollo)
       this.productosEnDesGraf=this.grafProd(this.productosEnDesarrollo);
       console.log( this.productosDesGraf);
       this.productosSinDesGraf=this.grafProdSin(this.productosSinDesarrollar);
@@ -366,6 +368,16 @@ this.single4 = [
     }
     console.log("grafZona SIn Des",data)
     return data;
+
+  }
+
+
+  convertColor(color){
+    return {domain:[color]}
+  }
+
+
+  getColorScheme(productos){
 
   }
 
