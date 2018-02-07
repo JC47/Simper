@@ -107,7 +107,7 @@ export class ProductosComponent implements OnInit {
 
 
 
-  guarda(producto:producto){
+  guarda(producto){
 
     producto["color"]=this.color
       console.log(producto)
@@ -128,7 +128,7 @@ export class ProductosComponent implements OnInit {
 
   }
 
-  editaProducto(producto:producto){
+  editaProducto(producto){
     this._productoService.setProducto(producto).subscribe();
     this.modalEdit.hide();
 
@@ -165,6 +165,7 @@ export class ProductosComponent implements OnInit {
     this.newForm.get('costosMPPUniProd').setValue(producto.costosMPPUniProd)
     this.newForm.get('uniMP').setValue(producto.uniMP)
     this.newForm.get('costoUni').setValue(producto.costoUni)
+    this.newForm.get('color').setValue(producto.color)
     this.modalCopia.hide();
   }
 
@@ -173,6 +174,7 @@ export class ProductosComponent implements OnInit {
 
   openNew(){
     this.newForm.reset();
+    this.editForm.reset();
     this.modalNew.show();
 
 
@@ -180,12 +182,30 @@ export class ProductosComponent implements OnInit {
 
 //Abre formulario para editar un item
 openEdit(producto){
+  this.newForm.reset();
+  this.editForm.reset();
+  console.log("Edicion",producto)
+  this.color = producto.color;
+  this.editForm.controls["idProducto"].setValue(producto.idProducto);
+  this.editForm.controls["nombreProd"].setValue(producto.nombreProd);
+  this.editForm.controls["costoDes"].setValue(producto.costoDes);
+  this.editForm.controls["tiempoDes"].setValue(producto.tiempoDes);
+  this.editForm.controls["precioVenta"].setValue(producto.precioVenta);
+  this.editForm.controls["costosFijosFabri"].setValue(producto.costosFijosFabri);
+  this.editForm.controls["costoVarUniFabri"].setValue(producto.costoVarUniFabri);
+  this.editForm.controls["gastosFijosDist"].setValue(producto.gastosFijosDist);
+  this.editForm.controls["depDistribucion"].setValue(producto.depDistribucion);
+  this.editForm.controls["costoVarUniDist"].setValue(producto.costoVarUniDist);
+  this.editForm.controls["depAdmon"].setValue(producto.depAdmon);
+  this.editForm.controls["gastosFijosAdmon"].setValue(producto.gastosFijosAdmon);
+  this.editForm.controls["costosMPPUniProd"].setValue(producto.costosMPPUniProd);
+  this.editForm.controls["uniMP"].setValue(producto.uniMP);
+  this.editForm.controls["costoUni"].setValue(producto.costoUni);
+  this.editForm.controls["color"].setValue(producto.color);
   this.modalEdit.show();
-  this.editForm.setValue(producto);
-
 }
 
-confDelete(producto:producto){
+confDelete(producto){
   this.productoDelete=producto;
   console.log(this.productoDelete);
   this.modalConfDelete.show();

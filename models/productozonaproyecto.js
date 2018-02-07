@@ -143,3 +143,8 @@ module.exports.getProductoZonaProyecto = function (idProducto,idZona,idProyecto,
   var query = "select * from productozonaproyecto where Producto_idProducto = "+idProducto+" and Zona_idZonas = "+idZona+" and Proyecto_idProyecto = "+idProyecto+" and Proyecto_Usuario_idUsuario = "+idUsuario+" and numeroPeriodo = "+numeroPeriodo+"  ";
   return querySql(query);
 }
+
+module.exports.deleteProductoZona = function(idProyecto, idProducto, idZona, numeroPeriodo,idUsuario) {
+  var query = "delete from productozonaproyecto where Producto_idProducto = "+ idProducto +" AND Zona_idZonas = "+ idZona+" AND Proyecto_idProyecto = "+idProyecto+" AND Proyecto_Usuario_idUsuario = "+ idUsuario+" AND numeroPeriodo = " +numeroPeriodo+"";
+  return querySql(query);
+}
