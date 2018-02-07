@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="offset-1 col-2">
-                          <button type="button" class="btn btn-primary" (click)="openModalVenta(option,producto.idProducto)">Vender</button>
+                          <button type="button" class="btn btn-primary" [disabled]="validaVi()" (click)="openModalVenta(option,producto.idProducto)">Vender</button>
                         </div>
                       </div>
 
@@ -47,7 +47,7 @@
               </div>
 
 
-            <button type="submit" class="btn btn-primary col-6" >Almacenar</button>
+            <button type="submit" [disabled]="validaVi()" class="btn btn-primary col-6" >Almacenar</button>
 
           </form>
 

@@ -158,7 +158,7 @@ export class GraficasService {
       data.push({
         values:this.setPeriodos(producto),
         key:this.getNameById(producto.idProducto),
-        color:"#"+Math.random().toString(16).slice(2, 8)
+        color:producto.color
       })
     }
     return data

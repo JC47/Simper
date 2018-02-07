@@ -47,9 +47,9 @@
   </div>
 
   <div class="col-2">
-    <button type="button" class="offset-1 col-10 btn btn-primary "
+    <button [disabled]="validaVi()" type="button" class="offset-1 col-10 btn btn-primary "
     (click) ="openConf=true" style="margin-top:250px"><i class="material-icons">keyboard_arrow_right</i></button>
-    <button type="button" class="offset-1 col-10 btn btn-danger " style="margin-top:50px" (click)="regresar()">
+    <button [disabled]="validaVi()" type="button" class="offset-1 col-10 btn btn-danger " style="margin-top:50px" (click)="regresar()">
       <i class="material-icons">keyboard_arrow_left</i>
     </button>
   </div>

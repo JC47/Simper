@@ -57,6 +57,7 @@ export class ProductosComponent implements OnInit {
               private modalService: NgbModal,
               private _flashMessagesService: FlashMessagesService) {
 
+
       this.newForm= new FormGroup({
         'nombreProd':new FormControl('',Validators.required),
         'costoDes':new FormControl('',Validators.required),
@@ -98,6 +99,8 @@ export class ProductosComponent implements OnInit {
 
 
       this.productos=this._productoService.returnProductos();
+      console.log(this.productos)
+
 
   }
 
@@ -129,6 +132,7 @@ export class ProductosComponent implements OnInit {
   }
 
   editaProducto(producto){
+    producto.color=this.color;
     this._productoService.setProducto(producto).subscribe();
     this.modalEdit.hide();
 
@@ -202,6 +206,7 @@ openEdit(producto){
   this.editForm.controls["uniMP"].setValue(producto.uniMP);
   this.editForm.controls["costoUni"].setValue(producto.costoUni);
   this.editForm.controls["color"].setValue(producto.color);
+  this.color=producto.color;
   this.modalEdit.show();
 }
 

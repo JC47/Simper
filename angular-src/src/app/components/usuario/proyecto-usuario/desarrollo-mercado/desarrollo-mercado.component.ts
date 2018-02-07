@@ -222,4 +222,11 @@ this._proyectoService.ocultaCierrePeriodo()
     this.productosZonaEnDesarrollo = this._desarrolloZonaService.returnProductosDeZonaEnDesarrollo();
   }
 
+  validaVi(){
+    if(localStorage.getItem('numeroPeriodo')==localStorage.getItem('numeroRPeriodos'))
+      return false
+    else
+      return true
+  }
+
 }

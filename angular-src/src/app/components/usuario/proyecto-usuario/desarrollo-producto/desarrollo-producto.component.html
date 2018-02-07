@@ -26,7 +26,7 @@
   </div>
 
   <div class="col-2">
-    <button type="button" class="btn btn-primary col-10 offset-1" style="margin-top:250px;"
+    <button type="button" [disabled]="validaVi()" class="btn btn-primary col-10 offset-1" style="margin-top:250px;"
     (click)="openConf=true"><i class="material-icons">keyboard_arrow_right</i></button>
   </div>
 
@@ -104,9 +104,9 @@
               </div>
 
               <button type="button" (click)="confPago(producto)"
-              class="btn btn-primary col-3" *ngIf="!revisaPeriodo(producto)" style="font-size:15px">Pagar</button>
+              class="btn btn-primary col-3" *ngIf="!revisaPeriodo(producto)" style="font-size:15px" [disabled]="validaVi()">Pagar</button>
               <button type="button" (click)="deshacer(producto)"
-              class="btn btn-danger col-3" *ngIf="revisaPeriodo(producto)" style="font-size:15px">Cancelar</button>
+              class="btn btn-danger col-3" *ngIf="revisaPeriodo(producto)" style="font-size:15px" [disabled]="validaVi()">Cancelar</button>
 
 
             </div>

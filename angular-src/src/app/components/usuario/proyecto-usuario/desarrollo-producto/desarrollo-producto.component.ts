@@ -145,4 +145,12 @@ export class DesarrolloProductoComponent implements OnInit {
     this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
   }
 
+
+  validaVi(){
+    if(localStorage.getItem('numeroPeriodo')==localStorage.getItem('numeroRPeriodos'))
+      return false
+    else
+      return true
+  }
+
 }
