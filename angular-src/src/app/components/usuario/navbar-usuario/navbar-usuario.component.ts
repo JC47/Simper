@@ -197,7 +197,12 @@ export class NavbarUsuarioComponent implements OnInit {
 
     }
 
-
+    validaRegre(){
+      if(localStorage.getItem('regresion')=="0")
+        return true
+      else
+        return false
+    }
 
 
 

@@ -121,7 +121,7 @@
                     <div class="list-group" >
                       <a class="list-group-item list-group-item-action col-12" *ngFor="let p of this._proyectoService.periodos" >{{p.nombre}}
                         <button class="btn btn-primary offset-3 col-3" (click)="visualizaPeriodo(p.numero)">Visualizar</button>
-                        <button class="btn btn-success col-3 offset-1" (click)="selectEditaPeriodo(p.numero)">Editar</button>
+                        <button class="btn btn-success col-3 offset-1" [disabled]="validaRegre()" (click)="selectEditaPeriodo(p.numero)">Editar</button>
                       </a>
                     </div>
                         <div class="modal-footer">
