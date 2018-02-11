@@ -85,22 +85,17 @@ productosZonaSinDesGraf:any;
               private _demandaService:ZonasService,
             private _proyectoService:ProyectosService) {
     this.productos=this._productosService.returnProductos();
+    this._resultadosService.vender();
     this.productosSinDesarrollar = this._desarrolloProducto.returnProductosSinDesarrollar();
     this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
     this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
     this.productosZonaSinDesarrollar = this._desarrolloZonaService.returnProductosDeZonaSinDesarrollar();
     this.productosZonaEnDesarrollo = this._desarrolloZonaService.returnProductosDeZonaEnDesarrollo();
-    console.log("Productos desarrolados",this.productosDesGraf,this.productosSinDesGraf)
     this.productosZonaDesarrollados = this._desarrolloZonaService.returnProductosDeZonaDesarrollados();
     this.demandas=this._dash.returnDemandas();
-    this.balanceFinal=this._balanceService.returnBalance();
     this.maquinarias=this._dash.returnMaquinarias();
-    this.activos = this._balanceService.returnActivos();
-    this.pasivos = this._balanceService.returnPasivos();
     this._proyectoService.ocultaCierrePeriodo()
-      this.zonas=this._demandaService.returnZonasNormales();
-
-    console.log(this.activos,this.pasivos);
+    this.zonas=this._demandaService.returnZonasNormales();
 
     setTimeout(()=>{
       console.log("Maquinarias y demanda",this.maquinarias,this.demandas)
@@ -118,128 +113,16 @@ productosZonaSinDesGraf:any;
       this.productosZonaDesGraf=this.grafZonaDes(this.productosZonaDesarrollados);
       console.log("graf",this.productosZonaEnDesarrollo);
       console.log("Prtoductos2",this.productosDesarollados,this.productosEnDesarrollo)
-
-      this.pasivo= [
-        {
-          "name": "IVA por Enterar",
-          "value": this.getIVAporEnterar()
-        },
-        {
-          "name": "Proveedores",
-          "value": this.getProvedores()
-        },
-
-        {
-          "name": "Impuestos por Pagar",
-          "value": this.getImpuestosPorPagar()
-        },
-        {
-          "name": "Prestamos Más de un Año",
-          "value": this.getPrestamosMas()
-        },
-        {
-          "name": "Prestamos Menos de un Año",
-          "value": this.getPrestamosMenos()
-        }
-
-      ];
       console.log(this.balanceFinal)
 
-
-
-
+      this._balanceService.getBalanceFinal().subscribe( data => {
+        if(data.success){
+          this.balanceFinal = this._resultadosService.getBalanceFinal();
+        }
+      });
     }, 3000)
 
     this.activosGraf = this.grafActivos();
-
-    console.log("Activo",this.activo)
-
-
-
-
-    this.single = [
-  {
-    "name": "Germany",
-    "value": 8940000
-  },
-  {
-    "name": "USA",
-    "value": 5000000
-  },
-  {
-    "name": "France",
-    "value": 7200000
-  },
-  {
-    "name": "Mexico",
-    "value": 7200000
-  },
-  {
-    "name": "U",
-    "value": 5000000
-  },
-  {
-    "name": "Uru",
-    "value": 7200000
-  }
-
-];
-
-
-this.single2 = [
-{
-"name": "Producto 1",
-"value": 8940000
-},
-{
-"name": "Producto 2",
-"value": 5000000
-},
-{
-"name": "Producto 3",
-"value": 7200000
-},
-{
-"name": "Producto 4",
-"value": 7200000
-},
-{
-"name": "Producto 5",
-"value": 5000000
-},
-{
-"name": "Producto 6",
-"value": 7200000
-}
-
-];
-
-this.single3 = [
-  {
-    "name": "Germany",
-    "value": 0
-  }
-];
-
-
-this.single4 = [
-  {
-    "name": "Germany",
-    "value": 8940000
-  },
-  {
-    "name": "USA",
-    "value": 5000000
-  },
-  {
-    "name": "France",
-    "value": 7200000
-  }
-];
-
-
-
-
 
   }
 

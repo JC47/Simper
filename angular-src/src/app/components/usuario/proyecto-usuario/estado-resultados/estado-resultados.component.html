@@ -69,13 +69,13 @@
       <tr>
         <th>ISR</th>
         <td  class="text-right" *ngFor="let producto of resultados">-</td>
-        <td  class="text-right" *ngFor="let balance of balanceFinal">{{balance.imptosPorPagar * 11 |currency:'USD':true:'1.0-0'}}</td>
+        <td  class="text-right" *ngFor="let balance of balanceFinal">{{balance.imptosPorPagar * 12 |currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <th>PTU</th>
         <td class="text-right" *ngFor="let producto of resultados">-</td>
-        <td class="text-right" *ngFor="let balance of balanceFinal">{{balance.PTUPorPagar * 11 |currency:'USD':true:'1.0-0'}}</td>
+        <td class="text-right" *ngFor="let balance of balanceFinal">{{balance.PTUPorPagar|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>

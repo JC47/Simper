@@ -199,17 +199,24 @@ router.post('/validateAlmacen', (req,res,next) => {
   var idProducto = req.body.Producto_idProducto;
   var idProyecto = req.body.Proyecto_idProyecto;
   var numeroPeriodo = req.body.Balance_numeroPeriodo;
+  var periodoAnterior = numeroPeriodo - 1;
   var uniA = req.body.unidadesAlmacenadas;
 
-  Promise.join(operacion.getMaquinarias(idProducto,idProyecto),operacion.getUnidadesVendidas(idProyecto,idProducto,numeroPeriodo),
-              function(maquinas,ventasTotales){
+  Promise.join(operacion.getMaquinarias(idProducto,idProyecto), operacion.getAlmacen(idProyecto,idProducto,periodoAnterior),
+              operacion.getUnidadesVendidas(idProyecto,idProducto,numeroPeriodo),
+              function(maquinas,almacenAnterior,ventasTotales){
 
                 var uniVendidas = getVentasAnteriores(ventasTotales);
-
+                var uniAlmacenadas = 0
+                if(almacenAnterior.length != 0){
+                  uniAlmacenadas = almacenAnterior[0].unidadesAlmacenadas;
+                }
                 var produccionA = getProduccion(maquinas);
+
                 var uniProd = uniVendidas + uniA;
-                console.log(produccionA,uniProd);
-                if(uniProd > produccionA){
+                var uniDisponibles = produccionA + uniAlmacenadas;
+                console.log(uniDisponibles,uniProd);
+                if(uniProd > uniDisponibles){
                   res.json({success:false,msg:"Maquinaria Insuficiente, reduce la cantidad a almacenar o compra más maquinaria"});
                 }
                 else{

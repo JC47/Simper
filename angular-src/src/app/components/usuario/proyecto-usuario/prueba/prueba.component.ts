@@ -45,7 +45,6 @@ export class PruebaComponent implements OnInit {
     if(cbf > cbi){
       r = (cbf - cbi);
     }
-    this.aplicacion += r;
     return r;
   }
 
@@ -54,7 +53,66 @@ export class PruebaComponent implements OnInit {
     if(cbf < cbi){
       r = (cbi - cbf);
     }
-    this.origen += r;
+    return r;
+  }
+
+  getAplicacionTotal(a,b){
+    var r = 0;
+    r += this.getAplicacionCB(b.cajaBancos,a.cajaBancos);
+    r += this.getAplicacionCB(b.cuentasPorCobrar,a.cuentasPorCobrar);
+    r += this.getAplicacionCB(b.almacenArtTerm,a.almacenArtTerm);
+    r += this.getAplicacionCB(b.almacenMateriales,a.almacenMateriales);
+    r += this.getAplicacionCB(b.terreno,a.terreno);
+    r += this.getAplicacionCB(b.edifInsta,a.edifInsta);
+    r += this.getAplicacionCB(-b.depEdif,-a.depEdif);
+    r += this.getAplicacionCB(b.maqEquipo,a.maqEquipo);
+    r += this.getAplicacionCB(-b.depMaqEquipo,-a.depMaqEquipo);
+    r += this.getAplicacionCB(b.mueblesEnseres,a.mueblesEnseres);
+    r += this.getAplicacionCB(-b.depMueblesEnseres,-a.depMueblesEnseres);
+    r += this.getAplicacionCB(b.eqTrans,a.eqTrans);
+    r += this.getAplicacionCB(-b.depEqTrans,-a.depEqTrans);
+    r += this.getAplicacionCB(b.pagosAnticipado,a.pagosAnticipado);
+    r += this.getAplicacionCB(b.gastosAmortizacion,a.gastosAmortizacion);
+    r += this.getAplicacionCB(-b.IVAPorEnterar,-a.IVAPorEnterar);
+    r += this.getAplicacionCB(-b.imptosPorPagar,-a.imptosPorPagar);
+    r += this.getAplicacionCB(-b.proveedores,-a.proveedores);
+    r += this.getAplicacionCB(-b.PTUPorPagar,-a.PTUPorPagar);
+    r += this.getAplicacionCB(-b.prestamosMenosAnio,-a.prestamosMenosAnio);
+    r += this.getAplicacionCB(-b.prestamosMasAnio,-a.prestamosMasAnio);
+    r += this.getAplicacionCB(-b.capitalSocial,-a.capitalSocial);
+    r += this.getAplicacionCB(-b.reservaLegal,-a.reservaLegal);
+    r += this.getAplicacionCB(-b.utilidadAcum,-a.utilidadAcum);
+    r += this.getAplicacionCB(-b.utilidadEjercicio,-a.utilidadEjercicio);
+    return r;
+  }
+
+  getOrigenTotal(a,b){
+    var r = 0;
+    r += this.getOrigenCB(b.cajaBancos,a.cajaBancos);
+    r += this.getOrigenCB(b.cuentasPorCobrar,a.cuentasPorCobrar);
+    r += this.getOrigenCB(b.almacenArtTerm,a.almacenArtTerm);
+    r += this.getOrigenCB(b.almacenMateriales,a.almacenMateriales);
+    r += this.getOrigenCB(b.terreno,a.terreno);
+    r += this.getOrigenCB(b.edifInsta,a.edifInsta);
+    r += this.getOrigenCB(-b.depEdif,-a.depEdif);
+    r += this.getOrigenCB(b.maqEquipo,a.maqEquipo);
+    r += this.getOrigenCB(-b.depMaqEquipo,-a.depMaqEquipo);
+    r += this.getOrigenCB(b.mueblesEnseres,a.mueblesEnseres);
+    r += this.getOrigenCB(-b.depMueblesEnseres,-a.depMueblesEnseres);
+    r += this.getOrigenCB(b.eqTrans,a.eqTrans);
+    r += this.getOrigenCB(-b.depEqTrans,-a.depEqTrans);
+    r += this.getOrigenCB(b.pagosAnticipado,a.pagosAnticipado);
+    r += this.getOrigenCB(b.gastosAmortizacion,a.gastosAmortizacion);
+    r += this.getOrigenCB(-b.IVAPorEnterar,-a.IVAPorEnterar);
+    r += this.getOrigenCB(-b.imptosPorPagar,-a.imptosPorPagar);
+    r += this.getOrigenCB(-b.proveedores,-a.proveedores);
+    r += this.getOrigenCB(-b.PTUPorPagar,-a.PTUPorPagar);
+    r += this.getOrigenCB(-b.prestamosMenosAnio,-a.prestamosMenosAnio);
+    r += this.getOrigenCB(-b.prestamosMasAnio,-a.prestamosMasAnio);
+    r += this.getOrigenCB(-b.capitalSocial,-a.capitalSocial);
+    r += this.getOrigenCB(-b.reservaLegal,-a.reservaLegal);
+    r += this.getOrigenCB(-b.utilidadAcum,-a.utilidadAcum);
+    r += this.getOrigenCB(-b.utilidadEjercicio,-a.utilidadEjercicio);
     return r;
   }
 
