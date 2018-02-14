@@ -29,21 +29,6 @@
   </div>
 
   <div class="col-lg-6 col-sm-12 " style="height:200px;">
-    <!-- <ngx-charts-bar-horizontal
-          [scheme]="colorScheme"
-          [results]="activos"
-          xAxis="true"
-          yAxis="true"
-          showXAxisLabel="true"
-          roundDomains="true"
-          showYAxisLabel="true"
-          xAxisLabel="Demnada Potencial"
-          yAxisLabel="Productos">
-        </ngx-charts-bar-horizontal> -->
-        <!-- <ngx-charts-advanced-pie-chart
-            [scheme]="colorScheme"
-            [results]="activos">
-          </ngx-charts-advanced-pie-chart> -->
 
         <table class="table table-sm" *ngFor= "let balance of balanceFinal">
           <tr>
@@ -54,19 +39,19 @@
             <td class="text-right">{{balance.IVAPorEnterar|currency:'USD':true:'1.0-0'}}</td>
           </tr>
           <tr>
-            <td>Proveedores</td>
-            <td class="text-right">{{balance.proveedores|currency:'USD':true:'1.0-0'}}</td>
-          </tr>
-          <tr>
             <td>Impuestos por Pagar</td>
             <td class="text-right">{{balance.imptosPorPagar|currency:'USD':true:'1.0-0'}}</td>
           </tr>
           <tr>
-            <td>Prestamos Más de un Año</td>
-            <td class="text-right">{{balance.prestamosMasAnio|currency:'USD':true:'1.0-0'}}</td>
+            <td>Proveedores</td>
+            <td class="text-right">{{balance.proveedores|currency:'USD':true:'1.0-0'}}</td>
           </tr>
           <tr>
-            <td>Prestamos Menos de un Año</td>
+            <td>PTU Por Pagar</td>
+            <td class="text-right">{{balance.PTUPorPagar|currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+          <tr>
+            <td>Prestamos Bancarios</td>
             <td class="text-right">{{balance.prestamosMenosAnio|currency:'USD':true:'1.0-0'}}</td>
           </tr>
         </table>

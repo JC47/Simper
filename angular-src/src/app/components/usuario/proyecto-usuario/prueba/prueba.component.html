@@ -286,8 +286,8 @@
         <th>Total</th>
         <th class="text-right">{{0|currency:'USD':true:'1.0-0'}}</th>
         <th class="text-right">{{0|currency:'USD':true:'1.0-0'}}</th>
-        <th class="text-right">{{origen |currency:'USD':true:'1.0-0'}}</th>
-        <th class="text-right">{{origen |currency:'USD':true:'1.0-0'}}</th>
+        <th class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionTotal(balanceI,balance) |currency:'USD':true:'1.0-0'}}</th>
+        <th class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenTotal(balanceI,balance) |currency:'USD':true:'1.0-0'}}</th>
       </tr>
 
     </tbody>
