@@ -35,7 +35,7 @@
 
                     <tr>
                       <th>{{getNameById(producto.idProducto)}}</th>
-                      <th *ngFor="let periodo of producto.periodos" class="text-center">{{periodo.cantidad}}</th>
+                      <th *ngFor="let periodo of producto.periodos" class="text-center">{{periodo.cantidad| number }}</th>
                     </tr>
 
                     <tr>

@@ -179,7 +179,7 @@ export class PruebaComponent implements OnInit {
       {"cara":"Capital Social", "actual": this.cp.transform(actual.capitalSocial,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.capitalSocial,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.capitalSocial,anterior.capitalSocial),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.capitalSocial,anterior.capitalSocial),'USD',true,'1.0-0')},
       {"cara":"Reserva Legal", "actual": this.cp.transform(actual.reservaLegal,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.reservaLegal,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.reservaLegal,anterior.reservaLegal),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.reservaLegal,anterior.reservaLegal),'USD',true,'1.0-0')},
       {"cara":"Utilidad Acumulada", "actual": this.cp.transform(actual.utilidadAcum,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.utilidadAcum,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.utilidadAcum,anterior.utilidadAcum),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.utilidadAcum,anterior.utilidadAcum),'USD',true,'1.0-0')},
-      {"cara":"Utilidad del Ejercicio", "actual": this.cp.transform(actual.utilidadEjercicio), "anterior": this.cp.transform(anterior.utilidadEjercicio), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.utilidadEjercicio,anterior.utilidadEjercicio)),"origen": this.cp.transform(this.getOrigenCB(actual.utilidadEjercicio,anterior.utilidadEjercicio),'USD',true,'1.0-0')},
+      {"cara":"Utilidad del Ejercicio", "actual": this.cp.transform(actual.utilidadEjercicio,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.utilidadEjercicio,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.utilidadEjercicio,anterior.utilidadEjercicio),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.utilidadEjercicio,anterior.utilidadEjercicio),'USD',true,'1.0-0')},
       {"cara":"Total", "actual":"$0", "anterior":"0", "aplicacion": this.cp.transform(this.origen,'USD',true,'1.0-0'),"origen": this.cp.transform(this.origen,'USD',true,'1.0-0')},
 
     ];
@@ -195,9 +195,13 @@ export class PruebaComponent implements OnInit {
     margin: {top: 40,
          left:15},
     tableWidth: 185,
-    headerStyles: {fillColor:0},
+    headerStyles: {fillColor:0,halign:'center'},
     columnStyles: {
-    cara: {halign:'left',columnWidth:65}
+    cara: {halign:'left',columnWidth:65},
+    actual:{halign:'right'},
+    anterior:{halign:'right'},
+    origen:{halign:'right'},
+    aplicacion:{halign:'right'}    
     },
     addPageContent: function(data) {
     doc.setFontSize(15);

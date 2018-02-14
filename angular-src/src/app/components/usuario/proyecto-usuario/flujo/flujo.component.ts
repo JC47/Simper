@@ -3,6 +3,7 @@ import {OperacionService} from '../../../../services/operacion.service';
 import {ProductoService} from '../../../../services/producto.service';
 import {ResultadosService} from '../../../../services/resultados.service';
 import {BalanceService} from '../../../../services/balance.service';
+import { CurrencyPipe } from '@angular/common';
 import {CompraMaquinariaService} from '../../../../services/compra-maquinaria.service';
 import {ProyectosService} from '../../../../services/proyectos.service';
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
@@ -32,6 +33,7 @@ export class FlujoComponent implements OnInit {
               private _productoService:ProductoService,
               private _maqService:CompraMaquinariaService,
               private _balanceService:BalanceService,
+              private cp: CurrencyPipe,
               private _resultadosService:ResultadosService,
             private _proyectoService:ProyectosService) {
               this._proyectoService.ocultaCierrePeriodo()
@@ -217,32 +219,32 @@ export class FlujoComponent implements OnInit {
       {title: "Saldo", dataKey: "saldo"}];
 
 
-      var rows = [
-      {"cara":"Saldo Inicial","saldo":this.getCajaBancos()},
+      var rows = [ 
+      {"cara":"Saldo Inicial","saldo":this.cp.transform(this.getCajaBancos(),'USD',true,'1.0-0')},
       {"cara":"","saldo":""},
-      {"cara":"Cobros por venta","saldo":this.getCobroVentas()},
-      {"cara":"Préstamos","saldo":this.getPAcuales()},
-      {"cara":"Intereses","saldo":this.getIntereses()},
+      {"cara":"Cobros por venta","saldo":this.cp.transform(this.getCobroVentas(),'USD',true,'1.0-0')},
+      {"cara":"Préstamos","saldo":this.cp.transform(this.getPAcuales(),'USD',true,'1.0-0')},
+      {"cara":"Intereses","saldo":this.cp.transform(this.getIntereses(),'USD',true,'1.0-0')},
       {"cara":"Incremento de Capital","saldo":""},
       {"cara":"","saldo":""},
-      {"cara":"Disponible","saldo":this.getDisponible()},
+      {"cara":"Disponible","saldo":this.cp.transform(this.getDisponible(),'USD',true,'1.0-0')},
       {"cara":"","saldo":""},
-      {"cara":"Costo de Transformación","saldo":this.getCostoDeTransformacion()},
-      {"cara":"Costo de Distribución","saldo":this.getCostoDeDistribucion()},
-      {"cara":"Costo de Administrativo","saldo":this.getCostoAdministrativo()},
-      {"cara":"Gastos de Venta","saldo":this.getGastosVenta()},
-      {"cara":"Compra de Maquinaria","saldo":this.getCompraMaquinaria()},
-      {"cara":"Compras","saldo":this.getCompras()},
-      {"cara":"Intereses","saldo":this.getIntereses()},
-      {"cara":"Pago de Prestamos","saldo":this.getPagos()},
+      {"cara":"Costo de Transformación","saldo":this.cp.transform(this.getCostoDeTransformacion(),'USD',true,'1.0-0')},
+      {"cara":"Costo de Distribución","saldo":this.cp.transform(this.getCostoDeDistribucion(),'USD',true,'1.0-0')},
+      {"cara":"Costo de Administrativo","saldo":this.cp.transform(this.getCostoAdministrativo(),'USD',true,'1.0-0')},
+      {"cara":"Gastos de Venta","saldo":this.cp.transform(this.getGastosVenta(),'USD',true,'1.0-0')},
+      {"cara":"Compra de Maquinaria","saldo":this.cp.transform(this.getCompraMaquinaria(),'USD',true,'1.0-0')},
+      {"cara":"Compras","saldo":this.cp.transform(this.getCompras(),'USD',true,'1.0-0')},
+      {"cara":"Intereses","saldo":this.cp.transform(this.getIntereses(),'USD',true,'1.0-0')},
+      {"cara":"Pago de Prestamos","saldo":this.cp.transform(this.getPagos(),'USD',true,'1.0-0')},
       {"cara":"Dividendos","saldo":""},
       {"cara":"","saldo":""},
-      {"cara":"PTU","saldo":this.getPTU()},
-      {"cara":"ISR","saldo":this.getISR()},
-      {"cara":"IVA","saldo":this.getIVA()},
+      {"cara":"PTU","saldo":this.cp.transform(this.getPTU(),'USD',true,'1.0-0')},
+      {"cara":"ISR","saldo":this.cp.transform(this.getISR(),'USD',true,'1.0-0')},
+      {"cara":"IVA","saldo":this.cp.transform(this.getIVA(),'USD',true,'1.0-0')},
       {"cara":"","saldo":""},
-      {"cara":"Total de Salidas","saldo":this.getSalidas()},
-      {"cara":"Saldo Final","saldo":this.getCajaBancosFinal()}
+      {"cara":"Total de Salidas","saldo":this.cp.transform(this.getSalidas(),'USD',true,'1.0-0')},
+      {"cara":"Saldo Final","saldo":this.cp.transform(this.getCajaBancosFinal(),'USD',true,'1.0-0')}
       ];
       var t = {
         title:"Total",
@@ -255,9 +257,10 @@ export class FlujoComponent implements OnInit {
       margin: {top: 40,
            left:15},
       tableWidth: 185,
-      headerStyles: {fillColor:0},
+      headerStyles: {fillColor:0,halign:'center'},
       columnStyles: {
-      cara: {halign:'left',columnWidth:65}
+      cara: {halign:'left',columnWidth:65},
+      saldo:{halign:'right'}
       },
       addPageContent: function(data) {
       doc.setFontSize(15);

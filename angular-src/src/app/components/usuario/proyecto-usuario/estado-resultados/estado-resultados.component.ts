@@ -300,10 +300,29 @@ export class EstadoResultadosComponent implements OnInit {
   {"cara":"Utilidad del Ejercicio"},
   ];
 
+
+    let conf={
+    margin: {top: 40,left:40},
+    tableWidth: 200,
+    headerStyles: {fillColor:0,halign:'center'},
+    columnStyles: {
+    cara: {halign:'left',columnWidth:65},
+
+    },
+    addPageContent: function(data) {
+    doc.setFontSize(15);
+    doc.setFontType("bold");
+    doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+    doc.setFontSize(13);
+    doc.text(139.5, 23, 'Estado de Resultados', null, null, 'center');
+    doc.line(50, 27, 228, 27);
+    },
+    }
+
   for(let producto of this.resultados){
     var x = {
       title:this.getNameByIdProducto(producto),
-      dataKey:producto
+      dataKey:this.getNameByIdProducto(producto)
     }
     columns.push(x);
     rows[0][x.dataKey] = this.getVentasNetas(producto).toString();
@@ -318,6 +337,9 @@ export class EstadoResultadosComponent implements OnInit {
     rows[16][x.dataKey] = "-";
     rows[17][x.dataKey] = "-";
     rows[19][x.dataKey] = "-";
+
+    conf.columnStyles[this.getNameByIdProducto(producto)]={halign:'right'}
+
   }
 
   var t = {
@@ -345,29 +367,11 @@ export class EstadoResultadosComponent implements OnInit {
 
 
 
-  doc.autoTable(columns, rows, {
-  margin: {top: 40,
-       left:40},
-  tableWidth: 200,
-  headerStyles: {fillColor:0},
-  columnStyles: {
-  cara: {halign:'left',columnWidth:65}
-  },
-  addPageContent: function(data) {
-  doc.setFontSize(15);
-  doc.setFontType("bold");
-  doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
-  doc.setFontSize(13);
-  doc.text(139.5, 23, 'Estado de Resultados', null, null, 'center');
-  doc.line(50, 27, 228, 27);
-  },
 
 
 
 
-
-
-  });
+  doc.autoTable(columns, rows, conf );
 
   doc.save("Estado de Resultados.pdf");
 

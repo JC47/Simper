@@ -102,7 +102,7 @@
 
             <div class="input-group col-6 has-success " [ngClass]="{'has-danger': !editForm.get('costo').valid}">
                 <span class="input-group-addon">$</span>
-                <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
+                <input currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }"  class="form-control" aria-label="Amount (to the nearest dollar)"
                 formControlName="costo">
 
 
@@ -122,7 +122,7 @@
 
           <div class="input-group col-6 has-success " [ngClass]="{'has-danger': !editForm.get('depAcum').valid}">
               <span class="input-group-addon">%</span>
-              <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
+              <input currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }"  class="form-control" aria-label="Amount (to the nearest dollar)"
               formControlName="depAcum">
 
 
@@ -142,7 +142,7 @@
 
           <div class="input-group col-6 has-success " [ngClass]="{'has-danger': !editForm.get('cantidadProd').valid}">
               <span class="input-group-addon">%</span>
-              <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
+              <input currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }"  class="form-control" aria-label="Amount (to the nearest dollar)"
               formControlName="cantidadProd">
 
 
@@ -262,7 +262,7 @@
 
               <div class="input-group col-6 has-success " [ngClass]="{'has-danger': !newForm.get('costo').valid}">
                   <span class="input-group-addon">$</span>
-                  <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
+                  <input currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }" class="form-control" aria-label="Amount (to the nearest dollar)"
                   formControlName="costo">
 
 
@@ -282,7 +282,7 @@
 
             <div class="input-group col-6 has-success " [ngClass]="{'has-danger': !newForm.get('depAcum').valid}">
                 <span class="input-group-addon">%</span>
-                <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
+                <input currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }" class="form-control" aria-label="Amount (to the nearest dollar)"
                 formControlName="depAcum">
 
 
@@ -301,8 +301,8 @@
             <label class="col-5 col-form-label">Capacidad en Unidades</label>
 
             <div class="input-group col-6 has-success " [ngClass]="{'has-danger': !newForm.get('cantidadProd').valid}">
-                <span class="input-group-addon">%</span>
-                <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
+                <span class="input-group-addon">U</span>
+                <input currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }"  class="form-control" aria-label="Amount (to the nearest dollar)"
                 formControlName="cantidadProd">
 
 

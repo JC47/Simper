@@ -324,7 +324,7 @@
 
 
 
-<div bsModal #modalEdit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div bsModal ngDraggable #modalEdit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
@@ -559,7 +559,7 @@
 
 
 
-<div bsModal #modalConfDelete="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div bsModal ngDraggable #modalConfDelete="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
@@ -596,7 +596,7 @@
 
 <!-- ////////////////////////////////////7777 Modal para cambiar variables de usuario //////////////////////////////////////-->
 
-<div bsModal #modalVars="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div bsModal ngDraggable #modalVars="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
@@ -630,12 +630,12 @@
 
 <!-- Modal de variables inciiales -->
 
-<div bsModal #modalVariables="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div bsModal ngDraggable #modalVariables="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="col-12 text-center">Variables Iniciales de Balance</h2>
-        <h4 class="col-12 text-center" style="margin-top:10px">{{userSelected.nombreUsuario}} {{userSelected.apPat}}</h4>
+        <!-- <h4 class="col-12 text-center" style="margin-top:10px">{{userSelected.nombreUsuario}} {{userSelected.apPat}}</h4> -->
       </div>
 
 
@@ -925,138 +925,141 @@
 
 
 
-<div bsModal #modalCopia="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div bsModal ngDraggable #modalCopia="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="col-12 text-center">Copia de Variables Iniciales</h4>
       </div>
       <div class="modal-body">
-      <accordion *ngFor="let usuario of usuarios" [closeOthers]="1">
-        <accordion-group #group >
-          <div accordion-heading>
-            <div class="row">
-              <h4 class="col-6">{{usuario.nombreUsuario}} {{usuario.apPat}}</h4>
-              <button class="col-5 btn btn-primary" type="button" (click)="setVariablesUsuario(usuario)" >Copiar a Formulario</button>
-            </div>
+        <div class=""  *ngFor="let usuario of usuarios">
+          <accordion  [closeOthers]="1" *ngIf="usuario.idUsuario!=userSelected.idUsuario" >
+            <accordion-group #group >
+              <div accordion-heading>
+                <div class="row">
+                  <h4 class="col-6">{{usuario.nombreUsuario}} {{usuario.apPat}}</h4>
+                  <button class="col-5 btn btn-primary" type="button" (click)="setVariablesUsuario(usuario)" >Copiar a Formulario</button>
+                </div>
 
-            <i class="pull-right float-xs-right glyphicon"
-            [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
-          </div>
+                <i class="pull-right float-xs-right glyphicon"
+                [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
+              </div>
 
-              <table class="table table-hover text-center">
-                <thead class="text-center">
-                  <tr>
-                    <th>Cuenta</th>
-                    <th>Cantidad</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Caja y Bancos</td>
-                    <td>{{usuario.cajaBancos| currency:'USD':true}}</td>
-                  </tr>
+                  <table class="table table-hover text-center">
+                    <thead class="text-center">
+                      <tr>
+                        <th>Cuenta</th>
+                        <th>Cantidad</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Caja y Bancos</td>
+                        <td>{{usuario.cajaBancos| currency:'USD':true}}</td>
+                      </tr>
 
-                  <tr>
-                    <td>Cuentas Por Cobrar:</td>
-                    <td>{{usuario.cuentasPorCobrar| currency:'USD':true}}</td>
-                  </tr>
+                      <tr>
+                        <td>Cuentas Por Cobrar:</td>
+                        <td>{{usuario.cuentasPorCobrar| currency:'USD':true}}</td>
+                      </tr>
 
-                  <tr>
-                    <td>IVA Acreditable</td>
-                    <td>{{usuario.IVAAcreditable| currency:'USD':true}}</td>
-                  </tr>
+                      <tr>
+                        <td>IVA Acreditable</td>
+                        <td>{{usuario.IVAAcreditable| currency:'USD':true}}</td>
+                      </tr>
 
-                  <tr>
-                    <td>Almacen de Articulo Terminado</td>
-                    <td>{{usuario.almacenArtTerm | currency:'USD':true }}</td>
-                  </tr>
+                      <tr>
+                        <td>Almacen de Articulo Terminado</td>
+                        <td>{{usuario.almacenArtTerm | currency:'USD':true }}</td>
+                      </tr>
 
-                  <tr>
-                    <td>Almacen de Materiales</td>
-                    <td>{{usuario.almacenMateriales| currency:'USD':true}}</td>
-                  </tr>
+                      <tr>
+                        <td>Almacen de Materiales</td>
+                        <td>{{usuario.almacenMateriales| currency:'USD':true}}</td>
+                      </tr>
 
-                  <tr>
-                    <td>Terrenos</td>
-                    <td>{{usuario.terreno| currency:'USD':true}}</td>
-                  </tr>
+                      <tr>
+                        <td>Terrenos</td>
+                        <td>{{usuario.terreno| currency:'USD':true}}</td>
+                      </tr>
 
-                  <tr>
-                    <td>Maquinaria y Equipo</td>
-                    <td>{{usuario.maqEquipo| currency:'USD':true}}</td>
-                  </tr>
+                      <tr>
+                        <td>Maquinaria y Equipo</td>
+                        <td>{{usuario.maqEquipo| currency:'USD':true}}</td>
+                      </tr>
 
-                  <tr>
-                    <td>Muebeles y Enseres</td>
-                    <td>{{usuario.mueblesEnseres| currency:'USD':true}}</td>
-                  </tr>
+                      <tr>
+                        <td>Muebeles y Enseres</td>
+                        <td>{{usuario.mueblesEnseres| currency:'USD':true}}</td>
+                      </tr>
 
-                  <tr>
-                    <td>Equipo de Transporte</td>
-                    <td>{{usuario.eqTrans| currency:'USD':true}}</td>
-                  </tr>
+                      <tr>
+                        <td>Equipo de Transporte</td>
+                        <td>{{usuario.eqTrans| currency:'USD':true}}</td>
+                      </tr>
 
-                  <tr>
-                    <td>Pagos Por Anticipado</td>
-                    <td>{{usuario.pagosAnticipado| currency:'USD':true}}</td>
-                  </tr>
+                      <tr>
+                        <td>Pagos Por Anticipado</td>
+                        <td>{{usuario.pagosAnticipado| currency:'USD':true}}</td>
+                      </tr>
 
-                  <tr>
-                    <td>Gastos de Amortización</td>
-                    <td>{{usuario.gastosAmortizacion| currency:'USD':true}}</td>
-                  </tr>
+                      <tr>
+                        <td>Gastos de Amortización</td>
+                        <td>{{usuario.gastosAmortizacion| currency:'USD':true}}</td>
+                      </tr>
 
-                  <tr>
-                    <td>IVA por Enterar</td>
-                    <td>{{usuario.IVAPorEnterar| currency:'USD':true}}</td>
-                  </tr>
+                      <tr>
+                        <td>IVA por Enterar</td>
+                        <td>{{usuario.IVAPorEnterar| currency:'USD':true}}</td>
+                      </tr>
 
-                  <tr>
-                    <td>Impuestos por Pagar</td>
-                    <td>{{usuario.imptosPorPagar| currency:'USD':true}}</td>
-                  </tr>
+                      <tr>
+                        <td>Impuestos por Pagar</td>
+                        <td>{{usuario.imptosPorPagar| currency:'USD':true}}</td>
+                      </tr>
 
-                  <tr>
-                    <td>Proveedores</td>
-                    <td>{{usuario.proveedores| currency:'USD':true}}</td>
-                  </tr>
+                      <tr>
+                        <td>Proveedores</td>
+                        <td>{{usuario.proveedores| currency:'USD':true}}</td>
+                      </tr>
 
-                  <tr>
-                    <td>PTU por Pagar</td>
-                    <td>{{usuario.PTUPorPagar| currency:'USD':true}}</td>
-                  </tr>
+                      <tr>
+                        <td>PTU por Pagar</td>
+                        <td>{{usuario.PTUPorPagar| currency:'USD':true}}</td>
+                      </tr>
 
-                  <tr>
-                    <td>Capital Social</td>
-                    <td>{{usuario.capitalSocial| currency:'USD':true}}</td>
-                  </tr>
+                      <tr>
+                        <td>Capital Social</td>
+                        <td>{{usuario.capitalSocial| currency:'USD':true}}</td>
+                      </tr>
 
-                  <tr>
-                    <td>Reserva Legal</td>
-                    <td>{{usuario.reservaLegal| currency:'USD':true}}</td>
-                  </tr>
+                      <tr>
+                        <td>Reserva Legal</td>
+                        <td>{{usuario.reservaLegal| currency:'USD':true}}</td>
+                      </tr>
 
-                  <tr>
-                    <td>Utilidad Acumulada</td>
-                    <td>{{usuario.utilidadAcum| currency:'USD':true}}</td>
-                  </tr>
+                      <tr>
+                        <td>Utilidad Acumulada</td>
+                        <td>{{usuario.utilidadAcum| currency:'USD':true}}</td>
+                      </tr>
 
-                  <tr>
-                    <td>Prestamos a menos de un Año</td>
-                    <td>{{usuario.prestamosMenosAnio| currency:'USD':true}}</td>
-                  </tr>
+                      <tr>
+                        <td>Prestamos a menos de un Año</td>
+                        <td>{{usuario.prestamosMenosAnio| currency:'USD':true}}</td>
+                      </tr>
 
-                  <tr>
-                    <td>Prestamos a Mas de un Año</td>
-                    <td>{{usuario.prestamosMasAnio| currency:'USD':true}}</td>
-                  </tr>
+                      <tr>
+                        <td>Prestamos a Mas de un Año</td>
+                        <td>{{usuario.prestamosMasAnio| currency:'USD':true}}</td>
+                      </tr>
 
-                </tbody>
+                    </tbody>
 
-              </table>
-  </accordion-group>
-</accordion>
+                  </table>
+      </accordion-group>
+    </accordion>
+
+        </div>
 
 
 
@@ -1074,7 +1077,7 @@
 
 
 
-<div bsModal #modalMaqInit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div bsModal ngDraggable #modalMaqInit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -1144,7 +1147,7 @@
 
 
 
-<div bsModal #modalZonaInit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div bsModal ngDraggable #modalZonaInit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -1262,7 +1265,7 @@
 </div>
 
 <!--Modal de asignacion de Productos-->
-<div bsModal #modalProdInit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div bsModal ngDraggable #modalProdInit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -1325,7 +1328,7 @@
 
 <!--Modal de asignacion de creditos-->
 
-<div bsModal #modalCreditosInit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div bsModal ngDraggable #modalCreditosInit="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -1388,7 +1391,7 @@
 
 <!--Modal de que no cuadran los valores del balance-->
 
-<div bsModal #modalErrBalance="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div bsModal ngDraggable #modalErrBalance="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
@@ -1417,7 +1420,7 @@
 </div>
 
 
-<ngl-modal header="Variables Generales"   [(open)]="openVarsGen" size="small" directional="false">
+<ngl-modal ngDraggable header="Variables Generales"   [(open)]="openVarsGen" size="small" directional="false">
   <div body>
       <div class="col-12">
         <div class="row" style="margin-bottom:10px" *ngFor="let t of variables">
@@ -1434,7 +1437,7 @@
 
 
 
-  <ngl-modal header="Variables Generales"   [(open)]="openVarUnit" size="small" directional="false">
+  <ngl-modal ngDraggable header="Variables Generales"   [(open)]="openVarUnit" size="small" directional="false">
     <div body>
       <form class="" (ngSubmit)="asignaVar()" [formGroup]="varsForm">
         <input type="text" formControlName="concepto" hidden>

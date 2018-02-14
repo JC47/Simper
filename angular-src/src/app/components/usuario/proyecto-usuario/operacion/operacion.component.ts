@@ -306,7 +306,7 @@ export class OperacionComponent implements OnInit {
     margin: {top: 40,
              left:40},
      tableWidth: 200,
-    headerStyles: {fillColor:0},
+    headerStyles: {fillColor:0,halign:'center'},
     columnStyles: {
     	total: {halign:'right',columnWidth:'auto'},
       producto:{halign:'center'},
@@ -391,7 +391,7 @@ export class OperacionComponent implements OnInit {
     margin: {top: 40,
              left:40},
      tableWidth: 200,
-    headerStyles: {fillColor:0},
+    headerStyles: {fillColor:0,halign:'center'},
     columnStyles: {
     	cantidadComprar: {halign:'right',columnWidth:'auto'},
       material:{halign:'center'},
@@ -474,7 +474,7 @@ export class OperacionComponent implements OnInit {
       margin: {top: 40,
                left:40},
        tableWidth: 200,
-      headerStyles: {fillColor:0},
+      headerStyles: {fillColor:0, halign:'center'},
       columnStyles: {
         producto: {halign:'center',columnWidth:'auto'},
         cantidadUnit:{halign:'right'},
@@ -488,7 +488,7 @@ export class OperacionComponent implements OnInit {
         doc.setFontType("bold");
         doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
         doc.setFontSize(13);
-        doc.text(139.5, 23, 'Presupuesto Global de Compras de Materia Prima e I.V.A. del Periodo X', null, null, 'center');
+        doc.text(139.5, 23, 'Presupuesto Global de Consumo de Materias Primas del Periodo X', null, null, 'center');
         doc.line(50, 27, 228, 27);
       },
 
@@ -547,44 +547,30 @@ export class OperacionComponent implements OnInit {
 
 
     var columns = [
-    {title: "", dataKey: "cara"}];
+    {title: "Producto", dataKey: "producto"},
+    {title: "Unidades a Vender", dataKey: "unidadesVender"},
+    {title: "Precio de Venta", dataKey: "precioVenta"},
+    {title: "Venta en $", dataKey: "venta"},
+    {title: "IVA", dataKey: "iva"},
+    {title: "Importe", dataKey: "importe"}];
 
 
 
-    var rows = [
-    {"cara":"Unidades a Vender"},
-    {"cara":""},
-    {"cara":"Precio de Venta"},
-    {"cara":""},
-    {"cara":"Venta en $ "},
-    {"cara":""},
-    {"cara":"IVA"},
-    {"cara":""},
-    {"cara":"Importe"},
-    {"cara":""}];
+    var rows=[];
 
 
-    for(let producto of this.auxiliares){
-      var x = {
-        title:this.getNameByIdProducto(producto.Producto_idProducto),
-        dataKey:this.getNameByIdProducto(producto.Producto_idProducto)
-      }
-      columns.push(x);
-      rows[0][x.dataKey] = producto.unidadesVendidas.toString();
-      rows[2][x.dataKey] = this.cp.transform(this.getPrecioVenta(producto.Producto_idProducto),'USD',true,'1.0-0')
-      rows[4][x.dataKey] =  this.cp.transform((producto.Ventas - producto.IVAxVentas),'USD',true,'1.0-0')
-      rows[6][x.dataKey] =  this.cp.transform(producto.IVAxVentas,'USD',true,'1.0-0')
-      rows[8][x.dataKey] =  this.cp.transform(producto.Ventas,'USD',true,'1.0-0')
-//this.cp.transform(,'USD',true,'1.0-0')
-    }
-
-    doc.autoTable(columns, rows, {
+    let conf={
     margin: {top: 40,
              left:40},
      tableWidth: 200,
-    headerStyles: {fillColor:0},
+    headerStyles: {fillColor:0,halign:'center'},
     columnStyles: {
-      cara: {halign:'left',columnWidth:40}
+      producto:{halign:'center'},
+      unidadesVender:{halign:'right'},
+      precioVenta:{halign:'right'},
+      venta:{halign:'right'},
+      iva:{halign:'right'},
+      importe:{halign:'right'}
     },
     addPageContent: function(data) {
       doc.setFontSize(15);
@@ -593,14 +579,22 @@ export class OperacionComponent implements OnInit {
       doc.setFontSize(13);
       doc.text(139.5, 23, 'Presupuesto Global de Ventas e IVA del Periodo X', null, null, 'center');
       doc.line(50, 27, 228, 27);
-    },
+    }};
 
 
+    for(let producto of this.auxiliares){
+      rows.push({
+        "producto":this.getNameByIdProducto(producto.Producto_idProducto),
+        "unidadesVender":producto.unidadesVendidas.toString(),
+        "precioVenta":this.cp.transform(this.getPrecioVenta(producto.Producto_idProducto),'USD',true,'1.0-0'),
+        "venta":this.cp.transform((producto.Ventas - producto.IVAxVentas),'USD',true,'1.0-0'),
+        "iva":this.cp.transform(producto.IVAxVentas,'USD',true,'1.0-0'),
+        "importe":this.cp.transform(producto.Ventas,'USD',true,'1.0-0')
+      })
 
+    }
 
-
-
-    });
+    doc.autoTable(columns, rows,conf );
 
     doc.save("Presupuesto Global de Ventas e IVA.pdf");
 
@@ -696,9 +690,8 @@ export class OperacionComponent implements OnInit {
 
       doc.autoTable(columns, rows, {
       margin: {top: 40,
-               left:40},
-       tableWidth: 200,
-      headerStyles: {fillColor:0},
+               left:10},
+      headerStyles: {fillColor:0,halign:'center'},
       columnStyles: {
         cara: {halign:'left',columnWidth:40}
       },
@@ -1030,7 +1023,7 @@ export class OperacionComponent implements OnInit {
     margin: {top: 40,
              left:40},
      tableWidth: 200,
-    headerStyles: {fillColor:0},
+    headerStyles: {fillColor:0,halign:'center'},
     columnStyles: {
       cara: {halign:'left',columnWidth:65}
     },

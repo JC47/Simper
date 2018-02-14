@@ -4,10 +4,10 @@
 <div class="col-10 offset-1">
   <table class="table table-bordered">
     <thead>
-      <tr>
+      <tr class="thead-inverse">
         <th></th>
-        <th *ngFor="let producto of resultados">{{getNameByIdProducto(producto) }}</th>
-        <th>Total</th>
+        <th *ngFor="let producto of resultados" class="text-center">{{getNameByIdProducto(producto) }}</th>
+        <th class="text-center">Total</th>
       </tr>
     </thead>
 
