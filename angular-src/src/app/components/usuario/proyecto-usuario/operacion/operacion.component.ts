@@ -63,6 +63,7 @@ export class OperacionComponent implements OnInit {
           this.auxiliares=this._operacionService.returnAuxiliares();
           this.auxiliarC=this._operacionService.returnAuxiliarC();
           this.productos=this._productoService.returnProductos();
+          console.log("Aux",this.auxiliares)
         }
       });
     }, 1500);
