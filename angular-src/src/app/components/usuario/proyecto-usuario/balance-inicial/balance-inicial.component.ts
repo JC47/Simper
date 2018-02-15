@@ -95,7 +95,7 @@ export class BalanceInicialComponent implements OnInit {
       doc.setFontType("bold");
       doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
       doc.setFontSize(13);
-      doc.text(139.5, 23, 'Posición Financiera Final del Periodo '+ localStorage.getItem('numeroPeriodo'), null, null, 'center');
+      doc.text(139.5, 23, 'Posición Financiera Inicial del Periodo '+ localStorage.getItem('numeroPeriodo'), null, null, 'center');
       doc.line(50, 27, 228, 27);
       doc.setFontSize(7);
       let mar=45;

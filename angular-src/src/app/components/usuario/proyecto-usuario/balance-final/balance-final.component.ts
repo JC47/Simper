@@ -139,7 +139,7 @@ let total3=IVAPorEnterar + imptosPorPagar + proveedores + PTUPorPagar + prestamo
     {cara1:"Total",                         io:"", depAcum:"",  neto:"",    valor1:total1,                                   cara2:"Total", valor2:total3},
     {cara1:"A mas de un año",               io:"", depAcum:"",  neto:"",    valor1:"",                                       cara2:"A más de un Año", valor2:""},
     {cara1:"",                              io:"", depAcum:"",  neto:"",    valor1:"",                                       cara2:"", valor2:""},
-    {cara1:"Terrenos",                      io:"", depAcum:"",  neto:"",    valor1:terreno,                                  cara2:"Prestamos Totales", valor2:prestamosMasAnio},
+    {cara1:"Terrenos",                      io:"", depAcum:"",  neto:"",    valor1:terreno,                                  cara2:"Prestamos Bancarios", valor2:prestamosMasAnio},
     {cara1:"Edificios e Instalaciones",     io:"", depAcum:"",  neto:"",    valor1:edificios,                                cara2:"", valor2:""},
     {cara1:"Maquinaria y Equipo",           io:"", depAcum:"",  neto:"",    valor1:maqEquipo,                                cara2:"", valor2:""},
     {cara1:"Muebles y Enseres",             io:"", depAcum:"",  neto:"",    valor1:mueblesEnseres,                           cara2:"", valor2:""},

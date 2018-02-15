@@ -21,6 +21,8 @@ export class NavbarUsuarioComponent implements OnInit {
   balance:any;
   balanceFinal:any;
   openConf:boolean=false;
+  confProd:boolean=false;
+  confZonas:boolean=false;
   openBien:boolean=false;
   openLoad:boolean=false;
   openLoadDatos:boolean=false;
@@ -29,6 +31,9 @@ export class NavbarUsuarioComponent implements OnInit {
   opciones:boolean=false;
   periodo:number;
   periodos = [];
+  confZona:boolean=false;
+  productosEnDesarrollo:any;
+  zonasEnDesarrollo:any;
   confEditaPeriodos:boolean=false;
   openPeriodos:boolean=false;
   constructor(private authService: AuthService, private router:Router,
@@ -40,6 +45,7 @@ export class NavbarUsuarioComponent implements OnInit {
     private _desarrolloProducto:DesarrolloProductoService,
     private _creditoService:UsuarioCreditoService) {
       this._resultadosService.vender();
+
       this._proyectoService.ocultaCierrePeriodo()
   this.asignarBalance(localStorage.getItem('idProyecto')); }
 
@@ -97,6 +103,16 @@ export class NavbarUsuarioComponent implements OnInit {
       this.alert=false;
     }
 
+    pasaDesProd(){
+      this.router.navigate(['Usuario/proyecto/desarrolloProducto']);
+      this.confProd=false;
+    }
+
+    pasaDesZona(){
+      this.router.navigate(['Usuario/proyecto/desarrolloMercado']);
+      this.confZona=false;
+    }
+
     modalPasarPeriodo(){
       this.openBien=false;
       this.router.navigate(['Usuario/proyecto/home']);
@@ -107,6 +123,12 @@ export class NavbarUsuarioComponent implements OnInit {
       this.confEditaPeriodos=true;
       this.openPeriodos=false;
       //this._proyectoService.editar(p.numero)
+    }
+
+    preparaCierre(){
+      this.productosEnDesarrollo=this._desarrolloProducto.returnProductosEnDesarrollo();
+      this.zonasEnDesarrollo=this._desarrolloZona.returnProductosDeZonaEnDesarrollo();
+      this.openConf=true
     }
 
     editaPeriodo(){
@@ -132,9 +154,46 @@ export class NavbarUsuarioComponent implements OnInit {
     }
 
 
+    verificaDesarrollo(){
+      this.openConf=false;
+
+      if(this.confProd==false){
+        for(let prodDes of this.productosEnDesarrollo){
+          if(prodDes.numeroPeriodo!=localStorage.getItem('numeroRPeriodos')){
+            this.confProd=true;
+          }
+        }
+      }else{
+        console.log(this.zonasEnDesarrollo)
+        for(let zonaDes of this.zonasEnDesarrollo){
+          for(let producto of zonaDes.productosEnDes){
+            if(producto.numeroPeriodo!=localStorage.getItem('numeroRPeriodos')){
+                this.confZona=true;
+          }
+          }
+
+      }
+
+
+    }
+
+    if(this.confZona==false && this.confProd==false){
+      this.pasarPeriodo();
+    }
+
+
+
+
+
+
+  }
+
+
     pasarPeriodo(){
       this.openLoad=true;
       this.openConf=false;
+      this.confProd=false;
+      console.log(this.productosEnDesarrollo)
       setTimeout(()=>{this.openLoad=false}, 1000);
       this._balanceService.getBalanceFinal().subscribe( data => {
         console.log("data side av",data)

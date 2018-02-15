@@ -35,7 +35,8 @@ export class OperacionComponent implements OnInit {
   presGlobalCostoAdmon:boolean=false;
   presGlobalCostoVenta:boolean=false;
   presOtrosGastos:boolean=false;
-
+  proyectos:any;
+  proyectoActual:any;
 
 
 
@@ -46,13 +47,16 @@ export class OperacionComponent implements OnInit {
               private cp: CurrencyPipe,
               private dc:DecimalPipe,
             private _proyectoService:ProyectosService) {
+    this.proyectos=this._proyectoService.returnUsuarios();
     this._proyectoService.ocultaCierrePeriodo()
     this._resultadosService.vender();
   }
 
 
+
   ngOnInit() {
     setTimeout(() => {
+      this.proyectoActual=this.getNameById(localStorage.getItem('idProyecto'));
       this._balanceService.getBalanceFinal().subscribe( data => {
         if(data.success){
           this.auxiliaresAnteriores=this._operacionService.returnAuxiliaresAnteriores();
@@ -79,6 +83,9 @@ export class OperacionComponent implements OnInit {
     }
     return 0;
   }
+
+
+
 
 
   cerrarTodo(){
@@ -302,6 +309,8 @@ export class OperacionComponent implements OnInit {
       rows.push(x);
     }
 
+    let actual=this.proyectoActual
+
     doc.autoTable(columns, rows, {
     margin: {top: 40,
              left:40},
@@ -316,7 +325,7 @@ export class OperacionComponent implements OnInit {
     addPageContent: function(data) {
       doc.setFontSize(15);
       doc.setFontType("bold");
-      doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+      doc.text(139.5, 15, 'Proyecto '+ actual, null, null, 'center');
       doc.setFontSize(13);
       doc.text(139.5, 23, 'Almacen de Artículo Terminado del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
       doc.line(50, 27, 228, 27);
@@ -338,6 +347,7 @@ export class OperacionComponent implements OnInit {
 
   CSValmacenArticuloTerminado(){
     let data:any=[
+      {producto:"Proyecto" + this.proyectoActual, costoProd:"Periodo"+localStorage.getItem('numeroPeriodo')},
       {prodcuto:"Producto",
        unidades:"Unidades",
        costoProd:"Costo de Producción",
@@ -387,6 +397,8 @@ export class OperacionComponent implements OnInit {
     }
     ];
 
+    let actual=this.proyectoActual
+
     doc.autoTable(columns, rows, {
     margin: {top: 40,
              left:40},
@@ -403,7 +415,7 @@ export class OperacionComponent implements OnInit {
     addPageContent: function(data) {
       doc.setFontSize(15);
       doc.setFontType("bold");
-      doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+      doc.text(139.5, 15, 'Proyecto '+ actual, null, null, 'center');
       doc.setFontSize(13);
       doc.text(139.5, 23, 'Presupuesto Global de Compras de Materia Prima e I.V.A. del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
       doc.line(50, 27, 228, 27);
@@ -415,8 +427,14 @@ export class OperacionComponent implements OnInit {
 
 
     }
+
+
+
+
+
     CSVpresupuestoGlobalComprasMP(){
       let data=[
+        {material:"Proyecto "+this.proyectoActual,costoUni:"Periodo"+ localStorage.getItem('numeroPeriodo')},
         {
           material:"Material",
           cantidadComprar:"Cantidad a Comprar",
@@ -470,6 +488,8 @@ export class OperacionComponent implements OnInit {
         rows.push(x);
       }
 
+      let actual=this.proyectoActual
+
       doc.autoTable(columns, rows, {
       margin: {top: 40,
                left:40},
@@ -483,12 +503,15 @@ export class OperacionComponent implements OnInit {
         cantidad:{halign:'right'},
         importe:{halign:'right'},
       },
+
+
+
       addPageContent: function(data) {
         doc.setFontSize(15);
         doc.setFontType("bold");
-        doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+        doc.text(139.5, 15, 'Proyecto '+actual, null, null, 'center');
         doc.setFontSize(13);
-        doc.text(139.5, 23, 'Presupuesto Global de Consumo de Materias Primas del Periodo X', null, null, 'center');
+        doc.text(139.5, 23, 'Presupuesto Global de Consumo de Materias Primas del Periodo '+localStorage.getItem('numeroPeriodo'), null, null, 'center');
         doc.line(50, 27, 228, 27);
       },
 
@@ -512,6 +535,7 @@ export class OperacionComponent implements OnInit {
   CSVpresupuestoGlobalConsumoMP(){
 
     let data:any=[
+      {producto:"Proyecto: "+  this.proyectoActual,unidadProd:"Periodo"+localStorage.getItem('numeroPeriodo') },
     {
       producto:"Producto",
       cantidadUnit:"Cantidad Unitaria",
@@ -558,7 +582,7 @@ export class OperacionComponent implements OnInit {
 
     var rows=[];
 
-
+    let actual=this.proyectoActual
     let conf={
     margin: {top: 40,
              left:40},
@@ -572,12 +596,14 @@ export class OperacionComponent implements OnInit {
       iva:{halign:'right'},
       importe:{halign:'right'}
     },
+
+
     addPageContent: function(data) {
       doc.setFontSize(15);
       doc.setFontType("bold");
-      doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+      doc.text(139.5, 15, 'Proyecto '+actual, null, null, 'center');
       doc.setFontSize(13);
-      doc.text(139.5, 23, 'Presupuesto Global de Ventas e IVA del Periodo X', null, null, 'center');
+      doc.text(139.5, 23, 'Presupuesto Global de Ventas e IVA del Periodo '+localStorage.getItem('numeroPeriodo'), null, null, 'center');
       doc.line(50, 27, 228, 27);
     }};
 
@@ -605,6 +631,7 @@ export class OperacionComponent implements OnInit {
 
     CSVpresupuestoGlobalVentasIVA(){
       let data:any=[
+        {cara:"Proyecto: "+this.proyectoActual, prod:"Periodo" +localStorage.getItem('numeroPeriodo')},
         {
           cara:""
         },
@@ -686,7 +713,7 @@ export class OperacionComponent implements OnInit {
       }
 
 
-
+      let actual=this.proyectoActual
 
       doc.autoTable(columns, rows, {
       margin: {top: 40,
@@ -698,9 +725,9 @@ export class OperacionComponent implements OnInit {
       addPageContent: function(data) {
         doc.setFontSize(15);
         doc.setFontType("bold");
-        doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+        doc.text(139.5, 15, 'Proyecto '+actual, null, null, 'center');
         doc.setFontSize(13);
-        doc.text(139.5, 23, 'Presupuesto Global de Ventas e IVA del Periodo X', null, null, 'center');
+        doc.text(139.5, 23, 'Presupuesto Global de Ventas e IVA del Periodo '+localStorage.getItem('numeroPeriodo'), null, null, 'center');
         doc.line(50, 27, 228, 27);
       },
 
@@ -722,6 +749,8 @@ export class OperacionComponent implements OnInit {
 
 
         let data:any=[
+          {producto:"Poryecto: "+this.proyectoActual,invFinal:"Periodo: "+localStorage.getItem('numeroPeriodo')},
+
           {
             producto:"Producto",
             unidadesVender:"Unidades A Vender (+)",
@@ -789,6 +818,9 @@ export class OperacionComponent implements OnInit {
   {"cara":"Total a Pagar"},
   ];
 
+
+  let actual=this.proyectoActual
+
   let options={
   margin: {top: 40,
      left:40},
@@ -801,11 +833,13 @@ export class OperacionComponent implements OnInit {
   addPageContent: function(data) {
   doc.setFontSize(15);
   doc.setFontType("bold");
-  doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+  doc.text(139.5, 15, 'Proyecto '+actual, null, null, 'center');
   doc.setFontSize(13);
-  doc.text(139.5, 23, 'Presupuesto Global de  Costo de Trasnformación del Periodo X', null, null, 'center');
+  doc.text(139.5, 23, 'Presupuesto Global de  Costo de Trasnformación del Periodo '+localStorage.getItem('numeroPeriodo'), null, null, 'center');
   doc.line(50, 27, 228, 27);
   }, }
+
+
 
   for(let producto of this.auxiliares){
     var x = {
@@ -840,7 +874,10 @@ export class OperacionComponent implements OnInit {
   }
 
   CSVpresupuestoGlobalCostoTrans(){
+
+
     let data:any=[
+      {cara:"Proyecto: "+this.proyectoActual,prod:"Periodo: "+localStorage.getItem('numeroPeriodo')},
       {cara:""},
       {cara:"Unidades a Producir"},
       {cara:"Costo de Transformación"},
@@ -904,6 +941,8 @@ export class OperacionComponent implements OnInit {
     {"cara":"Total a Pagar"},
   ];
 
+  let actual=this.proyectoActual
+
  let options={
  margin: {top: 40,
           left:40},
@@ -915,11 +954,13 @@ export class OperacionComponent implements OnInit {
  addPageContent: function(data) {
    doc.setFontSize(15);
    doc.setFontType("bold");
-   doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+   doc.text(139.5, 15, 'Proyecto '+actual, null, null, 'center');
    doc.setFontSize(13);
-   doc.text(139.5, 23, 'Presupuesto Global de  Costo de Distribución del Periodo X', null, null, 'center');
+   doc.text(139.5, 23, 'Presupuesto Global de  Costo de Distribución del Periodo '+localStorage.getItem('numeroPeriodo'), null, null, 'center');
    doc.line(50, 27, 228, 27);
  }}
+
+
 
   for(let producto of this.auxiliares){
     var x = {
@@ -955,6 +996,7 @@ export class OperacionComponent implements OnInit {
 
     CSVpresupuestoGlobalCostoDist(){
       let data:any=[
+        {cara:"Proyecto: "+this.proyectoActual, prod:"Periodo: "+localStorage.getItem('numeroPeriodo')},
         {cara:""},
         {cara:"Unidades a Vender"},
         {cara:"Costo Unitario Total"},
@@ -969,6 +1011,7 @@ export class OperacionComponent implements OnInit {
         {cara:"I.V.A."},
         {cara:"Total a Pagar"},
       ];
+
 
       for(let producto of this.auxiliares){
         data[0][this.getNameByIdProducto(producto.Producto_idProducto)]=this.getNameByIdProducto(producto.Producto_idProducto);
@@ -1019,6 +1062,8 @@ export class OperacionComponent implements OnInit {
         {"cara":"Total a Pagar"},
     ];
 
+    let actual=this.proyectoActual
+
     let options={
     margin: {top: 40,
              left:40},
@@ -1030,12 +1075,13 @@ export class OperacionComponent implements OnInit {
     addPageContent: function(data) {
       doc.setFontSize(15);
       doc.setFontType("bold");
-      doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+      doc.text(139.5, 15, 'Proyecto '+actual, null, null, 'center');
       doc.setFontSize(13);
-      doc.text(139.5, 23, 'Presupuesto Global de  Costo de Administración del Periodo X', null, null, 'center');
+      doc.text(139.5, 23, 'Presupuesto Global de  Costo de Administración del Periodo '+localStorage.getItem('numeroPeriodo'), null, null, 'center');
       doc.line(50, 27, 228, 27);
     },
     }
+
 
     for(let producto of this.auxiliares){
       var x = {
@@ -1070,7 +1116,11 @@ export class OperacionComponent implements OnInit {
 
       CSVpresupuestoGlobalCostoAdmin(){
 
+
+
+
         let data:any=[
+          {cara:"Proyecto: "+this.proyectoActual,prod:"Periodo: "+localStorage.getItem('numeroPeriodo')},
           {cara:""},
           {cara:"Unidades a Vender"},
           {cara:"Costo Unitario Total"},
@@ -1120,6 +1170,7 @@ export class OperacionComponent implements OnInit {
         {"cara":"Desarrollo de Mercado"}
 
       ];
+      let actual=this.proyectoActual
 
       let options={
       margin: {top: 40,
@@ -1132,11 +1183,14 @@ export class OperacionComponent implements OnInit {
       addPageContent: function(data) {
         doc.setFontSize(15);
         doc.setFontType("bold");
-        doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+        doc.text(139.5, 15, 'Proyecto '+actual, null, null, 'center');
         doc.setFontSize(13);
-        doc.text(139.5, 23, 'Presupuesto Global de Otros Gastos del Periodo X', null, null, 'center');
+        doc.text(139.5, 23, 'Presupuesto Global de Otros Gastos del Periodo '+localStorage.getItem('numeroPeriodo'), null, null, 'center');
         doc.line(50, 27, 228, 27);
       }}
+
+
+
 
       for(let producto of this.auxiliarC){
         var x = {
@@ -1178,10 +1232,23 @@ export class OperacionComponent implements OnInit {
 
       CSVpresupuestoGlobalOtrosGastos(){
         let data=[
+          {cara:"Proyecto: "+this.proyectoActual,prod:"Periodo: "+localStorage.getItem('numeroPeriodo')},
           {cara:""},
           {cara:"Desarrollo de Producto"},
           {cara:"Desarrollo de Mercado"}
         ];
+
+
+
+
+        for(let producto of this.auxiliarC){
+
+          data[0][this.getNameByIdProducto(producto.Producto_idProducto)]=this.getNameByIdProducto(producto.Producto_idProducto)
+
+          data[1][this.getNameByIdProducto(producto.Producto_idProducto)] =  producto.desarrolloProducto
+          data[2][this.getNameByIdProducto(producto.Producto_idProducto)] =  producto.desarrolloMercado
+        }
+
 
         data[0]["total"]="Total";
         data[1]["total"]=this.getTotalProducto();
@@ -1217,6 +1284,7 @@ export class OperacionComponent implements OnInit {
           {"cara":""},
           {"cara":"Costo de Ventas"}
         ];
+        let actual=this.proyectoActual
 
         let options= {
         margin: {top: 40,
@@ -1229,11 +1297,12 @@ export class OperacionComponent implements OnInit {
         addPageContent: function(data) {
           doc.setFontSize(15);
           doc.setFontType("bold");
-          doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+          doc.text(139.5, 15, 'Proyecto '+actual, null, null, 'center');
           doc.setFontSize(13);
-          doc.text(139.5, 23, 'Costo de Producción y Ventas', null, null, 'center');
+          doc.text(139.5, 23, 'Costo de Producción y Ventas del Periodo '+localStorage.getItem('numeroPeriodo'), null, null, 'center');
           doc.line(50, 27, 228, 27);
         }}
+
 
         for(let producto of this.auxiliares){
           var x = {
@@ -1267,7 +1336,11 @@ export class OperacionComponent implements OnInit {
 
 
           CSVcostoProduccionVentas(){
+
+
+
             let data=[
+              {"cara":"Proyecto: "+this.proyectoActual,"prod":"Periodo: "+localStorage.getItem('numeroPeriodo')},
               {"cara":"I.I de Materia Prima"},
               {"cara":"Compras"},
               {"cara":"I.F. de Materia prima"},
@@ -1292,6 +1365,19 @@ export class OperacionComponent implements OnInit {
             }
             new Angular2Csv(data, 'Presupuesto Global de Producion y Ventas');
 
+
+          }
+
+
+
+
+
+          getNameById(idProyecto){
+            for(let proyecto of this.proyectos){
+              if(proyecto.idProyecto==idProyecto)
+                return proyecto.nombreProyecto
+            }
+              return "id NO encontrado"
 
           }
 

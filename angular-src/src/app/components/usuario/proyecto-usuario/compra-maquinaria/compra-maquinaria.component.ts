@@ -62,12 +62,14 @@ export class CompraMaquinariaComponent implements OnInit {
     console.log(this.maquinasCompradas)
     setTimeout(() => {
      this.maqSelectedAdd=this.maquinas[0];
+     console.log(this.maqSelectedAdd)
    }, 900);
 
    setTimeout(() => {
     this.maqSelectedLess=this.maquinasCompradas[0];
-  }, 800);
     console.log(this.maqSelectedAdd);
+  }, 800);
+
   }
 
   ngOnInit() {
@@ -97,7 +99,7 @@ export class CompraMaquinariaComponent implements OnInit {
 comprar(){
     this.openConf=false;
     this.openLoad=true;
-    setTimeout(()=>this.openLoad=false, 2000);
+    setTimeout(()=>{this.openLoad=false;this.maqSelectedLess=this.maqSelectedAdd}, 2000);
     var x = {
       Balance_numeroPeriodo:localStorage.getItem('numeroPeriodo'),
       Maquinaria_idMaquinaria:this.maqSelectedAdd.idMaquinaria,
@@ -113,6 +115,7 @@ comprar(){
       dep:this.maqSelectedAdd.depAcum
     }
     this.maquinasCompradas = this._CompraMaquinariaService.compraMaquinaria(x,y);
+
 
   }
 

@@ -23,7 +23,7 @@
     </li>
 
     <li class="nav-item pull-left" style="margin-right:20px; margin-bottom:10px" >
-      <button  [hidden]="_proyectoService.muestraPeriodo"    type="button" class="btn btn-success navbar-right" (click)="openConf=true">Cerrar Periodo</button>
+      <button  [hidden]="_proyectoService.muestraPeriodo"    type="button" class="btn btn-success navbar-right" (click)="preparaCierre()">Cerrar Periodo</button>
     </li>
 
     <li class="nav-item " style="margin-right:40px;margin-bottom:10px">
@@ -60,9 +60,46 @@
 
     <ng-template ngl-modal-footer>
     <button class="btn btn-danger" (click)="openConf=false">Cancel</button>
-    <button class="btn btn-primary" (click)="pasarPeriodo()">Cerrar Periodo</button>
+    <button class="btn btn-primary" (click)="verificaDesarrollo()">Cerrar Periodo</button>
     </ng-template>
   </ngl-modal>
+
+
+
+
+  <ngl-modal header="Confirmación"  [(open)]="confProd" size="x-small" directional="false">
+      <div body>
+        <div class="col-12 text-center container">
+          <h2 style="margin-bottom:30px">¿Aun tienes pagos de Desarrollos de Productos pendeintes, quieres aun así cerrar el periodo?</h2>
+        </div>
+      </div>
+
+      <ng-template ngl-modal-footer>
+
+      <button class="btn btn-primary" (click)="pasaDesProd()">Ir a Desarrollos de Productos</button>
+      <button class="btn btn-success" (click)="pasarPeriodo()">Cerrar Periodo</button>
+      <button class="btn btn-danger" (click)="confProd=false">Cancelar</button>
+      </ng-template>
+    </ngl-modal>
+
+
+
+
+
+    <ngl-modal header="Confirmación"  [(open)]="confZona" size="x-small" directional="false">
+        <div body>
+          <div class="col-12 text-center container">
+            <h2 style="margin-bottom:30px">¿Aun tienes pagos de Desarrollos de Zonas de Demanda pendientes, quieres aun así cerrar el periodo?</h2>
+          </div>
+        </div>
+
+        <ng-template ngl-modal-footer>
+
+        <button class="btn btn-primary" (click)="pasaDesZona()">Ir a Desarrollos de Zonas</button>
+        <button class="btn btn-success" (click)="pasarPeriodo()">Cerrar Periodo</button>
+        <button class="btn btn-danger" (click)="confZona=false">Cancelar</button>
+        </ng-template>
+      </ngl-modal>
 
 
 

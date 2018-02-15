@@ -1985,7 +1985,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/navbar-usuario/navbar-usuario.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n\r\n<div *ngIf=\"usuario\">\r\n\r\n<nav class=\"navbar navbar-toggleable-md navbar-light bg-faded fixed-top navbar-inverse\" style=\"background-color:#007CB9;height:110px;\">\r\n\r\n  <button class=\"navbar-toggler navbar-toggler-right\" type=\"button\"\r\n  data-toggle=\"collapse\" data-target=\"#navbarTogglerDemo01\" aria-controls=\"navbarTogglerDemo01\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n     <span class=\"navbar-toggler-icon\"></span>\r\n   </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarTogglerDemo01\">\r\n  <span class=\"navbar-brand\" style=\"margin-left:30px;\">\r\n         <img class=\"img-fluid rounded-circle\" style=\"width:80px;\"\r\n         src=\"assets/img/user.png\"> {{usuario.nombreUsuario}} {{usuario.apPat}}\r\n    </span>\r\n\r\n\r\n  <ul class=\"nav navbar-nav navbar-right ml-auto\" style=\"margin-top:23px\"    >\r\n\r\n    <li class=\"nav-item pull-left\" style=\"margin-right:25px; margin-bottom:10px\">\r\n      <h4 style=\"color:white\" *ngIf=\"_proyectoService.muestraPeriodoCorriendo\">Periodo Corriendo: {{this._proyectoService.periodo}}</h4>\r\n    </li>\r\n\r\n    <li class=\"nav-item pull-left\" style=\"margin-right:20px; margin-bottom:10px\" >\r\n      <button  [hidden]=\"_proyectoService.muestraPeriodo\"    type=\"button\" class=\"btn btn-success navbar-right\" (click)=\"openConf=true\">Cerrar Periodo</button>\r\n    </li>\r\n\r\n    <li class=\"nav-item \" style=\"margin-right:40px;margin-bottom:10px\">\r\n      <button [hidden]=\"_proyectoService.muestraPeriodo\"  type=\"button\" class=\"btn btn-info\" (click)=\"openPeriodos=true\">Periodos Anteriores</button>\r\n    </li>\r\n\r\n\r\n  </ul>\r\n\r\n  <ul class=\"nav navbar-nav ml-auto\" style=\"margin-top:23px\">\r\n        <!-- <li class=\"nav-item \" style=\"margin-right:20px\">\r\n          <button  class=\"btn btn-danger\"><i class=\"fa fa-bell fa-lg\"></i></button>\r\n        </li> -->\r\n\r\n        <li class=\"nav-item \" style=\"margin-right:20px\">\r\n          <button title=\"Salir\"  class=\"btn btn-success \" (click)=\"logOut()\"><i class=\"fa fa-sign-out fa-lg\"></i></button>\r\n\r\n        </li>\r\n  </ul>\r\n</div>\r\n\r\n\r\n</nav>\r\n\r\n</div>\r\n\r\n\r\n<ngl-modal header=\"Confirmación\"  [(open)]=\"openConf\" size=\"x-small\" directional=\"false\">\r\n    <div body>\r\n      <div class=\"col-12 text-center container\">\r\n        <h2 style=\"margin-bottom:30px\">¿Esta seguro que deseas cerrar el periodo actual ?</h2>\r\n      </div>\r\n    </div>\r\n\r\n    <ng-template ngl-modal-footer>\r\n    <button class=\"btn btn-danger\" (click)=\"openConf=false\">Cancel</button>\r\n    <button class=\"btn btn-primary\" (click)=\"pasarPeriodo()\">Cerrar Periodo</button>\r\n    </ng-template>\r\n  </ngl-modal>\r\n\r\n\r\n\r\n\r\n      <ngl-modal header=\"Confirmación\"  [(open)]=\"openBien\" size=\"x-small\" directional=\"false\">\r\n        <div body>\r\n          <div class=\"col-12 text-center container\">\r\n            <h2 style=\"margin-bottom:30px\">Ha cerrado periodo satisfactoriamente</h2>\r\n          </div>\r\n        </div>\r\n\r\n        <ng-template ngl-modal-footer>\r\n        <button class=\"btn btn-primary\" (click)=\"modalPasarPeriodo()\">Aceptar</button>\r\n        </ng-template>\r\n      </ngl-modal>\r\n\r\n\r\n\r\n          <ngl-modal header=\"Confirmación\"  [(open)]=\"alert\" size=\"x-small\" directional=\"false\">\r\n\r\n            <div body>\r\n              <div class=\"container\">\r\n                <h5 class=\"col-12 text-center\" style=\"margin-bottom:30px\">Tienes deuda, no puedes pasar de periodo, necesitas un prestamo</h5>\r\n                  <div class=\"col-2 offset-5\">\r\n                    <img  src=\"assets/img/credit.png\" class=\"img-fluid\">\r\n                  </div>\r\n\r\n              </div>\r\n            </div>\r\n\r\n            <ng-template ngl-modal-footer>\r\n              <button class=\"btn btn-primary\" (click)=\"pasaCreditos()\">Ir a prestamos</button>\r\n                <button class=\"btn btn-danger\" (click)=\"alert=false\">Cancelar</button>\r\n\r\n          </ng-template>\r\n            </ngl-modal>\r\n\r\n\r\n\r\n\r\n\r\n\r\n                <ngl-modal  [(open)]=\"openLoad\" size=\"small\" directional=\"false\">\r\n                  <div body>\r\n                    <h1 class=\"col-12 text-center\" >Cerrando Periodo</h1>\r\n                    <h5 class=\"col-12 text-center\">Realzando Operacion</h5>\r\n                    <div style=\"position:relative; height:6.25rem; z-index:0;\">\r\n                      <ngl-spinner size=\"large\" type=\"brand\"></ngl-spinner>\r\n                    </div>\r\n                  </div>\r\n                </ngl-modal>\r\n\r\n\r\n                <ngl-modal  [(open)]=\"openPeriodos\" size=\"small\" directional=\"false\">\r\n                  <div body>\r\n                    <div class=\"list-group\" >\r\n                      <a class=\"list-group-item list-group-item-action col-12\" *ngFor=\"let p of this._proyectoService.periodos\" >{{p.nombre}}\r\n                        <button class=\"btn btn-primary offset-3 col-3\" (click)=\"visualizaPeriodo(p.numero)\">Visualizar</button>\r\n                        <button class=\"btn btn-success col-3 offset-1\" [disabled]=\"validaRegre()\" (click)=\"selectEditaPeriodo(p.numero)\">Editar</button>\r\n                      </a>\r\n                    </div>\r\n                        <div class=\"modal-footer\">\r\n                          <button  type=\"button\" class=\"btn btn-outline-danger\" (click)=\"openPeriodos=false\">\r\n                          Cancelar\r\n                          </button>\r\n                        </div>\r\n                  </div>\r\n                </ngl-modal>\r\n\r\n\r\n                <ngl-modal  header=\"Confirmación\" [(open)]=\"confEditaPeriodos\" size=\"small\" directional=\"false\">\r\n                  <div body>\r\n                    <div class=\"row\">\r\n                      <h4 class=\"col-12 text-center\">Al ir a editar un periodo, los resultados de los periodos subsecuentes se borrarán, ¿estás seguro de querer editarlo?</h4>\r\n                    </div>\r\n                        <div class=\"modal-footer\">\r\n                          <button  type=\"button\" class=\"btn btn-danger\" (click)=\"confEditaPeriodos=false;openPeriodos=true\">\r\n                          Cancelar\r\n                          </button>\r\n                          <button  type=\"button\" class=\"btn btn-primary\" (click)=\"editaPeriodo()\">\r\n                          Editar\r\n                          </button>\r\n                        </div>\r\n                  </div>\r\n                </ngl-modal>\r\n\r\n\r\n\r\n                <ngl-modal  [(open)]=\"openLoadDatos\" size=\"small\" directional=\"false\">\r\n                  <div body>\r\n                    <h1 class=\"col-12 text-center\" >Cargando Datos</h1>\r\n                    <h5 class=\"col-12 text-center\">Pasando Periodo</h5>\r\n                    <div style=\"position:relative; height:6.25rem; z-index:0;\">\r\n                      <ngl-spinner size=\"large\" type=\"brand\"></ngl-spinner>\r\n                    </div>\r\n                  </div>\r\n                </ngl-modal>\r\n"
+module.exports = "\r\n\r\n<div *ngIf=\"usuario\">\r\n\r\n<nav class=\"navbar navbar-toggleable-md navbar-light bg-faded fixed-top navbar-inverse\" style=\"background-color:#007CB9;height:110px;\">\r\n\r\n  <button class=\"navbar-toggler navbar-toggler-right\" type=\"button\"\r\n  data-toggle=\"collapse\" data-target=\"#navbarTogglerDemo01\" aria-controls=\"navbarTogglerDemo01\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n     <span class=\"navbar-toggler-icon\"></span>\r\n   </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarTogglerDemo01\">\r\n  <span class=\"navbar-brand\" style=\"margin-left:30px;\">\r\n         <img class=\"img-fluid rounded-circle\" style=\"width:80px;\"\r\n         src=\"assets/img/user.png\"> {{usuario.nombreUsuario}} {{usuario.apPat}}\r\n    </span>\r\n\r\n\r\n  <ul class=\"nav navbar-nav navbar-right ml-auto\" style=\"margin-top:23px\"    >\r\n\r\n    <li class=\"nav-item pull-left\" style=\"margin-right:25px; margin-bottom:10px\">\r\n      <h4 style=\"color:white\" *ngIf=\"_proyectoService.muestraPeriodoCorriendo\">Periodo Corriendo: {{this._proyectoService.periodo}}</h4>\r\n    </li>\r\n\r\n    <li class=\"nav-item pull-left\" style=\"margin-right:20px; margin-bottom:10px\" >\r\n      <button  [hidden]=\"_proyectoService.muestraPeriodo\"    type=\"button\" class=\"btn btn-success navbar-right\" (click)=\"preparaCierre()\">Cerrar Periodo</button>\r\n    </li>\r\n\r\n    <li class=\"nav-item \" style=\"margin-right:40px;margin-bottom:10px\">\r\n      <button [hidden]=\"_proyectoService.muestraPeriodo\"  type=\"button\" class=\"btn btn-info\" (click)=\"openPeriodos=true\">Periodos Anteriores</button>\r\n    </li>\r\n\r\n\r\n  </ul>\r\n\r\n  <ul class=\"nav navbar-nav ml-auto\" style=\"margin-top:23px\">\r\n        <!-- <li class=\"nav-item \" style=\"margin-right:20px\">\r\n          <button  class=\"btn btn-danger\"><i class=\"fa fa-bell fa-lg\"></i></button>\r\n        </li> -->\r\n\r\n        <li class=\"nav-item \" style=\"margin-right:20px\">\r\n          <button title=\"Salir\"  class=\"btn btn-success \" (click)=\"logOut()\"><i class=\"fa fa-sign-out fa-lg\"></i></button>\r\n\r\n        </li>\r\n  </ul>\r\n</div>\r\n\r\n\r\n</nav>\r\n\r\n</div>\r\n\r\n\r\n<ngl-modal header=\"Confirmación\"  [(open)]=\"openConf\" size=\"x-small\" directional=\"false\">\r\n    <div body>\r\n      <div class=\"col-12 text-center container\">\r\n        <h2 style=\"margin-bottom:30px\">¿Esta seguro que deseas cerrar el periodo actual ?</h2>\r\n      </div>\r\n    </div>\r\n\r\n    <ng-template ngl-modal-footer>\r\n    <button class=\"btn btn-danger\" (click)=\"openConf=false\">Cancel</button>\r\n    <button class=\"btn btn-primary\" (click)=\"verificaDesarrollo()\">Cerrar Periodo</button>\r\n    </ng-template>\r\n  </ngl-modal>\r\n\r\n\r\n\r\n\r\n  <ngl-modal header=\"Confirmación\"  [(open)]=\"confProd\" size=\"x-small\" directional=\"false\">\r\n      <div body>\r\n        <div class=\"col-12 text-center container\">\r\n          <h2 style=\"margin-bottom:30px\">¿Aun tienes pagos de Desarrollos de Productos pendeintes, quieres aun así cerrar el periodo?</h2>\r\n        </div>\r\n      </div>\r\n\r\n      <ng-template ngl-modal-footer>\r\n\r\n      <button class=\"btn btn-primary\" (click)=\"pasaDesProd()\">Ir a Desarrollos de Productos</button>\r\n      <button class=\"btn btn-success\" (click)=\"pasarPeriodo()\">Cerrar Periodo</button>\r\n      <button class=\"btn btn-danger\" (click)=\"confProd=false\">Cancelar</button>\r\n      </ng-template>\r\n    </ngl-modal>\r\n\r\n\r\n\r\n\r\n\r\n    <ngl-modal header=\"Confirmación\"  [(open)]=\"confZona\" size=\"x-small\" directional=\"false\">\r\n        <div body>\r\n          <div class=\"col-12 text-center container\">\r\n            <h2 style=\"margin-bottom:30px\">¿Aun tienes pagos de Desarrollos de Zonas de Demanda pendientes, quieres aun así cerrar el periodo?</h2>\r\n          </div>\r\n        </div>\r\n\r\n        <ng-template ngl-modal-footer>\r\n\r\n        <button class=\"btn btn-primary\" (click)=\"pasaDesZona()\">Ir a Desarrollos de Zonas</button>\r\n        <button class=\"btn btn-success\" (click)=\"pasarPeriodo()\">Cerrar Periodo</button>\r\n        <button class=\"btn btn-danger\" (click)=\"confZona=false\">Cancelar</button>\r\n        </ng-template>\r\n      </ngl-modal>\r\n\r\n\r\n\r\n\r\n      <ngl-modal header=\"Confirmación\"  [(open)]=\"openBien\" size=\"x-small\" directional=\"false\">\r\n        <div body>\r\n          <div class=\"col-12 text-center container\">\r\n            <h2 style=\"margin-bottom:30px\">Ha cerrado periodo satisfactoriamente</h2>\r\n          </div>\r\n        </div>\r\n\r\n        <ng-template ngl-modal-footer>\r\n        <button class=\"btn btn-primary\" (click)=\"modalPasarPeriodo()\">Aceptar</button>\r\n        </ng-template>\r\n      </ngl-modal>\r\n\r\n\r\n\r\n          <ngl-modal header=\"Confirmación\"  [(open)]=\"alert\" size=\"x-small\" directional=\"false\">\r\n\r\n            <div body>\r\n              <div class=\"container\">\r\n                <h5 class=\"col-12 text-center\" style=\"margin-bottom:30px\">Tienes deuda, no puedes pasar de periodo, necesitas un prestamo</h5>\r\n                  <div class=\"col-2 offset-5\">\r\n                    <img  src=\"assets/img/credit.png\" class=\"img-fluid\">\r\n                  </div>\r\n\r\n              </div>\r\n            </div>\r\n\r\n            <ng-template ngl-modal-footer>\r\n              <button class=\"btn btn-primary\" (click)=\"pasaCreditos()\">Ir a prestamos</button>\r\n                <button class=\"btn btn-danger\" (click)=\"alert=false\">Cancelar</button>\r\n\r\n          </ng-template>\r\n            </ngl-modal>\r\n\r\n\r\n\r\n\r\n\r\n\r\n                <ngl-modal  [(open)]=\"openLoad\" size=\"small\" directional=\"false\">\r\n                  <div body>\r\n                    <h1 class=\"col-12 text-center\" >Cerrando Periodo</h1>\r\n                    <h5 class=\"col-12 text-center\">Realzando Operacion</h5>\r\n                    <div style=\"position:relative; height:6.25rem; z-index:0;\">\r\n                      <ngl-spinner size=\"large\" type=\"brand\"></ngl-spinner>\r\n                    </div>\r\n                  </div>\r\n                </ngl-modal>\r\n\r\n\r\n                <ngl-modal  [(open)]=\"openPeriodos\" size=\"small\" directional=\"false\">\r\n                  <div body>\r\n                    <div class=\"list-group\" >\r\n                      <a class=\"list-group-item list-group-item-action col-12\" *ngFor=\"let p of this._proyectoService.periodos\" >{{p.nombre}}\r\n                        <button class=\"btn btn-primary offset-3 col-3\" (click)=\"visualizaPeriodo(p.numero)\">Visualizar</button>\r\n                        <button class=\"btn btn-success col-3 offset-1\" [disabled]=\"validaRegre()\" (click)=\"selectEditaPeriodo(p.numero)\">Editar</button>\r\n                      </a>\r\n                    </div>\r\n                        <div class=\"modal-footer\">\r\n                          <button  type=\"button\" class=\"btn btn-outline-danger\" (click)=\"openPeriodos=false\">\r\n                          Cancelar\r\n                          </button>\r\n                        </div>\r\n                  </div>\r\n                </ngl-modal>\r\n\r\n\r\n                <ngl-modal  header=\"Confirmación\" [(open)]=\"confEditaPeriodos\" size=\"small\" directional=\"false\">\r\n                  <div body>\r\n                    <div class=\"row\">\r\n                      <h4 class=\"col-12 text-center\">Al ir a editar un periodo, los resultados de los periodos subsecuentes se borrarán, ¿estás seguro de querer editarlo?</h4>\r\n                    </div>\r\n                        <div class=\"modal-footer\">\r\n                          <button  type=\"button\" class=\"btn btn-danger\" (click)=\"confEditaPeriodos=false;openPeriodos=true\">\r\n                          Cancelar\r\n                          </button>\r\n                          <button  type=\"button\" class=\"btn btn-primary\" (click)=\"editaPeriodo()\">\r\n                          Editar\r\n                          </button>\r\n                        </div>\r\n                  </div>\r\n                </ngl-modal>\r\n\r\n\r\n\r\n                <ngl-modal  [(open)]=\"openLoadDatos\" size=\"small\" directional=\"false\">\r\n                  <div body>\r\n                    <h1 class=\"col-12 text-center\" >Cargando Datos</h1>\r\n                    <h5 class=\"col-12 text-center\">Pasando Periodo</h5>\r\n                    <div style=\"position:relative; height:6.25rem; z-index:0;\">\r\n                      <ngl-spinner size=\"large\" type=\"brand\"></ngl-spinner>\r\n                    </div>\r\n                  </div>\r\n                </ngl-modal>\r\n"
 
 /***/ }),
 
@@ -2035,12 +2035,15 @@ var NavbarUsuarioComponent = (function () {
         this._desarrolloProducto = _desarrolloProducto;
         this._creditoService = _creditoService;
         this.openConf = false;
+        this.confProd = false;
+        this.confZonas = false;
         this.openBien = false;
         this.openLoad = false;
         this.openLoadDatos = false;
         this.alert = false;
         this.opciones = false;
         this.periodos = [];
+        this.confZona = false;
         this.confEditaPeriodos = false;
         this.openPeriodos = false;
         this._resultadosService.vender();
@@ -2090,6 +2093,14 @@ var NavbarUsuarioComponent = (function () {
         this.router.navigate(['Usuario/proyecto/financiamiento']);
         this.alert = false;
     };
+    NavbarUsuarioComponent.prototype.pasaDesProd = function () {
+        this.router.navigate(['Usuario/proyecto/desarrolloProducto']);
+        this.confProd = false;
+    };
+    NavbarUsuarioComponent.prototype.pasaDesZona = function () {
+        this.router.navigate(['Usuario/proyecto/desarrolloMercado']);
+        this.confZona = false;
+    };
     NavbarUsuarioComponent.prototype.modalPasarPeriodo = function () {
         this.openBien = false;
         this.router.navigate(['Usuario/proyecto/home']);
@@ -2099,6 +2110,11 @@ var NavbarUsuarioComponent = (function () {
         this.confEditaPeriodos = true;
         this.openPeriodos = false;
         //this._proyectoService.editar(p.numero)
+    };
+    NavbarUsuarioComponent.prototype.preparaCierre = function () {
+        this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
+        this.zonasEnDesarrollo = this._desarrolloZona.returnProductosDeZonaEnDesarrollo();
+        this.openConf = true;
     };
     NavbarUsuarioComponent.prototype.editaPeriodo = function () {
         var _this = this;
@@ -2120,10 +2136,38 @@ var NavbarUsuarioComponent = (function () {
         localStorage.setItem('numeroPeriodo', numero);
         //this.modalPeriodos.hide();
     };
+    NavbarUsuarioComponent.prototype.verificaDesarrollo = function () {
+        this.openConf = false;
+        if (this.confProd == false) {
+            for (var _i = 0, _a = this.productosEnDesarrollo; _i < _a.length; _i++) {
+                var prodDes = _a[_i];
+                if (prodDes.numeroPeriodo != localStorage.getItem('numeroRPeriodos')) {
+                    this.confProd = true;
+                }
+            }
+        }
+        else {
+            console.log(this.zonasEnDesarrollo);
+            for (var _b = 0, _c = this.zonasEnDesarrollo; _b < _c.length; _b++) {
+                var zonaDes = _c[_b];
+                for (var _d = 0, _e = zonaDes.productosEnDes; _d < _e.length; _d++) {
+                    var producto = _e[_d];
+                    if (producto.numeroPeriodo != localStorage.getItem('numeroRPeriodos')) {
+                        this.confZona = true;
+                    }
+                }
+            }
+        }
+        if (this.confZona == false && this.confProd == false) {
+            this.pasarPeriodo();
+        }
+    };
     NavbarUsuarioComponent.prototype.pasarPeriodo = function () {
         var _this = this;
         this.openLoad = true;
         this.openConf = false;
+        this.confProd = false;
+        console.log(this.productosEnDesarrollo);
         setTimeout(function () { _this.openLoad = false; }, 1000);
         this._balanceService.getBalanceFinal().subscribe(function (data) {
             console.log("data side av", data);
@@ -2340,7 +2384,7 @@ var BalanceFinalComponent = (function () {
             { cara1: "Total", io: "", depAcum: "", neto: "", valor1: total1, cara2: "Total", valor2: total3 },
             { cara1: "A mas de un año", io: "", depAcum: "", neto: "", valor1: "", cara2: "A más de un Año", valor2: "" },
             { cara1: "", io: "", depAcum: "", neto: "", valor1: "", cara2: "", valor2: "" },
-            { cara1: "Terrenos", io: "", depAcum: "", neto: "", valor1: terreno, cara2: "Prestamos Totales", valor2: prestamosMasAnio },
+            { cara1: "Terrenos", io: "", depAcum: "", neto: "", valor1: terreno, cara2: "Prestamos Bancarios", valor2: prestamosMasAnio },
             { cara1: "Edificios e Instalaciones", io: "", depAcum: "", neto: "", valor1: edificios, cara2: "", valor2: "" },
             { cara1: "Maquinaria y Equipo", io: "", depAcum: "", neto: "", valor1: maqEquipo, cara2: "", valor2: "" },
             { cara1: "Muebles y Enseres", io: "", depAcum: "", neto: "", valor1: mueblesEnseres, cara2: "", valor2: "" },
@@ -2587,7 +2631,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n\r\n  <div class=\"col-lg-6 col-sm-12 \" style=\"height:200px;\">\r\n    <table class=\"table table-sm\" *ngFor= \"let balance of balanceFinal\">\r\n      <tr>\r\n        <th colspan=\"2\" class=\"text-center\">Activo</th>\r\n      </tr>\r\n      <tr>\r\n        <td>Caja y Bancos</td>\r\n        <td class=\"text-right\">{{balance.cajaBancos|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <td>Cuentas Por Cobrar</td>\r\n        <td class=\"text-right\">{{balance.cuentasPorCobrar|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <td>IVA Acreditable</td>\r\n        <td class=\"text-right\">{{balance.IVAAcreditable|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <td>Almacen de Articulo Terminado</td>\r\n        <td class=\"text-right\">{{balance.almacenArtTerm|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <td>Almacen de Materiales</td>\r\n        <td class=\"text-right\">{{balance.almacenMateriales|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n    </table>\r\n  </div>\r\n\r\n  <div class=\"col-lg-6 col-sm-12 \" style=\"height:200px;\">\r\n\r\n        <table class=\"table table-sm\" *ngFor= \"let balance of balanceFinal\">\r\n          <tr>\r\n            <th colspan=\"2\" class=\"text-center\">Pasivo</th>\r\n          </tr>\r\n          <tr>\r\n            <td>IVA por Enterar</td>\r\n            <td class=\"text-right\">{{balance.IVAPorEnterar|currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n          <tr>\r\n            <td>Impuestos por Pagar</td>\r\n            <td class=\"text-right\">{{balance.imptosPorPagar|currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n          <tr>\r\n            <td>Proveedores</td>\r\n            <td class=\"text-right\">{{balance.proveedores|currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n          <tr>\r\n            <td>PTU Por Pagar</td>\r\n            <td class=\"text-right\">{{balance.PTUPorPagar|currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n          <tr>\r\n            <td>Prestamos Bancarios</td>\r\n            <td class=\"text-right\">{{balance.prestamosMenosAnio|currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n        </table>\r\n  </div>\r\n\r\n\r\n\r\n\r\n  <div class=\"card card-outline-primary col-7 text-center\" style=\"height:300px\">\r\n    <div class=\"card-block\">\r\n      <blockquote class=\"card-blockquote\">\r\n        <div class=\"card-header\">\r\n          <h5 class=\"col-lg-12 col-sm-12 col-md-12  text-center\">Demanda Potencial del Periodo </h5>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-lg-7 col-sm-12 \" style=\"height:200px;\">\r\n            <ngx-charts-bar-horizontal\r\n                  [scheme]=\"colorScheme\"\r\n                  [results]=\"demandasGraf\"\r\n                  xAxis=\"true\"\r\n                  yAxis=\"true\"\r\n                  showXAxisLabel=\"true\"\r\n                  roundDomains=\"true\"\r\n                  showYAxisLabel=\"true\"\r\n                  xAxisLabel=\"Demnada Potencial(unidades)\"\r\n                  yAxisLabel=\"Productos\">\r\n                </ngx-charts-bar-horizontal>\r\n          </div>\r\n\r\n          <div class=\"col-lg-5 col-sm-8 \" style=\"height:200px; overflow-y:scroll\">\r\n            <div class=\"card\" *ngFor=\"let producto of demandas\" style=\"margin-top:15px\">\r\n                {{getNameById(producto.idProducto)}}\r\n                <div class=\"card-footer\">\r\n                  <table class=\"table\">\r\n                    <tr>\r\n                      <th class=\"text-center\">Zona</th>\r\n                      <th class=\"text-center\">Cantidad</th>\r\n                    </tr>\r\n                    <tr *ngFor=\"let zona of producto.zonas\">\r\n                      <td class=\"text-center\">{{getNameByIdZona(zona.idZona)}}</td>\r\n                      <td class=\"text-center\">{{zona.demanda}}u</td>\r\n                    </tr>\r\n                  </table>\r\n                </div>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n\r\n\r\n\r\n      </blockquote>\r\n    </div>\r\n  </div>\r\n\r\n\r\n\r\n\r\n\r\n          <div class=\"col-lg-5\">\r\n            <div class=\"card card-outline-secondary mb-3 text-center\" style=\"height:300px\">\r\n  <div class=\"card-block\">\r\n    <blockquote class=\"card-blockquote\">\r\n      <div class=\"card-header\">\r\n            <h5 class=\"col-12 text-center\">Capacidad Instalada</h5>\r\n      </div>\r\n\r\n<div class=\"col-12\" style=\"height:200px\">\r\n  <ngx-charts-bar-horizontal\r\n\r\n        [scheme]=\"colorScheme2\"\r\n        [results]=\"maquinariasGraf\"\r\n        gradient=\"false\"\r\n        xAxis=\"true\"\r\n        yAxis=\"true\"\r\n        showXAxisLabel=\"true\"\r\n        showYAxisLabel=\"true\"\r\n        xAxisLabel=\"Capacidad de Producción(unidades)\"\r\n        yAxisLabel=\"Productos\">\r\n      </ngx-charts-bar-horizontal>\r\n</div>\r\n\r\n\r\n\r\n    </blockquote>\r\n  </div>\r\n</div>\r\n          </div>\r\n\r\n\r\n          <div class=\"col-4\" >\r\n            <div class=\"card card-outline-secondary mb-3 text-center\"\r\n            style=\"height:250px;overflow:hidden\">\r\n              <div class=\"card-block\">\r\n                <blockquote class=\"card-blockquote\">\r\n                  <div class=\"\">\r\n                    <h5 class=\"col-12 text-center\">Productos Desarrollados</h5>\r\n                    <hr>\r\n                  </div>\r\n\r\n                  <div class=\"row\" style=\"overflow-y:scroll; height:170px;oveflow-x:visible\">\r\n                    <div class=\"col-4\" *ngFor=\"let producto of productosDesarollados\">\r\n                      <div class=\"card\">\r\n\r\n                          <div class=\"col-12\" style=\"margin-top:10px\">\r\n                            <img src=\"assets/img/box.png\"  class=\"img-fluid\">\r\n                          </div>\r\n\r\n\r\n                          <span class=\"text-center\">{{getNameById(producto.idProducto)}}</span>\r\n\r\n\r\n\r\n                      </div>\r\n                      <!-- <div class=\"row\">\r\n                        <div class=\"col-6\" >\r\n                          <ngx-charts-pie-grid\r\n                          [scheme]=\"colorScheme\"\r\n                          [results]=\"producto.graf\"\r\n                          designatedTotal=\"2\">\r\n                          </ngx-charts-pie-grid>\r\n                        </div>\r\n                        <div class=\"col-6\">\r\n                          <div class=\"row\">\r\n                            <div class=\"text-left col-12\" style=\"font-size:13px; margin-top:30px\">Periodos desarrollados: {{producto.max}}p <br></div>\r\n                            <div class=\"text-left col-12\" style=\"font-size:13px;margin-top:5px\">Costo pagado: <br>{{producto.costoDes*producto.max |currency:'USD':true:'1.0-0'}}</div>\r\n\r\n                          </div>\r\n                        </div>\r\n                      </div> -->\r\n\r\n\r\n                    </div>\r\n\r\n                  </div>\r\n\r\n            </blockquote>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n          <div class=\"col-4\" >\r\n            <div class=\"card card-outline-secondary mb-3 text-center\"\r\n            style=\"height:250px;overflow:hidden\" >\r\n              <div class=\"card-block\">\r\n                <blockquote class=\"card-blockquote\">\r\n                  <div class=\"\">\r\n                    <h5 class=\"col-12 text-center\">Opciones de Desarrollo de Productos</h5>\r\n                    <hr>\r\n                  </div>\r\n\r\n\r\n\r\n                  <div class=\"row\" style=\"overflow-y:scroll; height:160px;oveflow-x:visible\">\r\n                    <div class=\"col-12\" *ngFor=\"let producto of productosSinDesarrollar\">\r\n                      <div class=\"card\" style=\"margin-bottom:10px\">\r\n                        <div class=\"row align-items-center\" >\r\n                          <div class=\"col-3\">\r\n                            <img src=\"assets/img/box.png\" class=\"img-fluid\" style=\"margin-left:18px;margin-top:10px;margin-bottom:10px\">\r\n                          </div>\r\n                          <div class=\"col-9\">\r\n                            <div class=\"row \">\r\n                              <div class=\"text-left col-12\" style=\"font-size:16px; margin-top:15px\">{{producto.nombreProd}}</div>\r\n                              <div class=\"text-left col-12\" style=\"font-size:13px; margin-top:5px\">Periodos a desarrollar: {{producto.tiempoDes}}p</div>\r\n                              <div class=\"text-left col-12\" style=\"font-size:13px;margin-top:5px\">Costo por Periodo:{{producto.costoDes|currency:'USD':true:'1.0-0'}}</div>\r\n\r\n                            </div>\r\n                          </div>\r\n                        </div>\r\n                      </div>\r\n\r\n\r\n\r\n                    </div>\r\n\r\n                  </div>\r\n                  <!-- <div class=\"col-12\">\r\n                    <div class=\"row\" style=\"overflow-y:scroll; height:200px;oveflow-x:visible\">\r\n                      <div class=\"col-6\" *ngFor=\"let producto of productosSinDesGraf\" >\r\n                        <ngx-charts-pie-grid\r\n\r\n                        [scheme]=\"colorScheme\"\r\n                        [results]=\"producto.graf\"\r\n                        [designatedTotal]=\"producto.max\">\r\n                        </ngx-charts-pie-grid>\r\n\r\n                      </div>\r\n                    </div>\r\n\r\n                  </div> -->\r\n                </blockquote>\r\n              </div>\r\n            </div>\r\n  </div>\r\n\r\n\r\n  <div class=\"col-4\" >\r\n    <div class=\"card card-outline-secondary mb-3 text-center\"\r\n    style=\"height:250px;overflow:hidden\">\r\n      <div class=\"card-block\">\r\n        <blockquote class=\"card-blockquote\">\r\n          <div class=\"\">\r\n            <h5 class=\"col-12 text-center\">Productos en Desarrollo</h5>\r\n            <hr>\r\n          </div>\r\n          <div class=\"row\" style=\"overflow-y:scroll; height:160px;oveflow-x:visible\">\r\n            <div class=\"col-12\" *ngFor=\"let producto of productosEnDesGraf\">\r\n              <div class=\"row\">\r\n                <div class=\"col-6\" >\r\n                  <ngx-charts-pie-grid\r\n                  [scheme]=\"colorScheme\"\r\n                  [results]=\"producto.graf\"\r\n                  designatedTotal=\"2\">\r\n                  </ngx-charts-pie-grid>\r\n                </div>\r\n                <div class=\"col-6\">\r\n                  <div class=\"row\">\r\n\r\n                    <div class=\"text-left col-12\" style=\"font-size:13px; margin-top:5px\">Periodos  desarrollados: {{producto.graf[0].value}} de {{producto.max}} <br></div>\r\n                    <div class=\"text-left col-12\" style=\"font-size:13px;margin-top:5px\">Costo del Periodo: <br>{{producto.costoDes|currency:'USD':true:'1.0-0'}}</div>\r\n\r\n                  </div>\r\n                </div>\r\n              </div>\r\n\r\n\r\n            </div>\r\n\r\n          </div>\r\n\r\n\r\n\r\n          <!-- <div class=\"col-12\">\r\n            <div class=\"row\" style=\"overflow-y:scroll;oveflow-x:hidden; height:200px\">\r\n              <div class=\"col-6\" *ngFor=\"let producto of productosEnDesGraf\">\r\n                <ngx-charts-pie-grid\r\n                [scheme]=\"colorScheme\"\r\n                [results]=\"producto.graf\"\r\n                [designatedTotal]=\"producto.max\">\r\n                </ngx-charts-pie-grid>\r\n\r\n              </div>\r\n\r\n            </div>\r\n\r\n          </div> -->\r\n\r\n\r\n\r\n\r\n\r\n\r\n        </blockquote>\r\n      </div>\r\n    </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n  </div>\r\n\r\n\r\n\r\n  <div class=\"col-4\" >\r\n    <div class=\"card card-outline-secondary mb-3 text-center\"\r\n    style=\"height:250px;overflow:hidden\" >\r\n      <div class=\"card-block\">\r\n        <blockquote class=\"card-blockquote\">\r\n          <div class=\"\">\r\n            <h5 class=\"col-12 text-center\">Mercados Desarrollados</h5>\r\n            <hr>\r\n          </div>\r\n          <div style=\"overflow-y:scroll; height:170px;oveflow-x:visible\">\r\n            <div class=\"col-12\" *ngFor=\"let zona of productosZonaDesarrollados\">\r\n              <h6 style=\"margin-top:10px\">{{zona.nombreZona}}</h6>\r\n              <hr>\r\n              <div class=\"row\" style=\"margin-top:-5px\">\r\n                <div class=\"col-4\" *ngFor=\"let producto of zona.productosDes\">\r\n\r\n                  <div class=\"card\">\r\n\r\n                      <div class=\"col-12\" style=\"margin-top:10px\">\r\n                        <img src=\"assets/img/zone.png\"  class=\"img-fluid\">\r\n                      </div>\r\n                      <span class=\"text-center\" style=\"font-size:12px\">{{getNameById(producto)}}</span>\r\n                  </div>\r\n                  <!-- <div class=\"row\">\r\n                    <div class=\"col-6\" >\r\n                      <ngx-charts-pie-grid\r\n                      [scheme]=\"colorScheme\"\r\n                      [results]=\"producto.graf\"\r\n                      designatedTotal=\"2\">\r\n                      </ngx-charts-pie-grid>\r\n                    </div>\r\n                    <div class=\"col-6\">\r\n                      <div class=\"row\">\r\n                        <div class=\"text-left col-12\" style=\"font-size:13px; margin-top:30px\">Periodos a desarrollar: {{getTiempo(zona.idZona,producto.idProducto)}}p <br></div>\r\n                        <div class=\"text-left col-12\" style=\"font-size:13px;margin-top:5px\">Costo de Periodo: <br>{{getCosto(zona.idZona,producto.idProducto)|currency:'USD':true:'1.0-0'}}</div>\r\n\r\n                      </div>\r\n                    </div>\r\n                  </div> -->\r\n\r\n\r\n                </div>\r\n\r\n              </div>\r\n\r\n            </div>\r\n          </div>\r\n<!--\r\n          <div class=\"col-12\">\r\n            <div class=\"row\" style=\"overflow-y:scroll; height:200px;oveflow-x:visible\">\r\n              <div class=\"col-12\" *ngFor=\"let zona of productosZonaDesGraf\">\r\n                <h6>{{zona.nombreZona}}</h6>\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-6\" *ngFor=\"let producto of zona.productos\">\r\n                    <ngx-charts-pie-grid\r\n                    [scheme]=\"colorScheme\"\r\n                    [results]=\"producto.graf\"\r\n                    designatedTotal=\"40\">\r\n                    </ngx-charts-pie-grid>\r\n\r\n\r\n                  </div>\r\n                </div>\r\n\r\n              </div>\r\n\r\n\r\n\r\n            </div>\r\n\r\n          </div> -->\r\n        </blockquote>\r\n      </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n<div class=\"col-4\" >\r\n  <div class=\"card card-outline-secondary mb-3 text-center\"\r\n  style=\"height:250px;overflow:hidden\" >\r\n    <div class=\"card-block\">\r\n      <blockquote class=\"card-blockquote\">\r\n        <div class=\"\">\r\n          <h5 class=\"col-12 text-center\">Opciones de Desarrollo de Mercado</h5>\r\n          <hr>\r\n        </div>\r\n        <div style=\"overflow-y:scroll; height:150px;oveflow-x:visible\">\r\n          <div class=\"col-12\" *ngFor=\"let zona of productosZonaSinDesarrollar\" >\r\n            <h6 style=\"margin-top:0px\">{{zona.nombreZona}}</h6>\r\n            <hr>\r\n            <div class=\"row\">\r\n              <div class=\"col-12\" *ngFor=\"let producto of zona.productosSinDes\">\r\n                <div class=\"card\" style=\"margin-bottom:10px\">\r\n                  <div class=\"row align-items-center\">\r\n                    <div class=\"col-3\">\r\n                      <img src=\"assets/img/zone.png\" class=\"img-fluid\" style=\"margin-left:18px;margin-top:10px;margin-bottom:10px\">\r\n                    </div>\r\n                    <div class=\"col-9\">\r\n                      <div class=\"row \">\r\n                        <div class=\"text-left col-12\" style=\"font-size:16px; margin-top:15px\">{{getNameById(producto)}}</div>\r\n                        <div class=\"text-left col-12\" style=\"font-size:13px; margin-top:5px\">Periodos a desarrollar: {{getTiempo(zona.idZona,producto)}}p</div>\r\n                        <div class=\"text-left col-12\" style=\"font-size:13px;margin-top:5px\">Costo por Periodo:{{getCosto(zona.idZona,producto)|currency:'USD':true:'1.0-0'}}</div>\r\n\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n\r\n\r\n              </div>\r\n\r\n            </div>\r\n\r\n          </div>\r\n        </div>\r\n\r\n\r\n\r\n        <!-- <div class=\"col-12\">\r\n          <div class=\"row\" style=\"overflow-y:scroll; height:200px;oveflow-x:visible\">\r\n\r\n\r\n            <div class=\"col-12\" *ngFor=\"let zona of productosZonaSinDesGraf\">\r\n              <h6>{{zona.nombreZona}}</h6>\r\n              <hr>\r\n              <div class=\"row\">\r\n                <div class=\"col-6\" *ngFor=\"let producto of zona.productos\">\r\n                  <ngx-charts-pie-grid\r\n                  [scheme]=\"colorScheme\"\r\n                  [results]=\"producto.graf\"\r\n                  designatedTotal=\"40\">\r\n                  </ngx-charts-pie-grid>\r\n\r\n\r\n                </div>\r\n              </div>\r\n\r\n            </div>\r\n\r\n\r\n\r\n          </div>\r\n\r\n        </div> -->\r\n      </blockquote>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n<div class=\"col-4\" >\r\n  <div class=\"card card-outline-secondary mb-3 text-center\"\r\n  style=\"height:250px;overflow:hidden\">\r\n    <div class=\"card-block\" >\r\n      <blockquote class=\"card-blockquote\">\r\n        <div class=\"\">\r\n          <h5 class=\"col-12 text-center\">Mercados en Desarrollo</h5>\r\n          <hr>\r\n        </div>\r\n        <div style=\"overflow-y:scroll; height:180px;oveflow-x:visible\">\r\n          <div class=\"col-12\" *ngFor=\"let zona of productosZonaEnDesGraf\">\r\n            <h6 style=\"margin-top:15px\">{{zona.nombreZona}}</h6>\r\n            <hr>\r\n            <div class=\"row\">\r\n              <div class=\"col-12\" *ngFor=\"let producto of zona.productos\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-6\" >\r\n                    <ngx-charts-pie-grid\r\n                    [scheme]=\"colorScheme\"\r\n                    [results]=\"producto.graf\"\r\n                    [designatedTotal]=\"producto.max\">\r\n                    </ngx-charts-pie-grid>\r\n                  </div>\r\n                  <div class=\"col-6\">\r\n                    <div class=\"row\">\r\n                      <div class=\"text-left col-12\" style=\"font-size:13px; margin-top:30px\">Periodos Desarrollados: <br>{{producto.graf[0].value}} de {{producto.max}}</div>\r\n                      <div class=\"text-left col-12\" style=\"font-size:13px;margin-top:5px\">Costo de Periodo: <br>{{getCosto(zona.idZona,producto.idProducto)|currency:'USD':true:'1.0-0'}}</div>\r\n\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n\r\n\r\n              </div>\r\n\r\n            </div>\r\n\r\n          </div>\r\n        </div>\r\n\r\n      </blockquote>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n          </div>\r\n"
+module.exports = "<div class=\"row\">\r\n\r\n  <div class=\"col-lg-6 col-sm-12 \" style=\"height:200px;\">\r\n    <table class=\"table table-sm\" *ngFor= \"let balance of balanceFinal\">\r\n      <tr>\r\n        <th colspan=\"2\" class=\"text-center\">Activo</th>\r\n      </tr>\r\n      <tr>\r\n        <td>Caja y Bancos</td>\r\n        <td class=\"text-right\">{{balance.cajaBancos|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <td>Cuentas Por Cobrar</td>\r\n        <td class=\"text-right\">{{balance.cuentasPorCobrar|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <td>IVA Acreditable</td>\r\n        <td class=\"text-right\">{{balance.IVAAcreditable|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Almacen de Materiales</td>\r\n        <td class=\"text-right\">{{balance.almacenMateriales|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Almacen de Articulo Terminado</td>\r\n        <td class=\"text-right\">{{balance.almacenArtTerm|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n    </table>\r\n  </div>\r\n\r\n  <div class=\"col-lg-6 col-sm-12 \" style=\"height:200px;\">\r\n\r\n        <table class=\"table table-sm\" *ngFor= \"let balance of balanceFinal\">\r\n          <tr>\r\n            <th colspan=\"2\" class=\"text-center\">Pasivo</th>\r\n          </tr>\r\n          <tr>\r\n            <td>IVA por Enterar</td>\r\n            <td class=\"text-right\">{{balance.IVAPorEnterar|currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n          <tr>\r\n            <td>Impuestos por Pagar</td>\r\n            <td class=\"text-right\">{{balance.imptosPorPagar|currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n          <tr>\r\n            <td>Proveedores</td>\r\n            <td class=\"text-right\">{{balance.proveedores|currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n          <tr>\r\n            <td>PTU Por Pagar</td>\r\n            <td class=\"text-right\">{{balance.PTUPorPagar|currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n          <tr>\r\n            <td>Prestamos Bancarios</td>\r\n            <td class=\"text-right\">{{balance.prestamosMenosAnio|currency:'USD':true:'1.0-0'}}</td>\r\n          </tr>\r\n        </table>\r\n  </div>\r\n\r\n\r\n\r\n\r\n  <div class=\"card card-outline-primary col-7 text-center\" style=\"height:300px\">\r\n    <div class=\"card-block\">\r\n      <blockquote class=\"card-blockquote\">\r\n        <div class=\"card-header\">\r\n          <h5 class=\"col-lg-12 col-sm-12 col-md-12  text-center\">Demanda Potencial del Periodo </h5>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-lg-7 col-sm-12 \" style=\"height:200px;\">\r\n            <ngx-charts-bar-horizontal\r\n                  [scheme]=\"colorScheme\"\r\n                  [results]=\"demandasGraf\"\r\n                  xAxis=\"true\"\r\n                  yAxis=\"true\"\r\n                  showXAxisLabel=\"true\"\r\n                  roundDomains=\"true\"\r\n                  showYAxisLabel=\"true\"\r\n                  xAxisLabel=\"Demnada Potencial(unidades)\"\r\n                  yAxisLabel=\"Productos\">\r\n                </ngx-charts-bar-horizontal>\r\n          </div>\r\n\r\n          <div class=\"col-lg-5 col-sm-8 \" style=\"height:200px; overflow-y:scroll\">\r\n            <div class=\"card\" *ngFor=\"let producto of demandas\" style=\"margin-top:15px\">\r\n                {{getNameById(producto.idProducto)}}\r\n                <div class=\"card-footer\">\r\n                  <table class=\"table\">\r\n                    <tr>\r\n                      <th class=\"text-center\">Zona</th>\r\n                      <th class=\"text-center\">Cantidad</th>\r\n                    </tr>\r\n                    <tr *ngFor=\"let zona of producto.zonas\">\r\n                      <td class=\"text-center\">{{getNameByIdZona(zona.idZona)}}</td>\r\n                      <td class=\"text-center\">{{zona.demanda}}u</td>\r\n                    </tr>\r\n                  </table>\r\n                </div>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n\r\n\r\n\r\n      </blockquote>\r\n    </div>\r\n  </div>\r\n\r\n\r\n\r\n\r\n\r\n          <div class=\"col-lg-5\">\r\n            <div class=\"card card-outline-secondary mb-3 text-center\" style=\"height:300px\">\r\n  <div class=\"card-block\">\r\n    <blockquote class=\"card-blockquote\">\r\n      <div class=\"card-header\">\r\n            <h5 class=\"col-12 text-center\">Capacidad Instalada</h5>\r\n      </div>\r\n\r\n<div class=\"col-12\" style=\"height:200px\">\r\n  <ngx-charts-bar-horizontal\r\n\r\n        [scheme]=\"colorScheme2\"\r\n        [results]=\"maquinariasGraf\"\r\n        gradient=\"false\"\r\n        xAxis=\"true\"\r\n        yAxis=\"true\"\r\n        showXAxisLabel=\"true\"\r\n        showYAxisLabel=\"true\"\r\n        xAxisLabel=\"Capacidad de Producción(unidades)\"\r\n        yAxisLabel=\"Productos\">\r\n      </ngx-charts-bar-horizontal>\r\n</div>\r\n\r\n\r\n\r\n    </blockquote>\r\n  </div>\r\n</div>\r\n          </div>\r\n\r\n\r\n          <div class=\"col-4\" >\r\n            <div class=\"card card-outline-secondary mb-3 text-center\"\r\n            style=\"height:250px;overflow:hidden\">\r\n              <div class=\"card-block\">\r\n                <blockquote class=\"card-blockquote\">\r\n                  <div class=\"\">\r\n                    <h5 class=\"col-12 text-center\">Productos Desarrollados</h5>\r\n                    <hr>\r\n                  </div>\r\n\r\n                  <div class=\"row\" style=\"overflow-y:scroll; height:170px;oveflow-x:visible\">\r\n                    <div class=\"col-4\" *ngFor=\"let producto of productosDesarollados\">\r\n                      <div class=\"card\">\r\n\r\n                          <div class=\"col-12\" style=\"margin-top:10px\">\r\n                            <img src=\"assets/img/box.png\"  class=\"img-fluid\">\r\n                          </div>\r\n\r\n\r\n                          <span class=\"text-center\">{{getNameById(producto.idProducto)}}</span>\r\n\r\n\r\n\r\n                      </div>\r\n                      <!-- <div class=\"row\">\r\n                        <div class=\"col-6\" >\r\n                          <ngx-charts-pie-grid\r\n                          [scheme]=\"colorScheme\"\r\n                          [results]=\"producto.graf\"\r\n                          designatedTotal=\"2\">\r\n                          </ngx-charts-pie-grid>\r\n                        </div>\r\n                        <div class=\"col-6\">\r\n                          <div class=\"row\">\r\n                            <div class=\"text-left col-12\" style=\"font-size:13px; margin-top:30px\">Periodos desarrollados: {{producto.max}}p <br></div>\r\n                            <div class=\"text-left col-12\" style=\"font-size:13px;margin-top:5px\">Costo pagado: <br>{{producto.costoDes*producto.max |currency:'USD':true:'1.0-0'}}</div>\r\n\r\n                          </div>\r\n                        </div>\r\n                      </div> -->\r\n\r\n\r\n                    </div>\r\n\r\n                  </div>\r\n\r\n            </blockquote>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n          <div class=\"col-4\" >\r\n            <div class=\"card card-outline-secondary mb-3 text-center\"\r\n            style=\"height:250px;overflow:hidden\" >\r\n              <div class=\"card-block\">\r\n                <blockquote class=\"card-blockquote\">\r\n                  <div class=\"\">\r\n                    <h5 class=\"col-12 text-center\">Opciones de Desarrollo de Productos</h5>\r\n                    <hr>\r\n                  </div>\r\n\r\n\r\n\r\n                  <div class=\"row\" style=\"overflow-y:scroll; height:160px;oveflow-x:visible\">\r\n                    <div class=\"col-12\" *ngFor=\"let producto of productosSinDesarrollar\">\r\n                      <div class=\"card\" style=\"margin-bottom:10px\">\r\n                        <div class=\"row align-items-center\" >\r\n                          <div class=\"col-3\">\r\n                            <img src=\"assets/img/box.png\" class=\"img-fluid\" style=\"margin-left:18px;margin-top:10px;margin-bottom:10px\">\r\n                          </div>\r\n                          <div class=\"col-9\">\r\n                            <div class=\"row \">\r\n                              <div class=\"text-left col-12\" style=\"font-size:16px; margin-top:15px\">{{producto.nombreProd}}</div>\r\n                              <div class=\"text-left col-12\" style=\"font-size:13px; margin-top:5px\">Periodos a desarrollar: {{producto.tiempoDes}}p</div>\r\n                              <div class=\"text-left col-12\" style=\"font-size:13px;margin-top:5px\">Costo por Periodo:{{producto.costoDes|currency:'USD':true:'1.0-0'}}</div>\r\n\r\n                            </div>\r\n                          </div>\r\n                        </div>\r\n                      </div>\r\n\r\n\r\n\r\n                    </div>\r\n\r\n                  </div>\r\n                  <!-- <div class=\"col-12\">\r\n                    <div class=\"row\" style=\"overflow-y:scroll; height:200px;oveflow-x:visible\">\r\n                      <div class=\"col-6\" *ngFor=\"let producto of productosSinDesGraf\" >\r\n                        <ngx-charts-pie-grid\r\n\r\n                        [scheme]=\"colorScheme\"\r\n                        [results]=\"producto.graf\"\r\n                        [designatedTotal]=\"producto.max\">\r\n                        </ngx-charts-pie-grid>\r\n\r\n                      </div>\r\n                    </div>\r\n\r\n                  </div> -->\r\n                </blockquote>\r\n              </div>\r\n            </div>\r\n  </div>\r\n\r\n\r\n  <div class=\"col-4\" >\r\n    <div class=\"card card-outline-secondary mb-3 text-center\"\r\n    style=\"height:250px;overflow:hidden\">\r\n      <div class=\"card-block\">\r\n        <blockquote class=\"card-blockquote\">\r\n          <div class=\"\">\r\n            <h5 class=\"col-12 text-center\">Productos en Desarrollo</h5>\r\n            <hr>\r\n          </div>\r\n          <div class=\"row\" style=\"overflow-y:scroll; height:160px;oveflow-x:visible\">\r\n            <div class=\"col-12\" *ngFor=\"let producto of productosEnDesGraf\">\r\n              <div class=\"row\">\r\n                <div class=\"col-6\" >\r\n                  <ngx-charts-pie-grid\r\n                  [scheme]=\"colorScheme\"\r\n                  [results]=\"producto.graf\"\r\n                  designatedTotal=\"2\">\r\n                  </ngx-charts-pie-grid>\r\n                </div>\r\n                <div class=\"col-6\">\r\n                  <div class=\"row\">\r\n\r\n                    <div class=\"text-left col-12\" style=\"font-size:13px; margin-top:5px\">Periodos  desarrollados: {{producto.graf[0].value}} de {{producto.max}} <br></div>\r\n                    <div class=\"text-left col-12\" style=\"font-size:13px;margin-top:5px\">Costo del Periodo: <br>{{producto.costoDes|currency:'USD':true:'1.0-0'}}</div>\r\n\r\n                  </div>\r\n                </div>\r\n              </div>\r\n\r\n\r\n            </div>\r\n\r\n          </div>\r\n\r\n\r\n\r\n          <!-- <div class=\"col-12\">\r\n            <div class=\"row\" style=\"overflow-y:scroll;oveflow-x:hidden; height:200px\">\r\n              <div class=\"col-6\" *ngFor=\"let producto of productosEnDesGraf\">\r\n                <ngx-charts-pie-grid\r\n                [scheme]=\"colorScheme\"\r\n                [results]=\"producto.graf\"\r\n                [designatedTotal]=\"producto.max\">\r\n                </ngx-charts-pie-grid>\r\n\r\n              </div>\r\n\r\n            </div>\r\n\r\n          </div> -->\r\n\r\n\r\n\r\n\r\n\r\n\r\n        </blockquote>\r\n      </div>\r\n    </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n  </div>\r\n\r\n\r\n\r\n  <div class=\"col-4\" >\r\n    <div class=\"card card-outline-secondary mb-3 text-center\"\r\n    style=\"height:250px;overflow:hidden\" >\r\n      <div class=\"card-block\">\r\n        <blockquote class=\"card-blockquote\">\r\n          <div class=\"\">\r\n            <h5 class=\"col-12 text-center\">Mercados Desarrollados</h5>\r\n            <hr>\r\n          </div>\r\n          <div style=\"overflow-y:scroll; height:170px;oveflow-x:visible\">\r\n            <div class=\"col-12\" *ngFor=\"let zona of productosZonaDesarrollados\">\r\n              <h6 style=\"margin-top:10px\">{{zona.nombreZona}}</h6>\r\n              <hr>\r\n              <div class=\"row\" style=\"margin-top:-5px\">\r\n                <div class=\"col-4\" *ngFor=\"let producto of zona.productosDes\">\r\n\r\n                  <div class=\"card\">\r\n\r\n                      <div class=\"col-12\" style=\"margin-top:10px\">\r\n                        <img src=\"assets/img/zone.png\"  class=\"img-fluid\">\r\n                      </div>\r\n                      <span class=\"text-center\" style=\"font-size:12px\">{{getNameById(producto)}}</span>\r\n                  </div>\r\n                  <!-- <div class=\"row\">\r\n                    <div class=\"col-6\" >\r\n                      <ngx-charts-pie-grid\r\n                      [scheme]=\"colorScheme\"\r\n                      [results]=\"producto.graf\"\r\n                      designatedTotal=\"2\">\r\n                      </ngx-charts-pie-grid>\r\n                    </div>\r\n                    <div class=\"col-6\">\r\n                      <div class=\"row\">\r\n                        <div class=\"text-left col-12\" style=\"font-size:13px; margin-top:30px\">Periodos a desarrollar: {{getTiempo(zona.idZona,producto.idProducto)}}p <br></div>\r\n                        <div class=\"text-left col-12\" style=\"font-size:13px;margin-top:5px\">Costo de Periodo: <br>{{getCosto(zona.idZona,producto.idProducto)|currency:'USD':true:'1.0-0'}}</div>\r\n\r\n                      </div>\r\n                    </div>\r\n                  </div> -->\r\n\r\n\r\n                </div>\r\n\r\n              </div>\r\n\r\n            </div>\r\n          </div>\r\n<!--\r\n          <div class=\"col-12\">\r\n            <div class=\"row\" style=\"overflow-y:scroll; height:200px;oveflow-x:visible\">\r\n              <div class=\"col-12\" *ngFor=\"let zona of productosZonaDesGraf\">\r\n                <h6>{{zona.nombreZona}}</h6>\r\n                <hr>\r\n                <div class=\"row\">\r\n                  <div class=\"col-6\" *ngFor=\"let producto of zona.productos\">\r\n                    <ngx-charts-pie-grid\r\n                    [scheme]=\"colorScheme\"\r\n                    [results]=\"producto.graf\"\r\n                    designatedTotal=\"40\">\r\n                    </ngx-charts-pie-grid>\r\n\r\n\r\n                  </div>\r\n                </div>\r\n\r\n              </div>\r\n\r\n\r\n\r\n            </div>\r\n\r\n          </div> -->\r\n        </blockquote>\r\n      </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n<div class=\"col-4\" >\r\n  <div class=\"card card-outline-secondary mb-3 text-center\"\r\n  style=\"height:250px;overflow:hidden\" >\r\n    <div class=\"card-block\">\r\n      <blockquote class=\"card-blockquote\">\r\n        <div class=\"\">\r\n          <h5 class=\"col-12 text-center\">Opciones de Desarrollo de Mercado</h5>\r\n          <hr>\r\n        </div>\r\n        <div style=\"overflow-y:scroll; height:150px;oveflow-x:visible\">\r\n          <div class=\"col-12\" *ngFor=\"let zona of productosZonaSinDesarrollar\" >\r\n            <h6 style=\"margin-top:0px\">{{zona.nombreZona}}</h6>\r\n            <hr>\r\n            <div class=\"row\">\r\n              <div class=\"col-12\" *ngFor=\"let producto of zona.productosSinDes\">\r\n                <div class=\"card\" style=\"margin-bottom:10px\">\r\n                  <div class=\"row align-items-center\">\r\n                    <div class=\"col-3\">\r\n                      <img src=\"assets/img/zone.png\" class=\"img-fluid\" style=\"margin-left:18px;margin-top:10px;margin-bottom:10px\">\r\n                    </div>\r\n                    <div class=\"col-9\">\r\n                      <div class=\"row \">\r\n                        <div class=\"text-left col-12\" style=\"font-size:16px; margin-top:15px\">{{getNameById(producto)}}</div>\r\n                        <div class=\"text-left col-12\" style=\"font-size:13px; margin-top:5px\">Periodos a desarrollar: {{getTiempo(zona.idZona,producto)}}p</div>\r\n                        <div class=\"text-left col-12\" style=\"font-size:13px;margin-top:5px\">Costo por Periodo:{{getCosto(zona.idZona,producto)|currency:'USD':true:'1.0-0'}}</div>\r\n\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n\r\n\r\n              </div>\r\n\r\n            </div>\r\n\r\n          </div>\r\n        </div>\r\n\r\n\r\n\r\n        <!-- <div class=\"col-12\">\r\n          <div class=\"row\" style=\"overflow-y:scroll; height:200px;oveflow-x:visible\">\r\n\r\n\r\n            <div class=\"col-12\" *ngFor=\"let zona of productosZonaSinDesGraf\">\r\n              <h6>{{zona.nombreZona}}</h6>\r\n              <hr>\r\n              <div class=\"row\">\r\n                <div class=\"col-6\" *ngFor=\"let producto of zona.productos\">\r\n                  <ngx-charts-pie-grid\r\n                  [scheme]=\"colorScheme\"\r\n                  [results]=\"producto.graf\"\r\n                  designatedTotal=\"40\">\r\n                  </ngx-charts-pie-grid>\r\n\r\n\r\n                </div>\r\n              </div>\r\n\r\n            </div>\r\n\r\n\r\n\r\n          </div>\r\n\r\n        </div> -->\r\n      </blockquote>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n<div class=\"col-4\" >\r\n  <div class=\"card card-outline-secondary mb-3 text-center\"\r\n  style=\"height:250px;overflow:hidden\">\r\n    <div class=\"card-block\" >\r\n      <blockquote class=\"card-blockquote\">\r\n        <div class=\"\">\r\n          <h5 class=\"col-12 text-center\">Mercados en Desarrollo</h5>\r\n          <hr>\r\n        </div>\r\n        <div style=\"overflow-y:scroll; height:180px;oveflow-x:visible\">\r\n          <div class=\"col-12\" *ngFor=\"let zona of productosZonaEnDesGraf\">\r\n            <h6 style=\"margin-top:15px\">{{zona.nombreZona}}</h6>\r\n            <hr>\r\n            <div class=\"row\">\r\n              <div class=\"col-12\" *ngFor=\"let producto of zona.productos\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-6\" >\r\n                    <ngx-charts-pie-grid\r\n                    [scheme]=\"colorScheme\"\r\n                    [results]=\"producto.graf\"\r\n                    [designatedTotal]=\"producto.max\">\r\n                    </ngx-charts-pie-grid>\r\n                  </div>\r\n                  <div class=\"col-6\">\r\n                    <div class=\"row\">\r\n                      <div class=\"text-left col-12\" style=\"font-size:13px; margin-top:30px\">Periodos Desarrollados: <br>{{producto.graf[0].value}} de {{producto.max}}</div>\r\n                      <div class=\"text-left col-12\" style=\"font-size:13px;margin-top:5px\">Costo de Periodo: <br>{{getCosto(zona.idZona,producto.idProducto)|currency:'USD':true:'1.0-0'}}</div>\r\n\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n\r\n\r\n              </div>\r\n\r\n            </div>\r\n\r\n          </div>\r\n        </div>\r\n\r\n      </blockquote>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n          </div>\r\n"
 
 /***/ }),
 
@@ -3103,7 +3147,7 @@ var BalanceInicialComponent = (function () {
         doc.setFontType("bold");
         doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
         doc.setFontSize(13);
-        doc.text(139.5, 23, 'Posición Financiera Final del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
+        doc.text(139.5, 23, 'Posición Financiera Inicial del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
         doc.line(50, 27, 228, 27);
         doc.setFontSize(7);
         var mar = 45;
@@ -3605,11 +3649,12 @@ var CompraMaquinariaComponent = (function () {
         console.log(this.maquinasCompradas);
         setTimeout(function () {
             _this.maqSelectedAdd = _this.maquinas[0];
+            console.log(_this.maqSelectedAdd);
         }, 900);
         setTimeout(function () {
             _this.maqSelectedLess = _this.maquinasCompradas[0];
+            console.log(_this.maqSelectedAdd);
         }, 800);
-        console.log(this.maqSelectedAdd);
     }
     CompraMaquinariaComponent.prototype.ngOnInit = function () {
     };
@@ -3633,7 +3678,7 @@ var CompraMaquinariaComponent = (function () {
         var _this = this;
         this.openConf = false;
         this.openLoad = true;
-        setTimeout(function () { return _this.openLoad = false; }, 2000);
+        setTimeout(function () { _this.openLoad = false; _this.maqSelectedLess = _this.maqSelectedAdd; }, 2000);
         var x = {
             Balance_numeroPeriodo: localStorage.getItem('numeroPeriodo'),
             Maquinaria_idMaquinaria: this.maqSelectedAdd.idMaquinaria,
@@ -4325,11 +4370,7 @@ var _a, _b;
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.html":
 /***/ (function(module, exports) {
 
-<<<<<<< HEAD
-module.exports = "<h4 class=\"text-center\">Estado de Resultados</h4>\r\n<hr>\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <table class=\"table table-bordered\">\r\n    <thead>\r\n      <tr class=\"thead-inverse\">\r\n        <th></th>\r\n        <th *ngFor=\"let producto of resultados\" class=\"text-center\">{{getNameByIdProducto(producto) }}</th>\r\n        <th class=\"text-center\">Total</th>\r\n      </tr>\r\n    </thead>\r\n\r\n    <tbody>\r\n      <tr>\r\n        <th>Ventas Netas</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getVentasNetas(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" >{{getTotalVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Costo de Ventas</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getCostoVentas(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" >{{getTotalCostosVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Utilidad Bruta</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" >{{getUtilidadBruta() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Costo de distribucion</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getDistParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{getDistTotal() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Otros Gastos</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\"> {{getOtrosGastosParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" *ngFor=\"let item of auxiliarT\">{{item |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Costo de Administración</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getAdminParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{getAdminTotal() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Utilidad en Operación</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadAntesParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" *ngFor=\"let item of auxiliarT\">{{getUtilidadAntes() - item |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Intereses</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n        <td class=\"text-right\" *ngFor=\"let aux of intereses\">{{aux |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Utilidad antes de Impuestos</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadAntesParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{getUtilidad2() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>ISR</th>\r\n        <td  class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n        <td  class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.imptosPorPagar * 11 |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>PTU</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n        <td class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.PTUPorPagar * 11 |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Utilidad del Ejercicio</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n        <td class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.utilidadEjercicio|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n    </tbody>\r\n  </table>\r\n\r\n</div>\r\n\r\n<div class=\"row align-items-center\" style=\"margin-bottom:20px\">\r\n  <div class=\"offset-9 col-1\">\r\n    Exportar:\r\n  </div>\r\n  <div class=\"col-1\">\r\n    <ngl-icon icon=\"pdf\" category=\"doctype\" (click)=\"PDFestadoDeResultados()\" size=\"large\"></ngl-icon>\r\n  </div>\r\n\r\n  <div class=\"col-1\">\r\n    <ngl-icon icon=\"csv\" category=\"doctype\" (click)=\"CSVestado()\" size=\"large\"></ngl-icon>\r\n  </div>\r\n\r\n</div>\r\n"
-=======
-module.exports = "<h4 class=\"text-center\">Estado de Resultados</h4>\r\n<hr>\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <table class=\"table table-bordered\">\r\n    <thead>\r\n      <tr>\r\n        <th></th>\r\n        <th *ngFor=\"let producto of resultados\">{{getNameByIdProducto(producto) }}</th>\r\n        <th>Total</th>\r\n      </tr>\r\n    </thead>\r\n\r\n    <tbody>\r\n      <tr>\r\n        <th>Ventas Netas</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getVentasNetas(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" >{{getTotalVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Costo de Ventas</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getCostoVentas(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" >{{getTotalCostosVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Utilidad Bruta</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" >{{getUtilidadBruta() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Costo de distribucion</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getDistParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{getDistTotal() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Otros Gastos</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\"> {{getOtrosGastosParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" *ngFor=\"let item of auxiliarT\">{{item |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Costo de Administración</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getAdminParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{getAdminTotal() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Utilidad en Operación</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadAntesParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" *ngFor=\"let item of auxiliarT\">{{getUtilidadAntes() - item |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Intereses</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n        <td class=\"text-right\" *ngFor=\"let aux of intereses\">{{aux |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Utilidad antes de Impuestos</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadAntesParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{getUtilidad2() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>ISR</th>\r\n        <td  class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n        <td  class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.imptosPorPagar * 12 |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>PTU</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n        <td class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.PTUPorPagar|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Utilidad del Ejercicio</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n        <td class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.utilidadEjercicio|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n    </tbody>\r\n  </table>\r\n\r\n</div>\r\n\r\n<div class=\"row align-items-center\" style=\"margin-bottom:20px\">\r\n  <div class=\"offset-9 col-1\">\r\n    Exportar:\r\n  </div>\r\n  <div class=\"col-1\">\r\n    <ngl-icon icon=\"pdf\" category=\"doctype\" (click)=\"PDFestadoDeResultados()\" size=\"large\"></ngl-icon>\r\n  </div>\r\n\r\n  <div class=\"col-1\">\r\n    <ngl-icon icon=\"csv\" category=\"doctype\" (click)=\"CSVestado()\" size=\"large\"></ngl-icon>\r\n  </div>\r\n\r\n</div>\r\n"
->>>>>>> 550cdd214d2eed2d0e504656c7bb89b1fce9ffb1
+module.exports = "<h4 class=\"text-center\">Estado de Resultados</h4>\r\n<hr>\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <table class=\"table table-bordered\">\r\n    <thead>\r\n      <tr class=\"thead-inverse\">\r\n        <th></th>\r\n        <th *ngFor=\"let producto of resultados\" class=\"text-center\">{{getNameByIdProducto(producto) }}</th>\r\n        <th class=\"text-center\">Total</th>\r\n      </tr>\r\n    </thead>\r\n\r\n    <tbody>\r\n      <tr>\r\n        <th>Ventas Netas</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getVentasNetas(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" >{{getTotalVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Costo de Ventas</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getCostoVentas(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" >{{getTotalCostosVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Utilidad Bruta</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" >{{getUtilidadBruta() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Costo de distribucion</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getDistParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{getDistTotal() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Otros Gastos</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\"> {{getOtrosGastosParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" *ngFor=\"let item of auxiliarT\">{{item |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Costo de Administración</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getAdminParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{getAdminTotal() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Utilidad en Operación</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadAntesParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" *ngFor=\"let item of auxiliarT\">{{getUtilidadAntes() - item |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Intereses</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n        <td class=\"text-right\" *ngFor=\"let aux of intereses\">{{aux |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Utilidad antes de Impuestos</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadAntesParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{getUtilidad2() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>ISR</th>\r\n        <td  class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n        <td  class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.imptosPorPagar * 12 |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>PTU</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n        <td class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.PTUPorPagar|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Utilidad del Ejercicio</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n        <td class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.utilidadEjercicio|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n    </tbody>\r\n  </table>\r\n\r\n</div>\r\n\r\n<div class=\"row align-items-center\" style=\"margin-bottom:20px\">\r\n  <div class=\"offset-9 col-1\">\r\n    Exportar:\r\n  </div>\r\n  <div class=\"col-1\">\r\n    <ngl-icon icon=\"pdf\" category=\"doctype\" (click)=\"PDFestadoDeResultados()\" size=\"large\"></ngl-icon>\r\n  </div>\r\n\r\n  <div class=\"col-1\">\r\n    <ngl-icon icon=\"csv\" category=\"doctype\" (click)=\"CSVestado()\" size=\"large\"></ngl-icon>\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -4342,10 +4383,11 @@ module.exports = "<h4 class=\"text-center\">Estado de Resultados</h4>\r\n<hr>\r\
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_producto_service__ = __webpack_require__("../../../../../src/app/services/producto.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__ = __webpack_require__("../../../../../src/app/services/resultados.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_balance_service__ = __webpack_require__("../../../../../src/app/services/balance.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_compra_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/compra-maquinaria.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_csv_Angular2_csv__ = __webpack_require__("../../../../angular2-csv/Angular2-csv.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_csv_Angular2_csv___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_angular2_csv_Angular2_csv__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_compra_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/compra-maquinaria.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angular2_csv_Angular2_csv__ = __webpack_require__("../../../../angular2-csv/Angular2-csv.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angular2_csv_Angular2_csv___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_angular2_csv_Angular2_csv__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EstadoResultadosComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4364,12 +4406,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var EstadoResultadosComponent = (function () {
-    function EstadoResultadosComponent(_operacionService, _productoService, _maqService, _balanceService, _resultadosService, _proyectoService) {
+    function EstadoResultadosComponent(_operacionService, _productoService, _maqService, cp, _balanceService, _resultadosService, _proyectoService) {
         var _this = this;
         this._operacionService = _operacionService;
         this._productoService = _productoService;
         this._maqService = _maqService;
+        this.cp = cp;
         this._balanceService = _balanceService;
         this._resultadosService = _resultadosService;
         this._proyectoService = _proyectoService;
@@ -4657,6 +4701,7 @@ var EstadoResultadosComponent = (function () {
             headerStyles: { fillColor: 0, halign: 'center' },
             columnStyles: {
                 cara: { halign: 'left', columnWidth: 65 },
+                t: { halign: 'right' }
             },
             addPageContent: function (data) {
                 doc.setFontSize(15);
@@ -4674,15 +4719,15 @@ var EstadoResultadosComponent = (function () {
                 dataKey: this.getNameByIdProducto(producto)
             };
             columns.push(x);
-            rows[0][x.dataKey] = this.getVentasNetas(producto).toString();
-            rows[1][x.dataKey] = this.getCostoVentas(producto).toString();
-            rows[3][x.dataKey] = this.getUtilidadParcial(producto).toString();
-            rows[5][x.dataKey] = this.getDistParcial(producto).toString();
-            rows[6][x.dataKey] = this.getOtrosGastosParcial(producto).toString();
-            rows[7][x.dataKey] = this.getAdminParcial(producto).toString();
-            rows[10][x.dataKey] = this.getUtilidadAntesParcial(producto).toString();
+            rows[0][x.dataKey] = this.cp.transform(this.getVentasNetas(producto), 'USD', true, '1.0-0');
+            rows[1][x.dataKey] = this.cp.transform(this.getCostoVentas(producto), 'USD', true, '1.0-0');
+            rows[3][x.dataKey] = this.cp.transform(this.getUtilidadParcial(producto), 'USD', true, '1.0-0');
+            rows[5][x.dataKey] = this.cp.transform(this.getDistParcial(producto), 'USD', true, '1.0-0');
+            rows[6][x.dataKey] = this.cp.transform(this.getOtrosGastosParcial(producto), 'USD', true, '1.0-0');
+            rows[7][x.dataKey] = this.cp.transform(this.getAdminParcial(producto), 'USD', true, '1.0-0');
+            rows[10][x.dataKey] = this.cp.transform(this.getUtilidadAntesParcial(producto), 'USD', true, '1.0-0');
             rows[12][x.dataKey] = "-";
-            rows[14][x.dataKey] = this.getUtilidadAntesParcial(producto).toString();
+            rows[14][x.dataKey] = this.cp.transform(this.getUtilidadAntesParcial(producto), 'USD', true, '1.0-0');
             rows[16][x.dataKey] = "-";
             rows[17][x.dataKey] = "-";
             rows[19][x.dataKey] = "-";
@@ -4693,24 +4738,24 @@ var EstadoResultadosComponent = (function () {
             dataKey: "t"
         };
         columns.push(t);
-        rows[0][t.dataKey] = this.getTotalVentas().toString();
-        rows[1][t.dataKey] = this.getTotalCostosVentas().toString();
-        rows[3][t.dataKey] = this.getUtilidadBruta().toString();
-        rows[5][t.dataKey] = this.getDistTotal().toString();
+        rows[0][t.dataKey] = this.cp.transform(this.getTotalVentas(), 'USD', true, '1.0-0');
+        rows[1][t.dataKey] = this.cp.transform(this.getTotalCostosVentas(), 'USD', true, '1.0-0');
+        rows[3][t.dataKey] = this.cp.transform(this.getUtilidadBruta(), 'USD', true, '1.0-0');
+        rows[5][t.dataKey] = this.cp.transform(this.getDistTotal(), 'USD', true, '1.0-0');
         for (var _b = 0, _c = this.auxiliarT; _b < _c.length; _b++) {
             var item = _c[_b];
-            rows[6][t.dataKey] = item.toString();
-            rows[10][t.dataKey] = (this.getUtilidadAntes() - item).toString();
+            rows[6][t.dataKey] = this.cp.transform(item, 'USD', true, '1.0-0');
+            rows[10][t.dataKey] = this.cp.transform((this.getUtilidadAntes() - item), 'USD', true, '1.0-0');
         }
-        rows[7][t.dataKey] = this.getAdminTotal().toString();
+        rows[7][t.dataKey] = this.cp.transform(this.getAdminTotal(), 'USD', true, '1.0-0');
         for (var _d = 0, _e = this.intereses; _d < _e.length; _d++) {
             var aux = _e[_d];
-            rows[12][t.dataKey] = aux.toString();
+            rows[12][t.dataKey] = this.cp.transform(aux, 'USD', true, '1.0-0');
         }
-        rows[14][t.dataKey] = this.getUtilidad2().toString();
-        rows[16][t.dataKey] = this.getISR().toString();
-        rows[17][t.dataKey] = this.getPTU().toString();
-        rows[19][t.dataKey] = (this.getUtilidad2() - this.getISR() - this.getPTU()).toString();
+        rows[14][t.dataKey] = this.cp.transform(this.getUtilidad2(), 'USD', true, '1.0-0');
+        rows[16][t.dataKey] = this.cp.transform(this.getISR(), 'USD', true, '1.0-0');
+        rows[17][t.dataKey] = this.cp.transform(this.getPTU(), 'USD', true, '1.0-0');
+        rows[19][t.dataKey] = this.cp.transform((this.getUtilidad2() - this.getISR() - this.getPTU()), 'USD', true, '1.0-0');
         doc.autoTable(columns, rows, conf);
         doc.save("Estado de Resultados.pdf");
     };
@@ -4774,7 +4819,7 @@ var EstadoResultadosComponent = (function () {
         data[17]["total"] = this.getISR();
         data[18]["total"] = this.getPTU();
         data[20]["total"] = (this.getUtilidad2() - this.getISR() - this.getPTU());
-        new __WEBPACK_IMPORTED_MODULE_7_angular2_csv_Angular2_csv__["Angular2Csv"](data, 'Estado de Resultados');
+        new __WEBPACK_IMPORTED_MODULE_8_angular2_csv_Angular2_csv__["Angular2Csv"](data, 'Estado de Resultados');
     };
     return EstadoResultadosComponent;
 }());
@@ -4783,10 +4828,10 @@ EstadoResultadosComponent = __decorate([
         selector: 'app-estado-resultados',
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.html")
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__["a" /* ResultadosService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _f || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_producto_service__["a" /* ProductoService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5__angular_common__["CurrencyPipe"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_common__["CurrencyPipe"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_balance_service__["a" /* BalanceService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__["a" /* ResultadosService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_7__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _g || Object])
 ], EstadoResultadosComponent);
 
-var _a, _b, _c, _d, _e, _f;
+var _a, _b, _c, _d, _e, _f, _g;
 //# sourceMappingURL=estado-resultados.component.js.map
 
 /***/ }),
@@ -5555,12 +5600,14 @@ var OperacionComponent = (function () {
         this.presGlobalCostoAdmon = false;
         this.presGlobalCostoVenta = false;
         this.presOtrosGastos = false;
+        this.proyectos = this._proyectoService.returnUsuarios();
         this._proyectoService.ocultaCierrePeriodo();
         this._resultadosService.vender();
     }
     OperacionComponent.prototype.ngOnInit = function () {
         var _this = this;
         setTimeout(function () {
+            _this.proyectoActual = _this.getNameById(localStorage.getItem('idProyecto'));
             _this._balanceService.getBalanceFinal().subscribe(function (data) {
                 if (data.success) {
                     _this.auxiliaresAnteriores = _this._operacionService.returnAuxiliaresAnteriores();
@@ -5796,6 +5843,7 @@ var OperacionComponent = (function () {
             }
             rows.push(x);
         }
+        var actual = this.proyectoActual;
         doc.autoTable(columns, rows, {
             margin: { top: 40,
                 left: 40 },
@@ -5810,7 +5858,7 @@ var OperacionComponent = (function () {
             addPageContent: function (data) {
                 doc.setFontSize(15);
                 doc.setFontType("bold");
-                doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+                doc.text(139.5, 15, 'Proyecto ' + actual, null, null, 'center');
                 doc.setFontSize(13);
                 doc.text(139.5, 23, 'Almacen de Artículo Terminado del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
                 doc.line(50, 27, 228, 27);
@@ -5820,6 +5868,7 @@ var OperacionComponent = (function () {
     };
     OperacionComponent.prototype.CSValmacenArticuloTerminado = function () {
         var data = [
+            { producto: "Proyecto" + this.proyectoActual, costoProd: "Periodo" + localStorage.getItem('numeroPeriodo') },
             { prodcuto: "Producto",
                 unidades: "Unidades",
                 costoProd: "Costo de Producción",
@@ -5861,6 +5910,7 @@ var OperacionComponent = (function () {
                 "total": this.cp.transform(this.getTotalMP(), 'USD', true, '1.0-0')
             }
         ];
+        var actual = this.proyectoActual;
         doc.autoTable(columns, rows, {
             margin: { top: 40,
                 left: 40 },
@@ -5877,7 +5927,7 @@ var OperacionComponent = (function () {
             addPageContent: function (data) {
                 doc.setFontSize(15);
                 doc.setFontType("bold");
-                doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+                doc.text(139.5, 15, 'Proyecto ' + actual, null, null, 'center');
                 doc.setFontSize(13);
                 doc.text(139.5, 23, 'Presupuesto Global de Compras de Materia Prima e I.V.A. del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
                 doc.line(50, 27, 228, 27);
@@ -5887,6 +5937,7 @@ var OperacionComponent = (function () {
     };
     OperacionComponent.prototype.CSVpresupuestoGlobalComprasMP = function () {
         var data = [
+            { material: "Proyecto " + this.proyectoActual, costoUni: "Periodo" + localStorage.getItem('numeroPeriodo') },
             {
                 material: "Material",
                 cantidadComprar: "Cantidad a Comprar",
@@ -5935,6 +5986,7 @@ var OperacionComponent = (function () {
             //this.cp.transform(  ,'USD',true,'1.0-0')
             rows.push(x);
         }
+        var actual = this.proyectoActual;
         doc.autoTable(columns, rows, {
             margin: { top: 40,
                 left: 40 },
@@ -5951,9 +6003,9 @@ var OperacionComponent = (function () {
             addPageContent: function (data) {
                 doc.setFontSize(15);
                 doc.setFontType("bold");
-                doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+                doc.text(139.5, 15, 'Proyecto ' + actual, null, null, 'center');
                 doc.setFontSize(13);
-                doc.text(139.5, 23, 'Presupuesto Global de Consumo de Materias Primas del Periodo X', null, null, 'center');
+                doc.text(139.5, 23, 'Presupuesto Global de Consumo de Materias Primas del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
                 doc.line(50, 27, 228, 27);
             },
         });
@@ -5968,6 +6020,7 @@ var OperacionComponent = (function () {
     };
     OperacionComponent.prototype.CSVpresupuestoGlobalConsumoMP = function () {
         var data = [
+            { producto: "Proyecto: " + this.proyectoActual, unidadProd: "Periodo" + localStorage.getItem('numeroPeriodo') },
             {
                 producto: "Producto",
                 cantidadUnit: "Cantidad Unitaria",
@@ -6005,6 +6058,7 @@ var OperacionComponent = (function () {
             { title: "Importe", dataKey: "importe" }
         ];
         var rows = [];
+        var actual = this.proyectoActual;
         var conf = {
             margin: { top: 40,
                 left: 40 },
@@ -6021,9 +6075,9 @@ var OperacionComponent = (function () {
             addPageContent: function (data) {
                 doc.setFontSize(15);
                 doc.setFontType("bold");
-                doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+                doc.text(139.5, 15, 'Proyecto ' + actual, null, null, 'center');
                 doc.setFontSize(13);
-                doc.text(139.5, 23, 'Presupuesto Global de Ventas e IVA del Periodo X', null, null, 'center');
+                doc.text(139.5, 23, 'Presupuesto Global de Ventas e IVA del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
                 doc.line(50, 27, 228, 27);
             }
         };
@@ -6043,6 +6097,7 @@ var OperacionComponent = (function () {
     };
     OperacionComponent.prototype.CSVpresupuestoGlobalVentasIVA = function () {
         var data = [
+            { cara: "Proyecto: " + this.proyectoActual, prod: "Periodo" + localStorage.getItem('numeroPeriodo') },
             {
                 cara: ""
             },
@@ -6110,6 +6165,7 @@ var OperacionComponent = (function () {
             };
             rows.push(x);
         }
+        var actual = this.proyectoActual;
         doc.autoTable(columns, rows, {
             margin: { top: 40,
                 left: 10 },
@@ -6120,9 +6176,9 @@ var OperacionComponent = (function () {
             addPageContent: function (data) {
                 doc.setFontSize(15);
                 doc.setFontType("bold");
-                doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+                doc.text(139.5, 15, 'Proyecto ' + actual, null, null, 'center');
                 doc.setFontSize(13);
-                doc.text(139.5, 23, 'Presupuesto Global de Ventas e IVA del Periodo X', null, null, 'center');
+                doc.text(139.5, 23, 'Presupuesto Global de Ventas e IVA del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
                 doc.line(50, 27, 228, 27);
             },
         });
@@ -6130,6 +6186,7 @@ var OperacionComponent = (function () {
     };
     OperacionComponent.prototype.CSVpresupuestoGlobalProduccion = function () {
         var data = [
+            { producto: "Poryecto: " + this.proyectoActual, invFinal: "Periodo: " + localStorage.getItem('numeroPeriodo') },
             {
                 producto: "Producto",
                 unidadesVender: "Unidades A Vender (+)",
@@ -6189,6 +6246,7 @@ var OperacionComponent = (function () {
             { "cara": "I.V.A." },
             { "cara": "Total a Pagar" },
         ];
+        var actual = this.proyectoActual;
         var options = {
             margin: { top: 40,
                 left: 40 },
@@ -6200,9 +6258,9 @@ var OperacionComponent = (function () {
             addPageContent: function (data) {
                 doc.setFontSize(15);
                 doc.setFontType("bold");
-                doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+                doc.text(139.5, 15, 'Proyecto ' + actual, null, null, 'center');
                 doc.setFontSize(13);
-                doc.text(139.5, 23, 'Presupuesto Global de  Costo de Trasnformación del Periodo X', null, null, 'center');
+                doc.text(139.5, 23, 'Presupuesto Global de  Costo de Trasnformación del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
                 doc.line(50, 27, 228, 27);
             },
         };
@@ -6231,6 +6289,7 @@ var OperacionComponent = (function () {
     };
     OperacionComponent.prototype.CSVpresupuestoGlobalCostoTrans = function () {
         var data = [
+            { cara: "Proyecto: " + this.proyectoActual, prod: "Periodo: " + localStorage.getItem('numeroPeriodo') },
             { cara: "" },
             { cara: "Unidades a Producir" },
             { cara: "Costo de Transformación" },
@@ -6288,6 +6347,7 @@ var OperacionComponent = (function () {
             { "cara": "I.V.A." },
             { "cara": "Total a Pagar" },
         ];
+        var actual = this.proyectoActual;
         var options = {
             margin: { top: 40,
                 left: 40 },
@@ -6299,9 +6359,9 @@ var OperacionComponent = (function () {
             addPageContent: function (data) {
                 doc.setFontSize(15);
                 doc.setFontType("bold");
-                doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+                doc.text(139.5, 15, 'Proyecto ' + actual, null, null, 'center');
                 doc.setFontSize(13);
-                doc.text(139.5, 23, 'Presupuesto Global de  Costo de Distribución del Periodo X', null, null, 'center');
+                doc.text(139.5, 23, 'Presupuesto Global de  Costo de Distribución del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
                 doc.line(50, 27, 228, 27);
             }
         };
@@ -6329,6 +6389,7 @@ var OperacionComponent = (function () {
     };
     OperacionComponent.prototype.CSVpresupuestoGlobalCostoDist = function () {
         var data = [
+            { cara: "Proyecto: " + this.proyectoActual, prod: "Periodo: " + localStorage.getItem('numeroPeriodo') },
             { cara: "" },
             { cara: "Unidades a Vender" },
             { cara: "Costo Unitario Total" },
@@ -6387,20 +6448,21 @@ var OperacionComponent = (function () {
             { "cara": "I.V.A." },
             { "cara": "Total a Pagar" },
         ];
+        var actual = this.proyectoActual;
         var options = {
             margin: { top: 40,
                 left: 40 },
             tableWidth: 200,
-            headerStyles: { fillColor: 0 },
+            headerStyles: { fillColor: 0, halign: 'center' },
             columnStyles: {
                 cara: { halign: 'left', columnWidth: 65 }
             },
             addPageContent: function (data) {
                 doc.setFontSize(15);
                 doc.setFontType("bold");
-                doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+                doc.text(139.5, 15, 'Proyecto ' + actual, null, null, 'center');
                 doc.setFontSize(13);
-                doc.text(139.5, 23, 'Presupuesto Global de  Costo de Administración del Periodo X', null, null, 'center');
+                doc.text(139.5, 23, 'Presupuesto Global de  Costo de Administración del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
                 doc.line(50, 27, 228, 27);
             },
         };
@@ -6428,6 +6490,7 @@ var OperacionComponent = (function () {
     };
     OperacionComponent.prototype.CSVpresupuestoGlobalCostoAdmin = function () {
         var data = [
+            { cara: "Proyecto: " + this.proyectoActual, prod: "Periodo: " + localStorage.getItem('numeroPeriodo') },
             { cara: "" },
             { cara: "Unidades a Vender" },
             { cara: "Costo Unitario Total" },
@@ -6470,6 +6533,7 @@ var OperacionComponent = (function () {
             { "cara": "Desarrollo de Producto" },
             { "cara": "Desarrollo de Mercado" }
         ];
+        var actual = this.proyectoActual;
         var options = {
             margin: { top: 40,
                 left: 40 },
@@ -6481,9 +6545,9 @@ var OperacionComponent = (function () {
             addPageContent: function (data) {
                 doc.setFontSize(15);
                 doc.setFontType("bold");
-                doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+                doc.text(139.5, 15, 'Proyecto ' + actual, null, null, 'center');
                 doc.setFontSize(13);
-                doc.text(139.5, 23, 'Presupuesto Global de Otros Gastos del Periodo X', null, null, 'center');
+                doc.text(139.5, 23, 'Presupuesto Global de Otros Gastos del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
                 doc.line(50, 27, 228, 27);
             }
         };
@@ -6510,10 +6574,17 @@ var OperacionComponent = (function () {
     };
     OperacionComponent.prototype.CSVpresupuestoGlobalOtrosGastos = function () {
         var data = [
+            { cara: "Proyecto: " + this.proyectoActual, prod: "Periodo: " + localStorage.getItem('numeroPeriodo') },
             { cara: "" },
             { cara: "Desarrollo de Producto" },
             { cara: "Desarrollo de Mercado" }
         ];
+        for (var _i = 0, _a = this.auxiliarC; _i < _a.length; _i++) {
+            var producto = _a[_i];
+            data[0][this.getNameByIdProducto(producto.Producto_idProducto)] = this.getNameByIdProducto(producto.Producto_idProducto);
+            data[1][this.getNameByIdProducto(producto.Producto_idProducto)] = producto.desarrolloProducto;
+            data[2][this.getNameByIdProducto(producto.Producto_idProducto)] = producto.desarrolloMercado;
+        }
         data[0]["total"] = "Total";
         data[1]["total"] = this.getTotalProducto();
         data[2]["total"] = this.getTotalMercado();
@@ -6543,6 +6614,7 @@ var OperacionComponent = (function () {
             { "cara": "" },
             { "cara": "Costo de Ventas" }
         ];
+        var actual = this.proyectoActual;
         var options = {
             margin: { top: 40,
                 left: 40 },
@@ -6554,9 +6626,9 @@ var OperacionComponent = (function () {
             addPageContent: function (data) {
                 doc.setFontSize(15);
                 doc.setFontType("bold");
-                doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+                doc.text(139.5, 15, 'Proyecto ' + actual, null, null, 'center');
                 doc.setFontSize(13);
-                doc.text(139.5, 23, 'Costo de Producción y Ventas', null, null, 'center');
+                doc.text(139.5, 23, 'Costo de Producción y Ventas del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
                 doc.line(50, 27, 228, 27);
             }
         };
@@ -6584,6 +6656,7 @@ var OperacionComponent = (function () {
     };
     OperacionComponent.prototype.CSVcostoProduccionVentas = function () {
         var data = [
+            { "cara": "Proyecto: " + this.proyectoActual, "prod": "Periodo: " + localStorage.getItem('numeroPeriodo') },
             { "cara": "I.I de Materia Prima" },
             { "cara": "Compras" },
             { "cara": "I.F. de Materia prima" },
@@ -6607,6 +6680,14 @@ var OperacionComponent = (function () {
             data[8][this.getNameByIdProducto(producto.Producto_idProducto)] = producto.costoVentas;
         }
         new __WEBPACK_IMPORTED_MODULE_7_angular2_csv_Angular2_csv__["Angular2Csv"](data, 'Presupuesto Global de Producion y Ventas');
+    };
+    OperacionComponent.prototype.getNameById = function (idProyecto) {
+        for (var _i = 0, _a = this.proyectos; _i < _a.length; _i++) {
+            var proyecto = _a[_i];
+            if (proyecto.idProyecto == idProyecto)
+                return proyecto.nombreProyecto;
+        }
+        return "id NO encontrado";
     };
     return OperacionComponent;
 }());

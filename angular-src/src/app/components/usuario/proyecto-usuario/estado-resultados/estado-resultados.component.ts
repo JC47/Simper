@@ -3,6 +3,7 @@ import {OperacionService} from '../../../../services/operacion.service';
 import {ProductoService} from '../../../../services/producto.service';
 import {ResultadosService} from '../../../../services/resultados.service';
 import {BalanceService} from '../../../../services/balance.service';
+import { CurrencyPipe } from '@angular/common';
 import { CompraMaquinariaService } from '../../../../services/compra-maquinaria.service';
 import {ProyectosService} from '../../../../services/proyectos.service';
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
@@ -28,6 +29,7 @@ export class EstadoResultadosComponent implements OnInit {
   constructor(private _operacionService:OperacionService,
               private _productoService:ProductoService,
               private _maqService:CompraMaquinariaService,
+              private cp: CurrencyPipe,
               private _balanceService:BalanceService,
               private _resultadosService:ResultadosService,
             private _proyectoService:ProyectosService){
@@ -307,7 +309,7 @@ export class EstadoResultadosComponent implements OnInit {
     headerStyles: {fillColor:0,halign:'center'},
     columnStyles: {
     cara: {halign:'left',columnWidth:65},
-
+    t:{halign:'right'}
     },
     addPageContent: function(data) {
     doc.setFontSize(15);
@@ -325,15 +327,15 @@ export class EstadoResultadosComponent implements OnInit {
       dataKey:this.getNameByIdProducto(producto)
     }
     columns.push(x);
-    rows[0][x.dataKey] = this.getVentasNetas(producto).toString();
-    rows[1][x.dataKey] = this.getCostoVentas(producto).toString();
-    rows[3][x.dataKey] = this.getUtilidadParcial(producto).toString();
-    rows[5][x.dataKey] = this.getDistParcial(producto).toString();
-    rows[6][x.dataKey] = this.getOtrosGastosParcial(producto).toString();
-    rows[7][x.dataKey] = this.getAdminParcial(producto).toString();
-    rows[10][x.dataKey] = this.getUtilidadAntesParcial(producto).toString();
+    rows[0][x.dataKey] = this.cp.transform(this.getVentasNetas(producto),'USD',true,'1.0-0')
+    rows[1][x.dataKey] = this.cp.transform(this.getCostoVentas(producto),'USD',true,'1.0-0')
+    rows[3][x.dataKey] = this.cp.transform(this.getUtilidadParcial(producto),'USD',true,'1.0-0')
+    rows[5][x.dataKey] = this.cp.transform(this.getDistParcial(producto),'USD',true,'1.0-0')
+    rows[6][x.dataKey] =  this.cp.transform(this.getOtrosGastosParcial(producto),'USD',true,'1.0-0')
+    rows[7][x.dataKey] = this.cp.transform(this.getAdminParcial(producto),'USD',true,'1.0-0')
+    rows[10][x.dataKey] =  this.cp.transform(this.getUtilidadAntesParcial(producto),'USD',true,'1.0-0')
     rows[12][x.dataKey] = "-";
-    rows[14][x.dataKey] = this.getUtilidadAntesParcial(producto).toString();
+    rows[14][x.dataKey] =  this.cp.transform(this.getUtilidadAntesParcial(producto),'USD',true,'1.0-0')
     rows[16][x.dataKey] = "-";
     rows[17][x.dataKey] = "-";
     rows[19][x.dataKey] = "-";
@@ -347,23 +349,23 @@ export class EstadoResultadosComponent implements OnInit {
     dataKey:"t"
   }
   columns.push(t);
-
-  rows[0][t.dataKey] = this.getTotalVentas().toString();
-  rows[1][t.dataKey] = this.getTotalCostosVentas().toString();
-  rows[3][t.dataKey] = this.getUtilidadBruta().toString();
-  rows[5][t.dataKey] = this.getDistTotal().toString();
+    
+  rows[0][t.dataKey] =   this.cp.transform(this.getTotalVentas(),'USD',true,'1.0-0')
+  rows[1][t.dataKey] = this.cp.transform( this.getTotalCostosVentas(),'USD',true,'1.0-0')
+  rows[3][t.dataKey] =  this.cp.transform(this.getUtilidadBruta(),'USD',true,'1.0-0');
+  rows[5][t.dataKey] =  this.cp.transform(this.getDistTotal(),'USD',true,'1.0-0')
   for(let item of this.auxiliarT){
-    rows[6][t.dataKey] = item.toString();
-    rows[10][t.dataKey] = (this.getUtilidadAntes() - item).toString();
+    rows[6][t.dataKey] = this.cp.transform(item,'USD',true,'1.0-0')
+    rows[10][t.dataKey] =  this.cp.transform((this.getUtilidadAntes() - item),'USD',true,'1.0-0')
   }
-  rows[7][t.dataKey] = this.getAdminTotal().toString();
+  rows[7][t.dataKey] = this.cp.transform(this.getAdminTotal(),'USD',true,'1.0-0')
   for(let aux of this.intereses){
-    rows[12][t.dataKey] = aux.toString();
+    rows[12][t.dataKey] =  this.cp.transform(aux,'USD',true,'1.0-0')
   }
-  rows[14][t.dataKey] = this.getUtilidad2().toString();
-  rows[16][t.dataKey] = this.getISR().toString();
-  rows[17][t.dataKey] = this.getPTU().toString();
-  rows[19][t.dataKey] = (this.getUtilidad2() - this.getISR() - this.getPTU()).toString();
+  rows[14][t.dataKey] =  this.cp.transform(this.getUtilidad2(),'USD',true,'1.0-0')
+  rows[16][t.dataKey] =  this.cp.transform(this.getISR(),'USD',true,'1.0-0')
+  rows[17][t.dataKey] =  this.cp.transform(this.getPTU(),'USD',true,'1.0-0')
+  rows[19][t.dataKey] = this.cp.transform((this.getUtilidad2() - this.getISR() - this.getPTU()),'USD',true,'1.0-0')
 
 
 
