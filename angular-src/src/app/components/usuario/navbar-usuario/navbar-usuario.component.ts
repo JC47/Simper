@@ -108,6 +108,13 @@ export class NavbarUsuarioComponent implements OnInit {
       this.confProd=false;
     }
 
+    validaVi(){
+      if(localStorage.getItem('numeroPeriodo')!=localStorage.getItem('numeroRPeriodos'))
+        return false
+      else
+        return true
+    }
+
     pasaDesZona(){
       this.router.navigate(['Usuario/proyecto/desarrolloMercado']);
       this.confZona=false;

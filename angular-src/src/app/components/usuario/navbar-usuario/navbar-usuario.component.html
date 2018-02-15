@@ -23,7 +23,7 @@
     </li>
 
     <li class="nav-item pull-left" style="margin-right:20px; margin-bottom:10px" >
-      <button  [hidden]="_proyectoService.muestraPeriodo"    type="button" class="btn btn-success navbar-right" (click)="preparaCierre()">Cerrar Periodo</button>
+      <button *ngIf="validaVi()"  [hidden]="_proyectoService.muestraPeriodo"    type="button" class="btn btn-success navbar-right" (click)="preparaCierre()">Cerrar Periodo</button>
     </li>
 
     <li class="nav-item " style="margin-right:40px;margin-bottom:10px">
