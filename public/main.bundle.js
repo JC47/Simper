@@ -4293,15 +4293,15 @@ var DesarrolloProductoComponent = (function () {
     };
     DesarrolloProductoComponent.prototype.desarrollar = function () {
         var _this = this;
+        var z = this._desarrolloProducto.comenzarDesarrollo(this.productoSelectedAdd.idProducto, this.productoSelectedAdd.costoDes);
         this.openConf = false;
         this.openLoad = true;
         setTimeout(function () {
+            if (z) {
+                _this.actualizar();
+            }
             _this.openLoad = false;
         }, 2000);
-        var z = this._desarrolloProducto.comenzarDesarrollo(this.productoSelectedAdd.idProducto, this.productoSelectedAdd.costoDes);
-        if (z) {
-            this.actualizar();
-        }
     };
     DesarrolloProductoComponent.prototype.pagarDesarrollo = function () {
         var _this = this;

@@ -79,14 +79,16 @@ export class DesarrolloProductoComponent implements OnInit {
   }
 
   desarrollar(){
-      this.openConf=false;
-      this.openLoad=true;
-      setTimeout(()=>{this.openLoad=false;
-      }, 2000);
-      var z = this._desarrolloProducto.comenzarDesarrollo(this.productoSelectedAdd.idProducto,this.productoSelectedAdd.costoDes);
+    var z = this._desarrolloProducto.comenzarDesarrollo(this.productoSelectedAdd.idProducto,this.productoSelectedAdd.costoDes);
+    this.openConf=false;
+    this.openLoad=true;
+    setTimeout(()=>{
       if(z){
         this.actualizar();
       }
+      this.openLoad=false;
+    }, 2000);
+
   }
 
   pagarDesarrollo(){
