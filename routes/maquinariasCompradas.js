@@ -4,6 +4,7 @@ const Promise = require("bluebird");
 const variable = require("../models/variable");
 const maquinariaComprada = require('../models/maquinariaComprada');
 const auxiliar = require('../models/auxiliar');
+const operacion = require('../models/operacion');
 
 router.post('/modify', (req,res,next) => {
   Promise.resolve().then(function () {
@@ -32,9 +33,6 @@ router.post('/', (req, res, next) => {
   function(idsmaqproyecto,maquinariaproyecto,maquinaria,nombremaqprod) {
        return jsonMaquinariaProyecto(idsmaqproyecto,maquinariaproyecto,maquinaria,nombremaqprod);
    })
-  // .then(function () {
-  //   return maquinariaComprada.getMaqMaqProyecto(idProyecto,numeroPeriodo);
-  // })
   .then( function (data) {
     res.json({success: true, datos:data, msg:"Operacion exitosa"});
   })
@@ -48,17 +46,46 @@ router.post('/validatecompra',(req,res,next) => {
   var idProyecto = req.body.Proyectos_idProyecto;
   var idMaquinaria = req.body.Maquinaria_idMaquinaria;
   var numeroPeriodo = req.body.Balance_numeroPeriodo;
+  var idProducto = req.body.idProducto;
+  var periodoAnterior = numeroPeriodo - 1;
 
-  Promise.resolve().then(function(){
-    return maquinariaComprada.getMaquinariaComprada(idProyecto, idMaquinaria, numeroPeriodo);
-  }).then(function(rows){
-    if(rows.length == 0){
+  Promise.join(maquinariaComprada.getMaquinariaComprada(idProyecto, idMaquinaria, numeroPeriodo),maquinariaComprada.getMaq(idMaquinaria),
+  operacion.getMaquinarias(idProducto,idProyecto),operacion.getAlmacen(idProyecto,idProducto,periodoAnterior),
+  operacion.getAlmacen(idProyecto,idProducto,numeroPeriodo),operacion.getUnidadesVendidas(idProyecto,idProducto,numeroPeriodo),
+  function(maquinaComprada,maquinaIndividual,maquinas,almacenAnterior,almacenActual,ventasTotales) {
+
+    if(maquinaComprada.length == 0){
       res.json({success:false,msg:"No puedes devolver esa maquinaria"});
     }
     else{
-      res.json({success:true});
+      var unidadesM = maquinaIndividual[0].cantidadProd;
+
+      var unidadesVendidas = getVentasAnteriores(ventasTotales);
+
+      var unidadesAlmacenadasAnterior = 0
+      if(almacenAnterior.length != 0){
+        unidadesAlmacenadasAnterior = almacenAnterior[0].unidadesAlmacenadas;
+      }
+
+      var unidadesAlmacenadasActual = 0
+      if(almacenActual.length != 0){
+        unidadesAlmacenadasActual = almacenActual[0].unidadesAlmacenadas;
+      }
+
+      var produccionTotal = getProduccion(maquinas);
+
+      var unidadesProducidas = unidadesVendidas + unidadesAlmacenadasActual - unidadesAlmacenadasAnterior;
+      var produccionReal = produccionTotal - unidadesM;
+
+        if((unidadesProducidas - produccionReal) > 0){
+          res.json({success:false,msg:"Haz ocupado esa maquinaria en produccion, no la puedes devolver"});
+        }else{
+          res.json({success:true});
+        }
     }
+
   }).catch(function (err) {
+    console.log(err);
     res.json({success:false,msg:"Algo salió mal"});
   });
 });
@@ -237,6 +264,22 @@ function maqEnMaqProyecto(maqcompradas, maqproyecto) {
     }
   }
 return cantidad;
+}
+
+function getVentasAnteriores(ventasTotales){
+  var uniAnterioresVendidas = 0;
+  for(let key in ventasTotales){
+    uniAnterioresVendidas += ventasTotales[key].unidadesVendidas;
+  }
+  return uniAnterioresVendidas;
+}
+
+function getProduccion(maquinas){
+  var P = 0;
+  for(let key$ in maquinas){
+    P += (maquinas[key$].cantidadProd * maquinas[key$].Cantidad);
+  }
+  return P;
 }
 
 function aumentaCantidad(cantidad) {

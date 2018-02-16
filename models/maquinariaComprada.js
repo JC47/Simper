@@ -57,3 +57,8 @@ module.exports.updateCantidad = function (idProyecto,idMaquinaria,numeroPeriodo,
   var queryMaqProy = "update maquinariaproyecto set Cantidad = "+cantidad+" where Maquinaria_idMaquinaria = "+idMaquinaria+" and Proyectos_idProyecto = "+idProyecto+" and Balance_numeroPeriodo = " +numeroPeriodo+ "";
   return querySql(queryMaqProy);
 }
+
+module.exports.getMaq = function(idMaquinaria){
+  var query = "select cantidadProd from maquinaria where idMaquinaria = " +idMaquinaria+ "";
+  return querySql(query);
+}
