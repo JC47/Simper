@@ -122,6 +122,7 @@ comprar(){
   regresar(){
     var x = {
       Maquinaria_idMaquinaria:this.maqSelectedLess.idMaquinaria,
+      idProducto :this.maqSelectedLess.Producto_idProducto,
       Balance_numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo')),
       Proyectos_idProyecto:parseInt(localStorage.getItem('idProyecto'))
     }
