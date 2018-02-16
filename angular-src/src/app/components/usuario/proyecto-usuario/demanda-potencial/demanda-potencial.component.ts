@@ -17,13 +17,17 @@ colorScheme:any;
 zonas:any[]=[];
 productos:any[]=[];
 graficas:any[]=[];
+scheme:any[]=[];
 
   constructor(private _demandaService:ZonasService,
   private _productosService:ProductoService,
   private _graficasService:GraficasService) {
     this.zonas=_graficasService.returnZonas();
+    console.log(this.zonas);
     this.productos=this._productosService.returnProductos();
     setTimeout(() => {
+      this.scheme=this.createColorScheme(this.zonas);
+      console.log(this.scheme)
      this.graficas=this.setGrafica(this.zonas);
      console.log(this.graficas);
    }, 800);
@@ -132,6 +136,23 @@ this.colorScheme = {
        return producto.nombreProd;
     }
     return "id no encontrado";
+
+  }
+
+
+  createColorScheme(zonas){
+    let scheme:any[]=[]
+
+    for(let zona of this.zonas){
+      let tempScheme=[]
+      for(let prod of zona.productos){
+        tempScheme.push(prod.color);
+      }
+
+      scheme.push({domain:tempScheme})
+
+    }
+    return scheme;
 
   }
 

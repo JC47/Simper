@@ -1,6 +1,6 @@
 <div class="row">
 
-  <div class="col-lg-6 col-sm-12 " style="height:200px;">
+  <div class="col-lg-6 col-sm-12 " style="height:235px;">
     <table class="table table-sm" *ngFor= "let balance of balanceFinal">
       <tr>
         <th colspan="2" class="text-center">Activo</th>
@@ -30,7 +30,7 @@
     </table>
   </div>
 
-  <div class="col-lg-6 col-sm-12 " style="height:200px;">
+  <div class="col-lg-6 col-sm-12 " style="height:235px;">
 
         <table class="table table-sm" *ngFor= "let balance of balanceFinal">
           <tr>
@@ -53,8 +53,13 @@
             <td class="text-right">{{balance.PTUPorPagar|currency:'USD':true:'1.0-0'}}</td>
           </tr>
           <tr>
-            <td>Prestamos Bancarios</td>
+            <td>Prestamos Corto Plazo</td>
             <td class="text-right">{{balance.prestamosMenosAnio|currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+          <tr>
+            <td>Prestamos a Largo Plazo</td>
+            <td class="text-right">{{balance.prestamosMasAnio|currency:'USD':true:'1.0-0'}}</td>
           </tr>
         </table>
   </div>
@@ -78,7 +83,7 @@
                   showXAxisLabel="true"
                   roundDomains="true"
                   showYAxisLabel="true"
-                  xAxisLabel="Demnada Potencial(unidades)"
+                  xAxisLabel="Demanda Potencial(unidades)"
                   yAxisLabel="Productos">
                 </ngx-charts-bar-horizontal>
           </div>
@@ -340,68 +345,35 @@
             <hr>
           </div>
           <div style="overflow-y:scroll; height:170px;oveflow-x:visible">
-            <div class="col-12" *ngFor="let zona of productosZonaDesarrollados">
-              <h6 style="margin-top:10px">{{zona.nombreZona}}</h6>
-              <hr>
-              <div class="row" style="margin-top:-5px">
+            <div class="card col-12" *ngFor="let zona of productosZonaDesarrollados">
+              <div class="row">
+                <div class="col-12">
+                  <h5 class="text-center" style="margin-top:10px;margin-bottom:10px">{{zona.nombreZona}}</h5>
+                </div>
+
+              </div>
+              <div class="row">
                 <div class="col-4" *ngFor="let producto of zona.productosDes">
-
                   <div class="card">
-
-                      <div class="col-12" style="margin-top:10px">
+                    <div class="row">
+                      <div class="col-8 offset-2" style="margin-top:10px">
                         <img src="assets/img/zone.png"  class="img-fluid">
                       </div>
-                      <span class="text-center" style="font-size:12px">{{getNameById(producto)}}</span>
-                  </div>
-                  <!-- <div class="row">
-                    <div class="col-6" >
-                      <ngx-charts-pie-grid
-                      [scheme]="colorScheme"
-                      [results]="producto.graf"
-                      designatedTotal="2">
-                      </ngx-charts-pie-grid>
                     </div>
-                    <div class="col-6">
-                      <div class="row">
-                        <div class="text-left col-12" style="font-size:13px; margin-top:30px">Periodos a desarrollar: {{getTiempo(zona.idZona,producto.idProducto)}}p <br></div>
-                        <div class="text-left col-12" style="font-size:13px;margin-top:5px">Costo de Periodo: <br>{{getCosto(zona.idZona,producto.idProducto)|currency:'USD':true:'1.0-0'}}</div>
-
+                    <div class="row">
+                      <div class="col-12">
+                        <span class="text-center" style="font-size:15px;margin-top:5px">{{getNameById(producto)}}</span>
                       </div>
                     </div>
-                  </div> -->
-
-
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-<!--
-          <div class="col-12">
-            <div class="row" style="overflow-y:scroll; height:200px;oveflow-x:visible">
-              <div class="col-12" *ngFor="let zona of productosZonaDesGraf">
-                <h6>{{zona.nombreZona}}</h6>
-                <hr>
-                <div class="row">
-                  <div class="col-6" *ngFor="let producto of zona.productos">
-                    <ngx-charts-pie-grid
-                    [scheme]="colorScheme"
-                    [results]="producto.graf"
-                    designatedTotal="40">
-                    </ngx-charts-pie-grid>
-
-
                   </div>
                 </div>
 
+
               </div>
-
-
-
             </div>
 
-          </div> -->
+          </div>
+
         </blockquote>
       </div>
     </div>
@@ -418,7 +390,39 @@
           <hr>
         </div>
         <div style="overflow-y:scroll; height:150px;oveflow-x:visible">
-          <div class="col-12" *ngFor="let zona of productosZonaSinDesarrollar" >
+          <div class="col-12" *ngFor="let zona of productosZonaSinDesarrollar">
+            <div class="card">
+
+              <div class="row" style="margin-top:10px;margin-bottom:5px">
+                <div class="col-12">
+                  <h5 class="text-center">{{zona.nombreZona}}</h5>
+                </div>
+              </div>
+
+              <div class="row" *ngFor="let producto of zona.productosSinDes" style="margin-bottom:10px">
+                <div class="col-10 offset-1">
+                  <div class="card">
+                    <div class="row">
+                      <div class="col-3">
+                        <img src="assets/img/zone.png" class="img-fluid" style="margin-left:18px;margin-top:10px;margin-bottom:10px">
+                      </div>
+                      <div class="col-9">
+                        <div class="row ">
+                          <div class="text-left col-12" style="font-size:16px; margin-top:15px">{{getNameById(producto)}}</div>
+                          <div class="text-left col-12" style="font-size:13px; margin-top:5px">Periodos a desarrollar: {{getTiempo(zona.idZona,producto)}}p</div>
+                          <div class="text-left col-12" style="font-size:13px;margin-top:5px">Costo por Periodo:{{getCosto(zona.idZona,producto)|currency:'USD':true:'1.0-0'}}</div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+          <!-- <div class="col-12" *ngFor="let zona of productosZonaSinDesarrollar" >
             <h6 style="margin-top:0px">{{zona.nombreZona}}</h6>
             <hr>
             <div class="row">
@@ -444,37 +448,8 @@
 
             </div>
 
-          </div>
+          </div> -->
         </div>
-
-
-
-        <!-- <div class="col-12">
-          <div class="row" style="overflow-y:scroll; height:200px;oveflow-x:visible">
-
-
-            <div class="col-12" *ngFor="let zona of productosZonaSinDesGraf">
-              <h6>{{zona.nombreZona}}</h6>
-              <hr>
-              <div class="row">
-                <div class="col-6" *ngFor="let producto of zona.productos">
-                  <ngx-charts-pie-grid
-                  [scheme]="colorScheme"
-                  [results]="producto.graf"
-                  designatedTotal="40">
-                  </ngx-charts-pie-grid>
-
-
-                </div>
-              </div>
-
-            </div>
-
-
-
-          </div>
-
-        </div> -->
       </blockquote>
     </div>
   </div>
@@ -492,9 +467,8 @@
           <hr>
         </div>
         <div style="overflow-y:scroll; height:180px;oveflow-x:visible">
-          <div class="col-12" *ngFor="let zona of productosZonaEnDesGraf">
+          <div class="col-12 card" *ngFor="let zona of productosZonaEnDesGraf" style="margin-bottom:10px">
             <h6 style="margin-top:15px">{{zona.nombreZona}}</h6>
-            <hr>
             <div class="row">
               <div class="col-12" *ngFor="let producto of zona.productos">
                 <div class="row">
