@@ -188,11 +188,14 @@ router.post('/getAmortizacion', (req,res,next) => {
   var idCredito = req.body.idCredito;
   var idProyecto = req.body.idProyecto;
 
-  Promise.resolve().then(function(){
+  Promise.resolve()
+  .then(function(){
     return prestamo.getAmortizacion(idProyecto,idCredito);
-  }).then(function(rows){
+  })
+  .then(function(rows){
     res.json({success:true,datos:rows,msg:"Bien"});
-  }).catch(function(err){
+  })
+  .catch(function(err){
     console.error("got error: " + err);
     res.json({success:false, msg:"No sirve"});
   });
@@ -215,12 +218,11 @@ router.get('/getCreditosBalance/:idProyecto', (req,res,next) => {
 router.post('/validacreditos', (req,res,next) => {
   //var idCredito = req.body.idCredito;
   var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
   var limite;
   var arrayIdCredito = [];
-  Promise.join(prestamo.getCreditosActivos(idProyecto),prestamo.getIdCreditosActivos(idProyecto),
+  Promise.join(prestamo.getCreditosActivos(idProyecto, numeroPeriodo),prestamo.getIdCreditosActivos(idProyecto,numeroPeriodo),
    function(activos, idsactivos) {
-console.log("activos", activos);
-console.log("idsactivos",idsactivos);
      if (activos[0].creditosactivos<2) {
        //bloquea
        limite = 0;//limite: 0 puede escoger otro credito.
@@ -228,34 +230,15 @@ console.log("idsactivos",idsactivos);
        //bloquea
        limite = 1;//limite: 1 ya no puede escoger más
      }
-
-
      for (var i = 0; i < idsactivos.length; i++) {
        arrayIdCredito.push(idsactivos[i]);
      }
-
      var json = {
        "idsCredito":arrayIdCredito,
        "limite":limite
      }
       return json
     })
-
-  // Promise.resolve()
-  // .then(function(){
-  //   return prestamo.getCreditosActivos(idProyecto);
-  // })
-  // .then(function (activos) {
-  //   if (activos[0].creditosactivos<2) {
-  //     //bloquea
-  //     limite = 0;//limite: 0 puede escoger otro credito.
-  //   }else if (activos[0].creditosactivos==2) {
-  //     //bloquea
-  //     limite = 1;//limite: 1 ya no puede escoger más
-  //   }
-  //
-  //   return prestamo.getIdCreditosActivos(idProyecto);
-  // })
   .then(function(json){
     res.json({success:true, datos:json.idsCredito, limite:json.limite, msg:"Bien"});
   })
@@ -265,39 +248,77 @@ console.log("idsactivos",idsactivos);
   });
 });
 
+//Esta ruta se llamará para validar que cada plazo sujeto a cada crédito sea descontado en su respectivo cambio de periodo
+//e.i, cada plazo del periodo se irá descontando hasta llegar a 0 cada que se cambie de periodo
 router.post('/validaperiodos', (req,res,next) => {
+  //el numero de periodo se lo tienen que ir dando consecutivo al momento de ir validando los periodos
+  //en la regresión, ya no importa qué número de periodo le estemos pasando
   var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;//numero del Periodo en donde esté situado el usuario
   var arrayFaltantes = [];
-    Promise.resolve()
-    .then(function () {
-      return prestamo.getPlazoActivo(idProyecto);
-    })
-    .then(function (plazoactivo) {
-        console.log("No puedes pedir más creditos");
-        arrayFaltantes = periodosFaltantes(plazoactivo);
+  var arrayCreditosActivos = [];
+  var coincidenciasCreditoActivo = [];
 
-        for (var i = 0; i < arrayFaltantes.length; i++) {
-          if (arrayFaltantes[i].activo == 1) {
-            var json = {
-              "plazo":arrayFaltantes[i].plazo,
-              "activo":arrayFaltantes[i].activo
-            }
-            console.log("json update", json);
-            //1
-            prestamo.updateCreditoActivo(json,arrayFaltantes[i].idCredito,arrayFaltantes[i].idProyecto);
-          }else {
-            //0
-            prestamo.deleteCreditoActivo(arrayFaltantes[i].idCredito,idProyecto);
-          }
-        }
-          return prestamo.getIdCreditosActivos(idProyecto);
+  Promise.join(
+    prestamo.getCreditoActivoByNumeroPeriodo(idProyecto,numeroPeriodo),
+    prestamo.getCreditoActivo(idProyecto),
+    prestamo.getIdsCredito(idProyecto,numeroPeriodo),
+    function(creditoactivonump,creditoactivo,idscreditos) {
+      arrayCreditosActivos = creditoactivo;
+      return jsonMaxNumeroPeriodo(creditoactivonump,idscreditos);
     })
-    //})
+    .then(function (creditoactivonumeroperiodo) {
+        arrayFaltantes = periodosFaltantes(creditoactivonumeroperiodo);
+        coincidenciasCreditoActivo = interseccionCreditoActivo(arrayFaltantes,arrayCreditosActivos);
+        arrayFaltantes = eliminaDuplicados(coincidenciasCreditoActivo,arrayFaltantes);
+        return prestamo.addCreditoActivoMul(arrayFaltantes);
+      })
     .then(function () {
-      return prestamo.getIdCreditosActivos(idProyecto);
-    })
+      return prestamo.getCreditoActivoRegresion(idProyecto,numeroPeriodo);
+      })
     .then(function(rows){
-      res.json({success:true,datos:rows,msg:"Bien"});
+      res.json({success:true, msg:"Bien"});
+    })
+  .catch(function(err){
+    console.error("got error: " + err);
+    res.json({success:false, msg:"No sirve"});
+  });
+});
+//HISTORIAL CREDITOS ACTIVOS EN TODOS LOS PERIODOS
+//NO BORRAR
+// router.post('/historialcreditosregresion/', (req,res,next) => {
+//   var idProyecto = req.body.idProyecto;
+//   var numeroPeriodo = req.body.numeroPeriodo;
+//
+//   Promise.join(
+//     prestamo.getCreditoActivoRegresion(idProyecto,numeroPeriodo),
+//     prestamo.getIdCreditoPlazo(),
+//     function (creditoactivoregresion,idcreditoplazo) {
+//     return jsonCreditosActivosRegresion(creditoactivoregresion,idcreditoplazo);
+//   })
+//   .then(function(rows){
+//     res.json({success:true,datos:rows,msg:"Bien"});
+//   })
+//   .catch(function(err){
+//     console.error("got error: " + err);
+//     res.json({success:false, msg:"No sirve"});
+//   });
+// });
+
+router.post('/regresioncreditos/', (req,res,next) => {
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+  Promise.join(
+    prestamo.getCreditosActivoPorPeriodo(idProyecto,numeroPeriodo),
+    prestamo.getCreditosTerminados(idProyecto,numeroPeriodo),
+    function(creditosactivosporperiodo,creditoterminados) {
+      // var a = [{ "idCredito": 1},{"idCredito":2},{"idCredito":1}];
+      // var b = [{ "idCredito": 1}];
+
+      return diferencia(creditoterminados,creditosactivosporperiodo)
+    })
+  .then(function(rows){
+    res.json({success:true,datos:rows,msg:"Bien"});
   })
   .catch(function(err){
     console.error("got error: " + err);
@@ -704,40 +725,41 @@ for (var j = 0; j < repIdCreditos.length; j++) {
   return creditosArray;
 }
 
-function periodosFaltantes(plazoactivo) {
+function periodosFaltantes(creditoactivonumeroperiodo) {
 //si nvoplazo == 0 borra el registro de creditoactivo
 //si nvoplazo!=0 continua en creditoactivo y actualiza el valor del atributo plazo
 var periodos = [];
 
-for (var i = 0; i < plazoactivo.length; i++) {//2
+for (var i = 0; i < creditoactivonumeroperiodo.length; i++) {//2
 
-  if (plazoactivo[i].plazo==0) {
+  if (creditoactivonumeroperiodo[i].plazo==0) {
     //si los plazos de pago llegan a cero en el periodo donde se encuentra
     // actualizamos el valor a 0. Disponible
     var json = {
-      "idCredito":plazoactivo[i].idCredito,
-      "idProyecto":plazoactivo[i].idProyecto,
-      "plazo":0,
-      "activo":0
+      "idCredito":creditoactivonumeroperiodo[i].idCredito,
+      "idProyecto":creditoactivonumeroperiodo[i].idProyecto,
+      "numeroPeriodo":creditoactivonumeroperiodo[i].numeroPeriodo,
+      "plazo":0//,
+//      "activo":0
     }
-    console.log("json: ",json);
     periodos.push(json);
-
   }else {
-    nvoplazo = plazoactivo[i].plazo - 1
+    var nvoplazo = creditoactivonumeroperiodo[i].plazo - 1
     if (nvoplazo==0) {
       var json = {
-        "idCredito":plazoactivo[i].idCredito,
-        "idProyecto":plazoactivo[i].idProyecto,
-        "plazo":nvoplazo,
-        "activo":0
+        "idCredito":creditoactivonumeroperiodo[i].idCredito,
+        "idProyecto":creditoactivonumeroperiodo[i].idProyecto,
+        "numeroPeriodo":creditoactivonumeroperiodo[i].numeroPeriodo + 1,
+        "plazo":nvoplazo//,
+        //"activo":0
       }
     }else {
       var json = {
-        "idCredito":plazoactivo[i].idCredito,
-        "idProyecto":plazoactivo[i].idProyecto,
-        "plazo":nvoplazo,
-        "activo":1
+        "idCredito":creditoactivonumeroperiodo[i].idCredito,
+        "idProyecto":creditoactivonumeroperiodo[i].idProyecto,
+        "numeroPeriodo":creditoactivonumeroperiodo[i].numeroPeriodo + 1,
+        "plazo":nvoplazo//,
+        //"activo":1
       }
     }
     console.log("json: ",json);
@@ -776,5 +798,189 @@ function gPagos(pagos){
   return PPagar;
 }
 
+function jsonMaxNumeroPeriodo(creditoactivonump,idscreditos){
+  var repIdCreditoActivo = [];//almacena las veces que se repite un idProducto en zonas de la tabla productozonaproyecto join producto
+  var i = 0;
+
+  while (i<idscreditos.length) {
+    var aux = 0;
+    for (var j = 0; j < creditoactivonump.length; j++) {
+      if (idscreditos[i].idCredito == creditoactivonump[j].idCredito) {
+        aux = aux +1;
+      }
+    }
+    repIdCreditoActivo.push(aux);
+    i++;
+  }
+
+var aux = 0;
+var arrayCreditoActivo = [];
+
+for (var k = 0; k < repIdCreditoActivo.length; k++) {
+  for (var l = 0; l < repIdCreditoActivo[k]; l++) {
+    aux = aux + 1;
+  }
+      console.log("aux: ", aux);
+
+  var json = {
+    "idCredito":creditoactivonump[aux-1].idCredito,
+    "idProyecto":creditoactivonump[aux-1].idProyecto,
+    "numeroPeriodo":creditoactivonump[aux-1].numeroPeriodo,
+    "plazo":creditoactivonump[aux-1].plazo
+  }
+    arrayCreditoActivo.push(json);
+}
+
+return arrayCreditoActivo;
+}
+
+function interseccionCreditoActivo(arrayFaltantes,arrayCreditosActivos) {
+    var coincidenciasCreditoActivo = [];
+    for (var i = 0; i < arrayFaltantes.length; i++) {
+      for (var j = 0; j < arrayCreditosActivos.length; j++) {
+        if ( (arrayFaltantes[i].idCredito == arrayCreditosActivos[j].idCredito) && (arrayFaltantes[i].idProyecto == arrayCreditosActivos[j].idProyecto) &&
+             (arrayFaltantes[i].plazo == arrayCreditosActivos[j].plazo) && (arrayFaltantes[i].numeroPeriodo == arrayCreditosActivos[j].numeroPeriodo)) {
+               var json = {
+                 "idCredito":arrayFaltantes[i].idCredito,
+                 "idProyecto":arrayFaltantes[i].idProyecto,
+                 "numeroPeriodo":arrayFaltantes[i].numeroPeriodo,
+                 "plazo":arrayFaltantes[i].plazo
+               };
+              coincidenciasCreditoActivo.push(json);
+        }
+      }
+    }
+    return coincidenciasCreditoActivo;
+}
+
+function eliminaDuplicados(coincidenciasCreditoActivo,arrayFaltantes) {
+  for (var i = 0, len = coincidenciasCreditoActivo.length; i < len; i++) {
+      for (var j = 0, len2 = arrayFaltantes.length; j < len2; j++) {
+          if ((coincidenciasCreditoActivo[i].idCredito === arrayFaltantes[j].idCredito) && (coincidenciasCreditoActivo[i].idProyecto === arrayFaltantes[j].idProyecto) &&
+               (coincidenciasCreditoActivo[i].plazo === arrayFaltantes[j].plazo) && (coincidenciasCreditoActivo[i].numeroPeriodo === arrayFaltantes[j].numeroPeriodo)) {
+              arrayFaltantes.splice(j, 1);
+              len2=arrayFaltantes.length;
+          }
+      }
+  }
+//  console.log("1 arrayFaltantes:: ",arrayFaltantes);
+//  console.log("2 coincidenciasCreditoActivo:: ",coincidenciasCreditoActivo);
+  return arrayFaltantes;
+}
+
+function diferencia (a1, a2) {
+
+    var arrayAux = [], resta = [];
+
+    for (var i = 0; i < a1.length; i++) {
+        arrayAux[a1[i].idCredito] = true;
+      //  console.log("a1[i].idCredito: ",a1[i].idCredito);
+    }
+
+    for (var i = 0; i < a2.length; i++) {
+        if (arrayAux[a2[i].idCredito]) {
+            delete arrayAux[a2[i].idCredito];
+        } else {
+            arrayAux[a2[i].idCredito] = true;
+                //    console.log("a2[i].idCredito: ",a2[i].idCredito);
+
+        }
+    }
+//console.log("arrayAux:: ",arrayAux);
+    for (var k in arrayAux) {
+      var json = {
+        "idCredito":k
+      }
+        resta.push(json);
+    }
+    return resta;
+}
+
+// function eliminaDuplicadosCreditos(creditoterminados,creditosactivosporperiodo) {
+//
+//   function comparer(otherArray){
+//     return function(current){
+//       return otherArray.filter(function(other){
+//         return other.idCredito == current.idCredito
+//       }).length == 0;
+//     }
+//   }
+//
+//   var onlyInA = creditoterminados.filter(comparer(creditosactivosporperiodo));
+//   var onlyInB = creditosactivosporperiodo.filter(comparer(creditoterminados));
+//
+//   result = onlyInA.concat(onlyInB);
+//
+//   console.log("result:: ",result);
+//
+//
+//   return result;
+// }
+
+function jsonProductosSinDesarrollar(productozonasindes,idszonasindes,zonas) {
+
+  var repIdProductosSinDes = [];//almacena las veces que se repite un idZona en productozonasindes
+
+  var i = 0;
+  while (i<idszonasindes.length) {
+    var aux = 0;
+    for (var j = 0; j < productozonasindes.length; j++) {
+      if (idszonasindes[i].Zona_idZonas == productozonasindes[j].Zona_idZonas) {
+        aux = aux +1;
+      }
+    }
+    repIdProductosSinDes.push(aux);
+    i++;
+  }
+//console.log(repIdProductosSinDes);
+var zonaArray = []
+var k = 0;
+
+while (k < idszonasindes.length) {
+  for (var i = 0; i < zonas.length; i++) {
+    if (idszonasindes[k].Zona_idZonas == zonas[i].idZona) {
+      var json = {
+        "idZona":idszonasindes[k].Zona_idZonas,
+        "nombreZona":zonas[i].nombreZona,
+        "productosSinDes":[]
+      }
+    zonaArray.push(json);
+    }
+  }
+  k++;
+}
+
+var aux2 = 0;
+for (var j = 0; j < repIdProductosSinDes.length; j++) {
+  for (var k = 0; k < (repIdProductosSinDes[j]); k++) {
+    zonaArray[j]['productosSinDes'].push(productozonasindes[aux2].Producto_idProducto);
+   aux2 = aux2 + 1;
+  }
+}
+
+console.log(zonaArray);
+
+  return zonaArray;
+}
+//NO BORRAR
+//Historial de creditos activos que hay al momento de hacer la regresión
+// function jsonCreditosActivosRegresion(creditoactivoregresion,idcreditoplazo) {
+//
+//   var arrayOrdenCreditos = [];//almacena las veces que se repite un idCreditoActivo en orden en el que se pidieron
+//   var i = 0;
+//   while (i<creditoactivoregresion.length) {
+//     for (var j = 0; j < idcreditoplazo.length; j++) {
+//       if ((creditoactivoregresion[i].idCredito == idcreditoplazo[j].idCredito) && (creditoactivoregresion[i].plazo == idcreditoplazo[j].plazo)) {
+//           var json = {
+//             "idCredito":creditoactivoregresion[i].idCredito
+//           };
+//           arrayOrdenCreditos.push(json);
+//       }
+//     }
+//     i++;
+//   }
+// //return console.log("arrayOrdenCreditos:: ",arrayOrdenCreditos);
+// return arrayOrdenCreditos;
+// }
 
 module.exports = router;

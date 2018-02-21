@@ -180,10 +180,28 @@ module.exports.plazoCredito = function (idCredito) {
 
 //agregamos el credito seleccionado a una tabla que registra los créditos que tenemos
 module.exports.addCreditoActivo = function (json) {
-  console.log("CREDITO ACTIVO");
+  //console.log("CREDITO ACTIVO");
   var query = "insert into creditoactivo set ? ";
   return querySql(query,json);
 }
+
+module.exports.addCreditoActivoMul = function (arrayfaltantes) {
+  //console.log("CREDITO ACTIVO");
+  for (var i = 0; i < arrayfaltantes.length; i++) {
+
+    var json = {
+      "idCredito":arrayfaltantes[i].idCredito,
+      "idProyecto":arrayfaltantes[i].idProyecto,
+      "numeroPeriodo":arrayfaltantes[i].numeroPeriodo,
+      "plazo":arrayfaltantes[i].plazo
+    }
+
+    var query = "insert into creditoactivo set ?";
+    querySql(query,json);
+  }
+return console.log("addCreditoActivoMul");
+}
+
 //actualiza los valores de creditoactivo
 module.exports.updateCreditoActivo = function (json, idCredito, idProyecto) {
   var query = "update creditoactivo set ? where idCredito = "+idCredito+" and idProyecto = "+idProyecto+" ";
@@ -203,25 +221,67 @@ module.exports.deleteCreditoActivoNumP = function (idCredito,idProyecto,numeroPe
   return querySql(query);
 }
 
+//VALIDA NUMERO DE CREDITOS ACTIVOS EN LOS PERIODOS
 //numero de creditos activos por Proyecto_idProyecto
-module.exports.getCreditosActivos = function (idProyecto) {
-  var query = "select count(idCredito) as creditosactivos from creditoactivo where idProyecto = "+idProyecto+" and activo = 1 ";
+module.exports.getCreditosActivos = function (idProyecto,numeroPeriodo) {
+  var query = "select count(distinct idCredito) as creditosactivos from creditoactivo where idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+" and plazo !=0 ";
   return querySql(query);
 }
-//select count(idCredito) as creditosactivos from creditoactivo where idProyecto = 454 and activo = 1;
-//Id's de credito activos
-module.exports.getIdCreditosActivos = function (idProyecto) {
-  var query = "select creditoactivo.idCredito,creditoactivo.numeroPeriodo from creditoactivo inner join creditobalance on creditoactivo.activo = 1 and creditoactivo.idProyecto = "+idProyecto+" and creditobalance.Proyectos_idProyecto = creditoactivo.idProyecto and creditobalance.credito_idCredito = creditoactivo.idCredito and creditobalance.numeroPeriodo = creditoactivo.numeroPeriodo ";
+
+module.exports.getIdCreditosActivos = function (idProyecto,numeroPeriodo) {
+  var query = "select * from creditoactivo where idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+" and plazo !=0 ";
   return querySql(query);
 }
-//select creditoactivo.idCredito,creditoactivo.numeroPeriodo from creditoactivo inner join creditobalance on creditoactivo.activo = 1 and creditoactivo.idProyecto = 443 and creditobalance.Proyectos_idProyecto = creditoactivo.idProyecto and creditobalance.credito_idCredito = creditoactivo.idCredito and creditobalance.numeroPeriodo = creditoactivo.numeroPeriodo;
-//get plazo,activo de creditoactivo
-module.exports.getPlazoActivo = function (idProyecto) {
+
+//VALIDA LOS DESCUENTOS DEL PLAZO DE CADA CRÉDITO QUE SE REALIZA EN CADA PERIODO
+//VALIDA QUÉ CRÉDITOS ESTÁN ACTIVOS EN LA REGRESIÓN
+
+module.exports.getCreditoActivo = function (idProyecto) {
   var query = "select * from creditoactivo where idProyecto = "+idProyecto+" ";
+  return querySql(query);
+}
+//Regresa una tabla con los registros de los creditos activos y sus respectivos numeros de periodos que han sido saldados
+module.exports.getCreditoActivoByNumeroPeriodo = function (idProyecto,numeroPeriodo) {
+  //var query = "select * from creditoactivo where idProyecto = "+idProyecto+" ";
+  var query = "select * from creditoactivo where idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" ";
+  return querySql(query);
+
+}
+//Regresa especificamente el creditoactivo que está en el número de periodo que se pide
+module.exports.getCreditoActivoRegresion = function (idProyecto,numeroPeriodo) {
+  var query = "select * from creditoactivo where idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" order by numeroPeriodo";
+  return querySql(query);
+}
+//Obtiene los idscreditos que estuvieron activosa partir del periodo donde se ha hecho la petición de regresión hacia atrás
+module.exports.getIdsCreditoActivoRegresion = function (idProyecto,numeroPeriodo) {
+  var query = "select distinct idCredito from creditoactivo where idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+" and plazo!=0 ";
+  return querySql(query);
+}
+
+module.exports.getIdCreditoPlazo = function () {
+  var query = "select idCredito, plazo from credito";
+  return querySql(query);
+}
+
+module.exports.getIdsCredito = function (idProyecto, numeroPeriodo) {
+  var query = "select distinct idCredito from creditoactivo where idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" ";
   return querySql(query);
 }
 
 module.exports.deteleCreditoActivo = function (idCredito,idProyecto) {
   var query = "delete from creditoactivo where idCredito = "+idCredito+" and idProyecto = "+idProyecto+" ";
+  return querySql(query);
+}
+
+//Regresion Creditos Activos por periodo
+
+module.exports.getCreditosActivoPorPeriodo = function (idProyecto,numeroPeriodo) {
+  //var query = "select distinct idCredito from creditoactivo where not (idCredito) in (select idCredito from creditoactivo where plazo=0 and idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" ) and idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" ";
+  var query = "select * from creditoactivo where (idCredito,plazo) in (select idCredito,plazo from credito) and idProyecto = "+idProyecto+" and numeroPeriodo<="+numeroPeriodo+" order by numeroPeriodo";
+  return querySql(query);
+}
+
+module.exports.getCreditosTerminados = function (idProyecto,numeroPeriodo) {
+  var query = "select idCredito,idProyecto,numeroPeriodo,plazo from creditoactivo where plazo=0 and numeroPeriodo <= "+numeroPeriodo+" and idProyecto = "+idProyecto+" ";
   return querySql(query);
 }
