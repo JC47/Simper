@@ -447,8 +447,7 @@ Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCr
       "idCredito":idCredito,
       "idProyecto":idProyecto,
       "numeroPeriodo":numeroPeriodo,
-      "plazo":plazo[0].plazocredito,
-      "activo":1
+      "plazo":plazo[0].plazocredito
     }
     return prestamo.addCreditoActivo(json);
   })

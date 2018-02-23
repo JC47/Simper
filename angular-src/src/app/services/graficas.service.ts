@@ -39,14 +39,17 @@ export class GraficasService {
   }
 
   eliminaPeriodo(idZona,idProducto){
+    this.zonas.length = 0;
     this.deletePeriodo(idZona,idProducto).subscribe(data=>{
       if(data.success){
         this.getZonas().subscribe(data=>{
           for(let num in data.datos){
-            this.zonas[num]=data.datos[num];
+            this.zonas.push(data.datos[num]);
           }
-        })      }
+        })
+      }
     })
+    return this.zonas;
   }
 
   setPeriodo(producto){
@@ -68,16 +71,17 @@ export class GraficasService {
 
 
   editaPeriodo(producto){
-      this.setPeriodo(producto).subscribe(data=>{
-        if(data.success){
-          this.getZonas().subscribe(data=>{
-            for(let num in data.datos){
-              this.zonas[num]=data.datos[num];
-            }
-          })      }
+    this.zonas.length = 0;
+    this.setPeriodo(producto).subscribe(data=>{
+      if(data.success){
+        this.getZonas().subscribe(data=>{
+          for(let num in data.datos){
+            this.zonas.push(data.datos[num]);
+          }
+        });
       }
-
-      )
+    });
+    return this.zonas;
   }
 
 
@@ -101,27 +105,27 @@ export class GraficasService {
   }
 
   returnGraficas(){
-    this.graficas=this.setGraficas();
-    return this.graficas;
+    return this.setGraficas();
   }
 
 
   agregaPeriodo(producto){
+    this.zonas.length = 0;
     this.addPeriodo(producto).subscribe(data =>{
       if(data.success){
         this.getZonas().subscribe(data=>{
           for(let num in data.datos){
-            this.zonas[num]=data.datos[num];
+            this.zonas.push(data.datos[num]);
           }
-        })      }
+        })
+      }
     });
+    return this.zonas;
   }
 
-  estableceZonasGraf(){
+  returnZonas(){
     this.zonas.length = 0;
-
     this.getZonas().subscribe(data => {
-      console.log("Servici Graf",data)
       for(let key$ in data.datos){
         this.zonas.push(data.datos[key$]);
       }
@@ -129,15 +133,8 @@ export class GraficasService {
     return this.zonas;
   }
 
-  returnZonas(){
-    this.estableceZonasGraf();
-    return this.zonas;
-  }
-
   setGraficas(){
-    let graficas:any[]=[];
-    let grafica:any[];
-    graficas=new Array;
+    let graficas = [];
 
     this.getZonas().subscribe(data=>{
       for(let num in data.datos){

@@ -128,7 +128,8 @@ export class UsuarioCreditoService {
       'Content-Type':'application/json'
     });
     var x = {
-      idProyecto:localStorage.getItem('idProyecto')
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:localStorage.getItem('numeroPeriodo')
     }
     return this.http.post('prestamo/validacreditos',x,{headers}).map(res => res.json());
   }
@@ -140,7 +141,6 @@ export class UsuarioCreditoService {
         r.push(data.datos[key]);
       }
     });
-    console.log("Arreglo",r)
     return r;
   }
 
@@ -149,9 +149,10 @@ export class UsuarioCreditoService {
       'Content-Type':'application/json'
     });
     var x = {
-      idProyecto:localStorage.getItem('idProyecto')
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:localStorage.getItem('numeroPeriodo')
     }
-    return this.http.post('prestamo/getActivos',x,{headers}).map(res => res.json());
+    return this.http.post('prestamo/regresioncreditos',x,{headers}).map(res => res.json());
   }
 
   validarP(){
@@ -159,7 +160,8 @@ export class UsuarioCreditoService {
       'Content-Type':'application/json'
     });
     var x = {
-      idProyecto:localStorage.getItem('idProyecto')
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:localStorage.getItem('numeroPeriodo')
     }
     return this.http.post('prestamo/validaperiodos',x,{headers}).map(res => res.json());
   }

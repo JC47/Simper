@@ -992,6 +992,7 @@ var DemandasComponent = (function () {
         };
     };
     DemandasComponent.prototype.guardaZona = function (zona) {
+        var _this = this;
         if (!this.buscaRepetidos(zona)) {
             this._demandaService.guardarZona(zona);
             this.modalNew.hide();
@@ -1004,6 +1005,9 @@ var DemandasComponent = (function () {
         else {
             alert("Repetido");
         }
+        setTimeout(function () {
+            _this.zonas = _this._demandaService.returnZonasNormales();
+        }, 500);
     };
     DemandasComponent.prototype.buscaRepetidos = function (zonaS) {
         for (var _i = 0, _a = this.zonas; _i < _a.length; _i++) {
@@ -1793,6 +1797,7 @@ var ProductosComponent = (function () {
         this.modalNew.hide();
     };
     ProductosComponent.prototype.editaProducto = function (producto) {
+        var _this = this;
         producto.color = this.color;
         this._productoService.setProducto(producto).subscribe();
         this.modalEdit.hide();
@@ -1801,6 +1806,9 @@ var ProductosComponent = (function () {
             msg: "Producto \"" + (producto.nombreProd) + "\" editado",
             timeout: 2000
         });
+        setTimeout(function () {
+            _this.productos = _this._productoService.returnProductos();
+        }, 500);
     };
     ProductosComponent.prototype.eliminaProducto = function (idProducto) {
         this._productoService.deleteProducto(idProducto).subscribe();
@@ -2204,7 +2212,6 @@ var NavbarUsuarioComponent = (function () {
                         var dep = data.datos[0].maqEquipo * .10;
                         _this._balanceService.crearBalance(proyecto, data.datos[0], periodoNuevo).subscribe(function (data) {
                             if (data.success) {
-                                setTimeout(function () { _this.openBien = true; }, 1000);
                                 localStorage.setItem('numeroPeriodo', periodoNuevo.toString());
                                 localStorage.setItem('numeroRPeriodos', periodoNuevo.toString());
                                 _this.periodo = _this.periodo + 1;
@@ -2217,12 +2224,15 @@ var NavbarUsuarioComponent = (function () {
                                     numero: _this.periodo
                                 };
                                 _this.periodos.push(y);
+                                setTimeout(function () {
+                                    _this.openBien = true;
+                                    _this._desarrolloProducto.actualizarPD();
+                                    _this._desarrolloZona.actualizarZonasDes();
+                                    _this._creditoService.validarP().subscribe();
+                                }, 1000);
                             }
                         });
                     });
-                    _this._desarrolloProducto.actualizarPD();
-                    _this._desarrolloZona.actualizarZonasDes();
-                    _this._creditoService.validarP().subscribe();
                 }
             }
         }, 1000);
@@ -4939,7 +4949,6 @@ var FinanciamientoComponent = (function () {
         for (var _i = 0, _a = this.creditosActivos; _i < _a.length; _i++) {
             var credit = _a[_i];
             if (credito.idCredito == credit.idCredito || this.validaVi()) {
-                console.log("esta pedidio");
                 return true;
             }
         }
@@ -8699,17 +8708,15 @@ var ZonaProductoComponent = (function () {
         //this.scrollService.scrollTo(this.zonaScrollSelected.zona+this.zonaScrollSelected.producto)
         this.modalPeriodoEdit.hide();
         setTimeout(function () {
-            _this.graficas = _this._graficasService.returnGraficas();
+            _this.graficas = _this._graficasService.setGraficas();
         }, 1000);
-        // console.log("Coomponent",producto)
-        //this.scrollService.scrollTo(zona.idZona.toS);
     };
     ZonaProductoComponent.prototype.borraPeriodo = function (idZona, idProducto) {
         var _this = this;
         this._graficasService.eliminaPeriodo(idZona, idProducto);
         // console.log(idZona,idProducto);
         setTimeout(function () {
-            _this.graficas = _this._graficasService.returnGraficas();
+            _this.graficas = _this._graficasService.setGraficas();
         }, 1000);
     };
     ZonaProductoComponent.prototype.selectProductoScroll = function (element) {
@@ -8721,24 +8728,13 @@ var ZonaProductoComponent = (function () {
         //console.log(this.zonaScrollSelected.zona+this.zonaScrollSelected.producto)
     };
     ZonaProductoComponent.prototype.agregaPeriodo = function (producto) {
-        // this._graficasService.addPeriodo(producto).subscribe();
         var _this = this;
         this._graficasService.agregaPeriodo(producto);
-        console.log("anterior graf", this.graficas);
-        console.log("new graf", this.graficas);
-        //console.log(this.zonas);
         // console.log(producto);
         setTimeout(function () {
-            _this.graficas = _this._graficasService.returnGraficas();
+            _this.graficas = _this._graficasService.setGraficas();
         }, 1000);
         this.modalPeriodoNew.hide();
-    };
-    ZonaProductoComponent.prototype.numPeriodos = function (producto) {
-        this._graficasService.getZonas().subscribe(function (data) {
-            for (var _i = 0, _a = data.datos; _i < _a.length; _i++) {
-                var zona_1 = _a[_i];
-            }
-        });
     };
     ZonaProductoComponent.prototype.getNameById = function (id) {
         //console.log(this.productos)
@@ -10023,15 +10019,17 @@ var GraficasService = (function () {
     };
     GraficasService.prototype.eliminaPeriodo = function (idZona, idProducto) {
         var _this = this;
+        this.zonas.length = 0;
         this.deletePeriodo(idZona, idProducto).subscribe(function (data) {
             if (data.success) {
                 _this.getZonas().subscribe(function (data) {
                     for (var num in data.datos) {
-                        _this.zonas[num] = data.datos[num];
+                        _this.zonas.push(data.datos[num]);
                     }
                 });
             }
         });
+        return this.zonas;
     };
     GraficasService.prototype.setPeriodo = function (producto) {
         console.log(producto);
@@ -10046,15 +10044,17 @@ var GraficasService = (function () {
     };
     GraficasService.prototype.editaPeriodo = function (producto) {
         var _this = this;
+        this.zonas.length = 0;
         this.setPeriodo(producto).subscribe(function (data) {
             if (data.success) {
                 _this.getZonas().subscribe(function (data) {
                     for (var num in data.datos) {
-                        _this.zonas[num] = data.datos[num];
+                        _this.zonas.push(data.datos[num]);
                     }
                 });
             }
         });
+        return this.zonas;
     };
     GraficasService.prototype.addPeriodo = function (producto) {
         var headers = new __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Headers */]({
@@ -10067,41 +10067,35 @@ var GraficasService = (function () {
         }, { headers: headers }).map(function (res) { return res.json(); });
     };
     GraficasService.prototype.returnGraficas = function () {
-        this.graficas = this.setGraficas();
-        return this.graficas;
+        return this.setGraficas();
     };
     GraficasService.prototype.agregaPeriodo = function (producto) {
         var _this = this;
+        this.zonas.length = 0;
         this.addPeriodo(producto).subscribe(function (data) {
             if (data.success) {
                 _this.getZonas().subscribe(function (data) {
                     for (var num in data.datos) {
-                        _this.zonas[num] = data.datos[num];
+                        _this.zonas.push(data.datos[num]);
                     }
                 });
             }
         });
+        return this.zonas;
     };
-    GraficasService.prototype.estableceZonasGraf = function () {
+    GraficasService.prototype.returnZonas = function () {
         var _this = this;
         this.zonas.length = 0;
         this.getZonas().subscribe(function (data) {
-            console.log("Servici Graf", data);
             for (var key$ in data.datos) {
                 _this.zonas.push(data.datos[key$]);
             }
         });
         return this.zonas;
     };
-    GraficasService.prototype.returnZonas = function () {
-        this.estableceZonasGraf();
-        return this.zonas;
-    };
     GraficasService.prototype.setGraficas = function () {
         var _this = this;
         var graficas = [];
-        var grafica;
-        graficas = new Array;
         this.getZonas().subscribe(function (data) {
             for (var num in data.datos) {
                 graficas.push(_this.setProductos(data.datos[num]));
@@ -11370,7 +11364,8 @@ var UsuarioCreditoService = (function () {
             'Content-Type': 'application/json'
         });
         var x = {
-            idProyecto: localStorage.getItem('idProyecto')
+            idProyecto: localStorage.getItem('idProyecto'),
+            numeroPeriodo: localStorage.getItem('numeroPeriodo')
         };
         return this.http.post('prestamo/validacreditos', x, { headers: headers }).map(function (res) { return res.json(); });
     };
@@ -11381,7 +11376,6 @@ var UsuarioCreditoService = (function () {
                 r.push(data.datos[key]);
             }
         });
-        console.log("Arreglo", r);
         return r;
     };
     UsuarioCreditoService.prototype.getActivos = function () {
@@ -11389,16 +11383,18 @@ var UsuarioCreditoService = (function () {
             'Content-Type': 'application/json'
         });
         var x = {
-            idProyecto: localStorage.getItem('idProyecto')
+            idProyecto: localStorage.getItem('idProyecto'),
+            numeroPeriodo: localStorage.getItem('numeroPeriodo')
         };
-        return this.http.post('prestamo/getActivos', x, { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.post('prestamo/regresioncreditos', x, { headers: headers }).map(function (res) { return res.json(); });
     };
     UsuarioCreditoService.prototype.validarP = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
             'Content-Type': 'application/json'
         });
         var x = {
-            idProyecto: localStorage.getItem('idProyecto')
+            idProyecto: localStorage.getItem('idProyecto'),
+            numeroPeriodo: localStorage.getItem('numeroPeriodo')
         };
         return this.http.post('prestamo/validaperiodos', x, { headers: headers }).map(function (res) { return res.json(); });
     };
