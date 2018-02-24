@@ -880,18 +880,24 @@ function diferencia (a1, a2) {
         if (arrayAux[a2[i].idCredito]) {
             delete arrayAux[a2[i].idCredito];
         } else {
+
             arrayAux[a2[i].idCredito] = true;
+            var json = {
+              "idCredito":a2[i].idCredito,
+              "numeroPeriodo":a2[i].numeroPeriodo
+            }
+            resta.push(json);
                 //    console.log("a2[i].idCredito: ",a2[i].idCredito);
 
         }
     }
 //console.log("arrayAux:: ",arrayAux);
-    for (var k in arrayAux) {
-      var json = {
-        "idCredito":k
-      }
-        resta.push(json);
-    }
+    // for (var k in arrayAux) {
+    //   var json = {
+    //     "idCredito":k
+    //   }
+    //     resta.push(json);
+    // }
     return resta;
 }
 
