@@ -188,9 +188,9 @@ while (k < idzonas.length) {
 }
 //console.log(zonaArray);
 
-for(var i=0; i<productozonademanda.length; i++){
-  console.log(productozonademanda[i]);
-}
+// for(var i=0; i<productozonademanda.length; i++){
+//   console.log(productozonademanda[i]);
+// }
 
 //productos insercion
 var aux2 = 0;
