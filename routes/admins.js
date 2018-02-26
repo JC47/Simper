@@ -1,188 +1,422 @@
-const express = require('express');
-const router = express.Router();
-const config = require('../config/db');
-const passport = require('passport');
-const jwt = require('jsonwebtoken');
-const Admin = require('../models/admin');
-const bcrypt = require('bcryptjs');
-
-router.post('/register', (req, res, next) => {
-  Promise.resolve().then(function () {
-    //validamos si existe un error en el request (req)
-      //recibimos datos
-      var nombreAdmin = req.body.nombreAdmin
-      var apPat = req.body.apPat
-      var apMat = req.body.apMat
-      var contra = req.body.contra
-      var user = req.body.user
-
-      return getJSONAdmin(nombreAdmin,apPat,apMat,contra,user);
-  })
-  .then(function (newAdmin) {
-      return Admin.addAdmin(newAdmin);
-  }).then(function(){
-    //res.json({success: true, msg:"Operacion exitosa"});
-    return Admin.getAdministradores();
-  }).
-  then( function (rows) {
-    return toArrayAdministradores(rows);
-  }).
-  then( function (AdministradoresList) {
-    res.json({success: true, datos:AdministradoresList, msg:"Operacion exitosa"});
-  })
-  .catch(function (err) {
-    res.json({success: false, msg:"Operacion denegada"});
-  });
-});
-
-//Logeo
-router.post('/authenticate', (req, res, next) => {
-Promise.resolve().then(function () {
-
-  const username = req.body.username;
-  return Admin.getAdminByUserName(username);
-
-}).then(function (rows){
-    return toJsonAdmin(rows);
-})
-.then( function(administrador) {
-    const pass = req.body.password;
-    if(pass == administrador.contra){
-      const token = jwt.sign(administrador, config.secret, {
-        expiresIn: 604800
-      });
-
-      res.json({
-        success: true,
-        token: 'JWT ' + token,
-        admin: {
-          id: administrador.idAdministrador,
-          name: administrador.user
+{
+    "success": true,
+    "datos": [
+        {
+            "idZona": 84,
+            "nombreZona": "Queretaro",
+            "productos": [
+                {
+                    "idProducto": 4,
+                    "color": "#0f00",
+                    "periodos": [
+                        {
+                            "numPeriodo": 1,
+                            "cantidad": 18000
+                        },
+                        {
+                            "numPeriodo": 2,
+                            "cantidad": 16000
+                        },
+                        {
+                            "numPeriodo": 3,
+                            "cantidad": 13000
+                        },
+                        {
+                            "numPeriodo": 4,
+                            "cantidad": 10000
+                        },
+                        {
+                            "numPeriodo": 5,
+                            "cantidad": 6000
+                        },
+                        {
+                            "numPeriodo": 6,
+                            "cantidad": 2000
+                        },
+                        {
+                            "numPeriodo": 7,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 8,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 9,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 10,
+                            "cantidad": 0
+                        }
+                    ]
+                },
+                {
+                    "idProducto": 5,
+                    "color": "#0f00",
+                    "periodos": [
+                        {
+                            "numPeriodo": 1,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 2,
+                            "cantidad": 8000
+                        },
+                        {
+                            "numPeriodo": 3,
+                            "cantidad": 2000
+                        },
+                        {
+                            "numPeriodo": 4,
+                            "cantidad": 9000
+                        },
+                        {
+                            "numPeriodo": 5,
+                            "cantidad": 15000
+                        },
+                        {
+                            "numPeriodo": 6,
+                            "cantidad": 12000
+                        },
+                        {
+                            "numPeriodo": 7,
+                            "cantidad": 10000
+                        },
+                        {
+                            "numPeriodo": 8,
+                            "cantidad": 3000
+                        },
+                        {
+                            "numPeriodo": 10,
+                            "cantidad": 6000
+                        }
+                    ]
+                },
+                {
+                    "idProducto": 6,
+                    "color": "#0f00",
+                    "periodos": [
+                        {
+                            "numPeriodo": 1,
+                            "cantidad": 17000
+                        },
+                        {
+                            "numPeriodo": 2,
+                            "cantidad": 9000
+                        },
+                        {
+                            "numPeriodo": 3,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 4,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 5,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 6,
+                            "cantidad": 15000
+                        },
+                        {
+                            "numPeriodo": 7,
+                            "cantidad": 16000
+                        },
+                        {
+                            "numPeriodo": 8,
+                            "cantidad": 20000
+                        },
+                        {
+                            "numPeriodo": 9,
+                            "cantidad": 48000
+                        },
+                        {
+                            "numPeriodo": 10,
+                            "cantidad": 23000
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "idZona": 87,
+            "nombreZona": "CDMX",
+            "productos": [
+                {
+                    "idProducto": 4,
+                    "color": "#0f00",
+                    "periodos": [
+                        {
+                            "numPeriodo": 1,
+                            "cantidad": 6000
+                        },
+                        {
+                            "numPeriodo": 2,
+                            "cantidad": 8000
+                        },
+                        {
+                            "numPeriodo": 3,
+                            "cantidad": 10000
+                        },
+                        {
+                            "numPeriodo": 4,
+                            "cantidad": 14000
+                        },
+                        {
+                            "numPeriodo": 5,
+                            "cantidad": 11000
+                        },
+                        {
+                            "numPeriodo": 6,
+                            "cantidad": 8000
+                        },
+                        {
+                            "numPeriodo": 7,
+                            "cantidad": 6000
+                        },
+                        {
+                            "numPeriodo": 8,
+                            "cantidad": 3000
+                        },
+                        {
+                            "numPeriodo": 9,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 10,
+                            "cantidad": 0
+                        }
+                    ]
+                },
+                {
+                    "idProducto": 5,
+                    "color": "#0f00",
+                    "periodos": [
+                        {
+                            "numPeriodo": 1,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 2,
+                            "cantidad": 4000
+                        },
+                        {
+                            "numPeriodo": 3,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 4,
+                            "cantidad": 8000
+                        },
+                        {
+                            "numPeriodo": 5,
+                            "cantidad": 10000
+                        },
+                        {
+                            "numPeriodo": 6,
+                            "cantidad": 12000
+                        },
+                        {
+                            "numPeriodo": 7,
+                            "cantidad": 14000
+                        },
+                        {
+                            "numPeriodo": 8,
+                            "cantidad": 20000
+                        },
+                        {
+                            "numPeriodo": 9,
+                            "cantidad": 20000
+                        },
+                        {
+                            "numPeriodo": 10,
+                            "cantidad": 2000
+                        }
+                    ]
+                },
+                {
+                    "idProducto": 6,
+                    "color": "#0f00",
+                    "periodos": [
+                        {
+                            "numPeriodo": 1,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 2,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 3,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 4,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 5,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 6,
+                            "cantidad": 2000
+                        },
+                        {
+                            "numPeriodo": 7,
+                            "cantidad": 5000
+                        },
+                        {
+                            "numPeriodo": 8,
+                            "cantidad": 5000
+                        },
+                        {
+                            "numPeriodo": 9,
+                            "cantidad": 8000
+                        },
+                        {
+                            "numPeriodo": 10,
+                            "cantidad": 16000
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "idZona": 88,
+            "nombreZona": "Tijuana",
+            "productos": [
+                {
+                    "idProducto": 4,
+                    "color": "#0f00",
+                    "periodos": [
+                        {
+                            "numPeriodo": 1,
+                            "cantidad": 16000
+                        },
+                        {
+                            "numPeriodo": 2,
+                            "cantidad": 18000
+                        },
+                        {
+                            "numPeriodo": 3,
+                            "cantidad": 26000
+                        },
+                        {
+                            "numPeriodo": 4,
+                            "cantidad": 22000
+                        },
+                        {
+                            "numPeriodo": 5,
+                            "cantidad": 6000
+                        },
+                        {
+                            "numPeriodo": 6,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 7,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 8,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 9,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 10,
+                            "cantidad": 0
+                        }
+                    ]
+                },
+                {
+                    "idProducto": 5,
+                    "color": "#0f00",
+                    "periodos": [
+                        {
+                            "numPeriodo": 1,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 2,
+                            "cantidad": 2000
+                        },
+                        {
+                            "numPeriodo": 3,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 4,
+                            "cantidad": 5000
+                        },
+                        {
+                            "numPeriodo": 5,
+                            "cantidad": 8000
+                        },
+                        {
+                            "numPeriodo": 6,
+                            "cantidad": 6000
+                        },
+                        {
+                            "numPeriodo": 7,
+                            "cantidad": 10000
+                        },
+                        {
+                            "numPeriodo": 8,
+                            "cantidad": 15000
+                        },
+                        {
+                            "numPeriodo": 9,
+                            "cantidad": 10000
+                        },
+                        {
+                            "numPeriodo": 10,
+                            "cantidad": 8000
+                        }
+                    ]
+                },
+                {
+                    "idProducto": 6,
+                    "color": "#0f00",
+                    "periodos": [
+                        {
+                            "numPeriodo": 1,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 2,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 3,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 4,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 5,
+                            "cantidad": 0
+                        },
+                        {
+                            "numPeriodo": 6,
+                            "cantidad": 4000
+                        },
+                        {
+                            "numPeriodo": 10,
+                            "cantidad": 16000
+                        }
+                    ]
+                }
+            ]
         }
-      });
-    }
-    else{
-      return res.json({success: false, msg:'Contraseña Inconrrecta'});
-    }
-  }).catch(function (err) {
-  return res.json({success: false, msg:'Usuario No Encontrado'});
-});
-});
-
-
-//Prfile
-router.get('/profile', passport.authenticate('jwt', {session:false}) , (req, res, next) => {
-  res.json({admin:req.user});
-});
-
-function getJSONAdmin(nombreAdmin,apPat,apMat,contra,user) {
-  //recibimos datos
-  var data = {
-      nombreAdmin: nombreAdmin,
-      apPat:apPat,
-      apMat:apMat,
-      contra:contra,
-      user:user
-   };
-   return data;
+    ],
+    "msg": "Operacion exitosa"
 }
-
-router.post('/modify/:id', (req, res, next) => {
-  Promise.resolve().then( function (){
-    var nombreAdmin = req.body.nombreAdmin
-    var apPat = req.body.apPat
-    var apMat = req.body.apMat
-    var contra = req.body.contra
-    var user = req.body.user
-
-    return getJSONAdmin(nombreAdmin,apPat,apMat,contra,user);
-  })
-  .then(function (updateAdmin) {
-      var id = req.params.id;
-      return Admin.updateAdministrador(updateAdmin, id);
-  }).then(function(){
-    res.json({success: true, msg:"Operacion exitosa"});
-  })
-  .catch(function (err) {
-    console.log(err);
-    res.json({success: false, msg:"Registo incompleto"});
-  });
-});
-
-router.get('/delete/:id', (req, res, next) => {
-  Promise.resolve()
-  .then(function () {
-      var id = req.params.id;
-      return Admin.deleteAdministrador(id);
-  })
-  .then(function () {
-      res.json({success: true, msg:"Operacion exitosa"});
-  })
-  .catch(function (err) {
-    console.log(err);
-    res.json({success: false, msg:"Borrado incompleto"});
-  });
-});
-
-router.get('/', (req, res, next) => {
-  Promise.resolve().then(function () {
-    return Admin.getAdministradores();
-  })
-    .then(function (rows) {
-      return toArrayAdministradores(rows);
-    })
-    .then(function (AdministradoresList){
-        res.json(AdministradoresList);
-    })
-    .catch(function (err) {
-      console.error("got error: " + err);
-      res.json({success:false, msg:"Operacion incompleta"});
-    });
-});
-
-router.get('/:id', (req, res, next) => {
-  Promise.resolve().then(function () {
-    return Admin.getAdminById(req.params.id);
-  })
-    .then(function (rows) {
-      return toJsonAdmin(rows);
-    })
-    .then(function (administrador){
-        res.json(administrador);
-    })
-    .catch(function (err) {
-      console.error("got error: " + err);
-      res.json({success:false, msg:"Operacion incompleta"});
-    });
-});
-
-
-function toJsonAdmin(rows){
-    var administrador = {
-      'idAdministrador': rows[0].idAdministrador,
-      'nombreAdmin': rows[0].nombreAdmin,
-      'apPat': rows[0].apPat,
-      'apMat': rows[0].apMat,
-      'contra': rows[0].contra,
-      'user': rows[0].user
-    }
-  return administrador;
-}
-
-function toArrayAdministradores(rows){
-  var AdministradoresList = [];
-  for(var i=0; i < rows.length; i++){
-    var administrador = {
-      'idAdministrador': rows[i].idAdministrador,
-      'nombreAdmin': rows[i].nombreAdmin,
-      'apPat': rows[i].apPat,
-      'apMat': rows[i].apMat,
-      'contra': rows[i].contra,
-      'user': rows[i].user
-    }
-    AdministradoresList.push(administrador);
-  }
-  return AdministradoresList;
-}
-
-module.exports = router;
