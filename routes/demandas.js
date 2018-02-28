@@ -253,13 +253,31 @@ var m = 0;
 var aux5 = 0;//aux5 cuenta hasta 3
 var aux6 = 0;//aux6 cuenta hasta 4
 
-console.log("repIdZonas: "+repIdZonas);
+// console.log("repIdZonas: "+repIdZonas);
+//
+// console.log("repPeriodos: ",repPeriodos);
+// console.log("zonaArray: ",zonaArray);
 
-//console.log("repPeriodos: ",repPeriodos);
-console.log("zonaArray: ",zonaArray);
-
+//Cada índice representa la cantidad de productos por zona
 for (var j = 0; j < repIdZonas.length; j++) {//numero de idZona en el json: 2
+  //Iteramos los productos que tiene cada zona
   for (var k = 0; k < (repIdZonas[j]); k++) {//numero de idProductos dentro de productos: 1,2. El de arriba es su tam
+    //Cada índice guarda la cantidad de productos demandados en todos los periodos financieros
+    //e.i. la cantidad total individual de productos x,y,z,etc. en zonas A,B,C que hay por periodo financiero 1,2,...,n
+    //E.G.
+    /*
+    numPeriodo | Producto_idProducto | Zona_idZona |
++------------+----------+--------------+------------
+|          1 |                   4 |          84 |
+|          2 |                   4 |          84 |
+|          3 |                   4 |          84 |
+|          4 |                   4 |          84 |
+|          5 |                   4 |          84 |
+|          6 |                   4 |          84 |
+|          7 |                   4 |          84 |
+|          8 |                   4 |          84 |
+
+    */
     for (var l = 0; l < repPeriodos[aux5]; l++) {//1,2,1. aux5 sirve para barrer el arreglo de repeticiones de periodos
 /*
 hacemos un for con 1,2,1
@@ -280,21 +298,6 @@ con: 1,2,1
 
 //Validación que asegura que lo que ya está en el arreglo es exactamente lo mismo que lo que está
 //en el query productozonademanda. Asegurando que los datos correspondan a los valores que se desean
-
-      // if (zonaArray[j].idZona == productozonademanda[aux6].Zona_idZonas &&
-      // zonaArray[j]['productos'][k].idProducto == productozonademanda[aux6].Producto_idProducto) {
-      //       zonaArray[j]['productos'][k]['periodos'].push(periodosArray[aux6]);
-      // }
-
-//       var json = {
-//         "numPeriodo":productozonademanda[aux6].numPeriodo,
-//         "cantidad":productozonademanda[aux6].cantidad
-//       }
-//
-// //zonaArray[j]['productos'][k]['periodos'].push(periodosArray[aux6]);
-// zonaArray[j]['productos'][k]['periodos'].push(json);
-
-
 
  if (zonaArray[j].idZona == productozonademanda[aux6].Zona_idZonas &&
  zonaArray[j]['productos'][k].idProducto == productozonademanda[aux6].Producto_idProducto) {
