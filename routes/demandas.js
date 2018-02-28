@@ -4,6 +4,11 @@ const config = require('../config/db');
 const demanda = require('../models/demanda');
 const Promise = require("bluebird");
 
+const zonaArray = [];
+const repIdZonas = [];//almacena las veces que se repite un idZona en productozonasindes
+const repPeriodos = [];
+const periodosArray = [];
+
 router.post('/register', (req, res, next) => {
   Promise.resolve()
   .then(function () {
@@ -135,12 +140,21 @@ router.post('/getdemanda', (req, res, next) => {
 });
 
 router.get('/grafica', (req, res, next) => {
-  Promise.join(demanda.getProductoZonaDemanda(),demanda.getIdZonasFromProductoZonaDemanda(),
-  demanda.getZonas(),demanda.filterIdZonaIdProducto(),demanda.idProductoEnZona(), function(productozonademanda,idzonas,zonas,filter,idproductoenzona) {
+  Promise.join(
+    demanda.getProductoZonaDemanda(),
+    demanda.getIdZonasFromProductoZonaDemanda(),
+    demanda.getZonas(),
+    demanda.filterIdZonaIdProducto(),
+    demanda.idProductoEnZona(),
+    function(productozonademanda,idzonas,zonas,filter,idproductoenzona) {
       return jsonProductoZonaDemanda(productozonademanda,idzonas,zonas,filter,idproductoenzona);
      })
   .then(function (rows) {
       res.json({success: true, datos:rows, msg:"Operacion exitosa"});
+      repIdZonas.length=0;
+      repPeriodos.length=0;
+      periodosArray.length=0;
+      zonaArray.length=0;
   })
   .catch(function (err) {
     console.error("got error: " + err);
@@ -155,7 +169,7 @@ router.get('/grafica', (req, res, next) => {
 
 function jsonProductoZonaDemanda(productozonademanda,idzonas,zonas,filter,idproductoenzona) {
 
-  var repIdZonas = [];//almacena las veces que se repite un idZona en productozonasindes
+
 
   var i = 0;
   while (i<idzonas.length) {
@@ -170,7 +184,7 @@ function jsonProductoZonaDemanda(productozonademanda,idzonas,zonas,filter,idprod
   }
 //console.log("repIdZonas: "+repIdZonas);
 
-var zonaArray = []
+
 var k = 0;
 
 while (k < idzonas.length) {
@@ -191,7 +205,7 @@ while (k < idzonas.length) {
 // for(var i=0; i<productozonademanda.length; i++){
 //   console.log(productozonademanda[i]);
 // }
-
+//console.log("idproductoenzona: ",idproductoenzona);
 //productos insercion
 var aux2 = 0;
 for (var j = 0; j < repIdZonas.length; j++) {
@@ -209,25 +223,24 @@ for (var j = 0; j < repIdZonas.length; j++) {
 
 
 //creamos periodos
-var l = 0;
-var repPeriodos = [];
- var periodosArray = [];
+var m = 0;
 
-  while (l < filter.length) {
+
+  while (m < filter.length) {
     var aux3 = 0;
-    for (var j = 0; j < productozonademanda.length; j++) {
-      if (filter[l].Zona_idZonas == productozonademanda[j].Zona_idZonas &&
-         filter[l].Producto_idProducto == productozonademanda[j].Producto_idProducto) {
+    for (var n = 0; n < productozonademanda.length; n++) {
+      if (filter[m].Zona_idZonas == productozonademanda[n].Zona_idZonas &&
+         filter[m].Producto_idProducto == productozonademanda[n].Producto_idProducto) {
           aux3 = aux3 + 1;
-        var json = {
-          "numPeriodo":productozonademanda[j].numPeriodo,
-          "cantidad":productozonademanda[j].cantidad
-        }
-        periodosArray.push(json);
+        // var json = {
+        //   "numPeriodo":productozonademanda[n].numPeriodo,
+        //   "cantidad":productozonademanda[n].cantidad
+        // }
+        // periodosArray.push(json);
       }
     }
     repPeriodos.push(aux3);
-    l++;
+    m++;
   }
 
 // console.log(repPeriodos);
@@ -237,43 +250,13 @@ var repPeriodos = [];
 //     console.log(periodosArray[i]);
 // }
 
-
-/*
-//NO BORRAR
-var aux4 = 0;
-var repeticiones = [];
-for (var i = 0; i < repPeriodos.length; i++) {
-  var auxArray = [];
-    for (var j = 0; j < (repPeriodos[i]); j++) {
-    auxArray.push(periodosArray[aux4]);
-      aux4 = aux4 + 1;
-    }
-    repeticiones.push(auxArray);
-}
-*/
-
-
-
-//
-// console.log("repeticiones.length: "+repeticiones.length);
-//
-// for (var i = 0; i < repeticiones.length; i++) {
-//   console.log(repeticiones[i]);
-// }
-
-/*
-//NO BORRAR
-var aux5 = 0;
-for (var j = 0; j < repIdZonas.length; j++) {
-  for (var k = 0; k < (repIdZonas[j]); k++) {
-
-    zonaArray[j]['productos'][k]['periodos'].push(repeticiones[aux5]);
-aux5 = aux5 + 1;
-  }
-}
-*/
 var aux5 = 0;//aux5 cuenta hasta 3
 var aux6 = 0;//aux6 cuenta hasta 4
+
+console.log("repIdZonas: "+repIdZonas);
+
+//console.log("repPeriodos: ",repPeriodos);
+console.log("zonaArray: ",zonaArray);
 
 for (var j = 0; j < repIdZonas.length; j++) {//numero de idZona en el json: 2
   for (var k = 0; k < (repIdZonas[j]); k++) {//numero de idProductos dentro de productos: 1,2. El de arriba es su tam
@@ -286,7 +269,46 @@ que barra:
   0
 con: 1,2,1
 */
-      zonaArray[j]['productos'][k]['periodos'].push(periodosArray[aux6]);
+//zonaArray[j].idZona
+//console.log("zonaArray[j].idZona: ",zonaArray[j].idZona);
+//console.log("zonaArray[j]['productos'][k].idProducto: ",zonaArray[j]['productos'][k].idProducto);
+
+
+//productozonademanda[j].Zona_idZonas
+//console.log("productozonademanda[l].Zona_idZonas: ",productozonademanda[aux6].Zona_idZonas);
+//console.log("productozonademanda[l].Producto_idProducto: ",productozonademanda[aux6].Producto_idProducto);
+
+//Validación que asegura que lo que ya está en el arreglo es exactamente lo mismo que lo que está
+//en el query productozonademanda. Asegurando que los datos correspondan a los valores que se desean
+
+      // if (zonaArray[j].idZona == productozonademanda[aux6].Zona_idZonas &&
+      // zonaArray[j]['productos'][k].idProducto == productozonademanda[aux6].Producto_idProducto) {
+      //       zonaArray[j]['productos'][k]['periodos'].push(periodosArray[aux6]);
+      // }
+
+//       var json = {
+//         "numPeriodo":productozonademanda[aux6].numPeriodo,
+//         "cantidad":productozonademanda[aux6].cantidad
+//       }
+//
+// //zonaArray[j]['productos'][k]['periodos'].push(periodosArray[aux6]);
+// zonaArray[j]['productos'][k]['periodos'].push(json);
+
+
+
+ if (zonaArray[j].idZona == productozonademanda[aux6].Zona_idZonas &&
+ zonaArray[j]['productos'][k].idProducto == productozonademanda[aux6].Producto_idProducto) {
+
+   var json = {
+     "numPeriodo":productozonademanda[aux6].numPeriodo,
+     "cantidad":productozonademanda[aux6].cantidad
+   }
+
+//zonaArray[j]['productos'][k]['periodos'].push(periodosArray[aux6]);
+zonaArray[j]['productos'][k]['periodos'].push(json);
+
+ }
+
       aux6=aux6+1;
     }
       aux5 = aux5 + 1;
