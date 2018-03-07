@@ -36,11 +36,11 @@ router.post('/registerdemanda', (req, res, next) => {
 
   }).then(function (rows) {
 
-    var numPeriodo = rows.length;
+    var numPeriodo = rows.length+1;
     var cantidad = req.body.cantidad;
     var idZona = req.body.idZona;
     var idProducto = req.body.idProducto;
-
+//    console.log("numPeriodo: ",numPeriodo);
     return demanda.addDemandaIndividual(numPeriodo,cantidad,idZona,idProducto);
   })
   .then(function(){

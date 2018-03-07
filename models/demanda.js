@@ -13,8 +13,8 @@ return console.log("Se ha insertado");
 module.exports.addZonaProducto = function (periodos,idZona,idProducto){
   for (var i = 0; i < periodos.length; i++) {
     //console.log("periodos[i].numero"+periodos[i].numero);
-    queryUpdateDemanda = "insert into Demanda (numPeriodo,cantidad,Zona_idZonas,Producto_idProducto) values ("+periodos[i].numero+","+periodos[i].cantidad+","+idZona+","+idProducto+")";
-    querySql(queryUpdateDemanda);
+    var query = "insert into Demanda (numPeriodo,cantidad,Zona_idZonas,Producto_idProducto) values ("+periodos[i].numero+","+periodos[i].cantidad+","+idZona+","+idProducto+")";
+    querySql(query);
   }
     return console.log("Se ha actualizado");
 }
@@ -44,6 +44,7 @@ return ciclos;
 }
 
 module.exports.addDemandaIndividual = function (numPeriodo,cantidad,idZona,idProducto) {
+  console.log("individual??");
   var query = "insert into Demanda (numPeriodo,cantidad,Zona_idZonas,Producto_idProducto) values ("+numPeriodo+","+cantidad+","+idZona+","+idProducto+")";
   return querySql(query);
 }
