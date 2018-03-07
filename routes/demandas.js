@@ -166,7 +166,7 @@ router.get('/grafica', (req, res, next) => {
       repPeriodos = repeticionesPeriodo(arrayFilter,arrayProductoZonaDemanda);
      })
      .then(function () {
-       return zonaArray = jsonZona(zonaArray,arrayIdZonas,arrayZonas);
+       return jsonZona(zonaArray,arrayIdZonas,arrayZonas);
      })
     .then(function (zonaArray) {
       return jsonProducto(zonaArray,repIdZonas,arrayIdProductoEnZona);
