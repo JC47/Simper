@@ -1,0 +1,111 @@
+<h4 class="text-center">Punto de Equilibrio</h4>
+<hr>
+
+<div class="col-10 offset-1">
+  <table class="table table-bordered">
+    <thead>
+      <tr class="thead-inverse">
+        <th></th>
+        <th class="text-center">Costos Fijos</th>
+        <th class="text-center">Costos Variables</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <th>MP</th>
+        <td class="text-right" >-</td>
+        <td class="text-right" *ngFor="let aux of equilibrio">{{aux.MP |currency:'USD':true:'1.0-0'}}</td>
+      </tr>
+      <tr>
+        <th>Costo de Fabricación</th>
+        <td class="text-right" *ngFor="let aux of equilibrio">{{aux.CFF |currency:'USD':true:'1.0-0'}}</td>
+        <td class="text-right" *ngFor="let aux of equilibrio">{{aux.CFV |currency:'USD':true:'1.0-0'}}</td>
+      </tr>
+      <tr>
+        <th>Gastos de Distribución</th>
+        <td class="text-right" *ngFor="let aux of equilibrio">{{aux.GDF |currency:'USD':true:'1.0-0'}}</td>
+        <td class="text-right" *ngFor="let aux of equilibrio">{{aux.GDV |currency:'USD':true:'1.0-0'}}</td>
+      </tr>
+      <tr>
+        <th>Gastos de Administración</th>
+        <td class="text-right" *ngFor="let aux of equilibrio">{{aux.GAF |currency:'USD':true:'1.0-0'}}</td>
+        <td class="text-right">-</td>
+      </tr>
+      <tr>
+        <th>Depreciaciones</th>
+        <td class="text-right" *ngFor="let aux of equilibrio">{{aux.DEP |currency:'USD':true:'1.0-0'}}</td>
+        <td class="text-right">-</td>
+      </tr>
+      <tr>
+        <th>Intereses</th>
+        <td class="text-right" *ngFor="let aux of intereses">{{aux |currency:'USD':true:'1.0-0'}}</td>
+        <td class="text-right">-</td>
+      </tr>
+      <tr>
+        <th>Desarrollo de Mercado</th>
+        <td class="text-right">{{getMercado() |currency:'USD':true:'1.0-0'}}</td>
+        <td class="text-right">-</td>
+      </tr>
+      <tr>
+        <th>Desarrollo de Producto</th>
+        <td class="text-right">{{getProducto() |currency:'USD':true:'1.0-0'}}</td>
+        <td class="text-right">-</td>
+      </tr>
+      <tr>
+        <th>Participación de Mercado</th>
+        <td class="text-right">-</td>
+        <td class="text-right">-</td>
+      </tr>
+      <tr>
+        <th>Totales</th>
+        <td class="text-right">{{getTotales1() |currency:'USD':true:'1.0-0'}}</td>
+        <td class="text-right">{{getTotales2() |currency:'USD':true:'1.0-0'}}</td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="text-right"></td>
+        <td class="text-right"></td>
+      </tr>
+      <tr>
+        <th>Ventas Totales</th>
+        <td class="text-right">-</td>
+        <td class="text-right" *ngFor="let aux of equilibrio">{{aux.ventasTotales |currency:'USD':true:'1.0-0'}}</td>
+      </tr>
+      <tr>
+        <th>Contrib Marginal</th>
+        <td class="text-right">{{getMarginal() |currency:'USD':true:'1.0-0'}}</td>
+        <td class="text-right">-</td>
+      </tr>
+      <tr>
+        <th>% Contrib Marginal</th>
+        <td class="text-right">{{getMarginalP() * 100 |number:'1.0-0'}}</td>
+        <td class="text-right">-</td>
+      </tr>
+      <tr>
+        <th>Costos Fijos</th>
+        <td class="text-right">{{getTotales1() |currency:'USD':true:'1.0-0'}}</td>
+        <td class="text-right">-</td>
+      </tr>
+      <tr>
+        <th>Punto de Equilibrio en ventas</th>
+        <td class="text-right">-</td>
+        <td class="text-right">{{getPE() |currency:'USD':true:'1.0-0'}}</td>
+      </tr>
+      <tr>
+        <th>Punto de Equilibrio</th>
+        <td class="text-right">-</td>
+        <td class="text-right">{{getTotales1() |currency:'USD':true:'1.0-0'}}</td>
+      </tr>
+      <tr>
+        <th>Costos Fijos</th>
+        <td class="text-right">-</td>
+        <td class="text-right">{{getTotales1() |currency:'USD':true:'1.0-0'}}</td>
+      </tr>
+      <tr>
+        <th>Utilidad</th>
+        <td class="text-right">-</td>
+        <td class="text-right">-</td>
+      </tr>
+    </tbody>
+  </table>

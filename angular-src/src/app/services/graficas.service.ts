@@ -126,9 +126,12 @@ export class GraficasService {
   returnZonas(){
     this.zonas.length = 0;
     this.getZonas().subscribe(data => {
-      for(let key$ in data.datos){
-        this.zonas.push(data.datos[key$]);
-      }
+      setTimeout(()=>{
+        console.log("Respuesta",data.datos)
+        for(let key$ in data.datos){
+          this.zonas.push(data.datos[key$]);
+        }
+      },1000);
     })
     return this.zonas;
   }

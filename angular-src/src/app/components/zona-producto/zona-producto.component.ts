@@ -47,7 +47,6 @@ zonaScrollSelected={
 options;
   data;
   ngOnInit() {
-    console.log("random","#",Math.random().toString(16).slice(2, 8));
 
     this.options = {
       chart: {
@@ -67,7 +66,7 @@ options;
           axisLabel: 'Periodos'
         },
         yAxis: {
-          axisLabel: 'Demanda Existente',
+          axisLabel: '',
           tickFormat: function(d){
             return d3.format('.02f')(d);
           },
@@ -125,9 +124,7 @@ options;
     private _graficasService:GraficasService
   ) {
     this.zonas=_graficasService.returnZonas();
-    console.log("Original",this.zonas)
     this.graficas=this._graficasService.setGraficas();
-    console.log("Data para Graficas",this.graficas);
 
     // console.log(this.graficas);
     this.productos=this._productosService.returnProductos();

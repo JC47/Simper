@@ -124,6 +124,14 @@ export class OperacionService {
     return this.auxiliarC;
   }
 
+  returnEquilibrio(){
+    var eq = [];
+    this.getEquilibrio().subscribe(data => {
+      eq.push(data.datos);
+    });
+    return eq;
+  }
+
   returnAlmacen(){
     var alma = [];
     this.getAlmacen().subscribe(data => {
@@ -228,6 +236,14 @@ export class OperacionService {
       "numeroPeriodo":parseInt(localStorage.getItem('numeroPeriodo'))
     }
     return this.http.post('prestamo/getIntereses/',x,this.headers).map(res => res.json());
+  }
+
+  getEquilibrio(){
+    var x = {
+      "idProyecto":localStorage.getItem('idProyecto'),
+      "numeroPeriodo":parseInt(localStorage.getItem('numeroPeriodo'))
+    }
+    return this.http.post('operacion/equilibrio/',x,this.headers).map(res => res.json());
   }
 
   prestamosPedidos(){
