@@ -161,6 +161,9 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_76__components_usuario_proyecto_usuario_flujo_flujo_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/flujo/flujo.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_77__components_usuario_proyecto_usuario_analisis_analisis_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/analisis/analisis.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_78__components_usuario_proyecto_usuario_punto_equilibrio_punto_equilibrio_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/punto-equilibrio/punto-equilibrio.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_79__components_usuario_proyecto_usuario_integrales_integrales_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/integrales/integrales.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_80__components_usuario_proyecto_usuario_tendencias_tendencias_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/tendencias/tendencias.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_81__components_usuario_proyecto_usuario_razones_razones_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/razones/razones.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -254,6 +257,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
+
 var AppModule = (function () {
     function AppModule() {
     }
@@ -296,6 +302,9 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_76__components_usuario_proyecto_usuario_flujo_flujo_component__["a" /* FlujoComponent */],
             __WEBPACK_IMPORTED_MODULE_77__components_usuario_proyecto_usuario_analisis_analisis_component__["a" /* AnalisisComponent */],
             __WEBPACK_IMPORTED_MODULE_78__components_usuario_proyecto_usuario_punto_equilibrio_punto_equilibrio_component__["a" /* PuntoEquilibrioComponent */],
+            __WEBPACK_IMPORTED_MODULE_79__components_usuario_proyecto_usuario_integrales_integrales_component__["a" /* IntegralesComponent */],
+            __WEBPACK_IMPORTED_MODULE_80__components_usuario_proyecto_usuario_tendencias_tendencias_component__["a" /* TendenciasComponent */],
+            __WEBPACK_IMPORTED_MODULE_81__components_usuario_proyecto_usuario_razones_razones_component__["a" /* RazonesComponent */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_8_angular2_flash_messages__["FlashMessagesModule"],
@@ -5599,6 +5608,48 @@ var _a, _b, _c, _d, _e, _f, _g;
 
 /***/ }),
 
+/***/ "../../../../../src/app/components/usuario/proyecto-usuario/integrales/integrales.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  integrales works!\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/usuario/proyecto-usuario/integrales/integrales.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return IntegralesComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var IntegralesComponent = (function () {
+    function IntegralesComponent() {
+    }
+    IntegralesComponent.prototype.ngOnInit = function () {
+    };
+    return IntegralesComponent;
+}());
+IntegralesComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-integrales',
+        template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/integrales/integrales.component.html")
+    }),
+    __metadata("design:paramtypes", [])
+], IntegralesComponent);
+
+//# sourceMappingURL=integrales.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/operacion/operacion.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6867,7 +6918,13 @@ ProyectoUsuarioComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__flujo_flujo_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/flujo/flujo.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__analisis_analisis_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/analisis/analisis.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__punto_equilibrio_punto_equilibrio_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/punto-equilibrio/punto-equilibrio.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__integrales_integrales_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/integrales/integrales.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__razones_razones_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/razones/razones.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__tendencias_tendencias_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/tendencias/tendencias.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PROYECTO_ROUTES; });
+
+
+
 
 
 
@@ -6899,6 +6956,9 @@ var PROYECTO_ROUTES = [
     { path: 'flujo', component: __WEBPACK_IMPORTED_MODULE_12__flujo_flujo_component__["a" /* FlujoComponent */] },
     { path: 'analisis', component: __WEBPACK_IMPORTED_MODULE_13__analisis_analisis_component__["a" /* AnalisisComponent */] },
     { path: 'puntoEquilibrio', component: __WEBPACK_IMPORTED_MODULE_14__punto_equilibrio_punto_equilibrio_component__["a" /* PuntoEquilibrioComponent */] },
+    { path: 'integrales', component: __WEBPACK_IMPORTED_MODULE_15__integrales_integrales_component__["a" /* IntegralesComponent */] },
+    { path: 'razones', component: __WEBPACK_IMPORTED_MODULE_16__razones_razones_component__["a" /* RazonesComponent */] },
+    { path: 'tendencias', component: __WEBPACK_IMPORTED_MODULE_17__tendencias_tendencias_component__["a" /* TendenciasComponent */] },
     { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 //# sourceMappingURL=proyecto.routes.js.map
@@ -7515,6 +7575,48 @@ var _a;
 
 /***/ }),
 
+/***/ "../../../../../src/app/components/usuario/proyecto-usuario/razones/razones.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  razones works!\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/usuario/proyecto-usuario/razones/razones.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RazonesComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var RazonesComponent = (function () {
+    function RazonesComponent() {
+    }
+    RazonesComponent.prototype.ngOnInit = function () {
+    };
+    return RazonesComponent;
+}());
+RazonesComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-razones',
+        template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/razones/razones.component.html")
+    }),
+    __metadata("design:paramtypes", [])
+], RazonesComponent);
+
+//# sourceMappingURL=razones.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7536,7 +7638,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"nav-side-menu\">\r\n    <div class=\"brand\">\r\n      <div class=\"row\" >\r\n        <div class=\"col-12 text-center\">\r\n          <h6 style=\"margin-top:20px\">Proyecto {{proyectoActual}}</h6>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-12 text-center\" style=\"margin-bottom:10px\">\r\n          <button type=\"button\" class=\"btn btn-danger\" style=\"font-size:10px\" (click)=\"verProyectos()\">Salir de Proyecto</button>\r\n        </div>\r\n\r\n      </div>\r\n\r\n    </div>\r\n    <i class=\"fa fa-bars fa-2x toggle-btn\" data-toggle=\"collapse\" data-target=\"#menu-content\"></i>\r\n\r\n        <div class=\"menu-list\">\r\n            <ul id=\"menu-content\" class=\"menu-content collapse out\">\r\n\r\n                <li [routerLink]=\"['home']\">\r\n                  <a >\r\n                  <i class=\"fa fa-tachometer fa-lg\"></i> Valores iniciales\r\n                  </a>\r\n                </li>\r\n\r\n                <li [routerLink]=\"['demandaPotencial']\">\r\n                  <a >\r\n                  <i class=\"fa fa-area-chart fa-lg\"></i> Demanda potencial\r\n                  </a>\r\n                </li>\r\n\r\n                <li [routerLink]=\"['produccion']\" routerLinkActive=\"active\">\r\n                   <a>\r\n                    <i class=\"fa fa-pie-chart fa-lg\"></i>  Decisiones de Producción y Venta\r\n                   </a>\r\n                </li>\r\n\r\n                <li data-toggle=\"collapse\" data-target=\"#service\" class=\"collapsed\">\r\n                  <a href=\"#\"><i class=\"fa fa-line-chart fa-lg\"></i> Decisiones de Crecimiento<span class=\"arrow\"></span></a>\r\n                </li>\r\n                <ul class=\"sub-menu collapse\" id=\"service\">\r\n\r\n                  <li [routerLink]=\"['compraMaquinaria']\" routerLinkActive=\"active\">\r\n                     <a >\r\n                     <i class=\"fa fa-cogs fa-lg\"></i> Compra de Maquinaria\r\n                     </a>\r\n                   </li>\r\n                   <li [routerLink]=\"['desarrolloProducto']\" routerLinkActive=\"active\">\r\n                      <a >\r\n                      <i class=\"fa fa-flask fa-lg\"></i> Desarrollo de Productos\r\n                      </a>\r\n                    </li>\r\n                   <li [routerLink]=\"['desarrolloMercado']\" routerLinkActive=\"active\">\r\n                      <a >\r\n                      <i class=\"fa fa-map-marker fa-lg\"></i> Desarrollo de mercados\r\n                      </a>\r\n                    </li>\r\n                </ul>\r\n\r\n                <li [routerLink]=\"['financiamiento']\" routerLinkActive=\"active\">\r\n                   <a>\r\n                    <i class=\"fa fa-credit-card fa-lg\"></i>  Decisiones de Finaciamiento\r\n                   </a>\r\n                </li>\r\n\r\n                <li data-toggle=\"collapse\" data-target=\"#service2\" class=\"collapsed\">\r\n                  <a href=\"#\"><i class=\"fa fa-list-alt fa-lg\"></i> Resultados del periodo<span class=\"arrow\"></span></a>\r\n                </li>\r\n                <ul class=\"sub-menu collapse\" id=\"service2\">\r\n                  <li [routerLink]=\"['balance_inicial']\" >Balance Inicial</li>\r\n                  <li [routerLink]=\"['operacion']\" >Resultados Operacion</li>\r\n                  <li [routerLink]=\"['estadoResultados']\">Estado de Resultados</li>\r\n                  <li [routerLink]=\"['balance_final']\">Balance Final</li>\r\n                  <li [routerLink]=\"['flujo']\">Flujo de Efectivo</li>\r\n                  <li [routerLink]=\"['comparativa']\">Posición Comparativa</li>\r\n                  <li [routerLink]=\"['analisis']\">Analisis del Periodo</li>\r\n                  <li [routerLink]=\"['puntoEquilibrio']\">Punto de Equilibrio</li>\r\n                </ul>\r\n            </ul>\r\n     </div>\r\n</div>\r\n"
+module.exports = "<div class=\"nav-side-menu\">\r\n    <div class=\"brand\">\r\n      <div class=\"row\" >\r\n        <div class=\"col-12 text-center\">\r\n          <h6 style=\"margin-top:20px\">Proyecto {{proyectoActual}}</h6>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-12 text-center\" style=\"margin-bottom:10px\">\r\n          <button type=\"button\" class=\"btn btn-danger\" style=\"font-size:10px\" (click)=\"verProyectos()\">Salir de Proyecto</button>\r\n        </div>\r\n\r\n      </div>\r\n\r\n    </div>\r\n    <i class=\"fa fa-bars fa-2x toggle-btn\" data-toggle=\"collapse\" data-target=\"#menu-content\"></i>\r\n\r\n        <div class=\"menu-list\">\r\n            <ul id=\"menu-content\" class=\"menu-content collapse out\">\r\n\r\n                <li [routerLink]=\"['home']\">\r\n                  <a >\r\n                  <i class=\"fa fa-tachometer fa-lg\"></i> Valores iniciales\r\n                  </a>\r\n                </li>\r\n\r\n                <li [routerLink]=\"['demandaPotencial']\">\r\n                  <a >\r\n                  <i class=\"fa fa-area-chart fa-lg\"></i> Demanda potencial\r\n                  </a>\r\n                </li>\r\n\r\n                <li [routerLink]=\"['produccion']\" routerLinkActive=\"active\">\r\n                   <a>\r\n                    <i class=\"fa fa-pie-chart fa-lg\"></i>  Decisiones de Producción y Venta\r\n                   </a>\r\n                </li>\r\n\r\n                <li data-toggle=\"collapse\" data-target=\"#service\" class=\"collapsed\">\r\n                  <a href=\"#\"><i class=\"fa fa-line-chart fa-lg\"></i> Decisiones de Crecimiento<span class=\"arrow\"></span></a>\r\n                </li>\r\n                <ul class=\"sub-menu collapse\" id=\"service\">\r\n\r\n                  <li [routerLink]=\"['compraMaquinaria']\" routerLinkActive=\"active\">\r\n                     <a >\r\n                     <i class=\"fa fa-cogs fa-lg\"></i> Compra de Maquinaria\r\n                     </a>\r\n                   </li>\r\n                   <li [routerLink]=\"['desarrolloProducto']\" routerLinkActive=\"active\">\r\n                      <a >\r\n                      <i class=\"fa fa-flask fa-lg\"></i> Desarrollo de Productos\r\n                      </a>\r\n                    </li>\r\n                   <li [routerLink]=\"['desarrolloMercado']\" routerLinkActive=\"active\">\r\n                      <a >\r\n                      <i class=\"fa fa-map-marker fa-lg\"></i> Desarrollo de mercados\r\n                      </a>\r\n                    </li>\r\n                </ul>\r\n\r\n                <li [routerLink]=\"['financiamiento']\" routerLinkActive=\"active\">\r\n                   <a>\r\n                    <i class=\"fa fa-credit-card fa-lg\"></i>  Decisiones de Finaciamiento\r\n                   </a>\r\n                </li>\r\n\r\n                <li data-toggle=\"collapse\" data-target=\"#service2\" class=\"collapsed\">\r\n                  <a href=\"#\"><i class=\"fa fa-list-alt fa-lg\"></i> Resultados del periodo<span class=\"arrow\"></span></a>\r\n                </li>\r\n                <ul class=\"sub-menu collapse\" id=\"service2\">\r\n                  <li [routerLink]=\"['balance_inicial']\" >Balance Inicial</li>\r\n                  <li [routerLink]=\"['operacion']\" >Resultados Operacion</li>\r\n                  <li [routerLink]=\"['estadoResultados']\">Estado de Resultados</li>\r\n                  <li [routerLink]=\"['balance_final']\">Balance Final</li>\r\n                  <li [routerLink]=\"['flujo']\">Flujo de Efectivo</li>\r\n                  <li [routerLink]=\"['comparativa']\">Posición Comparativa</li>\r\n                  <li [routerLink]=\"['analisis']\">Analisis del Periodo</li>\r\n                  <li [routerLink]=\"['puntoEquilibrio']\">Punto de Equilibrio</li>\r\n                </ul>\r\n\r\n                <li data-toggle=\"collapse\" data-target=\"#service3\" class=\"collapsed\">\r\n                  <a href=\"#\"><i class=\"fa fa-flag-checkered fa-lg\"></i> Analisis Final<span class=\"arrow\"></span></a>\r\n                </li>\r\n                <ul class=\"sub-menu collapse\" id=\"service3\">\r\n                  <li [routerLink]=\"['razones']\" >Razones</li>\r\n                  <li [routerLink]=\"['integrales']\" >Integrales</li>\r\n                  <li [routerLink]=\"['tendencias']\">Tendencias</li>\r\n                </ul>\r\n            </ul>\r\n     </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -7603,6 +7705,48 @@ SidenavPComponent = __decorate([
 
 var _a, _b;
 //# sourceMappingURL=sidenav-p.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/usuario/proyecto-usuario/tendencias/tendencias.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  tendencias works!\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/usuario/proyecto-usuario/tendencias/tendencias.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TendenciasComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var TendenciasComponent = (function () {
+    function TendenciasComponent() {
+    }
+    TendenciasComponent.prototype.ngOnInit = function () {
+    };
+    return TendenciasComponent;
+}());
+TendenciasComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-tendencias',
+        template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/tendencias/tendencias.component.html")
+    }),
+    __metadata("design:paramtypes", [])
+], TendenciasComponent);
+
+//# sourceMappingURL=tendencias.component.js.map
 
 /***/ }),
 

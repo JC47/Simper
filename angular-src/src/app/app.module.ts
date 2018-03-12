@@ -95,6 +95,9 @@ import { DemandaPotencialComponent } from './components/usuario/proyecto-usuario
 import { FlujoComponent } from './components/usuario/proyecto-usuario/flujo/flujo.component';
 import { AnalisisComponent } from './components/usuario/proyecto-usuario/analisis/analisis.component';
 import { PuntoEquilibrioComponent } from './components/usuario/proyecto-usuario/punto-equilibrio/punto-equilibrio.component';
+import { IntegralesComponent } from './components/usuario/proyecto-usuario/integrales/integrales.component';
+import { TendenciasComponent } from './components/usuario/proyecto-usuario/tendencias/tendencias.component';
+import { RazonesComponent } from './components/usuario/proyecto-usuario/razones/razones.component';
 
 @NgModule({
   declarations: [
@@ -132,6 +135,9 @@ import { PuntoEquilibrioComponent } from './components/usuario/proyecto-usuario/
     FlujoComponent,
     AnalisisComponent,
     PuntoEquilibrioComponent,
+    IntegralesComponent,
+    TendenciasComponent,
+    RazonesComponent,
   ],
   imports: [
     FlashMessagesModule,
