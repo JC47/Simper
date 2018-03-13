@@ -48,7 +48,6 @@ export class FinanciamientoComponent implements OnInit {
   validaCredito(credito){
     for(let credit of this.creditosActivos){
       if(credito.idCredito==credit.idCredito || this.validaVi()){
-        console.log("esta pedidio")
         return true;
 
       }

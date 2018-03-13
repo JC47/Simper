@@ -290,7 +290,23 @@ router.post('/productosventa', (req,res,next) => {
     console.log(err);
     res.json({success:false,msg:"Mal"});
   })
-})
+});
+
+router.post('/equilibrio', (req,res,next) => {
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+  Promise.resolve().then(function() {
+    return auxiliar.getEquilibrio(idProyecto,numeroPeriodo);
+  }).then(function(rows) {
+    return equilibrioTotal(rows);
+  }).then(function(rows) {
+    res.json({success:true,msg:"Bien",datos:rows});
+  }).catch(function(err) {
+    console.log(err);
+    res.json({success:false,msg:"Mal"});
+  });
+
+});
 
 router.post('/selling', (req,res,next) => {
   var idProducto = req.body.Producto_idProducto;
@@ -565,6 +581,34 @@ function jsonProductos(r1,r2,r3){
 
   return array.sort(function(a,b){return a - b;});
 }
+
+function equilibrioTotal(rows) {
+  var x = {MP:0,CFF:0,CFV:0,GDF:0,GDV:0,GAF:0,DEP:0,ventasTotales:0}
+  var d1 = 0;
+  var d2 = 0;
+  var d3 = 0;
+  for(let key in rows){
+    d1 += (rows[key].costosMPPUniProd * rows[key].unidadesVendidas);
+    d2 += rows[key].costoVarUniFabri * rows[key].unidadesVendidas;
+    d3 += rows[key].costoVarUniDist * rows[key].unidadesVendidas;
+    x.CFF += rows[key].costosFijosFabri;
+    x.GDF += rows[key].gastosFijosDist;
+    x.GAF += rows[key].gastosFijosAdmon;
+    x.DEP += rows[key].costoTransformacionMaq;
+    x.ventasTotales += (rows[key].VentasPorCobrar + rows[key].VentasCobradas - rows[key].IVAxVentas);
+  }
+
+  x.MP = d1;
+  x.CFV = d2;
+  x.GDV = d3;
+
+  return x;
+
+}
+
+
+
+
 
 
 module.exports = router;

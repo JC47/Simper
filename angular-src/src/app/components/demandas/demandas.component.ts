@@ -267,6 +267,9 @@ validaNew(){
     }else{
       alert("Repetido")
     }
+    setTimeout(() =>{
+      this.zonas=this._demandaService.returnZonasNormales();
+    },500);
 
   }
 

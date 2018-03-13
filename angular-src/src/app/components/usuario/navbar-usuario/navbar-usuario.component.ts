@@ -234,7 +234,6 @@ export class NavbarUsuarioComponent implements OnInit {
               var dep = data.datos[0].maqEquipo*.10;
               this._balanceService.crearBalance(proyecto,data.datos[0],periodoNuevo).subscribe(data => {
                 if(data.success){
-                  setTimeout(()=>{this.openBien=true;}, 1000);
                   localStorage.setItem('numeroPeriodo',periodoNuevo.toString());
                   localStorage.setItem('numeroRPeriodos',periodoNuevo.toString());
                   this.periodo = this.periodo + 1 ;
@@ -249,12 +248,18 @@ export class NavbarUsuarioComponent implements OnInit {
                     numero: this.periodo
                   }
                   this.periodos.push(y);
+
+                  setTimeout(()=>{
+                    this.openBien=true;
+                    this._desarrolloProducto.actualizarPD();
+                    this._desarrolloZona.actualizarZonasDes();
+                    this._creditoService.validarP().subscribe();
+                  }, 1000);
+                  
                 }
               });
             });
-            this._desarrolloProducto.actualizarPD();
-            this._desarrolloZona.actualizarZonasDes();
-            this._creditoService.validarP().subscribe();
+
           }
         }
       }, 1000);

@@ -36,11 +36,11 @@ router.post('/registerdemanda', (req, res, next) => {
 
   }).then(function (rows) {
 
-    var numPeriodo = rows.length;
+    var numPeriodo = rows.length+1;
     var cantidad = req.body.cantidad;
     var idZona = req.body.idZona;
     var idProducto = req.body.idProducto;
-
+//    console.log("numPeriodo: ",numPeriodo);
     return demanda.addDemandaIndividual(numPeriodo,cantidad,idZona,idProducto);
   })
   .then(function(){
@@ -90,7 +90,7 @@ router.post('/delete', (req, res, next) => {
     return demanda.getDemandaZona(idZona,idProducto);
   })
   .then(function(rows){
-    var numPeriodo = rows.length - 1;
+    var numPeriodo = rows.length;
     var idZona = req.body.idZona;
     var idProducto = req.body.idProducto;
 
@@ -135,28 +135,66 @@ router.post('/getdemanda', (req, res, next) => {
 });
 
 router.get('/grafica', (req, res, next) => {
-  Promise.join(demanda.getProductoZonaDemanda(),demanda.getIdZonasFromProductoZonaDemanda(),
-  demanda.getZonas(),demanda.filterIdZonaIdProducto(),demanda.idProductoEnZona(), function(productozonademanda,idzonas,zonas,filter,idproductoenzona) {
-      return jsonProductoZonaDemanda(productozonademanda,idzonas,zonas,filter,idproductoenzona);
-     })
-  .then(function (rows) {
-      res.json({success: true, datos:rows, msg:"Operacion exitosa"});
-  })
-  .catch(function (err) {
-    console.error("got error: " + err);
-    if (err instanceof Error) {
-      res.status(400).send("Error general");
-      console.log(err);
-    } else {
-      res.status(200).json({ "code": 1000, "message": err });
-    }
-  });
-});
+  //Guardamos las consultas
+  var arrayProductoZonaDemanda = [];
+  var arrayIdZonas = [];
+  var arrayZonas = [];
+  var arrayFilter = [];
+  var arrayIdProductoEnZona = [];
 
-function jsonProductoZonaDemanda(productozonademanda,idzonas,zonas,filter,idproductoenzona) {
-
+  //Arreglos que generan el json
   var repIdZonas = [];//almacena las veces que se repite un idZona en productozonasindes
+  var zonaArray = [];
+  var repPeriodos = [];
+  var periodosArray = [];
 
+  Promise.join(
+    demanda.getProductoZonaDemanda(),
+    demanda.getIdZonasFromProductoZonaDemanda(),
+    demanda.getZonas(),
+    demanda.filterIdZonaIdProducto(),
+    demanda.idProductoEnZona(),
+    function(productozonademanda,idzonas,zonas,filter,idproductoenzona) {
+
+      arrayProductoZonaDemanda = productozonademanda;
+      arrayIdZonas = idzonas;
+      arrayZonas = zonas;
+      arrayFilter = filter;
+      arrayIdProductoEnZona = idproductoenzona;
+
+      repIdZonas = repeticionesIdZona(arrayIdZonas,arrayFilter);
+      repPeriodos = repeticionesPeriodo(arrayFilter,arrayProductoZonaDemanda);
+     })
+     .then(function () {
+       return jsonZona(zonaArray,arrayIdZonas,arrayZonas);
+     })
+    .then(function (zonaArray) {
+      return jsonProducto(zonaArray,repIdZonas,arrayIdProductoEnZona);
+    })
+    .then(function (zonaArray) {
+      return jsonPeriodo(repIdZonas,repPeriodos,zonaArray,arrayProductoZonaDemanda);
+    })
+    .then(function (rows) {
+        res.json({success: true, datos:rows, msg:"Operacion exitosa"});
+        repIdZonas.length=0;
+        repPeriodos.length=0;
+        periodosArray.length=0;
+        zonaArray.length=0;
+    })
+    .catch(function (err) {
+      console.error("got error: " + err);
+      if (err instanceof Error) {
+        res.status(400).send("Error general");
+        console.log(err);
+      } else {
+        res.status(200).json({ "code": 1000, "message": err });
+      }
+    });
+  });
+
+function repeticionesIdZona(idzonas,filter) {
+  //Repeticiones idZonas en demanda
+  var arrayRepIdZonas = [];
   var i = 0;
   while (i<idzonas.length) {
     var aux = 0;
@@ -165,137 +203,99 @@ function jsonProductoZonaDemanda(productozonademanda,idzonas,zonas,filter,idprod
         aux = aux +1;
       }
     }
-    repIdZonas.push(aux);
+    arrayRepIdZonas.push(aux);
     i++;
   }
-//console.log("repIdZonas: "+repIdZonas);
-
-var zonaArray = []
-var k = 0;
-
-while (k < idzonas.length) {
-  for (var i = 0; i < zonas.length; i++) {
-    if (idzonas[k].Zona_idZonas == zonas[i].idZona) {
-      var json = {
-        "idZona":idzonas[k].Zona_idZonas,
-        "nombreZona":zonas[i].nombreZona,
-        "productos":[]
-      }
-    zonaArray.push(json);
-    }
-  }
-  k++;
-}
-//console.log(zonaArray);
-
-for(var i=0; i<productozonademanda.length; i++){
-  console.log(productozonademanda[i]);
+  return arrayRepIdZonas;
 }
 
-//productos insercion
-var aux2 = 0;
-for (var j = 0; j < repIdZonas.length; j++) {
-  for (var k = 0; k < (repIdZonas[j]); k++) {
-    var producto = {
-      "idProducto":idproductoenzona[aux2].Producto_idProducto,
-      "color":idproductoenzona[aux2].color,
-      "periodos":[]
-    }
-    zonaArray[j]['productos'].push(producto);
-  //  zonaArray[j]['productos'][k]['periodos'].push('a');
-   aux2 = aux2 + 1;
-  }
-}
-
-
-//creamos periodos
-var l = 0;
-var repPeriodos = [];
- var periodosArray = [];
-
-  while (l < filter.length) {
-    var aux3 = 0;
-    for (var j = 0; j < productozonademanda.length; j++) {
-      if (filter[l].Zona_idZonas == productozonademanda[j].Zona_idZonas &&
-         filter[l].Producto_idProducto == productozonademanda[j].Producto_idProducto) {
-          aux3 = aux3 + 1;
+function jsonZona(zonaArray,idzonas,zonas) {
+  //ZONA
+  var k = 0;
+  while (k < idzonas.length) {
+    for (var i = 0; i < zonas.length; i++) {
+      if (idzonas[k].Zona_idZonas == zonas[i].idZona) {
         var json = {
-          "numPeriodo":productozonademanda[j].numPeriodo,
-          "cantidad":productozonademanda[j].cantidad
+          "idZona":idzonas[k].Zona_idZonas,
+          "nombreZona":zonas[i].nombreZona,
+          "productos":[]
         }
-        periodosArray.push(json);
+      zonaArray.push(json);
       }
     }
-    repPeriodos.push(aux3);
-    l++;
+    k++;
   }
-
-// console.log(repPeriodos);
-//
-//
-// for (var i = 0; i < periodosArray.length; i++) {
-//     console.log(periodosArray[i]);
-// }
-
-
-/*
-//NO BORRAR
-var aux4 = 0;
-var repeticiones = [];
-for (var i = 0; i < repPeriodos.length; i++) {
-  var auxArray = [];
-    for (var j = 0; j < (repPeriodos[i]); j++) {
-    auxArray.push(periodosArray[aux4]);
-      aux4 = aux4 + 1;
-    }
-    repeticiones.push(auxArray);
+  return zonaArray;
 }
-*/
 
-
-
-//
-// console.log("repeticiones.length: "+repeticiones.length);
-//
-// for (var i = 0; i < repeticiones.length; i++) {
-//   console.log(repeticiones[i]);
-// }
-
-/*
-//NO BORRAR
-var aux5 = 0;
-for (var j = 0; j < repIdZonas.length; j++) {
-  for (var k = 0; k < (repIdZonas[j]); k++) {
-
-    zonaArray[j]['productos'][k]['periodos'].push(repeticiones[aux5]);
-aux5 = aux5 + 1;
+function jsonProducto(zonaArray,repIdZonas,idproductoenzona) {
+  //PRODUCTOS
+  var aux2 = 0;
+  for (var j = 0; j < repIdZonas.length; j++) {
+    for (var k = 0; k < (repIdZonas[j]); k++) {
+      var producto = {
+        "idProducto":idproductoenzona[aux2].Producto_idProducto,
+        "color":idproductoenzona[aux2].color,
+        "periodos":[]
+      }
+      zonaArray[j]['productos'].push(producto);
+    //  zonaArray[j]['productos'][k]['periodos'].push('a');
+     aux2 = aux2 + 1;
+    }
   }
+  return zonaArray;
 }
-*/
-var aux5 = 0;//aux5 cuenta hasta 3
-var aux6 = 0;//aux6 cuenta hasta 4
 
-for (var j = 0; j < repIdZonas.length; j++) {//numero de idZona en el json: 2
-  for (var k = 0; k < (repIdZonas[j]); k++) {//numero de idProductos dentro de productos: 1,2. El de arriba es su tam
-    for (var l = 0; l < repPeriodos[aux5]; l++) {//1,2,1. aux5 sirve para barrer el arreglo de repeticiones de periodos
-/*
-hacemos un for con 1,2,1
-que barra:
-  0,
-  0,1
-  0
-con: 1,2,1
-*/
-      zonaArray[j]['productos'][k]['periodos'].push(periodosArray[aux6]);
-      aux6=aux6+1;
+function repeticionesPeriodo(filter,productozonademanda) {
+  //Repeticiones Periodo
+  var arrayRepPeriodos = [];
+  var m = 0;
+    while (m < filter.length) {
+      var aux3 = 0;
+      for (var n = 0; n < productozonademanda.length; n++) {
+        if (filter[m].Zona_idZonas == productozonademanda[n].Zona_idZonas &&
+           filter[m].Producto_idProducto == productozonademanda[n].Producto_idProducto) {
+            aux3 = aux3 + 1;
+          // var json = {
+          //   "numPeriodo":productozonademanda[n].numPeriodo,
+          //   "cantidad":productozonademanda[n].cantidad
+          // }
+          // periodosArray.push(json);
+        }
+      }
+      arrayRepPeriodos.push(aux3);
+      m++;
     }
+    return arrayRepPeriodos;
+}
+
+function jsonPeriodo(repIdZonas,repPeriodos,zonaArray,productozonademanda) {
+  //PERIODO
+  var aux5 = 0;//aux5 cuenta hasta 3
+  var aux6 = 0;//aux6 cuenta hasta 4
+
+  //Cada índice representa la cantidad de productos por zona
+  for (var j = 0; j < repIdZonas.length; j++) {//numero de idZona en el json: 2
+    //Iteramos los productos que tiene cada zona
+    for (var k = 0; k < (repIdZonas[j]); k++) {//numero de idProductos dentro de productos: 1,2. El de arriba es su tam
+      //Cada índice guarda la cantidad de productos demandados en todos los periodos financieros
+      //e.i. la cantidad total individual de productos x,y,z,etc. en zonas A,B,C que hay por periodo financiero 1,2,...,n
+      for (var l = 0; l < repPeriodos[aux5]; l++) {//1,2,1. aux5 sirve para barrer el arreglo de repeticiones de periodos
+        if (zonaArray[j].idZona == productozonademanda[aux6].Zona_idZonas &&
+            zonaArray[j]['productos'][k].idProducto == productozonademanda[aux6].Producto_idProducto) {
+             var json = {
+               "numPeriodo":productozonademanda[aux6].numPeriodo,
+               "cantidad":productozonademanda[aux6].cantidad
+             }
+            //zonaArray[j]['productos'][k]['periodos'].push(periodosArray[aux6]);
+            zonaArray[j]['productos'][k]['periodos'].push(json);
+          }
+        aux6=aux6+1;
+      }
       aux5 = aux5 + 1;
+    }
   }
+  return zonaArray;
 }
-
-return zonaArray;
-}
-
-
 
 module.exports = router;

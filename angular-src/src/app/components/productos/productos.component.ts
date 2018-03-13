@@ -141,6 +141,9 @@ export class ProductosComponent implements OnInit {
       msg: `Producto "${(producto.nombreProd)}" editado`,
       timeout: 2000
     });
+    setTimeout(() => {
+      this.productos=this._productoService.returnProductos();
+    }, 500);
 
   }
 

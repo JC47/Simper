@@ -47,7 +47,6 @@ zonaScrollSelected={
 options;
   data;
   ngOnInit() {
-    console.log("random","#",Math.random().toString(16).slice(2, 8));
 
     this.options = {
       chart: {
@@ -67,7 +66,7 @@ options;
           axisLabel: 'Periodos'
         },
         yAxis: {
-          axisLabel: 'Demanda Existente',
+          axisLabel: '',
           tickFormat: function(d){
             return d3.format('.02f')(d);
           },
@@ -125,9 +124,7 @@ options;
     private _graficasService:GraficasService
   ) {
     this.zonas=_graficasService.returnZonas();
-    console.log("Original",this.zonas)
     this.graficas=this._graficasService.setGraficas();
-    console.log("Data para Graficas",this.graficas);
 
     // console.log(this.graficas);
     this.productos=this._productosService.returnProductos();
@@ -180,24 +177,17 @@ options;
       this._graficasService.editaPeriodo(producto);
       //this.scrollService.scrollTo(this.zonaScrollSelected.zona+this.zonaScrollSelected.producto)
       this.modalPeriodoEdit.hide();
-      setTimeout(() =>
-  {
-      this.graficas=this._graficasService.returnGraficas();
-  },
-      1000);
-
-
-      // console.log("Coomponent",producto)
-      //this.scrollService.scrollTo(zona.idZona.toS);
+      setTimeout(() =>{
+      this.graficas=this._graficasService.setGraficas();
+      },1000);
   }
 
   borraPeriodo(idZona,idProducto){
     this._graficasService.eliminaPeriodo(idZona,idProducto);
     // console.log(idZona,idProducto);
-    setTimeout(() =>
-{
-    this.graficas=this._graficasService.returnGraficas();
-},
+    setTimeout(() =>{
+    this.graficas=this._graficasService.setGraficas();
+    },
     1000);
 
 
@@ -213,36 +203,14 @@ selectProductoScroll(element){
 
   }
 
-
-
-
-
   agregaPeriodo(producto){
-    // this._graficasService.addPeriodo(producto).subscribe();
-
     this._graficasService.agregaPeriodo(producto);
-    console.log("anterior graf",this.graficas)
-
-    console.log("new graf",this.graficas);
-    //console.log(this.zonas);
     // console.log(producto);
-    setTimeout(() =>
-{
-    this.graficas=this._graficasService.returnGraficas();
-},
-    1000);
+    setTimeout(() =>{
+    this.graficas=this._graficasService.setGraficas();
+    },1000);
 
     this.modalPeriodoNew.hide();
-
-  }
-
-  numPeriodos(producto){
-    this._graficasService.getZonas().subscribe(data => {
-      for(let zona of data.datos){
-
-
-      }
-    })
 
   }
 

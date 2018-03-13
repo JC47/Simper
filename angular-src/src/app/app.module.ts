@@ -93,6 +93,11 @@ import 'nvd3';
 import { EstadoResultadosComponent } from './components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component';
 import { DemandaPotencialComponent } from './components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component';
 import { FlujoComponent } from './components/usuario/proyecto-usuario/flujo/flujo.component';
+import { AnalisisComponent } from './components/usuario/proyecto-usuario/analisis/analisis.component';
+import { PuntoEquilibrioComponent } from './components/usuario/proyecto-usuario/punto-equilibrio/punto-equilibrio.component';
+import { IntegralesComponent } from './components/usuario/proyecto-usuario/integrales/integrales.component';
+import { TendenciasComponent } from './components/usuario/proyecto-usuario/tendencias/tendencias.component';
+import { RazonesComponent } from './components/usuario/proyecto-usuario/razones/razones.component';
 
 @NgModule({
   declarations: [
@@ -128,6 +133,11 @@ import { FlujoComponent } from './components/usuario/proyecto-usuario/flujo/fluj
     FinanciamientoComponent,
     DemandaPotencialComponent,
     FlujoComponent,
+    AnalisisComponent,
+    PuntoEquilibrioComponent,
+    IntegralesComponent,
+    TendenciasComponent,
+    RazonesComponent,
   ],
   imports: [
     FlashMessagesModule,
