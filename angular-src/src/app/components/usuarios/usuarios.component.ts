@@ -517,6 +517,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   selectVariables(variables){
+      console.log("Prueba")
       this.variablesSelected=variables;
       this.varsForm.controls['concepto'].setValue(variables.concepto);
       this.varsForm.controls['valor'].setValue(variables.valor);
