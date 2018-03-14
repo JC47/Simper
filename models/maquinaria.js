@@ -6,22 +6,22 @@ const Promise = require("bluebird");
 
 
 module.exports.addMaquinaria = function (data) {
-    var query = "insert into Maquinaria set ? ";
+    var query = "insert into maquinaria set ? ";
     return querySql(query,data);
 }
 
 module.exports.deleteMaquinaria = function (id) {
-    var userQuery = "delete from Maquinaria where idMaquinaria = ?";
+    var userQuery = "delete from maquinaria where idMaquinaria = ?";
     return querySql(userQuery, id);
 }
 
 module.exports.updateMaquinaria = function (data,id){
-    queryUpdateMaq = "update Maquinaria set ? where idMaquinaria = "+id+"";
+    queryUpdateMaq = "update maquinaria set ? where idMaquinaria = "+id+"";
     return querySql(queryUpdateMaq,data);
 }
 
 module.exports.getMaquinarias = function () {
-    var query = "select * from Maquinaria";
+    var query = "select * from maquinaria";
     return querySql(query);
 }
 

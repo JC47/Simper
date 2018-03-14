@@ -5,22 +5,22 @@ const Promise = require("bluebird");
 
 
 module.exports.addUsuario = function (data) {
-  var sqlUsuario = "insert into Usuario set ? ";
+  var sqlUsuario = "insert into usuario set ? ";
   return querySql(sqlUsuario, data);
 }
 
 module.exports.deleteUsuario = function (id) {
-    var userQuery = "delete from Usuario where idUsuario = ?";
+    var userQuery = "delete from usuario where idUsuario = ?";
     return querySql(userQuery, id);
 }
 
 module.exports.updateUsuario = function (data,id){
-    var queryUpdate = "update Usuario set ? where idUsuario = "+id+"";
+    var queryUpdate = "update usuario set ? where idUsuario = "+id+"";
     return querySql(queryUpdate,data);
 }
 
 module.exports.getUsuarios = function () {
-    var query = "select * from Usuario";
+    var query = "select * from usuario";
     return querySql(query);
 }
 
@@ -30,16 +30,16 @@ module.exports.getProyectos = function () {
 }
 
 module.exports.getUsuarioById = function (id) {
-    var userQuery = "select * from Usuario where idUsuario = ?";
+    var userQuery = "select * from usuario where idUsuario = ?";
     return querySql(userQuery, id);
 }
 
 module.exports.getUsuarioByUserName = function (username){
-    var userQuery = "select * from Usuario where user = ?";
+    var userQuery = "select * from usuario where user = ?";
     return querySql(userQuery, username);
 }
 
 module.exports.addPeriodoCero = function (data,id){
-  var sql = "update Usuario set ? where idUsuario = "+id+"";
+  var sql = "update usuario set ? where idUsuario = "+id+"";
   return querySql(sql,data);
 }

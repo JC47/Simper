@@ -11,12 +11,12 @@ module.exports.getMaxNumeroPeriodo = function (idProyecto,idProducto) {
 }
 
 module.exports.getProyectoProducto = function (idProyecto,idProducto,numeroPeriodo) {
-    var query = "select * from  ProyectoProducto where Proyectos_idProyecto =  "+idProyecto+" and Productos_idProducto = "+idProducto+" and numeroPeriodo = "+numeroPeriodo+" ";
+    var query = "select * from  proyectoproducto where Proyectos_idProyecto =  "+idProyecto+" and Productos_idProducto = "+idProducto+" and numeroPeriodo = "+numeroPeriodo+" ";
     return querySql(query);
 }
 
 module.exports.addProyectoProducto = function (json) {
-    var query = "insert into ProyectoProducto set ?";
+    var query = "insert into proyectoproducto set ?";
     return querySql(query, json);
 }
 
@@ -31,7 +31,7 @@ module.exports.getPeriodosDes = function (idProyecto,idProducto,numeroPeriodo) {
 
 module.exports.updateDesarrolladoPeriodos = function (periodos,idProyecto,idProducto,numeroPeriodo) {
 //  console.log(periodos,idProyecto,idProducto);
-  var query = "update ProyectoProducto set periodosDes = "+periodos+" where Proyectos_idProyecto = "+idProyecto+" and Productos_idProducto = "+idProducto+" and numeroPeriodo = "+numeroPeriodo+" ";
+  var query = "update proyectoproducto set periodosDes = "+periodos+" where Proyectos_idProyecto = "+idProyecto+" and Productos_idProducto = "+idProducto+" and numeroPeriodo = "+numeroPeriodo+" ";
   return querySql(query);
 }
 
@@ -41,7 +41,7 @@ module.exports.getUltimoNumeroPeriodo = function (idProducto,idProyecto) {
 }
 
 module.exports.updateProyectoProducto = function (idProyecto,idProducto,ultimoPeriodo) {
-  var queryProyectoProd = "update ProyectoProducto set ultimoPeriodoDes = "+ultimoPeriodo+" where Proyectos_idProyecto = "+idProyecto+" and Productos_idProducto = "+idProducto+" ";
+  var queryProyectoProd = "update proyectoproducto set ultimoPeriodoDes = "+ultimoPeriodo+" where Proyectos_idProyecto = "+idProyecto+" and Productos_idProducto = "+idProducto+" ";
   return querySql(queryProyectoProd);
 }
 
@@ -57,7 +57,7 @@ module.exports.getTiempoDes = function (idProducto) {
 }
 
 // module.exports.addDesarrolladosPeriodos = function (periodos,idProyecto,idProducto) {
-//   var query = "insert into proyectoProducto";
+//   var query = "insert into proyectoproducto";
 // }
 
 //productosSinDesarrollar
@@ -91,7 +91,7 @@ module.exports.getProductosDesarrollados = function (idProyecto,numeroPeriodo) {
 }
 
 module.exports.desarollado = function (idProyecto, idProducto, desarrollado) {
-  var queryDes = "update ProyectoProducto set desarrollado = "+desarrollado+" where Proyectos_idProyecto = "+idProyecto+" and Productos_idProducto = "+idProducto+"";
+  var queryDes = "update proyectoproducto set desarrollado = "+desarrollado+" where Proyectos_idProyecto = "+idProyecto+" and Productos_idProducto = "+idProducto+"";
   return querySql(queryDes);
 }
 
