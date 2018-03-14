@@ -517,11 +517,12 @@ export class UsuariosComponent implements OnInit {
   }
 
   selectVariables(variables){
+      console.log("Var",variables)
+      this.openVarsGen=false;
       this.variablesSelected=variables;
       this.varsForm.controls['concepto'].setValue(variables.concepto);
       this.varsForm.controls['valor'].setValue(variables.valor);
       this.varsForm.controls['idVariable'].setValue(variables.idVariable);
-      this.openVarsGen=false;
       this.openVarUnit=true;
   }
 

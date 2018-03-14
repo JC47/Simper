@@ -5620,6 +5620,8 @@ module.exports = "<p>\n  integrales works!\n</p>\n"
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__ = __webpack_require__("../../../../../src/app/services/operacion.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_compra_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/compra-maquinaria.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return IntegralesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5631,10 +5633,141 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var IntegralesComponent = (function () {
-    function IntegralesComponent() {
+    function IntegralesComponent(_operacionService, _maqService) {
+        this._operacionService = _operacionService;
+        this._maqService = _maqService;
+        this.resultados = [];
+        this.auxiliares = [];
+        this.auxiliarC = [];
+        this.productos = [];
+        this.auxiliarT = [];
+        this.intereses = [];
+        this.maquinas = [];
+        this.balanceFinal = [];
+        this.auxiliares = this._operacionService.returnAuxiliares();
+        this.intereses = this._operacionService.returnInter();
+        this.auxiliarT = this._operacionService.returnAuxiliarCTotal();
+        this.maquinas = this._maqService.returnMaquinasCompradas();
     }
     IntegralesComponent.prototype.ngOnInit = function () {
+    };
+    IntegralesComponent.prototype.getTotalVentas = function () {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            T += aux.Ventas - aux.IVAxVentas;
+        }
+        return T;
+    };
+    IntegralesComponent.prototype.getTotalCostosVentas = function () {
+        var T = 0;
+        if (this.auxiliares.length == 0) {
+            for (var _i = 0, _a = this.maquinas; _i < _a.length; _i++) {
+                var m = _a[_i];
+                console.log(m.costo, m.depAcum, m.Cantidad);
+                T += ((m.costo * (m.depAcum / 100)) * m.Cantidad);
+            }
+        }
+        else {
+            for (var _b = 0, _c = this.auxiliares; _b < _c.length; _b++) {
+                var aux = _c[_b];
+                T += aux.costoVentas;
+            }
+        }
+        return T;
+    };
+    IntegralesComponent.prototype.getUtilidadBruta = function () {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            T += aux.Ventas - aux.costoVentas - aux.IVAxVentas;
+        }
+        return T;
+    };
+    IntegralesComponent.prototype.getDistTotal = function () {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            T += aux.costoDistribucion;
+        }
+        return T;
+    };
+    IntegralesComponent.prototype.getAdminTotal = function () {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            T += aux.costoAdministrativo;
+        }
+        return T;
+    };
+    IntegralesComponent.prototype.getUtilidadAntes = function () {
+        var T = 0;
+        if (this.auxiliares.length == 0) {
+            for (var _i = 0, _a = this.maquinas; _i < _a.length; _i++) {
+                var m = _a[_i];
+                T -= ((m.costo * (m.depAcum / 100)) * m.Cantidad);
+            }
+        }
+        else {
+            for (var _b = 0, _c = this.auxiliares; _b < _c.length; _b++) {
+                var aux = _c[_b];
+                T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
+            }
+        }
+        return T;
+    };
+    IntegralesComponent.prototype.getOtrosGastosTotal = function () {
+        var x = 0;
+        for (var _i = 0, _a = this.auxiliarT; _i < _a.length; _i++) {
+            var a = _a[_i];
+            x += a;
+        }
+        return x;
+    };
+    IntegralesComponent.prototype.getIntereses = function () {
+        var x = 0;
+        for (var _i = 0, _a = this.intereses; _i < _a.length; _i++) {
+            var a = _a[_i];
+            x += a;
+        }
+        return x;
+    };
+    IntegralesComponent.prototype.getUtilidadOperacion = function () {
+        var i = 0;
+        var x = 0;
+        for (var _i = 0, _a = this.auxiliarT; _i < _a.length; _i++) {
+            var a = _a[_i];
+            x += a;
+        }
+        i = this.getUtilidadAntes() - x;
+        return x;
+    };
+    IntegralesComponent.prototype.getUtilidad2 = function () {
+        var T = 0;
+        if (this.auxiliares.length == 0) {
+            for (var _i = 0, _a = this.maquinas; _i < _a.length; _i++) {
+                var m = _a[_i];
+                T -= ((m.costo * (m.depAcum / 100)) * m.Cantidad);
+            }
+        }
+        else {
+            for (var _b = 0, _c = this.auxiliares; _b < _c.length; _b++) {
+                var aux = _c[_b];
+                T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
+            }
+        }
+        for (var _d = 0, _e = this.auxiliarT; _d < _e.length; _d++) {
+            var i = _e[_d];
+            T -= i;
+        }
+        for (var _f = 0, _g = this.intereses; _f < _g.length; _f++) {
+            var i2 = _g[_f];
+            T -= i2;
+        }
+        return T;
     };
     return IntegralesComponent;
 }());
@@ -5643,9 +5776,10 @@ IntegralesComponent = __decorate([
         selector: 'app-integrales',
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/integrales/integrales.component.html")
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */]) === "function" && _b || Object])
 ], IntegralesComponent);
 
+var _a, _b;
 //# sourceMappingURL=integrales.component.js.map
 
 /***/ }),
@@ -8799,11 +8933,12 @@ var UsuariosComponent = (function () {
         return "id no encontrado";
     };
     UsuariosComponent.prototype.selectVariables = function (variables) {
+        console.log("Var", variables);
+        this.openVarsGen = false;
         this.variablesSelected = variables;
         this.varsForm.controls['concepto'].setValue(variables.concepto);
         this.varsForm.controls['valor'].setValue(variables.valor);
         this.varsForm.controls['idVariable'].setValue(variables.idVariable);
-        this.openVarsGen = false;
         this.openVarUnit = true;
     };
     UsuariosComponent.prototype.asignaVar = function () {
