@@ -123,11 +123,16 @@ options;
     private modalService:NgbModal,
     private _graficasService:GraficasService
   ) {
-    this.zonas=_graficasService.returnZonas();
-    this.graficas=this._graficasService.setGraficas();
+    setTimeout(() =>{
+      this.zonas=_graficasService.returnZonas();
+      console.log(this.zonas)
+      this.graficas=this._graficasService.setGraficas();
+      this.productos=this._productosService.returnProductos();
+      console.log("Graficas",this.graficas);
+    },1000);
 
-    // console.log(this.graficas);
-    this.productos=this._productosService.returnProductos();
+
+
 
     this.formPeriodoNew= new FormGroup({
       'idZona':new FormControl('',Validators.required),
@@ -188,7 +193,7 @@ options;
     setTimeout(() =>{
     this.graficas=this._graficasService.setGraficas();
     },
-    1000);
+    1500);
 
 
   }

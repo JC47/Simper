@@ -1420,7 +1420,7 @@
 </div>
 
 
-<ngl-modal ngDraggable header="Variables Generales"   [(open)]="openVarsGen" size="small" directional="false">
+<ngl-modal  header="Variables Generales"   [(open)]="openVarsGen" size="small" directional="false">
   <div body>
       <div class="col-12">
         <div class="row" style="margin-bottom:10px" *ngFor="let t of variables">
@@ -1428,16 +1428,13 @@
           <h3 class="col-4 text-center">{{t.valor}}</h3>
           <button type="button" class="btn btn-primary col-4" (click)="selectVariables(t)">Editar</button>
         </div>
-
-
       </div>
-
   </div>
   </ngl-modal>
 
 
 
-  <ngl-modal ngDraggable header="Variables Generales"   [(open)]="openVarUnit" size="small" directional="false">
+  <ngl-modal header="Variables Generales"   [(open)]="openVarUnit" size="small" directional="false">
     <div body>
       <form class="" (ngSubmit)="asignaVar()" [formGroup]="varsForm">
         <input type="text" formControlName="concepto" hidden>

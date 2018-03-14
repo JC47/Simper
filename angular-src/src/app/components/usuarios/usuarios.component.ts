@@ -517,6 +517,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   selectVariables(variables){
+      console.log("Prueba")
       console.log("Var",variables)
       this.openVarsGen=false;
       this.variablesSelected=variables;
