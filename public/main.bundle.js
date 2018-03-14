@@ -8117,7 +8117,7 @@ var _a;
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/razones/razones.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  razones works!\r\n</p>\r\n"
+module.exports = "<div class=\"row\">\n  <div class=\"col-12\">\n    <h2 class=\"col-12 text-center\">Razones</h2>\n    <hr>\n  </div>\n</div>\n\n\n<div class=\"row\">\n  <div class=\"col-10 offset-1\">\n    <table class=\"table table-responsive\">\n      <thead>\n        <th></th>\n        <th>Per 1</th>\n        <th>Per 2</th>\n      </thead>\n\n\n      <tr>\n        <td>Solvencia</td>\n      </tr>\n\n      <tr>\n        <td>Solvencia Inmediata</td>\n      </tr>\n\n      <tr>\n        <td>Origen de Capital</td>\n      </tr>\n\n      <tr>\n        <td>Valor de Capital</td>\n      </tr>\n\n\n      <tr>\n        <td>Ventas a CC</td>\n      </tr>\n\n\n      <tr>\n        <td>Ventas a CT</td>\n      </tr>\n\n      <tr>\n        <td>Utilidad neta/CC</td>\n      </tr>\n\n\n      <tr>\n        <td>Utilidad neta/Ventas</td>\n      </tr>\n\n\n      <tr>\n        <td>Días promedio de cartera</td>\n      </tr>\n\n      <tr>\n        <td>Días promedio de I.A.T.</td>\n      </tr>\n\n\n      <tr>\n        <td>Días promedio de I.M.P.</td>\n      </tr>\n\n\n      <tr>\n        <td>Días Promedio de C XP</td>\n      </tr>\n\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -9338,12 +9338,9 @@ var UsuariosComponent = (function () {
         return "id no encontrado";
     };
     UsuariosComponent.prototype.selectVariables = function (variables) {
-<<<<<<< HEAD
         console.log("Prueba");
-=======
         console.log("Var", variables);
         this.openVarsGen = false;
->>>>>>> e4442d9cbd0fbc16e74e6b11794cc593c6462da9
         this.variablesSelected = variables;
         this.varsForm.controls['concepto'].setValue(variables.concepto);
         this.varsForm.controls['valor'].setValue(variables.valor);
