@@ -16,7 +16,6 @@ export class BalanceInicialComponent implements OnInit {
               private cp: CurrencyPipe,
               private _proyectoService:ProyectosService) {
     this.balanceInicial = this._resultadosService.balanceInicialAnterior();
-    console.log(this.balanceInicial)
     this._proyectoService.ocultaCierrePeriodo()
 
   }
