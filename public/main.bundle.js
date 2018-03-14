@@ -2286,6 +2286,9 @@ module.exports = "<p>\n  analisis works!\n</p>\n"
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__ = __webpack_require__("../../../../../src/app/services/operacion.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_compra_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/compra-maquinaria.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__ = __webpack_require__("../../../../../src/app/services/resultados.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnalisisComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2297,10 +2300,412 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
 var AnalisisComponent = (function () {
-    function AnalisisComponent() {
+    function AnalisisComponent(_operacionService, _resultadosService, _maqService) {
+        this._operacionService = _operacionService;
+        this._resultadosService = _resultadosService;
+        this._maqService = _maqService;
+        this.resultados = [];
+        this.auxiliares = [];
+        this.auxiliarC = [];
+        this.productos = [];
+        this.auxiliarT = [];
+        this.intereses = [];
+        this.maquinas = [];
+        this.balanceFinal = [];
+        this.balanceInicial = [];
+        this.auxiliares = this._operacionService.returnAuxiliares();
+        this.intereses = this._operacionService.returnInter();
+        this.auxiliarT = this._operacionService.returnAuxiliarCTotal();
+        this.maquinas = this._maqService.returnMaquinasCompradas();
+        this.balanceFinal = this._resultadosService.getBalanceFinal();
+        this.balanceInicial = this._resultadosService.balanceInicialAnterior();
     }
     AnalisisComponent.prototype.ngOnInit = function () {
+    };
+    AnalisisComponent.prototype.getTotalVentas = function () {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            T += aux.Ventas - aux.IVAxVentas;
+        }
+        return T;
+    };
+    AnalisisComponent.prototype.getTotalCostosVentas = function () {
+        var T = 0;
+        if (this.auxiliares.length == 0) {
+            for (var _i = 0, _a = this.maquinas; _i < _a.length; _i++) {
+                var m = _a[_i];
+                console.log(m.costo, m.depAcum, m.Cantidad);
+                T += ((m.costo * (m.depAcum / 100)) * m.Cantidad);
+            }
+        }
+        else {
+            for (var _b = 0, _c = this.auxiliares; _b < _c.length; _b++) {
+                var aux = _c[_b];
+                T += aux.costoVentas;
+            }
+        }
+        return T;
+    };
+    AnalisisComponent.prototype.getUtilidadBruta = function () {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            T += aux.Ventas - aux.costoVentas - aux.IVAxVentas;
+        }
+        return T;
+    };
+    AnalisisComponent.prototype.getGastosDeOperacion = function () {
+        var i = 0;
+        i = this.getAdminTotal() + this.getOtrosGastosTotal() + this.getDistTotal();
+        return i;
+    };
+    AnalisisComponent.prototype.getUtilidadOperacion = function () {
+        var i = 0;
+        var x = 0;
+        for (var _i = 0, _a = this.auxiliarT; _i < _a.length; _i++) {
+            var a = _a[_i];
+            x += a;
+        }
+        i = this.getUtilidadAntes() - x;
+        return x;
+    };
+    AnalisisComponent.prototype.getIntereses = function () {
+        var x = 0;
+        for (var _i = 0, _a = this.intereses; _i < _a.length; _i++) {
+            var a = _a[_i];
+            x += a;
+        }
+        return x;
+    };
+    AnalisisComponent.prototype.getUtilidadAntes = function () {
+        var T = 0;
+        if (this.auxiliares.length == 0) {
+            for (var _i = 0, _a = this.maquinas; _i < _a.length; _i++) {
+                var m = _a[_i];
+                T -= ((m.costo * (m.depAcum / 100)) * m.Cantidad);
+            }
+        }
+        else {
+            for (var _b = 0, _c = this.auxiliares; _b < _c.length; _b++) {
+                var aux = _c[_b];
+                T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
+            }
+        }
+        return T;
+    };
+    AnalisisComponent.prototype.getImpuestos = function () {
+        var i = 0;
+        for (var _i = 0, _a = this.balanceFinal; _i < _a.length; _i++) {
+            var balance = _a[_i];
+            i += (balance.imptosPorPagar * 12) + balance.PTUPorPagar;
+        }
+        return i;
+    };
+    AnalisisComponent.prototype.getUtilidadNeta = function () {
+        var i = 0;
+        for (var _i = 0, _a = this.balanceFinal; _i < _a.length; _i++) {
+            var balance = _a[_i];
+            i += balance.utilidadEjercicio;
+        }
+        return i;
+    };
+    AnalisisComponent.prototype.getMargenNeto = function () {
+        var i = 0;
+        var x = this.getUtilidadNeta();
+        var y = this.getTotalVentas();
+        if (y > 0) {
+            i = x / y;
+        }
+        return i;
+    };
+    AnalisisComponent.prototype.getRotacionActivos = function () {
+        var i = 0;
+        i = this.getTotalVentas() / this.getActivoTotal();
+        return i;
+    };
+    AnalisisComponent.prototype.getRentabilidadSobreActivos = function () {
+        var i = this.getMargenNeto() * this.getRotacionActivos();
+        return i;
+    };
+    AnalisisComponent.prototype.getPalancaFinanciera = function () {
+        var i = 0;
+        return i;
+    };
+    AnalisisComponent.prototype.getRentabilidadSobreCapital = function () {
+        var i = this.getRentabilidadSobreActivos() * this.getPalancaFinanciera();
+        return i;
+    };
+    AnalisisComponent.prototype.getActivoCirculante = function () {
+        var i = 0;
+        for (var _i = 0, _a = this.balanceFinal; _i < _a.length; _i++) {
+            var balance = _a[_i];
+            i += balance.cajaBancos + balance.cuentasPorCobrar + balance.IVAAcreditable + balance.almacenArtTerm + balance.almacenMateriales;
+        }
+        return i;
+    };
+    AnalisisComponent.prototype.getActivoFijo = function () {
+        var i = 0;
+        for (var _i = 0, _a = this.balanceFinal; _i < _a.length; _i++) {
+            var balance = _a[_i];
+            i += balance.terreno + balance.edifInsta + balance.maqEquipo + balance.mueblesEnseres + balance.eqTrans;
+            i -= balance.depTerreno + balance.depEdif + balance.depMaqEquipo + balance.depMueblesEnseres + balance.depEqTrans;
+        }
+        return i;
+    };
+    AnalisisComponent.prototype.getActivoTotal = function () {
+        var i = this.getActivoCirculante() + this.getActivoFijo();
+        return i;
+    };
+    AnalisisComponent.prototype.getPasivoCirculante = function () {
+        var i = 0;
+        for (var _i = 0, _a = this.balanceFinal; _i < _a.length; _i++) {
+            var balance = _a[_i];
+            i += balance.IVAPorEnterar + balance.imptosPorPagar + balance.proveedores + balance.PTUPorPagar + balance.prestamosMenosAnio;
+        }
+        return i;
+    };
+    AnalisisComponent.prototype.getSolvencia = function () {
+        var i = 0;
+        var x = this.getActivoCirculante();
+        var y = this.getPasivoCirculante();
+        if (y > 0) {
+            i = x / y;
+        }
+        return i;
+    };
+    AnalisisComponent.prototype.getSolvenciaInmediata = function () {
+        var i = 0;
+        var x = this.getActivoFijo();
+        var y = this.getPasivoCirculante();
+        if (y > 0) {
+            i = x / y;
+        }
+        return i;
+    };
+    AnalisisComponent.prototype.getVentasACredito = function () {
+        var i = this.getTotalVentas() * 1.15;
+        return i;
+    };
+    AnalisisComponent.prototype.getPromedioCC = function () {
+        var i = 0;
+        for (var _i = 0, _a = this.balanceFinal; _i < _a.length; _i++) {
+            var balance = _a[_i];
+            i += balance.cuentasPorCobrar;
+        }
+        for (var _b = 0, _c = this.balanceInicial; _b < _c.length; _b++) {
+            var balance = _c[_b];
+            i += balance.cuentasPorCobrar;
+        }
+        i = i / 2;
+        return i;
+    };
+    AnalisisComponent.prototype.getRotacionCC = function () {
+        var i = 0;
+        var x = this.getVentasACredito();
+        var y = this.getPromedioCC();
+        if (y > 0) {
+            i = x / y;
+        }
+        return i;
+    };
+    AnalisisComponent.prototype.getDiasPPromedioDeCartera = function () {
+        var i = 365 / this.getRotacionCC();
+        return i;
+    };
+    AnalisisComponent.prototype.getComprasNetasCredito = function () {
+        var i = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            i += aux.materiaCosumida;
+        }
+        i = i * 1.15;
+        return i;
+    };
+    AnalisisComponent.prototype.getPromedioCP = function () {
+        var i = 0;
+        for (var _i = 0, _a = this.balanceFinal; _i < _a.length; _i++) {
+            var balance = _a[_i];
+            i += balance.proveedores;
+        }
+        for (var _b = 0, _c = this.balanceInicial; _b < _c.length; _b++) {
+            var balance = _c[_b];
+            i += balance.proveedores;
+        }
+        i = i / 2;
+        return i;
+    };
+    AnalisisComponent.prototype.getRotacionCP = function () {
+        var i = 0;
+        var x = this.getComprasNetasCredito();
+        var y = this.getPromedioCP();
+        if (y > 0) {
+            i = x / y;
+        }
+        return i;
+    };
+    AnalisisComponent.prototype.getDiasPPromedio = function () {
+        var i = 365 / this.getRotacionCP();
+        return i;
+    };
+    AnalisisComponent.prototype.getPromedioInvArtTerm = function () {
+        var i = 0;
+        for (var _i = 0, _a = this.balanceFinal; _i < _a.length; _i++) {
+            var balance = _a[_i];
+            i += balance.almacenArtTerm;
+        }
+        for (var _b = 0, _c = this.balanceInicial; _b < _c.length; _b++) {
+            var balance = _c[_b];
+            i += balance.almacenArtTerm;
+        }
+        i = i / 2;
+        return i;
+    };
+    AnalisisComponent.prototype.getRotacionIAT = function () {
+        var i = 0;
+        var x = this.getTotalCostosVentas();
+        var y = this.getPromedioInvArtTerm();
+        if (y > 0) {
+            i = x / y;
+        }
+        return i;
+    };
+    AnalisisComponent.prototype.getDiasPromedioIAT = function () {
+        var i = 0;
+        var y = this.getRotacionIAT();
+        if (y > 0) {
+            i = 365 / y;
+        }
+        return i;
+    };
+    AnalisisComponent.prototype.getCostoMPEmpleada = function () {
+        var i = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            i += aux.materiaCosumida;
+        }
+        return i;
+    };
+    AnalisisComponent.prototype.getPromIMP = function () {
+        var i = 0;
+        for (var _i = 0, _a = this.balanceFinal; _i < _a.length; _i++) {
+            var balance = _a[_i];
+            i += balance.almacenMateriales;
+        }
+        for (var _b = 0, _c = this.balanceInicial; _b < _c.length; _b++) {
+            var balance = _c[_b];
+            i += balance.almacenMateriales;
+        }
+        i = i / 2;
+        return i;
+    };
+    AnalisisComponent.prototype.getRotacionMP = function () {
+        var i = 0;
+        var x = this.getCostoMPEmpleada();
+        var y = this.getPromIMP();
+        if (y > 0) {
+            i = x / y;
+        }
+        return i;
+    };
+    AnalisisComponent.prototype.getDiasPromedioIMP = function () {
+        var i = 0;
+        var y = this.getRotacionMP();
+        if (y > 0) {
+            i = 365 / y;
+        }
+        return i;
+    };
+    AnalisisComponent.prototype.getMargenNetoUtilidad = function () {
+        var i = 0;
+        var x = this.getUtilidadNeta();
+        var y = this.getTotalVentas();
+        if (y > 0) {
+            i = x / y;
+        }
+        return i;
+    };
+    AnalisisComponent.prototype.getMargenBrutoUtilidad = function () {
+        var i = 0;
+        var x = this.getUtilidadAntes();
+        var y = this.getTotalVentas();
+        if (y > 0) {
+            i = x / y;
+        }
+        return i;
+    };
+    AnalisisComponent.prototype.getCapitalContable = function () {
+        var i = 0;
+        for (var _i = 0, _a = this.balanceFinal; _i < _a.length; _i++) {
+            var balance = _a[_i];
+            i += balance.captalSocial + balance.reservaLegal + balance.utilidadAcum + balance.utilidadEjercicio;
+        }
+        return i;
+    };
+    AnalisisComponent.prototype.getEndeudamiento = function () {
+        var i = 0;
+        var x = this.getPasivoCirculante();
+        var y = this.getCapitalContable();
+        if (y > 0) {
+            i = x / y;
+        }
+        return i;
+    };
+    AnalisisComponent.prototype.getPasivoActivoTotal = function () {
+        var i = 0;
+        var x = this.getPasivoCirculante();
+        var y = this.getActivoTotal();
+        if (y > 0) {
+            i = x / y;
+        }
+        return i;
+    };
+    AnalisisComponent.prototype.getActivoCapitalTotal = function () {
+        var i = 0;
+        var x = this.getActivoTotal();
+        var y = this.getCapitalContable();
+        if (y > 0) {
+            i = x / y;
+        }
+        return i;
+    };
+    AnalisisComponent.prototype.getCoberturaIntereses = function () {
+        var i = 0;
+        var x = this.getUtilidadAntes();
+        var y = this.getIntereses();
+        if (y > 0) {
+            i = x / y;
+        }
+        return i;
+    };
+    //Funciones usadas pero no para mostrar
+    AnalisisComponent.prototype.getDistTotal = function () {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            T += aux.costoDistribucion;
+        }
+        return T;
+    };
+    AnalisisComponent.prototype.getAdminTotal = function () {
+        var T = 0;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var aux = _a[_i];
+            T += aux.costoAdministrativo;
+        }
+        return T;
+    };
+    AnalisisComponent.prototype.getOtrosGastosTotal = function () {
+        var x = 0;
+        for (var _i = 0, _a = this.auxiliarT; _i < _a.length; _i++) {
+            var a = _a[_i];
+            x += a;
+        }
+        return x;
     };
     return AnalisisComponent;
 }());
@@ -2309,9 +2714,10 @@ AnalisisComponent = __decorate([
         selector: 'app-analisis',
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/analisis/analisis.component.html")
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_resultados_service__["a" /* ResultadosService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */]) === "function" && _c || Object])
 ], AnalisisComponent);
 
+var _a, _b, _c;
 //# sourceMappingURL=analisis.component.js.map
 
 /***/ }),
@@ -3173,7 +3579,6 @@ var BalanceInicialComponent = (function () {
         this.cp = cp;
         this._proyectoService = _proyectoService;
         this.balanceInicial = this._resultadosService.balanceInicialAnterior();
-        console.log(this.balanceInicial);
         this._proyectoService.ocultaCierrePeriodo();
     }
     BalanceInicialComponent.prototype.ngOnInit = function () {
