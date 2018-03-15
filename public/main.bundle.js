@@ -97,75 +97,73 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__swimlane_ngx_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__swimlane_ngx_charts__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_angular4_color_picker__ = __webpack_require__("../../../../angular4-color-picker/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_angular4_color_picker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16_angular4_color_picker__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_ng2_scrollspy__ = __webpack_require__("../../../../ng2-scrollspy/dist/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_ng2_scrollspy___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17_ng2_scrollspy__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__app_routes__ = __webpack_require__("../../../../../src/app/app.routes.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__services_auxiliar_service__ = __webpack_require__("../../../../../src/app/services/auxiliar.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__services_compra_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/compra-maquinaria.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__services_desarrollo_zona_service__ = __webpack_require__("../../../../../src/app/services/desarrollo-zona.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__services_administradores_service__ = __webpack_require__("../../../../../src/app/services/administradores.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__services_usuarios_service__ = __webpack_require__("../../../../../src/app/services/usuarios.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__services_graficas_service__ = __webpack_require__("../../../../../src/app/services/graficas.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__services_resultados_operacion_service__ = __webpack_require__("../../../../../src/app/services/resultados-operacion.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__services_usuario_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/usuario-maquinaria.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__services_usuario_credito_service__ = __webpack_require__("../../../../../src/app/services/usuario-credito.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__services_usuario_producto_service__ = __webpack_require__("../../../../../src/app/services/usuario-producto.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__services_usuario_zona_service__ = __webpack_require__("../../../../../src/app/services/usuario-zona.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32_ng2_file_upload__ = __webpack_require__("../../../../ng2-file-upload/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32_ng2_file_upload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_32_ng2_file_upload__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__services_desarrollo_producto_service__ = __webpack_require__("../../../../../src/app/services/desarrollo-producto.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__services_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/maquinaria.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__services_producto_service__ = __webpack_require__("../../../../../src/app/services/producto.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__services_variables_service__ = __webpack_require__("../../../../../src/app/services/variables.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__services_creditos_service__ = __webpack_require__("../../../../../src/app/services/creditos.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__services_zonas_service__ = __webpack_require__("../../../../../src/app/services/zonas.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__services_operacion_service__ = __webpack_require__("../../../../../src/app/services/operacion.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__services_balance_service__ = __webpack_require__("../../../../../src/app/services/balance.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__services_resultados_service__ = __webpack_require__("../../../../../src/app/services/resultados.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__services_dashboard_service__ = __webpack_require__("../../../../../src/app/services/dashboard.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__components_zona_producto_zona_producto_component__ = __webpack_require__("../../../../../src/app/components/zona-producto/zona-producto.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__components_usuario_proyecto_usuario_desarrollo_mercado_desarrollo_mercado_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/desarrollo-mercado/desarrollo-mercado.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__components_usuario_proyecto_usuario_desarrollo_producto_desarrollo_producto_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/desarrollo-producto/desarrollo-producto.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__components_usuario_proyecto_usuario_venta_productos_venta_productos_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/venta-productos/venta-productos.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__components_usuario_proyecto_usuario_compra_maquinaria_compra_maquinaria_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/compra-maquinaria/compra-maquinaria.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__components_navbar_navbar_component__ = __webpack_require__("../../../../../src/app/components/navbar/navbar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__components_usuario_proyecto_usuario_balance_balance_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance/balance.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__components_sidenav_sidenav_component__ = __webpack_require__("../../../../../src/app/components/sidenav/sidenav.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_53__components_productos_productos_component__ = __webpack_require__("../../../../../src/app/components/productos/productos.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_54__components_maquinarias_maquinarias_component__ = __webpack_require__("../../../../../src/app/components/maquinarias/maquinarias.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_55__components_creditos_creditos_component__ = __webpack_require__("../../../../../src/app/components/creditos/creditos.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__components_demandas_demandas_component__ = __webpack_require__("../../../../../src/app/components/demandas/demandas.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_57__components_usuarios_usuarios_component__ = __webpack_require__("../../../../../src/app/components/usuarios/usuarios.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_58__components_home_home_component__ = __webpack_require__("../../../../../src/app/components/home/home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_59__components_usuario_proyectos_proyectos_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyectos/proyectos.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_60__components_administradores_administradores_component__ = __webpack_require__("../../../../../src/app/components/administradores/administradores.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_61__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_62__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_63_ng_lightning_ng_lightning__ = __webpack_require__("../../../../ng-lightning/ng-lightning.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_64__components_usuario_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/usuario.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_65__components_usuario_navbar_usuario_navbar_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/navbar-usuario/navbar-usuario.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_66__components_usuario_proyecto_usuario_proyecto_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/proyecto-usuario.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_67__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_68__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-inicial/balance-inicial.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_69__components_usuario_proyecto_usuario_balance_final_balance_final_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-final/balance-final.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_70__components_usuario_proyecto_usuario_balance_home_balance_home_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_71__components_usuario_proyecto_usuario_operacion_operacion_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/operacion/operacion.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_72__components_usuario_proyecto_usuario_prueba_prueba_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/prueba/prueba.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_73_d3__ = __webpack_require__("../../../../d3/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_74_nvd3__ = __webpack_require__("../../../../nvd3/build/nv.d3.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_74_nvd3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_74_nvd3__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_75__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_76__components_usuario_proyecto_usuario_demanda_potencial_demanda_potencial_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_77__components_usuario_proyecto_usuario_flujo_flujo_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/flujo/flujo.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_78__components_usuario_proyecto_usuario_analisis_analisis_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/analisis/analisis.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_79__components_usuario_proyecto_usuario_punto_equilibrio_punto_equilibrio_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/punto-equilibrio/punto-equilibrio.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_80__components_usuario_proyecto_usuario_integrales_integrales_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/integrales/integrales.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_81__components_usuario_proyecto_usuario_tendencias_tendencias_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/tendencias/tendencias.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_82__components_usuario_proyecto_usuario_razones_razones_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/razones/razones.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__app_routes__ = __webpack_require__("../../../../../src/app/app.routes.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__guards_auth_guard__ = __webpack_require__("../../../../../src/app/guards/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__services_auxiliar_service__ = __webpack_require__("../../../../../src/app/services/auxiliar.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__services_compra_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/compra-maquinaria.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__services_desarrollo_zona_service__ = __webpack_require__("../../../../../src/app/services/desarrollo-zona.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__services_administradores_service__ = __webpack_require__("../../../../../src/app/services/administradores.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__services_usuarios_service__ = __webpack_require__("../../../../../src/app/services/usuarios.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__services_graficas_service__ = __webpack_require__("../../../../../src/app/services/graficas.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__services_resultados_operacion_service__ = __webpack_require__("../../../../../src/app/services/resultados-operacion.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__services_usuario_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/usuario-maquinaria.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__services_usuario_credito_service__ = __webpack_require__("../../../../../src/app/services/usuario-credito.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__services_usuario_producto_service__ = __webpack_require__("../../../../../src/app/services/usuario-producto.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__services_usuario_zona_service__ = __webpack_require__("../../../../../src/app/services/usuario-zona.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31_ng2_file_upload__ = __webpack_require__("../../../../ng2-file-upload/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31_ng2_file_upload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_31_ng2_file_upload__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__services_desarrollo_producto_service__ = __webpack_require__("../../../../../src/app/services/desarrollo-producto.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__services_maquinaria_service__ = __webpack_require__("../../../../../src/app/services/maquinaria.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__services_producto_service__ = __webpack_require__("../../../../../src/app/services/producto.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__services_variables_service__ = __webpack_require__("../../../../../src/app/services/variables.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__services_creditos_service__ = __webpack_require__("../../../../../src/app/services/creditos.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__services_zonas_service__ = __webpack_require__("../../../../../src/app/services/zonas.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__services_operacion_service__ = __webpack_require__("../../../../../src/app/services/operacion.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__services_balance_service__ = __webpack_require__("../../../../../src/app/services/balance.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__services_resultados_service__ = __webpack_require__("../../../../../src/app/services/resultados.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__services_dashboard_service__ = __webpack_require__("../../../../../src/app/services/dashboard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__components_zona_producto_zona_producto_component__ = __webpack_require__("../../../../../src/app/components/zona-producto/zona-producto.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__components_usuario_proyecto_usuario_desarrollo_mercado_desarrollo_mercado_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/desarrollo-mercado/desarrollo-mercado.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__components_usuario_proyecto_usuario_desarrollo_producto_desarrollo_producto_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/desarrollo-producto/desarrollo-producto.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__components_usuario_proyecto_usuario_venta_productos_venta_productos_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/venta-productos/venta-productos.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__components_usuario_proyecto_usuario_compra_maquinaria_compra_maquinaria_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/compra-maquinaria/compra-maquinaria.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__components_navbar_navbar_component__ = __webpack_require__("../../../../../src/app/components/navbar/navbar.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__components_usuario_proyecto_usuario_balance_balance_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance/balance.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__components_sidenav_sidenav_component__ = __webpack_require__("../../../../../src/app/components/sidenav/sidenav.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__components_productos_productos_component__ = __webpack_require__("../../../../../src/app/components/productos/productos.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_53__components_maquinarias_maquinarias_component__ = __webpack_require__("../../../../../src/app/components/maquinarias/maquinarias.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_54__components_creditos_creditos_component__ = __webpack_require__("../../../../../src/app/components/creditos/creditos.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_55__components_demandas_demandas_component__ = __webpack_require__("../../../../../src/app/components/demandas/demandas.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__components_usuarios_usuarios_component__ = __webpack_require__("../../../../../src/app/components/usuarios/usuarios.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_57__components_home_home_component__ = __webpack_require__("../../../../../src/app/components/home/home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_58__components_usuario_proyectos_proyectos_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyectos/proyectos.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_59__components_administradores_administradores_component__ = __webpack_require__("../../../../../src/app/components/administradores/administradores.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_60__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_61__components_login_login_component__ = __webpack_require__("../../../../../src/app/components/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_62_ng_lightning_ng_lightning__ = __webpack_require__("../../../../ng-lightning/ng-lightning.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_63__components_usuario_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/usuario.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_64__components_usuario_navbar_usuario_navbar_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/navbar-usuario/navbar-usuario.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_65__components_usuario_proyecto_usuario_proyecto_usuario_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/proyecto-usuario.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_66__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_67__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-inicial/balance-inicial.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_68__components_usuario_proyecto_usuario_balance_final_balance_final_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-final/balance-final.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_69__components_usuario_proyecto_usuario_balance_home_balance_home_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-home/balance-home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_70__components_usuario_proyecto_usuario_operacion_operacion_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/operacion/operacion.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_71__components_usuario_proyecto_usuario_prueba_prueba_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/prueba/prueba.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_72_d3__ = __webpack_require__("../../../../d3/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_73_nvd3__ = __webpack_require__("../../../../nvd3/build/nv.d3.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_73_nvd3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_73_nvd3__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_74__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_75__components_usuario_proyecto_usuario_demanda_potencial_demanda_potencial_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/demanda-potencial/demanda-potencial.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_76__components_usuario_proyecto_usuario_flujo_flujo_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/flujo/flujo.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_77__components_usuario_proyecto_usuario_analisis_analisis_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/analisis/analisis.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_78__components_usuario_proyecto_usuario_punto_equilibrio_punto_equilibrio_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/punto-equilibrio/punto-equilibrio.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_79__components_usuario_proyecto_usuario_integrales_integrales_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/integrales/integrales.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_80__components_usuario_proyecto_usuario_tendencias_tendencias_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/tendencias/tendencias.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_81__components_usuario_proyecto_usuario_razones_razones_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/razones/razones.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -173,7 +171,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -271,43 +268,43 @@ var AppModule = (function () {
 AppModule = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_44__app_component__["a" /* AppComponent */],
-            __WEBPACK_IMPORTED_MODULE_50__components_navbar_navbar_component__["a" /* NavbarComponent */],
-            __WEBPACK_IMPORTED_MODULE_32_ng2_file_upload__["FileSelectDirective"],
-            __WEBPACK_IMPORTED_MODULE_62__components_login_login_component__["a" /* LoginComponent */],
-            __WEBPACK_IMPORTED_MODULE_52__components_sidenav_sidenav_component__["a" /* SidenavComponent */],
-            __WEBPACK_IMPORTED_MODULE_51__components_usuario_proyecto_usuario_balance_balance_component__["a" /* BalanceComponent */],
-            __WEBPACK_IMPORTED_MODULE_45__components_zona_producto_zona_producto_component__["a" /* ZonaProductoComponent */],
-            __WEBPACK_IMPORTED_MODULE_53__components_productos_productos_component__["a" /* ProductosComponent */],
-            __WEBPACK_IMPORTED_MODULE_54__components_maquinarias_maquinarias_component__["a" /* MaquinariasComponent */],
-            __WEBPACK_IMPORTED_MODULE_59__components_usuario_proyectos_proyectos_component__["a" /* ProyectosComponent */],
-            __WEBPACK_IMPORTED_MODULE_55__components_creditos_creditos_component__["a" /* CreditosComponent */],
-            __WEBPACK_IMPORTED_MODULE_72__components_usuario_proyecto_usuario_prueba_prueba_component__["a" /* PruebaComponent */],
-            __WEBPACK_IMPORTED_MODULE_56__components_demandas_demandas_component__["a" /* DemandasComponent */],
-            __WEBPACK_IMPORTED_MODULE_57__components_usuarios_usuarios_component__["a" /* UsuariosComponent */],
-            __WEBPACK_IMPORTED_MODULE_46__components_usuario_proyecto_usuario_desarrollo_mercado_desarrollo_mercado_component__["a" /* DesarrolloMercadoComponent */],
-            __WEBPACK_IMPORTED_MODULE_47__components_usuario_proyecto_usuario_desarrollo_producto_desarrollo_producto_component__["a" /* DesarrolloProductoComponent */],
-            __WEBPACK_IMPORTED_MODULE_48__components_usuario_proyecto_usuario_venta_productos_venta_productos_component__["a" /* VentaProductosComponent */],
-            __WEBPACK_IMPORTED_MODULE_49__components_usuario_proyecto_usuario_compra_maquinaria_compra_maquinaria_component__["a" /* CompraMaquinariaComponent */],
-            __WEBPACK_IMPORTED_MODULE_58__components_home_home_component__["a" /* HomeComponent */],
-            __WEBPACK_IMPORTED_MODULE_60__components_administradores_administradores_component__["a" /* AdministradoresComponent */],
-            __WEBPACK_IMPORTED_MODULE_64__components_usuario_usuario_component__["a" /* UsuarioComponent */],
-            __WEBPACK_IMPORTED_MODULE_65__components_usuario_navbar_usuario_navbar_usuario_component__["a" /* NavbarUsuarioComponent */],
-            __WEBPACK_IMPORTED_MODULE_66__components_usuario_proyecto_usuario_proyecto_usuario_component__["a" /* ProyectoUsuarioComponent */],
-            __WEBPACK_IMPORTED_MODULE_67__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__["a" /* SidenavPComponent */],
-            __WEBPACK_IMPORTED_MODULE_68__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__["a" /* BalanceInicialComponent */],
-            __WEBPACK_IMPORTED_MODULE_69__components_usuario_proyecto_usuario_balance_final_balance_final_component__["a" /* BalanceFinalComponent */],
-            __WEBPACK_IMPORTED_MODULE_70__components_usuario_proyecto_usuario_balance_home_balance_home_component__["a" /* BalanceHomeComponent */],
-            __WEBPACK_IMPORTED_MODULE_71__components_usuario_proyecto_usuario_operacion_operacion_component__["a" /* OperacionComponent */],
-            __WEBPACK_IMPORTED_MODULE_75__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__["a" /* EstadoResultadosComponent */],
-            __WEBPACK_IMPORTED_MODULE_61__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__["a" /* FinanciamientoComponent */],
-            __WEBPACK_IMPORTED_MODULE_76__components_usuario_proyecto_usuario_demanda_potencial_demanda_potencial_component__["a" /* DemandaPotencialComponent */],
-            __WEBPACK_IMPORTED_MODULE_77__components_usuario_proyecto_usuario_flujo_flujo_component__["a" /* FlujoComponent */],
-            __WEBPACK_IMPORTED_MODULE_78__components_usuario_proyecto_usuario_analisis_analisis_component__["a" /* AnalisisComponent */],
-            __WEBPACK_IMPORTED_MODULE_79__components_usuario_proyecto_usuario_punto_equilibrio_punto_equilibrio_component__["a" /* PuntoEquilibrioComponent */],
-            __WEBPACK_IMPORTED_MODULE_80__components_usuario_proyecto_usuario_integrales_integrales_component__["a" /* IntegralesComponent */],
-            __WEBPACK_IMPORTED_MODULE_81__components_usuario_proyecto_usuario_tendencias_tendencias_component__["a" /* TendenciasComponent */],
-            __WEBPACK_IMPORTED_MODULE_82__components_usuario_proyecto_usuario_razones_razones_component__["a" /* RazonesComponent */],
+            __WEBPACK_IMPORTED_MODULE_43__app_component__["a" /* AppComponent */],
+            __WEBPACK_IMPORTED_MODULE_49__components_navbar_navbar_component__["a" /* NavbarComponent */],
+            __WEBPACK_IMPORTED_MODULE_31_ng2_file_upload__["FileSelectDirective"],
+            __WEBPACK_IMPORTED_MODULE_61__components_login_login_component__["a" /* LoginComponent */],
+            __WEBPACK_IMPORTED_MODULE_51__components_sidenav_sidenav_component__["a" /* SidenavComponent */],
+            __WEBPACK_IMPORTED_MODULE_50__components_usuario_proyecto_usuario_balance_balance_component__["a" /* BalanceComponent */],
+            __WEBPACK_IMPORTED_MODULE_44__components_zona_producto_zona_producto_component__["a" /* ZonaProductoComponent */],
+            __WEBPACK_IMPORTED_MODULE_52__components_productos_productos_component__["a" /* ProductosComponent */],
+            __WEBPACK_IMPORTED_MODULE_53__components_maquinarias_maquinarias_component__["a" /* MaquinariasComponent */],
+            __WEBPACK_IMPORTED_MODULE_58__components_usuario_proyectos_proyectos_component__["a" /* ProyectosComponent */],
+            __WEBPACK_IMPORTED_MODULE_54__components_creditos_creditos_component__["a" /* CreditosComponent */],
+            __WEBPACK_IMPORTED_MODULE_71__components_usuario_proyecto_usuario_prueba_prueba_component__["a" /* PruebaComponent */],
+            __WEBPACK_IMPORTED_MODULE_55__components_demandas_demandas_component__["a" /* DemandasComponent */],
+            __WEBPACK_IMPORTED_MODULE_56__components_usuarios_usuarios_component__["a" /* UsuariosComponent */],
+            __WEBPACK_IMPORTED_MODULE_45__components_usuario_proyecto_usuario_desarrollo_mercado_desarrollo_mercado_component__["a" /* DesarrolloMercadoComponent */],
+            __WEBPACK_IMPORTED_MODULE_46__components_usuario_proyecto_usuario_desarrollo_producto_desarrollo_producto_component__["a" /* DesarrolloProductoComponent */],
+            __WEBPACK_IMPORTED_MODULE_47__components_usuario_proyecto_usuario_venta_productos_venta_productos_component__["a" /* VentaProductosComponent */],
+            __WEBPACK_IMPORTED_MODULE_48__components_usuario_proyecto_usuario_compra_maquinaria_compra_maquinaria_component__["a" /* CompraMaquinariaComponent */],
+            __WEBPACK_IMPORTED_MODULE_57__components_home_home_component__["a" /* HomeComponent */],
+            __WEBPACK_IMPORTED_MODULE_59__components_administradores_administradores_component__["a" /* AdministradoresComponent */],
+            __WEBPACK_IMPORTED_MODULE_63__components_usuario_usuario_component__["a" /* UsuarioComponent */],
+            __WEBPACK_IMPORTED_MODULE_64__components_usuario_navbar_usuario_navbar_usuario_component__["a" /* NavbarUsuarioComponent */],
+            __WEBPACK_IMPORTED_MODULE_65__components_usuario_proyecto_usuario_proyecto_usuario_component__["a" /* ProyectoUsuarioComponent */],
+            __WEBPACK_IMPORTED_MODULE_66__components_usuario_proyecto_usuario_sidenav_p_sidenav_p_component__["a" /* SidenavPComponent */],
+            __WEBPACK_IMPORTED_MODULE_67__components_usuario_proyecto_usuario_balance_inicial_balance_inicial_component__["a" /* BalanceInicialComponent */],
+            __WEBPACK_IMPORTED_MODULE_68__components_usuario_proyecto_usuario_balance_final_balance_final_component__["a" /* BalanceFinalComponent */],
+            __WEBPACK_IMPORTED_MODULE_69__components_usuario_proyecto_usuario_balance_home_balance_home_component__["a" /* BalanceHomeComponent */],
+            __WEBPACK_IMPORTED_MODULE_70__components_usuario_proyecto_usuario_operacion_operacion_component__["a" /* OperacionComponent */],
+            __WEBPACK_IMPORTED_MODULE_74__components_usuario_proyecto_usuario_estado_resultados_estado_resultados_component__["a" /* EstadoResultadosComponent */],
+            __WEBPACK_IMPORTED_MODULE_60__components_usuario_proyecto_usuario_financiamiento_financiamiento_component__["a" /* FinanciamientoComponent */],
+            __WEBPACK_IMPORTED_MODULE_75__components_usuario_proyecto_usuario_demanda_potencial_demanda_potencial_component__["a" /* DemandaPotencialComponent */],
+            __WEBPACK_IMPORTED_MODULE_76__components_usuario_proyecto_usuario_flujo_flujo_component__["a" /* FlujoComponent */],
+            __WEBPACK_IMPORTED_MODULE_77__components_usuario_proyecto_usuario_analisis_analisis_component__["a" /* AnalisisComponent */],
+            __WEBPACK_IMPORTED_MODULE_78__components_usuario_proyecto_usuario_punto_equilibrio_punto_equilibrio_component__["a" /* PuntoEquilibrioComponent */],
+            __WEBPACK_IMPORTED_MODULE_79__components_usuario_proyecto_usuario_integrales_integrales_component__["a" /* IntegralesComponent */],
+            __WEBPACK_IMPORTED_MODULE_80__components_usuario_proyecto_usuario_tendencias_tendencias_component__["a" /* TendenciasComponent */],
+            __WEBPACK_IMPORTED_MODULE_81__components_usuario_proyecto_usuario_razones_razones_component__["a" /* RazonesComponent */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_8_angular2_flash_messages__["FlashMessagesModule"],
@@ -321,10 +318,9 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_6_ngx_bootstrap__["a" /* ModalModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_6_ngx_bootstrap__["b" /* AlertModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_9_ngx_bootstrap_tabs__["a" /* TabsModule */].forRoot(),
-            __WEBPACK_IMPORTED_MODULE_18__app_routes__["a" /* app_routing */],
-            __WEBPACK_IMPORTED_MODULE_17_ng2_scrollspy__["ScrollSpyModule"].forRoot(),
+            __WEBPACK_IMPORTED_MODULE_17__app_routes__["a" /* app_routing */],
             __WEBPACK_IMPORTED_MODULE_12_ng2_currency_mask__["CurrencyMaskModule"],
-            __WEBPACK_IMPORTED_MODULE_63_ng_lightning_ng_lightning__["a" /* NglModule */].forRoot({ svgPath: '../assets/icons' }),
+            __WEBPACK_IMPORTED_MODULE_62_ng_lightning_ng_lightning__["a" /* NglModule */].forRoot({ svgPath: '../assets/icons' }),
             __WEBPACK_IMPORTED_MODULE_6_ngx_bootstrap__["c" /* AccordionModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */].forRoot(),
             __WEBPACK_IMPORTED_MODULE_6_ngx_bootstrap__["d" /* PaginationModule */].forRoot(),
@@ -335,37 +331,37 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_5_angular2_select__["SelectModule"],
             __WEBPACK_IMPORTED_MODULE_5_angular2_select__["SelectModule"]
         ],
-        providers: [__WEBPACK_IMPORTED_MODULE_25__services_usuarios_service__["a" /* UsuariosService */],
-            __WEBPACK_IMPORTED_MODULE_19__services_auth_service__["a" /* AuthService */],
-            __WEBPACK_IMPORTED_MODULE_20__guards_auth_guard__["a" /* AuthGuard */],
+        providers: [__WEBPACK_IMPORTED_MODULE_24__services_usuarios_service__["a" /* UsuariosService */],
+            __WEBPACK_IMPORTED_MODULE_18__services_auth_service__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_19__guards_auth_guard__["a" /* AuthGuard */],
             __WEBPACK_IMPORTED_MODULE_7__angular_common__["CurrencyPipe"],
             __WEBPACK_IMPORTED_MODULE_7__angular_common__["DatePipe"],
             __WEBPACK_IMPORTED_MODULE_7__angular_common__["DecimalPipe"],
-            __WEBPACK_IMPORTED_MODULE_33__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */],
-            __WEBPACK_IMPORTED_MODULE_40__services_balance_service__["a" /* BalanceService */],
-            __WEBPACK_IMPORTED_MODULE_29__services_usuario_credito_service__["a" /* UsuarioCreditoService */],
-            __WEBPACK_IMPORTED_MODULE_23__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */],
-            __WEBPACK_IMPORTED_MODULE_43__services_dashboard_service__["a" /* DashboardService */],
-            __WEBPACK_IMPORTED_MODULE_42__services_resultados_service__["a" /* ResultadosService */],
-            __WEBPACK_IMPORTED_MODULE_21__services_auxiliar_service__["a" /* AuxiliarService */],
-            __WEBPACK_IMPORTED_MODULE_36__services_variables_service__["a" /* VariablesService */],
-            __WEBPACK_IMPORTED_MODULE_22__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */],
-            __WEBPACK_IMPORTED_MODULE_38__services_zonas_service__["a" /* ZonasService */],
-            __WEBPACK_IMPORTED_MODULE_27__services_resultados_operacion_service__["a" /* ResultadosOperacionService */],
-            __WEBPACK_IMPORTED_MODULE_39__services_operacion_service__["a" /* OperacionService */],
-            __WEBPACK_IMPORTED_MODULE_28__services_usuario_maquinaria_service__["a" /* UsuarioMaquinariaService */],
-            __WEBPACK_IMPORTED_MODULE_30__services_usuario_producto_service__["a" /* UsuarioProductoService */],
-            __WEBPACK_IMPORTED_MODULE_31__services_usuario_zona_service__["a" /* UsuarioZonaService */],
-            __WEBPACK_IMPORTED_MODULE_26__services_graficas_service__["a" /* GraficasService */],
-            __WEBPACK_IMPORTED_MODULE_41__services_proyectos_service__["a" /* ProyectosService */],
-            __WEBPACK_IMPORTED_MODULE_24__services_administradores_service__["a" /* AdministradoresService */],
-            __WEBPACK_IMPORTED_MODULE_34__services_maquinaria_service__["a" /* MaquinariaService */],
-            __WEBPACK_IMPORTED_MODULE_35__services_producto_service__["a" /* ProductoService */],
-            __WEBPACK_IMPORTED_MODULE_37__services_creditos_service__["a" /* CreditosService */],
+            __WEBPACK_IMPORTED_MODULE_32__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */],
+            __WEBPACK_IMPORTED_MODULE_39__services_balance_service__["a" /* BalanceService */],
+            __WEBPACK_IMPORTED_MODULE_28__services_usuario_credito_service__["a" /* UsuarioCreditoService */],
+            __WEBPACK_IMPORTED_MODULE_22__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */],
+            __WEBPACK_IMPORTED_MODULE_42__services_dashboard_service__["a" /* DashboardService */],
+            __WEBPACK_IMPORTED_MODULE_41__services_resultados_service__["a" /* ResultadosService */],
+            __WEBPACK_IMPORTED_MODULE_20__services_auxiliar_service__["a" /* AuxiliarService */],
+            __WEBPACK_IMPORTED_MODULE_35__services_variables_service__["a" /* VariablesService */],
+            __WEBPACK_IMPORTED_MODULE_21__services_compra_maquinaria_service__["a" /* CompraMaquinariaService */],
+            __WEBPACK_IMPORTED_MODULE_37__services_zonas_service__["a" /* ZonasService */],
+            __WEBPACK_IMPORTED_MODULE_26__services_resultados_operacion_service__["a" /* ResultadosOperacionService */],
+            __WEBPACK_IMPORTED_MODULE_38__services_operacion_service__["a" /* OperacionService */],
+            __WEBPACK_IMPORTED_MODULE_27__services_usuario_maquinaria_service__["a" /* UsuarioMaquinariaService */],
+            __WEBPACK_IMPORTED_MODULE_29__services_usuario_producto_service__["a" /* UsuarioProductoService */],
+            __WEBPACK_IMPORTED_MODULE_30__services_usuario_zona_service__["a" /* UsuarioZonaService */],
+            __WEBPACK_IMPORTED_MODULE_25__services_graficas_service__["a" /* GraficasService */],
+            __WEBPACK_IMPORTED_MODULE_40__services_proyectos_service__["a" /* ProyectosService */],
+            __WEBPACK_IMPORTED_MODULE_23__services_administradores_service__["a" /* AdministradoresService */],
+            __WEBPACK_IMPORTED_MODULE_33__services_maquinaria_service__["a" /* MaquinariaService */],
+            __WEBPACK_IMPORTED_MODULE_34__services_producto_service__["a" /* ProductoService */],
+            __WEBPACK_IMPORTED_MODULE_36__services_creditos_service__["a" /* CreditosService */],
             __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__["b" /* NgbActiveModal */],
             __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__["c" /* NgbModalRef */]
         ],
-        bootstrap: [__WEBPACK_IMPORTED_MODULE_44__app_component__["a" /* AppComponent */]]
+        bootstrap: [__WEBPACK_IMPORTED_MODULE_43__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
 
