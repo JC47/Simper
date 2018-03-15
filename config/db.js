@@ -13,6 +13,13 @@ var pool = mysql.createPool({
     database: 'wwwwcome_basesimv1'
 });
 
+// var pool = mysql.createPool({
+//     host: 'localhost',
+//     user: 'root',
+//     password: '',
+//     database: 'basesimv1'
+// });
+
 ///K=W8}UX1X!v?3
 
 function getSqlConnection() {

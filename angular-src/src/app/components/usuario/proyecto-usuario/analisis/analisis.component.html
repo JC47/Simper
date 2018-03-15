@@ -18,13 +18,13 @@
       <tr>
         <td></td>
         <td>Ventas</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getTotalVentas()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>-</td>
         <td>Costos</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getTotalCostosVentas()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
 
@@ -32,79 +32,79 @@
       <tr>
         <td>=</td>
         <td>Utilidad Bruta</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getUtilidadBruta()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>-</td>
         <td>Gastos de Operación</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getGastosDeOperacion()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr >
         <td>=</td>
         <td>Utilidad de Operación</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getUtilidadOperacion()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>-</td>
         <td>Intereses</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getIntereses()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>=</td>
         <td>Utilidad antes de Impuestos</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getUtilidadAntes()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>-</td>
         <td>Impuestos</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getImpuestos()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>=</td>
         <td>Utilidad Neta</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getUtilidadNeta()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>/</td>
         <td>Ventas</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getTotalVentas()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr bgcolor="DF060A" style="color:white">
         <td>=</td>
         <td>Margen Neto (%)</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getMargenNeto()* 100}}</td>
       </tr>
 
       <tr bgcolor="DF060A" style="color:white">
         <td>*</td>
         <td>Rotación de Activos</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getRotacionActivos()}}</td>
       </tr>
 
       <tr bgcolor="DF060A" style="color:white">
         <td>=</td>
         <td>Rentabilidad de Activos(%)</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getRentabilidadSobreActivos()* 100}}</td>
       </tr>
 
       <tr bgcolor="DF060A" style="color:white">
         <td>*</td>
         <td>Placa Financiera</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getActivoCapitalTotal()}}</td>
       </tr>
 
       <tr bgcolor="DF060A" style="color:white">
         <td>=</td>
         <td>Rentabilidad s/Capital Contable</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getRentabilidadSobreCapital()*100}}</td>
       </tr>
 
     </table>
@@ -122,13 +122,13 @@
       <tr>
         <td></td>
         <td>Activo Circulante</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getActivoCirculante()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>+</td>
         <td>Activo Fijo</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getActivoFijo()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
 
@@ -136,13 +136,13 @@
       <tr>
         <td>+</td>
         <td>Otros Activos</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>-</td>
       </tr>
 
       <tr>
         <td>=</td>
         <td>Activo Total</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getActivoTotal()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr >
@@ -154,19 +154,19 @@
       <tr>
         <td></td>
         <td>Ventas</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getTotalVentas()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>/</td>
         <td>Activo Total(promedio)</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getActivoTotal()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr bgcolor="DF060A" style="color:white">
         <td>=</td>
         <td>Rotación de activos</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getRotacionActivos()}}</td>
       </tr>
 
       <tr>
@@ -178,19 +178,19 @@
       <tr>
         <td></td>
         <td>Pasivo Circulante</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getPasivoCirculante()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>+</td>
         <td>Pasivo a Largo Plazo</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getPasivoLP()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>=</td>
         <td>Pasivo Total</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getPasivoTotal()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
 
@@ -202,20 +202,20 @@
       <tr>
         <td></td>
         <td>Activo Total</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getActivoTotal()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>-</td>
         <td>Pasivo Total</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getPasivoTotal()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
 
       <tr>
         <td>=</td>
         <td>Capital Contable</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getCapitalContable()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
@@ -227,19 +227,19 @@
       <tr>
         <td></td>
         <td>Activo Total</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getActivoTotal()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>/</td>
         <td>Capital Contable</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getCapitalContable()|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr bgcolor="DF060A" style="color:white">
         <td>=</td>
         <td>Palanaca Financiera</td>
-        <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+        <td>{{getActivoCapitalTotal()}}</td>
 
       </tr>
     </table>
@@ -257,14 +257,14 @@
         <tr>
           <td bgcolor="DF060A" style="color:white">Solvencia</td>
           <td>Activo Circulante</td>
-          <td>{{10|currency:'USD':true:'1.0-0'}}</td>
-          <td bgcolor="DF060A" style="color:white"></td>
+          <td>{{getActivoCirculante()|currency:'USD':true:'1.0-0'}}</td>
+          <td bgcolor="DF060A" style="color:white">{{getSolvencia()}}</td>
         </tr>
 
         <tr>
           <td></td>
           <td>Pasivo Circulante</td>
-          <td>{{10|currency:'USD':true:'1.0-0'}}</td>
+          <td>{{getPasivoCirculante()|currency:'USD':true:'1.0-0'}}</td>
           <td></td>
         </tr>
 
@@ -273,14 +273,14 @@
         <tr>
           <td bgcolor="DF060A" style="color:white">Solvencia Inmediata</td>
           <td>Activo Disponible</td>
-          <td></td>
-          <td bgcolor="DF060A" style="color:white"></td>
+          <td>{{getActivoDisponible()|currency:'USD':true:'1.0-0'}}</td>
+          <td bgcolor="DF060A" style="color:white">{{getSolvenciaInmediata()}}</td>
         </tr>
 
         <tr>
           <td></td>
           <td>Pasivo Circulante</td>
-          <td></td>
+          <td>{{getPasivoCirculante()|currency:'USD':true:'1.0-0'}}</td>
           <td></td>
         </tr>
 
@@ -290,14 +290,14 @@
         <tr>
           <td bgcolor="DF060A" style="color:white">Rotación de Cuentas x Cobrar</td>
           <td>Ventas de Créditos</td>
-          <td></td>
-          <td bgcolor="DF060A" style="color:white"></td>
+          <td>{{getVentasACredito()|currency:'USD':true:'1.0-0'}}</td>
+          <td bgcolor="DF060A" style="color:white">{{getRotacionCC()}}</td>
         </tr>
 
         <tr>
           <td></td>
           <td>Promedio de c x c</td>
-          <td></td>
+          <td>{{getPromedioCC()|currency:'USD':true:'1.0-0'}}</td>
           <td></td>
         </tr>
 
@@ -307,14 +307,14 @@
         <tr>
           <td bgcolor="DF060A" style="color:white">Días promedio de Cartera</td>
           <td>Días del Periodo</td>
-          <td></td>
-          <td bgcolor="DF060A" style="color:white"></td>
+          <td>365</td>
+          <td bgcolor="DF060A" style="color:white">{{getDiasPPromedioDeCartera()}}</td>
         </tr>
 
         <tr>
           <td></td>
           <td>Rotación de c x c</td>
-          <td></td>
+          <td>{{getRotacionCC()|currency:'USD':true:'1.0-0'}}</td>
           <td></td>
         </tr>
 
@@ -328,14 +328,14 @@
         <tr>
           <td bgcolor="DF060A" style="color:white">Rotación de Cuentas por Pagar</td>
           <td>Compras Netas a Crédito</td>
-          <td></td>
-          <td bgcolor="DF060A" style="color:white"></td>
+          <td>{{getComprasNetasCredito()|currency:'USD':true:'1.0-0'}}</td>
+          <td bgcolor="DF060A" style="color:white">{{getRotacionCP()}}</td>
         </tr>
 
         <tr>
           <td></td>
           <td>Promedio de cuentas por pagar</td>
-          <td></td>
+          <td>{{getPromedioCP()|currency:'USD':true:'1.0-0'}}</td>
           <td></td>
         </tr>
 
@@ -347,13 +347,13 @@
           <td bgcolor="DF060A" style="color:white">Días promedio de c x p</td>
           <td>Días del Periodo</td>
           <td>365</td>
-          <td bgcolor="DF060A" style="color:white"></td>
+          <td bgcolor="DF060A" style="color:white">{{getDiasPPromedio()}}</td>
         </tr>
 
         <tr>
           <td></td>
           <td>Rotación de c x p</td>
-          <td></td>
+          <td>{{getRotacionCP()|currency:'USD':true:'1.0-0'}}</td>
           <td></td>
         </tr>
 
@@ -364,14 +364,14 @@
         <tr>
           <td bgcolor="DF060A" style="color:white">Rotación  de I.A.T.</td>
           <td>Costo de lo vendido</td>
-          <td></td>
-          <td bgcolor="DF060A" style="color:white"></td>
+          <td>{{getTotalCostosVentas()|currency:'USD':true:'1.0-0'}}</td>
+          <td bgcolor="DF060A" style="color:white">{{getRotacionIAT()}}</td>
         </tr>
 
         <tr>
           <td></td>
           <td>Promedio de inv art term</td>
-          <td></td>
+          <td>{{getPromedioInvArtTerm()|currency:'USD':true:'1.0-0'}}</td>
           <td></td>
         </tr>
 
@@ -380,14 +380,14 @@
         <tr>
           <td bgcolor="DF060A" style="color:white">Días primedio I.A.T.</td>
           <td>Días del Periodo</td>
-          <td></td>
-          <td bgcolor="DF060A" style="color:white"></td>
+          <td>365</td>
+          <td bgcolor="DF060A" style="color:white">{{getDiasPromedioIAT()}}</td>
         </tr>
 
         <tr>
           <td></td>
           <td>Rotación I.A.T.</td>
-          <td></td>
+          <td>{{getRotacionIAT()|currency:'USD':true:'1.0-0'}}</td>
           <td></td>
         </tr>
 
@@ -397,14 +397,14 @@
         <tr>
           <td bgcolor="DF060A" style="color:white">Rotación de Materia Prima</td>
           <td>Costo de M.P. empleada</td>
-          <td></td>
-          <td bgcolor="DF060A" style="color:white"></td>
+          <td>{{getCostoMPEmpleada()|currency:'USD':true:'1.0-0'}}</td>
+          <td bgcolor="DF060A" style="color:white">{{getRotacionMP()}}</td>
         </tr>
 
         <tr>
           <td></td>
           <td>Prom in mat primas </td>
-          <td></td>
+          <td>{{getPromIMP()|currency:'USD':true:'1.0-0'}}</td>
           <td></td>
         </tr>
 
@@ -413,14 +413,14 @@
         <tr>
           <td bgcolor="DF060A" style="color:white">Días Promedio I.M.P.</td>
           <td>Días del Periodo</td>
-          <td></td>
-          <td bgcolor="DF060A" style="color:white"></td>
+          <td>365</td>
+          <td bgcolor="DF060A" style="color:white">{{getDiasPromedioIMP()}}</td>
         </tr>
 
         <tr>
           <td></td>
           <td>Rotación de I.M.P.</td>
-          <td></td>
+          <td>{{getRotacionMP()|currency:'USD':true:'1.0-0'}}</td>
           <td></td>
         </tr>
 
@@ -430,14 +430,14 @@
         <tr>
           <td bgcolor="DF060A" style="color:white">Margen Neto de Utilidad</td>
           <td>Utilidad Neta</td>
-          <td></td>
-          <td bgcolor="DF060A" style="color:white"></td>
+          <td>{{getUtilidadNeta()|currency:'USD':true:'1.0-0'}}</td>
+          <td bgcolor="DF060A" style="color:white">{{getMargenNetoUtilidad()}}</td>
         </tr>
 
         <tr>
           <td></td>
           <td>Ventas Totales</td>
-          <td></td>
+          <td>{{getTotalVentas()|currency:'USD':true:'1.0-0'}}</td>
           <td></td>
         </tr>
 
@@ -447,14 +447,14 @@
         <tr>
           <td bgcolor="DF060A" style="color:white">Margen Bruto de Utilidad</td>
           <td>Utilidad antes int. e imptos</td>
-          <td></td>
-          <td bgcolor="DF060A" style="color:white"></td>
+          <td>{{getUtilidadOperacion()|currency:'USD':true:'1.0-0'}}</td>
+          <td bgcolor="DF060A" style="color:white">{{getMargenBrutoUtilidad()}}</td>
         </tr>
 
         <tr>
           <td></td>
           <td>Ventas Totales</td>
-          <td></td>
+          <td>{{getTotalVentas()|currency:'USD':true:'1.0-0'}}</td>
           <td></td>
         </tr>
 
@@ -463,14 +463,14 @@
         <tr>
           <td bgcolor="DF060A" style="color:white">Endeudamiento</td>
           <td>Pasivo Total</td>
-          <td></td>
-          <td bgcolor="DF060A" style="color:white"></td>
+          <td>{{getPasivoTotal()|currency:'USD':true:'1.0-0'}}</td>
+          <td bgcolor="DF060A" style="color:white">{{getEndeudamiento()}}</td>
         </tr>
 
         <tr>
           <td></td>
           <td>Capital Contable</td>
-          <td></td>
+          <td>{{getCapitalContable()|currency:'USD':true:'1.0-0'}}</td>
           <td></td>
         </tr>
 
@@ -485,8 +485,8 @@
         <tr>
           <td></td>
           <td>Pasivo Total</td>
-          <td></td>
-          <td></td>
+          <td>{{getPasivoTotal()|currency:'USD':true:'1.0-0'}}</td>
+          <td bgcolor="DF060A" style="color:white">{{getPasivoActivoTotal()}}</td>
         </tr>
 
 
@@ -494,7 +494,7 @@
         <tr>
           <td></td>
           <td>Activo Total</td>
-          <td></td>
+          <td>{{getActivoTotal()|currency:'USD':true:'1.0-0'}}</td>
           <td></td>
         </tr>
 
@@ -509,28 +509,28 @@
         <tr>
           <td></td>
           <td>Total Activo</td>
-          <td></td>
-          <td></td>
+          <td>{{getActivoTotal()|currency:'USD':true:'1.0-0'}}</td>
+          <td bgcolor="DF060A" style="color:white">{{getActivoCapitalTotal()}}</td>
         </tr>
 
         <tr>
           <td></td>
           <td>Capital Contable</td>
-          <td></td>
+          <td>{{getCapitalContable()|currency:'USD':true:'1.0-0'}}</td>
           <td></td>
         </tr>
 
         <tr>
           <td bgcolor="DF060A" style="color:white">Coobertura de Intereses</td>
           <td>Utilidad antes int e imptos</td>
-          <td></td>
-          <td bgcolor="DF060A" style="color:white"></td>
+          <td>{{getUtilidadOperacion()|currency:'USD':true:'1.0-0'}}</td>
+          <td bgcolor="DF060A" style="color:white">{{getCoberturaIntereses()}}</td>
         </tr>
 
         <tr>
           <td></td>
           <td>Intereses Pagados</td>
-          <td></td>
+          <td>{{getIntereses()|currency:'USD':true:'1.0-0'}}</td>
           <td></td>
         </tr>
 

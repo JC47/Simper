@@ -44,7 +44,6 @@ export class AnalisisComponent implements OnInit {
     var T = 0;
     if(this.auxiliares.length == 0){
       for(let m of this.maquinas){
-        console.log(m.costo,m.depAcum,m.Cantidad)
         T += ((m.costo * (m.depAcum/100))*m.Cantidad);
       }
     }
@@ -73,11 +72,21 @@ export class AnalisisComponent implements OnInit {
   getUtilidadOperacion(){
     var i = 0;
     var x = 0;
+    if(this.auxiliares.length == 0){
+      for(let m of this.maquinas){
+        i -= ((m.costo * (m.depAcum/100))*m.Cantidad);
+      }
+    }
+    else{
+      for(let aux of this.auxiliares){
+        i += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
+      }
+    }
     for(let a of this.auxiliarT){
       x+=a;
     }
-    i = this.getUtilidadAntes() - x;
-    return x
+    i -= x;
+    return i;
   }
 
   getIntereses(){
@@ -99,6 +108,12 @@ export class AnalisisComponent implements OnInit {
       for(let aux of this.auxiliares){
         T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
       }
+    }
+    for(let i of this.auxiliarT){
+      T -= i
+    }
+    for(let i2 of this.intereses){
+      T -= i2;
     }
     return T;
   }
@@ -141,12 +156,11 @@ export class AnalisisComponent implements OnInit {
   }
 
   getPalancaFinanciera(){
-    var i = 0;
-    return i;
+    //getActivoCapitalTotal()
   }
 
   getRentabilidadSobreCapital(){
-    var i = this.getRentabilidadSobreActivos() * this.getPalancaFinanciera();
+    var i = this.getRentabilidadSobreActivos() * this.getActivoCapitalTotal();
     return i;
   }
 
@@ -180,6 +194,19 @@ export class AnalisisComponent implements OnInit {
     return i;
   }
 
+  getPasivoLP(){
+    var i = 0;
+    for(let balance of this.balanceFinal){
+      i+= balance.prestamosMasAnio;
+    }
+    return i;
+  }
+
+  getPasivoTotal(){
+    var i = this.getPasivoCirculante() + this.getPasivoLP();
+    return i;
+  }
+
   getSolvencia(){
     var i = 0;
     var x = this.getActivoCirculante();
@@ -190,9 +217,17 @@ export class AnalisisComponent implements OnInit {
     return i;
   }
 
+  getActivoDisponible(){
+    var i = 0;
+    for(let balance of this.balanceFinal){
+      i+= balance.cajaBancos + balance.cuentasPorCobrar;
+    }
+    return i;
+  }
+
   getSolvenciaInmediata(){
     var i = 0;
-    var x = this.getActivoFijo();
+    var x = this.getActivoDisponible();
     var y = this.getPasivoCirculante();
     if(y > 0){
       i = x/y;
@@ -350,7 +385,7 @@ export class AnalisisComponent implements OnInit {
 
   getMargenBrutoUtilidad(){
     var i = 0;
-    var x = this.getUtilidadAntes();
+    var x = this.getUtilidadOperacion();
     var y = this.getTotalVentas();
     if(y > 0){
       i = x/y;
@@ -361,14 +396,14 @@ export class AnalisisComponent implements OnInit {
   getCapitalContable(){
     var i = 0;
     for(let balance of this.balanceFinal){
-      i += balance.captalSocial + balance.reservaLegal + balance.utilidadAcum + balance.utilidadEjercicio;
+      i += balance.capitalSocial + balance.reservaLegal + balance.utilidadAcum + balance.utilidadEjercicio;
     }
     return i;
   }
 
   getEndeudamiento(){
     var i = 0;
-    var x = this.getPasivoCirculante();
+    var x = this.getPasivoTotal();
     var y = this.getCapitalContable();
     if(y > 0){
       i = x/y;
@@ -378,7 +413,7 @@ export class AnalisisComponent implements OnInit {
 
   getPasivoActivoTotal(){
     var i = 0;
-    var x = this.getPasivoCirculante();
+    var x = this.getPasivoTotal();
     var y = this.getActivoTotal();
     if(y > 0){
       i = x/y;
@@ -398,7 +433,7 @@ export class AnalisisComponent implements OnInit {
 
   getCoberturaIntereses(){
     var i = 0;
-    var x = this.getUtilidadAntes();
+    var x = this.getUtilidadOperacion();
     var y = this.getIntereses();
     if(y > 0){
       i = x/y;

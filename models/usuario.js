@@ -25,7 +25,7 @@ module.exports.getUsuarios = function () {
 }
 
 module.exports.getProyectos = function () {
-  var query = "select * from Proyecto";
+  var query = "select * from proyecto";
   return querySql(query);
 }
 
