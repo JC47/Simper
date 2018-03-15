@@ -2,12 +2,12 @@ const db = require('../config/db');
 const querySql = db.querySql;
 
 module.exports.deletePrestamo = function (id) {
-    var userQuery = "delete from Prestamo where idPrestamos = ?";
+    var userQuery = "delete from prestamo where idPrestamos = ?";
     return querySql(userQuery, id);
 }
 
 module.exports.updatePrestamo = function (data,id){
-    queryUpdateProd = "update Prestamo set ? where idPrestamos = "+id+"";
+    queryUpdateProd = "update prestamo set ? where idPrestamos = "+id+"";
     return querySql(queryUpdateProd,data);
 }
 

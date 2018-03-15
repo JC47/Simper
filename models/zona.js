@@ -5,7 +5,7 @@ const Promise = require("bluebird");
 
 module.exports.addZona = function (nombreZona) {
 //  console.log("nombreZona: "+nombreZona);
-    var queryZona = "insert into Zona set nombreZona = ? ";
+    var queryZona = "insert into zona set nombreZona = ? ";
   //  console.log(querySql(queryZona,nombreZona));
     return querySql(queryZona,nombreZona);
 }
@@ -20,17 +20,17 @@ module.exports.addDemandaIndividual = function (data) {
 }
 
 module.exports.deleteZona = function (id) {
-    var userQuery = "delete from Zona where idZona = ?";
+    var userQuery = "delete from zona where idZona = ?";
     return querySql(userQuery, id);
 }
 
 module.exports.updateZona = function (data,id){
-    queryUpdateProd = "update Zona set ? where idZona = "+id+"";
+    queryUpdateProd = "update zona set ? where idZona = "+id+"";
     return querySql(queryUpdateProd,data);
 }
 
 module.exports.getZonas = function () {
-    var query = "select * from Zona";
+    var query = "select * from zona";
     return querySql(query);
 }
 
@@ -49,7 +49,7 @@ module.exports.productoPeriodoZona = function (idZona) {
 
  module.exports.addDemanda = function (ultimoIdZona,productos) {
    for (var i = 0; i < productos.length; i++) {
-     var queryDemanda = "insert into Demanda (Zona_idZonas,Producto_idProducto) values ("+ultimoIdZona+","+productos[i].Producto_idProducto+") ";
+     var queryDemanda = "insert into demanda (Zona_idZonas,Producto_idProducto) values ("+ultimoIdZona+","+productos[i].Producto_idProducto+") ";
      querySql(queryDemanda);
    }
  return console.log("Se ha insertado");

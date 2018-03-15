@@ -6,12 +6,21 @@ Promise.promisifyAll(require("mysql/lib/Connection").prototype);
 Promise.promisifyAll(require("mysql/lib/Pool").prototype);
 
 
+// var pool = mysql.createPool({
+//     host: 'shx14.guebs.net',
+//     user: 'wwwwcome_basesim',
+//     password: 'CaletteEsquivelMelo',
+//     database: 'wwwwcome_basesimv1'
+// });
+
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: '',
     database: 'basesimv1'
 });
+
+///Zm8:C.2y6gQ:f2
 
 function getSqlConnection() {
     return pool.getConnectionAsync().disposer(function (connection) {

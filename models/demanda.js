@@ -4,7 +4,7 @@ const querySql = db.querySql;
 
 module.exports.addDemanda = function (ultimoIdZona,idsProducto) {
   for (var i = 0; i < idsProducto.length; i++) {
-    var queryDemanda = "insert into Demanda (Zona_idZonas,Producto_idProducto) values ("+ultimoIdZona+","+idsProducto[i]+") ";
+    var queryDemanda = "insert into demanda (Zona_idZonas,Producto_idProducto) values ("+ultimoIdZona+","+idsProducto[i]+") ";
     querySql(queryDemanda);
   }
 return console.log("Se ha insertado");
@@ -12,19 +12,19 @@ return console.log("Se ha insertado");
 
 module.exports.addZonaProducto = function (periodos,idZona,idProducto){
   for (var i = 0; i < periodos.length; i++) {
-    var query = "insert into Demanda (numPeriodo,cantidad,Zona_idZonas,Producto_idProducto) values ("+periodos[i].numero+","+periodos[i].cantidad+","+idZona+","+idProducto+")";
+    var query = "insert into demanda (numPeriodo,cantidad,Zona_idZonas,Producto_idProducto) values ("+periodos[i].numero+","+periodos[i].cantidad+","+idZona+","+idProducto+")";
     querySql(query);
   }
     return console.log("Se ha actualizado");
 }
 
 module.exports.getDemanda = function(){
-  var queryDemanda = "select * from Demanda";
+  var queryDemanda = "select * from demanda";
   return querySql(queryDemanda);
 }
 
 module.exports.getDemandaZona = function(idZona,idProducto){
-  var query = "select * from Demanda where Zona_idZonas = "+idZona+" and Producto_idProducto = " + idProducto +" ";
+  var query = "select * from demanda where Zona_idZonas = "+idZona+" and Producto_idProducto = " + idProducto +" ";
   return querySql(query);
 }
 
@@ -43,17 +43,17 @@ return ciclos;
 }
 
 module.exports.addDemandaIndividual = function (numPeriodo,cantidad,idZona,idProducto) {
-  var query = "insert into Demanda (numPeriodo,cantidad,Zona_idZonas,Producto_idProducto) values ("+numPeriodo+","+cantidad+","+idZona+","+idProducto+")";
+  var query = "insert into demanda (numPeriodo,cantidad,Zona_idZonas,Producto_idProducto) values ("+numPeriodo+","+cantidad+","+idZona+","+idProducto+")";
   return querySql(query);
 }
 
 module.exports.updateDemandaIndividual = function (numPeriodo,cantidad,idZona,idProducto) {
-  var query = "update Demanda set cantidad = "+cantidad+"  where numPeriodo = "+numPeriodo+" and Zona_idZonas = "+idZona+" and Producto_idProducto = "+idProducto+" ";
+  var query = "update demanda set cantidad = "+cantidad+"  where numPeriodo = "+numPeriodo+" and Zona_idZonas = "+idZona+" and Producto_idProducto = "+idProducto+" ";
   return querySql(query);
 }
 
 module.exports.deleteDemandaIndividual = function (numPeriodo,idZona,idProducto) {
-  var query = "delete from Demanda where numPeriodo = "+numPeriodo+" and Zona_idZonas = "+idZona+" and Producto_idProducto = "+idProducto+" ";
+  var query = "delete from demanda where numPeriodo = "+numPeriodo+" and Zona_idZonas = "+idZona+" and Producto_idProducto = "+idProducto+" ";
   return querySql(query);
 }
 
