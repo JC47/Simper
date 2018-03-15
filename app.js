@@ -30,7 +30,7 @@ const usuariosproductoszonas = require('./routes/usuariosproductoszonas');
 const operaciones = require('./routes/operaciones');
 const dashboards = require('./routes/dashboards');
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 
