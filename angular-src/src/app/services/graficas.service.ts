@@ -39,12 +39,15 @@ export class GraficasService {
   }
 
   eliminaPeriodo(idZona,idProducto){
-    this.zonas.length = 0;
+    //this.zonas.length = 0;
     this.deletePeriodo(idZona,idProducto).subscribe(data=>{
       if(data.success){
         this.getZonas().subscribe(data=>{
-          for(let num in data.datos){
-            this.zonas.push(data.datos[num]);
+          for(let zona in this.zonas){
+            if(this.zonas[zona].idZona==idZona)
+              for(let prod in this.zonas[zona].productos)
+                if(this.zonas[zona].productos[prod].idProducto==idProducto)
+                  this.zonas[zona].productos[prod].periodos.pop();
           }
         })
       }
@@ -110,15 +113,17 @@ export class GraficasService {
 
 
   agregaPeriodo(producto){
-    this.zonas.length = 0;
+    //this.zonas.length = 0;
     this.addPeriodo(producto).subscribe(data =>{
       if(data.success){
-        this.getZonas().subscribe(data=>{
-          for(let num in data.datos){
-            this.zonas.push(data.datos[num]);
-          }
-        })
-      }
+          for(let zona in this.zonas)
+             if(this.zonas[zona].idZona==producto.idZona)
+               for(let prod in this.zonas[zona].productos){
+                 console.log(this.zonas[zona].productos[prod].idProducto,producto.idProducto)
+                 if(this.zonas[zona].productos[prod].idProducto==producto.idProducto)
+                  this.zonas[zona].productos[prod].periodos.push({numPeriodo:this.zonas[zona].productos[prod].periodos.length-1,cantidad:producto.cantidad});
+               }
+    }
     });
     return this.zonas;
   }

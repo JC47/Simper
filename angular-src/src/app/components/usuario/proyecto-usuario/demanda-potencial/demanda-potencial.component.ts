@@ -23,14 +23,14 @@ scheme:any[]=[];
   private _productosService:ProductoService,
   private _graficasService:GraficasService) {
     this.zonas=_graficasService.returnZonas();
-    console.log(this.zonas);
+    console.log("Zonas",this.zonas);
     this.productos=this._productosService.returnProductos();
     setTimeout(() => {
       this.scheme=this.createColorScheme(this.zonas);
       console.log(this.scheme)
      this.graficas=this.setGrafica(this.zonas);
      console.log(this.graficas);
-   }, 800);
+   }, 1500);
     console.log(this.zonas,this.productos)
     this.multi = [
   {

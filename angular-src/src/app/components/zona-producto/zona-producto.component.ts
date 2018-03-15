@@ -5,6 +5,7 @@ import {zona,producto,select,productoPeriodo,periodos,periodosAct} from '../../a
 import {ProductoService} from '../../services/producto.service';
 import {ZonasService} from '../../services/zonas.service';
 import {Router} from '@angular/router';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { ChartModule } from 'angular2-highcharts';
 import {GraficasService} from '../../services/graficas.service';
@@ -52,7 +53,7 @@ options;
       chart: {
         type: 'lineChart',
         height: 500,
-        width:600,
+        width:770,
         margin : {
           top: 50,
           right: 20,
@@ -129,7 +130,7 @@ options;
       this.graficas=this._graficasService.setGraficas();
       this.productos=this._productosService.returnProductos();
       console.log("Graficas",this.graficas);
-    },1000);
+    },1500);
 
 
 
@@ -190,6 +191,15 @@ options;
   borraPeriodo(idZona,idProducto){
     this._graficasService.eliminaPeriodo(idZona,idProducto);
     // console.log(idZona,idProducto);
+    for(let zona in this.zonas)
+      if(this.zonas[zona].idZona==idZona)
+        for(let prod in this.zonas[zona].productos)
+          if(this.zonas[zona].productos[prod]==idProducto)
+            this.zonas[zona].productos[prod].periodos.pop();
+
+
+
+
     setTimeout(() =>{
     this.graficas=this._graficasService.setGraficas();
     },

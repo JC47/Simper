@@ -20,6 +20,7 @@ import { NG2D3Module } from 'ng2d3';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {DecimalPipe} from '@angular/common';
 import {ColorPickerModule} from 'angular4-color-picker';
+import { ScrollSpyModule } from 'ng2-scrollspy';
 
 
 
@@ -152,6 +153,7 @@ import { RazonesComponent } from './components/usuario/proyecto-usuario/razones/
     AlertModule.forRoot(),
     TabsModule.forRoot(),
     app_routing,
+    ScrollSpyModule.forRoot(),
     CurrencyMaskModule,
     NglModule.forRoot({svgPath: '../assets/icons'}),
     AccordionModule.forRoot(),
