@@ -4,6 +4,55 @@ const config = require('../config/db');
 const demanda = require('../models/demanda');
 const Promise = require("bluebird");
 
+const db = require('../config/db');
+const querySql = db.querySql;
+const getSqlConnection = db.getSqlConnection;
+
+
+// function productoZonaPrueba(idProducto) {
+//     var query = "select * from productozona where Producto_idProducto = "+idProducto+" ";
+//       return new Promise(function(resolve,reject) {
+//           return querySql(query,function(err,rows) {
+//               if (err){
+//                   return reject( err );
+//               }else {
+//                 resolve(rows);
+//               }
+//           })
+//       });
+//     }
+
+// function cerrarConexion() {
+//   return new Promise(function(resolve,reject){
+//       return getSqlConnection(function(err) {
+//           if (err)
+//               return reject( err );
+//           resolve();
+//       });
+//   });
+// }
+
+// router.post('/prueba', (req, res, next) => {
+//   var idProducto = req.body.Producto_idProducto;
+//   var aux;
+//   productoZonaPrueba(idProducto)
+//   .then(function (rows) {
+//     res.json({success: true, rows, msg:"Operacion exitosa"});
+//   })
+//   .catch(function (err) {
+//     console.error("got error: " + err);
+//     if (err instanceof Error) {
+//       res.status(400).send("Error general");
+//       console.log(err);
+//     } else {
+//       res.status(200).json({ "code": 1000, "message": err });
+//     }
+//   })
+//   .finally(function() {
+//     return getSqlConnection();
+//   });
+// });
+
 router.post('/register', (req, res, next) => {
   Promise.resolve()
   .then(function () {
@@ -168,10 +217,16 @@ router.get('/grafica', (req, res, next) => {
      .then(function () {
        return jsonZona(zonaArray,arrayIdZonas,arrayZonas);
      })
-    .then(function (zonaArray) {
+    //  .delay(500).then(function() {
+    //   console.log("another 500 ms passed") ;
+    // })
+    .delay(1000).then(function (zonaArray) {
+      console.log("another 500 ms passed");
       return jsonProducto(zonaArray,repIdZonas,arrayIdProductoEnZona);
+
     })
-    .then(function (zonaArray) {
+    .delay(1000).then(function (zonaArray) {
+      console.log("another 500 ms passed");
       return jsonPeriodo(repIdZonas,repPeriodos,zonaArray,arrayProductoZonaDemanda);
     })
     .then(function (rows) {
