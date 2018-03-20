@@ -168,10 +168,16 @@ router.get('/grafica', (req, res, next) => {
      .then(function () {
        return jsonZona(zonaArray,arrayIdZonas,arrayZonas);
      })
-    .then(function (zonaArray) {
+    //  .delay(500).then(function() {
+    //   console.log("another 500 ms passed") ;
+    // })
+    .delay(1000).then(function (zonaArray) {
+      console.log("another 500 ms passed");
       return jsonProducto(zonaArray,repIdZonas,arrayIdProductoEnZona);
+
     })
-    .then(function (zonaArray) {
+    .delay(1000).then(function (zonaArray) {
+      console.log("another 500 ms passed");
       return jsonPeriodo(repIdZonas,repPeriodos,zonaArray,arrayProductoZonaDemanda);
     })
     .then(function (rows) {
