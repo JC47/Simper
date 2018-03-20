@@ -12,7 +12,7 @@ const getSqlConnection = db.getSqlConnection;
 // function productoZonaPrueba(idProducto) {
 //     var query = "select * from productozona where Producto_idProducto = "+idProducto+" ";
 //       return new Promise(function(resolve,reject) {
-//           return querySql(query,function(err,rows) {
+//            querySql(query,function(err,rows) {
 //               if (err){
 //                   return reject( err );
 //               }else {
@@ -21,7 +21,7 @@ const getSqlConnection = db.getSqlConnection;
 //           })
 //       });
 //     }
-
+//
 // function cerrarConexion() {
 //   return new Promise(function(resolve,reject){
 //       return getSqlConnection(function(err) {
@@ -31,7 +31,7 @@ const getSqlConnection = db.getSqlConnection;
 //       });
 //   });
 // }
-
+//
 // router.post('/prueba', (req, res, next) => {
 //   var idProducto = req.body.Producto_idProducto;
 //   var aux;
@@ -231,10 +231,6 @@ router.get('/grafica', (req, res, next) => {
     })
     .then(function (rows) {
         res.json({success: true, datos:rows, msg:"Operacion exitosa"});
-        repIdZonas.length=0;
-        repPeriodos.length=0;
-        periodosArray.length=0;
-        zonaArray.length=0;
     })
     .catch(function (err) {
       console.error("got error: " + err);

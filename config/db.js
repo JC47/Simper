@@ -21,7 +21,7 @@ var pool = mysql.createPool({
 
 function getSqlConnection() {
     return pool.getConnectionAsync().disposer(function (connection) {
-        console.log("Realizando la conexión")
+        console.log("Cerrando la conexión")
         connection.release();
     });
 }
