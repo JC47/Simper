@@ -206,6 +206,7 @@ function repeticionesIdZona(idzonas,filter) {
     arrayRepIdZonas.push(aux);
     i++;
   }
+  console.log("repeticionesIdZona: "+arrayRepIdZonas);
   return arrayRepIdZonas;
 }
 
@@ -225,6 +226,7 @@ function jsonZona(zonaArray,idzonas,zonas) {
     }
     k++;
   }
+console.log("jsonZona::: "+JSON.stringify(zonaArray, null, 1));
   return zonaArray;
 }
 
@@ -243,6 +245,7 @@ function jsonProducto(zonaArray,repIdZonas,idproductoenzona) {
      aux2 = aux2 + 1;
     }
   }
+console.log("jsonProducto::: "+JSON.stringify(zonaArray, null, 1));
   return zonaArray;
 }
 
@@ -266,6 +269,7 @@ function repeticionesPeriodo(filter,productozonademanda) {
       arrayRepPeriodos.push(aux3);
       m++;
     }
+    console.log("repeticionesPeriodo: "+arrayRepPeriodos);
     return arrayRepPeriodos;
 }
 
@@ -295,6 +299,7 @@ function jsonPeriodo(repIdZonas,repPeriodos,zonaArray,productozonademanda) {
       aux5 = aux5 + 1;
     }
   }
+  console.log("jsonPeriodo::: "+JSON.stringify(zonaArray, null, 1));
   return zonaArray;
 }
 
