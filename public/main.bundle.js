@@ -9522,11 +9522,9 @@ var ZonaProductoComponent = (function () {
         };
         setTimeout(function () {
             _this.zonas = _graficasService.returnZonas();
-            console.log(_this.zonas);
             _this.graficas = _this._graficasService.setGraficas();
             _this.productos = _this._productosService.returnProductos();
-            console.log("Graficas", _this.graficas);
-        }, 1500);
+        }, 500);
         this.formPeriodoNew = new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormGroup"]({
             'idZona': new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormControl"]('', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required),
             'idProducto': new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormControl"]('', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required),
@@ -9594,7 +9592,6 @@ var ZonaProductoComponent = (function () {
                 color: 'blue' //color - optional: choose your own line color.
             }
         ];
-        console.log("Data", this.data);
     };
     ZonaProductoComponent.prototype.openModalPeriodo = function (idZona, idProducto) {
         this.formPeriodoNew.controls['idZona'].setValue(idZona);
@@ -9619,7 +9616,7 @@ var ZonaProductoComponent = (function () {
         this.modalPeriodoEdit.hide();
         setTimeout(function () {
             _this.graficas = _this._graficasService.setGraficas();
-        }, 1000);
+        }, 500);
     };
     ZonaProductoComponent.prototype.borraPeriodo = function (idZona, idProducto) {
         var _this = this;
@@ -9632,7 +9629,7 @@ var ZonaProductoComponent = (function () {
                         this.zonas[zona_1].productos[prod].periodos.pop();
         setTimeout(function () {
             _this.graficas = _this._graficasService.setGraficas();
-        }, 1500);
+        }, 500);
     };
     ZonaProductoComponent.prototype.selectProductoScroll = function (element) {
         // this.zonaScrollSelected={
@@ -9648,7 +9645,7 @@ var ZonaProductoComponent = (function () {
         // console.log(producto);
         setTimeout(function () {
             _this.graficas = _this._graficasService.setGraficas();
-        }, 1000);
+        }, 500);
         this.modalPeriodoNew.hide();
     };
     ZonaProductoComponent.prototype.getNameById = function (id) {
@@ -10978,7 +10975,6 @@ var GraficasService = (function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Headers */]({
             'Content-Type': 'application/json'
         });
-        console.log("Servicio", producto);
         return this.http.post('demanda/registerdemanda/', { idZona: producto.idZona,
             idProducto: producto.idProducto,
             cantidad: producto.cantidad
@@ -10997,7 +10993,7 @@ var GraficasService = (function () {
                         for (var prod in _this.zonas[zona_2].productos) {
                             console.log(_this.zonas[zona_2].productos[prod].idProducto, producto.idProducto);
                             if (_this.zonas[zona_2].productos[prod].idProducto == producto.idProducto)
-                                _this.zonas[zona_2].productos[prod].periodos.push({ numPeriodo: _this.zonas[zona_2].productos[prod].periodos.length - 1, cantidad: producto.cantidad });
+                                _this.zonas[zona_2].productos[prod].periodos.push({ numPeriodo: _this.zonas[zona_2].productos[prod].periodos.length + 1, cantidad: producto.cantidad });
                         }
             }
         });
@@ -11008,7 +11004,6 @@ var GraficasService = (function () {
         this.zonas.length = 0;
         this.getZonas().subscribe(function (data) {
             setTimeout(function () {
-                console.log("Respuesta", data.datos);
                 for (var key$ in data.datos) {
                     _this.zonas.push(data.datos[key$]);
                 }

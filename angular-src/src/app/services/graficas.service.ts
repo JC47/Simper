@@ -94,8 +94,6 @@ export class GraficasService {
       'Content-Type':'application/json'
     });
 
-    console.log("Servicio",producto)
-
 
     return this.http.post('demanda/registerdemanda/',
     {  idZona:producto.idZona,
@@ -121,7 +119,7 @@ export class GraficasService {
                for(let prod in this.zonas[zona].productos){
                  console.log(this.zonas[zona].productos[prod].idProducto,producto.idProducto)
                  if(this.zonas[zona].productos[prod].idProducto==producto.idProducto)
-                  this.zonas[zona].productos[prod].periodos.push({numPeriodo:this.zonas[zona].productos[prod].periodos.length-1,cantidad:producto.cantidad});
+                  this.zonas[zona].productos[prod].periodos.push({numPeriodo:this.zonas[zona].productos[prod].periodos.length+1,cantidad:producto.cantidad});
                }
     }
     });
@@ -132,7 +130,6 @@ export class GraficasService {
     this.zonas.length = 0;
     this.getZonas().subscribe(data => {
       setTimeout(()=>{
-        console.log("Respuesta",data.datos)
         for(let key$ in data.datos){
           this.zonas.push(data.datos[key$]);
         }

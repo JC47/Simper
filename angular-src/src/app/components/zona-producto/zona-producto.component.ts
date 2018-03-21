@@ -108,7 +108,6 @@ options;
 
 
     ]
-    console.log("Data",this.data);
 }
 
 
@@ -126,11 +125,9 @@ options;
   ) {
     setTimeout(() =>{
       this.zonas=_graficasService.returnZonas();
-      console.log(this.zonas)
       this.graficas=this._graficasService.setGraficas();
       this.productos=this._productosService.returnProductos();
-      console.log("Graficas",this.graficas);
-    },1500);
+    },500);
 
 
 
@@ -185,7 +182,7 @@ options;
       this.modalPeriodoEdit.hide();
       setTimeout(() =>{
       this.graficas=this._graficasService.setGraficas();
-      },1000);
+      },500);
   }
 
   borraPeriodo(idZona,idProducto){
@@ -197,15 +194,9 @@ options;
           if(this.zonas[zona].productos[prod]==idProducto)
             this.zonas[zona].productos[prod].periodos.pop();
 
-
-
-
     setTimeout(() =>{
     this.graficas=this._graficasService.setGraficas();
-    },
-    1500);
-
-
+    },500);
   }
 
 selectProductoScroll(element){
@@ -223,7 +214,7 @@ selectProductoScroll(element){
     // console.log(producto);
     setTimeout(() =>{
     this.graficas=this._graficasService.setGraficas();
-    },1000);
+    },500);
 
     this.modalPeriodoNew.hide();
 
