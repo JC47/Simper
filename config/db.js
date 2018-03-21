@@ -19,6 +19,8 @@ var pool = mysql.createPool({
 //     database: 'basesimv1'
 // });
 
+//G1X9.:59XN7mA:
+
 function getSqlConnection() {
     return pool.getConnectionAsync().disposer(function (connection) {
         console.log("Cerrando la conexión")
