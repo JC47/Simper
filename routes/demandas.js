@@ -217,20 +217,13 @@ router.get('/grafica', (req, res, next) => {
      .then(function () {
        return jsonZona(zonaArray,arrayIdZonas,arrayZonas);
      })
-    //  .delay(500).then(function() {
-    //   console.log("another 500 ms passed") ;
-    // })
-    .delay(500).then(function (zonaArray) {
-      console.log("another 500 ms passed");
+     .then(function (zonaArray) {
       return jsonProducto(zonaArray,repIdZonas,arrayIdProductoEnZona);
-
     })
-    .delay(500).then(function (zonaArray) {
-      console.log("another 500 ms passed");
+    .then(function (zonaArray) {
       return jsonPeriodo(repIdZonas,repPeriodos,zonaArray,arrayProductoZonaDemanda);
     })
     .then(function (zonaArray) {
-//      console.log("rows::: "+JSON.stringify(rows, null, 1));
         res.json({success: true, datos:zonaArray, msg:"Operacion exitosa"});
     })
     .catch(function (err) {
@@ -243,18 +236,10 @@ router.get('/grafica', (req, res, next) => {
       }
     })
     .finally(function() {
-      console.log("repIdZonas.length: "+repIdZonas.length);
-      console.log("repPeriodos.length: "+repPeriodos.length);
-      console.log("periodosArray.length: "+periodosArray.length);
-      console.log("zonaArray.length: "+zonaArray.length);
       repIdZonas.length=0;
       repPeriodos.length=0;
       periodosArray.length=0;
       zonaArray.length=0;
-      console.log("repIdZonas.length: "+repIdZonas.length);
-      console.log("repPeriodos.length: "+repPeriodos.length);
-      console.log("periodosArray.length: "+periodosArray.length);
-      console.log("zonaArray.length: "+zonaArray.length);
     });
   });
 
@@ -272,7 +257,6 @@ function repeticionesIdZona(idzonas,filter) {
     arrayRepIdZonas.push(aux);
     i++;
   }
-  console.log("repeticionesIdZona: "+arrayRepIdZonas);
   return arrayRepIdZonas;
 }
 
@@ -292,7 +276,6 @@ function jsonZona(zonaArray,idzonas,zonas) {
     }
     k++;
   }
-console.log("jsonZona::: "+JSON.stringify(zonaArray, null, 1));
   return zonaArray;
 }
 
@@ -306,13 +289,11 @@ function jsonProducto(zonaArray,repIdZonas,idproductoenzona) {
         "color":idproductoenzona[aux2].color,
         "periodos":[]
       }
-      console.log("Perro",idproductoenzona[aux2].Producto_idProducto);
       zonaArray[j]['productos'].push(producto);
     //  zonaArray[j]['productos'][k]['periodos'].push('a');
      aux2 = aux2 + 1;
     }
   }
-console.log("jsonProducto::: "+JSON.stringify(zonaArray, null, 1));
   return zonaArray;
 }
 
@@ -336,7 +317,6 @@ function repeticionesPeriodo(filter,productozonademanda) {
       arrayRepPeriodos.push(aux3);
       m++;
     }
-    console.log("repeticionesPeriodo: "+arrayRepPeriodos);
     return arrayRepPeriodos;
 }
 
@@ -367,7 +347,6 @@ function jsonPeriodo(repIdZonas,repPeriodos,zonaArray,productozonademanda) {
       aux5 = aux5 + 1;
     }
   }
-  console.log("jsonPeriodo::: "+JSON.stringify(zonaArray, null, 1));
   return zonaArray;
 }
 
