@@ -306,6 +306,7 @@ function jsonProducto(zonaArray,repIdZonas,idproductoenzona) {
         "color":idproductoenzona[aux2].color,
         "periodos":[]
       }
+      console.log("Perro",idproductoenzona[aux2].Producto_idProducto);
       zonaArray[j]['productos'].push(producto);
     //  zonaArray[j]['productos'][k]['periodos'].push('a');
      aux2 = aux2 + 1;
