@@ -8,6 +8,11 @@ const db = require('../config/db');
 const querySql = db.querySql;
 const getSqlConnection = db.getSqlConnection;
 
+//Arreglos que generan el json
+var repIdZonas = [];//almacena las veces que se repite un idZona en productozonasindes
+var zonaArray = [];
+var repPeriodos = [];
+var periodosArray = [];
 
 // function productoZonaPrueba(idProducto) {
 //     var query = "select * from productozona where Producto_idProducto = "+idProducto+" ";
@@ -191,11 +196,6 @@ router.get('/grafica', (req, res, next) => {
   var arrayFilter = [];
   var arrayIdProductoEnZona = [];
 
-  //Arreglos que generan el json
-  var repIdZonas = [];//almacena las veces que se repite un idZona en productozonasindes
-  var zonaArray = [];
-  var repPeriodos = [];
-  var periodosArray = [];
 
   Promise.join(
     demanda.getProductoZonaDemanda(),
@@ -229,8 +229,9 @@ router.get('/grafica', (req, res, next) => {
       console.log("another 500 ms passed");
       return jsonPeriodo(repIdZonas,repPeriodos,zonaArray,arrayProductoZonaDemanda);
     })
-    .then(function (rows) {
-        res.json({success: true, datos:rows, msg:"Operacion exitosa"});
+    .then(function (zonaArray) {
+//      console.log("rows::: "+JSON.stringify(rows, null, 1));
+        res.json({success: true, datos:zonaArray, msg:"Operacion exitosa"});
     })
     .catch(function (err) {
       console.error("got error: " + err);
@@ -240,6 +241,20 @@ router.get('/grafica', (req, res, next) => {
       } else {
         res.status(200).json({ "code": 1000, "message": err });
       }
+    })
+    .finally(function() {
+      console.log("repIdZonas.length: "+repIdZonas.length);
+      console.log("repPeriodos.length: "+repPeriodos.length);
+      console.log("periodosArray.length: "+periodosArray.length);
+      console.log("zonaArray.length: "+zonaArray.length);
+      repIdZonas.length=0;
+      repPeriodos.length=0;
+      periodosArray.length=0;
+      zonaArray.length=0;
+      console.log("repIdZonas.length: "+repIdZonas.length);
+      console.log("repPeriodos.length: "+repPeriodos.length);
+      console.log("periodosArray.length: "+periodosArray.length);
+      console.log("zonaArray.length: "+zonaArray.length);
     });
   });
 
@@ -338,12 +353,13 @@ function jsonPeriodo(repIdZonas,repPeriodos,zonaArray,productozonademanda) {
       for (var l = 0; l < repPeriodos[aux5]; l++) {//1,2,1. aux5 sirve para barrer el arreglo de repeticiones de periodos
         if (zonaArray[j].idZona == productozonademanda[aux6].Zona_idZonas &&
             zonaArray[j]['productos'][k].idProducto == productozonademanda[aux6].Producto_idProducto) {
-             var json = {
-               "numPeriodo":productozonademanda[aux6].numPeriodo,
-               "cantidad":productozonademanda[aux6].cantidad
-             }
+             // var json = {
+             //   "numPeriodo":productozonademanda[aux6].numPeriodo,
+             //   "cantidad":productozonademanda[aux6].cantidad
+             // }
             //zonaArray[j]['productos'][k]['periodos'].push(periodosArray[aux6]);
-            zonaArray[j]['productos'][k]['periodos'].push(json);
+            zonaArray[j]['productos'][k]['periodos'].push({"numPeriodo":productozonademanda[aux6].numPeriodo,
+            "cantidad":productozonademanda[aux6].cantidad});
           }
         aux6=aux6+1;
       }
