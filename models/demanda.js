@@ -87,6 +87,6 @@ module.exports.filterIdZonaIdProducto = function () {
 }
 
 module.exports.idProductoEnZona = function () {
-  var query = "select distinct demanda.Zona_idZonas,demanda.Producto_idProducto,producto.color from demanda inner join producto on demanda.Producto_idProducto = producto.idProducto order by demanda.Zona_idZonas";
+  var query = "select distinct demanda.Zona_idZonas,demanda.Producto_idProducto,producto.color from demanda inner join producto on demanda.Producto_idProducto = producto.idProducto order by demanda.Zona_idZonas, demanda.Producto_idProducto";
   return querySql(query);
 }
