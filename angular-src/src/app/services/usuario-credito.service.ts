@@ -155,13 +155,13 @@ export class UsuarioCreditoService {
     return this.http.post('prestamo/regresioncreditos',x,{headers}).map(res => res.json());
   }
 
-  validarP(){
+  validarP(periodo){
     let headers = new Headers({
       'Content-Type':'application/json'
     });
     var x = {
       idProyecto:localStorage.getItem('idProyecto'),
-      numeroPeriodo:localStorage.getItem('numeroPeriodo')
+      numeroPeriodo:parseInt(periodo)
     }
     return this.http.post('prestamo/validaperiodos',x,{headers}).map(res => res.json());
   }

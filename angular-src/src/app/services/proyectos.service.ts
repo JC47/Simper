@@ -150,7 +150,8 @@ returnUsuarios(){
   asignarBalance(idProyecto){
     this.buscarPeriodos(idProyecto).subscribe(data => {
       if(data.datos.length == 0){
-        this.asginarPeriodoCero(idProyecto);
+        var x = this.asginarPeriodoCero(idProyecto);
+        console.log("Retorno",x)
         setTimeout(()=>{
           localStorage.setItem('numeroPeriodo','1');
           localStorage.setItem('numeroRPeriodos','1');
@@ -263,15 +264,20 @@ returnUsuarios(){
     }
 
   asginarPeriodoCero(idProyecto){
+    var r = [];
     this.buscarDatosUsuario().subscribe(data => {
       for(let key$ in data){
         if(data[key$].idUsuario == localStorage.getItem('idUsuario')){
-          this.crearBalanceCero(idProyecto,data[key$],0).subscribe();
+          this.crearBalanceCero(idProyecto,data[key$],0).subscribe(data => {
+            r.push(data.datos);
+          }
+          );
           this.crearBalanceUno(idProyecto,data[key$],1).subscribe();
           break;
         }
       }
     });
+    return r;
   }
 
   buscarDatosUsuario(){

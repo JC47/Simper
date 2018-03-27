@@ -8,11 +8,13 @@ const variable = require("../models/variable");
 const Promise = require("bluebird");
 
 router.post('/register', (req, res, next) => {
+  var json = req.body;
   Promise.resolve().then( function () {
-    var json = req.body;
     return balance.addBalance(json);
-  }).then( function () {
-    res.json({success: true, msg:"Operacion exitosa"});
+  }).then(function() {
+    return balance.getUltimo(json.Proyectos_idProyecto);
+  }).then( function (rows) {
+    res.json({success: true, msg:"Operacion exitosa",datos:rows});
   }).catch(function (err) {
     console.log(err);
     res.json({success:false, msg:"Operacion incompleta"});
@@ -188,7 +190,7 @@ router.post('/final', (req, res, next) => {
       else{
         utilidadVerdadera = utilidadEjercicio;
       }
-      
+
       if(utilidadVerdadera > 0){
         ISR = utilidadVerdadera * ISR_valor;
         imptsPorPagar = (ISR/12);

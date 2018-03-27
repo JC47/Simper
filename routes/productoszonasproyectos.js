@@ -187,9 +187,11 @@ router.post('/productosdesarrollados/', (req, res, next) => {
   });
 });
 
-router.get('/terminados/:idProyecto', (req, res, next) => {
+router.post('/terminados/', (req, res, next) => {
   Promise.resolve().then(function () {
-    return productoZonaProyecto.getTerminados(req.params.idProyecto);
+    var pro = req.body.idProyecto;
+    var periodo = req.body.numeroPeriodo
+    return productoZonaProyecto.getTerminados(pro,periodo);
   }).then( function(rows) {
     res.json({success:true, msg:"Operacion exitosa", datos:rows});
   }).catch( function (err) {
