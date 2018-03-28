@@ -234,7 +234,6 @@ export class NavbarUsuarioComponent implements OnInit {
               var dep = data.datos[0].maqEquipo*.10;
               this._balanceService.crearBalance(proyecto,data.datos[0],periodoNuevo).subscribe(data => {
                 if(data.success){
-                  console.log(data.datos,"Ultimo")
                   localStorage.setItem('numeroPeriodo',periodoNuevo.toString());
                   localStorage.setItem('numeroRPeriodos',periodoNuevo.toString());
                   this.periodo = this.periodo + 1 ;

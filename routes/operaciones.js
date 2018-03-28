@@ -271,19 +271,30 @@ router.post('/validate', (req,res,next) => {
 });
 
 router.post('/productosventa', (req,res,next) => {
-  Promise.resolve().then(function() {
-    var idU = req.body.idUsuario;
-    var idP = req.body.idProyecto;
-    var numeroPeriodo = req.body.numeroPeriodo;
-    return operacion.getOperaciones(idP,idU,numeroPeriodo);
-  }).then(function(rows){
+  var idU = req.body.idUsuario;
+  var idP = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+  Promise.join(operacion.getOperaciones(idP,idU,numeroPeriodo),operacion.getAlmacenTotal(idP,numeroPeriodo),function(r1,r2) {
+
     var hash = {};
-    var array = rows.filter(function(current) {
+    var array = r1.filter(function(current) {
       var exists = !hash[current.Producto_idProducto] || false;
       hash[current.Producto_idProducto] = true;
       return exists;
     });
-    return operacionesBien(rows,array);
+
+    if(array.length == 0){
+      var hash2 = {};
+      var array2 = r2.filter(function(current) {
+        var exists = !hash2[current.Producto_idProducto] || false;
+        hash2[current.Producto_idProducto] = true;
+        return exists;
+      });
+      return operacionesBien2(array2);
+    }
+    else{
+      return operacionesBien(r1,array);
+    }
   }).then(function(arrglo){
     res.json({success:true,msg:"Bien",datos:arrglo});
   }).catch(function(err){
@@ -311,10 +322,9 @@ router.post('/equilibrio', (req,res,next) => {
 router.post('/selling', (req,res,next) => {
   var idProducto = req.body.Producto_idProducto;
   var idProyecto = req.body.Proyecto_idProyecto;
-  var idUsuario = req.body.Usuario_idUsuario;
   var numeroPeriodo = req.body.numeroPeriodo;
   var uniVendidas = req.body.unidadesVendidas;
-  var periodoAnterior = numeroPeriodo - 1;
+  var periodoAnterior = parseInt(numeroPeriodo) - 1;
 
   Promise.join(operacion.getProductoVendido(idProducto), auxiliar.getAuxiliarVenta(periodoAnterior,idProyecto,idProducto),
               operacion.getAlmacen(idProyecto,idProducto,numeroPeriodo),
@@ -343,7 +353,14 @@ router.post('/selling', (req,res,next) => {
     //IVA de las ventasz
     var ivaVentas = ventas = ventasCash * IVA;
     //Unidades a producir
-    var uniProd = uniVendidas + uniAlmacenadas - inventarioInicial;
+    var uniProd = 0;
+    if(uniVendidas != 0){
+      uniProd = uniVendidas + uniAlmacenadas - inventarioInicial;
+      if(uniProd <= 0){
+          uniProd = 0.01;
+      }
+
+    }
     //Consumo de materias Primas
     var cMP = uniProd * producto[0].uniMP;
     //Consumo en efectivo --Materia Prima Cosumida de la tabla de Costo de Produccion y Ventas
@@ -351,31 +368,52 @@ router.post('/selling', (req,res,next) => {
     //IVA del consumo en efectivo
     var IVAMP = (cashMP * IVA)*(-1);
     //Costo de transformación unitario
-    var cTransUnitario = (producto[0].costosFijosFabri + cTransMaq + (uniProd * producto[0].costoVarUniFabri))/uniProd;
+    var cTransUnitario = 0;
+    if(uniProd != 0){
+      cTransUnitario = (producto[0].costosFijosFabri + cTransMaq + (uniProd * producto[0].costoVarUniFabri))/uniProd;
+    }
     //Costo de transformacion Total
     var cTransTotal = (cTransUnitario * uniProd) - cTransMaq;
     //IVA de transformacion
-    var IVATrans = (cTransTotal * IVA)*(-1);
+    var IVATrans = 0;
+    if(uniVendidas != 0){
+      IVATrans = (cTransTotal * IVA)*(-1);
+    }
     //Costo de Distribucion unitario
-    var cDistribucionUnitario = (producto[0].gastosFijosDist/uniVendidas) + producto[0].costoVarUniDist;
+    var cDistribucionUnitario = 0;
+    if(uniVendidas != 0){
+      cDistribucionUnitario = (producto[0].gastosFijosDist/uniVendidas) + producto[0].costoVarUniDist;
+    }
     //Costo de Distribucion Total
     var cDistribucionTotal = (cDistribucionUnitario*uniVendidas);
     //Costo de Distribucion despues de Depreciaciones
-    var cDistribucionTotalDep = cDistribucionTotal - producto[0].depDistribucion;
+    var cDistribucionTotalDep = 0;
+    if(uniVendidas != 0){
+      cDistribucionTotalDep = cDistribucionTotal - producto[0].depDistribucion;
+    }
     //IVA de Distribucion
     var IVADistribucion = (cDistribucionTotalDep * IVA)*(-1);
     //Costo de Administracion Total
-    var cAdminTotal = (producto[0].gastosFijosAdmon / uniVendidas)*uniVendidas;
-    //Costo de Administracion despues de Depreciaciones
-    var cAdminTotalDep = cAdminTotal - producto[0].depAdmon;
+    var cAdminTotal = 0;
+    var cAdminTotalDep = 0;
+    if(uniVendidas != 0){
+      cAdminTotal = (producto[0].gastosFijosAdmon / uniVendidas)*uniVendidas;
+      //Costo de Administracion despues de Depreciaciones
+      cAdminTotalDep = cAdminTotal - producto[0].depAdmon;
+    }
     //IVA de Administracion
     var IVAAdmin = (cAdminTotalDep * IVA)*(-1);
     //Costo de Produccion
     var cProduccion = cashMP + (cTransUnitario * uniProd);
+    if(uniAlmacenadas > 0 && inventarioInicial > 0 && uniVendidas == 0){
+      cProduccion = cTransMaq;
+    }
     //Inventario Final de Articulo Terminado
     var inventarioFinal = 0;
     if(uniAlmacenadas > 0){
-      inventarioFinal = ((cashInventarioInicial + cProduccion) / (inventarioInicial + uniProd)) * uniAlmacenadas;
+      if(inventarioInicial > 0){
+        inventarioFinal = ((cashInventarioInicial + cProduccion) / (inventarioInicial + uniProd)) * uniAlmacenadas;
+      }
     }
     //Costo de ventas
     var cVentas = cProduccion + cashInventarioInicial - inventarioFinal;
@@ -445,11 +483,12 @@ router.post('/selling', (req,res,next) => {
           costoAdminDep:cAdminTotalDep,
           materiaCosumida:cashMP,
           costoDeProduccion:cProduccion,
-          inventarioInicial:inventarioInicial,
+          inventarioInicial:cashInventarioInicial,
           inventarioFinal:inventarioFinal,
           costoVentas:cVentas,
           costoTransformacionMaq:cTransMaq
         }
+        console.log(x);
         auxiliar.AddAuxiliarVenta(x);
       }
       else{
@@ -475,11 +514,12 @@ router.post('/selling', (req,res,next) => {
           costoAdminDep:cAdminTotalDep,
           materiaCosumida:cashMP,
           costoDeProduccion:cProduccion,
-          inventarioInicial:inventarioInicial,
+          inventarioInicial:cashInventarioInicial,
           inventarioFinal:inventarioFinal,
           costoVentas:cVentas,
           costoTransformacionMaq:cTransMaq
         }
+        console.log(y);
         auxiliar.setAuxiliarVenta(numeroPeriodo,idProyecto,idProducto,y);
       }
   }).then( function () {
@@ -546,6 +586,14 @@ function operacionesBien(rows,array){
     }
     return array;
   }
+}
+
+function operacionesBien2(r1) {
+  for(let i in r1){
+    r1[i]['numeroPeriodo'] = r1[i].Balance_numeroPeriodo;
+    r1[i]['unidadesVendidas'] = 0;
+  }
+  return r1;
 }
 
 function getVentasAnteriores(ventasTotales){

@@ -22,6 +22,11 @@ module.exports.getOperaciones = function (idProyecto,idUsuario,numeroPeriodo) {
   return querySql(query);
 }
 
+module.exports.getAlmacenTotal = function(idProyecto,numeroPeriodo) {
+  var query = "select * from almacen where Proyecto_idProyecto = "+idProyecto+" and Balance_numeroPeriodo = "+numeroPeriodo+"";
+  return querySql(query);
+}
+
 module.exports.updateOperacion = function (idProducto,idZona,idProyecto,idUsuario,numeroPeriodo,uniVendidas) {
   var query = " update operacion set unidadesVendidas = "+uniVendidas+" where Producto_idProducto = "+idProducto+" and Proyecto_idProyecto = "+idProyecto+" and Usuario_idUsuario = "+idUsuario+" and numeroPeriodo = "+numeroPeriodo+" and Zona_idZonas = " +idZona+ " " ;
   return querySql(query);

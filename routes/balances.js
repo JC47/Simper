@@ -184,12 +184,12 @@ router.post('/final', (req, res, next) => {
       PTU = utilidadEjercicio * PTU_valor;
       utilidadEjercicio = utilidadEjercicio - PTU;
 
-      if(utlidadAcumulada < 0){
-        utilidadVerdadera = utilidadEjercicio + utlidadAcumulada;
-      }
-      else{
-        utilidadVerdadera = utilidadEjercicio;
-      }
+      // if(utlidadAcumulada < 0){
+      //   utilidadVerdadera = utilidadEjercicio + utlidadAcumulada;
+      // }
+      // else{
+        utilidadVerdadera = utilidadEjercicio + PTU;
+      // }
 
       if(utilidadVerdadera > 0){
         ISR = utilidadVerdadera * ISR_valor;
@@ -284,12 +284,14 @@ function getDepTrans(auxV){
 function getSalidas(auxV){
   var salidas = 0;
   for (let key in auxV) {
-    salidas += auxV[key].costoTransformacionVentas;
     salidas += auxV[key].costoDistDep;
     salidas += auxV[key].costoAdminDep;
     salidas -= auxV[key].IVATrans;
     salidas -= auxV[key].IVADist;
     salidas -= auxV[key].IVAAdmon;
+    if(auxV[key].unidadesVendidas != 0){
+      salidas += auxV[key].costoTransformacionVentas;
+    }
   }
   return salidas;
 }
@@ -302,12 +304,13 @@ function getUtilidad(auxV,costoTransformacionMaq,desarrolloMercado,desarrolloPro
       utilidad -= auxV[key].costoAdministrativo;
       utilidad -= auxV[key].costoVentas;
       utilidad += (auxV[key].Ventas-auxV[key].IVAxVentas);
-      transMaqVentas += auxV[key].costoTransformacionMaq;
+      if(auxV[key].costoDeProduccion != 0){
+          transMaqVentas += auxV[key].costoTransformacionMaq;
+      }
     }
     if(transMaqVentas != costoTransformacionMaq){
       utilidad -= (costoTransformacionMaq - transMaqVentas);
     }
-
     return (utilidad - desarrolloProducto - desarrolloMercado);
 }
 

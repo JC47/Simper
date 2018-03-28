@@ -2227,7 +2227,6 @@ var NavbarUsuarioComponent = (function () {
                         var dep = data.datos[0].maqEquipo * .10;
                         _this._balanceService.crearBalance(proyecto, data.datos[0], periodoNuevo).subscribe(function (data) {
                             if (data.success) {
-                                console.log(data.datos, "Ultimo");
                                 localStorage.setItem('numeroPeriodo', periodoNuevo.toString());
                                 localStorage.setItem('numeroRPeriodos', periodoNuevo.toString());
                                 _this.periodo = _this.periodo + 1;
@@ -2249,13 +2248,13 @@ var NavbarUsuarioComponent = (function () {
                                     _this._desarrolloProducto.actualizarPD(np);
                                     _this._desarrolloZona.actualizarZonasDes(np);
                                     _this._creditoService.validarP(np).subscribe();
-                                }, 1500);
+                                }, 500);
                             }
                         });
                     });
                 }
             }
-        }, 1500);
+        }, 1000);
     };
     NavbarUsuarioComponent.prototype.validaRegre = function () {
         if (localStorage.getItem('regresion') == "0")
@@ -5460,7 +5459,8 @@ var FinanciamientoComponent = (function () {
         return false;
     };
     FinanciamientoComponent.prototype.validaCreditoA = function (credito) {
-        if (credito.numeroPeriodo == localStorage.getItem('numeroPeriodo'))
+        console.log(credito.numeroPeriodo, localStorage.getItem('numeroPeriodo'), "Perrroooooooooo");
+        if (credito.numeroPeriodo <= parseInt(localStorage.getItem('numeroPeriodo')))
             return true;
         else
             return false;
