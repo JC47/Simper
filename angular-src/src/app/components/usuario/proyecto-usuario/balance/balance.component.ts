@@ -119,9 +119,9 @@ export class BalanceComponent implements OnInit {
             }
           });
         });
-        this._desarrolloProducto.actualizarPD();
-        this._desarrolloZona.actualizarZonasDes();
-        this._creditoService.validarP().subscribe();
+        this._desarrolloProducto.actualizarPD(periodoNuevo);
+        this._desarrolloZona.actualizarZonasDes(periodoNuevo);
+        this._creditoService.validarP(periodoNuevo).subscribe();
       }
     }
   }

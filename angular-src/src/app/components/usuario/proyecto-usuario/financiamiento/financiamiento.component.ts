@@ -57,7 +57,7 @@ export class FinanciamientoComponent implements OnInit {
   }
 
   validaCreditoA(credito){
-    if(credito.numeroPeriodo==localStorage.getItem('numeroPeriodo'))
+    if(credito.numeroPeriodo==parseInt(localStorage.getItem('numeroPeriodo')))
       return true
     else
       return false

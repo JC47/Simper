@@ -73,10 +73,10 @@ export class DesarrolloProductoService {
     return this.http.post('proyectoproducto/getproductosdesarrollados/',x,{headers}).map(res => res.json());
   }
 
-  getTerminados(){
+  getTerminados(np){
     var x = {
       idProyecto:localStorage.getItem('idProyecto'),
-      numeroPeriodo:localStorage.getItem('numeroPeriodo')
+      numeroPeriodo:np-1
     }
     return this.http.post('proyectoproducto/getterminados/',x).map(res => res.json());
   }
@@ -88,11 +88,11 @@ export class DesarrolloProductoService {
     return this.http.post('proyectoproducto/desarrollado/',x, {headers}).map(res => res.json());
   }
 
-  actualizarPD(){
-    this.getTerminados().subscribe(data => {
+  actualizarPD(periodo){
+    this.getTerminados(periodo).subscribe(data => {
       for(let key$ in data.datos){
         var x = {
-          numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo')),
+          numeroPeriodo:parseInt(periodo),
           idProyecto:localStorage.getItem('idProyecto'),
           idProducto:data.datos[key$].idProducto
         }

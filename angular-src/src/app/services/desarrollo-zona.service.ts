@@ -127,15 +127,15 @@ export class DesarrolloZonaService {
     return this.http.post('productoszonasproyectos/productosendesarrollo/',x, {headers}).map(res => res.json());
   }
 
-  actualizarZonasDes(){
-    this.getTerminados().subscribe(data => {
+  actualizarZonasDes(periodo){
+    this.getTerminados(periodo).subscribe(data => {
       for(let key$ in data.datos){
         var x = {
           Producto_idProducto:data.datos[key$].Producto_idProducto,
           Zona_idZonas:data.datos[key$].Zona_idZonas,
           Proyecto_idProyecto:data.datos[key$].Proyecto_idProyecto,
           Proyecto_Usuario_idUsuario:data.datos[key$].Proyecto_Usuario_idUsuario,
-          numeroPeriodo:(parseInt(localStorage.getItem('numeroPeriodo'))+1),
+          numeroPeriodo:parseInt(periodo),
           desarrollado:2,
           periodoInicio:data.datos[key$].periodoInicio,
           periodosDes:data.datos[key$].periodosDes
@@ -174,8 +174,12 @@ export class DesarrolloZonaService {
     return this.http.post('productoszonasproyectos/desarrolladoproductozonaproyecto/',x, {headers}).map(res => res.json());
   }
 
-  getTerminados(){
-    return this.http.get('productoszonasproyectos/terminados/'+localStorage.getItem('idProyecto')).map(res => res.json());
+  getTerminados(np){
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:np-1
+    }
+    return this.http.post('productoszonasproyectos/terminados/',x).map(res => res.json());
   }
 
   getProductosDeZonaDesarrollados(){

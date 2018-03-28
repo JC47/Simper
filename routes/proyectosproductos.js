@@ -236,7 +236,7 @@ router.post('/desarrollado', (req, res, next) => {
     json = {
       "Proyectos_idProyecto":idProyecto,
       "Productos_idProducto":idProducto,
-      "numeroPeriodo":numeroPeriodo+1,
+      "numeroPeriodo":numeroPeriodo,
       "desarrollado":desarrollado,
       "periodoInicio":proyectoproducto[0].periodoInicio,
       "periodosDes":proyectoproducto[0].periodosDes

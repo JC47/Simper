@@ -36,3 +36,8 @@ module.exports.getPasivos = function(idProyecto, numeroPeriodo){
   const sql = "select IVAPorEnterar,imptosPorPagar,prestamosMenosAnio,prestamosMasAnio from balance where Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+"";
   return querySql(sql);
 }
+
+module.exports.getUltimo = function (idProyecto){
+  const sql = "SELECT * FROM (SELECT MAX(numeroPeriodo) numeroPeriodo FROM balance WHERE balance.Proyectos_idProyecto = "+idProyecto+") balance";
+  return querySql(sql);
+}

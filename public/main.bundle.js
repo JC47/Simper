@@ -2239,12 +2239,16 @@ var NavbarUsuarioComponent = (function () {
                                     numero: _this.periodo
                                 };
                                 _this.periodos.push(y);
+                                var np = 0;
+                                for (var r in data.datos) {
+                                    np += data.datos[np].numeroPeriodo;
+                                }
                                 setTimeout(function () {
                                     _this.openBien = true;
-                                    _this._desarrolloProducto.actualizarPD();
-                                    _this._desarrolloZona.actualizarZonasDes();
-                                    _this._creditoService.validarP().subscribe();
-                                }, 1000);
+                                    _this._desarrolloProducto.actualizarPD(np);
+                                    _this._desarrolloZona.actualizarZonasDes(np);
+                                    _this._creditoService.validarP(np).subscribe();
+                                }, 500);
                             }
                         });
                     });
@@ -4030,9 +4034,9 @@ var BalanceComponent = (function () {
                         }
                     });
                 });
-                this._desarrolloProducto.actualizarPD();
-                this._desarrolloZona.actualizarZonasDes();
-                this._creditoService.validarP().subscribe();
+                this._desarrolloProducto.actualizarPD(periodoNuevo);
+                this._desarrolloZona.actualizarZonasDes(periodoNuevo);
+                this._creditoService.validarP(periodoNuevo).subscribe();
             }
         }
     };
@@ -5455,7 +5459,8 @@ var FinanciamientoComponent = (function () {
         return false;
     };
     FinanciamientoComponent.prototype.validaCreditoA = function (credito) {
-        if (credito.numeroPeriodo == localStorage.getItem('numeroPeriodo'))
+        console.log(credito.numeroPeriodo, localStorage.getItem('numeroPeriodo'), "Perrroooooooooo");
+        if (credito.numeroPeriodo <= parseInt(localStorage.getItem('numeroPeriodo')))
             return true;
         else
             return false;
@@ -8215,7 +8220,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"nav-side-menu\">\r\n    <div class=\"brand\">\r\n      <div class=\"row\" >\r\n        <div class=\"col-12 text-center\">\r\n          <h6 style=\"margin-top:20px\">Proyecto {{proyectoActual}}</h6>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-12 text-center\" style=\"margin-bottom:10px\">\r\n          <button type=\"button\" class=\"btn btn-danger\" style=\"font-size:10px\" (click)=\"verProyectos()\">Salir de Proyecto</button>\r\n        </div>\r\n\r\n      </div>\r\n\r\n    </div>\r\n    <i class=\"fa fa-bars fa-2x toggle-btn\" data-toggle=\"collapse\" data-target=\"#menu-content\"></i>\r\n\r\n        <div class=\"menu-list\">\r\n            <ul id=\"menu-content\" class=\"menu-content collapse out\">\r\n\r\n                <li [routerLink]=\"['home']\">\r\n                  <a >\r\n                  <i class=\"fa fa-tachometer fa-lg\"></i> Valores iniciales\r\n                  </a>\r\n                </li>\r\n\r\n                <li [routerLink]=\"['demandaPotencial']\">\r\n                  <a >\r\n                  <i class=\"fa fa-area-chart fa-lg\"></i> Demanda potencial\r\n                  </a>\r\n                </li>\r\n\r\n                <li [routerLink]=\"['produccion']\" routerLinkActive=\"active\">\r\n                   <a>\r\n                    <i class=\"fa fa-pie-chart fa-lg\"></i>  Decisiones de Producción y Venta\r\n                   </a>\r\n                </li>\r\n\r\n                <li data-toggle=\"collapse\" data-target=\"#service\" class=\"collapsed\">\r\n                  <a href=\"#\"><i class=\"fa fa-line-chart fa-lg\"></i> Decisiones de Crecimiento<span class=\"arrow\"></span></a>\r\n                </li>\r\n                <ul class=\"sub-menu collapse\" id=\"service\">\r\n\r\n                  <li [routerLink]=\"['compraMaquinaria']\" routerLinkActive=\"active\">\r\n                     <a >\r\n                     <i class=\"fa fa-cogs fa-lg\"></i> Compra de Maquinaria\r\n                     </a>\r\n                   </li>\r\n                   <li [routerLink]=\"['desarrolloProducto']\" routerLinkActive=\"active\">\r\n                      <a >\r\n                      <i class=\"fa fa-flask fa-lg\"></i> Desarrollo de Productos\r\n                      </a>\r\n                    </li>\r\n                   <li [routerLink]=\"['desarrolloMercado']\" routerLinkActive=\"active\">\r\n                      <a >\r\n                      <i class=\"fa fa-map-marker fa-lg\"></i> Desarrollo de mercados\r\n                      </a>\r\n                    </li>\r\n                </ul>\r\n\r\n                <li [routerLink]=\"['financiamiento']\" routerLinkActive=\"active\">\r\n                   <a>\r\n                    <i class=\"fa fa-credit-card fa-lg\"></i>  Decisiones de Finaciamiento\r\n                   </a>\r\n                </li>\r\n\r\n                <li data-toggle=\"collapse\" data-target=\"#service2\" class=\"collapsed\">\r\n                  <a href=\"#\"><i class=\"fa fa-list-alt fa-lg\"></i> Resultados del periodo<span class=\"arrow\"></span></a>\r\n                </li>\r\n                <ul class=\"sub-menu collapse\" id=\"service2\">\r\n                  <li [routerLink]=\"['balance_inicial']\" >Balance Inicial</li>\r\n                  <li [routerLink]=\"['operacion']\" >Resultados Operacion</li>\r\n                  <li [routerLink]=\"['estadoResultados']\">Estado de Resultados</li>\r\n                  <li [routerLink]=\"['balance_final']\">Balance Final</li>\r\n                  <li [routerLink]=\"['flujo']\">Flujo de Efectivo</li>\r\n                  <li [routerLink]=\"['comparativa']\">Posición Comparativa</li>\r\n                  <li [routerLink]=\"['analisis']\">Analisis del Periodo</li>\r\n                  <li [routerLink]=\"['puntoEquilibrio']\">Punto de Equilibrio</li>\r\n                </ul>\r\n\r\n                <!-- <li data-toggle=\"collapse\" data-target=\"#service3\" class=\"collapsed\">\r\n                  <a href=\"#\"><i class=\"fa fa-flag-checkered fa-lg\"></i> Analisis Final<span class=\"arrow\"></span></a>\r\n                </li>\r\n                <ul class=\"sub-menu collapse\" id=\"service3\">\r\n                  <li [routerLink]=\"['razones']\" >Razones</li>\r\n                  <li [routerLink]=\"['integrales']\" >Integrales</li>\r\n                  <li [routerLink]=\"['tendencias']\">Tendencias</li>\r\n                </ul> -->\r\n            </ul>\r\n     </div>\r\n</div>\r\n"
+module.exports = "<div class=\"nav-side-menu\">\r\n    <div class=\"brand\">\r\n      <div class=\"row\" >\r\n        <div class=\"col-12 text-center\">\r\n          <h6 style=\"margin-top:20px\">Proyecto {{proyectoActual}}</h6>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-12 text-center\" style=\"margin-bottom:10px\">\r\n          <button type=\"button\" class=\"btn btn-danger\" style=\"font-size:10px\" (click)=\"verProyectos()\">Salir de Proyecto</button>\r\n        </div>\r\n\r\n      </div>\r\n\r\n    </div>\r\n    <i class=\"fa fa-bars fa-2x toggle-btn\" data-toggle=\"collapse\" data-target=\"#menu-content\"></i>\r\n\r\n        <div class=\"menu-list\">\r\n            <ul id=\"menu-content\" class=\"menu-content collapse out\">\r\n\r\n                <li [routerLink]=\"['home']\">\r\n                  <a >\r\n                  <i class=\"fa fa-tachometer fa-lg\"></i> Valores iniciales\r\n                  </a>\r\n                </li>\r\n\r\n                <li [routerLink]=\"['demandaPotencial']\">\r\n                  <a >\r\n                  <i class=\"fa fa-area-chart fa-lg\"></i> Demanda potencial\r\n                  </a>\r\n                </li>\r\n\r\n                <li [routerLink]=\"['produccion']\" routerLinkActive=\"active\">\r\n                   <a>\r\n                    <i class=\"fa fa-pie-chart fa-lg\"></i>  Decisiones de Producción y Venta\r\n                   </a>\r\n                </li>\r\n\r\n                <li data-toggle=\"collapse\" data-target=\"#service\" class=\"collapsed\">\r\n                  <a href=\"#\"><i class=\"fa fa-line-chart fa-lg\"></i> Decisiones de Crecimiento<span class=\"arrow\"></span></a>\r\n                </li>\r\n                <ul class=\"sub-menu collapse\" id=\"service\">\r\n\r\n                  <li [routerLink]=\"['compraMaquinaria']\" routerLinkActive=\"active\">\r\n                     <a >\r\n                     <i class=\"fa fa-cogs fa-lg\"></i> Compra de Maquinaria\r\n                     </a>\r\n                   </li>\r\n                   <li [routerLink]=\"['desarrolloProducto']\" routerLinkActive=\"active\">\r\n                      <a >\r\n                      <i class=\"fa fa-flask fa-lg\"></i> Desarrollo de Productos\r\n                      </a>\r\n                    </li>\r\n                   <li [routerLink]=\"['desarrolloMercado']\" routerLinkActive=\"active\">\r\n                      <a >\r\n                      <i class=\"fa fa-map-marker fa-lg\"></i> Desarrollo de mercados\r\n                      </a>\r\n                    </li>\r\n                </ul>\r\n\r\n                <li [routerLink]=\"['financiamiento']\" routerLinkActive=\"active\">\r\n                   <a>\r\n                    <i class=\"fa fa-credit-card fa-lg\"></i>  Decisiones de Finaciamiento\r\n                   </a>\r\n                </li>\r\n\r\n                <li data-toggle=\"collapse\" data-target=\"#service2\" class=\"collapsed\">\r\n                  <a href=\"#\"><i class=\"fa fa-list-alt fa-lg\"></i> Resultados del periodo<span class=\"arrow\"></span></a>\r\n                </li>\r\n                <ul class=\"sub-menu collapse\" id=\"service2\">\r\n                  <li [routerLink]=\"['balance_inicial']\" >Balance Inicial</li>\r\n                  <li [routerLink]=\"['operacion']\" >Resultados Operacion</li>\r\n                  <li [routerLink]=\"['estadoResultados']\">Estado de Resultados</li>\r\n                  <li [routerLink]=\"['balance_final']\">Balance Final</li>\r\n                  <li [routerLink]=\"['flujo']\">Flujo de Efectivo</li>\r\n                  <li [routerLink]=\"['comparativa']\">Posición Comparativa</li>\r\n                  <li [routerLink]=\"['analisis']\">Analisis del Periodo</li>\r\n                  <li [routerLink]=\"['puntoEquilibrio']\">Punto de Equilibrio</li>\r\n                </ul>\r\n<!-- \r\n                <li data-toggle=\"collapse\" data-target=\"#service3\" class=\"collapsed\">\r\n                  <a href=\"#\"><i class=\"fa fa-flag-checkered fa-lg\"></i> Analisis Final<span class=\"arrow\"></span></a>\r\n                </li>\r\n                <ul class=\"sub-menu collapse\" id=\"service3\">\r\n                  <li [routerLink]=\"['razones']\" >Razones</li>\r\n                  <li [routerLink]=\"['integrales']\" >Integrales</li>\r\n                  <li [routerLink]=\"['tendencias']\">Tendencias</li>\r\n                </ul> -->\r\n            </ul>\r\n     </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -10572,10 +10577,10 @@ var DesarrolloProductoService = (function () {
         };
         return this.http.post('proyectoproducto/getproductosdesarrollados/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
-    DesarrolloProductoService.prototype.getTerminados = function () {
+    DesarrolloProductoService.prototype.getTerminados = function (np) {
         var x = {
             idProyecto: localStorage.getItem('idProyecto'),
-            numeroPeriodo: localStorage.getItem('numeroPeriodo')
+            numeroPeriodo: np - 1
         };
         return this.http.post('proyectoproducto/getterminados/', x).map(function (res) { return res.json(); });
     };
@@ -10585,12 +10590,12 @@ var DesarrolloProductoService = (function () {
         });
         return this.http.post('proyectoproducto/desarrollado/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
-    DesarrolloProductoService.prototype.actualizarPD = function () {
+    DesarrolloProductoService.prototype.actualizarPD = function (periodo) {
         var _this = this;
-        this.getTerminados().subscribe(function (data) {
+        this.getTerminados(periodo).subscribe(function (data) {
             for (var key$ in data.datos) {
                 var x = {
-                    numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')),
+                    numeroPeriodo: parseInt(periodo),
                     idProyecto: localStorage.getItem('idProyecto'),
                     idProducto: data.datos[key$].idProducto
                 };
@@ -10819,16 +10824,16 @@ var DesarrolloZonaService = (function () {
         });
         return this.http.post('productoszonasproyectos/productosendesarrollo/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
-    DesarrolloZonaService.prototype.actualizarZonasDes = function () {
+    DesarrolloZonaService.prototype.actualizarZonasDes = function (periodo) {
         var _this = this;
-        this.getTerminados().subscribe(function (data) {
+        this.getTerminados(periodo).subscribe(function (data) {
             for (var key$ in data.datos) {
                 var x = {
                     Producto_idProducto: data.datos[key$].Producto_idProducto,
                     Zona_idZonas: data.datos[key$].Zona_idZonas,
                     Proyecto_idProyecto: data.datos[key$].Proyecto_idProyecto,
                     Proyecto_Usuario_idUsuario: data.datos[key$].Proyecto_Usuario_idUsuario,
-                    numeroPeriodo: (parseInt(localStorage.getItem('numeroPeriodo')) + 1),
+                    numeroPeriodo: parseInt(periodo),
                     desarrollado: 2,
                     periodoInicio: data.datos[key$].periodoInicio,
                     periodosDes: data.datos[key$].periodosDes
@@ -10861,8 +10866,12 @@ var DesarrolloZonaService = (function () {
         });
         return this.http.post('productoszonasproyectos/desarrolladoproductozonaproyecto/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
-    DesarrolloZonaService.prototype.getTerminados = function () {
-        return this.http.get('productoszonasproyectos/terminados/' + localStorage.getItem('idProyecto')).map(function (res) { return res.json(); });
+    DesarrolloZonaService.prototype.getTerminados = function (np) {
+        var x = {
+            idProyecto: localStorage.getItem('idProyecto'),
+            numeroPeriodo: np - 1
+        };
+        return this.http.post('productoszonasproyectos/terminados/', x).map(function (res) { return res.json(); });
     };
     DesarrolloZonaService.prototype.getProductosDeZonaDesarrollados = function () {
         var x = {
@@ -11700,7 +11709,8 @@ var ProyectosService = (function () {
         var _this = this;
         this.buscarPeriodos(idProyecto).subscribe(function (data) {
             if (data.datos.length == 0) {
-                _this.asginarPeriodoCero(idProyecto);
+                var x = _this.asginarPeriodoCero(idProyecto);
+                console.log("Retorno", x);
                 setTimeout(function () {
                     localStorage.setItem('numeroPeriodo', '1');
                     localStorage.setItem('numeroRPeriodos', '1');
@@ -11810,15 +11820,19 @@ var ProyectosService = (function () {
     };
     ProyectosService.prototype.asginarPeriodoCero = function (idProyecto) {
         var _this = this;
+        var r = [];
         this.buscarDatosUsuario().subscribe(function (data) {
             for (var key$ in data) {
                 if (data[key$].idUsuario == localStorage.getItem('idUsuario')) {
-                    _this.crearBalanceCero(idProyecto, data[key$], 0).subscribe();
+                    _this.crearBalanceCero(idProyecto, data[key$], 0).subscribe(function (data) {
+                        r.push(data.datos);
+                    });
                     _this.crearBalanceUno(idProyecto, data[key$], 1).subscribe();
                     break;
                 }
             }
         });
+        return r;
     };
     ProyectosService.prototype.buscarDatosUsuario = function () {
         return this.http.get('usuario/').map(function (res) { return res.json(); });
@@ -12320,13 +12334,13 @@ var UsuarioCreditoService = (function () {
         };
         return this.http.post('prestamo/regresioncreditos', x, { headers: headers }).map(function (res) { return res.json(); });
     };
-    UsuarioCreditoService.prototype.validarP = function () {
+    UsuarioCreditoService.prototype.validarP = function (periodo) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
             'Content-Type': 'application/json'
         });
         var x = {
             idProyecto: localStorage.getItem('idProyecto'),
-            numeroPeriodo: localStorage.getItem('numeroPeriodo')
+            numeroPeriodo: parseInt(periodo)
         };
         return this.http.post('prestamo/validaperiodos', x, { headers: headers }).map(function (res) { return res.json(); });
     };

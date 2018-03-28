@@ -314,7 +314,6 @@ router.post('/regresioncreditos/', (req,res,next) => {
     function(creditosactivosporperiodo,creditoterminados) {
       // var a = [{ "idCredito": 1},{"idCredito":2},{"idCredito":1}];
       // var b = [{ "idCredito": 1}];
-
       return diferencia(creditoterminados,creditosactivosporperiodo)
     })
   .then(function(rows){
@@ -873,7 +872,6 @@ function diferencia (a1, a2) {
 
     for (var i = 0; i < a1.length; i++) {
         arrayAux[a1[i].idCredito] = true;
-      //  console.log("a1[i].idCredito: ",a1[i].idCredito);
     }
 
     for (var i = 0; i < a2.length; i++) {
