@@ -5459,8 +5459,7 @@ var FinanciamientoComponent = (function () {
         return false;
     };
     FinanciamientoComponent.prototype.validaCreditoA = function (credito) {
-        console.log(credito.numeroPeriodo, localStorage.getItem('numeroPeriodo'), "Perrroooooooooo");
-        if (credito.numeroPeriodo <= parseInt(localStorage.getItem('numeroPeriodo')))
+        if (credito.numeroPeriodo == parseInt(localStorage.getItem('numeroPeriodo')))
             return true;
         else
             return false;
@@ -12160,7 +12159,6 @@ var ResultadosService = (function () {
         this._operacionService.getProductosV().subscribe(function (data) {
             console.log(data);
             for (var key$ in data.datos) {
-                console.log(1);
                 _this._operacionService.sell(data.datos[key$]).subscribe();
             }
         });

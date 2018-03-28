@@ -411,7 +411,7 @@ router.post('/selling', (req,res,next) => {
     //Inventario Final de Articulo Terminado
     var inventarioFinal = 0;
     if(uniAlmacenadas > 0){
-      if(inventarioInicial > 0){
+      if(inventarioInicial > 0 || uniVendidas > 0){
         inventarioFinal = ((cashInventarioInicial + cProduccion) / (inventarioInicial + uniProd)) * uniAlmacenadas;
       }
     }
