@@ -274,7 +274,11 @@ router.post('/productosventa', (req,res,next) => {
   var idU = req.body.idUsuario;
   var idP = req.body.idProyecto;
   var numeroPeriodo = req.body.numeroPeriodo;
-  Promise.join(operacion.getOperaciones(idP,idU,numeroPeriodo),operacion.getAlmacenTotal(idP,numeroPeriodo),function(r1,r2) {
+  var numeroPeriodoAnterior = parseInt(numeroPeriodo) - 1;
+  Promise.join(operacion.getOperaciones(idP,idU,numeroPeriodo),operacion.getAlmacenTotal(idP,numeroPeriodo),
+              operacion.getAlmacenTotal(idP,numeroPeriodoAnterior),function(r1,r2,r3) {
+
+    var r4 = r2.concat(r3);
 
     var hash = {};
     var array = r1.filter(function(current) {
@@ -285,12 +289,12 @@ router.post('/productosventa', (req,res,next) => {
 
     if(array.length == 0){
       var hash2 = {};
-      var array2 = r2.filter(function(current) {
+      var array2 = r4.filter(function(current) {
         var exists = !hash2[current.Producto_idProducto] || false;
         hash2[current.Producto_idProducto] = true;
         return exists;
       });
-      return operacionesBien2(array2);
+      return operacionesBien2(array2,numeroPeriodo);
     }
     else{
       return operacionesBien(r1,array);
@@ -431,7 +435,7 @@ router.post('/selling', (req,res,next) => {
     var comprasOff = compras - comprasXPagar;
 
     //Validación de 0's
-    if(uniAlmacenadas == 0 && uniVendidas == 0){
+    if(uniAlmacenadas == 0 && uniVendidas == 0 && cVentas == 0){
       ivaVentas = 0;
       IVAMP = 0;
       IVATrans = 0;
@@ -588,9 +592,9 @@ function operacionesBien(rows,array){
   }
 }
 
-function operacionesBien2(r1) {
+function operacionesBien2(r1,np) {
   for(let i in r1){
-    r1[i]['numeroPeriodo'] = r1[i].Balance_numeroPeriodo;
+    r1[i]['numeroPeriodo'] = np;
     r1[i]['unidadesVendidas'] = 0;
   }
   return r1;
