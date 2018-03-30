@@ -217,7 +217,7 @@ module.exports.deleteCreditoActivo = function (idCredito,idProyecto) {
 
 //borra los valores de creditoactivo para un periodo específico
 module.exports.deleteCreditoActivoNumP = function (idCredito,idProyecto,numeroPeriodo) {
-  var query = "delete from creditoactivo where idCredito = "+idCredito+" and idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+" ";
+  var query = "delete from creditoactivo where idCredito = "+idCredito+" and idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+" and plazo!=0 ";
   return querySql(query);
 }
 
