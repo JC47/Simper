@@ -8428,15 +8428,15 @@ var VentaProductosComponent = (function () {
         this.prueba = [];
         this.formsVentas = [];
         this.graficas = [];
+        this.demandas = [];
         this.zonaSelected = { graf: null, nombreZona: null };
         this._proyectoService.ocultaCierrePeriodo();
         this.zonas = this._graficasService.returnZonas();
         this.productos = this._productoService.returnProductos();
         this.productosOperacion = this._operacionService.returnProductosOperacion();
         this.ventas = this._operacionService.returnAllOperaciones();
-        console.log(this.zonas);
         this.maquinarias = this._dash.returnMaquinarias();
-        this.demandas = this._dash.returnDemandas();
+        this.demandas = this._zonasService.returnDemandaPPeriodo();
         this.almacen = this._operacionService.returnAlmacen();
         console.log(this.almacen);
         this.colorScheme = {
@@ -8600,14 +8600,10 @@ var VentaProductosComponent = (function () {
     };
     VentaProductosComponent.prototype.selectDemanda = function (idZona, idProducto) {
         for (var _i = 0, _a = this.demandas; _i < _a.length; _i++) {
-            var producto = _a[_i];
-            if (producto.idProducto == idProducto) {
-                for (var _b = 0, _c = producto.zonas; _b < _c.length; _b++) {
-                    var zona = _c[_b];
-                    if (zona.idZona == idZona) {
-                        this.demandaSelected = zona.demanda;
-                    }
-                }
+            var a = _a[_i];
+            if (a.Zona_idZonas == idZona && a.Producto_idProducto == idProducto) {
+                this.demandaSelected = a.cantidad;
+                break;
             }
         }
     };
@@ -12926,6 +12922,21 @@ var ZonasService = (function () {
             'Content-Type': 'application/json'
         });
         return this.http.post('zona/register/', zona, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    ZonasService.prototype.getDemandaPPeriodo = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        return this.http.get('zona/demandapperiodo/' + localStorage.getItem('numeroPeriodo'), { headers: headers }).map(function (res) { return res.json(); });
+    };
+    ZonasService.prototype.returnDemandaPPeriodo = function () {
+        var x = [];
+        this.getDemandaPPeriodo().subscribe(function (data) {
+            for (var key in data.datos) {
+                x.push(data.datos[key]);
+            }
+        });
+        return x;
     };
     ZonasService.prototype.guardarZona = function (zona) {
         var _this = this;

@@ -177,6 +177,18 @@ router.post('/deleteProducto/', (req, res, next) => {
   });
 });
 
+router.get('/demandapperiodo/:numeroPeriodo', (req,res,next) => {
+  Promise.resolve().then(function() {
+    var numPeriodo = req.params.numeroPeriodo;
+    return zona.demandaPorPeriodo(numPeriodo);
+  }).then(function(rows) {
+    res.json({success:true,datos:rows,msg:"Bien"});
+  }).catch(function(err) {
+    console.log(err);
+    res.json({success:false,msg:"Mal"});
+  });
+});
+
 router.get('/productoperiodozona/:idZona', (req, res, next) => {
   Promise.resolve().then(function () {
     var idZona = req.params.idZona;

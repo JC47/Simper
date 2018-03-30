@@ -97,6 +97,11 @@ module.exports.updateProductoZona = function (idZona,idProducto,costoDes,tiempoD
   return querySql(query);
 }
 
+module.exports.demandaPorPeriodo = function(numeroPeriodo){
+  var query = "select * from demanda where numPeriodo = "+numeroPeriodo+"";
+  return querySql(query);
+}
+
 
 
 

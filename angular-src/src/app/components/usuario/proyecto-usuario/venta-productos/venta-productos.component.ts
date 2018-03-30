@@ -53,7 +53,7 @@ export class VentaProductosComponent implements OnInit {
   formsVentas:FormArray[]=[];
   graficas:any[]=[];
   colorScheme:any;
-  demandas:any;
+  demandas= [];
   maquinarias:any;
   produccionSelected:any;
   demandaSelected:any;
@@ -73,10 +73,8 @@ export class VentaProductosComponent implements OnInit {
     this.productos=this._productoService.returnProductos();
     this.productosOperacion = this._operacionService.returnProductosOperacion();
     this.ventas=this._operacionService.returnAllOperaciones();
-
-    console.log(this.zonas);
     this.maquinarias=this._dash.returnMaquinarias();
-    this.demandas=this._dash.returnDemandas();
+    this.demandas=this._zonasService.returnDemandaPPeriodo();
 
     this.almacen = this._operacionService.returnAlmacen();
     console.log(this.almacen);
@@ -271,13 +269,10 @@ openModalVenta(idZona,idProducto){
   }
 
   selectDemanda(idZona,idProducto){
-    for(let producto of this.demandas){
-      if(producto.idProducto==idProducto){
-        for(let zona of producto.zonas){
-          if(zona.idZona==idZona){
-            this.demandaSelected=zona.demanda;
-          }
-        }
+    for(let a of this.demandas){
+      if(a.Zona_idZonas == idZona && a.Producto_idProducto == idProducto){
+        this.demandaSelected = a.cantidad;
+        break;
       }
     }
   }
