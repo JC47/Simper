@@ -123,19 +123,22 @@
 
 
 
-  <ngl-modal header="Tabla de Amorizacion"  [(open)]="openTablaAmort" size="x-small" directional="false">
+  <ngl-modal header="Tabla de Amortización"  [(open)]="openTablaAmort" size="x-small" directional="false">
 
     <div body>
-      <div class="col-12 text-center container">
-        <table class="table table-bordered table-responsive center-block">
-          <tbody>
+      <div class="col-10 offset-1">
+        <table class="table table-bordered ">
+          <thead class="thead-inverse">
             <tr>
-              <th>Capital</th>
-              <th>Interes</th>
-              <th>Pago</th>
-              <th>Saldo</th>
-              <th>Pago a Capital</th>
+              <th class="text-center">Capital</th>
+              <th class="text-center">Interes</th>
+              <th class="text-center">Pago</th>
+              <th class="text-center">Saldo</th>
+              <th class="text-center">Pago a Capital</th>
             </tr>
+          </thead>
+          <tbody>
+
             <tr *ngFor="let t of tablaA">
               <td class="text-right">{{t.capital |currency:'USD':true:'1.0-0'}}</td>
               <td class="text-right">{{t.interes |currency:'USD':true:'1.0-0'}}</td>
@@ -163,15 +166,20 @@
     <ngl-modal header="Pagos"  [(open)]="openPagos" size="x-small" directional="false">
 
       <div body>
-        <div class="col-12 text-center container">
-          <table class="table table-bordered table-responsive center-block">
-            <tbody>
+        <div class="col-10 offset-1 text-center">
+          <table class="table table-bordered">
+            <thead class="thead-inverse">
               <tr>
-                <th>Periodo</th>
-                <th>Interes</th>
-                <th>Pago</th>
-                <th>Pago a Capital</th>
+
+
+              <th class="text-center">Periodo</th>
+              <th class="text-center">Interes</th>
+              <th class="text-center">Pago</th>
+              <th class="text-center">Pago a Capital</th>
               </tr>
+            </thead>
+            <tbody>
+
               <tr *ngFor="let t of tablaPagos">
                 <td class="text-right">{{t.numeroPeriodo}}</td>
                 <td class="text-right">{{t.intereses |currency:'USD':true:'1.0-0'}}</td>

@@ -43,6 +43,7 @@ export class VentaProductosComponent implements OnInit {
   mensaje:any;
   modalAlerta:any=false;
   modalAlerta2:any=false;
+  modalAlerta3:any=false;
   vendeForm:FormGroup[]=[];
   openVenta:boolean=false;
   vendiendo:boolean=false;
@@ -50,6 +51,7 @@ export class VentaProductosComponent implements OnInit {
   openConf:boolean=false;
   openLoad:boolean=false;
   prueba:any=[];
+  modalAlertaAlma:boolean=false;
   formsVentas:FormArray[]=[];
   graficas:any[]=[];
   colorScheme:any;
@@ -187,7 +189,16 @@ openModalVenta(idZona,idProducto){
   }
 
   selectVenta(venta){
-    this.openConf=true;
+    console.log(venta)
+
+    if (venta.cantidadVenta   ) {
+      this.openConf=true;
+      this.openVenta=false;
+    }else{
+      this.modalAlerta3=true;
+      this.openVenta=false;
+    }
+
     this.selectedVenta={
       venta:{
         idZona:venta.idZona,
@@ -196,7 +207,7 @@ openModalVenta(idZona,idProducto){
       idProducto:venta.idProducto
     }
 
-    console.log(this.selectedVenta)
+    console.log("Selected venta",this.selectedVenta)
 
   }
 
@@ -234,9 +245,9 @@ openModalVenta(idZona,idProducto){
         this.almacen = this._operacionService.registerAlmacen(x);
       }
       else{
+        this.openConfAlmacen=false;
         this.mensaje=data.msg
-        this.openVenta=true;
-        this.modalAlerta=true;
+        this.modalAlertaAlma=true;
       }
     });
 
@@ -268,6 +279,35 @@ openModalVenta(idZona,idProducto){
     }
     this.produccionSelected=cantProdTem;
     console.log(this.produccionSelected)
+  }
+
+
+  getProduccion(idProducto){
+    console.log(idProducto)
+    console.log(this.maquinarias);
+    let cantProdTem:number=0;
+    let cantVendTem:number=0;
+    for(let produccion of this.maquinarias){
+      if(produccion.idProducto==idProducto){
+        for(let maquina of produccion.maquinas){
+          cantProdTem=maquina.cantidadProd+cantProdTem;
+          console.log("Maq",maquina);
+        }
+      }
+    }
+
+    console.log(this.ventas);
+    for(let venta of this.ventas){
+      if (venta.Producto_idProducto==idProducto) {
+        cantVendTem=cantVendTem+venta.unidadesVendidas;
+      }
+
+
+    }
+
+
+
+    return cantProdTem-cantVendTem;
   }
 
   selectDemanda(idZona,idProducto){

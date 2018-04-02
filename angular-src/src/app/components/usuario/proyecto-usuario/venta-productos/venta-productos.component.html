@@ -36,6 +36,7 @@
             </form>
 
             <h3 class="col-12 text-center" style="margin-top:25px">Almacenamiento</h3>
+            <h5>Producción Permitida: {{getProduccion(producto.idProducto)|number:'1.0-0'}}</h5>
             <form [formGroup]="almacenForm" (ngSubmit)="selectAlmacen(almacenForm.value,producto.idProducto)" class="offset-1"  >
 
               <div class="form-group row">
@@ -70,15 +71,15 @@
       <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col-12 text-center">Producto</th>
-      <th scope="col-12 text-center">Zona</th>
-      <th scope="col-12 text-center">Unidades Vendidas</th>
+      <th class="text-center">Producto</th>
+      <th class=" text-center">Zona</th>
+      <th class=" text-center">Unidades Vendidas</th>
       </tr>
   </thead>
   <tbody>
     <tr *ngFor="let venta of ventas">
-      <td>{{getNameByIdProducto(venta.Producto_idProducto)}}</td>
-      <td>{{getNameByIdZona(venta.Zona_idZonas)}}</td>
+      <td class="text-center">{{getNameByIdProducto(venta.Producto_idProducto)}}</td>
+      <td class="text-center">{{getNameByIdZona(venta.Zona_idZonas)}}</td>
       <td class="col-12 text-right">{{venta.unidadesVendidas|number:'1.0-0'}}</td>
     </tr>
   </tbody>
@@ -92,14 +93,14 @@
 <table class="table table-striped">
 <thead>
 <tr>
-<th scope="col-12 text-center">Producto</th>
-<th scope="col-12 text-center">Unidades Almacenandas</th>
+<th class="text-center">Producto</th>
+<th class="text-center">Unidades Almacenandas</th>
 </tr>
 </thead>
 <tbody>
 <tr *ngFor="let alma of almacen">
-<td class="col-12 text-center">{{getNameByIdProducto(alma.Producto_idProducto)}}</td>
-<td class="col-12 text-right">{{alma.unidadesAlmacenadas|number:'1.0-0'}}</td>
+<td class="text-center">{{getNameByIdProducto(alma.Producto_idProducto)}}</td>
+<td class="text-right">{{alma.unidadesAlmacenadas|number:'1.0-0'}}</td>
 </tr>
 </tbody>
 </table>
@@ -228,17 +229,51 @@
 
 
 
-      <ngl-modal header="Confirmación"  [(open)]="modalAlerta" size="x-small" directional="false">
+      <ngl-modal header="Alerta"  [(open)]="modalAlerta" size="x-small" directional="false">
 
         <div body>
           <h3 class="col-12 text-center">{{mensaje}}</h3>
         </div>
 
         <ng-template ngl-modal-footer>
-        <button class="btn btn-primary col-4 offset-4" (click)="paso()">Aceptar</button>
+        <button class="btn btn-success col-4 offset-2" (click)="paso()">Comprar Maquinarias</button>
+        <button class="btn btn-primary col-2" (click)="modalAlerta=false;openVenta=true;">Volver</button>
 
       </ng-template>
         </ngl-modal>
+
+
+
+
+        <ngl-modal header="Alerta"  [(open)]="modalAlertaAlma" size="x-small" directional="false">
+
+          <div body>
+            <h3 class="col-12 text-center">{{mensaje}}</h3>
+          </div>
+
+          <ng-template ngl-modal-footer>
+          <button class="btn btn-success col-4 offset-2" (click)="paso()">Comprar Maquinarias</button>
+          <button class="btn btn-primary col-2" (click)="modalAlertaAlma=false;">Volver</button>
+
+        </ng-template>
+          </ngl-modal>
+
+
+
+
+              <ngl-modal header="Alerta"  [(open)]="modalAlerta3" size="x-small" directional="false">
+
+                <div body>
+                  <h3 class="col-12 text-center">Ingresa una cantidad valida</h3>
+                </div>
+
+                <ng-template ngl-modal-footer>
+                <button class="btn btn-primary col-4 offset-4" (click)="modalAlerta3=false;openVenta=true;">Aceptar</button>
+
+              </ng-template>
+                </ngl-modal>
+
+
 
         <ngl-modal header="Confirmación"  [(open)]="modalAlerta2" size="x-small" directional="false">
 
