@@ -15,6 +15,7 @@ import {ProyectosService} from '../../../../services/proyectos.service';
 export class FinanciamientoComponent implements OnInit {
   tablaA = [];
   creditosActivos = [];
+  creditosBloqueados = [];
   creditos:any;
   creditosSolicitados = [];
   creditoSelected:any;
@@ -35,7 +36,9 @@ export class FinanciamientoComponent implements OnInit {
     this._proyectoService.ocultaCierrePeriodo()
     this.creditos=this._creditoService.returnCreditosU(localStorage.getItem('idUsuario'));
     this.creditosActivos=this._creditoService.arregloC();
+    this.creditosBloqueados=this._creditoService.returnBloqueados();
     console.log("cActivos",this.creditosActivos)
+    console.log("cBloqueados",this.creditosBloqueados)
     this.solicitudForm= new FormGroup({
       'monto':new FormControl('',Validators.required),
       'idCredito':new FormControl('',Validators.required)
@@ -57,10 +60,14 @@ export class FinanciamientoComponent implements OnInit {
   }
 
   validaCreditoA(credito){
-    if(credito.numeroPeriodo==parseInt(localStorage.getItem('numeroPeriodo')))
-      return true
-    else
-      return false
+    for(let a of this.creditosBloqueados){
+      if(credito.idCredito==a.credito_idCredito){
+        return true
+      }
+      else{
+        return false
+      }
+    }
   }
 
   getNameById(id:number){
@@ -153,6 +160,7 @@ export class FinanciamientoComponent implements OnInit {
 
   actualizar(){
     this.creditosActivos = this._creditoService.arregloC();
+    this.creditosBloqueados = this._creditoService.returnBloqueados();
   }
 
 

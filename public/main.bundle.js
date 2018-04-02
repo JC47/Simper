@@ -5433,6 +5433,7 @@ var FinanciamientoComponent = (function () {
         this._proyectoService = _proyectoService;
         this.tablaA = [];
         this.creditosActivos = [];
+        this.creditosBloqueados = [];
         this.creditosSolicitados = [];
         this.openTablaAmort = false;
         this.openPagos = false;
@@ -5447,7 +5448,9 @@ var FinanciamientoComponent = (function () {
         this._proyectoService.ocultaCierrePeriodo();
         this.creditos = this._creditoService.returnCreditosU(localStorage.getItem('idUsuario'));
         this.creditosActivos = this._creditoService.arregloC();
+        this.creditosBloqueados = this._creditoService.returnBloqueados();
         console.log("cActivos", this.creditosActivos);
+        console.log("cBloqueados", this.creditosBloqueados);
         this.solicitudForm = new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormGroup"]({
             'monto': new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormControl"]('', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required),
             'idCredito': new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormControl"]('', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required)
@@ -5465,10 +5468,15 @@ var FinanciamientoComponent = (function () {
         return false;
     };
     FinanciamientoComponent.prototype.validaCreditoA = function (credito) {
-        if (credito.numeroPeriodo == parseInt(localStorage.getItem('numeroPeriodo')))
-            return true;
-        else
-            return false;
+        for (var _i = 0, _a = this.creditosBloqueados; _i < _a.length; _i++) {
+            var a = _a[_i];
+            if (credito.idCredito == a.credito_idCredito) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
     };
     FinanciamientoComponent.prototype.getNameById = function (id) {
         for (var _i = 0, _a = this.creditos; _i < _a.length; _i++) {
@@ -5554,6 +5562,7 @@ var FinanciamientoComponent = (function () {
     };
     FinanciamientoComponent.prototype.actualizar = function () {
         this.creditosActivos = this._creditoService.arregloC();
+        this.creditosBloqueados = this._creditoService.returnBloqueados();
     };
     FinanciamientoComponent.prototype.validaVi = function () {
         if (localStorage.getItem('numeroPeriodo') == localStorage.getItem('numeroRPeriodos'))
@@ -12412,6 +12421,25 @@ var UsuarioCreditoService = (function () {
             'Content-Type': 'application/json'
         });
         return this.http.post('prestamo/deleteactivo', x, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    UsuarioCreditoService.prototype.validarBloqueo = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        var x = {
+            idProyecto: localStorage.getItem('idProyecto'),
+            numeroPeriodo: localStorage.getItem('numeroPeriodo')
+        };
+        return this.http.post('prestamo/validarCreditos', x, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    UsuarioCreditoService.prototype.returnBloqueados = function () {
+        var x = [];
+        this.validarBloqueo().subscribe(function (data) {
+            for (var key in data.datos) {
+                x.push(data.datos[key]);
+            }
+        });
+        return x;
     };
     return UsuarioCreditoService;
 }());

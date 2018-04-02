@@ -286,3 +286,8 @@ module.exports.getCreditosTerminados = function (idProyecto,numeroPeriodo) {
   var query = "select idCredito,idProyecto,numeroPeriodo,plazo from creditoactivo where plazo=0 and numeroPeriodo <= "+numeroPeriodo+" and idProyecto = "+idProyecto+" ";
   return querySql(query);
 }
+
+module.exports.validarAmortizacion = function(idProyecto,numeroPeriodo) {
+  var query = "select credito_idCredito from creditoBalance where Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+"";
+  return querySql(query);
+}
