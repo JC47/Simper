@@ -126,6 +126,23 @@ export class ZonasService {
 
   }
 
+  getDemandaPPeriodo(){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    return this.http.get('zona/demandapperiodo/'+localStorage.getItem('numeroPeriodo'), {headers}).map( res => res.json());
+  }
+
+  returnDemandaPPeriodo(){
+    var x:any = [];
+    this.getDemandaPPeriodo().subscribe(data => {
+      for(let key in data.datos){
+        x.push(data.datos[key]);
+      }
+    });
+    return x;
+  }
+
   guardarZona(zona){
     this.addZona(zona).subscribe( data => {
       if(data.success){

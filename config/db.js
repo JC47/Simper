@@ -20,6 +20,7 @@ var pool = mysql.createPool({
 });
 
 //G1X9.:59XN7mA:
+//ssh wwwwcome@52.16.185.51 -p 333
 
 function getSqlConnection() {
     return pool.getConnectionAsync().disposer(function (connection) {

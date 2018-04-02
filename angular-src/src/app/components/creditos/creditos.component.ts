@@ -57,7 +57,6 @@ export class CreditosComponent implements OnInit {
 
 
           this.creditos = this._creditosService.establecerValores();
-          console.log(this.creditos);
 
   }
 
@@ -74,7 +73,7 @@ export class CreditosComponent implements OnInit {
   }
 
   validaCampoEdit(i){
-    if(this.editForm.controls.pagosCredito.get(i+"").get('pago').valid)
+    if(this.editForm.controls.pagosCredito.get(i+"").get('pagosCredito').valid)
       return false;
     else
       return true;
@@ -89,9 +88,10 @@ export class CreditosComponent implements OnInit {
 
 
     initPagoOfEdit(pago,idPago){
+      console.log(pago,idPago);
       return this._fb.group({
-              pago:[pago,Validators.required],
-              idPago:[idPago,Validators.required]
+              pagosCredito:[pago,Validators.required],
+              idPagoCredito:[idPago]
             });
       }
 
@@ -105,8 +105,6 @@ export class CreditosComponent implements OnInit {
   }
 
   agregaCredito(credito){
-    console.log(credito)
-    //this._creditosService.guardarCredito(credito);
     this.modalNew.hide();
 
     this.alerts.push({
@@ -119,35 +117,35 @@ export class CreditosComponent implements OnInit {
   }
 
   editaCredito(credito){
-    console.log(credito);
-    this._creditosService.setCreditos(credito).subscribe();
+    console.log(credito.pagosCredito,"Edicion")
+    this.creditos = this._creditosService.editarCredito(credito);
     this.modalEdit.hide();
     this.alerts.push({
       type: 'success',
       msg: `Usuario "${(credito.nombreCredito)}" agregado`,
-      timeout: 2000
+      timeout: 1000
     });
 
     this.editForm.controls['pagosCredito']=this._fb.array([]);
-
   }
 
   eliminaCredito(id){
-    this._creditosService.deleteCredito(id.idCredito).subscribe(data => {
-      console.log("Data",data);
-    });
+    this.creditos = this._creditosService.eliminarCredito(id.idCredito);
     this.modalConfDelete.hide();
 
     this.alerts.push({
       type: 'danger',
       msg: `Credito eliminado`,
-      timeout: 2000
+      timeout: 1000
     });
-
   }
 
   openEdit(credito){
-
+    this.editForm.reset();
+    let cantidadpagosCredito=this.editForm.controls['pagosCredito'].value.length
+    for(let i=0;i<cantidadpagosCredito;i++){
+      (<FormArray>this.editForm.controls['pagosCredito']).removeAt(0);
+    }
     this.editForm.controls['montoMax'].setValue(credito.montoMax);
     this.editForm.controls['montoMin'].setValue(credito.montoMin);
     this.editForm.controls['nombreCredito'].setValue(credito.nombreCredito);
@@ -155,10 +153,11 @@ export class CreditosComponent implements OnInit {
     this.editForm.controls['pago'].setValue(credito.pago);
     this.editForm.controls['idCredito'].setValue(credito.idCredito);
     for(let pago of credito.pagosTotales){
-      this.inputPagoEdit(pago.pagosCredito)
+      this.inputPagoEdit(pago.pagosCredito,pago.idPagoCredito)
     }
+    console.log(this.editForm.controls.pagosCredito,"Formulario");
     this.modalEdit.show();
-    //this.editForm.setValue(credito);
+
   }
 
   openNew(){
@@ -178,8 +177,8 @@ export class CreditosComponent implements OnInit {
     (<FormArray>this.newForm.controls['pagosCredito']).push(this.initProductoOfNew(pago));
     console.log(this.newForm.controls.pagosCredito);
   }
-  inputPagoEdit(pago){
-        (<FormArray>this.editForm.controls['pagosCredito']).push(this.initProductoOfNew(pago));
+  inputPagoEdit(pago,id){
+        (<FormArray>this.editForm.controls['pagosCredito']).push(this.initPagoOfEdit(pago,id));
   }
 
 
@@ -189,7 +188,6 @@ export class CreditosComponent implements OnInit {
     this.modalConfDelete.show();
 
   }
-
 
 
 

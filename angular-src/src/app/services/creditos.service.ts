@@ -10,34 +10,24 @@ export class CreditosService {
   constructor(private http:Http) { }
 
    establecerValores(){
-     this.creditos.length = 0;
+     var creditos = [];
      this.getCreditos().subscribe(data => {
        for(let key$ in data.datos){
-           this.creditos.push(data.datos[key$]);
+           creditos.push(data.datos[key$]);
        }
      });
-     return this.creditos;
+     return creditos;
    }
 
    getCreditos(){
      return this.http.get('prestamo/getcredito').map(res => res.json());
    }
 
-  setCreditos(credito:credito){
+  setCreditos(credito){
     let headers = new Headers({
       'Content-Type':'application/json'
     });
-    console.log(credito.idPrestamos,"Modificandose");
-    for(let i=0;this.creditos.length>i;i++){
-      if(this.creditos[i].idPrestamos==credito.idPrestamos){
-        this.creditos.splice(i,1);
-        this.creditos.push(credito);
-        console.log("credito: ",this.creditos[i].idPrestamos,"modificado");
-
-
-      }
-    }
-    return this.http.post('prestamo/modify/'+credito.idPrestamos, credito, {headers}).map( res => res.json());
+    return this.http.post('prestamo/modifycredito/', credito, {headers}).map( res => res.json());
   }
 
 
@@ -48,6 +38,34 @@ export class CreditosService {
     });
     return this.http.post('prestamo/addcredito', credito, {headers}).map( res => res.json());
 
+  }
+
+  editarCredito(x){
+    var a = [];
+    this.setCreditos(x).subscribe(data2 => {
+      if(data2.success){
+        this.getCreditos().subscribe(data => {
+          for(let key$ in data.datos){
+              a.push(data.datos[key$]);
+          }
+        });
+      }
+    });
+    return a;
+  }
+
+  eliminarCredito(id){
+    var a = [];
+    this.deleteCredito(id).subscribe(data2 => {
+      if(data2.success){
+        this.getCreditos().subscribe(data => {
+          for(let key$ in data.datos){
+              a.push(data.datos[key$]);
+          }
+        });
+      }
+    });
+    return a;
   }
 
   guardarCredito(credito){
@@ -61,7 +79,6 @@ export class CreditosService {
         });
       }
     });
-    this.creditos = creditos;
     return creditos;
   }
 
@@ -69,12 +86,6 @@ export class CreditosService {
     let headers = new Headers({
       'Content-Type':'application/json'
     });
-
-    for(let i=0;this.creditos.length>i;i++){
-      if(this.creditos[i].idCredito==id){
-        this.creditos.splice(i,1);
-      }
-    }
     return this.http.get('prestamo/deletecredito/'+id,{headers}).map(res => res.json());
   }
 

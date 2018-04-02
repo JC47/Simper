@@ -81,20 +81,21 @@ router.get('/deletecredito/:idCredito', (req, res, next) => {
 });
 //PENDIENTE
 router.post('/modifycredito', (req, res, next) => {
+  console.log("Cuerpo",req.body);
   var idCredito = req.body.idCredito;
   var nombreCredito = req.body.nombreCredito;
   var montoMin = req.body.montoMin;
   var montoMax = req.body.montoMax;
   var pagoAnticipado = req.body.pagoAnticipado;
-  var pagosTotales = req.body.pagosTotales;
-
+  var pagosTotales = req.body.pagosCredito;
+  var pago = req.body.pago
   Promise.resolve()
   .then(function () {
-    console.log("tipo",t);
     var json = {
       "nombreCredito": nombreCredito,
       "montoMin": montoMin,
       "montoMax": montoMax,
+      "pago":pago,
       "pagoAnticipado": pagoAnticipado
     }
     return prestamo.updateCredito(json,idCredito);
@@ -106,7 +107,7 @@ router.post('/modifycredito', (req, res, next) => {
     res.json({success: true, msg:"Operacion exitosa"});
   })
   .catch(function (err) {
-    console.error("got error: " + err);
+    console.log( err);
     res.json({success:false, msg:"No sirve"});
   });
 });

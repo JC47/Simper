@@ -2,12 +2,12 @@ const db = require('../config/db');
 const querySql = db.querySql;
 
 module.exports.deletePrestamo = function (id) {
-    var userQuery = "delete from prestamo where idPrestamos = ?";
+    var userQuery = "delete from prestamo where idCredito = ?";
     return querySql(userQuery, id);
 }
 
 module.exports.updatePrestamo = function (data,id){
-    queryUpdateProd = "update prestamo set ? where idPrestamos = "+id+"";
+    queryUpdateProd = "update prestamo set ? where idCredito = "+id+"";
     return querySql(queryUpdateProd,data);
 }
 
@@ -47,6 +47,7 @@ module.exports.updateCredito = function (json,idCredito) {
 }
 
 module.exports.updatePagoCredito = function (idCredito,pagosTotales) {
+  console.log("-----------",pagosTotales);
   for (var i = 0; i < pagosTotales.length; i++) {
     var query = "update pagocredito set pagosCredito = "+pagosTotales[i].pagosCredito+" where idPagoCredito = "+pagosTotales[i].idPagoCredito+" and idCredito = "+idCredito+" ";
     querySql(query);
@@ -217,7 +218,7 @@ module.exports.deleteCreditoActivo = function (idCredito,idProyecto) {
 
 //borra los valores de creditoactivo para un periodo específico
 module.exports.deleteCreditoActivoNumP = function (idCredito,idProyecto,numeroPeriodo) {
-  var query = "delete from creditoactivo where idCredito = "+idCredito+" and idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+" ";
+  var query = "delete from creditoactivo where idCredito = "+idCredito+" and idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+" and plazo!=0 ";
   return querySql(query);
 }
 
