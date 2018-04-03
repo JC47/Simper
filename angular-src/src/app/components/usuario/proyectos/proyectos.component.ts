@@ -73,7 +73,7 @@ export class ProyectosComponent implements OnInit {
     this.alerts.push({
       type: 'danger',
       msg: `Proyecto Eliminado`,
-      timeout: 2000
+      timeout: 1000
     });
 
 
@@ -85,7 +85,7 @@ export class ProyectosComponent implements OnInit {
     this.alerts.push({
       type: 'success',
       msg: `Nuevo Proyecto: ${(proyecto.nombreProyecto)} Agregado`,
-      timeout: 2000
+      timeout: 1000
     });
 
   }
@@ -98,7 +98,7 @@ export class ProyectosComponent implements OnInit {
     this.alerts.push({
       type: 'success',
       msg: `Proyecto: ${(proyecto.nombreProyecto)} Modificado`,
-      timeout: 2000
+      timeout: 1000
     });
 
   }

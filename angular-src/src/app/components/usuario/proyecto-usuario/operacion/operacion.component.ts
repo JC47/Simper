@@ -612,7 +612,7 @@ export class OperacionComponent implements OnInit {
     for(let producto of this.auxiliares){
       rows.push({
         "producto":this.getNameByIdProducto(producto.Producto_idProducto),
-        "unidadesVender":producto.unidadesVendidas.toString(),
+        "unidadesVender":this.dc.transform(producto.unidadesVendidas ,'1.0-0'),
         "precioVenta":this.cp.transform(this.getPrecioVenta(producto.Producto_idProducto),'USD',true,'1.0-0'),
         "venta":this.cp.transform((producto.Ventas - producto.IVAxVentas),'USD',true,'1.0-0'),
         "iva":this.cp.transform(producto.IVAxVentas,'USD',true,'1.0-0'),
@@ -679,6 +679,24 @@ export class OperacionComponent implements OnInit {
       unit: 'mm',
       format: [215.9,279]});
 
+      var columns2=[
+        {title:"",dataKey:"init"}
+      ]
+
+      var rows2=[
+        {"init":"Producto"},
+        {"init":"Unidades a Vender (+)"},
+        {"init":"Inventario Final(+)"},
+        {"init":"Inventario Inicial(-)"},
+        {"init":"Unidades a Producir"},
+        {"init":"Costo Unitario(M.P.)"},
+        {"init":"Costo Total(M.P.)"},
+        {"init":"Costo Unitario(Transformación)"},
+        {"init":"Costo Total(Trasnformación)"},
+        {"init":"Costo Producción Unitario"},
+        {"init":"Costo Producción Total"}
+      ]
+
       var columns = [
       {title: "Producto", dataKey: "producto"},
       {title: "Unidades A Vender (+)", dataKey: "unidadesVender"},
@@ -716,7 +734,7 @@ export class OperacionComponent implements OnInit {
 
       let actual=this.proyectoActual
 
-      doc.autoTable(columns, rows, {
+      doc.autoTable(columns2, rows2, {
       margin: {top: 40,
                left:10},
       headerStyles: {fillColor:0,halign:'center'},

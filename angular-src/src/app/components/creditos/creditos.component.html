@@ -114,15 +114,28 @@
             </div>
           </div>
 
-          <fieldset class="form-group row">
+        <div class="" style="margin-bottom:20px">
+          <div class="offset-1">
+            <fieldset ngl-form-group label="Tipo de Credito"  class="slds-m-top--small">
+              <ngl-form-group-element label="Intereses Inicial"><input nglFormControl type="radio" formControlName="tipo" value="1" /></ngl-form-group-element>
+              <ngl-form-group-element label="Intereses en Periodo"><input nglFormControl type="radio" formControlName="tipo" value="2" /></ngl-form-group-element>
+              <ngl-form-group-element label="Intereses Inicial y en Periodos"><input nglFormControl type="radio" formControlName="tipo" value="3" /></ngl-form-group-element>
+            </fieldset>
+          </div>
+        </div>
+
+
+          <!-- <fieldset class="form-group row">
      <label class="col-form-legend col-5 text-center">Tipo de Credito:</label>
      <div class="col-12 row">
-       <div class="form-check col-6">
-         <label class="form-check-label">
-           <input class="form-check-input text-center" type="radio" name="tipo"  value="1" checked formControlName="tipo">
-           Intereses Inicial
-         </label>
-       </div>
+         <div class="form-check col-12">
+           <label class="form-check-label">
+             <input class="form-check-input text-center" type="radio" name="tipo"  value="1" checked formControlName="tipo">
+             Intereses Inicial
+           </label>
+         </div>
+
+
        <div class="form-check col-6 ">
          <label class="form-check-label text-center">
            <input class="form-check-input" type="radio" name="tipo" value="2" formControlName="tipo">
@@ -136,7 +149,7 @@
          </label>
        </div>
      </div>
-   </fieldset>
+   </fieldset> -->
 
 
             <div class="form-group row text-center ">
@@ -180,46 +193,58 @@
 
           <div class="container row" style="margin-top:20px">
             <div class="col-12">
-                <h6 class="col-12 text-left">Pagos de Credito:</h6>
-                <div formArrayName="pagosCredito">
-                  <div *ngFor="let pago of newForm.controls.pagosCredito.controls; let i=index">
-                    <div [formGroupName]="i">
-                    <div class="row">
-                      <div class="col-9">
-                        <div class="form-group row text-center ">
-                        <label class="col-3 col-form-label">Pago {{i}}</label>
+                <div class="row" style="margin-top:10px">
+                  <h6 class="col-12 text-left">Pagos de Credito:</h6>
+                </div>
+                <div class="row" style="margin-top:10px">
+                  <div formArrayName="pagosCredito" >
+                    <div *ngFor="let pago of newForm.controls.pagosCredito.controls; let i=index">
+                      <div [formGroupName]="i">
+                      <div class="row">
+                        <div class="col-9">
+                          <div class="form-group row text-center ">
+                          <label class=" offset-2 col-3 col-form-label text-center">Pago {{i+1}}</label>
 
-                        <div class="input-group col-8 has-success"
-                        [ngClass]="{'has-danger': validaCampo(i,'pago')}">
-                          <span class="input-group-addon">P</span>
-                          <input type="number" class="form-control"
-                          formControlName="pago">
+                          <div class="input-group col-7 has-success"
+                          [ngClass]="{'has-danger': validaCampo(i,'pago')}">
+                            <span class="input-group-addon">%</span>
+                            <input type="number" class="form-control"
+                            formControlName="pago">
 
+                          </div>
+
+                          <div class="form-control-feedback offset-7 text-center col-4 has-success"
+                          style="font-size:10px;"
+                          [ngClass]="{'has-danger': validaCampo(i,'pago')}"
+                          *ngIf="validaCampo(i,'pago')">
+                            El interes es reuqerido
+                          </div>
+                        </div>
+                        </div>
+                        <div class="col-2">
+                            <button type="button" class="btn btn-danger" (click)="eliminaPagoNew(i)">Eliminar</button>
                         </div>
 
-                        <div class="form-control-feedback offset-7 text-center col-4 has-success"
-                        style="font-size:10px;"
-                        [ngClass]="{'has-danger': validaCampo(i,'pago')}"
-                        *ngIf="validaCampo(i,'pago')">
-                          El interes es reuqerido
-                        </div>
                       </div>
-                      </div>
-                      <div class="col-2">
-                          <button type="button" class="btn btn-danger" (click)="eliminaPagoNew(i)">Eliminar</button>
+
+
+
+
                       </div>
 
                     </div>
-
-
-
-
-                    </div>
-
                   </div>
                 </div>
 
+
+
+            </div>
+
+            <div class="row" style="margin-top:10px">
+              <div class="col-4 offset-2">
                 <button type="button" class="btn btn-primary" (click)="inputPago(editForm,0)">Agregar</button>
+              </div>
+
             </div>
 
 

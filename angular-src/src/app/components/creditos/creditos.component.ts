@@ -157,7 +157,7 @@ export class CreditosComponent implements OnInit {
     }
     console.log(this.editForm.controls.pagosCredito,"Formulario");
     this.modalEdit.show();
-
+    console.log(this.editForm.value)
   }
 
   openNew(){

@@ -262,10 +262,10 @@
             </div> -->
 
 
-
+<!--
             <fieldset class="form-group row">
               <div class="row">
-       <label class="col-form-legend col-5 text-center">Modificacion de periodos anteriores:</label>
+       <label class="col-form-legend col-5 text-center">Modificación de periodos anteriores:</label>
 
 
            <div class="col-3">
@@ -283,11 +283,20 @@
 
 
        </div>
-     </fieldset>
+     </fieldset> -->
+     <div class="" style="margin-bottom:20px">
+       <div class="offset-1">
+         <fieldset ngl-form-group label="Permitir Regresión"  class="slds-m-top--small">
+           <ngl-form-group-element label="Si"><input nglFormControl type="radio" formControlName="regresion" value="1" /></ngl-form-group-element>
+           <ngl-form-group-element label="No"><input nglFormControl type="radio" checked="true" formControlName="regresion" value="0" /></ngl-form-group-element>
+         </fieldset>
+       </div>
+     </div>
 
 
 
-                <input class="form-control"
+
+                  <input class="form-control"
                        type="text"
                        formControlName="Administrador_idAdministrador"
                        hidden>
@@ -499,7 +508,14 @@
             </div>
           </div>
 
-          <fieldset class="form-group row">
+
+          <div class="offset-1">
+            <ngl-form-checkbox-toggle label="Modificación de Periodos" class="slds-m-top--small">
+             <input nglFormControl type="checkbox" formControlName="regresion" />
+            </ngl-form-checkbox-toggle>
+          </div>
+
+          <!-- <fieldset class="form-group row">
             <div class="row">
      <label class="col-form-label col-5 text-center">Modificacion de periodos anteriores:</label>
 
@@ -519,7 +535,7 @@
 
 
      </div>
-   </fieldset>
+   </fieldset> -->
 
 
               <input class="form-control"
@@ -639,7 +655,7 @@
       </div>
 
 
-      <div class="modal-body">
+      <div class="modal-body" style="height:600px; overflow-y:scroll" >
 
         <form [formGroup]="variablesForm" class="offset-1" (ngSubmit)="balanceCero(variablesForm.value)" >
 

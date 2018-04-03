@@ -214,6 +214,19 @@ router.get('/getCreditosBalance/:idProyecto', (req,res,next) => {
   });
 });
 
+router.post('/validarCreditos',(req,res,next) => {
+  var idP = req.body.idProyecto;
+  var n = req.body.numeroPeriodo;
+  Promise.resolve().then(function() {
+    return prestamo.validarAmortizacion(idP,n);
+  }).then(function(rows) {
+    res.json({success:true,datos:rows,msg:"Bien"});
+  }).catch(function(err) {
+    console.log(err);
+    res.json({success:false,msg:"Mal"});
+  })
+});
+
 //valida cuentos creditos activos tiene cada proyecto. Max dos
 // y cuenta descuenta los periodos faltantes para eligir un nuevo credito
 router.post('/validacreditos', (req,res,next) => {
