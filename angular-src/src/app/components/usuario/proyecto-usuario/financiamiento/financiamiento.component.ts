@@ -60,14 +60,14 @@ export class FinanciamientoComponent implements OnInit {
   }
 
   validaCreditoA(credito){
+    var r = false;
     for(let a of this.creditosBloqueados){
       if(credito.idCredito==a.credito_idCredito){
-        return true
-      }
-      else{
-        return false
+        r = true;
+        break;
       }
     }
+    return r;
   }
 
   getNameById(id:number){

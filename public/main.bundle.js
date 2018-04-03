@@ -5494,15 +5494,15 @@ var FinanciamientoComponent = (function () {
         return false;
     };
     FinanciamientoComponent.prototype.validaCreditoA = function (credito) {
+        var r = false;
         for (var _i = 0, _a = this.creditosBloqueados; _i < _a.length; _i++) {
             var a = _a[_i];
             if (credito.idCredito == a.credito_idCredito) {
-                return true;
-            }
-            else {
-                return false;
+                r = true;
+                break;
             }
         }
+        return r;
     };
     FinanciamientoComponent.prototype.getNameById = function (id) {
         for (var _i = 0, _a = this.creditos; _i < _a.length; _i++) {
@@ -8893,7 +8893,7 @@ var ProyectosComponent = (function () {
         this.alerts.push({
             type: 'danger',
             msg: "Proyecto Eliminado",
-            timeout: 2000
+            timeout: 1000
         });
     };
     ProyectosComponent.prototype.agregaProyecto = function (proyecto) {
@@ -8902,7 +8902,7 @@ var ProyectosComponent = (function () {
         this.alerts.push({
             type: 'success',
             msg: "Nuevo Proyecto: " + (proyecto.nombreProyecto) + " Agregado",
-            timeout: 2000
+            timeout: 1000
         });
     };
     ProyectosComponent.prototype.modificaProyecto = function (proyecto) {
@@ -8912,7 +8912,7 @@ var ProyectosComponent = (function () {
         this.alerts.push({
             type: 'success',
             msg: "Proyecto: " + (proyecto.nombreProyecto) + " Modificado",
-            timeout: 2000
+            timeout: 1000
         });
     };
     ProyectosComponent.prototype.confDelete = function (proyecto) {
