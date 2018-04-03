@@ -278,11 +278,13 @@ module.exports.deteleCreditoActivo = function (idCredito,idProyecto) {
 
 module.exports.getCreditosActivoPorPeriodo = function (idProyecto,numeroPeriodo) {
   //var query = "select distinct idCredito from creditoactivo where not (idCredito) in (select idCredito from creditoactivo where plazo=0 and idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" ) and idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" ";
-  var query = "select * from creditoactivo where (idCredito,plazo) in (select idCredito,plazo from credito) and idProyecto = "+idProyecto+" and numeroPeriodo<="+numeroPeriodo+" order by numeroPeriodo";
+//  var query = "select * from creditoactivo where (idCredito,plazo) in (select idCredito,plazo from credito) and idProyecto = "+idProyecto+" and numeroPeriodo<="+numeroPeriodo+" order by numeroPeriodo";
+var query = "select * from creditoactivo where idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+" order by numeroPeriodo";
   return querySql(query);
 }
 
 module.exports.getCreditosTerminados = function (idProyecto,numeroPeriodo) {
-  var query = "select idCredito,idProyecto,numeroPeriodo,plazo from creditoactivo where plazo=0 and numeroPeriodo <= "+numeroPeriodo+" and idProyecto = "+idProyecto+" ";
+  //var query = "select idCredito,idProyecto,numeroPeriodo,plazo from creditoactivo where plazo=0 and numeroPeriodo <= "+numeroPeriodo+" and idProyecto = "+idProyecto+" ";
+  var query = "select * from creditoactivo where plazo=0 and numeroPeriodo = "+numeroPeriodo+" and idProyecto = "+idProyecto+" ";
   return querySql(query);
 }

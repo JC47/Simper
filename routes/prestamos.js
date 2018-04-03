@@ -313,9 +313,62 @@ router.post('/regresioncreditos/', (req,res,next) => {
     prestamo.getCreditosActivoPorPeriodo(idProyecto,numeroPeriodo),
     prestamo.getCreditosTerminados(idProyecto,numeroPeriodo),
     function(creditosactivosporperiodo,creditoterminados) {
-      // var a = [{ "idCredito": 1},{"idCredito":2},{"idCredito":1}];
-      // var b = [{ "idCredito": 1}];
-      return diferencia(creditoterminados,creditosactivosporperiodo)
+
+       var arrayaux1 = [];
+       var arrayaux2 = [];
+//
+      for (var i = 0; i < creditosactivosporperiodo.length; i++) {
+        //console.log("creditosactivosporperiodo 1: "+creditosactivosporperiodo[i]);
+        var json = {
+          "idCredito":creditosactivosporperiodo[i].idCredito,
+          "idProyecto":creditosactivosporperiodo[i].idProyecto,
+          "numeroPeriodo":creditosactivosporperiodo[i].numeroPeriodo,
+          "plazo":creditosactivosporperiodo[i].plazo
+        }
+        arrayaux1.push(json);
+      }
+
+      for (var i = 0; i < creditoterminados.length; i++) {
+        var json = {
+          "idCredito":creditoterminados[i].idCredito,
+          "idProyecto":creditoterminados[i].idProyecto,
+          "numeroPeriodo":creditoterminados[i].numeroPeriodo,
+          "plazo":creditoterminados[i].plazo
+        }
+        arrayaux2.push(json);
+      }
+
+      // var activos = JSON.stringify(creditosactivosporperiodo);
+      // var terminados = JSON.stringify(creditoterminados);
+      // console.log("activos: ",activos);
+      // console.log("terminados: ",terminados);
+
+
+//
+// console.log("arrayaux1: "+arrayaux1);
+// console.log("arrayaux2: "+arrayaux2);
+      //return diferencia(creditoterminados,creditosactivosporperiodo)
+
+      //var a = [{ "value":1, "display":"a"},{ "value":1, "display":"a"},{ "value":1, "display":"a"},{ "value":3, "display":"c"}];
+      //var b = [{ "value":1, "display":"a"}];
+//      b = [{ value:a, display:"Jamsheer", $$hashKey:"008"}, { value:"644838b3-604d-4899-8b78-09e4799f586f", display:"Muhammed", $$hashKey:"009"}, { value:"b6ee537a-375c-45bd-b9d4-4dd84a75041d", display:"Ravi", $$hashKey:"00A"}, { value:"e97339e1-939d-47ab-974c-1b68c9cfb536", display:"Ajmal", $$hashKey:"00B"}]
+
+      function comparer(otherArray){
+        return function(current){
+          return otherArray.filter(function(other){
+            return other.idCredito == current.idCredito && other.idProyecto == current.idProyecto && other.numeroPeriodo == current.numeroPeriodo && other.plazo == current.plazo//&& other.display == current.display
+          }).length == 0;
+        }
+      }
+
+      var onlyInA = arrayaux1.filter(comparer(arrayaux2));
+      var onlyInB = arrayaux2.filter(comparer(arrayaux1));
+
+      result = onlyInA.concat(onlyInB);
+
+      console.log("result:",result);
+      return result;
+
     })
   .then(function(rows){
     res.json({success:true,datos:rows,msg:"Bien"});
@@ -346,38 +399,31 @@ var pagoAnticipado;
 var tipo;
 var pagoTotal;
 var anticipo;
-var limite1;
-var limite2;
 
 var limitecredito=0;
 
 Promise.join(prestamo.getPagoAnticipado(idCredito),prestamo.getPagosCredito(idCredito),
             prestamo.getFinanEspecifico(idProyecto,numeroPeriodo,idCredito),
-            prestamo.limiteCreditos1(idProyecto,numeroPeriodo),prestamo.limiteCreditos2(idProyecto,numeroPeriodo),
-            function(pagoanticipado,pagoscreditos,financiamiento,limitecredito1,limitecredito2) {
+            function(pagoanticipado,pagoscreditos,financiamiento) {
 
      fina = financiamiento;
      tipo = pagoanticipado[0].tipo;//1,2,3
      pagoAnticipado = pagoanticipado[0].pagoAnticipado;//1 o saldo
      pagoTotal = pagoscreditos;
 
-     //limitantes de creditos
-     limite1 = limitecredito1[0].limiteCredito1;
-     limite2 = limitecredito2[0].limiteCredito2;
-
     //Valores Iniciales para CAPITAL
 
-      if (tipo == 2) {//Es 0 cuando no existen pagos anticipados
-          capital = monto;
-          anticipo = 0;
+      if (tipo == 2) {
+          capital = monto;//Si hay cobro de intereses por periodo
+          anticipo = 0;//Cuando no existe cobro de intereses al inicio
       }else {
           if(tipo == 1){
             var pagoAntPorc = (pagoAnticipado)/(100);
-            capital = monto - monto*pagoAntPorc;
-            anticipo = monto*((pagoAnticipado)/(100));
+            capital = monto - monto*pagoAntPorc;//No hay cobro de intereses por periodo
+            anticipo = monto*((pagoAnticipado)/(100));//Si hay cobro de intereses al inicio
           }else {
-            capital = monto
-            anticipo = monto*((pagoAnticipado)/(100));
+            capital = monto;//Si hay cobro de intereses por periodo
+            anticipo = monto*((pagoAnticipado)/(100));//Si hay cobro de intereses al inicio
           }
       }
       //Valores Iniciales para porcentajes de pagos totales
@@ -897,6 +943,7 @@ function diferencia (a1, a2) {
     //   }
     //     resta.push(json);
     // }
+    console.log("resta: "+JSON.stringify(resta));
     return resta;
 }
 
