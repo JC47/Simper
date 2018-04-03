@@ -18,6 +18,8 @@ export class PruebaComponent implements OnInit {
   balanceInicial:any;
   aplicacion;
   origen;
+  proyectos:any;
+  proyectoActual:any;
 
   constructor(private _resultadosService:ResultadosService,
      private _balanceService:BalanceService,
@@ -25,12 +27,14 @@ export class PruebaComponent implements OnInit {
   private _proyectoService:ProyectosService) {
     this._proyectoService.ocultaCierrePeriodo()
     this._resultadosService.vender();
+    this.proyectos=this._proyectoService.returnUsuarios();
     this.aplicacion = 0;
     this.origen = 0;
   }
 
   ngOnInit() {
     setTimeout(() => {
+      this.proyectoActual=this.getNameById(localStorage.getItem('idProyecto'));
       this._balanceService.getBalanceFinal().subscribe( data => {
         if(data.success){
           this.balanceFinal = this._resultadosService.getBalanceFinal();
@@ -117,9 +121,19 @@ export class PruebaComponent implements OnInit {
   }
 
 
+  getNameById(idProyecto){
+    for(let proyecto of this.proyectos){
+      if(proyecto.idProyecto==idProyecto)
+        return proyecto.nombreProyecto
+    }
+      return "id NO encontrado"
+
+  }
+
+
 
     descargaPDF(){
-
+      let actualP=this.proyectoActual;
 
       let anterior:any={
         cajaBancos:null
@@ -259,14 +273,14 @@ export class PruebaComponent implements OnInit {
     actual:{halign:'right'},
     anterior:{halign:'right'},
     origen:{halign:'right'},
-    aplicacion:{halign:'right'}    
+    aplicacion:{halign:'right'}
     },
     addPageContent: function(data) {
     doc.setFontSize(15);
     doc.setFontType("bold");
-    doc.text(107.9, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+    doc.text(107.9, 15, 'Proyecto '+actualP, null, null, 'center');
     doc.setFontSize(13);
-    doc.text(107.9, 23, 'Posición Comparativa', null, null, 'center');
+    doc.text(107.9, 23, 'Posición Comparativa del Periodo '+localStorage.getItem('numeroPeriodo'), null, null, 'center');
     doc.line(25, 27, 190, 27);
     },
 
@@ -354,6 +368,7 @@ export class PruebaComponent implements OnInit {
     }
 
     descargaCSV(){
+      let actualP=this.proyectoActual;
       let anterior:any={
         cajaBancos:null
       };
@@ -424,6 +439,7 @@ export class PruebaComponent implements OnInit {
       }
 
       let data=[
+        {"cara":"Posición Comparativa del Periodo "+localStorage.getItem('numeroPeriodo'),anterior:"Proyecto "+actualP},
         {"cara":"","actual":"Año Actual","anterior":"Año Anterior","aplicacion":"Aplicación","origen":"Origen"},
         {"cara":"Amenos de un Año", "actual":"", "anterior":"", "aplicacion":"","origen":""},
         {"cara":"Caja Bancos", "actual":actual.cajaBancos, "anterior":anterior.cajaBancos, "aplicacion":this.getAplicacionCB(actual.cajaBancos,anterior.cajaBancos),"origen":this.getOrigenCB(actual.cajaBancos,anterior.cajaBancos)},

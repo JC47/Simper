@@ -25,6 +25,8 @@ export class EstadoResultadosComponent implements OnInit {
   intereses = [];
   maquinas = [];
   balanceFinal =[];
+  proyectoActual:any;
+  proyectos:any;
 
   constructor(private _operacionService:OperacionService,
               private _productoService:ProductoService,
@@ -33,9 +35,11 @@ export class EstadoResultadosComponent implements OnInit {
               private _balanceService:BalanceService,
               private _resultadosService:ResultadosService,
             private _proyectoService:ProyectosService){
+              this.proyectos=this._proyectoService.returnUsuarios();
               this._proyectoService.ocultaCierrePeriodo()
     this._resultadosService.vender();
     setTimeout(() => {
+      this.proyectoActual=this.getNameById(localStorage.getItem('idProyecto'));
         this._balanceService.getBalanceFinal().subscribe( data => {
           if(data.success){
             this.balanceFinal = this._resultadosService.getBalanceFinal();
@@ -189,6 +193,17 @@ export class EstadoResultadosComponent implements OnInit {
     return T;
   }
 
+
+            getNameById(idProyecto){
+              for(let proyecto of this.proyectos){
+                if(proyecto.idProyecto==idProyecto)
+                  return proyecto.nombreProyecto
+              }
+                return "id NO encontrado"
+
+            }
+
+
   getUtilidadAntesParcial(id){
     var T = 0;
     if(this.auxiliares.length == 0){
@@ -274,7 +289,7 @@ export class EstadoResultadosComponent implements OnInit {
   orientation: 'landscape',
   unit: 'mm',
   format: [215.9,279]});
-
+  let actual=this.proyectoActual;
   var columns = [
   {title: "", dataKey: "cara"}];
 
@@ -314,9 +329,9 @@ export class EstadoResultadosComponent implements OnInit {
     addPageContent: function(data) {
     doc.setFontSize(15);
     doc.setFontType("bold");
-    doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+    doc.text(139.5, 15, 'Proyecto '+actual, null, null, 'center');
     doc.setFontSize(13);
-    doc.text(139.5, 23, 'Estado de Resultados', null, null, 'center');
+    doc.text(139.5, 23, 'Estado de Resultados del Periodo '+localStorage.getItem('numeroPeriodo'), null, null, 'center');
     doc.line(50, 27, 228, 27);
     },
     }
@@ -349,7 +364,7 @@ export class EstadoResultadosComponent implements OnInit {
     dataKey:"t"
   }
   columns.push(t);
-    
+
   rows[0][t.dataKey] =   this.cp.transform(this.getTotalVentas(),'USD',true,'1.0-0')
   rows[1][t.dataKey] = this.cp.transform( this.getTotalCostosVentas(),'USD',true,'1.0-0')
   rows[3][t.dataKey] =  this.cp.transform(this.getUtilidadBruta(),'USD',true,'1.0-0');
@@ -384,7 +399,9 @@ export class EstadoResultadosComponent implements OnInit {
 
 
   CSVestado(){
+    let actual=this.proyectoActual;
     let data=[
+      {"cara":"Proyecto "+actual,"cara2":"Estado de Resultados del Perido "+ localStorage.getItem('numeroPeriodo')},
       {"cara":""},
       {"cara":"Ventas Netas"},
       {"cara":"Costo de Ventas"},
@@ -411,40 +428,38 @@ export class EstadoResultadosComponent implements OnInit {
 
     for(let producto of this.resultados){
       var x = this.getNameByIdProducto(producto);
-
-
-      data[0][x] = this.getNameByIdProducto(producto)
-      data[1][x] = this.getVentasNetas(producto)
-      data[2][x] = this.getCostoVentas(producto)
-      data[4][x] = this.getUtilidadParcial(producto)
-      data[6][x] = this.getDistParcial(producto)
-      data[7][x] = this.getOtrosGastosParcial(producto)
-      data[8][x] = this.getAdminParcial(producto)
-      data[11][x] = this.getUtilidadAntesParcial(producto)
-      data[13][x] = "-";
-      data[15][x] = this.getUtilidadAntesParcial(producto)
-      data[17][x] = "-";
+      data[1][x] = this.getNameByIdProducto(producto)
+      data[2][x] = this.getVentasNetas(producto)
+      data[3][x] = this.getCostoVentas(producto)
+      data[5][x] = this.getUtilidadParcial(producto)
+      data[7][x] = this.getDistParcial(producto)
+      data[8][x] = this.getOtrosGastosParcial(producto)
+      data[9][x] = this.getAdminParcial(producto)
+      data[12][x] = this.getUtilidadAntesParcial(producto)
+      data[14][x] = "-";
+      data[16][x] = this.getUtilidadAntesParcial(producto)
       data[18][x] = "-";
-      data[20][x] = "-";
+      data[19][x] = "-";
+      data[21][x] = "-";
     }
 
     data[1]["total"] = "Total"
-    data[1]["total"] = this.getTotalVentas()
-    data[2]["total"] = this.getTotalCostosVentas()
-    data[4]["total"] = this.getUtilidadBruta()
-    data[6]["total"] = this.getDistTotal()
+    data[2]["total"] = this.getTotalVentas()
+    data[3]["total"] = this.getTotalCostosVentas()
+    data[5]["total"] = this.getUtilidadBruta()
+    data[7]["total"] = this.getDistTotal()
     for(let item of this.auxiliarT){
-      data[7]["total"] = item
-      data[11]["total"] = (this.getUtilidadAntes() - item)
+      data[8]["total"] = item
+      data[12]["total"] = (this.getUtilidadAntes() - item)
     }
-    data[8]["total"] = this.getAdminTotal()
+    data[9]["total"] = this.getAdminTotal()
     for(let aux of this.intereses){
-      data[12]["total"] = aux.toString();
+      data[13]["total"] = aux.toString();
     }
-    data[15]["total"] = this.getUtilidad2()
-    data[17]["total"] = this.getISR()
-    data[18]["total"] = this.getPTU()
-    data[20]["total"] = (this.getUtilidad2() - this.getISR() - this.getPTU())
+    data[16]["total"] = this.getUtilidad2()
+    data[18]["total"] = this.getISR()
+    data[19]["total"] = this.getPTU()
+    data[21]["total"] = (this.getUtilidad2() - this.getISR() - this.getPTU())
 
 
 

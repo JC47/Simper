@@ -37,7 +37,7 @@
 
             <tr *ngFor="let producto of auxiliaresAnteriores">
               <td>{{getNameByIdProducto(producto.Producto_idProducto)}}</td>
-              <td class="text-right">{{producto.unidadesAlmacenadas}}</td>
+              <td class="text-right">{{producto.unidadesAlmacenadas|number:'1.0-0'}}</td>
               <td class="text-right" style="width:100px">{{getCostoAlmacen() |currency:'USD':true:'1.0-0'}}</td>
               <td class="text-right">{{producto.inventarioFinal |currency:'USD':true:'1.0-0'}}</td>
             </tr>
@@ -83,7 +83,7 @@
 
             <tr *ngFor="let producto of auxiliares">
               <td>{{getNameByIdProducto(producto.Producto_idProducto) }}</td>
-              <td class="text-right">{{dc.transform(producto.unidadesVendidas,'1.0-0')}}</td>
+              <td class="text-right">{{producto.unidadesVendidas|number:'1.0-0'}}</td>
               <td class="text-right">{{getPrecioVenta(producto.Producto_idProducto) |currency:'USD':true:'1.0-0'}}</td>
               <td class="text-right">{{producto.Ventas - producto.IVAxVentas |currency:'USD':true:'1.0-0'}}</td>
               <td class="text-right">{{producto.IVAxVentas |currency:'USD':true:'1.0-0'}}</td>
@@ -145,10 +145,10 @@
 
           <tr *ngFor="let producto of auxiliares">
             <td>{{getNameByIdProducto(producto.Producto_idProducto) }}</td>
-            <td class="text-right">{{ dc.transform(producto.unidadesVendidas,'1.0-0')}}</td>
-            <td class="text-right">{{ dc.transform(producto.unidadesAlmacenadas,'1.0-0')}}</td>
-            <td class="text-right">{{ dc.transform(getUnidadesAlmacenadasAnterior(producto.Producto_idProducto),'1.0-0') }}</td>
-            <td class="text-right">{{ dc.transform(producto.unidadesProducidas,'1.0-0') }}</td>
+            <td class="text-right">{{producto.unidadesVendidas|number:'1.0-0'}}</td>
+            <td class="text-right">{{producto.unidadesAlmacenadas|number:'1.0-0'}}</td>
+            <td class="text-right">{{getUnidadesAlmacenadasAnterior(producto.Producto_idProducto)|number:'1.0-0'}}</td>
+            <td class="text-right">{{producto.unidadesProducidas |number:'1.0-0'}}</td>
             <td class="text-right">{{getMPPuniProd(producto.Producto_idProducto) |currency:'USD':true:'1.0-0'}}</td>
             <td class="text-right">{{producto.materiaCosumida |currency:'USD':true:'1.0-0'}}</td>
             <td class="text-right">{{(producto.costoTransformacionVentas + producto.costoTransformacionMaq)/producto.unidadesProducidas |currency:'USD':true:'1.0-0'}}</td>

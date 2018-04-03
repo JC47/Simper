@@ -22,12 +22,13 @@ export class BalanceFinalComponent implements OnInit {
   balanceFinal:any;
   openConf:boolean=false;
   openBien:boolean=false;
+  proyectos:any;
   openLoad:boolean=false;
   alert:boolean=false;
   opciones:boolean=false;
   periodo:number;
   periodos = [];
-
+  proyectoActual:any;
 
 
 
@@ -42,12 +43,13 @@ export class BalanceFinalComponent implements OnInit {
     private _desarrolloProducto:DesarrolloProductoService) {
     this._resultadosService.vender();
     this._proyectoService.muestraCierrePeriodo();
-
+    this.proyectos=this._proyectoService.returnUsuarios();
 
   }
 
   ngOnInit() {
     setTimeout(() => {
+      this.proyectoActual=this.getNameById(localStorage.getItem('idProyecto'));
       this._balanceService.getBalanceFinal().subscribe( data => {
         if(data.success){
           this.balanceFinal = this._resultadosService.getBalanceFinal();
@@ -59,6 +61,8 @@ export class BalanceFinalComponent implements OnInit {
 
 
 descargaCSV(){
+
+  let actual=this.proyectoActual;
 
   let cajaBancos,
       cuentasPorCobrar,
@@ -130,6 +134,7 @@ descargaCSV(){
 let total3=IVAPorEnterar + imptosPorPagar + proveedores + PTUPorPagar + prestamosMenosAnio
 
   let data:any=[
+    {cara1:"Posición Financiera Final del Periodo "+localStorage.getItem('numeroPeriodo'),valor1:"Proyecto "+actual },
     {cara1:"A menos de un Año",             io:"", depAcum:"",  neto:"",    valor1:"",                                       cara2:"A menos de un año", valor2:""},
     {cara1:"Caja Bancos",                   io:"", depAcum:"",  neto:"",    valor1:cajaBancos,                               cara2:"IVA por Enterar", valor2:IVAPorEnterar},
     {cara1:"Cuentas por Cobrar",            io:"", depAcum:"",  neto:"",    valor1:cuentasPorCobrar,                         cara2:"Impuesto por Pagar", valor2:imptosPorPagar},
@@ -163,7 +168,19 @@ let total3=IVAPorEnterar + imptosPorPagar + proveedores + PTUPorPagar + prestamo
 
 
 
+            getNameById(idProyecto){
+              for(let proyecto of this.proyectos){
+                if(proyecto.idProyecto==idProyecto)
+                  return proyecto.nombreProyecto
+              }
+                return "id NO encontrado"
+
+            }
+
+
+
   descargaPDF(){
+    let actual=this.proyectoActual;
     let cajaBancos,
         cuentasPorCobrar,
         IVAAcreditable,
@@ -231,7 +248,7 @@ let total3=IVAPorEnterar + imptosPorPagar + proveedores + PTUPorPagar + prestamo
 
       doc.setFontSize(15);
       doc.setFontType("bold");
-      doc.text(139.5, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+      doc.text(139.5, 15, 'Proyecto ' +actual , null, null, 'center');
       doc.setFontSize(13);
       doc.text(139.5, 23, 'Posición Financiera Final del Periodo '+ localStorage.getItem('numeroPeriodo'), null, null, 'center');
       doc.line(50, 27, 228, 27);

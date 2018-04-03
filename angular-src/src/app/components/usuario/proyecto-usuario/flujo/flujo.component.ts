@@ -19,6 +19,8 @@ declare var jsPDF: any;
 export class FlujoComponent implements OnInit {
   balanceInicial:any;
   auxiliares=[];
+  proyectos:any;
+  proyectoActual:any;
   auxiliarC=[];
   auxiliarT = [];
   pagos = [];
@@ -37,8 +39,10 @@ export class FlujoComponent implements OnInit {
               private _resultadosService:ResultadosService,
             private _proyectoService:ProyectosService) {
               this._proyectoService.ocultaCierrePeriodo()
+              this.proyectos=this._proyectoService.returnUsuarios();
     this._resultadosService.vender();
     setTimeout(() => {
+        this.proyectoActual=this.getNameById(localStorage.getItem('idProyecto'));
         this.auxiliares=this._operacionService.returnAuxiliares();
         this.auxiliaresAnteriores=this._operacionService.returnAuxiliaresAnteriores();
         this.intereses = this._operacionService.returnInter();
@@ -202,7 +206,14 @@ export class FlujoComponent implements OnInit {
   }
 
 
+  getNameById(idProyecto){
+    for(let proyecto of this.proyectos){
+      if(proyecto.idProyecto==idProyecto)
+        return proyecto.nombreProyecto
+    }
+      return "id NO encontrado"
 
+  }
 
 
 
@@ -214,12 +225,13 @@ export class FlujoComponent implements OnInit {
 
     });
 
+      let actual=this.proyectoActual;
       var columns = [
       {title: "Concepto", dataKey: "cara"},
       {title: "Saldo", dataKey: "saldo"}];
 
 
-      var rows = [ 
+      var rows = [
       {"cara":"Saldo Inicial","saldo":this.cp.transform(this.getCajaBancos(),'USD',true,'1.0-0')},
       {"cara":"","saldo":""},
       {"cara":"Cobros por venta","saldo":this.cp.transform(this.getCobroVentas(),'USD',true,'1.0-0')},
@@ -265,9 +277,9 @@ export class FlujoComponent implements OnInit {
       addPageContent: function(data) {
       doc.setFontSize(15);
       doc.setFontType("bold");
-      doc.text(107.9, 15, 'Proyecto Empresa XYZ SA de CV', null, null, 'center');
+      doc.text(107.9, 15, 'Proyecto '+actual, null, null, 'center');
       doc.setFontSize(13);
-      doc.text(107.9, 23, 'Presupuesto Global de Caja y Bancos', null, null, 'center');
+      doc.text(107.9, 23, 'Presupuesto Global de Caja y Bancos del Periodo '+localStorage.getItem('numeroPeriodo'), null, null, 'center');
       doc.line(25, 27, 190, 27);
       },
 
@@ -335,7 +347,9 @@ export class FlujoComponent implements OnInit {
 
 
       descargaCSV(){
+        let actual=this.proyectoActual;
         var dataCSV = [
+        {concepto:"Flujo de Efectivo del Periodo "+localStorage.getItem('numeroPeriodo'), cantidad:"Proyecto "+actual},
         {
           concepto: "Presupuesto Global de Caja y Bancos",
           cantidad:"",

@@ -6,34 +6,40 @@
           <h3 class="col-12 text-center">Creditos</h3>
           <hr>
         </div>
-        <div class="card col-5" *ngFor="let credito of creditos">
+        <div class="col-10" style="overflow-y:scroll;height:800px">
+          <div class="row">
+            <div class="card col-6" *ngFor="let credito of creditos">
 
-          <div class="card-block">
-            <div class="row">
-              <div class="col-4">
-                <img  src="assets/img/credit.png" class=" img-fluid"  style="margin-left:20px">
+              <div class="card-block">
+                <div class="row">
+                  <div class="col-4">
+                    <img  src="assets/img/credit.png" class=" img-fluid"  style="margin-left:20px">
 
+                  </div>
+
+                  <div class="col-8">
+                    <h4 class="card-title" style="margin-bottom:15px">{{credito.nombreCredito}}</h4>
+                    <h6 class="card-subtitle" style="margin-bottom:15px">Monto Máximo: {{credito.montoMax| currency:'USD':true }}</h6>
+                    <h6 class="card-subtitle" style="margin-bottom:15px">Monto Minimo: {{credito.montoMin| currency:'USD':true}}</h6>
+                    <h6 class="card-subtitle" style="margin-bottom:15px">Descripción: {{credito.pago}}</h6>
+                    <h6 class="card-subtitle" style="margin-bottom:15px"> Duración: {{credito.plazo}} periodo(s)</h6>
+
+                  </div>
+
+                </div>
+
+                <div class="card-footer">
+                  <button  class="btn btn-primary  offset-1 col-10" (click)="selectCredito(credito)" [disabled]="validaVi()" [hidden]="validaCredito(credito)"   >Solicitar</button>
+                  <button class="btn btn-success offset-1 col-10" (click)="verPagos(credito.idCredito)" [disabled]="validaVi()" [hidden]="!validaCredito(credito)">Ver Pagos</button>
+
+
+                </div>
               </div>
-
-              <div class="col-8">
-                <h4 class="card-title" style="margin-bottom:15px">{{credito.nombreCredito}}</h4>
-                <h6 class="card-subtitle" style="margin-bottom:15px">Monto Máximo: {{credito.montoMax| currency:'USD':true }}</h6>
-                <h6 class="card-subtitle" style="margin-bottom:15px">Monto Minimo: {{credito.montoMin| currency:'USD':true}}</h6>
-                <h6 class="card-subtitle" style="margin-bottom:15px">Descripción: {{credito.pago}}</h6>
-                <h6 class="card-subtitle" style="margin-bottom:15px"> Duración: {{credito.plazo}} periodo(s)</h6>
-
-              </div>
-
-            </div>
-
-            <div class="card-footer">
-              <button  class="btn btn-primary  offset-1 col-10" (click)="selectCredito(credito)" [disabled]="validaVi()" [hidden]="validaCredito(credito)"   >Solicitar</button>
-              <button class="btn btn-success offset-1 col-10" (click)="verPagos(credito.idCredito)" [disabled]="validaVi()" [hidden]="!validaCredito(credito)">Ver Pagos</button>
-
-
             </div>
           </div>
+
         </div>
+
       </div>
 
     </div>
