@@ -173,6 +173,35 @@ export class UsuarioCreditoService {
     return this.http.post('prestamo/deleteactivo',x,{headers}).map(res => res.json());
   }
 
+  validarBloqueo(){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:localStorage.getItem('numeroPeriodo')
+    }
+    return this.http.post('prestamo/validarCreditos',x,{headers}).map(res => res.json());
+  }
+
+  returnBloqueados(){
+    var x = [];
+    this.validarBloqueo().subscribe(data => {
+      for(let key in data.datos){
+        x.push(data.datos[key]);
+      }
+    });
+    return x;
+  }
+
+
+
+
+
+
+
+
+
 
 
 }
