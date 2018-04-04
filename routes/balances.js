@@ -182,21 +182,17 @@ router.post('/final', (req, res, next) => {
     if(utilidadEjercicio > 0){
 
       PTU = utilidadEjercicio * PTU_valor;
-      utilidadEjercicio = utilidadEjercicio - PTU;
 
-      // if(utlidadAcumulada < 0){
-      //   utilidadVerdadera = utilidadEjercicio + utlidadAcumulada;
-      // }
-      // else{
-        utilidadVerdadera = utilidadEjercicio + PTU;
-      // }
+      utilidadVerdadera = utilidadEjercicio + utlidadAcumulada;
 
       if(utilidadVerdadera > 0){
         ISR = utilidadVerdadera * ISR_valor;
         imptsPorPagar = (ISR/12);
         ISRCajaBancos = imptsPorPagar * 11;
-        utilidadEjercicio = utilidadEjercicio - ISR;
       }
+
+      utilidadEjercicio = utilidadEjercicio - PTU - ISR;
+
     }
 
     var cobroPorVentasCajaBancos = getcobroPorVentas(auxesVentas);//cuentasPorCobrar * 11;

@@ -4189,11 +4189,11 @@ var CompraMaquinariaComponent = (function () {
         setTimeout(function () {
             _this.maqSelectedAdd = _this.maquinas[0];
             console.log(_this.maqSelectedAdd);
-        }, 900);
+        }, 500);
         setTimeout(function () {
             _this.maqSelectedLess = _this.maquinasCompradas[0];
             console.log(_this.maqSelectedAdd);
-        }, 800);
+        }, 500);
     }
     CompraMaquinariaComponent.prototype.ngOnInit = function () {
     };
@@ -10366,6 +10366,7 @@ var CompraMaquinariaService = (function () {
     };
     CompraMaquinariaService.prototype.compraMaquinaria = function (x, y) {
         var _this = this;
+        console.log(x, y, "CUERPO");
         this.cobrar(y).subscribe();
         var z = [];
         this.comprar(x).subscribe(function (d) {
