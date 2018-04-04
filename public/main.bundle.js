@@ -5049,7 +5049,7 @@ var EstadoResultadosComponent = (function () {
     };
     EstadoResultadosComponent.prototype.getCostoVentas = function (id) {
         var T = 0;
-        if (this.auxiliares.length == 0) {
+        if (this.auxiliares.length == 0 || this.validarExistencia(id)) {
             for (var _i = 0, _a = this.maquinas; _i < _a.length; _i++) {
                 var m = _a[_i];
                 if (m.Producto_idProducto == id) {
@@ -5077,7 +5077,7 @@ var EstadoResultadosComponent = (function () {
     };
     EstadoResultadosComponent.prototype.getUtilidadParcial = function (id) {
         var T = 0;
-        if (this.auxiliares.length == 0) {
+        if (this.auxiliares.length == 0 || this.validarExistencia(id)) {
             for (var _i = 0, _a = this.maquinas; _i < _a.length; _i++) {
                 var m = _a[_i];
                 if (m.Producto_idProducto == id) {
@@ -5151,7 +5151,7 @@ var EstadoResultadosComponent = (function () {
     };
     EstadoResultadosComponent.prototype.getUtilidadAntesParcial = function (id) {
         var T = 0;
-        if (this.auxiliares.length == 0) {
+        if (this.auxiliares.length == 0 || this.validarExistencia(id)) {
             for (var _i = 0, _a = this.maquinas; _i < _a.length; _i++) {
                 var m = _a[_i];
                 if (m.Producto_idProducto == id) {
@@ -5230,6 +5230,17 @@ var EstadoResultadosComponent = (function () {
             ptu = uti * .10;
         }
         return ptu;
+    };
+    EstadoResultadosComponent.prototype.validarExistencia = function (id) {
+        var t = true;
+        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
+            var a = _a[_i];
+            if (a.Producto_idProducto == id) {
+                t = false;
+                break;
+            }
+        }
+        return t;
     };
     EstadoResultadosComponent.prototype.PDFestadoDeResultados = function () {
         var doc = new jsPDF({
@@ -11994,7 +12005,8 @@ var ProyectosService = (function () {
             "Proyectos_idProyecto": idProyecto,
             "depTerreno": 0,
             "depMaqEquipo": 0,
-            "depEqTrans": 0
+            "depEqTrans": 0,
+            "porAmortizar": 0
         };
         var headers = new __WEBPACK_IMPORTED_MODULE_10__angular_http__["b" /* Headers */]({
             'Content-Type': 'application/json'
@@ -12030,7 +12042,8 @@ var ProyectosService = (function () {
             "Proyectos_idProyecto": idProyecto,
             "depTerreno": 0,
             "depMaqEquipo": 0,
-            "depEqTrans": 0
+            "depEqTrans": 0,
+            "porAmortizar": 0
         };
         var headers = new __WEBPACK_IMPORTED_MODULE_10__angular_http__["b" /* Headers */]({
             'Content-Type': 'application/json'

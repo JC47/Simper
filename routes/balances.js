@@ -178,15 +178,18 @@ router.post('/final', (req, res, next) => {
     var ISRCajaBancos = 0;
     var imptsPorPagar = 0;
     var utilidadVerdadera = 0;
+    var xAmortizar = utilidadEjercicio;
+
+    if(balanceBase[0].porAmortizar < 0){
+      xAmortizar = balanceBase[0].porAmortizar + utilidadEjercicio;
+    }
 
     if(utilidadEjercicio > 0){
 
       PTU = utilidadEjercicio * PTU_valor;
 
-      utilidadVerdadera = utilidadEjercicio + utlidadAcumulada;
-
-      if(utilidadVerdadera > 0){
-        ISR = utilidadVerdadera * ISR_valor;
+      if(xAmortizar > 0){
+        ISR = xAmortizar * ISR_valor;
         imptsPorPagar = (ISR/12);
         ISRCajaBancos = imptsPorPagar * 11;
       }
@@ -223,7 +226,8 @@ router.post('/final', (req, res, next) => {
       utilidadEjercicio:utilidadEjercicio,
       depEdif:depE,
       depMueblesEnseres:depME,
-      depEqTrans:depT
+      depEqTrans:depT,
+      porAmortizar:xAmortizar
     }
     balance.updateBalance(numeroPeriodoActual, idProyecto, x);
   }).then( function () {
