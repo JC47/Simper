@@ -29,22 +29,23 @@ module.exports.updateMaquinariaComprada = function(data){
 }
 
 module.exports.getMaqMaqProyecto = function(idProyecto,numeroPeriodo) {
-  var query = "select * from maquinaria inner join maquinariaproyecto on maquinaria.idMaquinaria = maquinariaproyecto.Maquinaria_idMaquinaria and maquinariaproyecto.Proyectos_idProyecto = "+idProyecto+" where maquinariaproyecto.Balance_numeroPeriodo <= "+numeroPeriodo+" ";
+  var query = "select * from maquinaria inner join maquinariaproyecto on maquinaria.idMaquinaria = maquinariaproyecto.Maquinaria_idMaquinaria and maquinariaproyecto.Proyectos_idProyecto = "+idProyecto+" where maquinariaproyecto.Balance_numeroPeriodo <= "+numeroPeriodo+" order by idMaquinaria,Balance_numeroPeriodo ";
   return querySql(query);
 }
 
 module.exports.getIdMaqProyecto = function (idProyecto,numeroPeriodo) {
-  var query = "select distinct(idMaquinaria) from maquinaria inner join maquinariaproyecto on maquinaria.idMaquinaria = maquinariaproyecto.Maquinaria_idMaquinaria and maquinariaproyecto.Proyectos_idProyecto = "+idProyecto+" where maquinariaproyecto.Balance_numeroPeriodo <= "+numeroPeriodo+" ";
+  var query = "select distinct(idMaquinaria) from maquinaria inner join maquinariaproyecto on maquinaria.idMaquinaria = maquinariaproyecto.Maquinaria_idMaquinaria and maquinariaproyecto.Proyectos_idProyecto = "+idProyecto+" where maquinariaproyecto.Balance_numeroPeriodo <= "+numeroPeriodo+" order by idMaquinaria";
   return querySql(query);
 }
 
 module.exports.getNombreMaqProd = function (idProyecto,numeroPeriodo) {
-  var query = "select distinct nombreMaq,Producto_idProducto,cantidadProd,costo,cantidadProd,depAcum from maquinaria inner join maquinariaproyecto on maquinaria.idMaquinaria = maquinariaproyecto.Maquinaria_idMaquinaria and maquinariaproyecto.Proyectos_idProyecto = "+idProyecto+" where maquinariaproyecto.Balance_numeroPeriodo <= "+numeroPeriodo+" ";
+  //var query = "select distinct nombreMaq,Producto_idProducto,cantidadProd,costo,cantidadProd,depAcum from maquinaria inner join maquinariaproyecto on maquinaria.idMaquinaria = maquinariaproyecto.Maquinaria_idMaquinaria and maquinariaproyecto.Proyectos_idProyecto = "+idProyecto+" where maquinariaproyecto.Balance_numeroPeriodo <= "+numeroPeriodo+" ";
+  var query = "select distinct Maquinaria_idMaquinaria,nombreMaq,Producto_idProducto,cantidadProd,costo,cantidadProd,depAcum from maquinaria inner join maquinariaproyecto on maquinaria.idMaquinaria = maquinariaproyecto.Maquinaria_idMaquinaria and maquinaria.Producto_idProducto = maquinariaproyecto.Maquinaria_idProducto and maquinariaproyecto.Proyectos_idProyecto = "+idProyecto+" where maquinariaproyecto.Balance_numeroPeriodo <= "+numeroPeriodo+" order by Maquinaria_idMaquinaria";
   return querySql(query);
 }
 
 module.exports.getMaquinaria = function () {
-  var query = "select * from maquinaria";
+  var query = "select * from maquinaria order by idMaquinaria,Producto_idProducto;";
   return querySql(query);
 }
 

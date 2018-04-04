@@ -27,16 +27,18 @@ router.post('/', (req, res, next) => {
   var idProyecto = req.body.idProyecto;
   var numeroPeriodo = req.body.numeroPeriodo;
 
-  Promise.join(maquinariaComprada.getIdMaqProyecto(idProyecto,numeroPeriodo),
-  maquinariaComprada.getMaqMaqProyecto(idProyecto,numeroPeriodo),
-  maquinariaComprada.getMaquinaria(),maquinariaComprada.getNombreMaqProd(idProyecto,numeroPeriodo),
-  function(idsmaqproyecto,maquinariaproyecto,maquinaria,nombremaqprod) {
-       return jsonMaquinariaProyecto(idsmaqproyecto,maquinariaproyecto,maquinaria,nombremaqprod);
-   })
-  .then( function (data) {
-    res.json({success: true, datos:data, msg:"Operacion exitosa"});
-  })
-  .catch(function (err) {
+
+ Promise.join(maquinariaComprada.getIdMaqProyecto(idProyecto,numeroPeriodo),
+              maquinariaComprada.getMaqMaqProyecto(idProyecto,numeroPeriodo),
+              maquinariaComprada.getMaquinaria(),
+              maquinariaComprada.getNombreMaqProd(idProyecto,numeroPeriodo),
+     function(idsmaqproyecto,maquinariaproyecto,maquinaria,nombremaqprod) {
+         return jsonMaquinariaProyecto(idsmaqproyecto,maquinariaproyecto,maquinaria,nombremaqprod);
+     })
+    .then( function (data) {
+      res.json({success: true, datos:data, msg:"Operacion exitosa"});
+    })
+    .catch(function (err) {
     console.log(err);
     res.json({success:false, msg:"Operacion incompleta"});
   });

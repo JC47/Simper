@@ -142,7 +142,6 @@ router.post('/productosendesarrollo/', (req, res, next) => {
     //console.log("productosendes",productosendes);
     //console.log("idszonasdes",idszonasdes);
     //console.log("zonas",zonas);
-
      return jsonProductosEnDesarrollo(productosendes, idszonasdes, zonas, idproductoidzonanumeroperiodo);
      })
   .then(function (rows) {
