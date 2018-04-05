@@ -94,7 +94,7 @@ for (var j = 0; j < repIdZonasDes.length; j++) {
   for (var k = 0; k < (repIdZonasDes[j]); k++) {
     var json = {
       "idZona":productoszonasdemandasdesidprod[aux2].Zona_idZonas,
-      "demanda":productoszonasdemandasdes[aux2].cantidad
+      "demanda":productoszonasdemandasdesidprod[aux2].cantidad
     }
     productosDes[j]['zonas'].push(json);
    aux2 = aux2 + 1;
