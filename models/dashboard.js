@@ -21,6 +21,11 @@ module.exports.getDistinctIdProductoDesarrollados = function (numeroPeriodo,idUs
     return querySql(query);
 }
 
+module.exports.getProductosZonaDemandaDesarrolladosByIdProductoIdZona = function (numeroPeriodo,idUsuario,idProyecto) {
+var query = "select productozonaproyecto.Producto_idProducto, productozonaproyecto.Zona_idZonas,demanda.cantidad from productozonaproyecto inner join demanda on productozonaproyecto.Producto_idProducto = demanda.Producto_idProducto and productozonaproyecto.Zona_idZonas = demanda.Zona_idZonas and demanda.numPeriodo = "+numeroPeriodo+" where productozonaproyecto.Proyecto_idProyecto = "+idProyecto+" and productozonaproyecto.Proyecto_Usuario_idUsuario = "+idUsuario+" and productozonaproyecto.numeroPeriodo <= "+numeroPeriodo+" and productozonaproyecto.desarrollado = 2 order by productozonaproyecto.Producto_idProducto, productozonaproyecto.Zona_idZonas";
+  return querySql(query);
+}
+
 //ProductoMaquinaria
 
 module.exports.getMaquinariaProyecto = function (idProyecto) {

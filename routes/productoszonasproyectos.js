@@ -137,12 +137,12 @@ router.post('/productosendesarrollo/', (req, res, next) => {
   productoZonaProyecto.getProductosEnDesarrollo(idProyecto,numeroPeriodo,idUsuario),
   productoZonaProyecto.getIdZonasEnDes(idProyecto,numeroPeriodo,idUsuario),
   productoZonaProyecto.getZonas(),
-  function(productosendes, idszonasdes, zonas) {
-    console.log("productosendes",productosendes);
-    console.log("idszonasdes",idszonasdes);
-    console.log("zonas",zonas);
-
-     return jsonProductosEnDesarrollo(productosendes, idszonasdes, zonas);
+  productoZonaProyecto.getIdProductoIdZonasNumeroPeriodo(idProyecto,numeroPeriodo,idUsuario),
+  function(productosendes, idszonasdes, zonas, idproductoidzonanumeroperiodo) {
+    //console.log("productosendes",productosendes);
+    //console.log("idszonasdes",idszonasdes);
+    //console.log("zonas",zonas);
+     return jsonProductosEnDesarrollo(productosendes, idszonasdes, zonas, idproductoidzonanumeroperiodo);
      })
   .then(function (rows) {
       res.json({success: true, datos:rows, msg:"Operacion exitosa"});
@@ -451,83 +451,107 @@ for (var j = 0; j < repIdProductosDes.length; j++) {
   for (var k = 0; k < (repIdProductosDes[j]); k++) {
     productosDes[j]['productosDes'].push(productosdes[aux2].Producto_idProducto);
    aux2 = aux2 + 1;
-   console.log("aux2: "+aux2);
+  // console.log("aux2: "+aux2);
   }
 }
-console.log(productosDes);
+//console.log(productosDes);
 return productosDes;
 }
 
 
 //PRODUCTOS EN DESARROLLO
 
-function jsonProductosEnDesarrollo(productosendes, idszonasendes,zonas/*, productosendesenzona*/) {
-  var repIdProductosEnDes = [];//almacena las veces que se repite un idZona en productosdes
-
+function jsonProductosEnDesarrollo(productosendes, idszonasendes,zonas, idproductoidzonanumeroperiodo/*, productosendesenzona*/) {
+  var repIdZonas = [];//almacena las veces que se repite un idZona en productosdes
   var i = 0;
-  while (i<idszonasendes.length) {
-    var aux = 0;
-    for (var j = 0; j < productosendes.length; j++) {
-      if (idszonasendes[i].Zona_idZonas == productosendes[j].Zona_idZonas) {
-        aux = aux +1;
+  var productosEnDes = []
+  var k = 0;
+  var productosmaxperiodo = [];
+  var l=0;
+
+  if (productosendes.length!=0) {
+    while (i<idproductoidzonanumeroperiodo.length) {
+      var aux = 0;
+      for (var j = 0; j < productosendes.length; j++) {
+        if (idproductoidzonanumeroperiodo[i].Producto_idProducto==productosendes[j].Producto_idProducto && idproductoidzonanumeroperiodo[i].Zona_idZonas == productosendes[j].Zona_idZonas) {
+          aux = aux +1;
+        }
       }
+      productosmaxperiodo.push(aux);
+      i++;
     }
-    repIdProductosEnDes.push(aux);
-    i++;
-  }
 
-//console.log(repIdProductosDes);
+  //Maximo numero de periodo de productosendes
+  var nvoproductosendes = [];
+   var aux2 = 0;
+   for (var j = 0; j < productosmaxperiodo.length; j++) {
+     for (var k = 0; k < (productosmaxperiodo[j]); k++) {
+     aux2 = aux2 + 1;
+     }
+  //      console.log("aux2: "+(aux2-1));
+        var json = {
+            "Producto_idProducto":productosendes[aux2-1].Producto_idProducto,
+            "Zona_idZonas":productosendes[aux2-1].Zona_idZonas,
+            "periodosDes":productosendes[aux2-1].periodosDes,
+            "tiempoDes":productosendes[aux2-1].tiempoDes,
+            "numeroPeriodo":productosendes[aux2-1].numeroPeriodo
+        }
+        nvoproductosendes.push(json);
+   }
+  // for (var i = 0; i < idszonasendes.length; i++) {
+  // console.log("idszonasendes:. "+idszonasendes[i].Zona_idZonas);
+  // }
 
-var productosEnDes = []
-var k = 0;
 
-while (k < idszonasendes.length) {
-  for (var i = 0; i < zonas.length; i++) {
-    if (idszonasendes[k].Zona_idZonas == zonas[i].idZona) {
-      var json = {
-        "idZona":idszonasendes[k].Zona_idZonas,
-        "nombreZona":zonas[i].nombreZona,
-        "productosEnDes":[]
-      }
-    productosEnDes.push(json);
-    }
-  }
-  k++;
-}
+   while (l<idszonasendes.length) {
+     var aux3 = 0;
+     for (var j = 0; j < nvoproductosendes.length; j++) {
+       if (idszonasendes[l].Zona_idZonas==nvoproductosendes[j].Zona_idZonas) {
+         //console.log("idszonasendes[l].Zona_idZonas::"+idszonasendes[l].Zona_idZonas);
+         aux3 = aux3 +1;
+       }
+     }
+     repIdZonas.push(aux3);
+     l++;
+   }
+   //console.log("repIdZonas",repIdZonas);
 
-// var aux2 = 0;
-// for (var j = 0; j < repIdProductosEnDes.length; j++) {
-//   for (var k = 0; k < (repIdProductosEnDes[j]); k++) {
-//     var json = {
-//       "idProducto":productosendes[aux2].Producto_idProducto,
-//       "periodosDes":productosendes[aux2].periodosDes,
-//       "tiempoDes":productosendes[aux2].tiempoDes,
-//       "ultimoPeriodoDes":productosendes[aux2].ultimoPeriodoDes
-//     }
-//     productosEnDes[j]['productosEnDes'].push(json);
-//    aux2 = aux2 + 1;
-//   }
-// }
-var counter = 0;
-var arrayProductosEnDes = [];
+    var m =0;
+     while (m < idszonasendes.length) {
+       for (var i = 0; i < zonas.length; i++) {
+         if (idszonasendes[m].Zona_idZonas == zonas[i].idZona) {
+           var json = {
+             "idZona":idszonasendes[m].Zona_idZonas,
+             "nombreZona":zonas[i].nombreZona,
+             "productosEnDes":[]
+           }
+         productosEnDes.push(json);
+         }
+       }
+       m++;
+     }
 
-for (var j = 0; j < repIdProductosEnDes.length; j++) {
-  for (var k = 0; k < repIdProductosEnDes[j]; k++) {
-    counter = counter + 1;
-  }
-      console.log("counter: ", counter);
-//      console.log("productosendes",productosendes[counter-1]);
-  var json = {
-          "idProducto":productosendes[counter-1].Producto_idProducto,
-          "periodosDes":productosendes[counter-1].periodosDes,
-          "tiempoDes":productosendes[counter-1].tiempoDes,
-          "numeroPeriodo":productosendes[counter-1].numeroPeriodo  }
-    productosEnDes[j]['productosEnDes'].push(json);
-}
-
-//console.log(productosDes);
+   var aux4 = 0;
+   for (var j = 0; j < repIdZonas.length; j++) {
+     for (var k = 0; k < (repIdZonas[j]); k++) {
+           var json = {
+             "idProducto":nvoproductosendes[aux4].Producto_idProducto,
+             "periodosDes":nvoproductosendes[aux4].periodosDes,
+             "tiempoDes":nvoproductosendes[aux4].tiempoDes,
+             "numeroPeriodo":nvoproductosendes[aux4].numeroPeriodo
+         }
+       productosEnDes[j]['productosEnDes'].push(json);
+      aux4 = aux4 + 1;
+     }
+   }
+  console.log("productosEnDes: "+JSON.stringify(productosEnDes));
+  return productosEnDes;
+}else {
   return productosEnDes;
 }
+  return productosEnDes;
+}
+
 
 
 // PRODUCTOS SIN DESARROLLAR

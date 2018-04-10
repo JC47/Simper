@@ -103,7 +103,7 @@ export class EstadoResultadosComponent implements OnInit {
 
   getCostoVentas(id){
     var T = 0;
-    if(this.auxiliares.length == 0){
+    if(this.auxiliares.length == 0 || this.validarExistencia(id)){
       for(let m of this.maquinas){
         if(m.Producto_idProducto == id){
           T += ((m.costo * (m.depAcum/100))*m.Cantidad);
@@ -130,7 +130,7 @@ export class EstadoResultadosComponent implements OnInit {
 
   getUtilidadParcial(id){
     var T = 0;
-    if(this.auxiliares.length == 0){
+    if(this.auxiliares.length == 0 || this.validarExistencia(id)){
       for(let m of this.maquinas){
         if(m.Producto_idProducto == id){
           T -= ((m.costo * (m.depAcum/100))*m.Cantidad);
@@ -206,7 +206,7 @@ export class EstadoResultadosComponent implements OnInit {
 
   getUtilidadAntesParcial(id){
     var T = 0;
-    if(this.auxiliares.length == 0){
+    if(this.auxiliares.length == 0 || this.validarExistencia(id)){
       for(let m of this.maquinas){
         if(m.Producto_idProducto == id){
           T -= ((m.costo * (m.depAcum/100))*m.Cantidad);
@@ -280,6 +280,17 @@ export class EstadoResultadosComponent implements OnInit {
       ptu = uti * .10;
     }
     return ptu;
+  }
+
+  validarExistencia(id){
+    var t = true;
+    for(let a of this.auxiliares){
+      if(a.Producto_idProducto == id){
+        t = false;
+        break;
+      }
+    }
+    return t;
   }
 
 

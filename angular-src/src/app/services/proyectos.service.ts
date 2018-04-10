@@ -313,7 +313,8 @@ returnUsuarios(){
     "Proyectos_idProyecto":idProyecto,
     "depTerreno":0,
     "depMaqEquipo":0,
-    "depEqTrans":0
+    "depEqTrans":0,
+    "porAmortizar":0
     }
     let headers = new Headers({
       'Content-Type':'application/json'
@@ -350,7 +351,8 @@ returnUsuarios(){
     "Proyectos_idProyecto":idProyecto,
     "depTerreno":0,
     "depMaqEquipo":0,
-    "depEqTrans":0
+    "depEqTrans":0,
+    "porAmortizar":0
     }
     let headers = new Headers({
       'Content-Type':'application/json'

@@ -27,16 +27,18 @@ router.post('/', (req, res, next) => {
   var idProyecto = req.body.idProyecto;
   var numeroPeriodo = req.body.numeroPeriodo;
 
-  Promise.join(maquinariaComprada.getIdMaqProyecto(idProyecto,numeroPeriodo),
-  maquinariaComprada.getMaqMaqProyecto(idProyecto,numeroPeriodo),
-  maquinariaComprada.getMaquinaria(),maquinariaComprada.getNombreMaqProd(idProyecto,numeroPeriodo),
-  function(idsmaqproyecto,maquinariaproyecto,maquinaria,nombremaqprod) {
-       return jsonMaquinariaProyecto(idsmaqproyecto,maquinariaproyecto,maquinaria,nombremaqprod);
-   })
-  .then( function (data) {
-    res.json({success: true, datos:data, msg:"Operacion exitosa"});
-  })
-  .catch(function (err) {
+
+ Promise.join(maquinariaComprada.getIdMaqProyecto(idProyecto,numeroPeriodo),
+              maquinariaComprada.getMaqMaqProyecto(idProyecto,numeroPeriodo),
+              maquinariaComprada.getMaquinaria(),
+              maquinariaComprada.getNombreMaqProd(idProyecto,numeroPeriodo),
+     function(idsmaqproyecto,maquinariaproyecto,maquinaria,nombremaqprod) {
+         return jsonMaquinariaProyecto(idsmaqproyecto,maquinariaproyecto,maquinaria,nombremaqprod);
+     })
+    .then( function (data) {
+      res.json({success: true, datos:data, msg:"Operacion exitosa"});
+    })
+    .catch(function (err) {
     console.log(err);
     res.json({success:false, msg:"Operacion incompleta"});
   });
@@ -95,7 +97,7 @@ router.post('/compra', (req, res, next) => {
 var idProyecto = req.body.Proyectos_idProyecto;
 var idMaquinaria = req.body.Maquinaria_idMaquinaria;
 var idProducto = req.body.Producto_idProducto;
-var numeroPeriodo = req.body.Balance_numeroPeriodo;
+var numeroPeriodo = parseInt(req.body.Balance_numeroPeriodo);
 
  Promise.join(maquinariaComprada.getMaquinariasCompradas(idProyecto),
  maquinariaComprada.getMaquinariaComprada(idProyecto, idMaquinaria, numeroPeriodo),function(maqcompradas,maqproyecto) {
@@ -252,7 +254,6 @@ router.post('/cobrar', (req, res, next) => {
 });
 
 function maqEnMaqProyecto(maqcompradas, maqproyecto) {
-  console.log(maqcompradas,maqproyecto);
   var cantidad = 0;
   for (var i = 0; i < maqcompradas.length; i++) {
     for (var j = 0; j < maqproyecto.length; j++) {

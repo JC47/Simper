@@ -46,6 +46,7 @@ export class CompraMaquinariaService {
    }
 
   compraMaquinaria(x,y){
+    console.log(x,y,"CUERPO")
     this.cobrar(y).subscribe();
     var z = [];
     this.comprar(x).subscribe(d => {
