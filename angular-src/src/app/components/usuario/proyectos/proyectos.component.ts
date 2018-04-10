@@ -28,7 +28,7 @@ export class ProyectosComponent implements OnInit {
     nombreProyecto:"",
     fechaCreacion:0
   };
-
+  openLoad:boolean=false;
   editForm:FormGroup;
   newForm:FormGroup;
 
@@ -53,13 +53,13 @@ export class ProyectosComponent implements OnInit {
    entrarProyecto(idProyecto){
      this._proyectosService.asignarBalance(idProyecto);
      localStorage.setItem('idProyecto',idProyecto);
-     this.confModal.show();
      this._proyectosService.muestraPCorriendo();
+     this.openLoad=true;
+     setTimeout(()=>{this.openLoad=false,this.entrarP()},2000);
    }
 
    entrarP(){
-     setTimeout(()=>{this._proyectosService.changePeriodo()}, 1000);
-     this.confModal.hide();
+     setTimeout(()=>{this._proyectosService.changePeriodo()},1000);
      this._proyectosService.entrar();
    }
 

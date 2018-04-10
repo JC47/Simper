@@ -117,11 +117,14 @@ this.colorScheme = {
   getSeries(periodos){
     let series:any=[];
     for(let periodo of periodos){
-      let serieTemp:any={
-        name:periodo.numPeriodo,
-        value:periodo.cantidad
+      if (periodo.numPeriodo<=localStorage.getItem('periodos')) {
+        let serieTemp:any={
+          name:periodo.numPeriodo,
+          value:periodo.cantidad
+        }
+        series.push(serieTemp)
       }
-      series.push(serieTemp)
+
     }
     return series
 

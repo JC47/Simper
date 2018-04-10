@@ -133,9 +133,9 @@
           <p>
           <h5 class="text-left"><b>Costo Total: </b>{{ productoSelectedAdd.costoDes * productoSelectedAdd.tiempoDes | currency:'USD':true }}</h5>
           <p>
-          <h5 class="text-left"><b>Costo por Periodo: </b>{{productoSelectedAdd.costoDes}}</h5>
+          <h5 class="text-left"><b>Costo por Periodo: </b>{{productoSelectedAdd.costoDes | currency:'USD':true }}</h5>
           <p>
-          <h5 class="text-left"><b>Tiempo de Desarrollo: </b>{{productoSelectedAdd.tiempoDes}}</h5>
+          <h5 class="text-left"><b>Tiempo de Desarrollo: </b>{{productoSelectedAdd.tiempoDes}} periodos</h5>
         </div>
       </div>
       <br>

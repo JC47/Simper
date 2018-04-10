@@ -1,16 +1,13 @@
+<div class="row">
+  <h3 class="col-12 text-center">Presupuesto de Caja y Bancos</h3>
+</div>
+
 <div class="col-8 offset-2">
   <table class="table table-bordered  " >
 
     <tbody>
-      <tr class="thead-inverse">
-      <th colspan="2">Presupuesto Global de Caja y Bancos</th>
-      </tr>
-
-
-
-
-      <tr>
-        <td>Saldo Inical</td>
+        <tr>
+        <td>Saldo Inicial</td>
         <td class="text-right" *ngFor="let balance of balanceInicial">{{getCajaBancos() |currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
@@ -84,14 +81,14 @@
       </tr>
 
       <tr>
-        <td>Costo de Distribución</td>
+        <td>Gasto de Distribución</td>
         <td class="text-right">{{getCostoDeDistribucion() |currency:'USD':true:'1.0-0'}}</td>
 
       </tr>
 
 
       <tr>
-        <td>Costo de Administrativo</td>
+        <td>Gasto de Administración</td>
         <td class="text-right">{{getCostoAdministrativo() |currency:'USD':true:'1.0-0'}}</td>
 
       </tr>

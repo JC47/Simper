@@ -28,6 +28,7 @@ export class NavbarUsuarioComponent implements OnInit {
   openLoadDatos:boolean=false;
   alert:boolean=false;
   numeroPeriodoSelected:any;
+  simTerm:boolean=false;
   opciones:boolean=false;
   periodo:number;
   periodos = [];
@@ -122,6 +123,10 @@ export class NavbarUsuarioComponent implements OnInit {
 
     modalPasarPeriodo(){
       this.openBien=false;
+      this.router.navigate(['Usuario/proyecto/home']);
+    }
+
+    goHome(){
       this.router.navigate(['Usuario/proyecto/home']);
     }
 
@@ -221,7 +226,7 @@ export class NavbarUsuarioComponent implements OnInit {
         }
 
         if(localStorage.getItem('periodos') == p){
-          alert("Haz finalizado la simulacion");
+          this.simTerm=true;
         }
         else{
           if(cajaBancosFinal < 0){

@@ -1,3 +1,8 @@
+<div class="row">
+  <h3 class="col-12 text-center">Posición Comparativa</h3>
+</div>
+
+
 <div class="col-10 offset-1">
   <table class="table table-bordered " *ngFor="let balance of balanceFinal">
 
@@ -49,7 +54,7 @@
       </tr>
 
       <tr>
-        <td>Almacen de Articulo Terminado</td>
+        <td>Almacén de Artículo Terminado</td>
         <td class="text-right">{{balance.almacenArtTerm|currency:'USD':true:'1.0-0'}}</td>
         <td  class="text-right" *ngFor="let balanceI of balanceInicial">{{balanceI.almacenArtTerm|currency:'USD':true:'1.0-0'}}</td>
         <td  class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(balance.almacenArtTerm,balanceI.almacenArtTerm) |currency:'USD':true:'1.0-0'}}</td>

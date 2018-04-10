@@ -209,7 +209,7 @@
           <p>
           <h5 class="text-left"><b>Costo Total: </b>{{ getCosto(productoSelectedAdd.idZona,productoSelectedAdd.idProducto)  * getTiempo(productoSelectedAdd.idZona,productoSelectedAdd.idProducto) | currency:'USD':true }}</h5>
           <p>
-          <h5 class="text-left"><b>Costo por Periodo: </b>{{getCosto(productoSelectedAdd.idZona,productoSelectedAdd.idProducto)}}</h5>
+          <h5 class="text-left"><b>Costo por Periodo: </b>{{getCosto(productoSelectedAdd.idZona,productoSelectedAdd.idProducto) | currency:'USD':true }}</h5>
           <p>
           <h5 class="text-left"><b>Tiempo de Desarrollo: </b>{{getTiempo(productoSelectedAdd.idZona,productoSelectedAdd.idProducto)}}</h5>
         </div>

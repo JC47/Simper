@@ -22,6 +22,12 @@
       <h4 style="color:white" *ngIf="_proyectoService.muestraPeriodoCorriendo">Periodo Corriendo: {{this._proyectoService.periodo}}</h4>
     </li>
 
+    <li class="nav-item pull-left">
+      <span style="font-size:15px;color:white">Derechos Reservados de Raul Uribe</span>
+    </li>
+
+
+
     <li class="nav-item pull-left" style="margin-right:20px; margin-bottom:10px" >
       <button *ngIf="validaVi()"  [hidden]="_proyectoService.muestraPeriodo"    type="button" class="btn btn-success navbar-right" (click)="preparaCierre()">Cerrar Periodo</button>
     </li>
@@ -37,6 +43,8 @@
         <!-- <li class="nav-item " style="margin-right:20px">
           <button  class="btn btn-danger"><i class="fa fa-bell fa-lg"></i></button>
         </li> -->
+
+
 
         <li class="nav-item " style="margin-right:20px">
           <button title="Salir"  class="btn btn-success " (click)="logOut()"><i class="fa fa-sign-out fa-lg"></i></button>
@@ -66,11 +74,25 @@
 
 
 
+  <ngl-modal header="Confirmación"  [(open)]="simTerm" size="x-small" directional="false">
+      <div body>
+        <div class="col-12 text-center container">
+          <h2 style="margin-bottom:30px">Tu simulación ha concluido</h2>
+        </div>
+      </div>
+
+      <ng-template ngl-modal-footer>
+      <button class="btn btn-success" (click)="goHome()">Aceptar</button>
+      </ng-template>
+    </ngl-modal>
+
+
+
 
   <ngl-modal header="Confirmación"  [(open)]="confProd" size="x-small" directional="false">
       <div body>
         <div class="col-12 text-center container">
-          <h2 style="margin-bottom:30px">¿Aun tienes pagos de Desarrollos de Productos pendeintes, quieres aun así cerrar el periodo?</h2>
+          <h2 style="margin-bottom:30px">¿Aun tienes pagos de Desarrollos de Productos pendientes, quieres aun así cerrar el periodo?</h2>
         </div>
       </div>
 

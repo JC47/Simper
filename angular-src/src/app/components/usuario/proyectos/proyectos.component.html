@@ -28,6 +28,9 @@
                 <button type="button" class="btn btn-secondary offset-1 col-4" (click)="openEdit(proyecto)">Edita</button>
                 <button type="button" class="btn btn-danger offset-2 col-4" (click)="confDelete(proyecto)">Elimina</button>
               </div>
+              <div class="row" style="margin-top:20px">
+                <button type="button" class="btn btn-secondary offset-4 col-4">Desiciones</button>
+              </div>
             </blockquote>
           </div>
         </div>
@@ -236,3 +239,34 @@
     </div>
   </div>
 </div>
+
+
+
+
+<ngl-modal  [(open)]="openLoad" size="small" directional="false">
+  <div body>
+        <h2 class="col-12 text-center">Entrando a Proyecto</h2>
+    <h6 class="col-12 text-center">Cargando Datos</h6>
+    <div style="position:relative; height:6.25rem; z-index:0;">
+      <ngl-spinner size="large" type="brand"></ngl-spinner>
+    </div>
+
+  </div>
+  </ngl-modal>
+
+
+
+  <ngl-modal header="Confirmación"  [(open)]="historial" size="x-small" directional="false">
+
+    <div body>
+      <div class="col-12" style="height:500px:overflow-y:scroll">
+        <table class="table">
+
+        </table>
+      </div>
+    </div>
+
+    <ng-template ngl-modal-footer>
+    <button class="btn btn-danger">Salir</button>
+  </ng-template>
+    </ngl-modal>
