@@ -89,7 +89,6 @@ export class EstadoResultadosComponent implements OnInit {
     var T = 0;
     if(this.auxiliares.length == 0){
       for(let m of this.maquinas){
-        console.log(m.costo,m.depAcum,m.Cantidad)
         T += ((m.costo * (m.depAcum/100))*m.Cantidad);
       }
     }
@@ -98,6 +97,9 @@ export class EstadoResultadosComponent implements OnInit {
         T += aux.costoVentas;
       }
     }
+
+    T += this.existenciaTotal();
+
     return T;
   }
 
@@ -122,9 +124,7 @@ export class EstadoResultadosComponent implements OnInit {
 
   getUtilidadBruta(){
     var T = 0;
-    for(let aux of this.auxiliares){
-      T += aux.Ventas - aux.costoVentas - aux.IVAxVentas;
-    }
+    T += this.getTotalVentas() - this.getTotalCostosVentas();
     return T;
   }
 
@@ -230,31 +230,15 @@ export class EstadoResultadosComponent implements OnInit {
 
   getUtilidadAntes(){
     var T = 0;
-    if(this.auxiliares.length == 0){
-      for(let m of this.maquinas){
-        T -= ((m.costo * (m.depAcum/100))*m.Cantidad);
-      }
-    }
-    else{
-      for(let aux of this.auxiliares){
-        T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
-      }
-    }
+
+    T+=this.getUtilidadBruta() - this.getDistTotal() - this.getAdminTotal();
+
     return T;
   }
 
   getUtilidad2(){
     var T = 0;
-    if(this.auxiliares.length == 0){
-      for(let m of this.maquinas){
-        T -= ((m.costo * (m.depAcum/100))*m.Cantidad);
-      }
-    }
-    else{
-      for(let aux of this.auxiliares){
-        T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
-      }
-    }
+    T += this.getUtilidadAntes();
     for(let i of this.auxiliarT){
       T -= i
     }
@@ -291,6 +275,20 @@ export class EstadoResultadosComponent implements OnInit {
       }
     }
     return t;
+  }
+
+  existenciaTotal(){
+  var T = 0;
+    for(let p of this.resultados){
+      if(this.validarExistencia(p)){
+        for(let m of this.maquinas){
+          if(m.Producto_idProducto == p){
+            T += ((m.costo * (m.depAcum/100))*m.Cantidad);
+          }
+        }
+      }
+    }
+  return T;
   }
 
 

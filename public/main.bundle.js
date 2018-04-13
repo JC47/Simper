@@ -2072,7 +2072,6 @@ var NavbarUsuarioComponent = (function () {
         this.confZona = false;
         this.confEditaPeriodos = false;
         this.openPeriodos = false;
-        this._resultadosService.vender();
         this._proyectoService.ocultaCierrePeriodo();
         this.asignarBalance(localStorage.getItem('idProyecto'));
     }
@@ -2138,7 +2137,16 @@ var NavbarUsuarioComponent = (function () {
         this.router.navigate(['Usuario/proyecto/home']);
     };
     NavbarUsuarioComponent.prototype.goHome = function () {
-        this.router.navigate(['Usuario/proyecto/home']);
+        this._proyectoService.ocultaCierrePeriodo();
+        this._proyectoService.oculataPCorriendo();
+        this.simTerm = false;
+        localStorage.removeItem('numeroPeriodo');
+        localStorage.removeItem('idProyecto');
+        localStorage.removeItem('numeroRPeriodos');
+        localStorage.removeItem('nombreProyecto');
+        localStorage.removeItem('periodos');
+        localStorage.removeItem('regresion');
+        this.router.navigate(['/Usuario/proyectos']);
     };
     NavbarUsuarioComponent.prototype.selectEditaPeriodo = function (p) {
         this.numeroPeriodoSelected = p;
@@ -5041,7 +5049,6 @@ var EstadoResultadosComponent = (function () {
         if (this.auxiliares.length == 0) {
             for (var _i = 0, _a = this.maquinas; _i < _a.length; _i++) {
                 var m = _a[_i];
-                console.log(m.costo, m.depAcum, m.Cantidad);
                 T += ((m.costo * (m.depAcum / 100)) * m.Cantidad);
             }
         }
@@ -5051,6 +5058,7 @@ var EstadoResultadosComponent = (function () {
                 T += aux.costoVentas;
             }
         }
+        T += this.existenciaTotal();
         return T;
     };
     EstadoResultadosComponent.prototype.getCostoVentas = function (id) {
@@ -5075,10 +5083,7 @@ var EstadoResultadosComponent = (function () {
     };
     EstadoResultadosComponent.prototype.getUtilidadBruta = function () {
         var T = 0;
-        for (var _i = 0, _a = this.auxiliares; _i < _a.length; _i++) {
-            var aux = _a[_i];
-            T += aux.Ventas - aux.costoVentas - aux.IVAxVentas;
-        }
+        T += this.getTotalVentas() - this.getTotalCostosVentas();
         return T;
     };
     EstadoResultadosComponent.prototype.getUtilidadParcial = function (id) {
@@ -5183,40 +5188,18 @@ var EstadoResultadosComponent = (function () {
     };
     EstadoResultadosComponent.prototype.getUtilidadAntes = function () {
         var T = 0;
-        if (this.auxiliares.length == 0) {
-            for (var _i = 0, _a = this.maquinas; _i < _a.length; _i++) {
-                var m = _a[_i];
-                T -= ((m.costo * (m.depAcum / 100)) * m.Cantidad);
-            }
-        }
-        else {
-            for (var _b = 0, _c = this.auxiliares; _b < _c.length; _b++) {
-                var aux = _c[_b];
-                T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
-            }
-        }
+        T += this.getUtilidadBruta() - this.getDistTotal() - this.getAdminTotal();
         return T;
     };
     EstadoResultadosComponent.prototype.getUtilidad2 = function () {
         var T = 0;
-        if (this.auxiliares.length == 0) {
-            for (var _i = 0, _a = this.maquinas; _i < _a.length; _i++) {
-                var m = _a[_i];
-                T -= ((m.costo * (m.depAcum / 100)) * m.Cantidad);
-            }
-        }
-        else {
-            for (var _b = 0, _c = this.auxiliares; _b < _c.length; _b++) {
-                var aux = _c[_b];
-                T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
-            }
-        }
-        for (var _d = 0, _e = this.auxiliarT; _d < _e.length; _d++) {
-            var i = _e[_d];
+        T += this.getUtilidadAntes();
+        for (var _i = 0, _a = this.auxiliarT; _i < _a.length; _i++) {
+            var i = _a[_i];
             T -= i;
         }
-        for (var _f = 0, _g = this.intereses; _f < _g.length; _f++) {
-            var i2 = _g[_f];
+        for (var _b = 0, _c = this.intereses; _b < _c.length; _b++) {
+            var i2 = _c[_b];
             T -= i2;
         }
         return T;
@@ -5247,6 +5230,21 @@ var EstadoResultadosComponent = (function () {
             }
         }
         return t;
+    };
+    EstadoResultadosComponent.prototype.existenciaTotal = function () {
+        var T = 0;
+        for (var _i = 0, _a = this.resultados; _i < _a.length; _i++) {
+            var p = _a[_i];
+            if (this.validarExistencia(p)) {
+                for (var _b = 0, _c = this.maquinas; _b < _c.length; _b++) {
+                    var m = _c[_b];
+                    if (m.Producto_idProducto == p) {
+                        T += ((m.costo * (m.depAcum / 100)) * m.Cantidad);
+                    }
+                }
+            }
+        }
+        return T;
     };
     EstadoResultadosComponent.prototype.PDFestadoDeResultados = function () {
         var doc = new jsPDF({
@@ -8347,15 +8345,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var SidenavPComponent = (function () {
     function SidenavPComponent(router, _proyectosS) {
-        var _this = this;
         this.router = router;
         this._proyectosS = _proyectosS;
-        this.proyectos = this._proyectosS.returnUsuarios();
-        console.log("Proyectos", this.proyectos);
-        setTimeout(function () {
-            _this.proyectoActual = _this.getNameById(localStorage.getItem('idProyecto'));
-            console.log(_this.proyectoActual);
-        }, 500);
+        this.proyectoActual = localStorage.getItem('nombreProyecto');
     }
     SidenavPComponent.prototype.ngOnInit = function () {
     };
@@ -8365,6 +8357,9 @@ var SidenavPComponent = (function () {
         localStorage.removeItem('numeroPeriodo');
         localStorage.removeItem('idProyecto');
         localStorage.removeItem('numeroRPeriodos');
+        localStorage.removeItem('nombreProyecto');
+        localStorage.removeItem('periodos');
+        localStorage.removeItem('regresion');
         this.router.navigate(['/Usuario/proyectos']);
     };
     SidenavPComponent.prototype.getNameById = function (idProyecto) {
@@ -8534,6 +8529,7 @@ var VentaProductosComponent = (function () {
         this.graficas = [];
         this.demandas = [];
         this.zonaSelected = { graf: null, nombreZona: null };
+        this.almacenAnterior = [];
         this._proyectoService.ocultaCierrePeriodo();
         this.zonas = this._graficasService.returnZonas();
         this.productos = this._productoService.returnProductos();
@@ -8542,7 +8538,7 @@ var VentaProductosComponent = (function () {
         this.maquinarias = this._dash.returnMaquinarias();
         this.demandas = this._zonasService.returnDemandaPPeriodo();
         this.almacen = this._operacionService.returnAlmacen();
-        console.log(this.almacen);
+        this.almacenAnterior = this._operacionService.returnAlmacenAnterior();
         this.colorScheme = {
             domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
         };
@@ -8694,25 +8690,19 @@ var VentaProductosComponent = (function () {
         return "id no encontrado";
     };
     VentaProductosComponent.prototype.selectProduccion = function (idProducto) {
-        console.log(idProducto);
-        console.log(this.maquinarias);
         var cantProdTem = 0;
         for (var _i = 0, _a = this.maquinarias; _i < _a.length; _i++) {
             var produccion = _a[_i];
             if (produccion.idProducto == idProducto) {
                 for (var _b = 0, _c = produccion.maquinas; _b < _c.length; _b++) {
                     var maquina = _c[_b];
-                    cantProdTem = maquina.cantidadProd + cantProdTem;
-                    console.log("Maq", maquina);
+                    cantProdTem += maquina.cantidadProd;
                 }
             }
         }
         this.produccionSelected = cantProdTem;
-        console.log(this.produccionSelected);
     };
     VentaProductosComponent.prototype.getProduccion = function (idProducto) {
-        console.log(idProducto);
-        console.log(this.maquinarias);
         var cantProdTem = 0;
         var cantVendTem = 0;
         for (var _i = 0, _a = this.maquinarias; _i < _a.length; _i++) {
@@ -8720,16 +8710,26 @@ var VentaProductosComponent = (function () {
             if (produccion.idProducto == idProducto) {
                 for (var _b = 0, _c = produccion.maquinas; _b < _c.length; _b++) {
                     var maquina = _c[_b];
-                    cantProdTem = maquina.cantidadProd + cantProdTem;
-                    console.log("Maq", maquina);
+                    cantProdTem += maquina.cantidadProd;
                 }
             }
         }
-        console.log(this.ventas);
         for (var _d = 0, _e = this.ventas; _d < _e.length; _d++) {
             var venta = _e[_d];
             if (venta.Producto_idProducto == idProducto) {
-                cantVendTem = cantVendTem + venta.unidadesVendidas;
+                cantVendTem += venta.unidadesVendidas;
+            }
+        }
+        for (var _f = 0, _g = this.almacen; _f < _g.length; _f++) {
+            var alma = _g[_f];
+            if (alma.Producto_idProducto == idProducto) {
+                cantVendTem += alma.unidadesAlmacenadas;
+            }
+        }
+        for (var _h = 0, _j = this.almacenAnterior; _h < _j.length; _h++) {
+            var alma = _j[_h];
+            if (alma.Producto_idProducto == idProducto) {
+                cantProdTem += alma.unidadesAlmacenadas;
             }
         }
         return cantProdTem - cantVendTem;
@@ -8837,7 +8837,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyectos/proyectos.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n\r\n<div style=\"margin-top:90px\" class=\"container\">\r\n  <div class=\"section\" style=\"margin-bottom:50px;\">\r\n    <h1 class=\"text-center\">Proyectos</h1>\r\n    <hr>\r\n    <div class=\"text-center\" *ngFor=\"let alert of alerts\" style=\"z-index:10000;width:100%; \">\r\n      <alert [type]=\"alert.type\" [dismissOnTimeout]=\"alert.timeout\"><h3>{{ alert.msg }}</h3></alert>\r\n    </div>\r\n  </div>\r\n\r\n\r\n\r\n  <div class=\"container\">\r\n\r\n    <div class=\"row\">\r\n      <div class=\"col-6\" *ngFor=\"let proyecto of proyectos\">\r\n        <div class=\"card card-inverse card-primary mb-3 text-center col-10 offser-1\">\r\n          <div class=\"card-block\">\r\n            <img src=\"assets/img/presentation.png\" class=\"col-6\">\r\n            <blockquote class=\"card-blockquote\">\r\n              <br>\r\n              <h1>{{proyecto.nombreProyecto}}</h1>\r\n              <h6>Fecha de Creación: {{proyecto.fechaCreacion}}</h6>\r\n\r\n              <button type=\"button\" class=\"btn btn-success\" (click)=\"entrarProyecto(proyecto.idProyecto)\">Entrar a Proyecto</button>\r\n              <div class=\"row\" style=\"margin-top:20px\">\r\n                <button type=\"button\" class=\"btn btn-secondary offset-1 col-4\" (click)=\"openEdit(proyecto)\">Edita</button>\r\n                <button type=\"button\" class=\"btn btn-danger offset-2 col-4\" (click)=\"confDelete(proyecto)\">Elimina</button>\r\n              </div>\r\n              <div class=\"row\" style=\"margin-top:20px\">\r\n                <button type=\"button\" class=\"btn btn-secondary offset-4 col-4\">Desiciones</button>\r\n              </div>\r\n            </blockquote>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n\r\n\r\n    </div>\r\n\r\n  </div>\r\n\r\n\r\n\r\n  <div bsModal #modalEdit=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myLargeModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-md\">\r\n      <div class=\"modal-content\">\r\n        <div class=\"modal-header\">\r\n          <h4 class=\" \">Edita Proyecto</h4>\r\n        </div>\r\n        <div class=\"modal-body\">\r\n\r\n          <form [formGroup]=\"editForm\" (ngSubmit)=\"modificaProyecto(editForm.value)\" class=\"offset-1\"  >\r\n\r\n              <div class=\"form-group\" hidden>\r\n                <label class=\"col-2 col-form-label\">id:</label>\r\n                <div class=\"col-2\">\r\n\r\n                  <input class=\"form-control\"\r\n                  type=\"text\"\r\n                  placeholder=\"id\"\r\n                  formControlName=\"idProyecto\">\r\n                </div>\r\n              </div>\r\n\r\n              <div class=\"form-group row\">\r\n                <label class=\"col-5 col-form-label\">Nombre</label>\r\n                <div class=\"col-6\">\r\n\r\n                  <input class=\"form-control\"\r\n                  type=\"text\"\r\n                  formControlName=\"nombreProyecto\">\r\n                </div>\r\n              </div>\r\n\r\n              <div class=\"form-group row\">\r\n                <label class=\"col-5 col-form-label\">Fecha de Creación</label>\r\n                <div class=\"col-6\">\r\n\r\n                  <input class=\"form-control\"\r\n                  type=\"text\"\r\n                  formControlName=\"fechaCreacion\"\r\n                  disabled>\r\n                </div>\r\n              </div>\r\n\r\n              <div class=\"form-group row\" hidden>\r\n                <label class=\"col-5 col-form-label\">Fecha de Creación</label>\r\n                <div class=\"col-6\">\r\n\r\n                  <input class=\"form-control\"\r\n                  type=\"text\"\r\n                  formControlName=\"Usuario_idUsuario\"\r\n                  disabled>\r\n                </div>\r\n              </div>\r\n\r\n              <div class=\"modal-footer\">\r\n                <button type=\"submit\" class=\"btn btn-outline-success\">\r\n                  Guardar\r\n                </button>\r\n\r\n                <button  type=\"button\" class=\"btn btn-outline-danger\" (click)=\"modalEdit.hide()\" >\r\n                  Cancelar\r\n                </button>\r\n\r\n              </div>\r\n\r\n          </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <button type=\"button\" (click)=\"openNew()\" class=\"btn btn-warning btn-floating\">Agregar</button>\r\n\r\n  <div bsModal #modalNew=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myLargeModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-md\">\r\n      <div class=\"modal-content\">\r\n        <div class=\"modal-header\">\r\n          <h4 class=\" \">Edita Proyecto</h4>\r\n        </div>\r\n        <div class=\"modal-body\">\r\n\r\n          <form [formGroup]=\"newForm\" (ngSubmit)=\"agregaProyecto(newForm.value)\" class=\"offset-1\"  >\r\n\r\n              <div class=\"form-group\" hidden>\r\n                <label class=\"col-2 col-form-label\">id:</label>\r\n                <div class=\"col-2\">\r\n\r\n                  <input class=\"form-control\"\r\n                  type=\"text\"\r\n                  placeholder=\"id\"\r\n                  formControlName=\"idProyecto\">\r\n                </div>\r\n              </div>\r\n\r\n              <div class=\"form-group row\">\r\n                <label class=\"col-5 col-form-label\">Nombre</label>\r\n                <div class=\"col-6\">\r\n\r\n                  <input class=\"form-control\"\r\n                  type=\"text\"\r\n                  formControlName=\"nombreProyecto\">\r\n                </div>\r\n              </div>\r\n\r\n              <div class=\"form-group row\">\r\n                <label class=\"col-5 col-form-label\">Fecha de Creación</label>\r\n                <div class=\"col-6\">\r\n\r\n                  <input class=\"form-control\"\r\n                  type=\"text\"\r\n                  formControlName=\"fechaCreacion\"\r\n                  disabled>\r\n                </div>\r\n              </div>\r\n\r\n              <div class=\"form-group row\" hidden>\r\n                <label class=\"col-5 col-form-label\">Fecha de Creación</label>\r\n                <div class=\"col-6\">\r\n\r\n                  <input class=\"form-control\"\r\n                  type=\"text\"\r\n                  formControlName=\"Usuario_idUsuario\"\r\n                  disabled>\r\n                </div>\r\n              </div>\r\n\r\n              <div class=\"modal-footer\">\r\n                <button type=\"submit\" class=\"btn btn-outline-success\">\r\n                  Guardar\r\n                </button>\r\n\r\n                <button  type=\"button\" class=\"btn btn-outline-danger\" (click)=\"modalNew.hide()\" >\r\n                  Cancelar\r\n                </button>\r\n\r\n              </div>\r\n\r\n          </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n\r\n</div>\r\n\r\n<div bsModal #modalConf=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\">\r\n  <div class=\"modal-dialog modal-sm\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"\">Confirmación</h4>\r\n      </div>\r\n      <div class=\"modal-body center-block text-center\">\r\n\r\n\r\n        <div class=\"row text-center offset-1\">\r\n          Datos listos\r\n          <br>\r\n        </div>\r\n        <br>\r\n        <div class=\"row\">\r\n          <button type=\"button\" class=\"btn btn-danger offset-4 col-4\" (click)=\"entrarP()\" >Aceptar</button>\r\n        </div>\r\n\r\n\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div bsModal #modalConfDelete=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\">\r\n  <div class=\"modal-dialog modal-sm\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\" \">Confirmación</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n\r\n\r\n        <div class=\"row text-center\">\r\n          ¿Estas seguro que deseas eliminar el proyecto ?\r\n          <br>\r\n          <br>\r\n          Todo el progreso se perderá\r\n        </div>\r\n        <br>\r\n        <div class=\"row\">\r\n          <button type=\"button\" class=\"btn btn-danger offset-2 col-3\" (click)=eliminaProyecto(proyectoDelete.idProyecto)>Si</button>\r\n          <button type=\"button\" class=\"btn btn-primary offset-2 col-3\" (click)=\"confModalDelete.hide()\">No</button>\r\n        </div>\r\n\r\n\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n<ngl-modal  [(open)]=\"openLoad\" size=\"small\" directional=\"false\">\r\n  <div body>\r\n        <h2 class=\"col-12 text-center\">Entrando a Proyecto</h2>\r\n    <h6 class=\"col-12 text-center\">Cargando Datos</h6>\r\n    <div style=\"position:relative; height:6.25rem; z-index:0;\">\r\n      <ngl-spinner size=\"large\" type=\"brand\"></ngl-spinner>\r\n    </div>\r\n\r\n  </div>\r\n  </ngl-modal>\r\n\r\n\r\n\r\n  <ngl-modal header=\"Confirmación\"  [(open)]=\"historial\" size=\"x-small\" directional=\"false\">\r\n\r\n    <div body>\r\n      <div class=\"col-12\" style=\"height:500px:overflow-y:scroll\">\r\n        <table class=\"table\">\r\n\r\n        </table>\r\n      </div>\r\n    </div>\r\n\r\n    <ng-template ngl-modal-footer>\r\n    <button class=\"btn btn-danger\">Salir</button>\r\n  </ng-template>\r\n    </ngl-modal>\r\n"
+module.exports = "\r\n\r\n<div style=\"margin-top:90px\" class=\"container\">\r\n  <div class=\"section\" style=\"margin-bottom:50px;\">\r\n    <h1 class=\"text-center\">Proyectos</h1>\r\n    <hr>\r\n    <div class=\"text-center\" *ngFor=\"let alert of alerts\" style=\"z-index:10000;width:100%; \">\r\n      <alert [type]=\"alert.type\" [dismissOnTimeout]=\"alert.timeout\"><h3>{{ alert.msg }}</h3></alert>\r\n    </div>\r\n  </div>\r\n\r\n\r\n\r\n  <div class=\"container\">\r\n\r\n    <div class=\"row\">\r\n      <div class=\"col-6\" *ngFor=\"let proyecto of proyectos\">\r\n        <div class=\"card card-inverse card-primary mb-3 text-center col-10 offser-1\">\r\n          <div class=\"card-block\">\r\n            <img src=\"assets/img/presentation.png\" class=\"col-6\">\r\n            <blockquote class=\"card-blockquote\">\r\n              <br>\r\n              <h1>{{proyecto.nombreProyecto}}</h1>\r\n              <h6>Fecha de Creación: {{proyecto.fechaCreacion}}</h6>\r\n\r\n              <button type=\"button\" class=\"btn btn-success\" (click)=\"entrarProyecto(proyecto.idProyecto,proyecto.nombreProyecto)\">Entrar a Proyecto</button>\r\n              <div class=\"row\" style=\"margin-top:20px\">\r\n                <button type=\"button\" class=\"btn btn-secondary offset-1 col-4\" (click)=\"openEdit(proyecto)\">Edita</button>\r\n                <button type=\"button\" class=\"btn btn-danger offset-2 col-4\" (click)=\"confDelete(proyecto)\">Elimina</button>\r\n              </div>\r\n              <div class=\"row\" style=\"margin-top:20px\">\r\n                <button type=\"button\" class=\"btn btn-secondary offset-4 col-4\">Desiciones</button>\r\n              </div>\r\n            </blockquote>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n\r\n\r\n    </div>\r\n\r\n  </div>\r\n\r\n\r\n\r\n  <div bsModal #modalEdit=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myLargeModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-md\">\r\n      <div class=\"modal-content\">\r\n        <div class=\"modal-header\">\r\n          <h4 class=\" \">Edita Proyecto</h4>\r\n        </div>\r\n        <div class=\"modal-body\">\r\n\r\n          <form [formGroup]=\"editForm\" (ngSubmit)=\"modificaProyecto(editForm.value)\" class=\"offset-1\"  >\r\n\r\n              <div class=\"form-group\" hidden>\r\n                <label class=\"col-2 col-form-label\">id:</label>\r\n                <div class=\"col-2\">\r\n\r\n                  <input class=\"form-control\"\r\n                  type=\"text\"\r\n                  placeholder=\"id\"\r\n                  formControlName=\"idProyecto\">\r\n                </div>\r\n              </div>\r\n\r\n              <div class=\"form-group row\">\r\n                <label class=\"col-5 col-form-label\">Nombre</label>\r\n                <div class=\"col-6\">\r\n\r\n                  <input class=\"form-control\"\r\n                  type=\"text\"\r\n                  formControlName=\"nombreProyecto\">\r\n                </div>\r\n              </div>\r\n\r\n              <div class=\"form-group row\">\r\n                <label class=\"col-5 col-form-label\">Fecha de Creación</label>\r\n                <div class=\"col-6\">\r\n\r\n                  <input class=\"form-control\"\r\n                  type=\"text\"\r\n                  formControlName=\"fechaCreacion\"\r\n                  disabled>\r\n                </div>\r\n              </div>\r\n\r\n              <div class=\"form-group row\" hidden>\r\n                <label class=\"col-5 col-form-label\">Fecha de Creación</label>\r\n                <div class=\"col-6\">\r\n\r\n                  <input class=\"form-control\"\r\n                  type=\"text\"\r\n                  formControlName=\"Usuario_idUsuario\"\r\n                  disabled>\r\n                </div>\r\n              </div>\r\n\r\n              <div class=\"modal-footer\">\r\n                <button type=\"submit\" class=\"btn btn-outline-success\">\r\n                  Guardar\r\n                </button>\r\n\r\n                <button  type=\"button\" class=\"btn btn-outline-danger\" (click)=\"modalEdit.hide()\" >\r\n                  Cancelar\r\n                </button>\r\n\r\n              </div>\r\n\r\n          </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <button type=\"button\" (click)=\"openNew()\" class=\"btn btn-warning btn-floating\">Agregar</button>\r\n\r\n  <div bsModal #modalNew=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myLargeModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-md\">\r\n      <div class=\"modal-content\">\r\n        <div class=\"modal-header\">\r\n          <h4 class=\" \">Edita Proyecto</h4>\r\n        </div>\r\n        <div class=\"modal-body\">\r\n\r\n          <form [formGroup]=\"newForm\" (ngSubmit)=\"agregaProyecto(newForm.value)\" class=\"offset-1\"  >\r\n\r\n              <div class=\"form-group\" hidden>\r\n                <label class=\"col-2 col-form-label\">id:</label>\r\n                <div class=\"col-2\">\r\n\r\n                  <input class=\"form-control\"\r\n                  type=\"text\"\r\n                  placeholder=\"id\"\r\n                  formControlName=\"idProyecto\">\r\n                </div>\r\n              </div>\r\n\r\n              <div class=\"form-group row\">\r\n                <label class=\"col-5 col-form-label\">Nombre</label>\r\n                <div class=\"col-6\">\r\n\r\n                  <input class=\"form-control\"\r\n                  type=\"text\"\r\n                  formControlName=\"nombreProyecto\">\r\n                </div>\r\n              </div>\r\n\r\n              <div class=\"form-group row\">\r\n                <label class=\"col-5 col-form-label\">Fecha de Creación</label>\r\n                <div class=\"col-6\">\r\n\r\n                  <input class=\"form-control\"\r\n                  type=\"text\"\r\n                  formControlName=\"fechaCreacion\"\r\n                  disabled>\r\n                </div>\r\n              </div>\r\n\r\n              <div class=\"form-group row\" hidden>\r\n                <label class=\"col-5 col-form-label\">Fecha de Creación</label>\r\n                <div class=\"col-6\">\r\n\r\n                  <input class=\"form-control\"\r\n                  type=\"text\"\r\n                  formControlName=\"Usuario_idUsuario\"\r\n                  disabled>\r\n                </div>\r\n              </div>\r\n\r\n              <div class=\"modal-footer\">\r\n                <button type=\"submit\" class=\"btn btn-outline-success\">\r\n                  Guardar\r\n                </button>\r\n\r\n                <button  type=\"button\" class=\"btn btn-outline-danger\" (click)=\"modalNew.hide()\" >\r\n                  Cancelar\r\n                </button>\r\n\r\n              </div>\r\n\r\n          </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n\r\n</div>\r\n\r\n<div bsModal #modalConf=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\">\r\n  <div class=\"modal-dialog modal-sm\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"\">Confirmación</h4>\r\n      </div>\r\n      <div class=\"modal-body center-block text-center\">\r\n\r\n\r\n        <div class=\"row text-center offset-1\">\r\n          Datos listos\r\n          <br>\r\n        </div>\r\n        <br>\r\n        <div class=\"row\">\r\n          <button type=\"button\" class=\"btn btn-danger offset-4 col-4\" (click)=\"entrarP()\" >Aceptar</button>\r\n        </div>\r\n\r\n\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div bsModal #modalConfDelete=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\">\r\n  <div class=\"modal-dialog modal-sm\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\" \">Confirmación</h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n\r\n\r\n        <div class=\"row text-center\">\r\n          ¿Estas seguro que deseas eliminar el proyecto ?\r\n          <br>\r\n          <br>\r\n          Todo el progreso se perderá\r\n        </div>\r\n        <br>\r\n        <div class=\"row\">\r\n          <button type=\"button\" class=\"btn btn-danger offset-2 col-3\" (click)=eliminaProyecto(proyectoDelete.idProyecto)>Si</button>\r\n          <button type=\"button\" class=\"btn btn-primary offset-2 col-3\" (click)=\"confModalDelete.hide()\">No</button>\r\n        </div>\r\n\r\n\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n<ngl-modal  [(open)]=\"openLoad\" size=\"small\" directional=\"false\">\r\n  <div body>\r\n        <h2 class=\"col-12 text-center\">Entrando a Proyecto</h2>\r\n    <h6 class=\"col-12 text-center\">Cargando Datos</h6>\r\n    <div style=\"position:relative; height:6.25rem; z-index:0;\">\r\n      <ngl-spinner size=\"large\" type=\"brand\"></ngl-spinner>\r\n    </div>\r\n\r\n  </div>\r\n  </ngl-modal>\r\n\r\n\r\n\r\n  <ngl-modal header=\"Confirmación\"  [(open)]=\"historial\" size=\"x-small\" directional=\"false\">\r\n\r\n    <div body>\r\n      <div class=\"col-12\" style=\"height:500px:overflow-y:scroll\">\r\n        <table class=\"table\">\r\n\r\n        </table>\r\n      </div>\r\n    </div>\r\n\r\n    <ng-template ngl-modal-footer>\r\n    <button class=\"btn btn-danger\">Salir</button>\r\n  </ng-template>\r\n    </ngl-modal>\r\n"
 
 /***/ }),
 
@@ -8890,10 +8890,11 @@ var ProyectosComponent = (function () {
             'Usuario_idUsuario': new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["FormControl"](localStorage.getItem('idUsuario'))
         });
     }
-    ProyectosComponent.prototype.entrarProyecto = function (idProyecto) {
+    ProyectosComponent.prototype.entrarProyecto = function (idProyecto, np) {
         var _this = this;
         this._proyectosService.asignarBalance(idProyecto);
         localStorage.setItem('idProyecto', idProyecto);
+        localStorage.setItem('nombreProyecto', np);
         this._proyectosService.muestraPCorriendo();
         this.openLoad = true;
         setTimeout(function () { _this.openLoad = false, _this.entrarP(); }, 2000);
@@ -11472,6 +11473,15 @@ var OperacionService = (function () {
         });
         return alma;
     };
+    OperacionService.prototype.returnAlmacenAnterior = function () {
+        var alma = [];
+        this.getAlmacenAnterior().subscribe(function (data) {
+            for (var key in data.datos) {
+                alma.push(data.datos[key]);
+            }
+        });
+        return alma;
+    };
     OperacionService.prototype.registerAlmacen = function (x) {
         var alma = [];
         this.addAlmacen(x).subscribe(function (data) {
@@ -11544,6 +11554,13 @@ var OperacionService = (function () {
     OperacionService.prototype.getAlmacen = function () {
         var x = {
             Balance_numeroPeriodo: localStorage.getItem('numeroPeriodo'),
+            Proyecto_idProyecto: localStorage.getItem('idProyecto')
+        };
+        return this.http.post('operacion/getAlmacen/', x, this.headers).map(function (res) { return res.json(); });
+    };
+    OperacionService.prototype.getAlmacenAnterior = function () {
+        var x = {
+            Balance_numeroPeriodo: parseInt(localStorage.getItem('numeroPeriodo')) - 1,
             Proyecto_idProyecto: localStorage.getItem('idProyecto')
         };
         return this.http.post('operacion/getAlmacen/', x, this.headers).map(function (res) { return res.json(); });
