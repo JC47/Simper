@@ -91,7 +91,7 @@ export class VentaProductosComponent implements OnInit {
     setTimeout(() => {
      this.graficas=this.setGrafica(this.zonas);
      console.log(this.graficas);
-   }, 800);
+   }, 500);
 
 
     this.ventasForm=new FormGroup({

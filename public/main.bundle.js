@@ -8545,7 +8545,7 @@ var VentaProductosComponent = (function () {
         setTimeout(function () {
             _this.graficas = _this.setGrafica(_this.zonas);
             console.log(_this.graficas);
-        }, 800);
+        }, 500);
         this.ventasForm = new __WEBPACK_IMPORTED_MODULE_4__angular_forms__["FormGroup"]({
             'idProducto': new __WEBPACK_IMPORTED_MODULE_4__angular_forms__["FormControl"](),
             'idZona': new __WEBPACK_IMPORTED_MODULE_4__angular_forms__["FormControl"](),
@@ -11164,7 +11164,7 @@ var GraficasService = (function () {
                 for (var key$ in data.datos) {
                     _this.zonas.push(data.datos[key$]);
                 }
-            }, 1000);
+            }, 300);
         });
         return this.zonas;
     };
