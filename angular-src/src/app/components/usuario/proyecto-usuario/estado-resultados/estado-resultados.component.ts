@@ -194,14 +194,14 @@ export class EstadoResultadosComponent implements OnInit {
   }
 
 
-            getNameById(idProyecto){
-              for(let proyecto of this.proyectos){
-                if(proyecto.idProyecto==idProyecto)
-                  return proyecto.nombreProyecto
-              }
-                return "id NO encontrado"
+  getNameById(idProyecto){
+    for(let proyecto of this.proyectos){
+      if(proyecto.idProyecto==idProyecto)
+        return proyecto.nombreProyecto
+    }
+      return "id NO encontrado"
 
-            }
+  }
 
 
   getUtilidadAntesParcial(id){

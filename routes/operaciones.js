@@ -310,11 +310,10 @@ router.post('/productosventa', (req,res,next) => {
 router.post('/equilibrio', (req,res,next) => {
   var idProyecto = req.body.idProyecto;
   var numeroPeriodo = req.body.numeroPeriodo;
-  Promise.resolve().then(function() {
-    return auxiliar.getEquilibrio(idProyecto,numeroPeriodo);
-  }).then(function(rows) {
-    return equilibrioTotal(rows);
-  }).then(function(rows) {
+  Promise.join(auxiliar.getEquilibrio(idProyecto,numeroPeriodo),auxiliar.getDepMaq(idProyecto,numeroPeriodo), function(r1,r2) {
+    return equilibrioTotal(r1,r2);
+  })
+  .then(function(rows) {
     res.json({success:true,msg:"Bien",datos:rows});
   }).catch(function(err) {
     console.log(err);
@@ -634,7 +633,7 @@ function jsonProductos(r1,r2,r3){
   return array.sort(function(a,b){return a - b;});
 }
 
-function equilibrioTotal(rows) {
+function equilibrioTotal(rows,rows2) {
   var x = {MP:0,CFF:0,CFV:0,GDF:0,GDV:0,GAF:0,DEP:0,ventasTotales:0}
   var d1 = 0;
   var d2 = 0;
@@ -646,8 +645,11 @@ function equilibrioTotal(rows) {
     x.CFF += rows[key].costosFijosFabri;
     x.GDF += rows[key].gastosFijosDist;
     x.GAF += rows[key].gastosFijosAdmon;
-    x.DEP += rows[key].costoTransformacionMaq;
     x.ventasTotales += (rows[key].VentasPorCobrar + rows[key].VentasCobradas - rows[key].IVAxVentas);
+  }
+
+  for(let key in rows2){
+    x.DEP += (rows2[key].maqEquipo * .10);
   }
 
   x.MP = d1;

@@ -85,8 +85,8 @@ export class PruebaComponent implements OnInit {
     r += this.getAplicacionCB(-b.prestamosMasAnio,-a.prestamosMasAnio);
     r += this.getAplicacionCB(-b.capitalSocial,-a.capitalSocial);
     r += this.getAplicacionCB(-b.reservaLegal,-a.reservaLegal);
-    r += this.getAplicacionCB(-b.utilidadAcum,-a.utilidadAcum);
-    r += this.getAplicacionCB(-b.utilidadEjercicio,-a.utilidadEjercicio);
+    r += this.getAplicacionCB(-b.utilidadAcum,(-a.utilidadAcum-a.utilidadEjercicio));
+    r += this.getAplicacionCB(-b.utilidadEjercicio,0);
     return r;
   }
 
@@ -115,8 +115,8 @@ export class PruebaComponent implements OnInit {
     r += this.getOrigenCB(-b.prestamosMasAnio,-a.prestamosMasAnio);
     r += this.getOrigenCB(-b.capitalSocial,-a.capitalSocial);
     r += this.getOrigenCB(-b.reservaLegal,-a.reservaLegal);
-    r += this.getOrigenCB(-b.utilidadAcum,-a.utilidadAcum);
-    r += this.getOrigenCB(-b.utilidadEjercicio,-a.utilidadEjercicio);
+    r += this.getOrigenCB(-b.utilidadAcum,(-a.utilidadAcum-a.utilidadEjercicio));
+    r += this.getOrigenCB(-b.utilidadEjercicio,0);
     return r;
   }
 
