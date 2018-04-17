@@ -828,7 +828,6 @@ for (var i = 0; i < creditoactivonumeroperiodo.length; i++) {//2
 }
 
 function getIntereses(prestamos,pagos){
-  console.log(prestamos,pagos);
   var p = [];
   var T = 0;
   for(let key in prestamos){

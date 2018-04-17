@@ -15,7 +15,6 @@ import {FlujoComponent} from './flujo/flujo.component';
 import {AnalisisComponent} from "./analisis/analisis.component";
 import {PuntoEquilibrioComponent} from "./punto-equilibrio/punto-equilibrio.component";
 import {IntegralesComponent} from './integrales/integrales.component';
-import {RazonesComponent} from './razones/razones.component';
 import {TendenciasComponent} from './tendencias/tendencias.component';
 
 export const PROYECTO_ROUTES: Routes = [
@@ -35,7 +34,6 @@ export const PROYECTO_ROUTES: Routes = [
   { path: 'analisis', component:AnalisisComponent },
   { path: 'puntoEquilibrio', component:PuntoEquilibrioComponent },
   { path: 'integrales', component:IntegralesComponent },
-  { path: 'razones', component:RazonesComponent },
   { path: 'tendencias', component:TendenciasComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];

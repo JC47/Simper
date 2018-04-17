@@ -305,5 +305,39 @@ export class OperacionService {
     return p;
   }
 
+  getIntegrales(){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    return this.http.get('operacion/integrales/'+localStorage.getItem('idProyecto'),{headers}).map(res => res.json());
+  }
+
+  getTendencias(){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    return this.http.get('operacion/tendencias/'+localStorage.getItem('idProyecto'),{headers}).map(res => res.json());
+  }
+
+  returnIntegrales(){
+    var x = [];
+    this.getIntegrales().subscribe(data => {
+      for(let key in data.datos){
+        x.push(data.datos[key]);
+      }
+    });
+    return x;
+  }
+
+  returnTendencias(){
+    var x = [];
+    this.getTendencias().subscribe(data => {
+      for(let key in data.datos){
+        x.push(data.datos[key]);
+      }
+    });
+    return x;
+  }
+
 
 }

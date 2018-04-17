@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {OperacionService} from '../../../../services/operacion.service';
 
 @Component({
   selector: 'app-tendencias',
@@ -6,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TendenciasComponent implements OnInit {
 
-  constructor() { }
+  tendencias = [];
+
+  constructor(private _operacionService:OperacionService) {
+    this.tendencias = this._operacionService.returnTendencias();
+    console.log(this.tendencias);
+  }
 
   ngOnInit() {
   }
