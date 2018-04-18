@@ -22,17 +22,17 @@
       <h4 style="color:white" *ngIf="_proyectoService.muestraPeriodoCorriendo">Periodo Corriendo: {{this._proyectoService.periodo}}</h4>
     </li>
 
-    <li class="nav-item pull-left">
+    <li class="nav-item pull-left" style="margin-left:10px">
       <span style="font-size:15px;color:white">Derechos Reservados de Raul Uribe</span>
     </li>
 
 
 
-    <li class="nav-item pull-left" style="margin-right:20px; margin-bottom:10px" >
+    <li class="nav-item pull-left" style="margin-right:20px; margin-bottom:10px;margin-left:10px" >
       <button *ngIf="validaVi()"  [hidden]="_proyectoService.muestraPeriodo"    type="button" class="btn btn-success navbar-right" (click)="preparaCierre()">Cerrar Periodo</button>
     </li>
 
-    <li class="nav-item " style="margin-right:40px;margin-bottom:10px">
+    <li class="nav-item " style="margin-right:30px;margin-bottom:10px">
       <button [hidden]="_proyectoService.muestraPeriodo"  type="button" class="btn btn-info" (click)="openPeriodos=true">Periodos Anteriores</button>
     </li>
 
