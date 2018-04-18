@@ -133,7 +133,7 @@ export class GraficasService {
         for(let key$ in data.datos){
           this.zonas.push(data.datos[key$]);
         }
-      },1000);
+      },300);
     })
     return this.zonas;
   }

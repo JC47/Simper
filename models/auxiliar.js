@@ -45,3 +45,8 @@ module.exports.getEquilibrio = function(idProyecto,numeroPeriodo) {
   var sql = "select costosMPPUniProd,unidadesVendidas,costosFijosFabri,costoVarUniFabri,gastosFijosDist,costoVarUniDist,gastosFijosAdmon,costoTransformacionMaq,VentasPorCobrar,VentasCobradas,IVAxVentas from auxiliarcuentaventa inner join producto on auxiliarcuentaventa.Producto_idProducto = producto.idProducto where auxiliarcuentaventa.Balance_numeroPeriodo = " +numeroPeriodo+ " and auxiliarcuentaventa.Proyectos_idProyecto = "+idProyecto+"";
   return querySql(sql);
 }
+
+module.exports.getDepMaq = function(idProyecto,numeroPeriodo) {
+  var sql = "select maqEquipo from balance where numeroPeriodo = " +numeroPeriodo+" and Proyectos_idProyecto = " +idProyecto+ "";
+  return querySql(sql);
+}

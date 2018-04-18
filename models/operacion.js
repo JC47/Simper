@@ -96,3 +96,29 @@ module.exports.getProductoCuenta = function(idProyecto,numeroPeriodo){
   var query = "select Producto_idProducto from auxiliarcuenta where Balance_numeroPeriodo = "+numeroPeriodo+ " and Proyectos_idProyecto = " +idProyecto+"";
   return querySql(query);
 }
+
+module.exports.getACV = function(idProyecto) {
+  var query = "select Balance_numeroPeriodo,Ventas,IVAxVentas,costoDistribucion,costoAdministrativo from auxiliarcuentaventa where Proyectos_idProyecto ="+idProyecto+"";
+  return querySql(query);
+}
+
+module.exports.getBalances = function(idProyecto) {
+  var query = "select * from balance where Proyectos_idProyecto ="+idProyecto+" and numeroPeriodo > 0 order by numeroPeriodo";
+  return querySql(query);
+}
+
+module.exports.getAC = function(idProyecto) {
+  var query = "select Balance_numeroPeriodo,desarrolloMercado,desarrolloProducto from auxiliarcuenta where Proyectos_idProyecto ="+idProyecto+"";
+  return querySql(query);
+}
+
+
+module.exports.getPedidos = function(idProyecto) {
+  var query = "select anticipo,numeroPeriodo from creditobalance where Proyectos_idProyecto ="+idProyecto+"";
+  return querySql(query);
+}
+
+module.exports.getPT = function(idProyecto) {
+  var query = "select numeroPeriodo,intereses,tipo from amortizacion inner join credito on amortizacion.idCredito = credito.idCredito and Proyecto_idProyecto = " +idProyecto+"";
+  return querySql(query);
+}

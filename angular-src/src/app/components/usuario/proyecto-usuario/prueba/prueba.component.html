@@ -273,9 +273,9 @@
       <tr>
         <td>Utilidad Acumulada</td>
         <td class="text-right">{{-balance.utilidadAcum|currency:'USD':true:'1.0-0'}}</td>
-        <td class="text-right" *ngFor="let balanceI of balanceInicial">{{-balanceI.utilidadEjercicio|currency:'USD':true:'1.0-0'}}</td>
-        <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(-balance.utilidadAcum,-balanceI.utilidadEjercicio)|currency:'USD':true:'1.0-0'}}</td>
-        <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(-balance.utilidadAcum,-balanceI.utilidadEjercicio)|currency:'USD':true:'1.0-0'}}</td>
+        <td class="text-right" *ngFor="let balanceI of balanceInicial">{{-balanceI.utilidadEjercicio-balanceI.utilidadAcum|currency:'USD':true:'1.0-0'}}</td>
+        <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(-balance.utilidadAcum,(-balanceI.utilidadEjercicio-balanceI.utilidadAcum))|currency:'USD':true:'1.0-0'}}</td>
+        <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getOrigenCB(-balance.utilidadAcum,(-balanceI.utilidadEjercicio-balanceI.utilidadAcum))|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>

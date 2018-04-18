@@ -24,6 +24,7 @@ export class AnalisisComponent implements OnInit {
     this.auxiliares=this._operacionService.returnAuxiliares();
     this.intereses = this._operacionService.returnInter();
     this.auxiliarT = this._operacionService.returnAuxiliarCTotal();
+    this.resultados = this._operacionService.returnProductoResultados();
     this.maquinas =this._maqService.returnMaquinasCompradas();
     this.balanceFinal = this._resultadosService.getBalanceFinal();
     this.balanceInicial = this._resultadosService.balanceInicialAnterior();
@@ -52,14 +53,15 @@ export class AnalisisComponent implements OnInit {
         T += aux.costoVentas;
       }
     }
+
+    T += this.existenciaTotal();
+
     return T;
   }
 
   getUtilidadBruta(){
     var T = 0;
-    for(let aux of this.auxiliares){
-      T += aux.Ventas - aux.costoVentas - aux.IVAxVentas;
-    }
+    T += this.getTotalVentas() - this.getTotalCostosVentas();
     return T;
   }
 
@@ -70,23 +72,15 @@ export class AnalisisComponent implements OnInit {
   }
 
   getUtilidadOperacion(){
-    var i = 0;
-    var x = 0;
-    if(this.auxiliares.length == 0){
-      for(let m of this.maquinas){
-        i -= ((m.costo * (m.depAcum/100))*m.Cantidad);
-      }
-    }
-    else{
-      for(let aux of this.auxiliares){
-        i += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
-      }
-    }
+    var T = 0;
+
+    T+=this.getUtilidadBruta() - this.getDistTotal() - this.getAdminTotal();
+
     for(let a of this.auxiliarT){
-      x+=a;
+      T-=a;
     }
-    i -= x;
-    return i;
+
+    return T;
   }
 
   getIntereses(){
@@ -99,16 +93,9 @@ export class AnalisisComponent implements OnInit {
 
   getUtilidadAntes(){
     var T = 0;
-    if(this.auxiliares.length == 0){
-      for(let m of this.maquinas){
-        T -= ((m.costo * (m.depAcum/100))*m.Cantidad);
-      }
-    }
-    else{
-      for(let aux of this.auxiliares){
-        T += aux.Ventas - aux.IVAxVentas - aux.costoVentas - aux.costoDistribucion - aux.costoAdministrativo;
-      }
-    }
+
+    T += this.getUtilidadOperacion();
+
     for(let i of this.auxiliarT){
       T -= i
     }
@@ -439,6 +426,31 @@ export class AnalisisComponent implements OnInit {
       i = x/y;
     }
     return i;
+  }
+
+  validarExistencia(id){
+    var t = true;
+    for(let a of this.auxiliares){
+      if(a.Producto_idProducto == id){
+        t = false;
+        break;
+      }
+    }
+    return t;
+  }
+
+  existenciaTotal(){
+  var T = 0;
+    for(let p of this.resultados){
+      if(this.validarExistencia(p)){
+        for(let m of this.maquinas){
+          if(m.Producto_idProducto == p){
+            T += ((m.costo * (m.depAcum/100))*m.Cantidad);
+          }
+        }
+      }
+    }
+  return T;
   }
 
 

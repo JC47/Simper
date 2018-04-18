@@ -14,14 +14,9 @@ export class SidenavPComponent implements OnInit {
   constructor(private router:Router,
               private _proyectosS:ProyectosService) {
 
-  this.proyectos=this._proyectosS.returnUsuarios();
-  console.log("Proyectos",this.proyectos)
-  setTimeout(() => {
-    this.proyectoActual=this.getNameById(localStorage.getItem('idProyecto'))
-    console.log(this.proyectoActual)
- }, 500);
+    this.proyectoActual=localStorage.getItem('nombreProyecto');
 
-              }
+  }
 
   ngOnInit() {
   }
@@ -32,6 +27,9 @@ export class SidenavPComponent implements OnInit {
     localStorage.removeItem('numeroPeriodo');
     localStorage.removeItem('idProyecto');
     localStorage.removeItem('numeroRPeriodos');
+    localStorage.removeItem('nombreProyecto');
+    localStorage.removeItem('periodos');
+    localStorage.removeItem('regresion');
     this.router.navigate(['/Usuario/proyectos']);
   }
 

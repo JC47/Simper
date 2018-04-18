@@ -45,10 +45,8 @@ export class NavbarUsuarioComponent implements OnInit {
     private _desarrolloZona:DesarrolloZonaService,
     private _desarrolloProducto:DesarrolloProductoService,
     private _creditoService:UsuarioCreditoService) {
-      this._resultadosService.vender();
-
-      this._proyectoService.ocultaCierrePeriodo()
-  this.asignarBalance(localStorage.getItem('idProyecto')); }
+    this._proyectoService.ocultaCierrePeriodo()
+    this.asignarBalance(localStorage.getItem('idProyecto')); }
 
   ngOnInit() {
     this.authService.getProfileUsuario().subscribe( data => {
@@ -127,7 +125,16 @@ export class NavbarUsuarioComponent implements OnInit {
     }
 
     goHome(){
-      this.router.navigate(['Usuario/proyecto/home']);
+      this._proyectoService.ocultaCierrePeriodo();
+      this._proyectoService.oculataPCorriendo();
+      this.simTerm = false;
+      localStorage.removeItem('numeroPeriodo');
+      localStorage.removeItem('idProyecto');
+      localStorage.removeItem('numeroRPeriodos');
+      localStorage.removeItem('nombreProyecto');
+      localStorage.removeItem('periodos');
+      localStorage.removeItem('regresion');
+      this.router.navigate(['/Usuario/proyectos']);
     }
 
     selectEditaPeriodo(p){
@@ -192,11 +199,6 @@ export class NavbarUsuarioComponent implements OnInit {
     if(this.confZona==false && this.confProd==false){
       this.pasarPeriodo();
     }
-
-
-
-
-
 
   }
 

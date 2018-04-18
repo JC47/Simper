@@ -4,6 +4,7 @@ const config = require('../config/db');
 const operacion = require('../models/operacion');
 const auxiliar = require('../models/auxiliar');
 const variable = require("../models/variable");
+const prestamo = require('../models/prestamo');
 const Promise = require("bluebird");
 
 router.post('/register', (req, res, next) => {
@@ -310,18 +311,42 @@ router.post('/productosventa', (req,res,next) => {
 router.post('/equilibrio', (req,res,next) => {
   var idProyecto = req.body.idProyecto;
   var numeroPeriodo = req.body.numeroPeriodo;
-  Promise.resolve().then(function() {
-    return auxiliar.getEquilibrio(idProyecto,numeroPeriodo);
-  }).then(function(rows) {
-    return equilibrioTotal(rows);
-  }).then(function(rows) {
+  Promise.join(auxiliar.getEquilibrio(idProyecto,numeroPeriodo),auxiliar.getDepMaq(idProyecto,numeroPeriodo), function(r1,r2) {
+    return equilibrioTotal(r1,r2);
+  })
+  .then(function(rows) {
     res.json({success:true,msg:"Bien",datos:rows});
   }).catch(function(err) {
     console.log(err);
     res.json({success:false,msg:"Mal"});
   });
-
 });
+
+router.get('/integrales/:idProyecto', (req,res,next) => {
+  var idProyecto = req.params.idProyecto;
+  Promise.join(operacion.getACV(idProyecto),operacion.getBalances(idProyecto),operacion.getAC(idProyecto),operacion.getPedidos(idProyecto),operacion.getPT(idProyecto),
+    function(axv,balances,ac,pedidos,pagos) {
+    return getIntegral(axv,balances,ac,pedidos,pagos);
+  }).then(function(rows) {
+    res.json({success:true,msg:"Bien",datos:rows});
+  }).catch(function(err) {
+    console.log(err);
+    res.json({success:false,msg:"Mal"});
+  })
+})
+
+router.get('/tendencias/:idProyecto', (req,res,next) => {
+  var idProyecto = req.params.idProyecto;
+  Promise.join(operacion.getACV(idProyecto),operacion.getBalances(idProyecto),operacion.getAC(idProyecto),operacion.getPedidos(idProyecto),operacion.getPT(idProyecto),
+    function(axv,balances,ac,pedidos,pagos) {
+    return getTendencia(axv,balances,ac,pedidos,pagos);
+  }).then(function(rows) {
+    res.json({success:true,msg:"Bien",datos:rows});
+  }).catch(function(err) {
+    console.log(err);
+    res.json({success:false,msg:"Mal"});
+  })
+})
 
 router.post('/selling', (req,res,next) => {
   var idProducto = req.body.Producto_idProducto;
@@ -634,7 +659,7 @@ function jsonProductos(r1,r2,r3){
   return array.sort(function(a,b){return a - b;});
 }
 
-function equilibrioTotal(rows) {
+function equilibrioTotal(rows,rows2) {
   var x = {MP:0,CFF:0,CFV:0,GDF:0,GDV:0,GAF:0,DEP:0,ventasTotales:0}
   var d1 = 0;
   var d2 = 0;
@@ -646,8 +671,11 @@ function equilibrioTotal(rows) {
     x.CFF += rows[key].costosFijosFabri;
     x.GDF += rows[key].gastosFijosDist;
     x.GAF += rows[key].gastosFijosAdmon;
-    x.DEP += rows[key].costoTransformacionMaq;
     x.ventasTotales += (rows[key].VentasPorCobrar + rows[key].VentasCobradas - rows[key].IVAxVentas);
+  }
+
+  for(let key in rows2){
+    x.DEP += (rows2[key].maqEquipo * .10);
   }
 
   x.MP = d1;
@@ -656,6 +684,168 @@ function equilibrioTotal(rows) {
 
   return x;
 
+}
+
+function getIntegral(ventas,balances,cuentas,pedidos,pagos){
+  var x = [];
+  for(let key in balances){
+    var y = {numeroPeriodo:0,ventasNetas:0,costoVentas:0,utilidadBruta:0,cDist:0,oGastos:0,cAdmin:0,utilidadOperacion:0,intereses:0,utilidadAntesImptos:0,ISR:0,PTU:0,utilidadEjercicio:0,pventasNetas:0,pcostoVentas:0,putilidadBruta:0,pcDist:0,poGastos:0,pcAdmin:0,putilidadOperacion:0,pintereses:0,putilidadAntesImptos:0,pISR:0,pPTU:0,putilidadEjercicio:0}
+    y.numeroPeriodo = balances[key].numeroPeriodo;
+    y.utilidadEjercicio = balances[key].utilidadEjercicio;
+    y.ISR = balances[key].imptosPorPagar * 12;
+    y.PTU = balances[key].PTUPorPagar;
+    y.utilidadAntesImptos = y.utilidadEjercicio + y.ISR + y.PTU;
+    for(let key5 in pagos){
+      if(pagos[key5].numeroPeriodo == balances[key].numeroPeriodo){
+        if(pagos[key5].tipo != 1){
+        y.intereses += pagos[key5].intereses;
+        }
+      }
+    }
+    for(let key4 in pedidos){
+      if(pedidos[key4].numeroPeriodo == balances[key].numeroPeriodo){
+        y.intereses += pedidos[key4].anticipo;
+      }
+    }
+    for(let key3 in cuentas){
+      if(cuentas[key3].Balance_numeroPeriodo == balances[key].numeroPeriodo){
+        y.oGastos += cuentas[key3].desarrolloMercado + cuentas[key3].desarrolloProducto;
+      }
+    }
+    for(let key2 in ventas){
+      if(ventas[key2].Balance_numeroPeriodo == balances[key].numeroPeriodo){
+        y.ventasNetas += ventas[key2].Ventas - ventas[key2].IVAxVentas;
+        y.cDist += ventas[key2].costoDistribucion;
+        y.cAdmin += ventas[key2].costoAdministrativo;
+      }
+    }
+    y.utilidadOperacion = y.utilidadAntesImptos + y.intereses;
+    y.utilidadBruta = y.utilidadOperacion + y.oGastos + y.cDist + y.cAdmin;
+    y.costoVentas = (y.utilidadBruta - y.ventasNetas) * -1;
+
+    //Porcentajes
+    y.pventasNetas = 100;
+    y.pcostoVentas = getPorcentaje(y.costoVentas,y.ventasNetas);
+    y.putilidadBruta = getPorcentaje(y.utilidadBruta,y.ventasNetas);
+    y.pcDist = getPorcentaje(y.cDist,y.ventasNetas);
+    y.poGastos = getPorcentaje(y.oGastos,y.ventasNetas);
+    y.pcAdmin = getPorcentaje(y.cAdmin,y.ventasNetas);
+    y.putilidadOperacion = getPorcentaje(y.utilidadOperacion,y.ventasNetas);
+    y.pintereses = getPorcentaje(y.intereses,y.ventasNetas);
+    y.putilidadAntesImptos = getPorcentaje(y.utilidadAntesImptos,y.ventasNetas);
+    y.pISR = getPorcentaje(y.ISR,y.ventasNetas);
+    y.pPTU = getPorcentaje(y.PTU,y.ventasNetas);
+    y.putilidadEjercicio = getPorcentaje(y.utilidadEjercicio,y.ventasNetas);
+
+    x.push(y);
+  }
+  return x;
+}
+
+function getTendencia(ventas,balances,cuentas,pedidos,pagos){
+  var x = [];
+  for(let key in balances){
+    var y = {numeroPeriodo:0,efectivo:0,cuentasPCobrar:0,almacenPT:0,activoCirculante:0,activoFijo:0,pasivoCortoPlazo:0,pasivoTotal:0,capitalContable:0,ventasNetas:0,costoVentas:0,utilidadBruta:0,cDist:0,oGastos:0,cAdmin:0,totalGastos:0,utilidadNeta:0,pefectivo:0,pcuentasPCobrar:0,palmacenPT:0,pactivoCirculante:0,pactivoFijo:0,ppasivoCortoPlazo:0,ppasivoTotal:0,pcapitalContable:0,pventasNetas:0,pcostoVentas:0,putilidadBruta:0,pcDist:0,poGastos:0,pcAdmin:0,ptotalGastos:0,putilidadNeta:0}
+    var ISR = PTU = intereses = utilidadAntesImptos = utilidadOperacion = 0;
+
+    //Directo de balance
+    y.numeroPeriodo = balances[key].numeroPeriodo;
+    y.utilidadNeta = balances[key].utilidadEjercicio;
+    y.efectivo = balances[key].cajaBancos;
+    y.cuentasPCobrar = balances[key].cuentasPorCobrar;
+    y.almacenPT = balances[key].almacenArtTerm
+    y.activoCirculante = balances[key].cajaBancos + balances[key].almacenArtTerm + balances[key].cuentasPorCobrar;
+    y.activoFijo = balances[key].terreno + balances[key].edifInsta + balances[key].maqEquipo + balances[key].mueblesEnseres + balances[key].eqTrans - balances[key].depEdif - balances[key].depMueblesEnseres - balances[key].depMaqEquipo - balances[key].depEqTrans;
+    y.pasivoCortoPlazo = balances[key].IVAPorEnterar + balances[key].imptosPorPagar + balances[key].PTUPorPagar +balances[key].proveedores +balances[key].prestamosMenosAnio;
+    y.pasivoTotal = balances[key].prestamosMasAnio + y.pasivoCortoPlazo;
+    y.capitalContable = balances[key].utilidadEjercicio + balances[key].utilidadAcum + balances[key].capitalSocial + balances[key].reservaLegal;
+
+    ISR = balances[key].imptosPorPagar * 12;
+    PTU = balances[key].PTUPorPagar;
+    utilidadAntesImptos = y.utilidadNeta + ISR + PTU;
+
+    //Intereses
+    for(let key5 in pagos){
+      if(pagos[key5].numeroPeriodo == balances[key].numeroPeriodo){
+        if(pagos[key5].tipo != 1){
+        intereses += pagos[key5].intereses;
+        }
+      }
+    }
+    for(let key4 in pedidos){
+      if(pedidos[key4].numeroPeriodo == balances[key].numeroPeriodo){
+        intereses += pedidos[key4].anticipo;
+      }
+    }
+
+    //Desarrollos
+    for(let key3 in cuentas){
+      if(cuentas[key3].Balance_numeroPeriodo == balances[key].numeroPeriodo){
+        y.oGastos += cuentas[key3].desarrolloMercado + cuentas[key3].desarrolloProducto;
+      }
+    }
+
+    //Datos de ventas
+    for(let key2 in ventas){
+      if(ventas[key2].Balance_numeroPeriodo == balances[key].numeroPeriodo){
+        y.ventasNetas += ventas[key2].Ventas - ventas[key2].IVAxVentas;
+        y.cDist += ventas[key2].costoDistribucion;
+        y.cAdmin += ventas[key2].costoAdministrativo;
+      }
+    }
+
+    //Calculos Finales
+    utilidadOperacion = utilidadAntesImptos + intereses;
+    y.utilidadBruta = utilidadOperacion + y.oGastos + y.cDist + y.cAdmin;
+    y.costoVentas = (y.utilidadBruta - y.ventasNetas) * -1;
+    y.totalGastos = y.oGastos + y.cDist + y.cAdmin;
+
+    //Porcentajes
+    if(balances[key].numeroPeriodo == 1){
+      y.pefectivo = 100;
+      y.pcuentasPCobrar = 100;
+      y.palmacenPT = 100;
+      y.pactivoCirculante = 100;
+      y.pactivoFijo = 100;
+      y.ppasivoCortoPlazo = 100;
+      y.ppasivoTotal = 100;
+      y.pcapitalContable = 100;
+      y.pventasNetas = 100;
+      y.pcostoVentas = 100;
+      y.putilidadBruta = 100;
+      y.pcDist = 100;
+      y.poGastos = 100;
+      y.pcAdmin = 100;
+      y.ptotalGastos = 100;
+      y.putilidadNeta = 100;
+    }
+    else{
+      y.pefectivo = getPorcentaje(y.efectivo,x[0].efectivo);
+      y.pcuentasPCobrar = getPorcentaje(y.cuentasPCobrar,x[0].cuentasPCobrar);
+      y.palmacenPT = getPorcentaje(y.almacenPT,x[0].almacenPT);
+      y.pactivoCirculante = getPorcentaje(y.activoCirculante,x[0].activoCirculante);
+      y.pactivoFijo = getPorcentaje(y.activoFijo,x[0].activoFijo);
+      y.ppasivoCortoPlazo = getPorcentaje(y.pasivoCortoPlazo,x[0].pasivoCortoPlazo);
+      y.ppasivoTotal = getPorcentaje(y.pasivoTotal,x[0].pasivoTotal);
+      y.pcapitalContable = getPorcentaje(y.capitalContable,x[0].capitalContable);
+      y.pventasNetas = getPorcentaje(y.ventasNetas,x[0].ventasNetas);
+      y.pcostoVentas = getPorcentaje(y.costoVentas,x[0].costoVentas);
+      y.putilidadBruta = getPorcentaje(y.utilidadBruta,x[0].utilidadBruta);
+      y.pcDist = getPorcentaje(y.cDist,x[0].cDist);
+      y.poGastos = getPorcentaje(y.oGastos,x[0].oGastos);
+      y.pcAdmin = getPorcentaje(y.cAdmin,x[0].cAdmin);
+      y.ptotalGastos = getPorcentaje(y.totalGastos,x[0].totalGastos);
+      y.putilidadNeta = getPorcentaje(y.utilidadNeta,x[0].utilidadNeta);
+    }
+
+    x.push(y);
+  }
+  return x;
+}
+
+function getPorcentaje(n1,n2) {
+  var r = (n1/n2)*100;
+  return r;
 }
 
 

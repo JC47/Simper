@@ -60,6 +60,7 @@ export class VentaProductosComponent implements OnInit {
   produccionSelected:any;
   demandaSelected:any;
   zonaSelected:any={graf:null,nombreZona:null};
+  almacenAnterior=[];
 
   @ViewChild('modalProgressVenta') public modalProgressVenta:ModalDirective;
 
@@ -77,9 +78,8 @@ export class VentaProductosComponent implements OnInit {
     this.ventas=this._operacionService.returnAllOperaciones();
     this.maquinarias=this._dash.returnMaquinarias();
     this.demandas=this._zonasService.returnDemandaPPeriodo();
-
     this.almacen = this._operacionService.returnAlmacen();
-    console.log(this.almacen);
+    this.almacenAnterior = this._operacionService.returnAlmacenAnterior();
 
 
 
@@ -91,7 +91,7 @@ export class VentaProductosComponent implements OnInit {
     setTimeout(() => {
      this.graficas=this.setGrafica(this.zonas);
      console.log(this.graficas);
-   }, 800);
+   }, 500);
 
 
     this.ventasForm=new FormGroup({
@@ -264,43 +264,45 @@ openModalVenta(idZona,idProducto){
   }
 
   selectProduccion(idProducto){
-    console.log(idProducto)
-    console.log(this.maquinarias);
     let cantProdTem:number=0;
     for(let produccion of this.maquinarias){
       if(produccion.idProducto==idProducto){
         for(let maquina of produccion.maquinas){
-          cantProdTem=maquina.cantidadProd+cantProdTem;
-          console.log("Maq",maquina);
+          cantProdTem+=maquina.cantidadProd;
         }
       }
     }
     this.produccionSelected=cantProdTem;
-    console.log(this.produccionSelected)
   }
 
 
   getProduccion(idProducto){
-    console.log(idProducto)
-    console.log(this.maquinarias);
     let cantProdTem:number=0;
     let cantVendTem:number=0;
     for(let produccion of this.maquinarias){
       if(produccion.idProducto==idProducto){
         for(let maquina of produccion.maquinas){
-          cantProdTem=maquina.cantidadProd+cantProdTem;
-          console.log("Maq",maquina);
+          cantProdTem+=maquina.cantidadProd;
         }
       }
     }
 
-    console.log(this.ventas);
     for(let venta of this.ventas){
       if (venta.Producto_idProducto==idProducto) {
-        cantVendTem=cantVendTem+venta.unidadesVendidas;
+        cantVendTem+=venta.unidadesVendidas;
       }
+    }
 
+    for(let alma of this.almacen){
+      if (alma.Producto_idProducto==idProducto) {
+        cantVendTem+=alma.unidadesAlmacenadas;
+      }
+    }
 
+    for(let alma of this.almacenAnterior){
+      if (alma.Producto_idProducto==idProducto) {
+        cantProdTem+=alma.unidadesAlmacenadas;
+      }
     }
 
 

@@ -142,6 +142,17 @@ export class OperacionService {
     return alma;
   }
 
+  returnAlmacenAnterior(){
+    var alma = [];
+    this.getAlmacenAnterior().subscribe(data => {
+      for(let key in data.datos){
+        alma.push(data.datos[key]);
+      }
+    });
+    return alma;
+  }
+
+
   registerAlmacen(x){
     var alma = [];
     this.addAlmacen(x).subscribe(data => {
@@ -230,6 +241,14 @@ export class OperacionService {
     return this.http.post('operacion/getAlmacen/',x,this.headers).map(res => res.json());
   }
 
+  getAlmacenAnterior(){
+    var x = {
+      Balance_numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo'))-1,
+      Proyecto_idProyecto:localStorage.getItem('idProyecto')
+    }
+    return this.http.post('operacion/getAlmacen/',x,this.headers).map(res => res.json());
+  }
+
   getInter(){
     var x = {
       "idProyecto":localStorage.getItem('idProyecto'),
@@ -284,6 +303,40 @@ export class OperacionService {
       p.push(data.datos);
     });
     return p;
+  }
+
+  getIntegrales(){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    return this.http.get('operacion/integrales/'+localStorage.getItem('idProyecto'),{headers}).map(res => res.json());
+  }
+
+  getTendencias(){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    return this.http.get('operacion/tendencias/'+localStorage.getItem('idProyecto'),{headers}).map(res => res.json());
+  }
+
+  returnIntegrales(){
+    var x = [];
+    this.getIntegrales().subscribe(data => {
+      for(let key in data.datos){
+        x.push(data.datos[key]);
+      }
+    });
+    return x;
+  }
+
+  returnTendencias(){
+    var x = [];
+    this.getTendencias().subscribe(data => {
+      for(let key in data.datos){
+        x.push(data.datos[key]);
+      }
+    });
+    return x;
   }
 
 

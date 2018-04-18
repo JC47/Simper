@@ -98,7 +98,6 @@ import { AnalisisComponent } from './components/usuario/proyecto-usuario/analisi
 import { PuntoEquilibrioComponent } from './components/usuario/proyecto-usuario/punto-equilibrio/punto-equilibrio.component';
 import { IntegralesComponent } from './components/usuario/proyecto-usuario/integrales/integrales.component';
 import { TendenciasComponent } from './components/usuario/proyecto-usuario/tendencias/tendencias.component';
-import { RazonesComponent } from './components/usuario/proyecto-usuario/razones/razones.component';
 
 @NgModule({
   declarations: [
@@ -138,7 +137,6 @@ import { RazonesComponent } from './components/usuario/proyecto-usuario/razones/
     PuntoEquilibrioComponent,
     IntegralesComponent,
     TendenciasComponent,
-    RazonesComponent,
   ],
   imports: [
     FlashMessagesModule,

@@ -53,7 +53,7 @@ export class FlujoComponent implements OnInit {
         this.balanceFinal = this._resultadosService.getBalanceFinal();
         this.prestamos = this._operacionService.returnPrestamosActuales();
         this.pagos = this._operacionService.returnPagos();
-    }, 1500);
+    }, 500);
   }
 
   ngOnInit() {
@@ -188,12 +188,15 @@ export class FlujoComponent implements OnInit {
     for(let b of this.balanceFinal){
       r += b.imptosPorPagar * 11;
     }
+    for(let c of this.balanceInicial){
+      r+=c.imptosPorPagar;
+    }
     return r;
   }
 
   getSalidas(){
     var s = 0;
-    s = this.getCostoDeTransformacion() + this.getCostoDeDistribucion() + this.getCostoAdministrativo() + this.getCompras() + this.getIntereses() + this.getPagos() + this.getGastosVenta() + this.getCompraMaquinaria() + this.getIVA();
+    s = this.getCostoDeTransformacion() + this.getCostoDeDistribucion() + this.getCostoAdministrativo() + this.getCompras() + this.getIntereses() + this.getPagos() + this.getGastosVenta() + this.getCompraMaquinaria() + this.getIVA() + this.getPTU() + this.getISR();
     return s;
   }
 
