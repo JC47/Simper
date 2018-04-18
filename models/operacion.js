@@ -42,8 +42,8 @@ module.exports.getDemandaPotencial = function(numeroPeriodo,idProducto,idZona){
   return querySql(query);
 }
 
-module.exports.getMaquinarias = function(idProducto, idProyecto){
-  var query = "select * from maquinariaproyecto inner join maquinaria on maquinariaproyecto.Maquinaria_idMaquinaria = maquinaria.idMaquinaria where maquinariaproyecto.Proyectos_idProyecto = "+idProyecto+" and maquinariaproyecto.Maquinaria_idProducto = " +idProducto+" ";
+module.exports.getMaquinarias = function(idProducto, idProyecto, numeroPeriodo){
+  var query = "select * from maquinariaproyecto inner join maquinaria on maquinariaproyecto.Maquinaria_idMaquinaria = maquinaria.idMaquinaria where maquinariaproyecto.Proyectos_idProyecto = "+idProyecto+" and maquinariaproyecto.Maquinaria_idProducto = " +idProducto+" and maquinariaproyecto.Balance_numeroPeriodo <= "+numeroPeriodo+"";
   return querySql(query);
 }
 

@@ -166,20 +166,6 @@ router.post('/resultados', (req,res,next) => {
               });
 });
 
-router.post('/getproduccion', (req,res,next) => {
-  Promise.resolve().then(function(){
-    var idProducto = req.body.Producto_idProducto;
-    var idProyecto = req.body.Proyecto_idProyecto;
-    return operacion.getMaquinarias(idProducto,idProyecto);
-  }).then(function(maquinas){
-    var r = getProduccion(maquinas);
-    return res.json({success:true,produccion:r});
-  }).catch(function(err){
-    console.log(err);
-    return res.json({success:false,msg:"Algo salió mal"});
-  })
-});
-
 router.post('/getdemanda', (req,res,next) => {
   Promise.resolve().then(function(){
     var idProducto = req.body.Producto_idProducto;
@@ -203,7 +189,7 @@ router.post('/validateAlmacen', (req,res,next) => {
   var periodoAnterior = numeroPeriodo - 1;
   var uniA = req.body.unidadesAlmacenadas;
 
-  Promise.join(operacion.getMaquinarias(idProducto,idProyecto), operacion.getAlmacen(idProyecto,idProducto,periodoAnterior),
+  Promise.join(operacion.getMaquinarias(idProducto,idProyecto,numeroPeriodo), operacion.getAlmacen(idProyecto,idProducto,periodoAnterior),
               operacion.getUnidadesVendidas(idProyecto,idProducto,numeroPeriodo),
               function(maquinas,almacenAnterior,ventasTotales){
 
@@ -238,7 +224,7 @@ router.post('/validate', (req,res,next) => {
   var idUsuario = req.body.Usuario_idUsuario;
   var periodoAnterior = numeroPeriodo - 1;
 
-  Promise.join(operacion.getMaquinarias(idProducto,idProyecto),operacion.getDemandaPotencial(numeroPeriodo,idProducto,idZona),
+  Promise.join(operacion.getMaquinarias(idProducto,idProyecto,numeroPeriodo),operacion.getDemandaPotencial(numeroPeriodo,idProducto,idZona),
               operacion.getAlmacen(idProyecto,idProducto,periodoAnterior),operacion.getAlmacen(idProyecto,idProducto,numeroPeriodo),
               operacion.getOperacionProducto(idProyecto,idProducto,numeroPeriodo,idUsuario,idZona),
               function(maquinas,demanda,opAnterior,almacenActual,ventasTotales){
@@ -357,7 +343,7 @@ router.post('/selling', (req,res,next) => {
 
   Promise.join(operacion.getProductoVendido(idProducto), auxiliar.getAuxiliarVenta(periodoAnterior,idProyecto,idProducto),
               operacion.getAlmacen(idProyecto,idProducto,numeroPeriodo),
-              auxiliar.getAuxiliarVenta(numeroPeriodo,idProyecto,idProducto),operacion.getMaquinarias(idProducto,idProyecto),
+              auxiliar.getAuxiliarVenta(numeroPeriodo,idProyecto,idProducto),operacion.getMaquinarias(idProducto,idProyecto,numeroPeriodo),
               variable.getIVA(),variable.getClientes(),variable.getProveedores(),
               function(producto,opAnterior,almacenActual,auxVenta,maquinas,iva,clientes,proveedores){
     //Variables
@@ -368,6 +354,10 @@ router.post('/selling', (req,res,next) => {
     var uniAlmacenadas = 0
     if(almacenActual.length != 0){
       uniAlmacenadas = almacenActual[0].unidadesAlmacenadas;
+    }
+
+    if(idProducto == 6){
+      console.log(maquinas,"Maquinas");
     }
     //Depreciacion de maquinaria correspondiente
     var cTransMaq = getTM(maquinas);
@@ -400,6 +390,7 @@ router.post('/selling', (req,res,next) => {
     var cTransUnitario = 0;
     if(uniProd != 0){
       cTransUnitario = (producto[0].costosFijosFabri + cTransMaq + (uniProd * producto[0].costoVarUniFabri))/uniProd;
+      console.log("Datos",idProducto,producto[0].costosFijosFabri,cTransMaq,uniProd,producto[0].costoVarUniFabri);
     }
     //Costo de transformacion Total
     var cTransTotal = (cTransUnitario * uniProd) - cTransMaq;
