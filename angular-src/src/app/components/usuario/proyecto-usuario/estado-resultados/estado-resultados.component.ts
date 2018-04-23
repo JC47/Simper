@@ -96,9 +96,8 @@ export class EstadoResultadosComponent implements OnInit {
       for(let aux of this.auxiliares){
         T += aux.costoVentas;
       }
+      T += this.existenciaTotal();
     }
-
-    T += this.existenciaTotal();
 
     return T;
   }
