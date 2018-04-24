@@ -2363,8 +2363,8 @@ var AnalisisComponent = (function () {
                 var aux = _c[_b];
                 T += aux.costoVentas;
             }
+            T += this.existenciaTotal();
         }
-        T += this.existenciaTotal();
         return T;
     };
     AnalisisComponent.prototype.getUtilidadBruta = function () {
@@ -4258,6 +4258,7 @@ var CompraMaquinariaComponent = (function () {
             costo: this.maqSelectedLess.costo,
             dep: this.maqSelectedLess.depAcum
         };
+        console.log("Perro", x, y);
         this._CompraMaquinariaService.validar(x).subscribe(function (data) {
             if (data.success) {
                 _this.maquinasCompradas = _this._CompraMaquinariaService.regresarMaquinaria(x, y);
@@ -5055,8 +5056,8 @@ var EstadoResultadosComponent = (function () {
                 var aux = _c[_b];
                 T += aux.costoVentas;
             }
+            T += this.existenciaTotal();
         }
-        T += this.existenciaTotal();
         return T;
     };
     EstadoResultadosComponent.prototype.getCostoVentas = function (id) {

@@ -51,8 +51,10 @@ router.post('/validatecompra',(req,res,next) => {
   var idProducto = req.body.idProducto;
   var periodoAnterior = numeroPeriodo - 1;
 
+  console.log("Perro",numeroPeriodo,periodoAnterior);
+
   Promise.join(maquinariaComprada.getMaquinariaComprada(idProyecto, idMaquinaria, numeroPeriodo),maquinariaComprada.getMaq(idMaquinaria),
-  operacion.getMaquinarias(idProducto,idProyecto),operacion.getAlmacen(idProyecto,idProducto,periodoAnterior),
+  operacion.getMaquinarias(idProducto,idProyecto,numeroPeriodo),operacion.getAlmacen(idProyecto,idProducto,periodoAnterior),
   operacion.getAlmacen(idProyecto,idProducto,numeroPeriodo),operacion.getUnidadesVendidas(idProyecto,idProducto,numeroPeriodo),
   function(maquinaComprada,maquinaIndividual,maquinas,almacenAnterior,almacenActual,ventasTotales) {
 
