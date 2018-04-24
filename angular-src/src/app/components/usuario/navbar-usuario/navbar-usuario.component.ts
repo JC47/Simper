@@ -147,6 +147,7 @@ export class NavbarUsuarioComponent implements OnInit {
     preparaCierre(){
       this.productosEnDesarrollo=this._desarrolloProducto.returnProductosEnDesarrollo();
       this.zonasEnDesarrollo=this._desarrolloZona.returnProductosDeZonaEnDesarrollo();
+      console.log("Perro",this.zonasEnDesarrollo)
       this.openConf=true
     }
 
@@ -182,19 +183,21 @@ export class NavbarUsuarioComponent implements OnInit {
             this.confProd=true;
           }
         }
-      }else{
-        console.log(this.zonasEnDesarrollo)
+      }
+
+      if(this.confZona==false){
         for(let zonaDes of this.zonasEnDesarrollo){
           for(let producto of zonaDes.productosEnDes){
             if(producto.numeroPeriodo!=localStorage.getItem('numeroRPeriodos')){
                 this.confZona=true;
+            }
           }
-          }
-
+        }
       }
 
 
-    }
+
+
 
     if(this.confZona==false && this.confProd==false){
       this.pasarPeriodo();

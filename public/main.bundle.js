@@ -2154,6 +2154,7 @@ var NavbarUsuarioComponent = (function () {
     NavbarUsuarioComponent.prototype.preparaCierre = function () {
         this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
         this.zonasEnDesarrollo = this._desarrolloZona.returnProductosDeZonaEnDesarrollo();
+        console.log("Perro", this.zonasEnDesarrollo);
         this.openConf = true;
     };
     NavbarUsuarioComponent.prototype.editaPeriodo = function () {
@@ -2186,8 +2187,7 @@ var NavbarUsuarioComponent = (function () {
                 }
             }
         }
-        else {
-            console.log(this.zonasEnDesarrollo);
+        if (this.confZona == false) {
             for (var _b = 0, _c = this.zonasEnDesarrollo; _b < _c.length; _b++) {
                 var zonaDes = _c[_b];
                 for (var _d = 0, _e = zonaDes.productosEnDes; _d < _e.length; _d++) {
@@ -4258,7 +4258,6 @@ var CompraMaquinariaComponent = (function () {
             costo: this.maqSelectedLess.costo,
             dep: this.maqSelectedLess.depAcum
         };
-        console.log("Perro", x, y);
         this._CompraMaquinariaService.validar(x).subscribe(function (data) {
             if (data.success) {
                 _this.maquinasCompradas = _this._CompraMaquinariaService.regresarMaquinaria(x, y);
