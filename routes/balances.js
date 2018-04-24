@@ -149,7 +149,12 @@ router.post('/final', (req, res, next) => {
         }
       }
       else{
-      PPagar += pagos[key].pagoCapital;
+        if(pagos[key].plazo == 1){
+          PPagarAmenosAnio += pagos[key].pagoCapital;
+        }
+        else{
+          PPagar += pagos[key].pagoCapital;
+        }
       }
     }
 

@@ -4258,6 +4258,7 @@ var CompraMaquinariaComponent = (function () {
             costo: this.maqSelectedLess.costo,
             dep: this.maqSelectedLess.depAcum
         };
+        console.log("Perro", x, y);
         this._CompraMaquinariaService.validar(x).subscribe(function (data) {
             if (data.success) {
                 _this.maquinasCompradas = _this._CompraMaquinariaService.regresarMaquinaria(x, y);
