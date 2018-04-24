@@ -1,87 +1,103 @@
-<div class="row">
+<div class="row" style="margin-bottom:10px">
   <h2 class="col-12 text-center">Tendencias</h2>
-  <hr>
 </div>
 
 <div class="row">
   <div class="col-10 offset-1">
-    <table>
+    <table class="table table-hover">
       <thead>
         <th></th>
-        <th>Per 1</th>
-        <th>Per 2</th>
+        <th *ngFor="let periodo of tendencias" class="text-center">Periodo {{periodo.numeroPeriodo}}</th>
       </thead>
 
 
       <tr>
         <td>Efectivo</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.efectivo|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
 
       <tr>
         <td>Cuentas Por Cobrar</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.cuentasPCobrar|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
 
       <tr>
         <td>Almacén de Materia Prima</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">$0</td>
       </tr>
 
 
       <tr>
         <td>Almacén de P.T.</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.almacenPT|currency:'USD':true:'1.0-0'}}</td>
+
       </tr>
 
       <tr>
         <td>Activo Circulante</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.activoCirculante|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>Activo Fijo</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.activoFijo|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>Pasivo a Corto Plazo</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.pasivoCortoPlazo|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>Pasivo Total</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.pasivoTotal|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>Capital Contable</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.capitalContable|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>Ventas</td>
+        <td class="text-right"  *ngFor="let periodo of tendencias">{{periodo.ventasNetas|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>Costo de Ventas</td>
+          <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.costoVentas|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>Utilidad Bruta</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.utilidadBruta|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>Gastos de Distribución</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.cDist|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>Gastos de Administración</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.cAdmin|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>Otros Gastos</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.oGastos|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>Total de Gastos de Operación</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.cDist+periodo.cAdmin+periodo.oGastos|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
         <td>Utilidad Neta</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.utilidadNeta|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
     </table>
@@ -91,90 +107,220 @@
 
 
 
-<div class="row">
+<div class="row" style="margin-top:20px">
   <div class="col-10 offset-1">
-    <table class="table">
-
+    <table class="table table-hover">
       <thead>
-        <th>Indices</th>
-        <th>Per 1</th>
-        <th>Per 2</th>
+        <th></th>
+        <th *ngFor="let periodo of tendencias" class="text-center">Periodo {{periodo.numeroPeriodo}}</th>
       </thead>
 
 
+      <tr>
+        <td>Efectivo</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.pefectivo|number:'1.0-0'}}</td>
+      </tr>
 
 
-            <tr>
-              <td>Efectivo</td>
-            </tr>
+      <tr>
+        <td>Cuentas Por Cobrar</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.pcuentasPCobrar|number:'1.0-0'}}</td>
+      </tr>
 
 
-            <tr>
-              <td>Cuentas Por Cobrar</td>
-            </tr>
+      <tr>
+        <td>Almacén de Materia Prima</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">0</td>
+      </tr>
 
 
-            <tr>
-              <td>Almacén de Materia Prima</td>
-            </tr>
+      <tr>
+        <td>Almacén de P.T.</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.palmacenPT|number:'1.0-0'}}</td>
 
+      </tr>
 
-            <tr>
-              <td>Almacén de P.T.</td>
-            </tr>
+      <tr>
+        <td>Activo Circulante</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.pactivoCirculante|number:'1.0-0'}}</td>
+      </tr>
 
-            <tr>
-              <td>Activo Circulante</td>
-            </tr>
+      <tr>
+        <td>Activo Fijo</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.pactivoFijo|number:'1.0-0'}}</td>
+      </tr>
 
-            <tr>
-              <td>Activo Fijo</td>
-            </tr>
+      <tr>
+        <td>Pasivo a Corto Plazo</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.ppasivoCortoPlazo|number:'1.0-0'}}</td>
+      </tr>
 
-            <tr>
-              <td>Pasivo a Corto Plazo</td>
-            </tr>
+      <tr>
+        <td>Pasivo Total</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.ppasivoTotal|number:'1.0-0'}}</td>
+      </tr>
 
-            <tr>
-              <td>Pasivo Total</td>
-            </tr>
+      <tr>
+        <td>Capital Contable</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.pcapitalContable|number:'1.0-0'}}</td>
+      </tr>
 
-            <tr>
-              <td>Capital Contable</td>
-            </tr>
+      <tr>
+        <td>Ventas</td>
+        <td class="text-right"  *ngFor="let periodo of tendencias">{{periodo.pventasNetas|number:'1.0-0'}}</td>
+      </tr>
 
-            <tr>
-              <td>Ventas</td>
-            </tr>
+      <tr>
+        <td>Costo de Ventas</td>
+          <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.pcostoVentas|number:'1.0-0'}}</td>
+      </tr>
 
-            <tr>
-              <td>Costo de Ventas</td>
-            </tr>
+      <tr>
+        <td>Utilidad Bruta</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.putilidadBruta|number:'1.0-0'}}</td>
+      </tr>
 
-            <tr>
-              <td>Utilidad Bruta</td>
-            </tr>
+      <tr>
+        <td>Gastos de Distribución</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.pcDist|number:'1.0-0'}}</td>
+      </tr>
 
-            <tr>
-              <td>Gastos de Distribución</td>
-            </tr>
+      <tr>
+        <td>Gastos de Administración</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.pcAdmin|number:'1.0-0'}}</td>
+      </tr>
 
-            <tr>
-              <td>Gastos de Administración</td>
-            </tr>
+      <tr>
+        <td>Otros Gastos</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.poGastos|number:'1.0-0'}}</td>
+      </tr>
 
-            <tr>
-              <td>Otros Gastos</td>
-            </tr>
+      <tr>
+        <td>Total de Gastos de Operación</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.pcDist+periodo.cAdmin+periodo.oGastos|number:'1.0-0'}}</td>
+      </tr>
 
-            <tr>
-              <td>Total de Gastos de Operación</td>
-            </tr>
-
-            <tr>
-              <td>Utilidad Neta</td>
-            </tr>
+      <tr>
+        <td>Utilidad Neta</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.putilidadNeta|number:'1.0-0'}}</td>
+      </tr>
 
     </table>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-12">
+    <h2 class="text-center">Indices</h2>
+  </div>
+
+
+  <div class="offset-1 col-10" style="height:400px;">
+    <ngx-charts-bar-vertical-2d
+       [results]="graf1"
+       [scheme]="colorScheme"
+       xAxis="true"
+       legendTitle="Indices"
+       yAxis="true"
+       legend="true"
+       showXAxisLabel="true"
+       showYAxisLabel="true"
+       xAxisLabel="Periodos"
+       yAxisLabel="Indices"
+       autoScale="true"
+       >
+     </ngx-charts-bar-vertical-2d>
+  </div>
+
+
+  <div class="offset-1 col-10" style="height:400px;">
+    <ngx-charts-bar-vertical-2d
+       [results]="graf2"
+       [scheme]="colorScheme"
+       xAxis="true"
+       legendTitle="Indices"
+       yAxis="true"
+       legend="true"
+       showXAxisLabel="true"
+       showYAxisLabel="true"
+       xAxisLabel="Periodos"
+       yAxisLabel="Indices"
+       autoScale="true"
+       >
+     </ngx-charts-bar-vertical-2d>
+  </div>
+
+
+  <div class="offset-1 col-10" style="height:400px;">
+    <ngx-charts-bar-vertical-2d
+       [results]="graf3"
+       [scheme]="colorScheme"
+       xAxis="true"
+       legendTitle="Indices"
+       yAxis="true"
+       legend="true"
+       showXAxisLabel="true"
+       showYAxisLabel="true"
+       xAxisLabel="Periodos"
+       yAxisLabel="Indices"
+       autoScale="true"
+       >
+     </ngx-charts-bar-vertical-2d>
+  </div>
+
+
+  <div class="offset-1 col-10" style="height:400px;">
+    <ngx-charts-bar-vertical-2d
+       [results]="graf4"
+       [scheme]="colorScheme"
+       xAxis="true"
+       legendTitle="Indices"
+       yAxis="true"
+       legend="true"
+       showXAxisLabel="true"
+       showYAxisLabel="true"
+       xAxisLabel="Periodos"
+       yAxisLabel="Indices"
+       autoScale="true"
+       >
+     </ngx-charts-bar-vertical-2d>
+  </div>
+
+
+  <div class="offset-1 col-10" style="height:400px;">
+    <ngx-charts-bar-vertical-2d
+       [results]="graf5"
+       [scheme]="colorScheme"
+       xAxis="true"
+       legendTitle="Indices"
+       yAxis="true"
+       legend="true"
+       showXAxisLabel="true"
+       showYAxisLabel="true"
+       xAxisLabel="Periodos"
+       yAxisLabel="Indices"
+       autoScale="true"
+       >
+     </ngx-charts-bar-vertical-2d>
+  </div>
+
+
+
+  <div class="offset-1 col-10" style="height:400px;">
+    <ngx-charts-bar-vertical-2d
+       [results]="graf6"
+       [scheme]="colorScheme"
+       xAxis="true"
+       legendTitle="Indices"
+       yAxis="true"
+       legend="true"
+       showXAxisLabel="true"
+       showYAxisLabel="true"
+       xAxisLabel="Periodos"
+       yAxisLabel="Indices"
+       autoScale="true"
+       >
+     </ngx-charts-bar-vertical-2d>
   </div>
 </div>

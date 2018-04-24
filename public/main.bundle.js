@@ -6129,7 +6129,7 @@ var _a, _b, _c, _d, _e, _f, _g;
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/integrales/integrales.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div class=\"col-12\">\r\n    <h2 class=\"col-12 text-center\">Integrales</h2>\r\n    <hr>\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-10 offset-1\">\r\n    <table class=\"table\">\r\n            \r\n    </table>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"row\" style=\"margin-bottom:20px\">\r\n  <div class=\"col-12\">\r\n    <h2 class=\"col-12 text-center\">Integrales</h2>\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-10 offset-1\">\r\n    <table class=\"table table-responsive table-hover\" id=\"tabla1\">\r\n            <tr>\r\n              <th ></th>\r\n              <th colspan=\"2\" class=\"text-center\" *ngFor=\"let periodo of integrales\">Periodo {{periodo.numeroPeriodo}}</th>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td>Ventas Netas</td>\r\n                <td class=\"text-right\" *ngFor=\"let element of tabla[0]\">{{element}}</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td>Costo de Ventas</td>\r\n              <td class=\"text-right\" style=\"width:50px\" *ngFor=\"let element of tabla[1]\">{{element}}</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td></td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td class=\"table-active\">Utilidad Bruta</td>\r\n              <td class=\"text-right table-active\" style=\"width:50px\" *ngFor=\"let element of tabla[2]\">{{element}}</td>\r\n\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td></td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td>Costo de Distribución</td>\r\n              <td class=\"text-right\" style=\"width:50px\" *ngFor=\"let element of tabla[3]\">{{element}}</td>\r\n            </tr>\r\n\r\n\r\n\r\n            <tr>\r\n              <td>Otros Gastos</td>\r\n              <td class=\"text-right\" style=\"width:50px\" *ngFor=\"let element of tabla[4]\">{{element}}</td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td>Costo de Administración</td>\r\n              <td class=\"text-right\" style=\"width:50px\" *ngFor=\"let element of tabla[5]\">{{element}}</td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td class=\"table-active\"></td>\r\n              <td class=\"text-right table-active\"  style=\"width:50px\" *ngFor=\"let element of tabla[6]\">{{element}}</td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td></td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td class=\"table-active\">Utilidad en Operación</td>\r\n              <td class=\"text-right table-active\" style=\"width:50px\" *ngFor=\"let element of tabla[7]\">{{element}}</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td></td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td>Intereses</td>\r\n              <td class=\"text-right\" style=\"width:50px\" *ngFor=\"let element of tabla[8]\">{{element}}</td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td></td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td class=\"table-active\">Utilidad Antes de Impuestos</td>\r\n              <td class=\"text-right table-active\" style=\"width:50px\" *ngFor=\"let element of tabla[9]\">{{element}}</td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td></td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td>ISR</td>\r\n              <td class=\"text-right\" style=\"width:50px\" *ngFor=\"let element of tabla[10]\">{{element}}</td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td>PTU</td>\r\n              <td class=\"text-right\" style=\"width:50px\" *ngFor=\"let element of tabla[11]\">{{element}}</td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td></td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td class=\"table-active\">Utilidad del Ejercicio</td>\r\n              <td class=\"text-right  table-active\" style=\"width:50px\" *ngFor=\"let element of tabla[12]\">{{element}}</td>\r\n            </tr>\r\n\r\n\r\n\r\n\r\n\r\n    </table>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n<div class=\"row\" style=\"margin-bottom:20px\">\r\n  <div class=\"col-10 offset-1\">\r\n    <table class=\"table table-hover\">\r\n            <tr>\r\n              <th ></th>\r\n              <th class=\"text-center\" *ngFor=\"let periodo of integrales\">Periodo {{periodo.numeroPeriodo}}</th>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td>Ventas Netas</td>\r\n                <td class=\"text-right\" *ngFor=\"let periodo of integrales\">{{periodo.pventasNetas|number:'1.0-0'}}%</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td>Costo de Ventas</td>\r\n              <td class=\"text-right\"  *ngFor=\"let periodo of integrales\">{{periodo.pcostoVentas|number:'1.0-0'}}%</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td></td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td class=\"table-active\">Utilidad Bruta</td>\r\n              <td class=\"text-right table-active\" *ngFor=\"let periodo of integrales\">{{periodo.putilidadBruta|number:'1.0-0'}}%</td>\r\n\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td></td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td>Costo de Distribución</td>\r\n              <td class=\"text-right\" *ngFor=\"let periodo of integrales\">{{periodo.pcDist|number:'1.0-0'}}%</td>\r\n            </tr>\r\n\r\n\r\n\r\n            <tr>\r\n              <td>Otros Gastos</td>\r\n              <td class=\"text-right\" *ngFor=\"let periodo of integrales\">{{periodo.poGastos|number:'1.0-0'}}%</td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td>Costo de Administración</td>\r\n              <td class=\"text-right\" *ngFor=\"let periodo of integrales\">{{periodo.pcAdmin|number:'1.0-0'}}%</td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td class=\"table-active\"></td>\r\n              <td class=\"text-right table-active\" *ngFor=\"let periodo of integrales\">{{(periodo.cAdmin+periodo.oGastos+periodo.cDist)/periodo.ventasNetas|number:'1.0-0'}}%</td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td></td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td class=\"table-active\">Utilidad en Operación</td>\r\n              <td class=\"text-right table-active\" *ngFor=\"let periodo of integrales\">{{periodo.putilidadOperacion|number:'1.0-0'}}%</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td></td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td>Intereses</td>\r\n              <td class=\"text-right\" *ngFor=\"let periodo of integrales\">{{periodo.pintereses|number:'1.0-0'}}%</td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td></td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td class=\"table-active\">Utilidad Antes de Impuestos</td>\r\n              <td class=\"text-right table-active\" *ngFor=\"let periodo of integrales\">{{periodo.putilidadAntesImptos|number:'1.0-0'}}%</td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td></td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td>ISR</td>\r\n              <td class=\"text-right\" *ngFor=\"let periodo of integrales\">{{periodo.pISR|number:'1.0-0'}}%</td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td>PTU</td>\r\n              <td class=\"text-right\" *ngFor=\"let periodo of integrales\">{{periodo.pPTU|number:'1.0-0'}}%</td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td></td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td class=\"table-active\">Utilidad del Ejercicio</td>\r\n              <td class=\"text-right  table-active\" *ngFor=\"let periodo of integrales\">{{periodo.putilidadEjercicio|number:'1.0-0'}}%</td>\r\n\r\n            </tr>\r\n\r\n\r\n\r\n\r\n\r\n    </table>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -6139,6 +6139,7 @@ module.exports = "<div class=\"row\">\r\n  <div class=\"col-12\">\r\n    <h2 cla
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__ = __webpack_require__("../../../../../src/app/services/operacion.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return IntegralesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -6151,14 +6152,119 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
 var IntegralesComponent = (function () {
-    function IntegralesComponent(_operacionService) {
+    function IntegralesComponent(_operacionService, dc, cp) {
+        var _this = this;
         this._operacionService = _operacionService;
+        this.dc = dc;
+        this.cp = cp;
         this.integrales = [];
+        this.tabla = [];
         this.integrales = this._operacionService.returnIntegrales();
         console.log(this.integrales);
+        setTimeout(function () {
+            _this.tabla = _this.acomoda(_this.integrales);
+            console.log(_this.tabla);
+        }, 2000);
     }
     IntegralesComponent.prototype.ngOnInit = function () {
+    };
+    IntegralesComponent.prototype.acomoda = function (integrales) {
+        var arrelgo = [];
+        var sec = [];
+        for (var _i = 0, _a = this.integrales; _i < _a.length; _i++) {
+            var periodo = _a[_i];
+            sec.push(this.cp.transform(periodo.costoVentas, 'USD', true, '1.0-0'));
+            sec.push(this.dc.transform(periodo.pventasNetas, '1.0-0') + "%");
+        }
+        arrelgo.push(sec);
+        sec = [];
+        for (var _b = 0, _c = this.integrales; _b < _c.length; _b++) {
+            var periodo = _c[_b];
+            sec.push(this.cp.transform(periodo.costoVentas, 'USD', true, '1.0-0'));
+            sec.push(this.dc.transform(periodo.pcostoVentas, '1.0-0') + "%");
+        }
+        arrelgo.push(sec);
+        sec = [];
+        for (var _d = 0, _e = this.integrales; _d < _e.length; _d++) {
+            var periodo = _e[_d];
+            sec.push(this.cp.transform(periodo.utilidadBruta, 'USD', true, '1.0-0'));
+            sec.push(this.dc.transform(periodo.putilidadBruta, '1.0-0') + "%");
+        }
+        arrelgo.push(sec);
+        sec = [];
+        for (var _f = 0, _g = this.integrales; _f < _g.length; _f++) {
+            var periodo = _g[_f];
+            sec.push(this.cp.transform(periodo.cDist, 'USD', true, '1.0-0'));
+            sec.push(this.dc.transform(periodo.pcDist, '1.0-0') + "%");
+        }
+        arrelgo.push(sec);
+        sec = [];
+        for (var _h = 0, _j = this.integrales; _h < _j.length; _h++) {
+            var periodo = _j[_h];
+            sec.push(this.cp.transform(periodo.oGastos, 'USD', true, '1.0-0'));
+            sec.push(this.dc.transform(periodo.poGastos, '1.0-0') + "%");
+        }
+        arrelgo.push(sec);
+        sec = [];
+        for (var _k = 0, _l = this.integrales; _k < _l.length; _k++) {
+            var periodo = _l[_k];
+            sec.push(this.cp.transform(periodo.cAdmin, 'USD', true, '1.0-0'));
+            sec.push(this.dc.transform(periodo.pcAdmin, '1.0-0') + "%");
+        }
+        arrelgo.push(sec);
+        sec = [];
+        for (var _m = 0, _o = this.integrales; _m < _o.length; _m++) {
+            var periodo = _o[_m];
+            sec.push(this.cp.transform(periodo.cDist + periodo.oGastos + periodo.cAdmin, 'USD', true, '1.0-0'));
+            sec.push(this.dc.transform((periodo.cDist + periodo.oGastos + periodo.cAdmin) / periodo.ventasNetas, '1.0-0') + "%");
+        }
+        arrelgo.push(sec);
+        sec = [];
+        for (var _p = 0, _q = this.integrales; _p < _q.length; _p++) {
+            var periodo = _q[_p];
+            sec.push(this.cp.transform(periodo.utilidadOperacion, 'USD', true, '1.0-0'));
+            sec.push(this.dc.transform(periodo.putilidadOperacion, '1.0-0') + "%");
+        }
+        arrelgo.push(sec);
+        sec = [];
+        for (var _r = 0, _s = this.integrales; _r < _s.length; _r++) {
+            var periodo = _s[_r];
+            sec.push(this.cp.transform(periodo.intereses, 'USD', true, '1.0-0'));
+            sec.push(this.dc.transform(periodo.pintereses, '1.0-0') + "%");
+        }
+        arrelgo.push(sec);
+        sec = [];
+        for (var _t = 0, _u = this.integrales; _t < _u.length; _t++) {
+            var periodo = _u[_t];
+            sec.push(this.cp.transform(periodo.utilidadAntesImptos, 'USD', true, '1.0-0'));
+            sec.push(this.dc.transform(periodo.putilidadAntesImptos, '1.0-0') + "%");
+        }
+        arrelgo.push(sec);
+        sec = [];
+        for (var _v = 0, _w = this.integrales; _v < _w.length; _v++) {
+            var periodo = _w[_v];
+            sec.push(this.cp.transform(periodo.ISR, 'USD', true, '1.0-0'));
+            sec.push(this.dc.transform(periodo.pISR, '1.0-0') + "%");
+        }
+        arrelgo.push(sec);
+        sec = [];
+        for (var _x = 0, _y = this.integrales; _x < _y.length; _x++) {
+            var periodo = _y[_x];
+            sec.push(this.cp.transform(periodo.PTU, 'USD', true, '1.0-0'));
+            sec.push(this.dc.transform(periodo.pPTU, '1.0-0') + "%");
+        }
+        arrelgo.push(sec);
+        sec = [];
+        for (var _z = 0, _0 = this.integrales; _z < _0.length; _z++) {
+            var periodo = _0[_z];
+            sec.push(this.cp.transform(periodo.utilidadEjercicio, 'USD', true, '1.0-0'));
+            sec.push(this.dc.transform(periodo.putilidadEjercicio, '1.0-0') + "%");
+        }
+        arrelgo.push(sec);
+        return arrelgo;
     };
     return IntegralesComponent;
 }());
@@ -6167,10 +6273,10 @@ IntegralesComponent = __decorate([
         selector: 'app-integrales',
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/integrales/integrales.component.html")
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["DecimalPipe"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common__["DecimalPipe"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["CurrencyPipe"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common__["CurrencyPipe"]) === "function" && _c || Object])
 ], IntegralesComponent);
 
-var _a;
+var _a, _b, _c;
 //# sourceMappingURL=integrales.component.js.map
 
 /***/ }),
@@ -8219,7 +8325,7 @@ var _a, _b;
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/tendencias/tendencias.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <h2 class=\"col-12 text-center\">Tendencias</h2>\r\n  <hr>\r\n</div>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-10 offset-1\">\r\n    <table>\r\n      <thead>\r\n        <th></th>\r\n        <th>Per 1</th>\r\n        <th>Per 2</th>\r\n      </thead>\r\n\r\n\r\n      <tr>\r\n        <td>Efectivo</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Cuentas Por Cobrar</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Almacén de Materia Prima</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Almacén de P.T.</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Activo Circulante</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Activo Fijo</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Pasivo a Corto Plazo</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Pasivo Total</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Capital Contable</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Ventas</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Costo de Ventas</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Utilidad Bruta</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Gastos de Distribución</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Gastos de Administración</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Otros Gastos</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Total de Gastos de Operación</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Utilidad Neta</td>\r\n      </tr>\r\n\r\n    </table>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-10 offset-1\">\r\n    <table class=\"table\">\r\n\r\n      <thead>\r\n        <th>Indices</th>\r\n        <th>Per 1</th>\r\n        <th>Per 2</th>\r\n      </thead>\r\n\r\n\r\n\r\n\r\n            <tr>\r\n              <td>Efectivo</td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td>Cuentas Por Cobrar</td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td>Almacén de Materia Prima</td>\r\n            </tr>\r\n\r\n\r\n            <tr>\r\n              <td>Almacén de P.T.</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td>Activo Circulante</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td>Activo Fijo</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td>Pasivo a Corto Plazo</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td>Pasivo Total</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td>Capital Contable</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td>Ventas</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td>Costo de Ventas</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td>Utilidad Bruta</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td>Gastos de Distribución</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td>Gastos de Administración</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td>Otros Gastos</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td>Total de Gastos de Operación</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td>Utilidad Neta</td>\r\n            </tr>\r\n\r\n    </table>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"row\" style=\"margin-bottom:10px\">\r\n  <h2 class=\"col-12 text-center\">Tendencias</h2>\r\n</div>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-10 offset-1\">\r\n    <table class=\"table table-hover\">\r\n      <thead>\r\n        <th></th>\r\n        <th *ngFor=\"let periodo of tendencias\" class=\"text-center\">Periodo {{periodo.numeroPeriodo}}</th>\r\n      </thead>\r\n\r\n\r\n      <tr>\r\n        <td>Efectivo</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.efectivo|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Cuentas Por Cobrar</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.cuentasPCobrar|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Almacén de Materia Prima</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">$0</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Almacén de P.T.</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.almacenPT|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Activo Circulante</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.activoCirculante|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Activo Fijo</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.activoFijo|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Pasivo a Corto Plazo</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pasivoCortoPlazo|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Pasivo Total</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pasivoTotal|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Capital Contable</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.capitalContable|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Ventas</td>\r\n        <td class=\"text-right\"  *ngFor=\"let periodo of tendencias\">{{periodo.ventasNetas|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Costo de Ventas</td>\r\n          <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.costoVentas|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Utilidad Bruta</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.utilidadBruta|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Gastos de Distribución</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.cDist|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Gastos de Administración</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.cAdmin|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Otros Gastos</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.oGastos|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Total de Gastos de Operación</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.cDist+periodo.cAdmin+periodo.oGastos|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Utilidad Neta</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.utilidadNeta|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n    </table>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n<div class=\"row\" style=\"margin-top:20px\">\r\n  <div class=\"col-10 offset-1\">\r\n    <table class=\"table table-hover\">\r\n      <thead>\r\n        <th></th>\r\n        <th *ngFor=\"let periodo of tendencias\" class=\"text-center\">Periodo {{periodo.numeroPeriodo}}</th>\r\n      </thead>\r\n\r\n\r\n      <tr>\r\n        <td>Efectivo</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pefectivo|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Cuentas Por Cobrar</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pcuentasPCobrar|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Almacén de Materia Prima</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">0</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Almacén de P.T.</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.palmacenPT|number:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Activo Circulante</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pactivoCirculante|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Activo Fijo</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pactivoFijo|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Pasivo a Corto Plazo</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.ppasivoCortoPlazo|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Pasivo Total</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.ppasivoTotal|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Capital Contable</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pcapitalContable|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Ventas</td>\r\n        <td class=\"text-right\"  *ngFor=\"let periodo of tendencias\">{{periodo.pventasNetas|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Costo de Ventas</td>\r\n          <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pcostoVentas|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Utilidad Bruta</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.putilidadBruta|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Gastos de Distribución</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pcDist|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Gastos de Administración</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pcAdmin|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Otros Gastos</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.poGastos|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Total de Gastos de Operación</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pcDist+periodo.cAdmin+periodo.oGastos|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Utilidad Neta</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.putilidadNeta|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n    </table>\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-12\">\r\n    <h2 class=\"text-center\">Indices</h2>\r\n  </div>\r\n\r\n\r\n  <div class=\"offset-1 col-10\" style=\"height:400px;\">\r\n    <ngx-charts-bar-vertical-2d\r\n       [results]=\"graf1\"\r\n       [scheme]=\"colorScheme\"\r\n       xAxis=\"true\"\r\n       legendTitle=\"Indices\"\r\n       yAxis=\"true\"\r\n       legend=\"true\"\r\n       showXAxisLabel=\"true\"\r\n       showYAxisLabel=\"true\"\r\n       xAxisLabel=\"Periodos\"\r\n       yAxisLabel=\"Indices\"\r\n       autoScale=\"true\"\r\n       >\r\n     </ngx-charts-bar-vertical-2d>\r\n  </div>\r\n\r\n\r\n  <div class=\"offset-1 col-10\" style=\"height:400px;\">\r\n    <ngx-charts-bar-vertical-2d\r\n       [results]=\"graf2\"\r\n       [scheme]=\"colorScheme\"\r\n       xAxis=\"true\"\r\n       legendTitle=\"Indices\"\r\n       yAxis=\"true\"\r\n       legend=\"true\"\r\n       showXAxisLabel=\"true\"\r\n       showYAxisLabel=\"true\"\r\n       xAxisLabel=\"Periodos\"\r\n       yAxisLabel=\"Indices\"\r\n       autoScale=\"true\"\r\n       >\r\n     </ngx-charts-bar-vertical-2d>\r\n  </div>\r\n\r\n\r\n  <div class=\"offset-1 col-10\" style=\"height:400px;\">\r\n    <ngx-charts-bar-vertical-2d\r\n       [results]=\"graf3\"\r\n       [scheme]=\"colorScheme\"\r\n       xAxis=\"true\"\r\n       legendTitle=\"Indices\"\r\n       yAxis=\"true\"\r\n       legend=\"true\"\r\n       showXAxisLabel=\"true\"\r\n       showYAxisLabel=\"true\"\r\n       xAxisLabel=\"Periodos\"\r\n       yAxisLabel=\"Indices\"\r\n       autoScale=\"true\"\r\n       >\r\n     </ngx-charts-bar-vertical-2d>\r\n  </div>\r\n\r\n\r\n  <div class=\"offset-1 col-10\" style=\"height:400px;\">\r\n    <ngx-charts-bar-vertical-2d\r\n       [results]=\"graf4\"\r\n       [scheme]=\"colorScheme\"\r\n       xAxis=\"true\"\r\n       legendTitle=\"Indices\"\r\n       yAxis=\"true\"\r\n       legend=\"true\"\r\n       showXAxisLabel=\"true\"\r\n       showYAxisLabel=\"true\"\r\n       xAxisLabel=\"Periodos\"\r\n       yAxisLabel=\"Indices\"\r\n       autoScale=\"true\"\r\n       >\r\n     </ngx-charts-bar-vertical-2d>\r\n  </div>\r\n\r\n\r\n  <div class=\"offset-1 col-10\" style=\"height:400px;\">\r\n    <ngx-charts-bar-vertical-2d\r\n       [results]=\"graf5\"\r\n       [scheme]=\"colorScheme\"\r\n       xAxis=\"true\"\r\n       legendTitle=\"Indices\"\r\n       yAxis=\"true\"\r\n       legend=\"true\"\r\n       showXAxisLabel=\"true\"\r\n       showYAxisLabel=\"true\"\r\n       xAxisLabel=\"Periodos\"\r\n       yAxisLabel=\"Indices\"\r\n       autoScale=\"true\"\r\n       >\r\n     </ngx-charts-bar-vertical-2d>\r\n  </div>\r\n\r\n\r\n\r\n  <div class=\"offset-1 col-10\" style=\"height:400px;\">\r\n    <ngx-charts-bar-vertical-2d\r\n       [results]=\"graf6\"\r\n       [scheme]=\"colorScheme\"\r\n       xAxis=\"true\"\r\n       legendTitle=\"Indices\"\r\n       yAxis=\"true\"\r\n       legend=\"true\"\r\n       showXAxisLabel=\"true\"\r\n       showYAxisLabel=\"true\"\r\n       xAxisLabel=\"Periodos\"\r\n       yAxisLabel=\"Indices\"\r\n       autoScale=\"true\"\r\n       >\r\n     </ngx-charts-bar-vertical-2d>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -8243,12 +8349,147 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var TendenciasComponent = (function () {
     function TendenciasComponent(_operacionService) {
+        var _this = this;
         this._operacionService = _operacionService;
         this.tendencias = [];
+        this.graf1 = [];
+        this.graf2 = [];
+        this.graf3 = [];
+        this.graf4 = [];
+        this.graf5 = [];
+        this.graf6 = [];
+        this.colorScheme = {
+            domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+        };
         this.tendencias = this._operacionService.returnTendencias();
         console.log(this.tendencias);
+        setTimeout(function () {
+            _this.graf1 = _this.getGraf1();
+            _this.graf2 = _this.getGraf2();
+            _this.graf3 = _this.getGraf3();
+            _this.graf4 = _this.getGraf4();
+            _this.graf5 = _this.getGraf5();
+            _this.graf6 = _this.getGraf6();
+            console.log("Grafica 1", _this.graf1);
+        }, 5000);
     }
     TendenciasComponent.prototype.ngOnInit = function () {
+    };
+    TendenciasComponent.prototype.getGraf1 = function () {
+        var data = [];
+        for (var _i = 0, _a = this.tendencias; _i < _a.length; _i++) {
+            var periodo = _a[_i];
+            var gTemp = {
+                name: "Periodo " + periodo.numeroPeriodo,
+                series: [
+                    { name: "Activo Circulante",
+                        value: Math.trunc(periodo.pactivoCirculante) },
+                    { name: "Pasivo a Corto Plazo",
+                        value: Math.trunc(periodo.ppasivoCortoPlazo) }
+                ]
+            };
+            data.push(gTemp);
+        }
+        return data;
+    };
+    TendenciasComponent.prototype.getGraf2 = function () {
+        var data = [];
+        for (var _i = 0, _a = this.tendencias; _i < _a.length; _i++) {
+            var periodo = _a[_i];
+            var gTemp = {
+                name: "Periodo " + periodo.numeroPeriodo,
+                series: [
+                    { name: "Activo Fijo",
+                        value: Math.trunc(periodo.pactivoFijo) },
+                    { name: "Pasivo Pasivo Total",
+                        value: Math.trunc(periodo.ppasivoTotal) },
+                    { name: "Capital Contable",
+                        value: Math.trunc(periodo.pcapitalContable) }
+                ]
+            };
+            data.push(gTemp);
+        }
+        return data;
+    };
+    TendenciasComponent.prototype.getGraf3 = function () {
+        var data = [];
+        for (var _i = 0, _a = this.tendencias; _i < _a.length; _i++) {
+            var periodo = _a[_i];
+            var gTemp = {
+                name: "Periodo " + periodo.numeroPeriodo,
+                series: [
+                    { name: "Cuentas por Cobrar",
+                        value: Math.trunc(periodo.pcuentasPCobrar) },
+                    { name: "Almacen de Materia Prima",
+                        value: Math.trunc(0) },
+                    { name: "Almacen de PT",
+                        value: Math.trunc(periodo.palmacenPT) },
+                    { name: "Ventas",
+                        value: Math.trunc(periodo.pventasNetas) }
+                ]
+            };
+            data.push(gTemp);
+        }
+        return data;
+    };
+    TendenciasComponent.prototype.getGraf4 = function () {
+        var data = [];
+        for (var _i = 0, _a = this.tendencias; _i < _a.length; _i++) {
+            var periodo = _a[_i];
+            var gTemp = {
+                name: "Periodo " + periodo.numeroPeriodo,
+                series: [
+                    { name: "Ventas",
+                        value: Math.trunc(periodo.pventasNetas) },
+                    { name: "Costo de Ventas",
+                        value: Math.trunc(periodo.pcostoVentas) },
+                    { name: "Utilidad Neta",
+                        value: Math.trunc(periodo.putilidadNeta) },
+                    { name: "Total de Gastos de Operación",
+                        value: Math.trunc(periodo.pcDist + periodo.pcAdmin + periodo.poGastos) }
+                ]
+            };
+            data.push(gTemp);
+        }
+        return data;
+    };
+    TendenciasComponent.prototype.getGraf5 = function () {
+        var data = [];
+        for (var _i = 0, _a = this.tendencias; _i < _a.length; _i++) {
+            var periodo = _a[_i];
+            var gTemp = {
+                name: "Periodo " + periodo.numeroPeriodo,
+                series: [
+                    { name: "Total de Gastos de Operación",
+                        value: Math.trunc(periodo.pcDist + periodo.pcAdmin + periodo.poGastos) },
+                    { name: "Gastos de Distribución",
+                        value: Math.trunc(periodo.pcDist) },
+                    { name: "Gastos de Administración",
+                        value: Math.trunc(periodo.pcAdmin) },
+                    { name: "Otros Gastos",
+                        value: Math.trunc(periodo.poGastos) }
+                ]
+            };
+            data.push(gTemp);
+        }
+        return data;
+    };
+    TendenciasComponent.prototype.getGraf6 = function () {
+        var data = [];
+        for (var _i = 0, _a = this.tendencias; _i < _a.length; _i++) {
+            var periodo = _a[_i];
+            var gTemp = {
+                name: "Periodo " + periodo.numeroPeriodo,
+                series: [
+                    { name: "Utilidad Bruta",
+                        value: Math.trunc(periodo.putilidadBruta) },
+                    { name: "Utilidad Neta",
+                        value: Math.trunc(periodo.putilidadNeta) }
+                ]
+            };
+            data.push(gTemp);
+        }
+        return data;
     };
     return TendenciasComponent;
 }());

@@ -15,11 +15,7 @@ Promise.promisifyAll(require("mysql/lib/Pool").prototype);
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-<<<<<<< HEAD
     password: 'root',
-=======
-    password: '',
->>>>>>> 9e4e54a0833aa23fb1024d12d83543f27921ec88
     database: 'basesimv1'
 });
 

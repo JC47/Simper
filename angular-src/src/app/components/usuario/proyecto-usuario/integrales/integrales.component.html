@@ -1,15 +1,256 @@
-<div class="row">
+<div class="row" style="margin-bottom:20px">
   <div class="col-12">
     <h2 class="col-12 text-center">Integrales</h2>
-    <hr>
   </div>
 </div>
 
 
 <div class="row">
   <div class="col-10 offset-1">
-    <table class="table">
-            
+    <table class="table table-responsive table-hover" id="tabla1">
+            <tr>
+              <th ></th>
+              <th colspan="2" class="text-center" *ngFor="let periodo of integrales">Periodo {{periodo.numeroPeriodo}}</th>
+            </tr>
+
+            <tr>
+              <td>Ventas Netas</td>
+                <td class="text-right" *ngFor="let element of tabla[0]">{{element}}</td>
+            </tr>
+
+            <tr>
+              <td>Costo de Ventas</td>
+              <td class="text-right" style="width:50px" *ngFor="let element of tabla[1]">{{element}}</td>
+            </tr>
+
+            <tr>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td class="table-active">Utilidad Bruta</td>
+              <td class="text-right table-active" style="width:50px" *ngFor="let element of tabla[2]">{{element}}</td>
+
+            </tr>
+
+
+            <tr>
+              <td></td>
+            </tr>
+
+
+            <tr>
+              <td>Costo de Distribución</td>
+              <td class="text-right" style="width:50px" *ngFor="let element of tabla[3]">{{element}}</td>
+            </tr>
+
+
+
+            <tr>
+              <td>Otros Gastos</td>
+              <td class="text-right" style="width:50px" *ngFor="let element of tabla[4]">{{element}}</td>
+            </tr>
+
+
+            <tr>
+              <td>Costo de Administración</td>
+              <td class="text-right" style="width:50px" *ngFor="let element of tabla[5]">{{element}}</td>
+            </tr>
+
+
+            <tr>
+              <td class="table-active"></td>
+              <td class="text-right table-active"  style="width:50px" *ngFor="let element of tabla[6]">{{element}}</td>
+            </tr>
+
+
+            <tr>
+              <td></td>
+            </tr>
+
+
+            <tr>
+              <td class="table-active">Utilidad en Operación</td>
+              <td class="text-right table-active" style="width:50px" *ngFor="let element of tabla[7]">{{element}}</td>
+            </tr>
+
+            <tr>
+              <td></td>
+            </tr>
+
+
+            <tr>
+              <td>Intereses</td>
+              <td class="text-right" style="width:50px" *ngFor="let element of tabla[8]">{{element}}</td>
+            </tr>
+
+
+            <tr>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td class="table-active">Utilidad Antes de Impuestos</td>
+              <td class="text-right table-active" style="width:50px" *ngFor="let element of tabla[9]">{{element}}</td>
+            </tr>
+
+
+            <tr>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td>ISR</td>
+              <td class="text-right" style="width:50px" *ngFor="let element of tabla[10]">{{element}}</td>
+            </tr>
+
+
+            <tr>
+              <td>PTU</td>
+              <td class="text-right" style="width:50px" *ngFor="let element of tabla[11]">{{element}}</td>
+            </tr>
+
+
+            <tr>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td class="table-active">Utilidad del Ejercicio</td>
+              <td class="text-right  table-active" style="width:50px" *ngFor="let element of tabla[12]">{{element}}</td>
+            </tr>
+
+
+
+
+
+    </table>
+  </div>
+</div>
+
+
+
+
+<div class="row" style="margin-bottom:20px">
+  <div class="col-10 offset-1">
+    <table class="table table-hover">
+            <tr>
+              <th ></th>
+              <th class="text-center" *ngFor="let periodo of integrales">Periodo {{periodo.numeroPeriodo}}</th>
+            </tr>
+
+            <tr>
+              <td>Ventas Netas</td>
+                <td class="text-right" *ngFor="let periodo of integrales">{{periodo.pventasNetas|number:'1.0-0'}}%</td>
+            </tr>
+
+            <tr>
+              <td>Costo de Ventas</td>
+              <td class="text-right"  *ngFor="let periodo of integrales">{{periodo.pcostoVentas|number:'1.0-0'}}%</td>
+            </tr>
+
+            <tr>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td class="table-active">Utilidad Bruta</td>
+              <td class="text-right table-active" *ngFor="let periodo of integrales">{{periodo.putilidadBruta|number:'1.0-0'}}%</td>
+
+            </tr>
+
+
+            <tr>
+              <td></td>
+            </tr>
+
+
+            <tr>
+              <td>Costo de Distribución</td>
+              <td class="text-right" *ngFor="let periodo of integrales">{{periodo.pcDist|number:'1.0-0'}}%</td>
+            </tr>
+
+
+
+            <tr>
+              <td>Otros Gastos</td>
+              <td class="text-right" *ngFor="let periodo of integrales">{{periodo.poGastos|number:'1.0-0'}}%</td>
+            </tr>
+
+
+            <tr>
+              <td>Costo de Administración</td>
+              <td class="text-right" *ngFor="let periodo of integrales">{{periodo.pcAdmin|number:'1.0-0'}}%</td>
+            </tr>
+
+
+            <tr>
+              <td class="table-active"></td>
+              <td class="text-right table-active" *ngFor="let periodo of integrales">{{(periodo.cAdmin+periodo.oGastos+periodo.cDist)/periodo.ventasNetas|number:'1.0-0'}}%</td>
+            </tr>
+
+
+            <tr>
+              <td></td>
+            </tr>
+
+
+            <tr>
+              <td class="table-active">Utilidad en Operación</td>
+              <td class="text-right table-active" *ngFor="let periodo of integrales">{{periodo.putilidadOperacion|number:'1.0-0'}}%</td>
+            </tr>
+
+            <tr>
+              <td></td>
+            </tr>
+
+
+            <tr>
+              <td>Intereses</td>
+              <td class="text-right" *ngFor="let periodo of integrales">{{periodo.pintereses|number:'1.0-0'}}%</td>
+            </tr>
+
+
+            <tr>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td class="table-active">Utilidad Antes de Impuestos</td>
+              <td class="text-right table-active" *ngFor="let periodo of integrales">{{periodo.putilidadAntesImptos|number:'1.0-0'}}%</td>
+            </tr>
+
+
+            <tr>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td>ISR</td>
+              <td class="text-right" *ngFor="let periodo of integrales">{{periodo.pISR|number:'1.0-0'}}%</td>
+            </tr>
+
+
+            <tr>
+              <td>PTU</td>
+              <td class="text-right" *ngFor="let periodo of integrales">{{periodo.pPTU|number:'1.0-0'}}%</td>
+            </tr>
+
+
+            <tr>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td class="table-active">Utilidad del Ejercicio</td>
+              <td class="text-right  table-active" *ngFor="let periodo of integrales">{{periodo.putilidadEjercicio|number:'1.0-0'}}%</td>
+
+            </tr>
+
+
+
+
+
     </table>
   </div>
 </div>
