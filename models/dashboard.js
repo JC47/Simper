@@ -28,13 +28,13 @@ var query = "select productozonaproyecto.Producto_idProducto, productozonaproyec
 
 //ProductoMaquinaria
 
-module.exports.getMaquinariaProyecto = function (idProyecto) {
-  var query = "select * from maquinariaproyecto inner join maquinaria on maquinariaproyecto.Maquinaria_idMaquinaria = maquinaria.idMaquinaria and maquinariaproyecto.Maquinaria_idProducto = maquinaria.Producto_idProducto where maquinariaproyecto.Proyectos_idProyecto = "+idProyecto+" order by Maquinaria_idProducto ";
+module.exports.getMaquinariaProyecto = function (idProyecto,numeroPeriodo) {
+  var query = "select * from maquinariaproyecto inner join maquinaria on maquinariaproyecto.Maquinaria_idMaquinaria = maquinaria.idMaquinaria and maquinariaproyecto.Maquinaria_idProducto = maquinaria.Producto_idProducto where maquinariaproyecto.Proyectos_idProyecto = "+idProyecto+" and maquinariaproyecto.Balance_numeroPeriodo <= "+numeroPeriodo+" order by Maquinaria_idProducto ";
   return querySql(query);
 }
 
-module.exports.getDistinctIdProducto = function (idProyecto) {
+module.exports.getDistinctIdProducto = function (idProyecto,numeroPeriodo) {
   //var query = "select distinct Producto_idProducto from maquinariaproyecto inner join maquinaria on maquinariaproyecto.Maquinaria_idMaquinaria = maquinaria.idMaquinaria and maquinariaproyecto.Maquinaria_idProducto = maquinaria.Producto_idProducto where maquinariaproyecto.Proyectos_idProyecto = "+idProyecto+" order by Producto_idProducto";
-  var query = "select distinct maquinaria.Producto_idProducto,producto.color from maquinariaproyecto inner join maquinaria inner join producto on maquinariaproyecto.Maquinaria_idMaquinaria = maquinaria.idMaquinaria and maquinariaproyecto.Maquinaria_idProducto = maquinaria.Producto_idProducto and maquinariaproyecto.Maquinaria_idProducto = producto.idProducto where maquinariaproyecto.Proyectos_idProyecto = "+idProyecto+" order by Producto_idProducto";
+  var query = "select distinct maquinaria.Producto_idProducto,producto.color from maquinariaproyecto inner join maquinaria inner join producto on maquinariaproyecto.Maquinaria_idMaquinaria = maquinaria.idMaquinaria and maquinariaproyecto.Maquinaria_idProducto = maquinaria.Producto_idProducto and maquinariaproyecto.Maquinaria_idProducto = producto.idProducto where maquinariaproyecto.Proyectos_idProyecto = "+idProyecto+" and maquinariaproyecto.Balance_numeroPeriodo <= "+numeroPeriodo+" order by Producto_idProducto";
   return querySql(query);
 }

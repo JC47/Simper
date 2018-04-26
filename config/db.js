@@ -5,19 +5,19 @@ Promise.promisifyAll(mysql);
 Promise.promisifyAll(require("mysql/lib/Connection").prototype);
 Promise.promisifyAll(require("mysql/lib/Pool").prototype);
 
-var pool = mysql.createPool({
-  host: 'shx27.guebs.net',
-  user: 'simulado_basesim',
-  password: 'CaletteEsquivelMelo',
-  database: 'simulado_basesimv1'
-});
-
 // var pool = mysql.createPool({
-//     host: 'localhost',
-//     user: 'root',
-//     password: '',
-//     database: 'basesimv1'
+//   host: 'shx27.guebs.net',
+//   user: 'simulado_basesim',
+//   password: 'CaletteEsquivelMelo',
+//   database: 'simulado_basesimv1'
 // });
+
+var pool = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'basesimv1'
+});
 
 //-w=J2vS5&Y?7@-
 //ssh simulado@52.52.49.94 -p 333

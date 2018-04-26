@@ -63,7 +63,7 @@ module.exports.getTiempoDes = function (idProducto) {
 //productosSinDesarrollar
 module.exports.productosSinDesarrollar = function (idProyecto,numeroPeriodo) {
   //var query = "select Productos_idProducto from proyectoproducto inner join producto on proyectoproducto.Productos_idProducto = producto.idProducto where desarrollado = 0 and Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" ";
-  var query = "select * from proyectoproducto inner join producto on proyectoproducto.Productos_idProducto = producto.idProducto where not Productos_idProducto in (select Productos_idProducto from proyectoproducto where desarrollado > 0 and Proyectos_idProyecto = "+idProyecto+") and Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" and desarrollado = 0";
+  var query = "select * from proyectoproducto inner join producto on proyectoproducto.Productos_idProducto = producto.idProducto where not Productos_idProducto in (select Productos_idProducto from proyectoproducto where desarrollado > 0 and Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+") and Proyectos_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" and desarrollado = 0";
   return querySql(query);
 }
 

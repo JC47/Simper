@@ -4362,7 +4362,7 @@ var DemandaPotencialComponent = (function () {
             console.log(_this.scheme);
             _this.graficas = _this.setGrafica(_this.zonas);
             console.log(_this.graficas);
-        }, 1500);
+        }, 300);
         console.log(this.zonas, this.productos);
         this.multi = [
             {
@@ -10684,6 +10684,7 @@ var DashboardService = (function () {
             'Content-Type': 'application/json'
         });
         var datos = {
+            "numeroPeriodo": localStorage.getItem('numeroPeriodo'),
             "Proyecto_idProyecto": localStorage.getItem('idProyecto')
         };
         return this.http.post('dashboard/productomaquinaria', datos, { headers: headers }).map(function (res) { return res.json(); });
@@ -11238,11 +11239,9 @@ var GraficasService = (function () {
         var _this = this;
         this.zonas.length = 0;
         this.getZonas().subscribe(function (data) {
-            setTimeout(function () {
-                for (var key$ in data.datos) {
-                    _this.zonas.push(data.datos[key$]);
-                }
-            }, 300);
+            for (var key$ in data.datos) {
+                _this.zonas.push(data.datos[key$]);
+            }
         });
         return this.zonas;
     };

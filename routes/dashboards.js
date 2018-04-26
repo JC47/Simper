@@ -35,8 +35,9 @@ router.post('/productoszonademandadesarrollados/', (req, res, next) => {
 
 router.post('/productomaquinaria/', (req, res, next) => {
   var idProyecto = req.body.Proyecto_idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
 
-  Promise.join(dashboard.getMaquinariaProyecto(idProyecto),dashboard.getDistinctIdProducto(idProyecto),
+  Promise.join(dashboard.getMaquinariaProyecto(idProyecto,numeroPeriodo),dashboard.getDistinctIdProducto(idProyecto,numeroPeriodo),
   function(maquinariasproyectos,idsproductos) {
       return jsonProductosMaquinarias(maquinariasproyectos,idsproductos);
      })
