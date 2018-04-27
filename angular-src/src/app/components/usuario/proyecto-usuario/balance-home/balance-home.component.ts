@@ -120,7 +120,7 @@ productosZonaSinDesGraf:any;
           this.balanceFinal = this._resultadosService.getBalanceFinal();
         }
       });
-    }, 3000)
+    }, 2000)
 
     this.activosGraf = this.grafActivos();
 

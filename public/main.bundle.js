@@ -3290,7 +3290,7 @@ var BalanceHomeComponent = (function () {
                     _this.balanceFinal = _this._resultadosService.getBalanceFinal();
                 }
             });
-        }, 3000);
+        }, 2000);
         this.activosGraf = this.grafActivos();
     }
     BalanceHomeComponent.prototype.ngOnInit = function () {
@@ -4362,7 +4362,7 @@ var DemandaPotencialComponent = (function () {
             console.log(_this.scheme);
             _this.graficas = _this.setGrafica(_this.zonas);
             console.log(_this.graficas);
-        }, 300);
+        }, 700);
         console.log(this.zonas, this.productos);
         this.multi = [
             {

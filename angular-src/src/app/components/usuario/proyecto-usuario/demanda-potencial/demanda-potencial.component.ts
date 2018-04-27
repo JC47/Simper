@@ -30,7 +30,7 @@ scheme:any[]=[];
       console.log(this.scheme)
      this.graficas=this.setGrafica(this.zonas);
      console.log(this.graficas);
-   }, 300);
+   }, 700);
     console.log(this.zonas,this.productos)
     this.multi = [
   {
