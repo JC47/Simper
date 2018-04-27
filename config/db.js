@@ -6,17 +6,10 @@ Promise.promisifyAll(require("mysql/lib/Connection").prototype);
 Promise.promisifyAll(require("mysql/lib/Pool").prototype);
 
 var pool = mysql.createPool({
-<<<<<<< HEAD
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'basesimv1'
-=======
   host: 'shx27.guebs.net',
   user: 'simulado_basesim',
   password: 'CaletteEsquivelMelo',
   database: 'simulado_basesimv1'
->>>>>>> 629acb09991c29fb9e9ca3b9c3dfb8ae1f36082a
 });
 
 // var pool = mysql.createPool({

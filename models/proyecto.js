@@ -32,3 +32,8 @@ module.exports.getPs = function (idUsuario) {
   var query = "select * from proyecto where Usuario_idUsuario = ?";
   return querySql(query,idUsuario);
 }
+
+module.exports.setTerminado = function(idProyecto) {
+  var query = "update proyecto set terminado=1 where idProyecto = "+idProyecto+"";
+  return querySql(query);
+}

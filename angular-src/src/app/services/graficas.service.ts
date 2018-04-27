@@ -129,12 +129,10 @@ export class GraficasService {
   returnZonas(){
     this.zonas.length = 0;
     this.getZonas().subscribe(data => {
-      setTimeout(()=>{
-        for(let key$ in data.datos){
-          this.zonas.push(data.datos[key$]);
-        }
-      },300);
-    })
+      for(let key$ in data.datos){
+        this.zonas.push(data.datos[key$]);
+      }
+    });
     return this.zonas;
   }
 

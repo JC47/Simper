@@ -30,7 +30,8 @@ export class DashboardService {
     let headers = new Headers({
       'Content-Type':'application/json'
     });
-    let datos:any={
+    let datos={
+      "numeroPeriodo":localStorage.getItem('numeroPeriodo'),
       "Proyecto_idProyecto":localStorage.getItem('idProyecto')
     }
     return this.http.post('dashboard/productomaquinaria',datos,{headers}).map(res => res.json());

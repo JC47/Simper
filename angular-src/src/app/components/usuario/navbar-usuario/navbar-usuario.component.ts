@@ -136,13 +136,16 @@ export class NavbarUsuarioComponent implements OnInit {
     goHome(){
       this._proyectoService.ocultaCierrePeriodo();
       this._proyectoService.oculataPCorriendo();
+      this._proyectoService.setTerminado(localStorage.getItem('idProyecto')).subscribe();
       this.simTerm = false;
-      localStorage.removeItem('numeroPeriodo');
-      localStorage.removeItem('idProyecto');
-      localStorage.removeItem('numeroRPeriodos');
-      localStorage.removeItem('nombreProyecto');
-      localStorage.removeItem('periodos');
-      localStorage.removeItem('regresion');
+      setTimeout(()=>{
+        localStorage.removeItem('numeroPeriodo');
+        localStorage.removeItem('idProyecto');
+        localStorage.removeItem('numeroRPeriodos');
+        localStorage.removeItem('nombreProyecto');
+        localStorage.removeItem('regresion');
+        localStorage.removeItem('terminado');
+      },100);
       this.router.navigate(['/Usuario/proyectos']);
     }
 
@@ -156,6 +159,7 @@ export class NavbarUsuarioComponent implements OnInit {
     preparaCierre(){
       this.productosEnDesarrollo=this._desarrolloProducto.returnProductosEnDesarrollo();
       this.zonasEnDesarrollo=this._desarrolloZona.returnProductosDeZonaEnDesarrollo();
+      console.log("Perro",this.zonasEnDesarrollo)
       this.openConf=true
     }
 
@@ -191,19 +195,21 @@ export class NavbarUsuarioComponent implements OnInit {
             this.confProd=true;
           }
         }
-      }else{
-        console.log(this.zonasEnDesarrollo)
+      }
+
+      if(this.confZona==false){
         for(let zonaDes of this.zonasEnDesarrollo){
           for(let producto of zonaDes.productosEnDes){
             if(producto.numeroPeriodo!=localStorage.getItem('numeroRPeriodos')){
                 this.confZona=true;
+            }
           }
-          }
-
+        }
       }
 
 
-    }
+
+
 
     if(this.confZona==false && this.confProd==false){
       this.pasarPeriodo();
