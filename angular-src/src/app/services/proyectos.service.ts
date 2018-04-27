@@ -193,6 +193,10 @@ returnUsuarios(){
     });
   }
 
+  setTerminado(idProyecto){
+    return this.http.get('proyecto/terminado/'+idProyecto).map(res => res.json());
+  }
+
   asignarProductos2(idProyecto, idUsuario){
     this._usuarioProductoService.getProductosNU(idUsuario).subscribe(data => {
       for(let key$ in data.datos){

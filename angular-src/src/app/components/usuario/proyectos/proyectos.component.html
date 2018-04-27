@@ -23,7 +23,7 @@
               <h1>{{proyecto.nombreProyecto}}</h1>
               <h6>Fecha de Creación: {{proyecto.fechaCreacion}}</h6>
 
-              <button type="button" class="btn btn-success" (click)="entrarProyecto(proyecto.idProyecto,proyecto.nombreProyecto)">Entrar a Proyecto</button>
+              <button type="button" class="btn btn-success" (click)="entrarProyecto(proyecto.idProyecto,proyecto.nombreProyecto,proyecto.terminado)">Entrar a Proyecto</button>
               <div class="row" style="margin-top:20px">
                 <button type="button" class="btn btn-secondary offset-1 col-4" (click)="openEdit(proyecto)">Edita</button>
                 <button type="button" class="btn btn-danger offset-2 col-4" (click)="confDelete(proyecto)">Elimina</button>

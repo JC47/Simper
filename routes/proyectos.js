@@ -28,12 +28,7 @@ router.post('/register/:idUsuario', (req, res, next) => {
   .then(function(){
     const id = req.params.idUsuario;
     return proyecto.getProyectos(id);
-  })
-  .then( function (rows) {
-    return toArrayProyecto(rows);
-  })
-  .then( function (ProyectoList) {
-
+  }).then( function (ProyectoList) {
     res.json({success: boolean, datos:ProyectoList, msg:"Operacion exitosa"});
   })
   .catch(function (err) {
@@ -92,11 +87,7 @@ router.get('/:idUsuario', (req, res, next) => {
   Promise.resolve().then(function () {
     const id = req.params.idUsuario;
     return proyecto.getProyectos(id);
-  })
-    .then(function (rows) {
-      return toArrayProyecto(rows);
-    })
-    .then(function (ProyectoList){
+  }).then(function (ProyectoList){
         res.json(ProyectoList);
     })
     .catch(function (err) {
@@ -107,6 +98,19 @@ router.get('/:idUsuario', (req, res, next) => {
       } else {
         res.status(200).json({ "code": 1000, "message": err });
       }
+    });
+});
+
+router.get('/terminado/:idProyecto', (req, res, next) => {
+  Promise.resolve().then(function () {
+    const id = req.params.idProyecto;
+    return proyecto.setTerminado(id);
+  }).then(function (){
+        res.json({success:true,msg:"Bien"});
+    })
+    .catch(function (err) {
+      console.log(err);
+        res.json({success:false,msg:"Mal"});
     });
 });
 

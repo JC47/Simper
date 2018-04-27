@@ -50,10 +50,11 @@ export class ProyectosComponent implements OnInit {
 
    }
 
-   entrarProyecto(idProyecto,np){
+   entrarProyecto(idProyecto,np,t){
      this._proyectosService.asignarBalance(idProyecto);
      localStorage.setItem('idProyecto',idProyecto);
      localStorage.setItem('nombreProyecto',np);
+     localStorage.setItem('terminado',t);
      this._proyectosService.muestraPCorriendo();
      this.openLoad=true;
      setTimeout(()=>{this.openLoad=false,this.entrarP()},2000);
