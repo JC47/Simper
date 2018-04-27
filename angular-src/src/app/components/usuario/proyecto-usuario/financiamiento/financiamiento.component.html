@@ -12,7 +12,7 @@
 
               <div class="card-block">
                 <div class="row">
-                  <div class="col-4">
+                  <div class="col-3">
                     <img  src="assets/img/credit.png" class=" img-fluid"  style="margin-left:20px">
 
                   </div>
@@ -58,11 +58,11 @@
                 <img  src="assets/img/credit.png" class=" img-fluid"  style="margin-left:20px">
               </div>
 
-              <div class="col-3">
+              <div class="col-5">
                 <h4 class="card-title" style="margin-bottom:15px">{{getNameById(credito.idCredito)}}</h4>
               </div>
 
-              <button type="button" class="btn btn-secondary col-4 offset-1 text-center" (click)="deleteCreditoSelected=credito;confDeleteCredito=true" [disabled]="validaCreditoA(credito)">Cancelar</button>
+              <button type="button" class="btn btn-secondary col-3 offset-1 text-center" (click)="deleteCreditoSelected=credito;confDeleteCredito=true" [disabled]="validaCreditoA(credito)">Cancelar</button>
 
             </div>
 

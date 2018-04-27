@@ -50,8 +50,8 @@
 
 
                   </table>
-                  <button type="button" class="btn btn-danger offset-1 col-4" (click)="borraPeriodo(zona.idZona,producto.idProducto,numPeriodo)" >Eliminar</button>
-                  <button type="button" class="btn btn-success offset-2 col-4" (click)="openModalPeriodo(zona.idZona,producto.idProducto)" >Agregar</button>
+                  <button type="button" class="btn btn-secondary offset-1 col-4" (click)="borraPeriodo(zona.idZona,producto.idProducto,numPeriodo)" >Eliminar</button>
+                  <button type="button" class="btn btn-primary offset-2 col-4" (click)="openModalPeriodo(zona.idZona,producto.idProducto)" >Agregar</button>
                 </div>
 
               </div>
@@ -104,10 +104,10 @@
                         </div>
 
                         <div class="modal-footer">
-                          <button  type="button" class="btn btn-outline-danger" (click)="modalPeriodoNew.hide()">
+                          <button  type="button" class="btn btn-outline-secondary" (click)="modalPeriodoNew.hide()">
                           Cancelar
                           </button>
-                          <button type="submit" class="btn btn-outline-success"  [disabled]="!formPeriodoNew.valid">
+                          <button type="submit" class="btn btn-outline-primary"  [disabled]="!formPeriodoNew.valid">
                             Guardar
                           </button>
 
@@ -166,10 +166,10 @@
                         </div>
 
                         <div class="modal-footer">
-                          <button  type="button" class="btn btn-outline-danger" (click)="modalPeriodoEdit.hide()">
+                          <button  type="button" class="btn btn-outline-secondary" (click)="modalPeriodoEdit.hide()">
                           Cancelar
                           </button>
-                          <button type="submit" class="btn btn-outline-success"  [disabled]="!formPeriodoEdit.valid">
+                          <button type="submit" class="btn btn-outline-primary"  [disabled]="!formPeriodoEdit.valid">
                             Guardar
                           </button>
 

@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <h2 class="text-center offset-4 col-4">Productos</h2>
-    <button type="button" (click)="openNew(newModal)" class="btn btn-warning offset-3 col-1">Agregar</button>
+    <button type="button" (click)="openNew(newModal)" class="btn btn-info offset-3 col-1">Agregar</button>
   </div>
 
   <hr>
@@ -45,7 +45,7 @@
       </div>
       <div class="card-footer">
         <div  class="btn btn-primary offset-1 col-4" (click)="openEdit(producto)">Editar</div>
-        <button type="button" class="btn btn-danger col-5 offset-1" (click)="confDelete(producto)">Eliminar</button>
+        <button type="button" class="btn btn-secondary col-5 offset-1" (click)="confDelete(producto)">Eliminar</button>
       </div>
     </div>
 
@@ -350,13 +350,13 @@
 
               <div class="modal-footer">
 
-                <button  type="button" class="btn btn-outline-danger" (click)="modalNew.hide()">
+                <button  type="button" class="btn btn-outline-secondary" (click)="modalNew.hide()">
                 Cancelar
                 </button>
 
                 <button type="button" class="btn btn-outline-primary" (click)="modalCopia.show()">Copias Variables</button>
 
-                <button type="submit" class="btn btn-outline-success" [disabled]="!newForm.valid">
+                <button type="submit" class="btn btn-outline-primary" [disabled]="!newForm.valid">
                   Guardar
                 </button>
 
@@ -687,10 +687,10 @@
 
 
               <div class="modal-footer">
-                <button  type="button" class="btn btn-outline-danger" (click)="modalEdit.hide()">
+                <button  type="button" class="btn btn-outline-secondary" (click)="modalEdit.hide()">
                 Cancelar
                 </button>
-                <button type="submit" class="btn btn-outline-success" [disabled]="!editForm.valid">
+                <button type="submit" class="btn btn-outline-primary" [disabled]="!editForm.valid">
                   Guardar
                 </button>
 
@@ -723,7 +723,7 @@
         </div>
         <br>
         <div class="row">
-          <button type="button" class="btn btn-danger offset-2 col-3" (click)="eliminaProducto(productoDelete.idProducto)" >Si</button>
+          <button type="button" class="btn btn-secondary offset-2 col-3" (click)="eliminaProducto(productoDelete.idProducto)" >Si</button>
           <button type="button" class="btn btn-primary offset-2 col-3" (click)="modalConfDelete.hide()">No</button>
         </div>
 
@@ -837,7 +837,7 @@
 
       </div>
       <div class="modal-footer">
-        <button  type="button" class="btn btn-outline-danger" (click)="modalCopia.hide()">
+        <button  type="button" class="btn btn-outline-secondary" (click)="modalCopia.hide()">
         Cancelar
         </button>
 
