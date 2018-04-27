@@ -3,7 +3,7 @@
   font-family: verdana;
   font-size: 15px;
   font-weight: 200;
-  background-color: #408AB4 ;
+  background-color: #004581;
   position: fixed;
   top: 0px;
   width: 20%;
@@ -12,7 +12,7 @@
   margin-top: 110px;
 }
 .nav-side-menu .brand {
-  background-color: #34699A;
+  background-color: #004581;
   line-height: 50px;
   display: block;
   text-align: center;

@@ -163,7 +163,7 @@
               <button [disabled]="validaVi()" type="button" (click)="confPagoF(zona.idZona,producto.idProducto,zona.nombreZona)"
               class="btn btn-primary col-4" *ngIf="!validaPago(producto)">Pagar</button>
               <button [disabled]="validaVi()" type="button" (click)="deshacer(zona.idZona,producto.idProducto)"
-              class="btn btn-danger col-4" *ngIf="validaPago(producto)">Cancelar</button>
+              class="btn btn-secondary col-4" *ngIf="validaPago(producto)">Cancelar</button>
 
             <div class="col-8" style="margin-top:14px">
               <h6>{{getNameById(producto.idProducto)}}</h6>
@@ -219,7 +219,7 @@
   </div>
 
   <ng-template ngl-modal-footer>
-  <button class="btn btn-danger" (click)="openConf=false">Cancelar</button>
+  <button class="btn btn-secondary" (click)="openConf=false">Cancelar</button>
   <button class="btn btn-primary" (click)="desarrollaZona(productoSelectedAdd)">Comenzar Desarrollo</button>
 </ng-template>
   </ngl-modal>
@@ -249,7 +249,7 @@
     </div>
 
     <ng-template ngl-modal-footer>
-    <button class="btn btn-danger" (click)="openConf=false">Cancelar</button>
+    <button class="btn btn-secondary" (click)="openConf=false">Cancelar</button>
     <button class="btn btn-primary" (click)="pagarDesarrollo()">Pagar Desarrollo</button>
   </ng-template>
     </ngl-modal>

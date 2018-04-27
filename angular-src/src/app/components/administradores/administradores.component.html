@@ -1,10 +1,10 @@
-
+btn-secondary
 
 
 <div class="container">
   <div class="row">
     <h2 class="text-center col-2 offset-5 ">Administradores</h2>
-    <button type="button" (click)="openNew()" class="btn btn-warning col-1 offset-4">Agregar</button>
+    <button type="button" (click)="openNew()" class="btn btn-primary col-1 offset-4">Agregar</button>
 
   </div>
 
@@ -36,7 +36,7 @@
     </div>
     <div class="card-footer">
       <div  class="btn btn-primary offset-1 col-4" (click)="openEdit(admin)">Editar</div>
-      <button type="button" class="btn btn-danger offset-1 col-4" (click)="confDelete(admin)" >Eliminar</button>
+      <button type="button" class="btn btn-secondary offset-1 col-4" (click)="confDelete(admin)" >Eliminar</button>
     </div>
   </div>
 
@@ -142,10 +142,10 @@
 
               <div class="modal-footer">
 
-                  <button  type="button" class="btn btn-outline-danger" (click)="modalNew.hide()">
+                  <button  type="button" class="btn btn-outline-secondary" (click)="modalNew.hide()">
                   Cancelar
                   </button>
-                <button type="submit" class="btn btn-outline-success" [disabled]="!newForm.valid" >
+                <button type="submit" class="btn btn-outline-primary" [disabled]="!newForm.valid" >
                   Guardar
                 </button>
 
@@ -275,10 +275,10 @@
 
 
               <div class="modal-footer">
-                <button  type="button" class="btn btn-outline-danger" (click)="modalEdit.hide()">
+                <button  type="button" class="btn btn-outline-secondary" (click)="modalEdit.hide()">
                 Cancelar
                 </button>
-                <button type="submit" class="btn btn-outline-success" [disabled]="!editForm.valid" >
+                <button type="submit" class="btn btn-outline-primary" [disabled]="!editForm.valid" >
                   Guardar
                 </button>
 
@@ -306,7 +306,7 @@
         </div>
         <br>
         <div class="row">
-          <button type="button" class="btn btn-danger offset-2 col-3"  (click)="eliminaAdmin(adminDelete.idAdministrador)">Si</button>
+          <button type="button" class="btn btn-secondary offset-2 col-3"  (click)="eliminaAdmin(adminDelete.idAdministrador)">Si</button>
           <button type="button" class="btn btn-primary offset-2 col-3" (click)="modalConfDelete.hide()">No</button>
         </div>
 

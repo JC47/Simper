@@ -109,7 +109,21 @@
     </table>
   </div>
 
+  <div class="row align-items-center" style="margin-bottom:20px">
+    <div class="offset-8 col-1">
+      Exportar:
+    </div>
 
+
+    <div class="col-1">
+      <ngl-icon icon="pdf" category="doctype" (click)="PDFestadoDeResultados()" size="large" style="cursor:pointer" ></ngl-icon>
+    </div>
+
+
+    <div class="col-1">
+      <ngl-icon icon="csv" category="doctype" (click)="CSVestadoDeResultados()"  size="large" style="cursor:pointer"></ngl-icon>
+    </div>
+  </div>
 
 
   <div style="margin-top:50px" class="col-6 offset-3">
@@ -243,6 +257,24 @@
       </tr>
     </table>
   </div>
+
+  <div class="row align-items-center" style="margin-bottom:20px">
+    <div class="offset-8 col-1">
+      Exportar:
+    </div>
+
+
+    <div class="col-1">
+      <ngl-icon icon="pdf" category="doctype" (click)="PDFbalanceGeneral()" size="large" style="cursor:pointer" ></ngl-icon>
+    </div>
+
+
+    <div class="col-1">
+      <ngl-icon icon="csv" category="doctype" (click)="CSVbalanceGeneral()"  size="large" style="cursor:pointer"></ngl-icon>
+    </div>
+  </div>
+
+
 
 
 

@@ -65,6 +65,15 @@ export class NavbarUsuarioComponent implements OnInit {
     this.router.navigate(['login']);
   }
 
+  pasaAfDes(){
+    if(this.zonasEnDesarrollo){
+      this.confProd=false;
+      this.confZona=true;
+
+    }
+
+  }
+
 
 
     asignarBalance(idProyecto){
@@ -203,12 +212,21 @@ export class NavbarUsuarioComponent implements OnInit {
   }
 
 
+  muestraCerrarPeriodo(){
+    if(this._proyectoService.muestraPeriodo==true || localStorage.getItem('periodos')==localStorage.getItem('numeroPeriodo'))
+      return true
+    else
+      return false;
+  }
+
+
     pasarPeriodo(){
-      this.openLoad=true;
+
       this.openConf=false;
+      this.confZona=false;
       this.confProd=false;
       console.log(this.productosEnDesarrollo)
-      setTimeout(()=>{this.openLoad=false}, 1000);
+
       this._balanceService.getBalanceFinal().subscribe( data => {
         console.log("data side av",data)
         if(data.success){
@@ -229,6 +247,7 @@ export class NavbarUsuarioComponent implements OnInit {
 
         if(localStorage.getItem('periodos') == p){
           this.simTerm=true;
+
         }
         else{
           if(cajaBancosFinal < 0){
@@ -241,6 +260,8 @@ export class NavbarUsuarioComponent implements OnInit {
               var dep = data.datos[0].maqEquipo*.10;
               this._balanceService.crearBalance(proyecto,data.datos[0],periodoNuevo).subscribe(data => {
                 if(data.success){
+                  this.openLoad=true;
+                  setTimeout(()=>{this.openLoad=false}, 1000);
                   localStorage.setItem('numeroPeriodo',periodoNuevo.toString());
                   localStorage.setItem('numeroRPeriodos',periodoNuevo.toString());
                   this.periodo = this.periodo + 1 ;
@@ -248,6 +269,7 @@ export class NavbarUsuarioComponent implements OnInit {
                   setTimeout(() => {
                     console.log("Peri",this._proyectoService.periodo)
                   }, 1000);
+
 
 
                   var y = {
@@ -265,7 +287,7 @@ export class NavbarUsuarioComponent implements OnInit {
                     this._desarrolloProducto.actualizarPD(np);
                     this._desarrolloZona.actualizarZonasDes(np);
                     this._creditoService.validarP(np).subscribe();
-                  }, 500);
+                  }, 1000);
 
                 }
               });

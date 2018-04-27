@@ -2,7 +2,7 @@
 
 <div *ngIf="usuario">
 
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top navbar-inverse" style="background-color:#007CB9;height:110px;">
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top navbar-inverse" style="background-color:#001b48;height:110px;">
 
   <button class="navbar-toggler navbar-toggler-right" type="button"
   data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,9 +10,9 @@
    </button>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-  <span class="navbar-brand" style="margin-left:30px;">
+  <span class="navbar-brand" style="margin-left:50px;">
          <img class="img-fluid rounded-circle" style="width:80px;"
-         src="assets/img/user.png"> {{usuario.nombreUsuario}} {{usuario.apPat}}
+         src="assets/img/user2.png"> {{usuario.nombreUsuario}} {{usuario.apPat}}
     </span>
 
 
@@ -29,7 +29,7 @@
 
 
     <li class="nav-item pull-left" style="margin-right:20px; margin-bottom:10px;margin-left:10px" >
-      <button *ngIf="validaVi()"  [hidden]="_proyectoService.muestraPeriodo"    type="button" class="btn btn-success navbar-right" (click)="preparaCierre()">Cerrar Periodo</button>
+      <button *ngIf="validaVi()"  [hidden]="muestraCerrarPeriodo()"    type="button" class="btn btn-primary navbar-right" (click)="preparaCierre()">Cerrar Periodo</button>
     </li>
 
     <li class="nav-item " style="margin-right:30px;margin-bottom:10px">
@@ -41,13 +41,13 @@
 
   <ul class="nav navbar-nav ml-auto" style="margin-top:23px">
         <!-- <li class="nav-item " style="margin-right:20px">
-          <button  class="btn btn-danger"><i class="fa fa-bell fa-lg"></i></button>
+          <button  class="btn btn-primary"><i class="fa fa-bell fa-lg"></i></button>
         </li> -->
 
 
 
         <li class="nav-item " style="margin-right:20px">
-          <button title="Salir"  class="btn btn-success " (click)="logOut()"><i class="fa fa-sign-out fa-lg"></i></button>
+          <button title="Salir"  class="btn btn-info " (click)="logOut()"><i class="fa fa-sign-out fa-lg"></i></button>
 
         </li>
   </ul>
@@ -67,7 +67,7 @@
     </div>
 
     <ng-template ngl-modal-footer>
-    <button class="btn btn-danger" (click)="openConf=false">Cancel</button>
+    <button class="btn btn-primary" (click)="openConf=false">Cancel</button>
     <button class="btn btn-primary" (click)="verificaDesarrollo()">Cerrar Periodo</button>
     </ng-template>
   </ngl-modal>
@@ -82,7 +82,7 @@
       </div>
 
       <ng-template ngl-modal-footer>
-      <button class="btn btn-success" (click)="goHome()">Aceptar</button>
+      <button class="btn btn-primary" (click)="goHome()">Aceptar</button>
       </ng-template>
     </ngl-modal>
 
@@ -99,8 +99,8 @@
       <ng-template ngl-modal-footer>
 
       <button class="btn btn-primary" (click)="pasaDesProd()">Ir a Desarrollos de Productos</button>
-      <button class="btn btn-success" (click)="pasarPeriodo()">Cerrar Periodo</button>
-      <button class="btn btn-danger" (click)="confProd=false">Cancelar</button>
+      <button class="btn btn-primary" (click)="pasaAfDes()">Cerrar Periodo</button>
+      <button class="btn btn-secondary" (click)="confProd=false">Cancelar</button>
       </ng-template>
     </ngl-modal>
 
@@ -118,8 +118,8 @@
         <ng-template ngl-modal-footer>
 
         <button class="btn btn-primary" (click)="pasaDesZona()">Ir a Desarrollos de Zonas</button>
-        <button class="btn btn-success" (click)="pasarPeriodo()">Cerrar Periodo</button>
-        <button class="btn btn-danger" (click)="confZona=false">Cancelar</button>
+        <button class="btn btn-primary" (click)="pasarPeriodo()">Cerrar Periodo</button>
+        <button class="btn btn-secondary" (click)="confZona=false">Cancelar</button>
         </ng-template>
       </ngl-modal>
 
@@ -144,7 +144,7 @@
 
             <div body>
               <div class="container">
-                <h5 class="col-12 text-center" style="margin-bottom:30px">Tienes deuda, no puedes pasar de periodo, necesitas un prestamo</h5>
+                <h5 class="col-12 text-center" style="margin-bottom:30px">Tu caja y bancos está en números negativos, no puedes pasar de periodo.</h5>
                   <div class="col-2 offset-5">
                     <img  src="assets/img/credit.png" class="img-fluid">
                   </div>
@@ -154,7 +154,7 @@
 
             <ng-template ngl-modal-footer>
               <button class="btn btn-primary" (click)="pasaCreditos()">Ir a prestamos</button>
-                <button class="btn btn-danger" (click)="alert=false">Cancelar</button>
+                <button class="btn btn-secondary" (click)="alert=false">Cancelar</button>
 
           </ng-template>
             </ngl-modal>
@@ -167,7 +167,7 @@
                 <ngl-modal  [(open)]="openLoad" size="small" directional="false">
                   <div body>
                     <h1 class="col-12 text-center" >Cerrando Periodo</h1>
-                    <h5 class="col-12 text-center">Realzando Operacion</h5>
+                    <h5 class="col-12 text-center">Realizando Operación</h5>
                     <div style="position:relative; height:6.25rem; z-index:0;">
                       <ngl-spinner size="large" type="brand"></ngl-spinner>
                     </div>
@@ -180,7 +180,7 @@
                     <div class="list-group" >
                       <a class="list-group-item list-group-item-action col-12" *ngFor="let p of this._proyectoService.periodos" >{{p.nombre}}
                         <button class="btn btn-primary offset-3 col-3" (click)="visualizaPeriodo(p.numero)">Visualizar</button>
-                        <button class="btn btn-success col-3 offset-1" [disabled]="validaRegre()" (click)="selectEditaPeriodo(p.numero)">Editar</button>
+                        <button class="btn btn-primary col-3 offset-1" [disabled]="validaRegre()" (click)="selectEditaPeriodo(p.numero)">Editar</button>
                       </a>
                     </div>
                         <div class="modal-footer">
@@ -198,7 +198,7 @@
                       <h4 class="col-12 text-center">Al ir a editar un periodo, los resultados de los periodos subsecuentes se borrarán, ¿estás seguro de querer editarlo?</h4>
                     </div>
                         <div class="modal-footer">
-                          <button  type="button" class="btn btn-danger" (click)="confEditaPeriodos=false;openPeriodos=true">
+                          <button  type="button" class="btn btn-primary" (click)="confEditaPeriodos=false;openPeriodos=true">
                           Cancelar
                           </button>
                           <button  type="button" class="btn btn-primary" (click)="editaPeriodo()">

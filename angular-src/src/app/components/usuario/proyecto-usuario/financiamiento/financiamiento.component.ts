@@ -39,6 +39,7 @@ export class FinanciamientoComponent implements OnInit {
     this.creditosBloqueados=this._creditoService.returnBloqueados();
     console.log("cActivos",this.creditosActivos)
     console.log("cBloqueados",this.creditosBloqueados)
+    console.log("creditos",this.creditos)
     this.solicitudForm= new FormGroup({
       'monto':new FormControl('',Validators.required),
       'idCredito':new FormControl('',Validators.required)
@@ -50,24 +51,28 @@ export class FinanciamientoComponent implements OnInit {
 
   validaCredito(credito){
     for(let credit of this.creditosActivos){
-      if(credito.idCredito==credit.idCredito || this.validaVi()){
-        return true;
-
+      if(credito.idCredito==credit.idCredito){
+        return false;
       }
+
     }
-    return false;
+
+return true
 
   }
 
   validaCreditoA(credito){
-    var r = false;
-    for(let a of this.creditosBloqueados){
-      if(credito.idCredito==a.credito_idCredito){
-        r = true;
-        break;
-      }
-    }
-    return r;
+
+      if(!this.validaVi()){
+        for(let creditoA of this.creditosActivos ){
+        if(creditoA.idCredito==credito.idCredito){
+          for(let creditoB of this.creditosBloqueados){
+            if(creditoB.credito_idCredito==credito.idCredito)
+              return false
+          }
+        }
+      }}
+      return true;
   }
 
   getNameById(id:number){

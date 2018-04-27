@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {OperacionService} from '../../../../services/operacion.service';
 import { CompraMaquinariaService } from '../../../../services/compra-maquinaria.service';
 import {ResultadosService} from '../../../../services/resultados.service';
+import { Angular2Csv } from 'angular2-csv/Angular2-csv';
+import {CurrencyPipe} from '@angular/common'
+import {DecimalPipe} from '@angular/common'
+
+declare var jsPDF: any;
 
 @Component({
   selector: 'app-analisis',
@@ -20,7 +25,9 @@ export class AnalisisComponent implements OnInit {
 
   constructor(private _operacionService:OperacionService,
               private _resultadosService:ResultadosService,
-              private _maqService:CompraMaquinariaService) {
+              private _maqService:CompraMaquinariaService,
+              private cp: CurrencyPipe,
+              private dc:DecimalPipe) {
     this.auxiliares=this._operacionService.returnAuxiliares();
     this.intereses = this._operacionService.returnInter();
     this.auxiliarT = this._operacionService.returnAuxiliarCTotal();
@@ -483,6 +490,304 @@ export class AnalisisComponent implements OnInit {
     }
     return x;
   }
+
+
+
+
+
+    PDFestadoDeResultados(){
+
+      var doc= new jsPDF({
+      orientation: 'landscape',
+      unit: 'mm',
+      format: [215.9,279]});
+
+      var columns = [
+      {title: "", dataKey: "signo"},
+      {title: "Estado de Resultados", dataKey: "concepto"},
+      {title: "", dataKey: "cantidad"}];
+
+      var rows = [
+      {"signo":"","concepto":"Ventas","cantidad":this.cp.transform(this.getTotalVentas(),'USD',true,'1.0-0')},
+      {"signo":"-","concepto":"Costos","cantidad":this.cp.transform(this.getTotalCostosVentas(),'USD',true,'1.0-0')},
+      {"signo":"=","concepto":"Utilidad Bruta","cantidad":this.cp.transform(this.getUtilidadBruta(),'USD',true,'1.0-0')},
+      {"signo":"-","concepto":"Gastos de Operación","cantidad":this.cp.transform(this.getGastosDeOperacion(),'USD',true,'1.0-0')},
+      {"signo":"=","concepto":"Utilidad de Operación","cantidad":this.cp.transform(this.getUtilidadOperacion(),'USD',true,'1.0-0')},
+      {"signo":"-","concepto":"Intereses","cantidad":this.cp.transform(this.getIntereses(),'USD',true,'1.0-0')},
+      {"signo":"=","concepto":"Utilidad antes de Impuestos","cantidad":this.cp.transform(this.getUtilidadAntes(),'USD',true,'1.0-0')},
+      {"signo":"-","concepto":"Impuestos","cantidad":this.cp.transform(this.getImpuestos(),'USD',true,'1.0-0')},
+      {"signo":"=","concepto":"Utilidad Neta","cantidad":this.cp.transform(this.getUtilidadNeta(),'USD',true,'1.0-0')},
+      {"signo":"/","concepto":"Ventas","cantidad":this.cp.transform(this.getTotalVentas(),'USD',true,'1.0-0')},
+      {"signo":"=","concepto":"Margen Neto(%)","cantidad":this.dc.transform(this.getMargenNeto()*10,'1.0-0')},
+      {"signo":"*","concepto":"Rotación de Activos","cantidad":this.dc.transform(this.getRotacionActivos(),'1.0-0')},
+      {"signo":"=","concepto":"Rentabilidad de Activos(%)","cantidad":this.dc.transform(this.getRentabilidadSobreActivos()*100,'1.0-0')},
+      {"signo":"*","concepto":"Placa Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.0-0')},
+      {"signo":"=","concepto":"Rentabilidad s/Capital Contable","cantidad":this.dc.transform(this.getRentabilidadSobreCapital(),'1.0-0')}
+
+      ];
+
+
+      doc.autoTable(columns, rows, {
+        drawRow: function (row) {
+              if (row.index == 9) {
+                  doc.setFillColor(254,0,0);
+              }
+        },
+      margin: {top: 40,
+               left:40},
+       tableWidth: 200,
+      headerStyles: {fillColor:0,halign:'center'
+
+      },
+      columnStyles: {
+      	signo: {halign:'center',columnWidth:20},
+        concepto:{halign:'left'},
+        cantidad:{halign:'right'},
+
+      },
+      addPageContent: function(data) {
+        doc.setFontSize(15);
+        doc.setFontType("bold");
+        doc.text(139.5, 15, 'Proyecto ' , null, null, 'center');
+        doc.setFontSize(13);
+        doc.text(139.5, 23, 'Análisis de la Rentabilidad Sobre el Capital Contable del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
+        doc.line(50, 27, 228, 27);
+      },
+
+
+
+
+
+
+      });
+
+      doc.save("Analisis Balance General.pdf");
+
+
+
+      }
+
+
+    CSVestadoDeResultados(){
+      let data:any=[
+        {signo:"Proyecto", concepto:"Periodo"+localStorage.getItem('numeroPeriodo')},
+        {signo:"",
+         concepto:"Estado de Resutlados",
+         cantidad:""
+       },
+       {"signo":"","concepto":"Ventas","cantidad":this.cp.transform(this.getTotalVentas(),'USD',true,'1.0-0')},
+       {"signo":"-","concepto":"Costos","cantidad":this.cp.transform(this.getTotalCostosVentas(),'USD',true,'1.0-0')},
+       {"signo":"=","concepto":"Utilidad Bruta","cantidad":this.cp.transform(this.getUtilidadBruta(),'USD',true,'1.0-0')},
+       {"signo":"-","concepto":"Gastos de Operación","cantidad":this.cp.transform(this.getGastosDeOperacion(),'USD',true,'1.0-0')},
+       {"signo":"=","concepto":"Utilidad de Operación","cantidad":this.cp.transform(this.getUtilidadOperacion(),'USD',true,'1.0-0')},
+       {"signo":"-","concepto":"Intereses","cantidad":this.cp.transform(this.getIntereses(),'USD',true,'1.0-0')},
+       {"signo":"=","concepto":"Utilidad antes de Impuestos","cantidad":this.cp.transform(this.getUtilidadAntes(),'USD',true,'1.0-0')},
+       {"signo":"-","concepto":"Impuestos","cantidad":this.cp.transform(this.getImpuestos(),'USD',true,'1.0-0')},
+       {"signo":"=","concepto":"Utilidad Neta","cantidad":this.cp.transform(this.getUtilidadNeta(),'USD',true,'1.0-0')},
+       {"signo":"/","concepto":"Ventas","cantidad":this.cp.transform(this.getTotalVentas(),'USD',true,'1.0-0')},
+       {"signo":"=","concepto":"Margen Neto(%)","cantidad":this.dc.transform(this.getMargenNeto()*10,'1.0-0')},
+       {"signo":"*","concepto":"Rotación de Activos","cantidad":this.dc.transform(this.getRotacionActivos(),'1.0-0')},
+       {"signo":"=","concepto":"Rentabilidad de Activos(%)","cantidad":this.dc.transform(this.getRentabilidadSobreActivos()*100,'1.0-0')},
+       {"signo":"*","concepto":"Placa Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.0-0')},
+       {"signo":"=","concepto":"Rentabilidad s/Capital Contable","cantidad":this.dc.transform(this.getRentabilidadSobreCapital(),'1.0-0')}
+
+      ];
+
+
+      new Angular2Csv(data, ' Analisis Estado de Resultados');
+    }
+
+
+
+        PDFbalanceGeneral(){
+
+          var doc= new jsPDF({
+          orientation: 'landscape',
+          unit: 'mm',
+          format: [215.9,279]});
+
+          var columns = [
+          {title: "", dataKey: "signo"},
+          {title: "Balance General", dataKey: "concepto"},
+          {title: "", dataKey: "cantidad"}];
+
+          var rows = [
+          {"signo":"","concepto":"Activo Circulante","cantidad":this.cp.transform(this.getActivoCirculante(),'USD',true,'1.0-0')},
+          {"signo":"+","concepto":"Activo Fijo","cantidad":this.cp.transform(this.getActivoFijo(),'USD',true,'1.0-0')},
+          {"signo":"+","concepto":"Otros Activos","cantidad":"-"},
+          {"signo":"=","concepto":"Activo Total","cantidad":this.cp.transform(this.getActivoTotal(),'USD',true,'1.0-0')},
+          {"signo":"","concepto":"","cantidad":""},
+          {"signo":"-","concepto":"Ventas","cantidad":this.cp.transform(this.getTotalVentas(),'USD',true,'1.0-0')},
+          {"signo":"/","concepto":"Activo Total Promedio","cantidad":this.cp.transform(this.getActivoTotal(),'USD',true,'1.0-0')},
+          {"signo":"-","concepto":"Rotación de Activos","cantidad":this.dc.transform(this.getRotacionActivos(),'1.0-0')},
+          {"signo":"","concepto":"","cantidad":""},
+          {"signo":"","concepto":"Pasivo Circulante","cantidad":this.cp.transform(this.getPasivoCirculante(),'USD',true,'1.0-0')},
+          {"signo":"+","concepto":"Pasivo a Largo Plazo","cantidad":this.cp.transform(this.getPasivoLP(),'USD',true,'1.0-0')},
+          {"signo":"=","concepto":"Pasivo Total","cantidad":this.dc.transform(this.getPasivoTotal(),'1.0-0')},
+          {"signo":"","concepto":"","cantidad":""},
+          {"signo":"","concepto":"Activo Total","cantidad":this.dc.transform(this.getActivoTotal(),'1.0-0')},
+          {"signo":"-","concepto":"Pasivo Total","cantidad":this.dc.transform(this.getPasivoTotal(),'1.0-0')},
+          {"signo":"/","concepto":"Capital Contable","cantidad":this.dc.transform(this.getCapitalContable(),'1.0-0')},
+          {"signo":"","concepto":"","cantidad":""},
+          {"signo":"=","concepto":"Placa Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.0-0')}
+
+          ];
+
+
+          doc.autoTable(columns, rows, {
+            drawRow: function (row) {
+                  if (row.index == 9) {
+                      doc.setFillColor(254,0,0);
+                  }
+            },
+          margin: {top: 40,
+                   left:40},
+           tableWidth: 200,
+          headerStyles: {fillColor:0,halign:'center'
+
+          },
+          columnStyles: {
+          	signo: {halign:'center',columnWidth:20},
+            concepto:{halign:'left'},
+            cantidad:{halign:'right'},
+
+          },
+          addPageContent: function(data) {
+            doc.setFontSize(15);
+            doc.setFontType("bold");
+            doc.text(139.5, 15, 'Proyecto ' , null, null, 'center');
+            doc.setFontSize(13);
+            doc.text(139.5, 23, 'Análisis de la Rentabilidad Sobre el Capital Contable del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
+            doc.line(50, 27, 228, 27);
+          },
+
+
+
+
+
+
+          });
+
+          doc.save("Analisis Balance General.pdf");
+
+
+
+          }
+
+          CSVbalanceGeneral(){
+            let data:any=[
+              {signo:"Proyecto", concepto:"Periodo"+localStorage.getItem('numeroPeriodo')},
+              {signo:"",
+               concepto:"Balance General",
+               cantidad:""
+             },
+             {"signo":"","concepto":"Activo Circulante","cantidad":this.cp.transform(this.getActivoCirculante(),'USD',true,'1.0-0')},
+             {"signo":"+","concepto":"Activo Fijo","cantidad":this.cp.transform(this.getActivoFijo(),'USD',true,'1.0-0')},
+             {"signo":"+","concepto":"Otros Activos","cantidad":"-"},
+             {"signo":"=","concepto":"Activo Total","cantidad":this.cp.transform(this.getActivoTotal(),'USD',true,'1.0-0')},
+             {"signo":"","concepto":"","cantidad":""},
+             {"signo":"-","concepto":"Ventas","cantidad":this.cp.transform(this.getTotalVentas(),'USD',true,'1.0-0')},
+             {"signo":"/","concepto":"Activo Total Promedio","cantidad":this.cp.transform(this.getActivoTotal(),'USD',true,'1.0-0')},
+             {"signo":"-","concepto":"Rotación de Activos","cantidad":this.dc.transform(this.getRotacionActivos(),'1.0-0')},
+             {"signo":"","concepto":"","cantidad":""},
+             {"signo":"","concepto":"Pasivo Circulante","cantidad":this.cp.transform(this.getPasivoCirculante(),'USD',true,'1.0-0')},
+             {"signo":"+","concepto":"Pasivo a Largo Plazo","cantidad":this.cp.transform(this.getPasivoLP(),'USD',true,'1.0-0')},
+             {"signo":"=","concepto":"Pasivo Total","cantidad":this.dc.transform(this.getPasivoTotal(),'1.0-0')},
+             {"signo":"","concepto":"","cantidad":""},
+             {"signo":"","concepto":"Activo Total","cantidad":this.dc.transform(this.getActivoTotal(),'1.0-0')},
+             {"signo":"-","concepto":"Pasivo Total","cantidad":this.dc.transform(this.getPasivoTotal(),'1.0-0')},
+             {"signo":"/","concepto":"Capital Contable","cantidad":this.dc.transform(this.getCapitalContable(),'1.0-0')},
+             {"signo":"","concepto":"","cantidad":""},
+             {"signo":"=","concepto":"Placa Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.0-0')}
+
+            ];
+
+
+            new Angular2Csv(data, ' Analisis Estado de Resultados');
+          }
+
+
+
+                  PDFratios(){
+
+                    var doc= new jsPDF({
+                    orientation: 'landscape',
+                    unit: 'mm',
+                    format: [215.9,279]});
+
+                    var columns = [
+                    {title: "Ratios", dataKey: "grupo"},
+                    {title: "", dataKey: "concepto"},
+                    {title: "", dataKey: "cantidad"},
+                    {title: "", dataKey: "numero"}];
+
+                    var rows = [
+                      {"grupo":"Solvencia","concepto":"Activo Circulante","cantidad":this.getActivoCirculante(),"numero":this.getSolvencia()},
+                      {"grupo":"","concepto":"Pasivo Circulante","cantidad":this.getPasivoCirculante(),"numero":""},
+                      {"grupo":"Solvencia Inmediata","concepto":"Activo Disponible","cantidad":this.getActivoDisponible(),"numero":this.getSolvenciaInmediata()},
+                      {"grupo":"","concepto":"Pasivo Circulante","cantidad":this.getPasivoCirculante(),"numero":""},
+                      {"grupo":"Rotación de Activos","concepto":"Ventas a Crédito","cantidad":this.getVentasACredito(),"numero":this.getRotacionCC()},
+                      {"grupo":"","concepto":"Promedio c x c","cantidad":this.getPromedioCC(),"numero":""},
+                      {"grupo":"Días Promedio de Cartera","concepto":"Días del Periodo","cantidad":365,"numero":this.getDiasPPromedioDeCartera()},
+                      {"grupo":"","concepto":"Rotación de c x c","cantidad":this.getRotacionCC(),"numero":""},
+                      {"grupo":"Rotación de Cuentas Por Pagar","concepto":"Compras Netas A Crédito","cantidad":this.getComprasNetasCredito(),"numero":this.getRotacionCP()},
+                      {"grupo":"","concepto":"Promedio de Cuentas Por Pagar","cantidad":this.getPromedioCP(),"numero":""},
+                      {"grupo":"Días Promedio de c x p","concepto":"Días del Periodo","cantidad":365,"numero":this.getDiasPPromedio()},
+                      {"grupo":"","concepto":"Rotación de c x p","cantidad":this.getRotacionCP(),"numero":""},
+                      {"grupo":"Rotación de I.A.T.","concepto":"Costo de lo Vendido","cantidad":this.getTotalCostosVentas(),"numero":this.getRotacionIAT()},
+                      {"grupo":"","concepto":"Promedio de inv art term","cantidad":this.getPromedioInvArtTerm(),"numero":""},
+                      {"grupo":"Días Promedios","concepto":"Días del Periodo","cantidad":365,"numero":this.getDiasPromedioIAT()},
+                      {"grupo":"","concepto":"Promedio de inv art term","cantidad":this.getPromedioInvArtTerm(),"numero":""},
+
+
+                    ];
+
+
+                    doc.autoTable(columns, rows, {
+                      drawRow: function (row) {
+                            if (row.index == 9) {
+                                doc.setFillColor(254,0,0);
+                            }
+                      },
+                    margin: {top: 40,
+                             left:40},
+                     tableWidth: 200,
+                    headerStyles: {fillColor:0,halign:'center'
+
+                    },
+                    columnStyles: {
+                    	signo: {halign:'center',columnWidth:20},
+                      concepto:{halign:'left'},
+                      cantidad:{halign:'right'},
+
+                    },
+                    addPageContent: function(data) {
+                      doc.setFontSize(15);
+                      doc.setFontType("bold");
+                      doc.text(139.5, 15, 'Proyecto ' , null, null, 'center');
+                      doc.setFontSize(13);
+                      doc.text(139.5, 23, 'Análisis de la Rentabilidad Sobre el Capital Contable del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
+                      doc.line(50, 27, 228, 27);
+                    },
+
+
+
+
+
+
+                    });
+
+                    doc.save("Analisis Balance General.pdf");
+
+
+
+                    }
+
+
+
+
+
+
 
 
 

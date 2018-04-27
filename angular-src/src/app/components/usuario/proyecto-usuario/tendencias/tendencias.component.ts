@@ -34,7 +34,7 @@ export class TendenciasComponent implements OnInit {
     this.graf5=this.getGraf5();
     this.graf6=this.getGraf6();
     console.log("Grafica 1",this.graf1)
-  },5000);
+  },2000);
   }
 
   ngOnInit() {

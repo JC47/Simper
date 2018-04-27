@@ -19,13 +19,13 @@
         <div class="menu-list">
             <ul id="menu-content" class="menu-content collapse out">
 
-                <li [routerLink]="['home']">
+                <li [routerLink]="['home']" routerLinkActive="active">
                   <a >
-                  <i class="fa fa-tachometer fa-lg"></i> Valores iniciales
+                  <i class="fa fa-tachometer fa-lg"></i> Dash Board
                   </a>
                 </li>
 
-                <li [routerLink]="['demandaPotencial']">
+                <li [routerLink]="['demandaPotencial']" routerLinkActive="active">
                   <a >
                   <i class="fa fa-area-chart fa-lg"></i> Demanda potencial
                   </a>
@@ -69,22 +69,22 @@
                   <a href="#"><i class="fa fa-list-alt fa-lg"></i> Resultados del periodo<span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse" id="service2">
-                  <li [routerLink]="['balance_inicial']" >Balance Inicial</li>
-                  <li [routerLink]="['operacion']" >Resultados Operacion</li>
-                  <li [routerLink]="['estadoResultados']">Estado de Resultados</li>
-                  <li [routerLink]="['balance_final']">Balance Final</li>
-                  <li [routerLink]="['flujo']">Flujo de Efectivo</li>
-                  <li [routerLink]="['comparativa']">Posición Comparativa</li>
-                  <li [routerLink]="['analisis']">Analisis del Periodo</li>
-                  <li [routerLink]="['puntoEquilibrio']">Punto de Equilibrio</li>
+                  <li [routerLink]="['balance_inicial']" routerLinkActive="active">Balance Inicial</li>
+                  <li [routerLink]="['operacion']" routerLinkActive="active">Resultados Operacion</li>
+                  <li [routerLink]="['estadoResultados']" routerLinkActive="active">Estado de Resultados</li>
+                  <li [routerLink]="['balance_final']" routerLinkActive="active">Balance Final</li>
+                  <li [routerLink]="['flujo']" routerLinkActive="active">Flujo de Efectivo</li>
+                  <li [routerLink]="['comparativa']" routerLinkActive="active">Posición Comparativa</li>
+                  <li [routerLink]="['analisis']" routerLinkActive="active">Analisis del Periodo</li>
+                  <li [routerLink]="['puntoEquilibrio']" routerLinkActive="active">Punto de Equilibrio</li>
                 </ul>
 
                 <li data-toggle="collapse" data-target="#service3" class="collapsed">
                   <a href="#"><i class="fa fa-flag-checkered fa-lg"></i> Analisis Final<span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse" id="service3">
-                  <li [routerLink]="['integrales']" >Integrales</li>
-                  <li [routerLink]="['tendencias']">Tendencias</li>
+                  <li [routerLink]="['integrales']" routerLinkActive="active">Integrales</li>
+                  <li [routerLink]="['tendencias']" routerLinkActive="active">Tendencias</li>
                 </ul>
             </ul>
      </div>

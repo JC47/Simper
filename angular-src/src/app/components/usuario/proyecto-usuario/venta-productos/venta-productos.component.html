@@ -10,7 +10,7 @@
 <div class="row">
     <div class="col-3 offset-1">
       <div class="row" *ngFor="let producto of productosOperacion" style="margin-bottom:50px">
-        <div class="col-12 card card-inverse card-success  text-center" style="margin-bottom:20px">
+        <div class="col-12 card card-inverse  text-center" style="margin-bottom:20px;background-color:#004581">
           <div class="card-block">
               <blockquote class="card-blockquote">
               <br>
@@ -156,7 +156,7 @@
             </div>
           </div>
           <ng-template ngl-modal-footer>
-              <button type="submit" class="btn btn-danger col-5 offset-1" (click)="openVenta=false" >Cancelar</button>
+              <button type="submit" class="btn btn-secondary col-5 offset-1" (click)="openVenta=false" >Cancelar</button>
             <button type="submit" class="btn btn-primary col-5" (click)="selectVenta(ventasForm.value)" >Vender</button>
 
 
@@ -185,7 +185,7 @@
     </div>
 
     <ng-template ngl-modal-footer>
-      <button class="btn btn-danger" (click)="openConfAlmacen=false">Cancelar</button>
+      <button class="btn btn-secondary" (click)="openConfAlmacen=false">Cancelar</button>
       <button class="btn btn-primary" (click)="cobrarAlmacen()">Almacenar</button>
 
   </ng-template>
@@ -220,7 +220,7 @@
       </div>
 
       <ng-template ngl-modal-footer>
-        <button class="btn btn-danger" (click)="openConf=false">Cancelar</button>
+        <button class="btn btn-secondary" (click)="openConf=false">Cancelar</button>
         <button class="btn btn-primary" (click)="cobrarVenta()">Vender</button>
 
     </ng-template>
@@ -236,7 +236,7 @@
         </div>
 
         <ng-template ngl-modal-footer>
-        <button class="btn btn-success col-4 offset-2" (click)="paso()">Comprar Maquinarias</button>
+        <button class="btn btn-info col-4 offset-2" (click)="paso()">Comprar Maquinarias</button>
         <button class="btn btn-primary col-2" (click)="modalAlerta=false;openVenta=true;">Volver</button>
 
       </ng-template>
@@ -252,7 +252,7 @@
           </div>
 
           <ng-template ngl-modal-footer>
-          <button class="btn btn-success col-4 offset-2" (click)="paso()">Comprar Maquinarias</button>
+          <button class="btn btn-info col-4 offset-2" (click)="paso()">Comprar Maquinarias</button>
           <button class="btn btn-primary col-2" (click)="modalAlertaAlma=false;">Volver</button>
 
         </ng-template>

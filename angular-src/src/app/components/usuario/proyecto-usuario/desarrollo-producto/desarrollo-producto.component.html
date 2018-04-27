@@ -106,7 +106,7 @@
               <button type="button" (click)="confPago(producto)"
               class="btn btn-primary col-3" *ngIf="!revisaPeriodo(producto)" style="font-size:15px" [disabled]="validaVi()">Pagar</button>
               <button type="button" (click)="deshacer(producto)"
-              class="btn btn-danger col-3" *ngIf="revisaPeriodo(producto)" style="font-size:15px" [disabled]="validaVi()">Cancelar</button>
+              class="btn btn-secondary col-3" *ngIf="revisaPeriodo(producto)" style="font-size:15px" [disabled]="validaVi()">Cancelar</button>
 
 
             </div>
@@ -143,7 +143,7 @@
   </div>
 
   <ng-template ngl-modal-footer>
-  <button class="btn btn-danger" (click)="openConf=false">Cancelar</button>
+  <button class="btn btn-secondary" (click)="openConf=false">Cancelar</button>
   <button class="btn btn-primary" (click)="desarrollar()">Comenzar Desarrollo</button>
 </ng-template>
   </ngl-modal>
@@ -174,7 +174,7 @@
     </div>
 
     <ng-template ngl-modal-footer>
-    <button class="btn btn-danger" (click)="openPago=false">Cancelar</button>
+    <button class="btn btn-secondary" (click)="openPago=false">Cancelar</button>
     <button class="btn btn-primary" (click)="pagarDesarrollo()">Realizar Pago</button>
   </ng-template>
     </ngl-modal>
