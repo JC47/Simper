@@ -139,9 +139,12 @@ router.post('/productosendesarrollo/', (req, res, next) => {
   productoZonaProyecto.getZonas(),
   productoZonaProyecto.getIdProductoIdZonasNumeroPeriodo(idProyecto,numeroPeriodo,idUsuario),
   function(productosendes, idszonasdes, zonas, idproductoidzonanumeroperiodo) {
-    //console.log("productosendes",productosendes);
-    //console.log("idszonasdes",idszonasdes);
-    //console.log("zonas",zonas);
+
+    console.log("productosendes",productosendes);
+    console.log("idszonasdes",idszonasdes);
+    console.log("zonas",zonas);
+    console.log("idproductoidzonanumeroperiodo",idproductoidzonanumeroperiodo);
+
      return jsonProductosEnDesarrollo(productosendes, idszonasdes, zonas, idproductoidzonanumeroperiodo);
      })
   .then(function (rows) {
@@ -480,15 +483,16 @@ function jsonProductosEnDesarrollo(productosendes, idszonasendes,zonas, idproduc
       productosmaxperiodo.push(aux);
       i++;
     }
-
+console.log("productosmaxperiodo:: "+productosmaxperiodo);
   //Maximo numero de periodo de productosendes
   var nvoproductosendes = [];
    var aux2 = 0;
    for (var j = 0; j < productosmaxperiodo.length; j++) {
      for (var k = 0; k < (productosmaxperiodo[j]); k++) {
      aux2 = aux2 + 1;
+     console.log("aux2 1.1:"+aux2);
      }
-  //      console.log("aux2: "+(aux2-1));
+        //console.log("aux2: "+(aux2-1));
         var json = {
             "Producto_idProducto":productosendes[aux2-1].Producto_idProducto,
             "Zona_idZonas":productosendes[aux2-1].Zona_idZonas,
