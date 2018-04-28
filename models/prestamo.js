@@ -134,8 +134,8 @@ module.exports.getPagos = function(idProyecto,numeroPeriodo){
   return querySql(query);
 }
 
-module.exports.getAmortizacion = function(idProyecto,idCredito){
-  var query = "select * from amortizacion where Proyecto_idProyecto = " +idProyecto+ " and idCredito = " +idCredito+"";
+module.exports.getAmortizacion = function(idProyecto,idCredito,numeroPeriodo,numeroPeriodoFinal){
+  var query = "select * from amortizacion where Proyecto_idProyecto = " +idProyecto+ " and idCredito = " +idCredito+" and numeroPeriodo > "+numeroPeriodo+" and numeroPeriodo <= "+numeroPeriodoFinal+"";
   return querySql(query);
 }
 

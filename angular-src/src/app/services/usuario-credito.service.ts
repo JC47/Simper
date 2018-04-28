@@ -106,18 +106,18 @@ export class UsuarioCreditoService {
     return this.http.post('prestamo/getAmortizacion/',x,{headers}).map(res => res.json());
   }
 
-  verPagosP(idCredito){
+  verPagosP(idCredito,plazo){
+    var t = parseInt(localStorage.getItem('numeroPeriodo'));
     var x = {
       idCredito:idCredito,
-      idProyecto:parseInt(localStorage.getItem('idProyecto'))
+      idProyecto:parseInt(localStorage.getItem('idProyecto')),
+      numeroPeriodo:t,
+      numeroPeriodoFinal:(t+plazo)
     };
     var tabla = [];
     this.verPagosR(x).subscribe( data=> {
-      console.log("Consulta Tabla 2",data.success,data.datos)
       for(let i in data.datos){
-        if(data.datos[i].numeroPeriodo > parseInt(localStorage.getItem('numeroPeriodo'))){
-          tabla.push(data.datos[i]);
-        }
+        tabla.push(data.datos[i]);
       }
     });
     return tabla;
