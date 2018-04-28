@@ -54,9 +54,10 @@ router.post('/getDesarrollosP/', (req,res,next) => {
   Promise.join(
     decision.getDesarrolladosProyectoProducto(idProyecto,numeroPeriodo),
     decision.getNumeroPeriodoProyectoProducto(idProyecto,numeroPeriodo),
-    function(desproyectoproducto,numeroperiodoproyectoproducto) {
+    decision.getNumeroPeriodoBalance(idProyecto,numeroPeriodo),
+    function(desproyectoproducto,numeroperiodoproyectoproducto,numeroperiodobalance) {
 
-      return jsonDecisionesDesarrolladosP(desproyectoproducto,numeroperiodoproyectoproducto);
+      return jsonDecisionesDesarrolladosP(desproyectoproducto,numeroperiodoproyectoproducto,numeroperiodobalance);
     })
   .then( function (data) {
     res.json({success: true, datos:data, msg:"Operacion exitosa"});
@@ -75,8 +76,9 @@ router.post('/getDesarrollosZ/', (req,res,next) => {
   Promise.join(
     decision.getDesarrolladosProductoZonaProyecto(idProyecto,numeroPeriodo),
     decision.getNumeroPeriodoProductoZonaProyecto(idProyecto,numeroPeriodo),
-    function(desproductozonaproyecto,numeroperiodoproductozonaproyecto) {
-      return jsonDecisionesDesarrolladosZ(desproductozonaproyecto,numeroperiodoproductozonaproyecto);
+    decision.getNumeroPeriodoBalance(idProyecto,numeroPeriodo),
+    function(desproductozonaproyecto,numeroperiodoproductozonaproyecto,numeroperiodobalance) {
+      return jsonDecisionesDesarrolladosZ(desproductozonaproyecto,numeroperiodoproductozonaproyecto,numeroperiodobalance);
     })
   .then( function (data) {
     res.json({success: true, datos:data, msg:"Operacion exitosa"});
@@ -211,13 +213,13 @@ console.log("numeroperiodobalance:: ",numeroperiodobalance);
   // return console.log("ok");
 }
 
-function jsonDecisionesDesarrolladosP(desproyectoproducto,numeroperiodoproyectoproducto) {
+function jsonDecisionesDesarrolladosP(desproyectoproducto,numeroperiodoproyectoproducto,numeroperiodobalance) {
   var arrayRepNumeroPeriodo = [];
   var i=0;
-    while (i<numeroperiodoproyectoproducto.length) {
+    while (i<numeroperiodobalance.length) {
       var aux = 0;
       for (var j = 0; j < desproyectoproducto.length; j++) {
-        if (numeroperiodoproyectoproducto[i].numeroPeriodo == desproyectoproducto[j].numeroPeriodo/* && auxcuenta[i].Zona_idZonas == numeroperiodoauxcuenta[j].Zona_idZonas*/) {
+        if (numeroperiodobalance[i].numeroPeriodo == desproyectoproducto[j].numeroPeriodo/* && auxcuenta[i].Zona_idZonas == numeroperiodoauxcuenta[j].Zona_idZonas*/) {
           aux = aux +1;
         }
       }
@@ -229,11 +231,11 @@ function jsonDecisionesDesarrolladosP(desproyectoproducto,numeroperiodoproyectop
     var arrayDecisionesDesarrollados = [];
     var k = 0;
 
-    while (k < numeroperiodoproyectoproducto.length) {
+    while (k < numeroperiodobalance.length) {
       //for (var i = 0; i < zonas.length; i++) {
   //      if (idszonasindes[k].Zona_idZonas == zonas[i].idZona) {
           var json = {
-            "numeroPeriodo":numeroperiodoproyectoproducto[k].numeroPeriodo,
+            "numeroPeriodo":numeroperiodobalance[k].numeroPeriodo,
             "productos":[]
           }
         arrayDecisionesDesarrollados.push(json);
@@ -255,13 +257,13 @@ function jsonDecisionesDesarrolladosP(desproyectoproducto,numeroperiodoproyectop
   return arrayDecisionesDesarrollados;
 }
 
-function jsonDecisionesDesarrolladosZ(desproductozonaproyecto,numeroperiodoproductozonaproyecto) {
+function jsonDecisionesDesarrolladosZ(desproductozonaproyecto,numeroperiodoproductozonaproyecto,numeroperiodobalance) {
   var arrayRepNumeroPeriodo = [];
   var i=0;
-    while (i<numeroperiodoproductozonaproyecto.length) {
+    while (i<numeroperiodobalance.length) {
       var aux = 0;
       for (var j = 0; j < desproductozonaproyecto.length; j++) {
-        if (numeroperiodoproductozonaproyecto[i].numeroPeriodo == desproductozonaproyecto[j].numeroPeriodo/* && auxcuenta[i].Zona_idZonas == numeroperiodoauxcuenta[j].Zona_idZonas*/) {
+        if (numeroperiodobalance[i].numeroPeriodo == desproductozonaproyecto[j].numeroPeriodo/* && auxcuenta[i].Zona_idZonas == numeroperiodoauxcuenta[j].Zona_idZonas*/) {
           aux = aux +1;
         }
       }
@@ -273,11 +275,11 @@ function jsonDecisionesDesarrolladosZ(desproductozonaproyecto,numeroperiodoprodu
     var arrayDecisionesDesarrollados = [];
     var k = 0;
 
-    while (k < numeroperiodoproductozonaproyecto.length) {
+    while (k < numeroperiodobalance.length) {
       //for (var i = 0; i < zonas.length; i++) {
   //      if (idszonasindes[k].Zona_idZonas == zonas[i].idZona) {
           var json = {
-            "numeroPeriodo":numeroperiodoproductozonaproyecto[k].numeroPeriodo,
+            "numeroPeriodo":numeroperiodobalance[k].numeroPeriodo,
             "productos":[]
           }
         arrayDecisionesDesarrollados.push(json);
