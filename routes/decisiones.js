@@ -191,13 +191,13 @@ console.log("numeroperiodobalance:: ",numeroperiodobalance);
 
     var aux2 = 0;
     for (var j = 0; j < numeroperiodobalance.length; j++) {
-      if(arrayRepNumeroPeriodo[j]==0){
-        var json = {
-          "idMaquinaria":0,
-          "Cantidad":0
-        }
-        arrayDecisionesMaquinaria[j]['maquinarias'].push(json);
-      }
+      // if(arrayRepNumeroPeriodo[j]==0){
+      //   var json = {
+      //     "idMaquinaria":0,
+      //     "Cantidad":0
+      //   }
+      //   arrayDecisionesMaquinaria[j]['maquinarias'].push(json);
+      // }
       for (var k = 0; k < (arrayRepNumeroPeriodo[j]); k++) {
           var json = {
             "idMaquinaria":maquinariaproyecto[aux2].Maquinaria_idMaquinaria,
