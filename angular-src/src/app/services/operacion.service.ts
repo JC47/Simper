@@ -339,5 +339,111 @@ export class OperacionService {
     return x;
   }
 
+  //Decisiones
+  ventas(){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:localStorage.getItem('numeroPeriodo')
+    }
+    return this.http.post('decisiones/getVentas/',x,{headers}).map(res => res.json());
+  }
+
+  maquinas(){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:localStorage.getItem('numeroPeriodo')
+    }
+    return this.http.post('decisiones/getVentas/',x,{headers}).map(res => res.json());
+  }
+
+  dproductos(){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:localStorage.getItem('numeroPeriodo')
+    }
+    return this.http.post('decisiones/getVentas/',x,{headers}).map(res => res.json());
+  }
+
+  dzonas(){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:localStorage.getItem('numeroPeriodo')
+    }
+    return this.http.post('decisiones/getVentas/',x,{headers}).map(res => res.json());
+  }
+
+  creditos(){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:localStorage.getItem('numeroPeriodo')
+    }
+    return this.http.post('decisiones/getVentas/',x,{headers}).map(res => res.json());
+  }
+
+  returnVentas(){
+    var x = [];
+    this.ventas().subscribe(data => {
+      for(let key in data.datos){
+        x.push(data.datos[key]);
+      }
+    });
+    return x;
+  }
+
+  returnMaquinas(){
+    var x = [];
+    this.ventas().subscribe(data => {
+      for(let key in data.datos){
+        x.push(data.datos[key]);
+      }
+    });
+    return x;
+  }
+
+  returnDProductos(){
+    var x = [];
+    this.ventas().subscribe(data => {
+      for(let key in data.datos){
+        x.push(data.datos[key]);
+      }
+    });
+    return x;
+  }
+
+  returnDZonas(){
+    var x = [];
+    this.ventas().subscribe(data => {
+      for(let key in data.datos){
+        x.push(data.datos[key]);
+      }
+    });
+    return x;
+  }
+
+  returnCreditos(){
+    var x = [];
+    this.ventas().subscribe(data => {
+      for(let key in data.datos){
+        x.push(data.datos[key]);
+      }
+    });
+    return x;
+  }
+
 
 }
