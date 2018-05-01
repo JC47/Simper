@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router}  from '@angular/router';
 import {ProyectosService} from '../../../../services/proyectos.service';
+import {OperacionService} from '../../../../services/operacion.service';
 
 @Component({
   selector: 'app-sidenav-p',
@@ -11,7 +12,13 @@ export class SidenavPComponent implements OnInit {
 
   proyectos:any;
   proyectoActual:any;
+  ventas=[];
+  maquinas=[];
+  DProductos=[];
+  DZonas=[];
+  ceditos=[];
   constructor(private router:Router,
+              private _operacionService:OperacionService,
               private _proyectosS:ProyectosService) {
 
     this.proyectoActual=localStorage.getItem('nombreProyecto');
@@ -41,6 +48,20 @@ export class SidenavPComponent implements OnInit {
     }
       return "id NO encontrado"
 
+  }
+
+  verDecisiones(){
+    this.ventas = this._operacionService.returnVentas();
+    this.maquinas = this._operacionService.returnMaquinas();
+    this.DProductos = this._operacionService.returnDProductos();
+    this.DZonas = this._operacionService.returnDZonas();
+    this.ceditos = this._operacionService.returnCreditos();
+
+    console.log("Ventas",this.ventas);
+    console.log("Maquinas",this.maquinas);
+    console.log("Productos",this.DProductos);
+    console.log("Zonas",this.DZonas);
+    console.log("Creditos",this.ceditos);
   }
 
 
