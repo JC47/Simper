@@ -79,31 +79,31 @@
       <tr bgcolor="DF060A" style="color:white">
         <td>=</td>
         <td>Margen Neto (%)</td>
-        <td class="text-right">{{getMargenNeto()* 100|number:'1.0-0'}}</td>
+        <td class="text-right">{{getMargenNeto()* 100|number:'1.2-2'}}%</td>
       </tr>
 
       <tr bgcolor="DF060A" style="color:white">
         <td>*</td>
         <td>Rotación de Activos</td>
-        <td class="text-right">{{getRotacionActivos() |number:'1.0-0'}}</td>
+        <td class="text-right">{{getRotacionActivos()|number:'1.2-2'}}</td>
       </tr>
 
       <tr bgcolor="DF060A" style="color:white">
         <td>=</td>
         <td>Rentabilidad de Activos(%)</td>
-        <td class="text-right">{{getRentabilidadSobreActivos()* 100|number:'1.0-0'}}</td>
+        <td class="text-right">{{getRentabilidadSobreActivos()* 100|number:'1.2-2'}}%</td>
       </tr>
 
       <tr bgcolor="DF060A" style="color:white">
         <td>*</td>
         <td>Placa Financiera</td>
-        <td class="text-right">{{getActivoCapitalTotal()|number:'1.0-0'}}</td>
+        <td class="text-right">{{getActivoCapitalTotal()|number:'1.2-2'}}</td>
       </tr>
 
       <tr bgcolor="DF060A" style="color:white">
         <td>=</td>
         <td>Rentabilidad s/Capital Contable</td>
-        <td class="text-right">{{getRentabilidadSobreCapital()*100 |number:'1.0-0'}}</td>
+        <td class="text-right">{{getRentabilidadSobreCapital()*100 |number:'1.2-2'}}</td>
       </tr>
 
     </table>
@@ -179,7 +179,7 @@
       <tr bgcolor="DF060A" style="color:white">
         <td>=</td>
         <td>Rotación de activos</td>
-        <td class="text-right">{{getRotacionActivos() |number:'1.0-0'}}</td>
+        <td class="text-right">{{getRotacionActivos() |number:'1.2-2'}}</td>
       </tr>
 
       <tr>
@@ -252,7 +252,7 @@
       <tr bgcolor="DF060A" style="color:white">
         <td>=</td>
         <td>Palanaca Financiera</td>
-        <td class="text-right">{{getActivoCapitalTotal() |number:'1.0-0'}}</td>
+        <td class="text-right">{{getActivoCapitalTotal() |number:'1.2-2'}}</td>
 
       </tr>
     </table>
@@ -289,7 +289,7 @@
           <td bgcolor="DF060A" style="color:white">Solvencia</td>
           <td>Activo Circulante</td>
           <td class="text-right">{{getActivoCirculante()|currency:'USD':true:'1.0-0'}}</td>
-          <td class="text-right" bgcolor="DF060A" style="color:white">{{getSolvencia() |number:'1.0-0'}}</td>
+          <td class="text-right" bgcolor="DF060A" style="color:white">{{getSolvencia() |number:'1.2-2'}}</td>
         </tr>
 
         <tr>
@@ -305,7 +305,7 @@
           <td bgcolor="DF060A" style="color:white">Solvencia Inmediata</td>
           <td>Activo Disponible</td>
           <td class="text-right">{{getActivoDisponible()|currency:'USD':true:'1.0-0'}}</td>
-          <td class="text-right" bgcolor="DF060A" style="color:white">{{getSolvenciaInmediata()|number:'1.0-0'}}</td>
+          <td class="text-right" bgcolor="DF060A" style="color:white">{{getSolvenciaInmediata()|number:'1.2-2'}}</td>
         </tr>
 
         <tr>
@@ -322,7 +322,7 @@
           <td bgcolor="DF060A" style="color:white">Rotación de Cuentas x Cobrar</td>
           <td>Ventas de Créditos</td>
           <td class="text-right">{{getVentasACredito()|currency:'USD':true:'1.0-0'}}</td>
-          <td class="text-right" bgcolor="DF060A" style="color:white">{{getRotacionCC()|number:'1.0-0'}}</td>
+          <td class="text-right" bgcolor="DF060A" style="color:white">{{getRotacionCC()|number:'1.2-2'}}</td>
         </tr>
 
         <tr>
@@ -339,7 +339,7 @@
           <td bgcolor="DF060A" style="color:white">Días promedio de Cartera</td>
           <td>Días del Periodo</td>
           <td class="text-center">365</td>
-          <td class="text-right" bgcolor="DF060A" style="color:white">{{getDiasPPromedioDeCartera()|number:'1.0-0'}}</td>
+          <td class="text-right" bgcolor="DF060A" style="color:white">{{getDiasPPromedioDeCartera()|number:'1.2-2'}}</td>
         </tr>
 
         <tr>
@@ -360,7 +360,7 @@
           <td bgcolor="DF060A" style="color:white">Rotación de Cuentas por Pagar</td>
           <td>Compras Netas a Crédito</td>
           <td class="text-right">{{getComprasNetasCredito()|currency:'USD':true:'1.0-0'}}</td>
-          <td class="text-right" bgcolor="DF060A" style="color:white">{{getRotacionCP()|number:'1.0-0'}}</td>
+          <td class="text-right" bgcolor="DF060A" style="color:white">{{getRotacionCP()|number:'1.2-2'}}</td>
         </tr>
 
         <tr>
@@ -378,7 +378,7 @@
           <td bgcolor="DF060A" style="color:white">Días promedio de c x p</td>
           <td>Días del Periodo</td>
           <td class="text-center">365</td>
-          <td class="text-right" bgcolor="DF060A" style="color:white">{{getDiasPPromedio()|number:'1.0-0'}}</td>
+          <td class="text-right" bgcolor="DF060A" style="color:white">{{getDiasPPromedio()|number:'1.2-2'}}</td>
         </tr>
 
         <tr>
@@ -396,7 +396,7 @@
           <td bgcolor="DF060A" style="color:white">Rotación  de I.A.T.</td>
           <td>Costo de lo vendido</td>
           <td class="text-right">{{getTotalCostosVentas()|currency:'USD':true:'1.0-0'}}</td>
-          <td class="text-right" bgcolor="DF060A" style="color:white">{{getRotacionIAT()|number:'1.0-0'}}</td>
+          <td class="text-right" bgcolor="DF060A" style="color:white">{{getRotacionIAT()|number:'1.2-2'}}</td>
         </tr>
 
         <tr>
@@ -412,7 +412,7 @@
           <td bgcolor="DF060A" style="color:white">Días primedio I.A.T.</td>
           <td>Días del Periodo</td>
           <td class="text-center">365</td>
-          <td  class="text-right" bgcolor="DF060A" style="color:white">{{getDiasPromedioIAT()|number:'1.0-0'}}</td>
+          <td  class="text-right" bgcolor="DF060A" style="color:white">{{getDiasPromedioIAT()|number:'1.2-2'}}</td>
         </tr>
 
         <tr>
@@ -429,7 +429,7 @@
           <td bgcolor="DF060A" style="color:white">Rotación de Materia Prima</td>
           <td>Costo de M.P. empleada</td>
           <td class="text-right">{{getCostoMPEmpleada()|currency:'USD':true:'1.0-0'}}</td>
-          <td class="text-right" bgcolor="DF060A" style="color:white">{{getRotacionMP()|number:'1.0-0'}}</td>
+          <td class="text-right" bgcolor="DF060A" style="color:white">{{getRotacionMP()|number:'1.2-2'}}</td>
         </tr>
 
         <tr>
@@ -445,7 +445,7 @@
           <td bgcolor="DF060A" style="color:white">Días Promedio I.M.P.</td>
           <td>Días del Periodo</td>
           <td class="text-center">365</td>
-          <td class="text-right" bgcolor="DF060A" style="color:white">{{getDiasPromedioIMP()|number:'1.0-0'}}</td>
+          <td class="text-right" bgcolor="DF060A" style="color:white">{{getDiasPromedioIMP()|number:'1.2-2'}}</td>
         </tr>
 
         <tr>
@@ -462,7 +462,7 @@
           <td bgcolor="DF060A" style="color:white">Margen Neto de Utilidad</td>
           <td>Utilidad Neta</td>
           <td class="text-right">{{getUtilidadNeta()|currency:'USD':true:'1.0-0'}}</td>
-          <td class="text-right" bgcolor="DF060A" style="color:white">{{getMargenNetoUtilidad()|number:'1.0-0'}}</td>
+          <td class="text-right" bgcolor="DF060A" style="color:white">{{getMargenNetoUtilidad()|number:'1.2-2'}}</td>
         </tr>
 
         <tr>
@@ -479,7 +479,7 @@
           <td bgcolor="DF060A" style="color:white">Margen Bruto de Utilidad</td>
           <td>Utilidad antes int. e imptos</td>
           <td class="text-right">{{getUtilidadOperacion()|currency:'USD':true:'1.0-0'}}</td>
-          <td class="text-right" bgcolor="DF060A" style="color:white">{{getMargenBrutoUtilidad()|number:'1.0-0'}}</td>
+          <td class="text-right" bgcolor="DF060A" style="color:white">{{getMargenBrutoUtilidad()|number:'1.2-2'}}</td>
         </tr>
 
         <tr>
@@ -495,12 +495,12 @@
           <td bgcolor="DF060A" style="color:white">Endeudamiento</td>
           <td>Pasivo Total</td>
           <td class="text-right">{{getPasivoTotal()|currency:'USD':true:'1.0-0'}}</td>
-          <td class="text-right" bgcolor="DF060A" style="color:white">{{getEndeudamiento()|number:'1.0-0'}}</td>
+          <td class="text-right" bgcolor="DF060A" style="color:white">{{getEndeudamiento()|number:'1.2-2'}}</td>
         </tr>
 
         <tr>
           <td></td>
-          <td>Capital Contable</td>
+          <td>Capital Contable</td>c
           <td class="text-right">{{getCapitalContable()|currency:'USD':true:'1.0-0'}}</td>
           <td></td>
         </tr>
@@ -517,7 +517,7 @@
           <td></td>
           <td>Pasivo Total</td>
           <td class="text-right">{{getPasivoTotal()|currency:'USD':true:'1.0-0'}}</td>
-          <td class="text-right" bgcolor="DF060A" style="color:white">{{getPasivoActivoTotal()|number:'1.0-0'}}</td>
+          <td class="text-right" bgcolor="DF060A" style="color:white">{{getPasivoActivoTotal()|number:'1.2-2'}}</td>
         </tr>
 
 
@@ -541,7 +541,7 @@
           <td></td>
           <td>Total Activo</td>
           <td class="text-right">{{getActivoTotal()|currency:'USD':true:'1.0-0'}}</td>
-          <td class="text-right" bgcolor="DF060A" style="color:white">{{getActivoCapitalTotal()|number:'1.0-0'}}</td>
+          <td class="text-right" bgcolor="DF060A" style="color:white">{{getActivoCapitalTotal()|number:'1.2-2'}}</td>
         </tr>
 
         <tr>
@@ -555,7 +555,7 @@
           <td bgcolor="DF060A" style="color:white">Coobertura de Intereses</td>
           <td>Utilidad antes int e imptos</td>
           <td class="text-right">{{getUtilidadOperacion()|currency:'USD':true:'1.0-0'}}</td>
-          <td class="text-right" bgcolor="DF060A" style="color:white">{{getCoberturaIntereses()|number:'1.0-0'}}</td>
+          <td class="text-right" bgcolor="DF060A" style="color:white">{{getCoberturaIntereses()|number:'1.2-2'}}</td>
         </tr>
 
         <tr>
@@ -566,4 +566,19 @@
         </tr>
 
       </table>
+    </div>
+    <div class="row align-items-center" style="margin-bottom:20px">
+      <div class="offset-8 col-1">
+        Exportar:
+      </div>
+
+
+      <div class="col-1">
+        <ngl-icon icon="pdf" category="doctype" (click)="PDFratios()" size="large" style="cursor:pointer" ></ngl-icon>
+      </div>
+
+
+      <div class="col-1">
+        <ngl-icon icon="csv" category="doctype" (click)="CSVratios()"  size="large" style="cursor:pointer"></ngl-icon>
+      </div>
     </div>

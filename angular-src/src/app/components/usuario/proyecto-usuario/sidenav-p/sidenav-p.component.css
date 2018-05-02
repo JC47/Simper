@@ -1,15 +1,15 @@
 .nav-side-menu {
-  overflow: auto;
+  overflow-y:auto;
+  overflow-x: hidden;
   font-family: verdana;
   font-size: 15px;
   font-weight: 200;
   background-color: #004581 ;
   position: fixed;
-  top: 0px;
   width:350px;
-  height: 100%;
+  height: 97%;
   color: #e1ffff;
-  margin-top: 110px;
+  padding-top:4%;
 }
 .nav-side-menu .brand {
   background-color: #001b48;

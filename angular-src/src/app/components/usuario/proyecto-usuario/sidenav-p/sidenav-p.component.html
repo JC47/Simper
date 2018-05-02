@@ -1,91 +1,97 @@
-<div class="nav-side-menu">
-    <div class="brand">
-      <div class="row" >
-        <div class="col-12 text-center">
-          <h6 style="margin-top:20px">Proyecto {{proyectoActual}}</h6>
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="col-12 text-center" style="margin-bottom:10px">
-          <button type="button" class="btn btn-danger" style="font-size:10px" (click)="verProyectos()">Salir de Proyecto</button>
+<div style="height:100%">
+
+  <div class="nav-side-menu">
+      <div class="brand">
+        <div class="row" >
+          <div class="col-12 text-center">
+            <h6 style="margin-top:20px">Proyecto {{proyectoActual}}</h6>
+          </div>
         </div>
 
+        <div class="row">
+          <div class="col-12 text-center" style="margin-bottom:10px">
+            <button type="button" class="btn btn-danger" style="font-size:10px" (click)="verProyectos()">Salir de Proyecto</button>
+          </div>
+
+        </div>
+
       </div>
+      <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
-    </div>
-    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+          <div class="menu-list">
+              <ul id="menu-content" class="menu-content collapse out">
 
-        <div class="menu-list">
-            <ul id="menu-content" class="menu-content collapse out">
+                  <li [routerLink]="['home']" routerLinkActive="active">
+                    <a >
+                    <i class="fa fa-tachometer fa-lg"></i> Dash Board
+                    </a>
+                  </li>
 
-                <li [routerLink]="['home']" routerLinkActive="active">
-                  <a >
-                  <i class="fa fa-tachometer fa-lg"></i> Dash Board
-                  </a>
-                </li>
+                  <li [routerLink]="['demandaPotencial']" routerLinkActive="active">
+                    <a >
+                    <i class="fa fa-area-chart fa-lg"></i> Demanda potencial
+                    </a>
+                  </li>
 
-                <li [routerLink]="['demandaPotencial']" routerLinkActive="active">
-                  <a >
-                  <i class="fa fa-area-chart fa-lg"></i> Demanda potencial
-                  </a>
-                </li>
-
-                <li [routerLink]="['produccion']" routerLinkActive="active">
-                   <a>
-                    <i class="fa fa-pie-chart fa-lg"></i>  Decisiones de Producción y Venta
-                   </a>
-                </li>
-
-                <li data-toggle="collapse" data-target="#service" class="collapsed">
-                  <a href="#"><i class="fa fa-line-chart fa-lg"></i> Decisiones de Crecimiento<span class="arrow"></span></a>
-                </li>
-                <ul class="sub-menu collapse" id="service">
-
-                  <li [routerLink]="['compraMaquinaria']" routerLinkActive="active">
-                     <a >
-                     <i class="fa fa-cogs fa-lg"></i> Compra de Maquinaria
+                  <li [routerLink]="['produccion']" routerLinkActive="active">
+                     <a>
+                      <i class="fa fa-pie-chart fa-lg"></i>  Decisiones de Producción y Venta
                      </a>
-                   </li>
-                   <li [routerLink]="['desarrolloProducto']" routerLinkActive="active">
-                      <a >
-                      <i class="fa fa-flask fa-lg"></i> Desarrollo de Productos
-                      </a>
-                    </li>
-                   <li [routerLink]="['desarrolloMercado']" routerLinkActive="active">
-                      <a >
-                      <i class="fa fa-map-marker fa-lg"></i> Desarrollo de mercados
-                      </a>
-                    </li>
-                </ul>
+                  </li>
 
-                <li [routerLink]="['financiamiento']" routerLinkActive="active">
-                   <a>
-                    <i class="fa fa-credit-card fa-lg"></i>  Decisiones de Finaciamiento
-                   </a>
-                </li>
+                  <li data-toggle="collapse" data-target="#service" class="collapsed">
+                    <a href="#"><i class="fa fa-line-chart fa-lg"></i> Decisiones de Crecimiento<span class="arrow"></span></a>
+                  </li>
+                  <ul class="sub-menu collapse" id="service">
 
-                <li data-toggle="collapse" data-target="#service2" class="collapsed">
-                  <a href="#"><i class="fa fa-list-alt fa-lg"></i> Resultados del periodo<span class="arrow"></span></a>
-                </li>
-                <ul class="sub-menu collapse" id="service2">
-                  <li [routerLink]="['balance_inicial']" routerLinkActive="active">Balance Inicial</li>
-                  <li [routerLink]="['operacion']" routerLinkActive="active">Resultados Operacion</li>
-                  <li [routerLink]="['estadoResultados']" routerLinkActive="active">Estado de Resultados</li>
-                  <li [routerLink]="['balance_final']" routerLinkActive="active">Balance Final</li>
-                  <li [routerLink]="['flujo']" routerLinkActive="active">Flujo de Efectivo</li>
-                  <li [routerLink]="['comparativa']" routerLinkActive="active">Posición Comparativa</li>
-                  <li [routerLink]="['analisis']" routerLinkActive="active">Analisis del Periodo</li>
-                  <li [routerLink]="['puntoEquilibrio']" routerLinkActive="active">Punto de Equilibrio</li>
-                </ul>
+                    <li [routerLink]="['compraMaquinaria']" routerLinkActive="active">
+                       <a >
+                       <i class="fa fa-cogs fa-lg"></i> Compra de Maquinaria
+                       </a>
+                     </li>
+                     <li [routerLink]="['desarrolloProducto']" routerLinkActive="active">
+                        <a >
+                        <i class="fa fa-flask fa-lg"></i> Desarrollo de Productos
+                        </a>
+                      </li>
+                     <li [routerLink]="['desarrolloMercado']" routerLinkActive="active">
+                        <a >
+                        <i class="fa fa-map-marker fa-lg"></i> Desarrollo de mercados
+                        </a>
+                      </li>
+                  </ul>
 
-                <li data-toggle="collapse" data-target="#service3" class="collapsed">
-                  <a href="#"><i class="fa fa-flag-checkered fa-lg"></i> Analisis Final<span class="arrow"></span></a>
-                </li>
-                <ul class="sub-menu collapse" id="service3">
-                  <li [routerLink]="['integrales']" routerLinkActive="active">Integrales</li>
-                  <li [routerLink]="['tendencias']" routerLinkActive="active">Tendencias</li>
-                </ul>
-            </ul>
-     </div>
+                  <li [routerLink]="['financiamiento']" routerLinkActive="active">
+                     <a>
+                      <i class="fa fa-credit-card fa-lg"></i>  Decisiones de Finaciamiento
+                     </a>
+                  </li>
+
+                  <li data-toggle="collapse" data-target="#service2" class="collapsed">
+                    <a href="#"><i class="fa fa-list-alt fa-lg"></i> Resultados del periodo<span class="arrow"></span></a>
+                  </li>
+                  <ul class="sub-menu collapse" id="service2">
+                    <li [routerLink]="['balance_inicial']" routerLinkActive="active">Balance Inicial</li>
+                    <li [routerLink]="['operacion']" routerLinkActive="active">Resultados Operacion</li>
+                    <li [routerLink]="['estadoResultados']" routerLinkActive="active">Estado de Resultados</li>
+                    <li [routerLink]="['balance_final']" routerLinkActive="active">Balance Final</li>
+                    <li [routerLink]="['flujo']" routerLinkActive="active">Flujo de Efectivo</li>
+                    <li [routerLink]="['comparativa']" routerLinkActive="active">Posición Comparativa</li>
+                    <li [routerLink]="['analisis']" routerLinkActive="active">Analisis del Periodo</li>
+                    <li [routerLink]="['puntoEquilibrio']" routerLinkActive="active">Punto de Equilibrio</li>
+                  </ul>
+
+                  <li data-toggle="collapse" data-target="#service3" class="collapsed">
+                    <a href="#"><i class="fa fa-flag-checkered fa-lg"></i> Analisis Final<span class="arrow"></span></a>
+                  </li>
+                  <ul class="sub-menu collapse" id="service3">
+                    <li [routerLink]="['integrales']" routerLinkActive="active">Integrales</li>
+                    <li [routerLink]="['tendencias']" routerLinkActive="active">Tendencias</li>
+                  </ul>
+              </ul>
+       </div>
+  </div>
+
+
 </div>
