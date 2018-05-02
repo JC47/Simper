@@ -188,16 +188,17 @@ router.post('/deleteactivo', (req, res, next) => {
 router.post('/getAmortizacion', (req,res,next) => {
   var idCredito = req.body.idCredito;
   var idProyecto = req.body.idProyecto;
-
+  var numeroPeriodo = req.body.numeroPeriodo;
+  var numeroPeriodoFinal = req.body.numeroPeriodoFinal;
   Promise.resolve()
   .then(function(){
-    return prestamo.getAmortizacion(idProyecto,idCredito);
+    return prestamo.getAmortizacion(idProyecto,idCredito,numeroPeriodo,numeroPeriodoFinal);
   })
   .then(function(rows){
     res.json({success:true,datos:rows,msg:"Bien"});
   })
   .catch(function(err){
-    console.error("got error: " + err);
+    console.log(err);
     res.json({success:false, msg:"No sirve"});
   });
 });

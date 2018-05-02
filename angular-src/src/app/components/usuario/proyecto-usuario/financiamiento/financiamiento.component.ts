@@ -139,9 +139,9 @@ return true
     this.tablaA = this._creditoService.visualizarTabla(idCredito);
   }
 
-  verPagos(idCredito){
+  verPagos(idCredito,plazo){
     this.openPagos = true;
-    this.tablaPagos = this._creditoService.verPagosP(idCredito);
+    this.tablaPagos = this._creditoService.verPagosP(idCredito,plazo);
   }
 
   getMaxById(idCredito){

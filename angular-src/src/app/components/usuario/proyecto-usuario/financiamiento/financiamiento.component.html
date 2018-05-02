@@ -30,7 +30,7 @@
 
                 <div class="card-footer">
                   <button  class="btn btn-primary  offset-1 col-10" (click)="selectCredito(credito)" [disabled]="validaVi()" [hidden]="!validaCredito(credito)"   >Solicitar</button>
-                  <button class="btn btn-primary offset-1 col-10" (click)="verPagos(credito.idCredito)"  [hidden]="validaCredito(credito)">Ver Pagos</button>
+                  <button class="btn btn-primary offset-1 col-10" (click)="verPagos(credito.idCredito,credito.plazo)"  [hidden]="validaCredito(credito)">Ver Pagos</button>
 
 
                 </div>

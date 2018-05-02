@@ -21,18 +21,18 @@ router.post('/register', (req, res, next) => {
   });
 });
 
-router.post('/modify/:id', (req,res,next) => {
-  Promise.resolve().then( function () {
-    var id = req.params.id;
-    var cambios = req.body;
-    return balance.updateBalance(id,cambios);
-  }).then( function () {
-    res.json({success: true,msg:"Operacion exitosa"});
-  }).catch(function (err) {
-    console.log(err);
-    res.json({success:false, msg:"Operacion incompleta"});
-  });
-});
+// router.post('/modify/:id', (req,res,next) => {
+//   Promise.resolve().then( function () {
+//     var id = req.params.id;
+//     var cambios = req.body;
+//     return balance.updateBalance(id,cambios);
+//   }).then( function () {
+//     res.json({success: true,msg:"Operacion exitosa"});
+//   }).catch(function (err) {
+//     console.log(err);
+//     res.json({success:false, msg:"Operacion incompleta"});
+//   });
+// });
 
 router.post('/', (req,res,next) => {
   Promise.resolve().then( function () {
@@ -265,6 +265,58 @@ router.get('/:id', (req,res,next) => {
   }).then( function (rows) {
     res.json({success: true, datos:rows, msg:"Operacion exitosa"});
   }).catch(function (err) {
+    console.log(err);
+    res.json({success:false, msg:"Operacion incompleta"});
+  });
+});
+
+//Rutas Rescate
+
+router.post('/validarescate', (req,res,next) => {
+
+  var montoRescate = req.body.montoRescate;
+  var idUsuario = req.body.idUsuario;
+
+  Promise.resolve()
+  .then( function () {
+    return balance.getRescate(idUsuario);
+  })
+  .then(function (rescate) {
+
+    if (rescate[0].minRescate>=montoRescate && rescate[1].maxRescate<=montoRescate) {
+        res.json({success: true, msg:"Estás dentro del rango"});
+    }else {
+        res.json({success: true, msg:"Estás fuera del rango"});
+    }
+  })
+  .catch(function (err) {
+    console.log(err);
+    res.json({success:false, msg:"Operacion incompleta"});
+  });
+});
+
+router.post('/rescatecontable', (req,res,next) => {
+
+  var montoRescate = req.body.montoRescate;
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+
+  Promise.resolve()
+  .then( function () {
+    return balance.getBalanceById(idProyecto,numeroPeriodo);
+  })
+  .then(function (balance) {
+     balance[0].cajaBancos+=monto;
+     balance[0].capitalSocial+=monto;
+   return balance;
+  })
+  .then(function (balance) {
+    return balance.updateBalance(numeroPeriodo,idProyecto,balance);
+  })
+  .then(function () {
+    return res.json({success:true, msg:"Operacion completa"});
+  })
+  .catch(function (err) {
     console.log(err);
     res.json({success:false, msg:"Operacion incompleta"});
   });

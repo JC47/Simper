@@ -5786,7 +5786,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"overflow-y:scroll\">\r\n  <div class=\"row\">\r\n    <div class=\"col-8\" >\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <h3 class=\"col-12 text-center\">Créditos</h3>\r\n          <hr>\r\n        </div>\r\n        <div class=\"col-12\" style=\"overflow-y:scroll;height:800px\">\r\n          <div class=\"row\">\r\n            <div class=\"card col-6\" *ngFor=\"let credito of creditos\">\r\n\r\n              <div class=\"card-block\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-3\">\r\n                    <img  src=\"assets/img/credit.png\" class=\" img-fluid\"  style=\"margin-left:20px\">\r\n\r\n                  </div>\r\n\r\n                  <div class=\"col-8\">\r\n                    <h4 class=\"card-title\" style=\"margin-bottom:15px\">{{credito.nombreCredito}}</h4>\r\n                    <h6 class=\"card-subtitle\" style=\"margin-bottom:15px\">Monto Máximo: {{credito.montoMax| currency:'USD':true }}</h6>\r\n                    <h6 class=\"card-subtitle\" style=\"margin-bottom:15px\">Monto Minimo: {{credito.montoMin| currency:'USD':true}}</h6>\r\n                    <h6 class=\"card-subtitle\" style=\"margin-bottom:15px\">Descripción: {{credito.pago}}</h6>\r\n                    <h6 class=\"card-subtitle\" style=\"margin-bottom:15px\"> Duración: {{credito.plazo}} periodo(s)</h6>\r\n\r\n                  </div>\r\n\r\n                </div>\r\n\r\n                <div class=\"card-footer\">\r\n                  <button  class=\"btn btn-primary  offset-1 col-10\" (click)=\"selectCredito(credito)\" [disabled]=\"validaVi()\" [hidden]=\"!validaCredito(credito)\"   >Solicitar</button>\r\n                  <button class=\"btn btn-primary offset-1 col-10\" (click)=\"verPagos(credito.idCredito)\"  [hidden]=\"validaCredito(credito)\">Ver Pagos</button>\r\n\r\n\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n\r\n      </div>\r\n\r\n    </div>\r\n\r\n    <div class=\"col-4\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <h3 class=\"col-12 text-center\">Creditos Activos</h3>\r\n          <hr>\r\n        </div>\r\n        <div class=\"card col-12\" *ngFor=\"let credito of creditosActivos\">\r\n\r\n          <div class=\"card-block\">\r\n            <div class=\"row\">\r\n              <div class=\"col-3\">\r\n                <img  src=\"assets/img/credit.png\" class=\" img-fluid\"  style=\"margin-left:20px\">\r\n              </div>\r\n\r\n              <div class=\"col-5\">\r\n                <h4 class=\"card-title\" style=\"margin-bottom:15px\">{{getNameById(credito.idCredito)}}</h4>\r\n              </div>\r\n\r\n              <button type=\"button\" class=\"btn btn-secondary col-3 offset-1 text-center\" (click)=\"deleteCreditoSelected=credito;confDeleteCredito=true\" [disabled]=\"validaCreditoA(credito)\">Cancelar</button>\r\n\r\n            </div>\r\n\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n\r\n    </div>\r\n  </div>\r\n\r\n</div>\r\n\r\n\r\n\r\n<ngl-modal header=\"Confirmación\"  [(open)]=\"openModalConf\" size=\"x-small\" directional=\"false\">\r\n\r\n  <div body>\r\n    <div class=\"col-12 text-center container\">\r\n      <h5 style=\"margin-bottom:30px\">Ingresa la cantidad del credito que se desea solicitar</h5>\r\n      <div class=\"row\">\r\n\r\n      </div>\r\n\r\n        <form [formGroup]=\"solicitudForm\" (ngSubmit)=\"solicitaCredito(solicitudForm.value)\"  class=\"offset-1\" >\r\n          <input type=\"number\" formControlName=\"idCredito\" hidden=\"true\">\r\n          <div class=\"form-group row text-center\" >\r\n            <label class=\"col-5 col-form-label\">Monto a Solicitar:  </label>\r\n\r\n            <div class=\"input-group col-6 has-primary \" [ngClass]=\"{'has-danger': !solicitudForm.get('monto').valid}\">\r\n                <span class=\"input-group-addon\">$</span>\r\n                <input currencyMask [options]=\"{ prefix: '', thousands: ',', precision:'0' }\" class=\"form-control\" aria-label=\"Amount (to the nearest dollar)\"\r\n                formControlName=\"monto\">\r\n\r\n\r\n\r\n            </div>\r\n            <div class=\"form-control-feedback offset-5 text-center col-6\" style=\"font-size:10px;\"\r\n            [ngClass]=\"{'has-danger': !solicitudForm.get('monto').valid}\" *ngIf=\"!solicitudForm.controls['monto'].valid\">\r\n              El costo es requerido\r\n            </div>\r\n\r\n\r\n\r\n          </div>\r\n\r\n          <div class=\"col-12\">\r\n            <button class=\"btn btn-secondary offset-2 col-4\" (click)=\"openModalConf=false\">Salir</button>\r\n            <button type=\"submit\" class=\"btn btn-primary offset-1 col-4\"  >Solicitar</button>\r\n\r\n\r\n          </div>\r\n\r\n          </form>\r\n\r\n\r\n      <br>\r\n    </div>\r\n  </div>\r\n\r\n\r\n\r\n  </ngl-modal>\r\n\r\n\r\n\r\n  <ngl-modal header=\"Tabla de Amortización\"  [(open)]=\"openTablaAmort\" size=\"x-small\" directional=\"false\">\r\n\r\n    <div body>\r\n      <div class=\"col-10 offset-1\">\r\n        <table class=\"table table-bordered \">\r\n          <thead class=\"thead-inverse\">\r\n            <tr>\r\n              <th class=\"text-center\">Capital</th>\r\n              <th class=\"text-center\">Interes</th>\r\n              <th class=\"text-center\">Pago</th>\r\n              <th class=\"text-center\">Saldo</th>\r\n              <th class=\"text-center\">Pago a Capital</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n\r\n            <tr *ngFor=\"let t of tablaA\">\r\n              <td class=\"text-right\">{{t.capital |currency:'USD':true:'1.0-0'}}</td>\r\n              <td class=\"text-right\">{{t.interes |currency:'USD':true:'1.0-0'}}</td>\r\n              <td class=\"text-right\">{{t.pago |currency:'USD':true:'1.0-0'}}</td>\r\n              <td class=\"text-right\">{{t.saldo |currency:'USD':true:'1.0-0'}}</td>\r\n              <td class=\"text-right\">{{t.pagoCapital |currency:'USD':true:'1.0-0'}}</td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n        <br>\r\n        <div class=\"row\">\r\n\r\n        </div>\r\n        <div class=\"col-12\">\r\n          <button class=\"btn btn-secondary offset-1 col-4\" (click)=\"openTablaAmort=false\">Salir</button>\r\n        </div>\r\n\r\n      </div>\r\n    </div>\r\n\r\n\r\n\r\n    </ngl-modal>\r\n\r\n    <ngl-modal header=\"Pagos\"  [(open)]=\"openPagos\" size=\"x-small\" directional=\"false\">\r\n\r\n      <div body>\r\n        <div class=\"col-10 offset-1 text-center\">\r\n          <table class=\"table table-bordered\">\r\n            <thead class=\"thead-inverse\">\r\n              <tr>\r\n\r\n\r\n              <th class=\"text-center\">Periodo</th>\r\n              <th class=\"text-center\">Interes</th>\r\n              <th class=\"text-center\">Pago</th>\r\n              <th class=\"text-center\">Pago a Capital</th>\r\n              </tr>\r\n            </thead>\r\n            <tbody>\r\n\r\n              <tr *ngFor=\"let t of tablaPagos\">\r\n                <td class=\"text-right\">{{t.numeroPeriodo}}</td>\r\n                <td class=\"text-right\">{{t.intereses |currency:'USD':true:'1.0-0'}}</td>\r\n                <td class=\"text-right\">{{t.pagoCapital + t.intereses |currency:'USD':true:'1.0-0'}}</td>\r\n                <td class=\"text-right\">{{t.pagoCapital |currency:'USD':true:'1.0-0'}}</td>\r\n              </tr>\r\n            </tbody>\r\n          </table>\r\n          <br>\r\n          <div class=\"row\">\r\n\r\n          </div>\r\n          <div class=\"col-12\">\r\n            <button class=\"btn btn-secondary offset-1 col-4\" (click)=\"openPagos=false\">Salir</button>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n\r\n\r\n      </ngl-modal>\r\n\r\n\r\n\r\n      <ngl-modal header=\"Alerta\"  [(open)]=\"modalAlerta\" size=\"x-small\" directional=\"false\">\r\n\r\n        <div body>\r\n          <h5 class=\"col-12 text-center\">Has sobrepasado el limite de créditos activos, termina de pagar un credito para pedir otro nuevo</h5>\r\n        </div>\r\n\r\n        <ng-template ngl-modal-footer>\r\n        <button class=\"btn btn-primary col-4 offset-4\" (click)=\"modalAlerta=false\">Aceptar</button>\r\n\r\n      </ng-template>\r\n        </ngl-modal>\r\n\r\n        <ngl-modal header=\"Alerta\"  [(open)]=\"modalAlerta2\" size=\"x-small\" directional=\"false\">\r\n\r\n          <div body>\r\n            <h5 class=\"col-12 text-center\">Tu cantidad ingresada no coincide con los limites permitidos de éste crédito</h5>\r\n          </div>\r\n\r\n          <ng-template ngl-modal-footer>\r\n          <button class=\"btn btn-primary col-4 offset-4\" (click)=\"modalAlerta2=false;openModalConf=true\">Aceptar</button>\r\n\r\n        </ng-template>\r\n          </ngl-modal>\r\n\r\n\r\n          <ngl-modal header=\"Confirmación\"  [(open)]=confDeleteCredito size=\"x-small\" directional=\"false\">\r\n\r\n            <div body>\r\n              <h5 class=\"col-12 text-center\">¿Estas seguro que deseas eliminar el credito {{getNameById(deleteCreditoSelected.idCredito)}}?</h5>\r\n            </div>\r\n\r\n            <ng-template ngl-modal-footer>\r\n            <button class=\"btn btn-secondary col-5 \" (click)=\"confDeleteCredito=false\">Cancelar</button>\r\n            <button class=\"btn btn-primary col-5\"  (click)=\"eliminarCreditoSolicitado()\">Aceptar</button>\r\n\r\n          </ng-template>\r\n            </ngl-modal>\r\n"
+module.exports = "<div style=\"overflow-y:scroll\">\r\n  <div class=\"row\">\r\n    <div class=\"col-8\" >\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <h3 class=\"col-12 text-center\">Créditos</h3>\r\n          <hr>\r\n        </div>\r\n        <div class=\"col-12\" style=\"overflow-y:scroll;height:800px\">\r\n          <div class=\"row\">\r\n            <div class=\"card col-6\" *ngFor=\"let credito of creditos\">\r\n\r\n              <div class=\"card-block\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-3\">\r\n                    <img  src=\"assets/img/credit.png\" class=\" img-fluid\"  style=\"margin-left:20px\">\r\n\r\n                  </div>\r\n\r\n                  <div class=\"col-8\">\r\n                    <h4 class=\"card-title\" style=\"margin-bottom:15px\">{{credito.nombreCredito}}</h4>\r\n                    <h6 class=\"card-subtitle\" style=\"margin-bottom:15px\">Monto Máximo: {{credito.montoMax| currency:'USD':true }}</h6>\r\n                    <h6 class=\"card-subtitle\" style=\"margin-bottom:15px\">Monto Minimo: {{credito.montoMin| currency:'USD':true}}</h6>\r\n                    <h6 class=\"card-subtitle\" style=\"margin-bottom:15px\">Descripción: {{credito.pago}}</h6>\r\n                    <h6 class=\"card-subtitle\" style=\"margin-bottom:15px\"> Duración: {{credito.plazo}} periodo(s)</h6>\r\n\r\n                  </div>\r\n\r\n                </div>\r\n\r\n                <div class=\"card-footer\">\r\n                  <button  class=\"btn btn-primary  offset-1 col-10\" (click)=\"selectCredito(credito)\" [disabled]=\"validaVi()\" [hidden]=\"!validaCredito(credito)\"   >Solicitar</button>\r\n                  <button class=\"btn btn-primary offset-1 col-10\" (click)=\"verPagos(credito.idCredito,credito.plazo)\"  [hidden]=\"validaCredito(credito)\">Ver Pagos</button>\r\n\r\n\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n\r\n      </div>\r\n\r\n    </div>\r\n\r\n    <div class=\"col-4\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <h3 class=\"col-12 text-center\">Creditos Activos</h3>\r\n          <hr>\r\n        </div>\r\n        <div class=\"card col-12\" *ngFor=\"let credito of creditosActivos\">\r\n\r\n          <div class=\"card-block\">\r\n            <div class=\"row\">\r\n              <div class=\"col-3\">\r\n                <img  src=\"assets/img/credit.png\" class=\" img-fluid\"  style=\"margin-left:20px\">\r\n              </div>\r\n\r\n              <div class=\"col-5\">\r\n                <h4 class=\"card-title\" style=\"margin-bottom:15px\">{{getNameById(credito.idCredito)}}</h4>\r\n              </div>\r\n\r\n              <button type=\"button\" class=\"btn btn-secondary col-3 offset-1 text-center\" (click)=\"deleteCreditoSelected=credito;confDeleteCredito=true\" [disabled]=\"validaCreditoA(credito)\">Cancelar</button>\r\n\r\n            </div>\r\n\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n\r\n    </div>\r\n  </div>\r\n\r\n</div>\r\n\r\n\r\n\r\n<ngl-modal header=\"Confirmación\"  [(open)]=\"openModalConf\" size=\"x-small\" directional=\"false\">\r\n\r\n  <div body>\r\n    <div class=\"col-12 text-center container\">\r\n      <h5 style=\"margin-bottom:30px\">Ingresa la cantidad del credito que se desea solicitar</h5>\r\n      <div class=\"row\">\r\n\r\n      </div>\r\n\r\n        <form [formGroup]=\"solicitudForm\" (ngSubmit)=\"solicitaCredito(solicitudForm.value)\"  class=\"offset-1\" >\r\n          <input type=\"number\" formControlName=\"idCredito\" hidden=\"true\">\r\n          <div class=\"form-group row text-center\" >\r\n            <label class=\"col-5 col-form-label\">Monto a Solicitar:  </label>\r\n\r\n            <div class=\"input-group col-6 has-primary \" [ngClass]=\"{'has-danger': !solicitudForm.get('monto').valid}\">\r\n                <span class=\"input-group-addon\">$</span>\r\n                <input currencyMask [options]=\"{ prefix: '', thousands: ',', precision:'0' }\" class=\"form-control\" aria-label=\"Amount (to the nearest dollar)\"\r\n                formControlName=\"monto\">\r\n\r\n\r\n\r\n            </div>\r\n            <div class=\"form-control-feedback offset-5 text-center col-6\" style=\"font-size:10px;\"\r\n            [ngClass]=\"{'has-danger': !solicitudForm.get('monto').valid}\" *ngIf=\"!solicitudForm.controls['monto'].valid\">\r\n              El costo es requerido\r\n            </div>\r\n\r\n\r\n\r\n          </div>\r\n\r\n          <div class=\"col-12\">\r\n            <button class=\"btn btn-secondary offset-2 col-4\" (click)=\"openModalConf=false\">Salir</button>\r\n            <button type=\"submit\" class=\"btn btn-primary offset-1 col-4\"  >Solicitar</button>\r\n\r\n\r\n          </div>\r\n\r\n          </form>\r\n\r\n\r\n      <br>\r\n    </div>\r\n  </div>\r\n\r\n\r\n\r\n  </ngl-modal>\r\n\r\n\r\n\r\n  <ngl-modal header=\"Tabla de Amortización\"  [(open)]=\"openTablaAmort\" size=\"x-small\" directional=\"false\">\r\n\r\n    <div body>\r\n      <div class=\"col-10 offset-1\">\r\n        <table class=\"table table-bordered \">\r\n          <thead class=\"thead-inverse\">\r\n            <tr>\r\n              <th class=\"text-center\">Capital</th>\r\n              <th class=\"text-center\">Interes</th>\r\n              <th class=\"text-center\">Pago</th>\r\n              <th class=\"text-center\">Saldo</th>\r\n              <th class=\"text-center\">Pago a Capital</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n\r\n            <tr *ngFor=\"let t of tablaA\">\r\n              <td class=\"text-right\">{{t.capital |currency:'USD':true:'1.0-0'}}</td>\r\n              <td class=\"text-right\">{{t.interes |currency:'USD':true:'1.0-0'}}</td>\r\n              <td class=\"text-right\">{{t.pago |currency:'USD':true:'1.0-0'}}</td>\r\n              <td class=\"text-right\">{{t.saldo |currency:'USD':true:'1.0-0'}}</td>\r\n              <td class=\"text-right\">{{t.pagoCapital |currency:'USD':true:'1.0-0'}}</td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n        <br>\r\n        <div class=\"row\">\r\n\r\n        </div>\r\n        <div class=\"col-12\">\r\n          <button class=\"btn btn-secondary offset-1 col-4\" (click)=\"openTablaAmort=false\">Salir</button>\r\n        </div>\r\n\r\n      </div>\r\n    </div>\r\n\r\n\r\n\r\n    </ngl-modal>\r\n\r\n    <ngl-modal header=\"Pagos\"  [(open)]=\"openPagos\" size=\"x-small\" directional=\"false\">\r\n\r\n      <div body>\r\n        <div class=\"col-10 offset-1 text-center\">\r\n          <table class=\"table table-bordered\">\r\n            <thead class=\"thead-inverse\">\r\n              <tr>\r\n\r\n\r\n              <th class=\"text-center\">Periodo</th>\r\n              <th class=\"text-center\">Interes</th>\r\n              <th class=\"text-center\">Pago</th>\r\n              <th class=\"text-center\">Pago a Capital</th>\r\n              </tr>\r\n            </thead>\r\n            <tbody>\r\n\r\n              <tr *ngFor=\"let t of tablaPagos\">\r\n                <td class=\"text-right\">{{t.numeroPeriodo}}</td>\r\n                <td class=\"text-right\">{{t.intereses |currency:'USD':true:'1.0-0'}}</td>\r\n                <td class=\"text-right\">{{t.pagoCapital + t.intereses |currency:'USD':true:'1.0-0'}}</td>\r\n                <td class=\"text-right\">{{t.pagoCapital |currency:'USD':true:'1.0-0'}}</td>\r\n              </tr>\r\n            </tbody>\r\n          </table>\r\n          <br>\r\n          <div class=\"row\">\r\n\r\n          </div>\r\n          <div class=\"col-12\">\r\n            <button class=\"btn btn-secondary offset-1 col-4\" (click)=\"openPagos=false\">Salir</button>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n\r\n\r\n\r\n      </ngl-modal>\r\n\r\n\r\n\r\n      <ngl-modal header=\"Alerta\"  [(open)]=\"modalAlerta\" size=\"x-small\" directional=\"false\">\r\n\r\n        <div body>\r\n          <h5 class=\"col-12 text-center\">Has sobrepasado el limite de créditos activos, termina de pagar un credito para pedir otro nuevo</h5>\r\n        </div>\r\n\r\n        <ng-template ngl-modal-footer>\r\n        <button class=\"btn btn-primary col-4 offset-4\" (click)=\"modalAlerta=false\">Aceptar</button>\r\n\r\n      </ng-template>\r\n        </ngl-modal>\r\n\r\n        <ngl-modal header=\"Alerta\"  [(open)]=\"modalAlerta2\" size=\"x-small\" directional=\"false\">\r\n\r\n          <div body>\r\n            <h5 class=\"col-12 text-center\">Tu cantidad ingresada no coincide con los limites permitidos de éste crédito</h5>\r\n          </div>\r\n\r\n          <ng-template ngl-modal-footer>\r\n          <button class=\"btn btn-primary col-4 offset-4\" (click)=\"modalAlerta2=false;openModalConf=true\">Aceptar</button>\r\n\r\n        </ng-template>\r\n          </ngl-modal>\r\n\r\n\r\n          <ngl-modal header=\"Confirmación\"  [(open)]=confDeleteCredito size=\"x-small\" directional=\"false\">\r\n\r\n            <div body>\r\n              <h5 class=\"col-12 text-center\">¿Estas seguro que deseas eliminar el credito {{getNameById(deleteCreditoSelected.idCredito)}}?</h5>\r\n            </div>\r\n\r\n            <ng-template ngl-modal-footer>\r\n            <button class=\"btn btn-secondary col-5 \" (click)=\"confDeleteCredito=false\">Cancelar</button>\r\n            <button class=\"btn btn-primary col-5\"  (click)=\"eliminarCreditoSolicitado()\">Aceptar</button>\r\n\r\n          </ng-template>\r\n            </ngl-modal>\r\n"
 
 /***/ }),
 
@@ -5930,9 +5930,9 @@ var FinanciamientoComponent = (function () {
         this.openTablaAmort = true;
         this.tablaA = this._creditoService.visualizarTabla(idCredito);
     };
-    FinanciamientoComponent.prototype.verPagos = function (idCredito) {
+    FinanciamientoComponent.prototype.verPagos = function (idCredito, plazo) {
         this.openPagos = true;
-        this.tablaPagos = this._creditoService.verPagosP(idCredito);
+        this.tablaPagos = this._creditoService.verPagosP(idCredito, plazo);
     };
     FinanciamientoComponent.prototype.getMaxById = function (idCredito) {
         for (var _i = 0, _a = this.creditos; _i < _a.length; _i++) {
@@ -8593,7 +8593,11 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.html":
 /***/ (function(module, exports) {
 
+<<<<<<< HEAD
 module.exports = "\r\n<div style=\"height:100%\">\r\n\r\n  <div class=\"nav-side-menu\">\r\n      <div class=\"brand\">\r\n        <div class=\"row\" >\r\n          <div class=\"col-12 text-center\">\r\n            <h6 style=\"margin-top:20px\">Proyecto {{proyectoActual}}</h6>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"row\">\r\n          <div class=\"col-12 text-center\" style=\"margin-bottom:10px\">\r\n            <button type=\"button\" class=\"btn btn-danger\" style=\"font-size:10px\" (click)=\"verProyectos()\">Salir de Proyecto</button>\r\n          </div>\r\n\r\n        </div>\r\n\r\n      </div>\r\n      <i class=\"fa fa-bars fa-2x toggle-btn\" data-toggle=\"collapse\" data-target=\"#menu-content\"></i>\r\n\r\n          <div class=\"menu-list\">\r\n              <ul id=\"menu-content\" class=\"menu-content collapse out\">\r\n\r\n                  <li [routerLink]=\"['home']\" routerLinkActive=\"active\">\r\n                    <a >\r\n                    <i class=\"fa fa-tachometer fa-lg\"></i> Dash Board\r\n                    </a>\r\n                  </li>\r\n\r\n                  <li [routerLink]=\"['demandaPotencial']\" routerLinkActive=\"active\">\r\n                    <a >\r\n                    <i class=\"fa fa-area-chart fa-lg\"></i> Demanda potencial\r\n                    </a>\r\n                  </li>\r\n\r\n                  <li [routerLink]=\"['produccion']\" routerLinkActive=\"active\">\r\n                     <a>\r\n                      <i class=\"fa fa-pie-chart fa-lg\"></i>  Decisiones de Producción y Venta\r\n                     </a>\r\n                  </li>\r\n\r\n                  <li data-toggle=\"collapse\" data-target=\"#service\" class=\"collapsed\">\r\n                    <a href=\"#\"><i class=\"fa fa-line-chart fa-lg\"></i> Decisiones de Crecimiento<span class=\"arrow\"></span></a>\r\n                  </li>\r\n                  <ul class=\"sub-menu collapse\" id=\"service\">\r\n\r\n                    <li [routerLink]=\"['compraMaquinaria']\" routerLinkActive=\"active\">\r\n                       <a >\r\n                       <i class=\"fa fa-cogs fa-lg\"></i> Compra de Maquinaria\r\n                       </a>\r\n                     </li>\r\n                     <li [routerLink]=\"['desarrolloProducto']\" routerLinkActive=\"active\">\r\n                        <a >\r\n                        <i class=\"fa fa-flask fa-lg\"></i> Desarrollo de Productos\r\n                        </a>\r\n                      </li>\r\n                     <li [routerLink]=\"['desarrolloMercado']\" routerLinkActive=\"active\">\r\n                        <a >\r\n                        <i class=\"fa fa-map-marker fa-lg\"></i> Desarrollo de mercados\r\n                        </a>\r\n                      </li>\r\n                  </ul>\r\n\r\n                  <li [routerLink]=\"['financiamiento']\" routerLinkActive=\"active\">\r\n                     <a>\r\n                      <i class=\"fa fa-credit-card fa-lg\"></i>  Decisiones de Finaciamiento\r\n                     </a>\r\n                  </li>\r\n\r\n                  <li data-toggle=\"collapse\" data-target=\"#service2\" class=\"collapsed\">\r\n                    <a href=\"#\"><i class=\"fa fa-list-alt fa-lg\"></i> Resultados del periodo<span class=\"arrow\"></span></a>\r\n                  </li>\r\n                  <ul class=\"sub-menu collapse\" id=\"service2\">\r\n                    <li [routerLink]=\"['balance_inicial']\" routerLinkActive=\"active\">Balance Inicial</li>\r\n                    <li [routerLink]=\"['operacion']\" routerLinkActive=\"active\">Resultados Operacion</li>\r\n                    <li [routerLink]=\"['estadoResultados']\" routerLinkActive=\"active\">Estado de Resultados</li>\r\n                    <li [routerLink]=\"['balance_final']\" routerLinkActive=\"active\">Balance Final</li>\r\n                    <li [routerLink]=\"['flujo']\" routerLinkActive=\"active\">Flujo de Efectivo</li>\r\n                    <li [routerLink]=\"['comparativa']\" routerLinkActive=\"active\">Posición Comparativa</li>\r\n                    <li [routerLink]=\"['analisis']\" routerLinkActive=\"active\">Analisis del Periodo</li>\r\n                    <li [routerLink]=\"['puntoEquilibrio']\" routerLinkActive=\"active\">Punto de Equilibrio</li>\r\n                  </ul>\r\n\r\n                  <li data-toggle=\"collapse\" data-target=\"#service3\" class=\"collapsed\">\r\n                    <a href=\"#\"><i class=\"fa fa-flag-checkered fa-lg\"></i> Analisis Final<span class=\"arrow\"></span></a>\r\n                  </li>\r\n                  <ul class=\"sub-menu collapse\" id=\"service3\">\r\n                    <li [routerLink]=\"['integrales']\" routerLinkActive=\"active\">Integrales</li>\r\n                    <li [routerLink]=\"['tendencias']\" routerLinkActive=\"active\">Tendencias</li>\r\n                  </ul>\r\n              </ul>\r\n       </div>\r\n  </div>\r\n\r\n\r\n</div>\r\n"
+=======
+module.exports = "<div class=\"nav-side-menu\">\r\n    <div class=\"brand\">\r\n      <div class=\"row\" >\r\n        <div class=\"col-12 text-center\">\r\n          <h6 style=\"margin-top:20px\">Proyecto {{proyectoActual}}</h6>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-12 text-center\" style=\"margin-bottom:10px\">\r\n          <button type=\"button\" class=\"btn btn-warning\" style=\"font-size:10px\" (click)=\"verDecisiones()\">Decisiones</button>\r\n          <button type=\"button\" class=\"btn btn-danger\" style=\"font-size:10px\" (click)=\"verProyectos()\">Salir de Proyecto</button>\r\n        </div>\r\n\r\n      </div>\r\n\r\n    </div>\r\n    <i class=\"fa fa-bars fa-2x toggle-btn\" data-toggle=\"collapse\" data-target=\"#menu-content\"></i>\r\n\r\n        <div class=\"menu-list\">\r\n            <ul id=\"menu-content\" class=\"menu-content collapse out\">\r\n\r\n                <li [routerLink]=\"['home']\" routerLinkActive=\"active\">\r\n                  <a >\r\n                  <i class=\"fa fa-tachometer fa-lg\"></i> Dash Board\r\n                  </a>\r\n                </li>\r\n\r\n                <li [routerLink]=\"['demandaPotencial']\" routerLinkActive=\"active\">\r\n                  <a >\r\n                  <i class=\"fa fa-area-chart fa-lg\"></i> Demanda potencial\r\n                  </a>\r\n                </li>\r\n\r\n                <li [routerLink]=\"['produccion']\" routerLinkActive=\"active\">\r\n                   <a>\r\n                    <i class=\"fa fa-pie-chart fa-lg\"></i>  Decisiones de Producción y Venta\r\n                   </a>\r\n                </li>\r\n\r\n                <li data-toggle=\"collapse\" data-target=\"#service\" class=\"collapsed\">\r\n                  <a href=\"#\"><i class=\"fa fa-line-chart fa-lg\"></i> Decisiones de Crecimiento<span class=\"arrow\"></span></a>\r\n                </li>\r\n                <ul class=\"sub-menu collapse\" id=\"service\">\r\n\r\n                  <li [routerLink]=\"['compraMaquinaria']\" routerLinkActive=\"active\">\r\n                     <a >\r\n                     <i class=\"fa fa-cogs fa-lg\"></i> Compra de Maquinaria\r\n                     </a>\r\n                   </li>\r\n                   <li [routerLink]=\"['desarrolloProducto']\" routerLinkActive=\"active\">\r\n                      <a >\r\n                      <i class=\"fa fa-flask fa-lg\"></i> Desarrollo de Productos\r\n                      </a>\r\n                    </li>\r\n                   <li [routerLink]=\"['desarrolloMercado']\" routerLinkActive=\"active\">\r\n                      <a >\r\n                      <i class=\"fa fa-map-marker fa-lg\"></i> Desarrollo de mercados\r\n                      </a>\r\n                    </li>\r\n                </ul>\r\n\r\n                <li [routerLink]=\"['financiamiento']\" routerLinkActive=\"active\">\r\n                   <a>\r\n                    <i class=\"fa fa-credit-card fa-lg\"></i>  Decisiones de Finaciamiento\r\n                   </a>\r\n                </li>\r\n\r\n                <li data-toggle=\"collapse\" data-target=\"#service2\" class=\"collapsed\">\r\n                  <a href=\"#\"><i class=\"fa fa-list-alt fa-lg\"></i> Resultados del periodo<span class=\"arrow\"></span></a>\r\n                </li>\r\n                <ul class=\"sub-menu collapse\" id=\"service2\">\r\n                  <li [routerLink]=\"['balance_inicial']\" routerLinkActive=\"active\">Balance Inicial</li>\r\n                  <li [routerLink]=\"['operacion']\" routerLinkActive=\"active\">Resultados Operacion</li>\r\n                  <li [routerLink]=\"['estadoResultados']\" routerLinkActive=\"active\">Estado de Resultados</li>\r\n                  <li [routerLink]=\"['balance_final']\" routerLinkActive=\"active\">Balance Final</li>\r\n                  <li [routerLink]=\"['flujo']\" routerLinkActive=\"active\">Flujo de Efectivo</li>\r\n                  <li [routerLink]=\"['comparativa']\" routerLinkActive=\"active\">Posición Comparativa</li>\r\n                  <li [routerLink]=\"['analisis']\" routerLinkActive=\"active\">Analisis del Periodo</li>\r\n                  <li [routerLink]=\"['puntoEquilibrio']\" routerLinkActive=\"active\">Punto de Equilibrio</li>\r\n                </ul>\r\n\r\n                <li data-toggle=\"collapse\" data-target=\"#service3\" class=\"collapsed\">\r\n                  <a href=\"#\"><i class=\"fa fa-flag-checkered fa-lg\"></i> Analisis Final<span class=\"arrow\"></span></a>\r\n                </li>\r\n                <ul class=\"sub-menu collapse\" id=\"service3\">\r\n                  <li [routerLink]=\"['integrales']\" routerLinkActive=\"active\">Integrales</li>\r\n                  <li [routerLink]=\"['tendencias']\" routerLinkActive=\"active\">Tendencias</li>\r\n                </ul>\r\n            </ul>\r\n     </div>\r\n</div>\r\n"
+>>>>>>> bf69e36f102286ccb1d63f414beabd9a644b9239
 
 /***/ }),
 
@@ -8604,6 +8608,7 @@ module.exports = "\r\n<div style=\"height:100%\">\r\n\r\n  <div class=\"nav-side
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_operacion_service__ = __webpack_require__("../../../../../src/app/services/operacion.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SidenavPComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -8617,10 +8622,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var SidenavPComponent = (function () {
-    function SidenavPComponent(router, _proyectosS) {
+    function SidenavPComponent(router, _operacionService, _proyectosS) {
         this.router = router;
+        this._operacionService = _operacionService;
         this._proyectosS = _proyectosS;
+        this.ventas = [];
+        this.maquinas = [];
+        this.DProductos = [];
+        this.DZonas = [];
+        this.ceditos = [];
         this.proyectoActual = localStorage.getItem('nombreProyecto');
     }
     SidenavPComponent.prototype.ngOnInit = function () {
@@ -8644,6 +8656,18 @@ var SidenavPComponent = (function () {
         }
         return "id NO encontrado";
     };
+    SidenavPComponent.prototype.verDecisiones = function () {
+        this.ventas = this._operacionService.returnVentas();
+        this.maquinas = this._operacionService.returnMaquinas();
+        this.DProductos = this._operacionService.returnDProductos();
+        this.DZonas = this._operacionService.returnDZonas();
+        this.ceditos = this._operacionService.returnCreditos();
+        console.log("Ventas", this.ventas);
+        console.log("Maquinas", this.maquinas);
+        console.log("Productos", this.DProductos);
+        console.log("Zonas", this.DZonas);
+        console.log("Creditos", this.ceditos);
+    };
     return SidenavPComponent;
 }());
 SidenavPComponent = __decorate([
@@ -8652,10 +8676,10 @@ SidenavPComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_operacion_service__["a" /* OperacionService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _c || Object])
 ], SidenavPComponent);
 
-var _a, _b;
+var _a, _b, _c;
 //# sourceMappingURL=sidenav-p.component.js.map
 
 /***/ }),
@@ -12061,6 +12085,102 @@ var OperacionService = (function () {
         });
         return x;
     };
+    //Decisiones
+    OperacionService.prototype.ventas = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        var x = {
+            idProyecto: localStorage.getItem('idProyecto'),
+            numeroPeriodo: localStorage.getItem('numeroPeriodo')
+        };
+        return this.http.post('decisiones/getVentas/', x, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    OperacionService.prototype.maquinas = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        var x = {
+            idProyecto: localStorage.getItem('idProyecto'),
+            numeroPeriodo: localStorage.getItem('numeroPeriodo')
+        };
+        return this.http.post('decisiones/getVentas/', x, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    OperacionService.prototype.dproductos = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        var x = {
+            idProyecto: localStorage.getItem('idProyecto'),
+            numeroPeriodo: localStorage.getItem('numeroPeriodo')
+        };
+        return this.http.post('decisiones/getVentas/', x, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    OperacionService.prototype.dzonas = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        var x = {
+            idProyecto: localStorage.getItem('idProyecto'),
+            numeroPeriodo: localStorage.getItem('numeroPeriodo')
+        };
+        return this.http.post('decisiones/getVentas/', x, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    OperacionService.prototype.creditos = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        var x = {
+            idProyecto: localStorage.getItem('idProyecto'),
+            numeroPeriodo: localStorage.getItem('numeroPeriodo')
+        };
+        return this.http.post('decisiones/getVentas/', x, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    OperacionService.prototype.returnVentas = function () {
+        var x = [];
+        this.ventas().subscribe(function (data) {
+            for (var key in data.datos) {
+                x.push(data.datos[key]);
+            }
+        });
+        return x;
+    };
+    OperacionService.prototype.returnMaquinas = function () {
+        var x = [];
+        this.ventas().subscribe(function (data) {
+            for (var key in data.datos) {
+                x.push(data.datos[key]);
+            }
+        });
+        return x;
+    };
+    OperacionService.prototype.returnDProductos = function () {
+        var x = [];
+        this.ventas().subscribe(function (data) {
+            for (var key in data.datos) {
+                x.push(data.datos[key]);
+            }
+        });
+        return x;
+    };
+    OperacionService.prototype.returnDZonas = function () {
+        var x = [];
+        this.ventas().subscribe(function (data) {
+            for (var key in data.datos) {
+                x.push(data.datos[key]);
+            }
+        });
+        return x;
+    };
+    OperacionService.prototype.returnCreditos = function () {
+        var x = [];
+        this.ventas().subscribe(function (data) {
+            for (var key in data.datos) {
+                x.push(data.datos[key]);
+            }
+        });
+        return x;
+    };
     return OperacionService;
 }());
 OperacionService = __decorate([
@@ -12903,18 +13023,18 @@ var UsuarioCreditoService = (function () {
         });
         return this.http.post('prestamo/getAmortizacion/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
-    UsuarioCreditoService.prototype.verPagosP = function (idCredito) {
+    UsuarioCreditoService.prototype.verPagosP = function (idCredito, plazo) {
+        var t = parseInt(localStorage.getItem('numeroPeriodo'));
         var x = {
             idCredito: idCredito,
-            idProyecto: parseInt(localStorage.getItem('idProyecto'))
+            idProyecto: parseInt(localStorage.getItem('idProyecto')),
+            numeroPeriodo: t,
+            numeroPeriodoFinal: (t + plazo)
         };
         var tabla = [];
         this.verPagosR(x).subscribe(function (data) {
-            console.log("Consulta Tabla 2", data.success, data.datos);
             for (var i in data.datos) {
-                if (data.datos[i].numeroPeriodo > parseInt(localStorage.getItem('numeroPeriodo'))) {
-                    tabla.push(data.datos[i]);
-                }
+                tabla.push(data.datos[i]);
             }
         });
         return tabla;

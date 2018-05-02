@@ -8,21 +8,24 @@ const usuario = require('../models/usuario');
 router.post('/register', (req, res, next) => {
   Promise.resolve().then(function () {
 
-
-    var nombreUsuario = req.body.nombreUsuario;
-    var apPat = req.body.apPat;
-    var apMat = req.body.apMat;
-    var Administrador_idAdministrador = req.body.Administrador_idAdministrador;
-    var contra = req.body.contra;
-    var user = req.body.user;
-    var proyectos = req.body.proyectos;
-    var periodos = req.body.periodos;
-    var regresion = req.body.regresion;
-
-  return getJSONUsuario(nombreUsuario,apPat,apMat,Administrador_idAdministrador,contra,user,proyectos,periodos,regresion);
+    var json = {
+        "nombreUsuario": req.body.nombreUsuario,
+        "apPat":req.body.apPat,
+        "apMat":req.body.apMat,
+        "Administrador_idAdministrador":req.body.Administrador_idAdministrador,
+        "contra":req.body.contra,
+        "user":req.body.user,
+        "proyectos":req.body.proyectos,
+        "periodos":req.body.periodos,
+        "regresion":req.body.regresion,
+        "minRescate":req.body.minRescate,
+        "maxRescate":req.body.maxRescate
+     };
+  //return getJSONUsuario(nombreUsuario,apPat,apMat,Administrador_idAdministrador,contra,user,proyectos,periodos,regresion);
+  return json;
   })
-  .then(function (newUsuario) {
-      return usuario.addUsuario(newUsuario);
+  .then(function (json) {
+      return usuario.addUsuario(json);
   }).then(function(){
     return usuario.getUsuarios();
   }).
@@ -36,22 +39,26 @@ router.post('/register', (req, res, next) => {
 });
 
 router.post('/modify/:idUsuario', (req, res, next) => {
+var idUsuario = req.params.idUsuario;
   Promise.resolve()
   .then(function () {
-       var nombreUsuario = req.body.nombreUsuario;
-       var apPat = req.body.apPat;
-       var apMat = req.body.apMat;
-       var Administrador_idAdministrador = req.body.Administrador_idAdministrador;
-       var contra = req.body.contra;
-       var user = req.body.user;
-       var proyectos = req.body.proyectos;
-       var periodos = req.body.periodos;
-       var regresion = req.body.regresion;
-      return getJSONUsuario(nombreUsuario,apPat,apMat,Administrador_idAdministrador,contra,user,proyectos,periodos,regresion);
+    var json = {
+        "nombreUsuario": req.body.nombreUsuario,
+        "apPat":req.body.apPat,
+        "apMat":req.body.apMat,
+        "Administrador_idAdministrador":req.body.Administrador_idAdministrador,
+        "contra":req.body.contra,
+        "user":req.body.user,
+        "proyectos":req.body.proyectos,
+        "periodos":req.body.periodos,
+        "regresion":req.body.regresion,
+        "minRescate":req.body.minRescate,
+        "maxRescate":req.body.maxRescate
+     };
+     return json;
   })
-  .then(function (data) {
-      var idUsuario = req.params.idUsuario;
-      return usuario.updateUsuario(data,idUsuario);
+  .then(function (json) {
+      return usuario.updateUsuario(json,idUsuario);
   }).then(function(){
     res.json({success: true, msg:"Operacion exitosa"});
   })
@@ -70,9 +77,6 @@ router.post('/variables/:id', (req, res, next) => {
   }).then(function(){
     //res.json({success: true, msg:"Operacion exitosa"});
     return usuario.getUsuarios();
-  }).
-  then( function (rows) {
-    return toArrayUsuario(rows);
   }).
   then( function (usuarioList) {
     res.json({success: true, datos:usuarioList, msg:"Operacion exitosa"});
@@ -113,7 +117,6 @@ router.get('/', (req, res, next) => {
 
 router.post('/authenticate', (req, res, next) => {
 Promise.resolve().then(function () {
-
   const username = req.body.username;
   return usuario.getUsuarioByUserName(username);
 
@@ -274,21 +277,21 @@ function toArrayProyecto(rows) {
   return ProyectoList;
 }
 
-function getJSONUsuario(nombreUsuario,apPat,apMat,Administrador_idAdministrador,contra,user,pro,per,regre) {
-  //recibimos datos
-  var data = {
-      "nombreUsuario": nombreUsuario,
-      "apPat":apPat,
-      "apMat":apMat,
-      "Administrador_idAdministrador": Administrador_idAdministrador,
-      "contra":contra,
-      "user":user,
-      "proyectos":pro,
-      "periodos":per,
-      "regresion":regre
-   };
-   return data;
-}
+// function getJSONUsuario(nombreUsuario,apPat,apMat,Administrador_idAdministrador,contra,user,pro,per,regre) {
+//   //recibimos datos
+//   var data = {
+//       "nombreUsuario": nombreUsuario,
+//       "apPat":apPat,
+//       "apMat":apMat,
+//       "Administrador_idAdministrador": Administrador_idAdministrador,
+//       "contra":contra,
+//       "user":user,
+//       "proyectos":pro,
+//       "periodos":per,
+//       "regresion":regre
+//    };
+//    return data;
+// }
 
 function toJsonAdmin(rows){
     var usuario = {
