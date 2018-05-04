@@ -263,6 +263,9 @@ export class NavbarUsuarioComponent implements OnInit {
             if(this.creditosActivos.length > 1){
               alert("Necesitas rescate");
               //Aqui activa el modal de rescate
+              //Los montos minimos y maximos están el el localStorage se llaman maxRescate y minRescate
+              //Despliega algo como "Necesitas rescate, inserta una cantidad dentro del rango de max y min rescate"
+              //También valida que la cantidad ingresada este dentro del rango
             }
             else{
               this.openConf=false;
