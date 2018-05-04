@@ -32,6 +32,7 @@ export class NavbarUsuarioComponent implements OnInit {
   opciones:boolean=false;
   periodo:number;
   periodos = [];
+  creditosActivos = [];
   confZona:boolean=false;
   productosEnDesarrollo:any;
   zonasEnDesarrollo:any;
@@ -233,6 +234,8 @@ export class NavbarUsuarioComponent implements OnInit {
       this.confProd=false;
       console.log(this.productosEnDesarrollo)
 
+      this.creditosActivos=this._creditoService.arregloC();
+
       this._balanceService.getBalanceFinal().subscribe( data => {
         console.log("data side av",data)
         if(data.success){
@@ -257,11 +260,16 @@ export class NavbarUsuarioComponent implements OnInit {
         }
         else{
           if(cajaBancosFinal < 0){
-            this.openConf=false;
-            this.alert=true;
+            if(this.creditosActivos.length > 1){
+              alert("Necesitas rescate");
+              //Aqui activa el modal de rescate
+            }
+            else{
+              this.openConf=false;
+              this.alert=true;
+            }
           }
           else{
-
             this._balanceService.getBalanceByIds(proyecto,p).subscribe(data => {
               var dep = data.datos[0].maqEquipo*.10;
               this._balanceService.crearBalance(proyecto,data.datos[0],periodoNuevo).subscribe(data => {
@@ -298,7 +306,6 @@ export class NavbarUsuarioComponent implements OnInit {
                 }
               });
             });
-
           }
         }
       }, 1000);

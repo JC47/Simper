@@ -142,6 +142,7 @@ returnUsuarios(){
       });
       localStorage.setItem('numeroPeriodo', numero);
       localStorage.setItem('numeroRPeriodos', numero);
+      localStorage.setItem('terminado',"0");
       this.router.navigate(['Usuario/proyecto/home']);
     },300);
 

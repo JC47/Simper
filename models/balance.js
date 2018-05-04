@@ -41,3 +41,8 @@ module.exports.getUltimo = function (idProyecto){
   const sql = "SELECT * FROM (SELECT MAX(numeroPeriodo) numeroPeriodo FROM balance WHERE balance.Proyectos_idProyecto = "+idProyecto+") balance";
   return querySql(sql);
 }
+
+module.exports.editTerminado = function(idProyecto) {
+  var query = "update proyecto set terminado=0 where idProyecto = "+idProyecto+"";
+  return querySql(query);
+}
