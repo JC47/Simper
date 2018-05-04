@@ -30,7 +30,7 @@
       </tr>
 
       <tr>
-        <td>Almacen de Articulo Terminado</td>
+        <td>Almacen de Artículo Terminado</td>
         <td colspan="3" class="text-right">{{balance.almacenArtTerm|currency:'USD':true:'1.0-0'}}</td>
         <td>PTU por Pagar</td>
         <td class="text-right">{{balance.PTUPorPagar|currency:'USD':true:'1.0-0'}}</td>
@@ -156,14 +156,14 @@
 
       <tr>
         <th >Suma de los Derechos</th>
-        <td colspan="3" class="text-right">{{balance.pagosAnticipado + balance.gastosAmortizacion + balance.terreno
+        <th colspan="3" class="text-right">{{balance.pagosAnticipado + balance.gastosAmortizacion + balance.terreno
           + balance.edifInsta + balance.mueblesEnseres + balance.eqTrans + balance.maqEquipo
           + balance.cajaBancos + balance.cuentasPorCobrar + balance.IVAAcreditable + balance.almacenArtTerm
-          + balance.almacenMateriales - balance.depMaqEquipo - balance.depEdif - balance.depMueblesEnseres -balance.depEqTrans|currency:'USD':true:'1.0-0'}}</td>
-        <td>Suma de las Obligaciones</td>
-        <td class="text-right">{{balance.IVAPorEnterar + balance.imptosPorPagar + balance.proveedores + balance.PTUPorPagar
+          + balance.almacenMateriales - balance.depMaqEquipo - balance.depEdif - balance.depMueblesEnseres -balance.depEqTrans|currency:'USD':true:'1.0-0'}}</th>
+        <th>Suma de las Obligaciones</th>
+        <th class="text-right">{{balance.IVAPorEnterar + balance.imptosPorPagar + balance.proveedores + balance.PTUPorPagar
           + balance.prestamosMenosAnio + balance.prestamosMasAnio + balance.capitalSocial + balance.reservaLegal
-          + balance.utilidadAcum + balance.utilidadEjercicio|currency:'USD':true:'1.0-0'}}</td>
+          + balance.utilidadAcum + balance.utilidadEjercicio|currency:'USD':true:'1.0-0'}}</th>
       </tr>
 
       <tr>

@@ -8,7 +8,7 @@
 
 
 <div class="row">
-    <div class="col-3 offset-1">
+    <div class="col-3 offset-1" style="height:700px; overflow-y:scroll" >
       <div class="row" *ngFor="let producto of productosOperacion" style="margin-bottom:50px">
         <div class="col-12 card card-inverse  text-center" style="margin-bottom:20px;background-color:#004581">
           <div class="card-block">
@@ -61,49 +61,56 @@
 
     </div>
 
-    <div class=" offset-1 col-5" style="height:auto">
+    <div class=" offset-1 col-5">
+
+
       <div class="row">
         <h2 class=" col-12 text-center">Relación de Ventas </h2>
         <hr>
       </div>
 
-
-      <table class="table table-striped">
-  <thead>
-    <tr>
-      <th class="text-center">Producto</th>
-      <th class=" text-center">Zona</th>
-      <th class=" text-center">Unidades Vendidas</th>
+      <div class="row" style="height:250px;overflow-y:auto">
+        <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="text-center">Producto</th>
+        <th class=" text-center">Zona</th>
+        <th class=" text-center">Unidades Vendidas</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let venta of ventas">
+        <td class="text-center">{{getNameByIdProducto(venta.Producto_idProducto)}}</td>
+        <td class="text-center">{{getNameByIdZona(venta.Zona_idZonas)}}</td>
+        <td class="col-12 text-right">{{venta.unidadesVendidas|number:'1.0-0'}}</td>
       </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let venta of ventas">
-      <td class="text-center">{{getNameByIdProducto(venta.Producto_idProducto)}}</td>
-      <td class="text-center">{{getNameByIdZona(venta.Zona_idZonas)}}</td>
-      <td class="col-12 text-right">{{venta.unidadesVendidas|number:'1.0-0'}}</td>
-    </tr>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+      </div>
 
-<div class="row">
+
+<div class="row"  style="margin-top:20px;">
   <h3 class="col-12 text-center">Almacen</h3>
   <hr>
 </div>
 
-<table class="table table-striped">
-<thead>
-<tr>
-<th class="text-center">Producto</th>
-<th class="text-center">Unidades Almacenandas</th>
-</tr>
-</thead>
-<tbody>
-<tr *ngFor="let alma of almacen">
-<td class="text-center">{{getNameByIdProducto(alma.Producto_idProducto)}}</td>
-<td class="text-right">{{alma.unidadesAlmacenadas|number:'1.0-0'}}</td>
-</tr>
-</tbody>
-</table>
+
+<div class="row" style="height:250px; overflow-y:auto">
+  <table class="table table-striped">
+  <thead>
+  <tr>
+  <th class="text-center">Producto</th>
+  <th class="text-center">Unidades Almacenandas</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let alma of almacen">
+  <td class="text-center">{{getNameByIdProducto(alma.Producto_idProducto)}}</td>
+  <td class="text-right">{{alma.unidadesAlmacenadas|number:'1.0-0'}}</td>
+  </tr>
+  </tbody>
+  </table>
+</div>
 
 
 

@@ -6,9 +6,8 @@ module.exports.addBalance = function (data) {
   return querySql(sql,data);
 }
 
-module.exports.updateBalance = function (id, idProyecto,data) {
-  console.log(id, idProyecto,data);
-  const sql = "update balance set ? where numeroPeriodo = "+id+" and Proyectos_idProyecto = " +idProyecto+ " ";
+module.exports.updateBalance = function (numeroPeriodo, idProyecto,data) {
+  const sql = "update balance set ? where numeroPeriodo = "+numeroPeriodo+" and Proyectos_idProyecto = " +idProyecto+ " ";
   return querySql(sql, data);
 }
 
@@ -44,5 +43,12 @@ module.exports.getUltimo = function (idProyecto){
 
 module.exports.editTerminado = function(idProyecto) {
   var query = "update proyecto set terminado=0 where idProyecto = "+idProyecto+"";
+  return querySql(query);
+}
+
+//Models rescate
+
+module.exports.getRescate = function (idUsuario) {
+  var query = "select minRescate,maxRescate from usuario where idUsuario = "+idUsuario+" ";
   return querySql(query);
 }

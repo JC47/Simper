@@ -5,6 +5,8 @@ import {ResultadosService} from '../../../../services/resultados.service';
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 import {CurrencyPipe} from '@angular/common'
 import {DecimalPipe} from '@angular/common'
+import {ProyectosService} from '../../../../services/proyectos.service';
+
 
 declare var jsPDF: any;
 
@@ -22,12 +24,16 @@ export class AnalisisComponent implements OnInit {
   maquinas = [];
   balanceFinal =[];
   balanceInicial = [];
+  proyectos:any;
+  proyectoActual:any;
 
   constructor(private _operacionService:OperacionService,
               private _resultadosService:ResultadosService,
               private _maqService:CompraMaquinariaService,
               private cp: CurrencyPipe,
-              private dc:DecimalPipe) {
+              private dc:DecimalPipe,
+              private _proyectoService:ProyectosService) {
+    this.proyectos=this._proyectoService.returnUsuarios();
     this.auxiliares=this._operacionService.returnAuxiliares();
     this.intereses = this._operacionService.returnInter();
     this.auxiliarT = this._operacionService.returnAuxiliarCTotal();
@@ -35,6 +41,14 @@ export class AnalisisComponent implements OnInit {
     this.maquinas =this._maqService.returnMaquinasCompradas();
     this.balanceFinal = this._resultadosService.getBalanceFinal();
     this.balanceInicial = this._resultadosService.balanceInicialAnterior();
+
+
+    setTimeout(() => {
+      this.proyectoActual=this.getNameById(localStorage.getItem('idProyecto'));
+    }, 1500);
+
+
+
   }
 
   ngOnInit() {
@@ -151,6 +165,18 @@ export class AnalisisComponent implements OnInit {
   getPalancaFinanciera(){
     //getActivoCapitalTotal()
   }
+
+
+
+            getNameById(idProyecto){
+              for(let proyecto of this.proyectos){
+                if(proyecto.idProyecto==idProyecto)
+                  return proyecto.nombreProyecto
+              }
+                return "id NO encontrado"
+
+            }
+
 
   getRentabilidadSobreCapital(){
     var i = this.getRentabilidadSobreActivos() * this.getActivoCapitalTotal();
@@ -518,11 +544,11 @@ export class AnalisisComponent implements OnInit {
       {"signo":"-","concepto":"Impuestos","cantidad":this.cp.transform(this.getImpuestos(),'USD',true,'1.0-0')},
       {"signo":"=","concepto":"Utilidad Neta","cantidad":this.cp.transform(this.getUtilidadNeta(),'USD',true,'1.0-0')},
       {"signo":"/","concepto":"Ventas","cantidad":this.cp.transform(this.getTotalVentas(),'USD',true,'1.0-0')},
-      {"signo":"=","concepto":"Margen Neto(%)","cantidad":this.dc.transform(this.getMargenNeto()*10,'1.0-0')},
-      {"signo":"*","concepto":"Rotación de Activos","cantidad":this.dc.transform(this.getRotacionActivos(),'1.0-0')},
-      {"signo":"=","concepto":"Rentabilidad de Activos(%)","cantidad":this.dc.transform(this.getRentabilidadSobreActivos()*100,'1.0-0')},
-      {"signo":"*","concepto":"Placa Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.0-0')},
-      {"signo":"=","concepto":"Rentabilidad s/Capital Contable","cantidad":this.dc.transform(this.getRentabilidadSobreCapital(),'1.0-0')}
+      {"signo":"=","concepto":"Margen Neto(%)","cantidad":this.dc.transform(this.getMargenNeto()*10,'1.2-2')+"%"},
+      {"signo":"*","concepto":"Rotación de Activos","cantidad":this.dc.transform(this.getRotacionActivos(),'1.2-2')},
+      {"signo":"=","concepto":"Rentabilidad de Activos(%)","cantidad":this.dc.transform(this.getRentabilidadSobreActivos()*100,'1.2-2')+"%"},
+      {"signo":"*","concepto":"Placa Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.2-2')},
+      {"signo":"=","concepto":"Rentabilidad s/Capital Contable","cantidad":this.dc.transform(this.getRentabilidadSobreCapital(),'1.2-2')}
 
       ];
 
@@ -585,11 +611,11 @@ export class AnalisisComponent implements OnInit {
        {"signo":"-","concepto":"Impuestos","cantidad":this.cp.transform(this.getImpuestos(),'USD',true,'1.0-0')},
        {"signo":"=","concepto":"Utilidad Neta","cantidad":this.cp.transform(this.getUtilidadNeta(),'USD',true,'1.0-0')},
        {"signo":"/","concepto":"Ventas","cantidad":this.cp.transform(this.getTotalVentas(),'USD',true,'1.0-0')},
-       {"signo":"=","concepto":"Margen Neto(%)","cantidad":this.dc.transform(this.getMargenNeto()*10,'1.0-0')},
-       {"signo":"*","concepto":"Rotación de Activos","cantidad":this.dc.transform(this.getRotacionActivos(),'1.0-0')},
-       {"signo":"=","concepto":"Rentabilidad de Activos(%)","cantidad":this.dc.transform(this.getRentabilidadSobreActivos()*100,'1.0-0')},
-       {"signo":"*","concepto":"Placa Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.0-0')},
-       {"signo":"=","concepto":"Rentabilidad s/Capital Contable","cantidad":this.dc.transform(this.getRentabilidadSobreCapital(),'1.0-0')}
+       {"signo":"=","concepto":"Margen Neto(%)","cantidad":this.dc.transform(this.getMargenNeto()*10,'1.2-2')},
+       {"signo":"*","concepto":"Rotación de Activos","cantidad":this.dc.transform(this.getRotacionActivos(),'1.2-2')},
+       {"signo":"=","concepto":"Rentabilidad de Activos(%)","cantidad":this.dc.transform(this.getRentabilidadSobreActivos()*100,'1.2-2')},
+       {"signo":"*","concepto":"Placa Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.2-2')},
+       {"signo":"=","concepto":"Rentabilidad s/Capital Contable","cantidad":this.dc.transform(this.getRentabilidadSobreCapital(),'1.2-2')}
 
       ];
 
@@ -619,7 +645,7 @@ export class AnalisisComponent implements OnInit {
           {"signo":"","concepto":"","cantidad":""},
           {"signo":"-","concepto":"Ventas","cantidad":this.cp.transform(this.getTotalVentas(),'USD',true,'1.0-0')},
           {"signo":"/","concepto":"Activo Total Promedio","cantidad":this.cp.transform(this.getActivoTotal(),'USD',true,'1.0-0')},
-          {"signo":"-","concepto":"Rotación de Activos","cantidad":this.dc.transform(this.getRotacionActivos(),'1.0-0')},
+          {"signo":"-","concepto":"Rotación de Activos","cantidad":this.dc.transform(this.getRotacionActivos(),'1.2-2')},
           {"signo":"","concepto":"","cantidad":""},
           {"signo":"","concepto":"Pasivo Circulante","cantidad":this.cp.transform(this.getPasivoCirculante(),'USD',true,'1.0-0')},
           {"signo":"+","concepto":"Pasivo a Largo Plazo","cantidad":this.cp.transform(this.getPasivoLP(),'USD',true,'1.0-0')},
@@ -629,7 +655,7 @@ export class AnalisisComponent implements OnInit {
           {"signo":"-","concepto":"Pasivo Total","cantidad":this.dc.transform(this.getPasivoTotal(),'1.0-0')},
           {"signo":"/","concepto":"Capital Contable","cantidad":this.dc.transform(this.getCapitalContable(),'1.0-0')},
           {"signo":"","concepto":"","cantidad":""},
-          {"signo":"=","concepto":"Placa Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.0-0')}
+          {"signo":"=","concepto":"Placa Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.2-2')}
 
           ];
 
@@ -688,7 +714,7 @@ export class AnalisisComponent implements OnInit {
              {"signo":"","concepto":"","cantidad":""},
              {"signo":"-","concepto":"Ventas","cantidad":this.cp.transform(this.getTotalVentas(),'USD',true,'1.0-0')},
              {"signo":"/","concepto":"Activo Total Promedio","cantidad":this.cp.transform(this.getActivoTotal(),'USD',true,'1.0-0')},
-             {"signo":"-","concepto":"Rotación de Activos","cantidad":this.dc.transform(this.getRotacionActivos(),'1.0-0')},
+             {"signo":"-","concepto":"Rotación de Activos","cantidad":this.dc.transform(this.getRotacionActivos(),'1.2-2')},
              {"signo":"","concepto":"","cantidad":""},
              {"signo":"","concepto":"Pasivo Circulante","cantidad":this.cp.transform(this.getPasivoCirculante(),'USD',true,'1.0-0')},
              {"signo":"+","concepto":"Pasivo a Largo Plazo","cantidad":this.cp.transform(this.getPasivoLP(),'USD',true,'1.0-0')},
@@ -698,7 +724,7 @@ export class AnalisisComponent implements OnInit {
              {"signo":"-","concepto":"Pasivo Total","cantidad":this.dc.transform(this.getPasivoTotal(),'1.0-0')},
              {"signo":"/","concepto":"Capital Contable","cantidad":this.dc.transform(this.getCapitalContable(),'1.0-0')},
              {"signo":"","concepto":"","cantidad":""},
-             {"signo":"=","concepto":"Placa Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.0-0')}
+             {"signo":"=","concepto":"Placa Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.2-2')}
 
             ];
 
@@ -722,22 +748,46 @@ export class AnalisisComponent implements OnInit {
                     {title: "", dataKey: "numero"}];
 
                     var rows = [
-                      {"grupo":"Solvencia","concepto":"Activo Circulante","cantidad":this.getActivoCirculante(),"numero":this.getSolvencia()},
-                      {"grupo":"","concepto":"Pasivo Circulante","cantidad":this.getPasivoCirculante(),"numero":""},
-                      {"grupo":"Solvencia Inmediata","concepto":"Activo Disponible","cantidad":this.getActivoDisponible(),"numero":this.getSolvenciaInmediata()},
-                      {"grupo":"","concepto":"Pasivo Circulante","cantidad":this.getPasivoCirculante(),"numero":""},
-                      {"grupo":"Rotación de Activos","concepto":"Ventas a Crédito","cantidad":this.getVentasACredito(),"numero":this.getRotacionCC()},
-                      {"grupo":"","concepto":"Promedio c x c","cantidad":this.getPromedioCC(),"numero":""},
-                      {"grupo":"Días Promedio de Cartera","concepto":"Días del Periodo","cantidad":365,"numero":this.getDiasPPromedioDeCartera()},
-                      {"grupo":"","concepto":"Rotación de c x c","cantidad":this.getRotacionCC(),"numero":""},
-                      {"grupo":"Rotación de Cuentas Por Pagar","concepto":"Compras Netas A Crédito","cantidad":this.getComprasNetasCredito(),"numero":this.getRotacionCP()},
-                      {"grupo":"","concepto":"Promedio de Cuentas Por Pagar","cantidad":this.getPromedioCP(),"numero":""},
-                      {"grupo":"Días Promedio de c x p","concepto":"Días del Periodo","cantidad":365,"numero":this.getDiasPPromedio()},
-                      {"grupo":"","concepto":"Rotación de c x p","cantidad":this.getRotacionCP(),"numero":""},
-                      {"grupo":"Rotación de I.A.T.","concepto":"Costo de lo Vendido","cantidad":this.getTotalCostosVentas(),"numero":this.getRotacionIAT()},
-                      {"grupo":"","concepto":"Promedio de inv art term","cantidad":this.getPromedioInvArtTerm(),"numero":""},
-                      {"grupo":"Días Promedios","concepto":"Días del Periodo","cantidad":365,"numero":this.getDiasPromedioIAT()},
-                      {"grupo":"","concepto":"Promedio de inv art term","cantidad":this.getPromedioInvArtTerm(),"numero":""},
+                      {"grupo":"Solvencia","concepto":"Activo Circulante","cantidad":this.cp.transform(this.getActivoCirculante(),'USD',true,'1.0-0'),"numero":this.dc.transform(this.getSolvencia(),'1.2-2') },
+                      {"grupo":"","concepto":"Pasivo Circulante","cantidad":this.cp.transform(this.getPasivoCirculante(),'USD',true,'1.0-0') ,"numero":""},
+                      {"grupo":"Solvencia Inmediata","concepto":"Activo Disponible","cantidad":this.cp.transform(this.getActivoDisponible(),'USD',true,'1.0-0'),"numero":this.dc.transform(this.getSolvenciaInmediata(),'1.2-2')},
+                      {"grupo":"","concepto":"Pasivo Circulante","cantidad":this.cp.transform(this.getPasivoCirculante(),'USD',true,'1.0-0') ,"numero":""},
+                      {"grupo":"Rotación de Activos","concepto":"Ventas a Crédito","cantidad": this.cp.transform(this.getVentasACredito(),'USD',true,'1.0-0') ,"numero":this.dc.transform(this.getRotacionCC(),'1.2-2')},
+                      {"grupo":"","concepto":"Promedio c x c","cantidad":this.cp.transform(this.getPromedioCC(),'USD',true,'1.0-0') ,"numero":""},
+                      {"grupo":"Días Promedio de Cartera","concepto":"Días del Periodo","cantidad":365,"numero":this.dc.transform(this.getDiasPPromedioDeCartera(),'1.2-2')},
+                      {"grupo":"","concepto":"Rotación de c x c","cantidad":this.cp.transform(this.getRotacionCC(),'USD',true,'1.0-0') ,"numero":""},
+                      {"grupo":"Rotación de Cuentas Por Pagar","concepto":"Compras Netas A Crédito","cantidad": this.cp.transform(this.getComprasNetasCredito(),'USD',true,'1.0-0') ,"numero":this.dc.transform(this.getRotacionCP(),'1.2-2')},
+                      {"grupo":"","concepto":"Promedio de Cuentas Por Pagar","cantidad":this.cp.transform(this.getPromedioCP(),'USD',true,'1.0-0') ,"numero":""},
+                      {"grupo":"Días Promedio de c x p","concepto":"Días del Periodo","cantidad":365,"numero": this.dc.transform(this.getDiasPPromedio(),'1.2-2')},
+                      {"grupo":"","concepto":"Rotación de c x p","cantidad":this.cp.transform(this.getRotacionCP(),'USD',true,'1.0-0'),"numero":""},
+                      {"grupo":"Rotación de I.A.T.","concepto":"Costo de lo Vendido","cantidad":this.cp.transform(this.getTotalCostosVentas(),'USD',true,'1.0-0'),"numero":this.dc.transform(this.getRotacionIAT(),'1.2-2')},
+                      {"grupo":"","concepto":"Promedio de inv art term","cantidad":this.cp.transform(this.getPromedioInvArtTerm(),'USD',true,'1.0-0') ,"numero":""},
+                      {"grupo":"Días promedio I.A.T.","concepto":"Días del Periodo","cantidad":365,"numero":this.dc.transform(this.getDiasPromedioIAT(),'1.2-2')},
+                      {"grupo":"","concepto":"Rotación I.A.T.","cantidad":this.cp.transform(this.getRotacionIAT(),'USD',true,'1.0-0'),"numero":""},
+                      {"grupo":"Rotación de Materia Prima","concepto":"Costo de M.P. empleada","cantidad":this.cp.transform(this.getCostoMPEmpleada(),'USD',true,'1.0-0'),"numero":this.dc.transform(this.getRotacionMP(),'1.2-2')},
+                      {"grupo":"","concepto":"Prom in mat primas","cantidad": this.cp.transform(this.getPromIMP(),'USD',true,'1.0-0'),"numero":""},
+                      {"grupo":"Días Promedio I.M.P.","concepto":"Días del Periodo","cantidad":365,"numero":this.dc.transform(this.getDiasPromedioIMP(),'1.2-2') },
+                      {"grupo":"","concepto":"Rotación I.M.P.","cantidad":this.cp.transform(this.getRotacionMP(),'USD',true,'1.0-0'),"numero":""},
+                      {"grupo":"Margen Neto de Utilidad","concepto":"Utilidad Neta","cantidad": this.cp.transform(this.getUtilidadNeta(),'USD',true,'1.0-0'),"numero":this.dc.transform(this.getMargenNetoUtilidad(),'1.2-2')},
+                      {"grupo":"","concepto":"Ventas Totales","cantidad":this.cp.transform(this.getTotalVentas(),'USD',true,'1.0-0'),"numero":""},
+                      {"grupo":"Margen Bruto de Utilidad","concepto":"Utilidad antes int. e imptos","cantidad":this.cp.transform(this.getUtilidadOperacion(),'USD',true,'1.0-0'),"numero":this.dc.transform(this.getMargenBrutoUtilidad(),'1.2-2')},
+                      {"grupo":"","concepto":"Ventas Totales","cantidad":this.cp.transform(this.getTotalVentas(),'USD',true,'1.0-0'),"numero":""},
+                      {"grupo":"Endeudamiento","concepto":"Pasivo Total","cantidad":this.cp.transform(this.getPasivoTotal(),'USD',true,'1.0-0'),"numero":this.dc.transform(this.getEndeudamiento(),'1.2-2') },
+                      {"grupo":"","concepto":"Capital Contable","cantidad":this.cp.transform(this.getCapitalContable(),'USD',true,'1.0-0'),"numero":""},
+                      {"grupo":"","concepto":"","cantidad":"","numero":""},
+                      {"grupo":"","concepto":"Pasivo Total","cantidad":this.cp.transform(this.getPasivoTotal(),'USD',true,'1.0-0'),"numero":this.dc.transform(this.getPasivoActivoTotal(),'1.2-2')},
+                      {"grupo":"","concepto":"Activo Total","cantidad":this.cp.transform(this.getActivoTotal(),'USD',true,'1.0-0'),"numero":this.dc.transform(this.getPasivoActivoTotal(),'1.2-2')},
+                      {"grupo":"","concepto":"","cantidad":"","numero":""},
+                      {"grupo":"","concepto":"Total Activo","cantidad":this.cp.transform(this.getActivoTotal(),'USD',true,'1.0-0') ,"numero":this.dc.transform(this.getActivoCapitalTotal(),'1.2-2') },
+                      {"grupo":"","concepto":"Capital Contable","cantidad":this.cp.transform(this.getCapitalContable(),'USD',true,'1.0-0'),"numero":""},
+                      {"grupo":"Cobertura de Intereses","concepto":"Utilidad antes int e imptos","cantidad":this.cp.transform(this.getUtilidadOperacion(),'USD',true,'1.0-0'),"numero":this.dc.transform(this.getCoberturaIntereses(),'1.2-2')  },
+                      {"grupo":"","concepto":"Intereses Pagados","cantidad":this.cp.transform(this.getIntereses(),'USD',true,'1.0-0'),"numero":""},
+
+
+
+
+
+
 
 
                     ];
@@ -756,9 +806,9 @@ export class AnalisisComponent implements OnInit {
 
                     },
                     columnStyles: {
-                    	signo: {halign:'center',columnWidth:20},
                       concepto:{halign:'left'},
                       cantidad:{halign:'right'},
+                      numero:{halign:'right'}
 
                     },
                     addPageContent: function(data) {
@@ -784,7 +834,47 @@ export class AnalisisComponent implements OnInit {
                     }
 
 
+                    CSVratios(){
+                      let data=[
+                        {"grupo":"Ratios"},
+                        {"grupo":"Solvencia","concepto":"Activo Circulante","cantidad":this.getActivoCirculante(),"numero":this.getSolvencia()},
+                        {"grupo":"","concepto":"Pasivo Circulante","cantidad":this.getPasivoCirculante(),"numero":""},
+                        {"grupo":"Solvencia Inmediata","concepto":"Activo Disponible","cantidad":this.getActivoDisponible(),"numero":this.getSolvenciaInmediata()},
+                        {"grupo":"","concepto":"Pasivo Circulante","cantidad":this.getPasivoCirculante(),"numero":""},
+                        {"grupo":"Rotación de Activos","concepto":"Ventas a Crédito","cantidad":this.getVentasACredito(),"numero":this.getRotacionCC()},
+                        {"grupo":"","concepto":"Promedio c x c","cantidad":this.getPromedioCC(),"numero":""},
+                        {"grupo":"Días Promedio de Cartera","concepto":"Días del Periodo","cantidad":365,"numero":this.getDiasPPromedioDeCartera()},
+                        {"grupo":"","concepto":"Rotación de c x c","cantidad":this.getRotacionCC(),"numero":""},
+                        {"grupo":"Rotación de Cuentas Por Pagar","concepto":"Compras Netas A Crédito","cantidad":this.getComprasNetasCredito(),"numero":this.getRotacionCP()},
+                        {"grupo":"","concepto":"Promedio de Cuentas Por Pagar","cantidad":this.getPromedioCP(),"numero":""},
+                        {"grupo":"Días Promedio de c x p","concepto":"Días del Periodo","cantidad":365,"numero":this.getDiasPPromedio()},
+                        {"grupo":"","concepto":"Rotación de c x p","cantidad":this.getRotacionCP(),"numero":""},
+                        {"grupo":"Rotación de I.A.T.","concepto":"Costo de lo Vendido","cantidad":this.getTotalCostosVentas(),"numero":this.getRotacionIAT()},
+                        {"grupo":"","concepto":"Promedio de inv art term","cantidad":this.getPromedioInvArtTerm(),"numero":""},
+                        {"grupo":"Días promedio I.A.T.","concepto":"Días del Periodo","cantidad":365,"numero":this.getDiasPromedioIAT()},
+                        {"grupo":"","concepto":"Rotación I.A.T.","cantidad":this.getRotacionIAT(),"numero":""},
+                        {"grupo":"Rotación de Materia Prima","concepto":"Costo de M.P. empleada","cantidad":this.getCostoMPEmpleada(),"numero":this.getRotacionMP()},
+                        {"grupo":"","concepto":"Prom in mat primas","cantidad":this.getPromIMP(),"numero":""},
+                        {"grupo":"Días Promedio I.M.P.","concepto":"Días del Periodo","cantidad":365,"numero":this.getDiasPromedioIMP()},
+                        {"grupo":"","concepto":"Rotación I.M.P.","cantidad":this.getRotacionMP(),"numero":""},
+                        {"grupo":"Margen Neto de Utilidad","concepto":"Utilidad Neta","cantidad":this.getUtilidadNeta(),"numero":this.getMargenNetoUtilidad()},
+                        {"grupo":"","concepto":"Ventas Totales","cantidad":this.getTotalVentas(),"numero":""},
+                        {"grupo":"Margen Bruto de Utilidad","concepto":"Utilidad antes int. e imptos","cantidad":this.getUtilidadOperacion(),"numero":this.getMargenBrutoUtilidad()},
+                        {"grupo":"","concepto":"Ventas Totales","cantidad":this.getTotalVentas(),"numero":""},
+                        {"grupo":"Endeudamiento","concepto":"Pasivo Total","cantidad":this.getPasivoTotal(),"numero":this.getEndeudamiento()},
+                        {"grupo":"","concepto":"Capital Contable","cantidad":this.getCapitalContable(),"numero":""},
+                        {"grupo":"","concepto":"","cantidad":"","numero":""},
+                        {"grupo":"","concepto":"Pasivo Total","cantidad":this.getPasivoTotal(),"numero":this.getPasivoActivoTotal()},
+                        {"grupo":"","concepto":"Activo Total","cantidad":this.getActivoTotal(),"numero":this.getPasivoActivoTotal()},
+                        {"grupo":"","concepto":"","cantidad":"","numero":""},
+                        {"grupo":"","concepto":"Total Activo","cantidad":this.getActivoTotal(),"numero":this.getActivoCapitalTotal()},
+                        {"grupo":"","concepto":"Capital Contable","cantidad":this.getCapitalContable(),"numero":""},
+                        {"grupo":"Cobertura de Intereses","concepto":"Utilidad antes int e imptos","cantidad":this.getUtilidadOperacion(),"numero":this.getCoberturaIntereses()},
+                        {"grupo":"","concepto":"Intereses Pagados","cantidad":this.getIntereses(),"numero":this.getCoberturaIntereses()},
+]
 
+                        new Angular2Csv(data, ' Analisis Ratios');
+                    }
 
 
 

@@ -1,5 +1,5 @@
 <div class="row">
-  <h4 class="text-center col-12">Estado de Resultados</h4> 
+  <h4 class="text-center col-12">Estado de Resultados</h4>
 </div>
 
 
@@ -35,7 +35,7 @@
       </tr>
 
       <tr>
-        <th>Costo de distribucion</th>
+        <th>Gasto de Distribucion</th>
         <td class="text-right" *ngFor="let producto of resultados">{{getDistParcial(producto) |currency:'USD':true:'1.0-0'}}</td>
         <td class="text-right">{{getDistTotal() |currency:'USD':true:'1.0-0'}}</td>
       </tr>
@@ -47,7 +47,7 @@
       </tr>
 
       <tr>
-        <th>Costo de Administración</th>
+        <th>Gasto de Administración</th>
         <td class="text-right" *ngFor="let producto of resultados">{{getAdminParcial(producto) |currency:'USD':true:'1.0-0'}}</td>
         <td class="text-right">{{getAdminTotal() |currency:'USD':true:'1.0-0'}}</td>
       </tr>
