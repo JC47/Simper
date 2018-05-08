@@ -68,11 +68,14 @@ export class AuthService {
   }
 
   storeUsuarioData(token, usuario){
+    console.log(usuario)
     localStorage.setItem('id_token', token);
     localStorage.setItem('idUsuario', usuario.id);
     localStorage.setItem('nombreUsuario', usuario.name);
     localStorage.setItem("periodos", usuario.periodos);
     localStorage.setItem("regresion",usuario.regresion);
+    localStorage.setItem("minRescate",usuario.minRescate);
+    localStorage.setItem("maxRescate",usuario.maxRescate);
     this.authToken = token;
     this.usuario = usuario;
   }

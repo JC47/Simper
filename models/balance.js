@@ -41,6 +41,11 @@ module.exports.getUltimo = function (idProyecto){
   return querySql(sql);
 }
 
+module.exports.editTerminado = function(idProyecto) {
+  var query = "update proyecto set terminado=0 where idProyecto = "+idProyecto+"";
+  return querySql(query);
+}
+
 //Models rescate
 
 module.exports.getRescate = function (idUsuario) {

@@ -245,11 +245,13 @@ router.post('/final', (req, res, next) => {
 });
 
 router.post('/eliminarperiodos', (req,res,next) => {
+  var idProyecto = req.body.idProyecto;
+  var pm = req.body.periodoMenor;
+  var pMas = req.body.periodoMayor;
   Promise.resolve().then(function() {
-    var idProyecto = req.body.idProyecto;
-    var pm = req.body.periodoMenor;
-    var pMas = req.body.periodoMayor;
     return balance.deleteBalanceR(idProyecto,pm,pMas);
+  }).then(function () {
+    return balance.editTerminado(idProyecto);
   }).then(function() {
     res.json({success:true, msg:"Bien"});
   }).catch(function(err) {
