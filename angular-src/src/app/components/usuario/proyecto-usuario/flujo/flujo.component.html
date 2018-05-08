@@ -3,7 +3,7 @@
 </div>
 
 <div class="col-8 offset-2">
-  <table class="table table-bordered  " >
+  <table class="table table-striped " >
 
     <tbody>
         <tr>
@@ -12,11 +12,11 @@
       </tr>
 
       <tr>
-              <td colspan="2"></td>
+        <td colspan="2"></td>
       </tr>
 
       <tr>
-        <th colspan="2">Entradas </th>
+        <th colspan="2" class="text-center">Entradas </th>
 
       </tr>
 
@@ -41,7 +41,7 @@
 
       <tr>
         <td>Intereses</td>
-        <td class="text-right">-</td>
+        <td class="text-right">$0</td>
 
 
 
@@ -57,7 +57,7 @@
       </tr>
 
       <tr>
-              <td colspan=""></td>
+              <td colspan="2"></td>
       </tr>
 
 
@@ -71,7 +71,7 @@
       </tr>
 
       <tr>
-        <td colspan="2">Salidas</td>
+        <th colspan="2" class="text-center">Salidas</th>
       </tr>
 
       <tr>
@@ -103,21 +103,16 @@
       <tr>
         <td>Compra de Maquinaria</td>
         <td class="text-right">{{getCompraMaquinaria() |currency:'USD':true:'1.0-0'}}</td>
-
-
       </tr>
 
       <tr>
         <td>Compras</td>
         <td class="text-right">{{getCompras() |currency:'USD':true:'1.0-0'}}</td>
-
-
       </tr>
 
       <tr>
         <td>Intereses</td>
         <td class="text-right">{{getIntereses() |currency:'USD':true:'1.0-0'}}</td>
-
       </tr>
 
       <tr>
@@ -128,10 +123,10 @@
       <tr>
         <td>Dividendos</td>
         <td class="text-right">-</td>
-
       </tr>
+
       <tr>
-              <td colspan="2"></td>
+        <td colspan="2"></td>
       </tr>
 
       <tr>

@@ -389,6 +389,7 @@ doc.save("Balance Inicial.pdf")
     let data:any=[
       {io:"Posición Financiera Inicial del Periodo "+localStorage.getItem('numeroPeriodo') },
       {cara2:"Proyecto "+actual },
+      {cara2:""},
       {cara1:"A menos de un Año",             io:"", depAcum:"",      valor1:"",                                       cara2:"A menos de un año", valor2:""},
       {cara1:"Caja Bancos",                   io:"", depAcum:"",      valor1:cajaBancos,                               cara2:"IVA por Enterar", valor2:IVAPorEnterar},
       {cara1:"Cuentas por Cobrar",            io:"", depAcum:"",      valor1:cuentasPorCobrar,                         cara2:"Impuesto por Pagar", valor2:imptosPorPagar},

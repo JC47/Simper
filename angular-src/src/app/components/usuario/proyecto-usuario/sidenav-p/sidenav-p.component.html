@@ -9,20 +9,21 @@
           </div>
         </div>
 
-<<<<<<< HEAD
-        <div class="row">
-          <div class="col-12 text-center" style="margin-bottom:10px">
-            <button type="button" class="btn btn-danger" style="font-size:10px" (click)="verProyectos()">Salir de Proyecto</button>
-          </div>
 
-=======
+
+
       <div class="row">
-        <div class="col-12 text-center" style="margin-bottom:10px">
-          <button type="button" class="btn btn-warning" style="font-size:10px" (click)="verDecisiones()">Decisiones</button>
-          <button type="button" class="btn btn-danger" style="font-size:10px" (click)="verProyectos()">Salir de Proyecto</button>
->>>>>>> bf69e36f102286ccb1d63f414beabd9a644b9239
+        <div class="col-12 text-center" style="margin-bottom:5px">
+          <button type="button" class="btn btn-info" style="font-size:10px" (click)="verDecisiones()">Decisiones</button>
         </div>
 
+      </div>
+
+      <div class="row">
+        <div class="col-12 text-center">
+          <button type="button" class="btn btn-danger" style="font-size:10px" (click)="verProyectos()">Salir de Proyecto</button>
+        </div>
+      </div>
       </div>
       <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
@@ -102,3 +103,35 @@
 
 
 </div>
+
+
+
+
+
+<ngl-modal header="Reporte de Decisiones"  [(open)]="openDes" size="large" directional="false">
+    <div body>
+        <div class="row">
+          <h3 class="col-12 text-right">Periodo {{ventas[periodoSelect-1].numeroPeriodo}}</h3>
+            <div class="col-8 offset-1">
+              <table class="table">
+                  <tr>
+                    <th class="text-center">Producto</th>
+                    <th class="text-center">Unidades Vendidas</th>
+                    <th class="text-center">Unidades Almacenadas</th>
+                  </tr>
+                  <tr *ngFor="let venta of ventas[periodoSelect-1].ventas">
+                    <td class="text-center">{{getNameByIdProducto(venta.idProducto)}}</td>
+                    <td class="text-right">{{venta.unidadesVendidas}}</td>
+                    <td class="text-right">{{venta.unidadesAlmacenadas}}</td>
+                  </tr>
+              </table>
+            </div>
+        </div>
+
+
+    </div>
+
+    <ng-template ngl-modal-footer>
+    <ngl-pagination [(page)]="periodoSelect" [total]="totalPer"></ngl-pagination>
+    </ng-template>
+  </ngl-modal>

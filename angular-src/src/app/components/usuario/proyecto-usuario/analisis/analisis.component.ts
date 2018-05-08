@@ -523,6 +523,7 @@ export class AnalisisComponent implements OnInit {
 
     PDFestadoDeResultados(){
 
+      let actual=this.proyectoActual;
       var doc= new jsPDF({
       orientation: 'landscape',
       unit: 'mm',
@@ -574,7 +575,7 @@ export class AnalisisComponent implements OnInit {
       addPageContent: function(data) {
         doc.setFontSize(15);
         doc.setFontType("bold");
-        doc.text(139.5, 15, 'Proyecto ' , null, null, 'center');
+        doc.text(139.5, 15, 'Proyecto '+actual , null, null, 'center');
         doc.setFontSize(13);
         doc.text(139.5, 23, 'Análisis de la Rentabilidad Sobre el Capital Contable del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
         doc.line(50, 27, 228, 27);
@@ -595,12 +596,10 @@ export class AnalisisComponent implements OnInit {
 
 
     CSVestadoDeResultados(){
+      let actual=this.proyectoActual;
       let data:any=[
-        {signo:"Proyecto", concepto:"Periodo"+localStorage.getItem('numeroPeriodo')},
-        {signo:"",
-         concepto:"Estado de Resutlados",
-         cantidad:""
-       },
+       {signo:"Proyecto" +"actual", concepto:"Periodo"+localStorage.getItem('numeroPeriodo')},
+       {signo:"",concepto:"Estado de Resutlados",cantidad:""},
        {"signo":"","concepto":"Ventas","cantidad":this.cp.transform(this.getTotalVentas(),'USD',true,'1.0-0')},
        {"signo":"-","concepto":"Costos","cantidad":this.cp.transform(this.getTotalCostosVentas(),'USD',true,'1.0-0')},
        {"signo":"=","concepto":"Utilidad Bruta","cantidad":this.cp.transform(this.getUtilidadBruta(),'USD',true,'1.0-0')},
@@ -626,7 +625,7 @@ export class AnalisisComponent implements OnInit {
 
 
         PDFbalanceGeneral(){
-
+          let actual=this.proyectoActual;
           var doc= new jsPDF({
           orientation: 'landscape',
           unit: 'mm',
@@ -681,7 +680,7 @@ export class AnalisisComponent implements OnInit {
           addPageContent: function(data) {
             doc.setFontSize(15);
             doc.setFontType("bold");
-            doc.text(139.5, 15, 'Proyecto ' , null, null, 'center');
+            doc.text(139.5, 15, 'Proyecto '+actual , null, null, 'center');
             doc.setFontSize(13);
             doc.text(139.5, 23, 'Análisis de la Rentabilidad Sobre el Capital Contable del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
             doc.line(50, 27, 228, 27);
@@ -701,12 +700,10 @@ export class AnalisisComponent implements OnInit {
           }
 
           CSVbalanceGeneral(){
+            let actual=this.proyectoActual;
             let data:any=[
-              {signo:"Proyecto", concepto:"Periodo"+localStorage.getItem('numeroPeriodo')},
-              {signo:"",
-               concepto:"Balance General",
-               cantidad:""
-             },
+              {signo:"Proyecto "+actual, concepto:"Periodo"+localStorage.getItem('numeroPeriodo')},
+              {signo:"",concepto:"Balance General",cantidad:""},
              {"signo":"","concepto":"Activo Circulante","cantidad":this.cp.transform(this.getActivoCirculante(),'USD',true,'1.0-0')},
              {"signo":"+","concepto":"Activo Fijo","cantidad":this.cp.transform(this.getActivoFijo(),'USD',true,'1.0-0')},
              {"signo":"+","concepto":"Otros Activos","cantidad":"-"},
@@ -735,7 +732,7 @@ export class AnalisisComponent implements OnInit {
 
 
                   PDFratios(){
-
+                    let actual=this.proyectoActual;
                     var doc= new jsPDF({
                     orientation: 'landscape',
                     unit: 'mm',
@@ -814,7 +811,7 @@ export class AnalisisComponent implements OnInit {
                     addPageContent: function(data) {
                       doc.setFontSize(15);
                       doc.setFontType("bold");
-                      doc.text(139.5, 15, 'Proyecto ' , null, null, 'center');
+                      doc.text(139.5, 15, 'Proyecto '+actual , null, null, 'center');
                       doc.setFontSize(13);
                       doc.text(139.5, 23, 'Análisis de la Rentabilidad Sobre el Capital Contable del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
                       doc.line(50, 27, 228, 27);
@@ -835,7 +832,9 @@ export class AnalisisComponent implements OnInit {
 
 
                     CSVratios(){
+                      let actual=this.proyectoActual;
                       let data=[
+                        {"grupo":"Proyecto "+actual,"concepto":"Periodo "+localStorage.getItem('numeroPeriodo')},
                         {"grupo":"Ratios"},
                         {"grupo":"Solvencia","concepto":"Activo Circulante","cantidad":this.getActivoCirculante(),"numero":this.getSolvencia()},
                         {"grupo":"","concepto":"Pasivo Circulante","cantidad":this.getPasivoCirculante(),"numero":""},

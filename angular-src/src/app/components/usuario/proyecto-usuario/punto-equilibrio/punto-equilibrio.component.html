@@ -75,12 +75,12 @@
         <td class="text-right" *ngFor="let aux of equilibrio">{{aux.ventasTotales |currency:'USD':true:'1.0-0'}}</td>
       </tr>
       <tr>
-        <th>Contrib Marginal</th>
+        <th>Contribución Marginal</th>
         <td class="text-right">{{getMarginal() |currency:'USD':true:'1.0-0'}}</td>
         <td class="text-right">-</td>
       </tr>
       <tr>
-        <th>% Contrib Marginal</th>
+        <th>% Contribución Marginal</th>
         <td class="text-right">{{getMarginalP() * 100 |number:'1.0-0'}}</td>
         <td class="text-right">-</td>
       </tr>
@@ -111,3 +111,24 @@
       </tr>
     </tbody>
   </table>
+
+
+
+
+
+
+          <div class="row align-items-center" style="margin-bottom:20px">
+            <div class="offset-8 col-1">
+              Exportar:
+            </div>
+
+
+            <div class="col-1">
+              <ngl-icon icon="pdf" category="doctype" (click)="PDFequilibrio()" size="large" style="cursor:pointer" ></ngl-icon>
+            </div>
+
+
+            <div class="col-1">
+              <ngl-icon icon="csv" category="doctype" (click)="CSVequilibrio()" size="large" style="cursor:pointer"></ngl-icon>
+            </div>
+          </div>

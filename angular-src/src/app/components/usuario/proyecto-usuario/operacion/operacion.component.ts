@@ -302,7 +302,7 @@ export class OperacionComponent implements OnInit {
         "total":this.cp.transform(producto.inventarioFinal, 'USD',true,'1.0-0')
       }
       if(producto.unidadesAlmacenadas == 0){
-        x.unidades = this.cp.transform( 0 ,'USD',true,'1.0-0');
+        x.unidades = this.dc.transform( 0,'1.0-0');
         x.costoUni = this.cp.transform( 0 ,'USD',true,'1.0-0');
         x.total = this.cp.transform(0, 'USD',true,'1.0-0');
       }
@@ -359,7 +359,7 @@ export class OperacionComponent implements OnInit {
 
     for(let producto of this.auxiliaresAnteriores){
       data.push({
-        prodcuto:producto.Producto_idProducto,
+        prodcuto:this.getNameByIdProducto( producto.Producto_idProducto),
          unidades:producto.unidadesAlmacenadas,
          costoProd:this.getCostoAlmacen(producto.Producto_idProducto),
          total:producto.inventarioFinal
@@ -435,7 +435,8 @@ export class OperacionComponent implements OnInit {
 
     CSVpresupuestoGlobalComprasMP(){
       let data=[
-        {material:"Proyecto "+this.proyectoActual,costoUni:"Periodo"+ localStorage.getItem('numeroPeriodo')},
+        {material:"Presupuesto Global de Compras del Periodo"+ localStorage.getItem('numeroPeriodo')},
+        {material:"Proyecto "+this.proyectoActual,},
         {
           material:"Material",
           cantidadComprar:"Cantidad a Comprar",
@@ -479,7 +480,7 @@ export class OperacionComponent implements OnInit {
       for(let producto of this.auxiliares){
         var x = {
           "producto":this.getNameByIdProducto(producto.Producto_idProducto),
-          "cantidadUnit":this.cp.transform(this.getUniMP(producto.Producto_idProducto),'USD',true,'1.0-0'),
+          "cantidadUnit":this.dc.transform(this.getUniMP(producto.Producto_idProducto),'1.0-0'),
           "costoUni":this.cp.transform( this.getCostoUni(producto.Producto_idProducto) ,'USD',true,'1.0-0'),
           "unidadProd":this.dc.transform( producto.unidadesProducidas ,'1.0-0'),
           "cantidad":this.dc.transform( (this.getUniMP(producto.Producto_idProducto)*producto.unidadesProducidas),'1.0-0'),
@@ -550,9 +551,9 @@ export class OperacionComponent implements OnInit {
     for(let producto of this.auxiliares){
       data.push(
         {
-          producto:producto.Producto_idProducto,
-          cantidadUnit:producto.Producto_idProducto,
-          costoUni:producto.Producto_idProducto,
+          producto:this.getNameByIdProducto(producto.Producto_idProducto),
+          cantidadUnit:this.getUniMP(producto.Producto_idProducto),
+          costoUni:this.getCostoUni(producto.Producto_idProducto),
           unidadProd:producto.unidadesProducidas,
           cantidad:producto.Producto_idProducto*producto.unidadesProducidas,
           importe:producto.Producto_idProducto*(this.getUniMP(producto.Producto_idProducto) * producto.unidadesProducidas)
@@ -932,7 +933,6 @@ export class OperacionComponent implements OnInit {
     {"cara":"Neto"},
     {"cara":""},
     {"cara":"Menos partidas que no incluyen I.V.A."},
-    {"cara":""},
     {"cara":"Sueldos y Salarios"},
     {"cara":"Previsión Social"},
     {"cara":""},
@@ -1145,8 +1145,9 @@ export class OperacionComponent implements OnInit {
           data[4][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.costoAdministrativo/producto.unidadesVendidas;
           data[5][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.costoAdministrativo
           data[7][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.costoAdministrativo - producto.costoAdminDep
-          data[8][this.getNameByIdProducto(producto.Producto_idProducto)]=0
+          data[8][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.costoAdminDep
           data[10][this.getNameByIdProducto(producto.Producto_idProducto)]=0
+          data[11][this.getNameByIdProducto(producto.Producto_idProducto)]=0
           data[11][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.costoAdminDep;
           data[12][this.getNameByIdProducto(producto.Producto_idProducto)]=-producto.IVAAdmon;
           data[13][this.getNameByIdProducto(producto.Producto_idProducto)]=(producto.costoAdminDep - producto.IVAAdmon);

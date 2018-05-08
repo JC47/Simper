@@ -407,7 +407,7 @@ export class OperacionService {
 
   returnMaquinas(){
     var x = [];
-    this.ventas().subscribe(data => {
+    this.maquinas().subscribe(data => {
       for(let key in data.datos){
         x.push(data.datos[key]);
       }
@@ -417,7 +417,7 @@ export class OperacionService {
 
   returnDProductos(){
     var x = [];
-    this.ventas().subscribe(data => {
+    this.dproductos().subscribe(data => {
       for(let key in data.datos){
         x.push(data.datos[key]);
       }
@@ -427,7 +427,7 @@ export class OperacionService {
 
   returnDZonas(){
     var x = [];
-    this.ventas().subscribe(data => {
+    this.dzonas().subscribe(data => {
       for(let key in data.datos){
         x.push(data.datos[key]);
       }
@@ -437,7 +437,7 @@ export class OperacionService {
 
   returnCreditos(){
     var x = [];
-    this.ventas().subscribe(data => {
+    this.creditos().subscribe(data => {
       for(let key in data.datos){
         x.push(data.datos[key]);
       }
