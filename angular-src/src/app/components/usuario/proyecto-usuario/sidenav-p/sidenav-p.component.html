@@ -110,28 +110,90 @@
 
 <ngl-modal header="Reporte de Decisiones"  [(open)]="openDes" size="large" directional="false">
     <div body>
-        <div class="row">
-          <h3 class="col-12 text-right">Periodo {{ventas[periodoSelect-1].numeroPeriodo}}</h3>
-            <div class="col-8 offset-1">
-              <table class="table">
-                  <tr>
-                    <th class="text-center">Producto</th>
-                    <th class="text-center">Unidades Vendidas</th>
-                    <th class="text-center">Unidades Almacenadas</th>
-                  </tr>
-                  <tr *ngFor="let venta of ventas[periodoSelect-1].ventas">
-                    <td class="text-center">{{getNameByIdProducto(venta.idProducto)}}</td>
-                    <td class="text-right">{{venta.unidadesVendidas}}</td>
-                    <td class="text-right">{{venta.unidadesAlmacenadas}}</td>
-                  </tr>
-              </table>
-            </div>
+
+      <div class="card" *ngFor="let venta of ventas;let i=index">
+        <div class="card-header">
+          <h4 class="col-12 text-center">Periodo {{venta.numeroPeriodo}}</h4>
         </div>
+        <div class="card-block">
+
+                    <div class="row">
+                      <h5 class="col-4 text-center">Venta de Productos</h5>
+                      <h5 class="col-3 text-center">Maquinaria Adquirida</h5>
+                      <h5 class="col-5 text-center">Desarrollo  de Productos y Zonas</h5>
+                    </div>
 
 
-    </div>
+                    <div class="row">
+                      <div class="col-4">
+                        <table class="table table-hover">
+                            <tr>
+                              <th class="text-center">Producto</th>
+                              <th class="text-center">Unidades Vendidas</th>
+                              <th class="text-center">Unidades Almacenadas</th>
+                            </tr>
+                            <tr *ngFor="let v of venta.ventas">
+                              <td class="text-center">{{getNameByIdProducto(v.idProducto)}}</td>
+                              <td class="text-right">{{v.unidadesVendidas|number:'1.0-0'}}</td>
+                              <td class="text-right">{{v.unidadesAlmacenadas|number:'1.0-0'}}</td>
+                            </tr>
+                        </table>
+                      </div>
+
+                        <div class="col-3">
+                          <table class="table table-hover">
+                            <tr>
+                              <th class="text-center">Maquinaria</th>
+                              <th class="text-center">Cantidad</th>
+                            </tr>
+
+                            <tr *ngFor="let maquina of maquinas[i].maquinarias">
+                              <td class="text-center">{{getNameByIdMaquinaria(maquina.idMaquinaria)}}</td>
+                              <td class="text-right">{{maquina.Cantidad}}</td>
+                            </tr>
+                          </table>
+                        </div>
+
+
+
+                        <div class="col-2">
+                          <table class="table table-hover">
+                            <tr>
+                              <th class="text-center">Productos Desarrollados</th>
+                            </tr>
+                            <tr *ngFor="let producto of this.DProductos[i].productos">
+                              <td class="text-center">{{getNameByIdProducto(producto.idProducto)}}</td>
+                            </tr>
+                          </table>
+                        </div>
+
+
+
+                        <div class="col-3">
+                          <table class="table table-hover">
+                            <tr>
+                              <th class="text-center">Producto</th>
+                              <th class="text-center">Zona de Mercado Desarrollada</th>
+                            </tr>
+
+                            <tr *ngFor="let producto of this.DZonas[i].productos">
+                              <td class="text-center">{{getNameByIdProducto(producto.idProducto)}}</td>
+                              <td class="text-center">{{getNameByIdZona(producto.idZona)}}</td>
+                            </tr>
+                          </table>
+                        </div>
+
+                    </div>
+                </div>
+
+
+        </div>
+      </div>
 
     <ng-template ngl-modal-footer>
-    <ngl-pagination [(page)]="periodoSelect" [total]="totalPer"></ngl-pagination>
+      <span>Exportar:</span>
+      <button type="button" (click)="CSVdecisiones()" class="btn btn-success">CSV</button>
+      <button type="button" (click)="PDFdecisiones()" class="btn btn-danger">PDF</button>
+
     </ng-template>
   </ngl-modal>

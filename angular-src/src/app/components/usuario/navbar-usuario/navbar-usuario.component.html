@@ -75,10 +75,48 @@
 
 
 
+  <ngl-modal header="Confirmación"  [(open)]="openRescate" size="x-small" directional="false">
+      <div body>
+        <div class="col-12 text-center container">
+          <h2 style="margin-bottom:10px">Haz quedado en Bancarrota</h2>
+        </div>
+        <div class="offset-4 col-4">
+          <img src="assets/img/graph.png" class="img-fluid" alt="">
+        </div>
+        <div class="col-12">
+          <h4 class="text-center" style="margin-top:10px">Puedes solicitar un monto de inversión para rescatar tu proyecto de {{rescMin|currency:'USD':true:'1.0-0'}} hasta {{rescMax|currency:'USD':true:'1.0-0'}} </h4>
+        </div>
+
+
+      <form [formGroup]="rescateForm" class="offset-1"  >
+      <div class="form-group row">
+        <label class="col-12 col-form-label text-center">Cantidad a Solicitar</label>
+        <div class="offset-3 col-6">
+          <input  currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }" class="form-control" formControlName="cantidadRescate">
+        </div>
+      </div>
+      <ng-template ngl-modal-footer>
+          <button type="submit" class="btn btn-secondary col-5 offset-1" (click)="openRescate=false" >Cancelar</button>
+        <button type="submit" class="btn btn-primary col-5"  (click)="rescate(rescateForm.value)">Solicitar</button>
+
+
+    </ng-template>
+
+      </form>
+        </div>
+    </ngl-modal>
+
+
+
+
   <ngl-modal header="Confirmación"  [(open)]="simTerm" size="x-small" directional="false">
       <div body>
         <div class="col-12 text-center container">
-          <h2 style="margin-bottom:30px">Tu simulación ha concluido</h2>
+          <h1 style="margin-bottom:30px">¡Felicidades!</h1>
+          <h2>Tu simulación ha Concluido</h2>
+          <div class="offset-4 col-4">
+            <img src="assets/img/goal.png" class="img-fluid">
+          </div>
         </div>
       </div>
 

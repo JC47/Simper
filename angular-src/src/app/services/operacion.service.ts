@@ -359,7 +359,7 @@ export class OperacionService {
       idProyecto:localStorage.getItem('idProyecto'),
       numeroPeriodo:localStorage.getItem('numeroPeriodo')
     }
-    return this.http.post('decisiones/getVentas/',x,{headers}).map(res => res.json());
+    return this.http.post('decisiones/getMaquinarias/',x,{headers}).map(res => res.json());
   }
 
   dproductos(){
@@ -370,7 +370,7 @@ export class OperacionService {
       idProyecto:localStorage.getItem('idProyecto'),
       numeroPeriodo:localStorage.getItem('numeroPeriodo')
     }
-    return this.http.post('decisiones/getVentas/',x,{headers}).map(res => res.json());
+    return this.http.post('decisiones/getDesarrollosP/',x,{headers}).map(res => res.json());
   }
 
   dzonas(){
@@ -381,7 +381,7 @@ export class OperacionService {
       idProyecto:localStorage.getItem('idProyecto'),
       numeroPeriodo:localStorage.getItem('numeroPeriodo')
     }
-    return this.http.post('decisiones/getVentas/',x,{headers}).map(res => res.json());
+    return this.http.post('decisiones/getDesarrollosZ/',x,{headers}).map(res => res.json());
   }
 
   creditos(){
@@ -392,7 +392,7 @@ export class OperacionService {
       idProyecto:localStorage.getItem('idProyecto'),
       numeroPeriodo:localStorage.getItem('numeroPeriodo')
     }
-    return this.http.post('decisiones/getVentas/',x,{headers}).map(res => res.json());
+    return this.http.post('decisiones/getCreditos/',x,{headers}).map(res => res.json());
   }
 
   returnVentas(){

@@ -170,7 +170,7 @@ return true
 
 
   validaVi(){
-    if(localStorage.getItem('numeroPeriodo')==localStorage.getItem('numeroRPeriodos'))
+    if(localStorage.getItem('numeroPeriodo')==localStorage.getItem('numeroRPeriodos')&& !parseInt(localStorage.getItem('terminado')))
       return false
     else
       return true

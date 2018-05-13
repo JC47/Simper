@@ -9,6 +9,7 @@ import {DesarrolloProductoService} from '../../../services/desarrollo-producto.s
 import {DesarrolloZonaService} from '../../../services/desarrollo-zona.service';
 import { UsuarioCreditoService} from '../../../services/usuario-credito.service';
 import {AuxiliarService} from '../../../services/auxiliar.service';
+import {FormControl, FormGroup, Validators,FormArray} from '@angular/forms';
 
 
 @Component({
@@ -20,6 +21,8 @@ export class NavbarUsuarioComponent implements OnInit {
   usuario:Object
   balance:any;
   balanceFinal:any;
+  rescMin:any;
+  rescMax:any;
   openConf:boolean=false;
   confProd:boolean=false;
   confZonas:boolean=false;
@@ -28,6 +31,7 @@ export class NavbarUsuarioComponent implements OnInit {
   openLoadDatos:boolean=false;
   alert:boolean=false;
   numeroPeriodoSelected:any;
+  openRescate:boolean=false;
   simTerm:boolean=false;
   opciones:boolean=false;
   periodo:number;
@@ -38,6 +42,9 @@ export class NavbarUsuarioComponent implements OnInit {
   zonasEnDesarrollo:any;
   confEditaPeriodos:boolean=false;
   openPeriodos:boolean=false;
+  rescateForm:FormGroup;
+
+
   constructor(private authService: AuthService, private router:Router,
     private _resultadosService:ResultadosService,
     private _proyectoService:ProyectosService,
@@ -46,6 +53,12 @@ export class NavbarUsuarioComponent implements OnInit {
     private _desarrolloZona:DesarrolloZonaService,
     private _desarrolloProducto:DesarrolloProductoService,
     private _creditoService:UsuarioCreditoService) {
+      this.rescMax=localStorage.getItem('maxRescate')
+      this.rescMin=localStorage.getItem('minRescate')
+
+      this.rescateForm=new FormGroup({
+        'cantidadRescate':new FormControl(),
+      });
     this._proyectoService.ocultaCierrePeriodo()
     this.asignarBalance(localStorage.getItem('idProyecto')); }
 
@@ -220,7 +233,7 @@ export class NavbarUsuarioComponent implements OnInit {
 
 
   muestraCerrarPeriodo(){
-    if(this._proyectoService.muestraPeriodo==true || localStorage.getItem('periodos')==localStorage.getItem('numeroPeriodo'))
+    if(this._proyectoService.muestraPeriodo==true || parseInt(localStorage.getItem('terminado')))
       return true
     else
       return false;
@@ -262,10 +275,7 @@ export class NavbarUsuarioComponent implements OnInit {
           if(cajaBancosFinal < 0){
             if(this.creditosActivos.length > 1){
               alert("Necesitas rescate");
-              //Aqui activa el modal de rescate
-              //Los montos minimos y maximos están el el localStorage se llaman maxRescate y minRescate
-              //Despliega algo como "Necesitas rescate, inserta una cantidad dentro del rango de max y min rescate"
-              //También valida que la cantidad ingresada este dentro del rango
+              this.openRescate=true;
             }
             else{
               this.openConf=false;
@@ -322,6 +332,11 @@ export class NavbarUsuarioComponent implements OnInit {
         return true
       else
         return false
+    }
+
+
+    rescate(resc){
+      console.log(resc);
     }
 
 
