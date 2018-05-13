@@ -55,7 +55,7 @@
 
 </div>
 <!--- +++++++++++++++++++++++++++ Formulario para agregar +++++++++++++++++++++++++++++++++++++++++ -->
-<div bsModal #modalNew="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div  bsModal #modalNew="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-">
     <div class="modal-content">
       <div class="modal-header">
@@ -753,82 +753,81 @@
             <i class="pull-right float-xs-right glyphicon"
             [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
           </div>
+          <table class="table table-hover text-center">
+            <thead class="text-center">
+              <tr>
+                <th class="text-center">Concepto</th>
+                <th class="text-center">Cantidad</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-center">Costo de Desarrollo</td>
+                <td class="text-right">{{producto.costoDes|currency:'USD':true:'1.0-0'}}</td>
+              </tr>
 
-              <table class="table table-hover text-center">
-                <thead class="text-center">
-                  <tr>
-                    <th>Campo</th>
-                    <th>Cantidad</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Costo de Desarrollo</td>
-                    <td>{{producto.costoDes}}</td>
-                  </tr>
+              <tr>
+                <td class="text-center">Tiempo de Desarrollo</td>
+                <td class="text-right">{{producto.tiempoDes|number:'1.0-0'}}</td>
+              </tr>
 
-                  <tr>
-                    <td>Tiempo de Desarrollo</td>
-                    <td>{{producto.tiempoDes}}</td>
-                  </tr>
+              <tr>
+                <td class="text-center">Precio de Venta</td>
+                <td class="text-right">{{producto.precioVenta|currency:'USD':true:'1.0-0'}}</td>
+              </tr>
 
-                  <tr>
-                    <td>Precio de Venta</td>
-                    <td>{{producto.precioVenta}}</td>
-                  </tr>
+              <tr>
+                <td class="text-center">Costo Fijo</td>
+                <td class="text-right">{{producto.costosFijosFabri|currency:'USD':true:'1.0-0'}}</td>
+              </tr>
 
-                  <tr>
-                    <td>Costo Fijo</td>
-                    <td>{{producto.costosFijosFabri}}</td>
-                  </tr>
+              <tr>
+                <td class="text-center">Depreciación por Administración</td>
+                <td class="text-right">{{producto.depAdmon|currency:'USD':true:'1.0-0'}}</td>
+              </tr>
 
-                  <tr>
-                    <td>Depreciación por Administración</td>
-                    <td>{{producto.depAdmon}}</td>
-                  </tr>
+              <tr>
+                <td class="text-center">Deprecicación por Distribución</td>
+                <td class="text-right">{{producto.depDistribucion|currency:'USD':true:'1.0-0'}}</td>
+              </tr>
 
-                  <tr>
-                    <td>Deprecicación por Distribución</td>
-                    <td>{{producto.depDistribucion}}</td>
-                  </tr>
+              <tr>
+                <td class="text-center">Gastos Fijos de Distribución</td>
+                <td class="text-right">{{producto.gastosFijosDist|currency:'USD':true:'1.0-0'}}</td>
+              </tr>
 
-                  <tr>
-                    <td>Gastos Fijos de Distribución</td>
-                    <td>{{producto.gastosFijosDist}}</td>
-                  </tr>
+              <tr>
+                <td class="text-center">Costo Variable de Fabricación</td>
+                <td class="text-right">{{producto.costoVarUniFabri|currency:'USD':true:'1.0-0'}}</td>
+              </tr>
 
-                  <tr>
-                    <td>Costo Variable de Fabricación</td>
-                    <td>{{producto.costoVarUniFabri}}</td>
-                  </tr>
+              <tr>
+                <td class="text-center">Costo Variable Unitario de Distribución</td>
+                <td class="text-right">{{producto.costoVarUniDist|currency:'USD':true:'1.0-0'}}</td>
+              </tr>
 
-                  <tr>
-                    <td>Costo Variable Unitario de Distribución</td>
-                    <td>{{producto.costoVarUniDist}}</td>
-                  </tr>
+              <tr>
+                <td class="text-center">Gastos Fijos de Administración</td>
+                <td class="text-right">{{producto.gastosFijosAdmon|currency:'USD':true:'1.0-0'}}</td>
+              </tr>
 
-                  <tr>
-                    <td>Gastos Fijos de Administración</td>
-                    <td>{{producto.gastosFijosAdmon}}</td>
-                  </tr>
+              <tr>
+                <td class="text-center">Costo MP por unidad</td>
+                <td class="text-right">{{producto.costosMPPUniProd|currency:'USD':true:'1.0-0'}}</td>
+              </tr>
 
-                  <tr>
-                    <td>Costo MP por unidad</td>
-                    <td>{{producto.costosMPPUniProd}}</td>
-                  </tr>
+              <tr>
+                <td class="text-center">Unidades MP por unidad producida</td>
+                <td class="text-right">{{producto.uniMP|number:'1.0-0'}}</td>
+              </tr>
 
-                  <tr>
-                    <td>Unidades MP por unidad producida</td>
-                    <td>{{producto.uniMP}}</td>
-                  </tr>
+              <tr>
+                <td class="text-center">Costo Unitario</td>
+                <td class="text-right">{{producto.costoUni|currency:'USD':true:'1.0-0'}}</td>
+              </tr>
+            </tbody>
 
-                  <tr>
-                    <td>Costo Unitario</td>
-                    <td>{{producto.costoUni}}</td>
-                  </tr>
-                </tbody>
-
-              </table>
+          </table>
   </accordion-group>
 </accordion>
 
