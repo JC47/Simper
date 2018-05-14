@@ -269,12 +269,10 @@ export class NavbarUsuarioComponent implements OnInit {
 
         if(localStorage.getItem('periodos') == p){
           this.simTerm=true;
-
         }
         else{
           if(cajaBancosFinal < 0){
             if(this.creditosActivos.length > 1){
-              alert("Necesitas rescate");
               this.openRescate=true;
             }
             else{
@@ -336,7 +334,12 @@ export class NavbarUsuarioComponent implements OnInit {
 
 
     rescate(resc){
-      console.log(resc);
+      this._proyectoService.rescatarProyecto(resc.cantidadRescate).subscribe(data => {
+        if(data.success){
+          this.openRescate=false;
+          this.pasarPeriodo();
+        }
+      });
     }
 
 

@@ -309,14 +309,22 @@ export class OperacionService {
     let headers = new Headers({
       'Content-Type':'application/json'
     });
-    return this.http.get('operacion/integrales/'+localStorage.getItem('idProyecto'),{headers}).map(res => res.json());
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo'))
+    }
+    return this.http.post('operacion/integrales',x,{headers}).map(res => res.json());
   }
 
   getTendencias(){
     let headers = new Headers({
       'Content-Type':'application/json'
     });
-    return this.http.get('operacion/tendencias/'+localStorage.getItem('idProyecto'),{headers}).map(res => res.json());
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo'))
+    }
+    return this.http.post('operacion/tendencias',x,{headers}).map(res => res.json());
   }
 
   returnIntegrales(){

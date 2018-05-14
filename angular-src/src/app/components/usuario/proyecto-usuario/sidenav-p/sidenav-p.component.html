@@ -85,15 +85,15 @@
                     <li [routerLink]="['estadoResultados']" routerLinkActive="active">Estado de Resultados</li>
                     <li [routerLink]="['balance_final']" routerLinkActive="active">Balance Final</li>
                     <li [routerLink]="['flujo']" routerLinkActive="active">Flujo de Efectivo</li>
-                    <li [routerLink]="['comparativa']" routerLinkActive="active">Posición Comparativa</li>
-                    <li [routerLink]="['analisis']" routerLinkActive="active">Analisis del Periodo</li>
-                    <li [routerLink]="['puntoEquilibrio']" routerLinkActive="active">Punto de Equilibrio</li>
                   </ul>
 
                   <li data-toggle="collapse" data-target="#service3" class="collapsed">
                     <a href="#"><i class="fa fa-flag-checkered fa-lg"></i> Analisis Final<span class="arrow"></span></a>
                   </li>
                   <ul class="sub-menu collapse" id="service3">
+                    <li [routerLink]="['comparativa']" routerLinkActive="active">Posición Comparativa</li>
+                    <li [routerLink]="['analisis']" routerLinkActive="active">Analisis de Rentabilidad</li>
+                    <li [routerLink]="['puntoEquilibrio']" routerLinkActive="active">Punto de Equilibrio</li>
                     <li [routerLink]="['integrales']" routerLinkActive="active">Integrales</li>
                     <li [routerLink]="['tendencias']" routerLinkActive="active">Tendencias</li>
                   </ul>
