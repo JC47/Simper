@@ -11,9 +11,10 @@ router.post('/getVentas/', (req,res,next) => {
   Promise.join(
     decision.getAuxiliarCuenta(idProyecto,numeroPeriodo),
     decision.getAllNumeroBalanceAuxiliarCuenta(idProyecto,numeroPeriodo),
-    function(auxcuenta,numeroperiodoauxcuenta) {
+    decision.getNumeroPeriodoBalance(idProyecto,numeroPeriodo),
+    function(auxcuenta,numeroperiodoauxcuenta,numeroperiodobalance) {
 
-      return jsonDecisionesVentas(auxcuenta,numeroperiodoauxcuenta);
+      return jsonDecisionesVentas(auxcuenta,numeroperiodoauxcuenta,numeroperiodobalance);
     })
   .then( function (data) {
     res.json({success: true, datos:data, msg:"Operacion exitosa"});
@@ -109,13 +110,13 @@ router.post('/getCreditos/', (req,res,next) => {
   });
 });
 
-function jsonDecisionesVentas(auxcuenta,numeroperiodoauxcuenta) {
+function jsonDecisionesVentas(auxcuenta,numeroperiodoauxcuenta, numeroperiodobalance) {
 var arrayRepNumeroPeriodo = [];
 var i=0;
   while (i<numeroperiodoauxcuenta.length) {
     var aux = 0;
     for (var j = 0; j < auxcuenta.length; j++) {
-      if (numeroperiodoauxcuenta[i].Balance_numeroPeriodo == auxcuenta[j].Balance_numeroPeriodo/* && auxcuenta[i].Zona_idZonas == numeroperiodoauxcuenta[j].Zona_idZonas*/) {
+      if (numeroperiodobalance[i].numeroPeriodo == auxcuenta[j].Balance_numeroPeriodo/* && auxcuenta[i].Zona_idZonas == numeroperiodoauxcuenta[j].Zona_idZonas*/) {
         aux = aux +1;
       }
     }
@@ -127,11 +128,11 @@ var i=0;
   var arrayDecisiones = [];
   var k = 0;
 
-  while (k < numeroperiodoauxcuenta.length) {
+  while (k < numeroperiodobalance.length) {
     //for (var i = 0; i < zonas.length; i++) {
 //      if (idszonasindes[k].Zona_idZonas == zonas[i].idZona) {
         var json = {
-          "numeroPeriodo":numeroperiodoauxcuenta[k].Balance_numeroPeriodo,
+          "numeroPeriodo":numeroperiodobalance[k].numeroPeriodo,
           "ventas":[]
         }
       arrayDecisiones.push(json);
@@ -141,7 +142,7 @@ var i=0;
   }
 
   var aux2 = 0;
-  for (var j = 0; j < arrayRepNumeroPeriodo.length; j++) {
+  for (var j = 0; j < numeroperiodobalance.length; j++) {
     for (var k = 0; k < (arrayRepNumeroPeriodo[j]); k++) {
       var json = {
         "idProducto":auxcuenta[aux2].Producto_idProducto,
