@@ -308,7 +308,7 @@ export class EstadoResultadosComponent implements OnInit {
   {"cara":""},
   {"cara":"Utilidad Bruta"},
   {"cara":""},
-  {"cara":"Costo de Distribución"},
+  {"cara":"Gasto de Distribución"},
   {"cara":"Otros Gastos"},
   {"cara":"Gastos de Administración"},
   {"cara":""},
@@ -416,7 +416,7 @@ export class EstadoResultadosComponent implements OnInit {
       {"cara":""},
       {"cara":"Utilidad Bruta"},
       {"cara":""},
-      {"cara":"Costo de Distribución"},
+      {"cara":"Gasto de Distribución"},
       {"cara":"Otros Gastos"},
       {"cara":"Gastos de Administración"},
       {"cara":""},
@@ -459,6 +459,9 @@ export class EstadoResultadosComponent implements OnInit {
     for(let item of this.auxiliarT){
       data[8]["total"] = item
       data[12]["total"] = (this.getUtilidadAntes() - item)
+    }
+    for(let aux of this.intereses){
+      data[14]["total"]=aux;
     }
     data[9]["total"] = this.getAdminTotal()
     for(let aux of this.intereses){

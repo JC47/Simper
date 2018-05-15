@@ -137,7 +137,9 @@ Promise.resolve().then(function () {
           id: usuario.idUsuario,
           name: usuario.user,
           regresion:usuario.regresion,
-          periodos:usuario.periodos
+          periodos:usuario.periodos,
+          minRescate:usuario.minRescate,
+          maxRescate:usuario.maxRescate
         }
       });
     }
@@ -304,7 +306,9 @@ function toJsonAdmin(rows){
       "user": rows[0].user,
       "proyectos":rows[0].proyectos,
       "periodos":rows[0].periodos,
-      "regresion":rows[0].regresion
+      "regresion":rows[0].regresion,
+      "minRescate":rows[0].minRescate,
+      "maxRescate":rows[0].maxRescate
     }
   return usuario;
 }

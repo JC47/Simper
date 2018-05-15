@@ -122,6 +122,8 @@ export class UsuariosComponent implements OnInit {
       'proyectos':new FormControl('',Validators.required),
       'periodos':new FormControl('',Validators.required),
       'regresion':new FormControl('',Validators.required),
+      'maxRescate':new FormControl('',Validators.required),
+      'minRescate':new FormControl('',Validators.required),
       'Administrador_idAdministrador': new FormControl(localStorage.getItem('idAdmin'))
     });
 
@@ -142,6 +144,8 @@ export class UsuariosComponent implements OnInit {
       'proyectos':new FormControl('',Validators.required),
       'periodos':new FormControl('',Validators.required),
       'regresion':new FormControl('',Validators.required),
+      'maxRescate':new FormControl('',Validators.required),
+      'minRescate':new FormControl('',Validators.required),
       'Administrador_idAdministrador': new FormControl(localStorage.getItem('idAdmin'))
 
     });
@@ -323,6 +327,8 @@ export class UsuariosComponent implements OnInit {
       this.editForm.controls['proyectos'].setValue(usuario.proyectos);
       this.editForm.controls['periodos'].setValue(usuario.periodos);
       this.editForm.controls['regresion'].setValue(usuario.regresion);
+      this.editForm.controls['maxRescate'].setValue(usuario.maxRescate);
+      this.editForm.controls['minRescate'].setValue(usuario.minRescate);
       this.editForm.controls['Administrador_idAdministrador'].setValue(usuario.Administrador_idAdministrador);
 
   }

@@ -144,7 +144,7 @@ export class PruebaComponent implements OnInit {
       let origen:any;
       let aplicacion:any
 
-      for(let balance of this.balanceFinal){
+      for(let balance of this.balanceInicial){
         anterior["cajaBancos"]=balance.cajaBancos;
         anterior['cuentasPorCobrar']=balance.cuentasPorCobrar
         anterior['IVAAcreditable']=balance.IVAAcreditable
@@ -174,7 +174,7 @@ export class PruebaComponent implements OnInit {
         anterior['total']=0
       }
 
-      for(let balance of this.balanceInicial){
+      for(let balance of this.balanceFinal){
         actual['cajaBancos']=balance.cajaBancos;
         actual['cuentasPorCobrar']=balance.cuentasPorCobrar
         actual['IVAAcreditable']=balance.IVAAcreditable
@@ -224,7 +224,7 @@ export class PruebaComponent implements OnInit {
       {"cara":"Amenos de un Año", "actual":"", "anterior":"", "aplicacion":"","origen":""},
       {"cara":"Caja Bancos", "actual": this.cp.transform(actual.cajaBancos,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.cajaBancos,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.cajaBancos,anterior.cajaBancos),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.cajaBancos,anterior.cajaBancos),'USD',true,'1.0-0')},
       {"cara":"Cuentas por Cobrar", "actual": this.cp.transform(actual.cuentasPorCobrar,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.cuentasPorCobrar,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.cuentasPorCobrar,anterior.cuentasPorCobrar),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.cuentasPorCobrar,anterior.cuentasPorCobrar),'USD',true,'1.0-0')},
-      {"cara":"IVA Acreditable", "actual": this.cp.transform(actual.IVAAcredita,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.IVAAcreditable,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.IVAAcreditable,anterior.IVAAcreditable),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.IVAAcreditable,anterior.IVAAcreditable),'USD',true,'1.0-0')},
+      {"cara":"IVA Acreditable", "actual": this.cp.transform(actual.IVAAcreditable,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.IVAAcreditable,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.IVAAcreditable,anterior.IVAAcreditable),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.IVAAcreditable,anterior.IVAAcreditable),'USD',true,'1.0-0')},
       {"cara":"Almacen de Articulo Terminado", "actual": this.cp.transform(actual.almacenArtTerm,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.almacenArtTerm,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.almacenArtTerm,anterior.almacenArtTerm),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.almacenArtTerm,anterior.almacenArtTerm),'USD',true,'1.0-0')},
       {"cara":"Almacen de Materiales", "actual": this.cp.transform(actual.almacenMateriales,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.almacenMateriales,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.almacenMateriales,anterior.almacenMateriales),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.almacenMateriales,anterior.almacenMateriales),'USD',true,'1.0-0')},
       {"cara":"A más de un año", "actual":"", "anterior":"", "aplicacion":"","origen":""},

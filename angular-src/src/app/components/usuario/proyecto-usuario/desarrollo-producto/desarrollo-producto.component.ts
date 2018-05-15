@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DesarrolloProductoService } from '../../../../services/desarrollo-producto.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import {ProyectosService} from '../../../../services/proyectos.service';
+import {ProductoService} from '../../../../services/producto.service';
 
 
 @Component({
@@ -10,10 +11,14 @@ import {ProyectosService} from '../../../../services/proyectos.service';
   styleUrls: ['./desarrollo-producto.component.css']
 })
 export class DesarrolloProductoComponent implements OnInit {
+  @ViewChild('modalCopia') public modalCopia:ModalDirective;
+
+
   productosDesarollados:any[] = [];
   productosEnDesarrollo:any[] = [];
   productosSinDesarrollar:any[] = [];
   productoDeleted:any;
+  productos:any;
   productoSelectedAdd:any={
     costoDes:null,
     costoUni:null,
@@ -40,11 +45,14 @@ export class DesarrolloProductoComponent implements OnInit {
   openLoadPago:boolean=false;
 
   constructor(private _desarrolloProducto:DesarrolloProductoService,
-  private _proyectoService:ProyectosService) {
+  private _proyectoService:ProyectosService,
+  private _productoService:ProductoService
+) {
     this._proyectoService.ocultaCierrePeriodo()
     this.productosSinDesarrollar = this._desarrolloProducto.returnProductosSinDesarrollar();
     this.productosEnDesarrollo = this._desarrolloProducto.returnProductosEnDesarrollo();
     this.productosDesarollados = this._desarrolloProducto.returnProductosDesarrollados();
+    this.productos=this._productoService.returnProductos();
     console.log("array en desarrolloo",this.productosDesarollados);
     setTimeout(()=>{
       if(this.productosSinDesarrollar.length==0){
@@ -149,7 +157,7 @@ export class DesarrolloProductoComponent implements OnInit {
 
 
   validaVi(){
-    if(localStorage.getItem('numeroPeriodo')==localStorage.getItem('numeroRPeriodos'))
+    if(localStorage.getItem('numeroPeriodo')==localStorage.getItem('numeroRPeriodos')&& !parseInt(localStorage.getItem('terminado')))
       return false
     else
       return true

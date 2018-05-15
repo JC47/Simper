@@ -309,14 +309,22 @@ export class OperacionService {
     let headers = new Headers({
       'Content-Type':'application/json'
     });
-    return this.http.get('operacion/integrales/'+localStorage.getItem('idProyecto'),{headers}).map(res => res.json());
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo'))
+    }
+    return this.http.post('operacion/integrales',x,{headers}).map(res => res.json());
   }
 
   getTendencias(){
     let headers = new Headers({
       'Content-Type':'application/json'
     });
-    return this.http.get('operacion/tendencias/'+localStorage.getItem('idProyecto'),{headers}).map(res => res.json());
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:parseInt(localStorage.getItem('numeroPeriodo'))
+    }
+    return this.http.post('operacion/tendencias',x,{headers}).map(res => res.json());
   }
 
   returnIntegrales(){
@@ -359,7 +367,7 @@ export class OperacionService {
       idProyecto:localStorage.getItem('idProyecto'),
       numeroPeriodo:localStorage.getItem('numeroPeriodo')
     }
-    return this.http.post('decisiones/getVentas/',x,{headers}).map(res => res.json());
+    return this.http.post('decisiones/getMaquinarias/',x,{headers}).map(res => res.json());
   }
 
   dproductos(){
@@ -370,7 +378,7 @@ export class OperacionService {
       idProyecto:localStorage.getItem('idProyecto'),
       numeroPeriodo:localStorage.getItem('numeroPeriodo')
     }
-    return this.http.post('decisiones/getVentas/',x,{headers}).map(res => res.json());
+    return this.http.post('decisiones/getDesarrollosP/',x,{headers}).map(res => res.json());
   }
 
   dzonas(){
@@ -381,7 +389,7 @@ export class OperacionService {
       idProyecto:localStorage.getItem('idProyecto'),
       numeroPeriodo:localStorage.getItem('numeroPeriodo')
     }
-    return this.http.post('decisiones/getVentas/',x,{headers}).map(res => res.json());
+    return this.http.post('decisiones/getDesarrollosZ/',x,{headers}).map(res => res.json());
   }
 
   creditos(){
@@ -392,7 +400,7 @@ export class OperacionService {
       idProyecto:localStorage.getItem('idProyecto'),
       numeroPeriodo:localStorage.getItem('numeroPeriodo')
     }
-    return this.http.post('decisiones/getVentas/',x,{headers}).map(res => res.json());
+    return this.http.post('decisiones/getCreditos/',x,{headers}).map(res => res.json());
   }
 
   returnVentas(){
@@ -407,7 +415,7 @@ export class OperacionService {
 
   returnMaquinas(){
     var x = [];
-    this.ventas().subscribe(data => {
+    this.maquinas().subscribe(data => {
       for(let key in data.datos){
         x.push(data.datos[key]);
       }
@@ -417,7 +425,7 @@ export class OperacionService {
 
   returnDProductos(){
     var x = [];
-    this.ventas().subscribe(data => {
+    this.dproductos().subscribe(data => {
       for(let key in data.datos){
         x.push(data.datos[key]);
       }
@@ -427,7 +435,7 @@ export class OperacionService {
 
   returnDZonas(){
     var x = [];
-    this.ventas().subscribe(data => {
+    this.dzonas().subscribe(data => {
       for(let key in data.datos){
         x.push(data.datos[key]);
       }
@@ -437,7 +445,7 @@ export class OperacionService {
 
   returnCreditos(){
     var x = [];
-    this.ventas().subscribe(data => {
+    this.creditos().subscribe(data => {
       for(let key in data.datos){
         x.push(data.datos[key]);
       }

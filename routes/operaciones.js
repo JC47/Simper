@@ -308,9 +308,10 @@ router.post('/equilibrio', (req,res,next) => {
   });
 });
 
-router.get('/integrales/:idProyecto', (req,res,next) => {
-  var idProyecto = req.params.idProyecto;
-  Promise.join(operacion.getACV(idProyecto),operacion.getBalances(idProyecto),operacion.getAC(idProyecto),operacion.getPedidos(idProyecto),operacion.getPT(idProyecto),
+router.post('/integrales', (req,res,next) => {
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+  Promise.join(operacion.getACV(idProyecto,numeroPeriodo),operacion.getBalances(idProyecto,numeroPeriodo),operacion.getAC(idProyecto,numeroPeriodo),operacion.getPedidos(idProyecto,numeroPeriodo),operacion.getPT(idProyecto,numeroPeriodo),
     function(axv,balances,ac,pedidos,pagos) {
     return getIntegral(axv,balances,ac,pedidos,pagos);
   }).then(function(rows) {
@@ -321,9 +322,10 @@ router.get('/integrales/:idProyecto', (req,res,next) => {
   })
 })
 
-router.get('/tendencias/:idProyecto', (req,res,next) => {
-  var idProyecto = req.params.idProyecto;
-  Promise.join(operacion.getACV(idProyecto),operacion.getBalances(idProyecto),operacion.getAC(idProyecto),operacion.getPedidos(idProyecto),operacion.getPT(idProyecto),
+router.post('/tendencias', (req,res,next) => {
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+  Promise.join(operacion.getACV(idProyecto,numeroPeriodo),operacion.getBalances(idProyecto,numeroPeriodo),operacion.getAC(idProyecto,numeroPeriodo),operacion.getPedidos(idProyecto,numeroPeriodo),operacion.getPT(idProyecto,numeroPeriodo),
     function(axv,balances,ac,pedidos,pagos) {
     return getTendencia(axv,balances,ac,pedidos,pagos);
   }).then(function(rows) {

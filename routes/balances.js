@@ -21,19 +21,6 @@ router.post('/register', (req, res, next) => {
   });
 });
 
-// router.post('/modify/:id', (req,res,next) => {
-//   Promise.resolve().then( function () {
-//     var id = req.params.id;
-//     var cambios = req.body;
-//     return balance.updateBalance(id,cambios);
-//   }).then( function () {
-//     res.json({success: true,msg:"Operacion exitosa"});
-//   }).catch(function (err) {
-//     console.log(err);
-//     res.json({success:false, msg:"Operacion incompleta"});
-//   });
-// });
-
 router.post('/', (req,res,next) => {
   Promise.resolve().then( function () {
     var idProyecto = req.body.idProyecto;
@@ -98,8 +85,8 @@ router.post('/final', (req, res, next) => {
               prestamo.getPagos(idProyecto,numeroPeriodoActual),
               auxiliar.getAuxiliares(numeroPeriodoActual,idProyecto),
               auxiliar.getAuxiliaresVenta(numeroPeriodoActual,idProyecto),
-              variable.getPTU(),variable.getISR(),
-              function(balanceBase,prestamos,pagos,auxCompleto,auxesVentas,ptu,isr){
+              variable.getPTU(),variable.getISR(),balance.getCS(idProyecto,numeroPeriodoActual),
+              function(balanceBase,prestamos,pagos,auxCompleto,auxesVentas,ptu,isr,cs){
 
     //ISR Y PTU
     var ISR_valor = isr[0].valor;
@@ -215,6 +202,13 @@ router.post('/final', (req, res, next) => {
 
     var cajaBancos = balanceBase[0].cajaBancos + (cantidadPrestada+cantidadPrestadaAmenosAnio-interesesAnticipo)- PPagar -PPagarAmenosAnio - interesesPago - ISRCajaBancos - balanceBase[0].PTUPorPagar - balanceBase[0].imptosPorPagar + balanceBase[0].cuentasPorCobrar - balanceBase[0].proveedores - balanceBase[0].IVAPorEnterar + cobroPorVentasCajaBancos - IVACajaBancos - comprasCajaBancos - maqYdesarrollos - salidas;
 
+    var excedente = 0;
+    if(balanceBase[0].capitalSocial != cs[0].capitalSocial){
+      excedente = cs[0].capitalSocial - balanceBase[0].capitalSocial;
+    }
+
+    cajaBancos += excedente;
+
     var x = {
       imptosPorPagar:imptsPorPagar,
       PTUPorPagar:PTU,
@@ -245,11 +239,13 @@ router.post('/final', (req, res, next) => {
 });
 
 router.post('/eliminarperiodos', (req,res,next) => {
+  var idProyecto = req.body.idProyecto;
+  var pm = req.body.periodoMenor;
+  var pMas = req.body.periodoMayor;
   Promise.resolve().then(function() {
-    var idProyecto = req.body.idProyecto;
-    var pm = req.body.periodoMenor;
-    var pMas = req.body.periodoMayor;
     return balance.deleteBalanceR(idProyecto,pm,pMas);
+  }).then(function () {
+    return balance.editTerminado(idProyecto);
   }).then(function() {
     res.json({success:true, msg:"Bien"});
   }).catch(function(err) {
@@ -305,13 +301,14 @@ router.post('/rescatecontable', (req,res,next) => {
   .then( function () {
     return balance.getBalanceById(idProyecto,numeroPeriodo);
   })
-  .then(function (balance) {
-     balance[0].cajaBancos+=monto;
-     balance[0].capitalSocial+=monto;
-   return balance;
-  })
-  .then(function (balance) {
-    return balance.updateBalance(numeroPeriodo,idProyecto,balance);
+  .then(function (balanceX) {
+    var n = balanceX[0].cajaBancos + montoRescate;
+    var n2 = balanceX[0].capitalSocial + montoRescate;
+    var x = {
+      cajaBancos:n,
+      capitalSocial:n2
+    }
+    balance.updateBalance(numeroPeriodo,idProyecto,x);
   })
   .then(function () {
     return res.json({success:true, msg:"Operacion completa"});

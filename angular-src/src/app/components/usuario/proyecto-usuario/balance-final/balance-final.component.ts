@@ -132,32 +132,33 @@ descargaCSV(){
     + cajaBancos + cuentasPorCobrar + IVAAcreditable + almacenArtTerm
     + almacenMateriales - depMaqEquipo - depEdif - depMueblesEnseres -depEqTrans;
 let total3=IVAPorEnterar + imptosPorPagar + proveedores + PTUPorPagar + prestamosMenosAnio
-
+let sumaObligaciones=prestamosMasAnio+capitalSocial+reservaLegal+utilidadAcum+utilidadEjercicio+IVAPorEnterar+imptosPorPagar+PTUPorPagar+proveedores+prestamosMenosAnio;
   let data:any=[
-    {cara1:"Posición Financiera Final del Periodo "+localStorage.getItem('numeroPeriodo'),valor1:"Proyecto "+actual },
-    {cara1:"A menos de un Año",             io:"", depAcum:"",  neto:"",    valor1:"",                                       cara2:"A menos de un año", valor2:""},
-    {cara1:"Caja Bancos",                   io:"", depAcum:"",  neto:"",    valor1:cajaBancos,                               cara2:"IVA por Enterar", valor2:IVAPorEnterar},
-    {cara1:"Cuentas por Cobrar",            io:"", depAcum:"",  neto:"",    valor1:cuentasPorCobrar,                         cara2:"Impuesto por Pagar", valor2:imptosPorPagar},
-    {cara1:"IVA Acreditable",               io:"", depAcum:"",  neto:"",    valor1:IVAAcreditable,                           cara2:"Proveedores", valor2:proveedores},
-    {cara1:"Almacen de Artículo Terminado", io:"", depAcum:"",  neto:"",    valor1:almacenArtTerm,                           cara2:"PTU por Pagar", valor2:PTUPorPagar},
-    {cara1:"Almacen de Materiales",         io:"", depAcum:"",  neto:"",    valor1:almacenMateriales,                        cara2:"Prestamos Bancarios", valor2:prestamosMenosAnio},
-    {cara1:"Total",                         io:"", depAcum:"",  neto:"",    valor1:total1,                                   cara2:"Total", valor2:total3},
-    {cara1:"A mas de un año",               io:"", depAcum:"",  neto:"",    valor1:"",                                       cara2:"A más de un Año", valor2:""},
-    {cara1:"",                              io:"", depAcum:"",  neto:"",    valor1:"",                                       cara2:"", valor2:""},
-    {cara1:"Terrenos",                      io:"", depAcum:"",  neto:"",    valor1:terreno,                                  cara2:"Prestamos Bancarios", valor2:prestamosMasAnio},
-    {cara1:"Edificios e Instalaciones",     io:"", depAcum:"",  neto:"",    valor1:edificios,                                cara2:"", valor2:""},
-    {cara1:"Maquinaria y Equipo",           io:"", depAcum:"",  neto:"",    valor1:maqEquipo,                                cara2:"", valor2:""},
-    {cara1:"Muebles y Enseres",             io:"", depAcum:"",  neto:"",    valor1:mueblesEnseres,                           cara2:"", valor2:""},
-    {cara1:"Equipo de Transporte",          io:"", depAcum:"",  neto:"",    valor1:equipoTrans,                              cara2:"", valor2:""},
-    {cara1:"Total",                         io:"", depAcum:"",  neto:"",    valor1:total2,                                   cara2:"Total", valor2:prestamosMasAnio},
-    {cara1:"De Aplicacion Difereida",       io:"", depAcum:"",  neto:"",    valor1:"",                                       cara2:"Con los Accionistas", valor2:""},
-    {cara1:"Pagos Hechos por Anticipado",   io:"", depAcum:"",  neto:"",    valor1:pagosAnticipado,                          cara2:"Capital Social", valor2:capitalSocial},
-    {cara1:"Gastos Por Amortizar",          io:"", depAcum:"",  neto:"",    valor1:gastosAmortizacion,                       cara2:"Reserva Legal", valor2:reservaLegal},
-    {cara1:"",                              io:"", depAcum:"",  neto:"",    valor1:"",                                       cara2:"Utilidad Acumulada", valor2:utilidadAcum},
-    {cara1:"",                              io:"", depAcum:"",  neto:"",    valor1:"",                                       cara2:"Utilidad del Ejercicio", valor2:utilidadEjercicio},
+    {cara1:"Posición Financiera Final del Periodo "+localStorage.getItem('numeroPeriodo')},
+    {cara1:"Proyecto "+actual },
+    {cara1:"A menos de un Año",             io:"", depAcum:"",      valor1:"",                                       cara2:"A menos de un año", valor2:""},
+    {cara1:"Caja Bancos",                   io:"", depAcum:"",      valor1:cajaBancos,                               cara2:"IVA por Enterar", valor2:IVAPorEnterar},
+    {cara1:"Cuentas por Cobrar",            io:"", depAcum:"",      valor1:cuentasPorCobrar,                         cara2:"Impuesto por Pagar", valor2:imptosPorPagar},
+    {cara1:"IVA Acreditable",               io:"", depAcum:"",      valor1:IVAAcreditable,                           cara2:"Proveedores", valor2:proveedores},
+    {cara1:"Almacen de Artículo Terminado", io:"", depAcum:"",      valor1:almacenArtTerm,                           cara2:"PTU por Pagar", valor2:PTUPorPagar},
+    {cara1:"Almacen de Materiales",         io:"", depAcum:"",      valor1:almacenMateriales,                        cara2:"Préstamos Bancarios", valor2:prestamosMenosAnio},
+    {cara1:"Total",                         io:"", depAcum:"",      valor1:total1,                                   cara2:"Total", valor2:total3},
+    {cara1:"A más de un año",               io:"", depAcum:"",      valor1:"",                                       cara2:"A más de un Año", valor2:""},
+    {cara1:"",                              io:"", depAcum:"",      valor1:"",                                       cara2:"", valor2:""},
+    {cara1:"Terrenos",                      io:terreno, depAcum:depTerreno,      valor1:terreno-depTerreno,                                  cara2:"Préstamos Bancarios", valor2:prestamosMasAnio},
+    {cara1:"Edificios e Instalaciones",     io:edificios, depAcum:depEdif,      valor1:edificios-depEdif,                                cara2:"", valor2:""},
+    {cara1:"Maquinaria y Equipo",           io:maqEquipo, depAcum:depMaqEquipo,      valor1:maqEquipo-depMaqEquipo,                                cara2:"", valor2:""},
+    {cara1:"Muebles y Enseres",             io:mueblesEnseres, depAcum:depMueblesEnseres,      valor1:mueblesEnseres-depMueblesEnseres,                           cara2:"", valor2:""},
+    {cara1:"Equipo de Transporte",          io:equipoTrans, depAcum:depEqTrans,      valor1:equipoTrans-depEqTrans,                              cara2:"", valor2:""},
+    {cara1:"Total",                         io:"", depAcum:"",      valor1:total2,                                   cara2:"Total", valor2:prestamosMasAnio},
+    {cara1:"De Aplicacion Difereida",       io:"", depAcum:"",      valor1:"",                                       cara2:"Con los Accionistas", valor2:""},
+    {cara1:"Pagos Hechos por Anticipado",   io:"", depAcum:"",      valor1:pagosAnticipado,                          cara2:"Capital Social", valor2:capitalSocial},
+    {cara1:"Gastos Por Amortizar",          io:"", depAcum:"",      valor1:gastosAmortizacion,                       cara2:"Reserva Legal", valor2:reservaLegal},
+    {cara1:"",                              io:"", depAcum:"",      valor1:"",                                       cara2:"Utilidad Acumulada", valor2:utilidadAcum},
+    {cara1:"",                              io:"", depAcum:"",      valor1:"",                                       cara2:"Utilidad del Ejercicio", valor2:utilidadEjercicio},
 
-    {cara1:"Total",                         io:"", depAcum:"",  neto:"",    valor1:pagosAnticipado + gastosAmortizacion,     cara2:"Total", valor2:""},
-    {cara1:"Suma de los Derechos",          io:"", depAcum:"",  neto:"",    valor1:sumaDerechos,                             cara2:"Suma de las Obligaciones", valor2:""}
+    {cara1:"Total",                         io:"", depAcum:"",      valor1:pagosAnticipado + gastosAmortizacion,     cara2:"Total", valor2:capitalSocial+utilidadAcum+reservaLegal+utilidadEjercicio},
+    {cara1:"Suma de los Derechos",          io:"", depAcum:"",      valor1:sumaDerechos,                             cara2:"Suma de las Obligaciones", valor2:sumaObligaciones}
   ]
 
     new Angular2Csv(data, 'Balance Final');
@@ -261,9 +262,11 @@ let total3=IVAPorEnterar + imptosPorPagar + proveedores + PTUPorPagar + prestamo
 
 
   //Activo
+  doc.setFontSize(8);
       doc.text(10, 40, 'A menos de un año');
       doc.line(10, 45, 120, 45);
           doc.setFontType("normal");
+     doc.setFontSize(7);
       doc.text(12, 48, 'Caja y Bancos');
       doc.line(10, mar+anchCell*1, 120, mar+anchCell*1);
       doc.text(120, 48, this.cp.transform(cajaBancos,'USD',true,'1.0-0') , null, null, 'right');
@@ -335,19 +338,18 @@ doc.text(95, 44+anchCell*11+21,  this.cp.transform(depEqTrans,'USD',true,'1.0-0'
 var rt = r+r1+r2+r3+r4;
 var rn = equipoTrans+mueblesEnseres+maqEquipo+edificios+terreno;
 var rdep = depEdif+depMaqEquipo+depTerreno+depMueblesEnseres+depEqTrans;
-doc.setFontSize(8);
 doc.setFontType("bold");
 doc.text(12, 44+anchCell*12+21, 'Total');
 doc.text(140, 44+anchCell*12+21,  this.cp.transform(rt,'USD',true,'1.0-0'), null, null, 'right');
 doc.text(70, 44+anchCell*12+21,  this.cp.transform(rn,'USD',true,'1.0-0'), null, null, 'right');
 doc.text(95, 44+anchCell*12+21,  this.cp.transform(rdep,'USD',true,'1.0-0'), null, null, 'right');
 
-doc.setFontSize(7);
+doc.setFontSize(8);
 
 doc.text(10, 130, 'De Aplicación Difereida');
 doc.line(10, 135, 120, 135);
 doc.setFontType("normal");
-
+doc.setFontSize(7);
 doc.text(12, 44+anchCell*12+46, 'Pagos Hechos por Anticipado');
 doc.line(10, mar+0+anchCell*12+46, 120, mar+anchCell*12+46);
 doc.text(120, 44+anchCell*12+46,  this.cp.transform(pagosAnticipado,'USD',true,'1.0-0'), null, null, 'right');
@@ -356,11 +358,11 @@ doc.text(12, 44+anchCell*13+46, 'Gastos por Amortizar');
 doc.line(10, mar+0+anchCell*13+46, 120, mar+anchCell*13+46);
 doc.text(120, 44+anchCell*13+46,  this.cp.transform(gastosAmortizacion,'USD',true,'1.0-0'), null, null, 'right');
 
-doc.setFontSize(8);
 doc.setFontType("bold");
 doc.text(12, 44+anchCell*14+46, 'Total');
-doc.text(140, 44+anchCell*14+46, this.cp.transform((total1+rt+pagosAnticipado+gastosAmortizacion),'USD',true,'1.0-0'), null, null, 'right');
+doc.text(140, 44+anchCell*14+46, this.cp.transform((pagosAnticipado+gastosAmortizacion),'USD',true,'1.0-0'), null, null, 'right');
 
+doc.setFontSize(8);
 doc.text(12, 44+anchCell*18+46, 'Suma de los Derechos');
 doc.text(140, 44+anchCell*18+46, this.cp.transform((total1+rt+pagosAnticipado+gastosAmortizacion),'USD',true,'1.0-0'), null, null, 'right');
 doc.line(120, mar+0+anchCell*18+46, 140, mar+anchCell*18+46);
@@ -369,7 +371,7 @@ doc.line(120, mar+0+anchCell*18+46, 140, mar+anchCell*18+46);
   doc.text(165, 40, 'A menos de un año');
 doc.line(165, 45, 235, 45);
 doc.setFontType("normal");
-
+doc.setFontSize(7);
 doc.text(167, 44+anchCell*1, 'IVA por enterar');
 doc.text(235, 44+anchCell*1,  this.cp.transform(IVAPorEnterar,'USD',true,'1.0-0'), null, null, 'right');
 doc.line(165, mar+anchCell*1, 235, mar+anchCell*1);
@@ -386,34 +388,33 @@ doc.text(167, 44+anchCell*4, 'PTU por Pagar');
 doc.text(235, 44+anchCell*4,  this.cp.transform(PTUPorPagar,'USD',true,'1.0-0'), null, null, 'right');
 doc.line(165, mar+anchCell*4, 235, mar+anchCell*4);
 
-doc.text(167, 44+anchCell*5, 'Prestamos Bancarios');
+doc.text(167, 44+anchCell*5, 'Préstamos Bancarios');
 doc.text(235, 44+anchCell*5,  this.cp.transform(prestamosMenosAnio,'USD',true,'1.0-0'), null, null, 'right');
 doc.line(165, mar+anchCell*5, 235, mar+anchCell*5);
 
 var t1 = IVAPorEnterar+imptosPorPagar+PTUPorPagar+proveedores+prestamosMenosAnio;
-doc.setFontSize(8);
+doc.setFontSize(7);
 doc.setFontType("bold");
 doc.text(167, 44+anchCell*6, 'Total');
 doc.text(255, 44+anchCell*6, this.cp.transform(t1,'USD',true,'1.0-0'), null, null, 'right');
 
-doc.setFontSize(7);
+doc.setFontSize(8);
 
 doc.text(165, 85, 'A más de un año');
 doc.setFontType("normal");
 doc.setFontSize(7);
 doc.line(165, 90, 235, 90);
 
-
-doc.text(167, 44+anchCell*7+21, 'Prestamos Bancarios');
+doc.setFontSize(7);
+doc.text(167, 44+anchCell*7+21, 'Préstamos Bancarios');
 doc.line(165, mar+0+anchCell*7+21, 235, mar+anchCell*7+21);
 doc.text(235, 44+anchCell*7+21,  this.cp.transform(prestamosMasAnio,'USD',true,'1.0-0'), null, null, 'right');
 
-
-doc.setFontSize(8);
 doc.setFontType("bold");
 doc.text(167, 44+anchCell*8+21, 'Total');
 doc.text(255, 44+anchCell*8+21,  this.cp.transform(prestamosMasAnio,'USD',true,'1.0-0'), null, null, 'right');
 
+doc.setFontSize(8);
 doc.text(165, 115, 'Con los Accionistas');
 doc.line(165, 122, 235, 122);
 
@@ -437,13 +438,15 @@ doc.text(235, 44+anchCell*11+45,  this.cp.transform(utilidadAcum,'USD',true,'1.0
 doc.text(167, 44+anchCell*12+45, 'Utilidad del Ejercicio');
 doc.line(165, mar+0+anchCell*12+45, 235, mar+anchCell*12+45);
 doc.text(235, 44+anchCell*12+45,  this.cp.transform(utilidadEjercicio,'USD',true,'1.0-0'), null, null, 'right');
-doc.setFontSize(8);
+
 doc.setFontType("bold");
 var tr = t1+prestamosMasAnio+capitalSocial+reservaLegal+utilidadAcum+utilidadEjercicio;
 doc.text(167, 44+anchCell*13+45, 'Total');
-doc.text(255, 44+anchCell*13+45,  this.cp.transform(tr,'USD',true,'1.0-0'), null, null, 'right');
+doc.text(255, 44+anchCell*13+45,  this.cp.transform(prestamosMasAnio+capitalSocial+reservaLegal+utilidadAcum+utilidadEjercicio,'USD',true,'1.0-0'), null, null, 'right');
 
-doc.text(165, 44+anchCell*18+46, 'Suma de los Derechos');
+
+doc.setFontSize(8);
+doc.text(165, 44+anchCell*18+46, 'Suma de las Obligaciones');
 doc.text(255, 44+anchCell*18+46,  this.cp.transform(tr,'USD',true,'1.0-0'), null, null, 'right');
 doc.line(235, mar+0+anchCell*18+46, 255, mar+anchCell*18+46);
 

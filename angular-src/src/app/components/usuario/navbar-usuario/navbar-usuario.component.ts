@@ -9,6 +9,7 @@ import {DesarrolloProductoService} from '../../../services/desarrollo-producto.s
 import {DesarrolloZonaService} from '../../../services/desarrollo-zona.service';
 import { UsuarioCreditoService} from '../../../services/usuario-credito.service';
 import {AuxiliarService} from '../../../services/auxiliar.service';
+import {FormControl, FormGroup, Validators,FormArray} from '@angular/forms';
 
 
 @Component({
@@ -20,6 +21,8 @@ export class NavbarUsuarioComponent implements OnInit {
   usuario:Object
   balance:any;
   balanceFinal:any;
+  rescMin:any;
+  rescMax:any;
   openConf:boolean=false;
   confProd:boolean=false;
   confZonas:boolean=false;
@@ -28,15 +31,21 @@ export class NavbarUsuarioComponent implements OnInit {
   openLoadDatos:boolean=false;
   alert:boolean=false;
   numeroPeriodoSelected:any;
+  openRescate:boolean=false;
   simTerm:boolean=false;
   opciones:boolean=false;
+  openFalloRescate:boolean=false;
   periodo:number;
   periodos = [];
+  creditosActivos = [];
   confZona:boolean=false;
   productosEnDesarrollo:any;
   zonasEnDesarrollo:any;
   confEditaPeriodos:boolean=false;
   openPeriodos:boolean=false;
+  rescateForm:FormGroup;
+
+
   constructor(private authService: AuthService, private router:Router,
     private _resultadosService:ResultadosService,
     private _proyectoService:ProyectosService,
@@ -45,6 +54,12 @@ export class NavbarUsuarioComponent implements OnInit {
     private _desarrolloZona:DesarrolloZonaService,
     private _desarrolloProducto:DesarrolloProductoService,
     private _creditoService:UsuarioCreditoService) {
+      this.rescMax=localStorage.getItem('maxRescate')
+      this.rescMin=localStorage.getItem('minRescate')
+
+      this.rescateForm=new FormGroup({
+        'cantidadRescate':new FormControl(),
+      });
     this._proyectoService.ocultaCierrePeriodo()
     this.asignarBalance(localStorage.getItem('idProyecto')); }
 
@@ -219,7 +234,7 @@ export class NavbarUsuarioComponent implements OnInit {
 
 
   muestraCerrarPeriodo(){
-    if(this._proyectoService.muestraPeriodo==true || localStorage.getItem('periodos')==localStorage.getItem('numeroPeriodo'))
+    if(this._proyectoService.muestraPeriodo==true || parseInt(localStorage.getItem('terminado')))
       return true
     else
       return false;
@@ -232,6 +247,8 @@ export class NavbarUsuarioComponent implements OnInit {
       this.confZona=false;
       this.confProd=false;
       console.log(this.productosEnDesarrollo)
+
+      this.creditosActivos=this._creditoService.arregloC();
 
       this._balanceService.getBalanceFinal().subscribe( data => {
         console.log("data side av",data)
@@ -253,15 +270,18 @@ export class NavbarUsuarioComponent implements OnInit {
 
         if(localStorage.getItem('periodos') == p){
           this.simTerm=true;
-
         }
         else{
           if(cajaBancosFinal < 0){
-            this.openConf=false;
-            this.alert=true;
+            if(this.creditosActivos.length > 1){
+              this.openRescate=true;
+            }
+            else{
+              this.openConf=false;
+              this.alert=true;
+            }
           }
           else{
-
             this._balanceService.getBalanceByIds(proyecto,p).subscribe(data => {
               var dep = data.datos[0].maqEquipo*.10;
               this._balanceService.crearBalance(proyecto,data.datos[0],periodoNuevo).subscribe(data => {
@@ -298,7 +318,6 @@ export class NavbarUsuarioComponent implements OnInit {
                 }
               });
             });
-
           }
         }
       }, 1000);
@@ -312,6 +331,27 @@ export class NavbarUsuarioComponent implements OnInit {
         return true
       else
         return false
+    }
+
+
+    rescate(resc){
+<<<<<<< HEAD
+      if(resc.cantidadRescate<=10000000 && resc.cantidadRescate>=5000000){
+        this.openRescate=false;
+        //Aqui va la función o el método del servicios que haga lo que tenga que hacer para aumentar el rescate
+      }else{
+        this.openRescate=false;
+        this.openFalloRescate=true
+      }
+      console.log(resc);
+=======
+      this._proyectoService.rescatarProyecto(resc.cantidadRescate).subscribe(data => {
+        if(data.success){
+          this.openRescate=false;
+          this.pasarPeriodo();
+        }
+      });
+>>>>>>> f6e3600d4e544c9d7db15162ce2b290bec084f30
     }
 
 
