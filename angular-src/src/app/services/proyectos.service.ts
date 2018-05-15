@@ -384,12 +384,24 @@ returnUsuarios(){
     return this.http.post('proyecto/register/'+localStorage.getItem('idUsuario'), proyecto, {headers}).map( res => res.json());
   }
 
-  agregaProyecto(proyecto:proyecto){
+  agregaProyecto(proyecto){
     this.addProyecto(proyecto).subscribe( data => {
       for(let key$ in data.datos){
           this.proyectos[key$] = data.datos[key$];
       }
     });
+  }
+
+  rescatarProyecto(cantidad){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    var x = {
+      montoRescate:cantidad,
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:localStorage.getItem('numeroPeriodo')
+    }
+    return this.http.post('balance/rescatecontable/', x, {headers}).map( res => res.json());
   }
 
 

@@ -270,12 +270,10 @@ export class NavbarUsuarioComponent implements OnInit {
 
         if(localStorage.getItem('periodos') == p){
           this.simTerm=true;
-
         }
         else{
           if(cajaBancosFinal < 0){
             if(this.creditosActivos.length > 1){
-              alert("Necesitas rescate");
               this.openRescate=true;
             }
             else{
@@ -337,6 +335,7 @@ export class NavbarUsuarioComponent implements OnInit {
 
 
     rescate(resc){
+<<<<<<< HEAD
       if(resc.cantidadRescate<=10000000 && resc.cantidadRescate>=5000000){
         this.openRescate=false;
         //Aqui va la función o el método del servicios que haga lo que tenga que hacer para aumentar el rescate
@@ -345,6 +344,14 @@ export class NavbarUsuarioComponent implements OnInit {
         this.openFalloRescate=true
       }
       console.log(resc);
+=======
+      this._proyectoService.rescatarProyecto(resc.cantidadRescate).subscribe(data => {
+        if(data.success){
+          this.openRescate=false;
+          this.pasarPeriodo();
+        }
+      });
+>>>>>>> f6e3600d4e544c9d7db15162ce2b290bec084f30
     }
 
 
