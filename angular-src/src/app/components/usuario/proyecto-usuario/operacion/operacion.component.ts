@@ -375,6 +375,8 @@ export class OperacionComponent implements OnInit {
 
 
   PDFpresupuestoGlobalComprasMP(){
+
+
     var doc= new jsPDF({
     orientation: 'landscape',
     unit: 'mm',

@@ -34,6 +34,7 @@ export class NavbarUsuarioComponent implements OnInit {
   openRescate:boolean=false;
   simTerm:boolean=false;
   opciones:boolean=false;
+  openFalloRescate:boolean=false;
   periodo:number;
   periodos = [];
   creditosActivos = [];
@@ -336,6 +337,13 @@ export class NavbarUsuarioComponent implements OnInit {
 
 
     rescate(resc){
+      if(resc.cantidadRescate<=10000000 && resc.cantidadRescate>=5000000){
+        this.openRescate=false;
+        //Aqui va la función o el método del servicios que haga lo que tenga que hacer para aumentar el rescate
+      }else{
+        this.openRescate=false;
+        this.openFalloRescate=true
+      }
       console.log(resc);
     }
 

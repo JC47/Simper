@@ -172,6 +172,7 @@ export class PuntoEquilibrioComponent implements OnInit {
              left:15},
         tableWidth: 185,
         headerStyles: {fillColor:0,halign:'center'},
+
         columnStyles: {
         cara: {halign:'left',columnWidth:65},
         cFijos:{halign:'right'},

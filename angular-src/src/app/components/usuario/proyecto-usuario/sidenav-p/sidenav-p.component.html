@@ -111,9 +111,9 @@
 <ngl-modal header="Reporte de Decisiones"  [(open)]="openDes" size="large" directional="false">
     <div body>
 
-      <div class="card" *ngFor="let venta of ventas;let i=index">
+      <div class="card" *ngFor="let prod of DProductos;let i=index">
         <div class="card-header">
-          <h4 class="col-12 text-center">Periodo {{venta.numeroPeriodo}}</h4>
+          <h4 class="col-12 text-center">Periodo {{i+1}}</h4>
         </div>
         <div class="card-block">
 
@@ -132,7 +132,7 @@
                               <th class="text-center">Unidades Vendidas</th>
                               <th class="text-center">Unidades Almacenadas</th>
                             </tr>
-                            <tr *ngFor="let v of venta.ventas">
+                            <tr *ngFor="let v of ventas[i].ventas">
                               <td class="text-center">{{getNameByIdProducto(v.idProducto)}}</td>
                               <td class="text-right">{{v.unidadesVendidas|number:'1.0-0'}}</td>
                               <td class="text-right">{{v.unidadesAlmacenadas|number:'1.0-0'}}</td>
@@ -197,3 +197,16 @@
 
     </ng-template>
   </ngl-modal>
+
+
+
+  <ngl-modal  [(open)]="openLoad" size="small" directional="false">
+    <div body>
+          <h2 class="col-12 text-center">Abriendo Reporte</h2>
+      <h6 class="col-12 text-center">Realizando Operación</h6>
+      <div style="position:relative; height:6.25rem; z-index:0;">
+        <ngl-spinner size="large" type="brand"></ngl-spinner>
+      </div>
+
+    </div>
+    </ngl-modal>

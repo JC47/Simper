@@ -106,6 +106,21 @@
 
 
 
+    <ngl-modal header="Alerta"  [(open)]="openFalloRescate" size="x-small" directional="false">
+        <div body>
+          <div class="col-12 text-center container">
+            <h3 style="margin-bottom:10px">Tu petición no está dentro de los límites permitidos, realiza una petición que esté dentro de los limites</h3>
+          </div>
+          </div>
+
+          <ng-template ngl-modal-footer>
+              <button type="submit" class="btn btn-secondary col-5 offset-1" (click)="openFalloRescate=false">Cancelar</button>
+            <button type="submit" class="btn btn-primary col-5"  (click)="openFalloRescate=false;openRescate=true">Aceptar</button>
+        </ng-template>
+      </ngl-modal>
+
+
+
 
   <ngl-modal header="Confirmación"  [(open)]="simTerm" size="x-small" directional="false">
       <div body>

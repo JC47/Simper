@@ -21,6 +21,7 @@ declare var jsPDF: any;
 export class SidenavPComponent implements OnInit {
 
   proyectos:any;
+  openLoad:boolean=false;
   proyectoActual:any;
   totalPer:number=1;
   ventas=[
@@ -140,24 +141,29 @@ export class SidenavPComponent implements OnInit {
   }
 
   verDecisiones(){
-
     this.ventas = this._operacionService.returnVentas();
     this.maquinas = this._operacionService.returnMaquinas();
     this.DProductos = this._operacionService.returnDProductos();
     this.DZonas = this._operacionService.returnDZonas();
     this.ceditos = this._operacionService.returnCreditos();
 
-    setTimeout(() => {
-      this.openDes=true;
-      this.totalPer=this.ventas.length*10;
-      console.log(this.totalPer)
-      }, 1500);
-
     console.log("Ventas",this.ventas);
     console.log("Maquinas",this.maquinas);
     console.log("Productos",this.DProductos);
     console.log("Zonas",this.DZonas);
     console.log("Creditos",this.ceditos);
+
+
+
+    this.openLoad=true;
+    setTimeout(() => {
+      this.openLoad=false;
+      this.openDes=true;
+      this.totalPer=this.ventas.length*10;
+      console.log(this.totalPer)
+      }, 1500);
+
+
   }
 
 
