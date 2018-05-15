@@ -203,7 +203,7 @@
 
             <tr>
               <td class="table-active"></td>
-              <td class="text-right table-active" *ngFor="let periodo of integrales">{{(periodo.cAdmin+periodo.oGastos+periodo.cDist)/periodo.ventasNetas|number:'1.0-0'}}%</td>
+              <td class="text-right table-active" *ngFor="let periodo of integrales">{{getSuma(periodo.cAdmin+periodo.oGastos+periodo.cDist,periodo.ventasNetas)|number:'1.0-0'}}%</td>
             </tr>
 
 

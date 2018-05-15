@@ -40,6 +40,15 @@ export class TendenciasComponent implements OnInit {
   ngOnInit() {
   }
 
+  getTotal(n1,n2){
+    if(n1 == 1){
+      return 100;
+    }
+    else{
+      return n2;
+    }
+  }
+
 
   getGraf1(){
     let data=[];

@@ -87,7 +87,7 @@ acomoda(integrales){
     sec=[];
     for(let periodo of this.integrales){
       sec.push(this.cp.transform(periodo.cDist+periodo.oGastos+periodo.cAdmin,'USD',true,'1.0-0')  )
-      sec.push(this.dc.transform((periodo.cDist+periodo.oGastos+periodo.cAdmin)/periodo.ventasNetas,'1.0-0')+"%")
+      sec.push(this.dc.transform(this.getSuma(periodo.cDist+periodo.oGastos+periodo.cAdmin,periodo.ventasNetas),'1.0-0')+"%")
     }
     arrelgo.push(sec);
 
@@ -139,6 +139,14 @@ acomoda(integrales){
 
 
     return arrelgo;
+}
+
+getSuma(n1,n2){
+  var r = 0;
+  if(n2 != 0){
+    r = (n1/n2)*100;
+  }
+  return r;
 }
 
 

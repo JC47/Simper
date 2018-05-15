@@ -837,7 +837,10 @@ function getTendencia(ventas,balances,cuentas,pedidos,pagos){
 }
 
 function getPorcentaje(n1,n2) {
-  var r = (n1/n2)*100;
+  var r = 0;
+  if(n2 != 0){
+    r = (n1/n2)*100;
+  }
   return r;
 }
 
