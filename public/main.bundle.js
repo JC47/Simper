@@ -6538,6 +6538,9 @@ module.exports = "<div class=\"row\" style=\"margin-bottom:20px\">\r\n  <div cla
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__ = __webpack_require__("../../../../../src/app/services/operacion.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_csv_Angular2_csv__ = __webpack_require__("../../../../angular2-csv/Angular2-csv.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_csv_Angular2_csv___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angular2_csv_Angular2_csv__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return IntegralesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -6552,17 +6555,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var IntegralesComponent = (function () {
-    function IntegralesComponent(_operacionService, dc, cp) {
+    function IntegralesComponent(_operacionService, dc, _proyectoService, cp) {
         var _this = this;
         this._operacionService = _operacionService;
         this.dc = dc;
+        this._proyectoService = _proyectoService;
         this.cp = cp;
         this.integrales = [];
         this.tabla = [];
         this.integrales = this._operacionService.returnIntegrales();
         console.log(this.integrales);
+        this.proyectos = this._proyectoService.returnUsuarios();
         setTimeout(function () {
+            _this.proyectoActual = _this.getNameById(localStorage.getItem('idProyecto'));
             _this.tabla = _this.acomoda(_this.integrales);
             console.log(_this.tabla);
         }, 2000);
@@ -6672,6 +6680,7 @@ var IntegralesComponent = (function () {
         return r;
     };
     IntegralesComponent.prototype.PDFintegrales = function () {
+        var proyecto = this.proyectoActual;
         var doc = new jsPDF({
             orientation: 'landscape',
             unit: 'mm',
@@ -6692,7 +6701,7 @@ var IntegralesComponent = (function () {
             addPageContent: function (data) {
                 doc.setFontSize(15);
                 doc.setFontType("bold");
-                doc.text(139.5, 15, 'Proyecto ', null, null, 'center');
+                doc.text(139.5, 15, 'Proyecto ' + proyecto, null, null, 'center');
                 doc.setFontSize(13);
                 doc.text(139.5, 23, 'Integrales', null, null, 'center');
                 doc.line(50, 27, 228, 27);
@@ -6758,6 +6767,7 @@ var IntegralesComponent = (function () {
         doc.save("Integrales.pdf");
     };
     IntegralesComponent.prototype.PDFintegrales2 = function () {
+        var proyecto = this.proyectoActual;
         var doc = new jsPDF({
             orientation: 'landscape',
             unit: 'mm',
@@ -6778,7 +6788,7 @@ var IntegralesComponent = (function () {
             addPageContent: function (data) {
                 doc.setFontSize(15);
                 doc.setFontType("bold");
-                doc.text(139.5, 15, 'Proyecto ', null, null, 'center');
+                doc.text(139.5, 15, 'Proyecto ' + proyecto, null, null, 'center');
                 doc.setFontSize(13);
                 doc.text(139.5, 23, 'Integrales', null, null, 'center');
                 doc.line(50, 27, 228, 27);
@@ -6825,6 +6835,106 @@ var IntegralesComponent = (function () {
         doc.autoTable(cols, rows, options);
         doc.save("Integrales Porcentajes.pdf");
     };
+    IntegralesComponent.prototype.CSVintegrales = function () {
+        var data = [
+            { cara: "Integrales del Proyecto " + this.proyectoActual },
+            { cara: "" },
+            { cara: "Ventas Netas" },
+            { cara: "Costo de Ventas" },
+            { cara: "Utilidad Bruta" },
+            { cara: "" },
+            { cara: "Costo de Distribución" },
+            { cara: "Otros Gastos" },
+            { cara: "Costo de Administración" },
+            { cara: "" },
+            { cara: "" },
+            { cara: "Utilidad en Operación" },
+            { cara: "Intereses" },
+            { cara: "Utilidad Antes de Impuestos" },
+            { cara: "ISR" },
+            { cara: "PTU" },
+            { cara: "Utilidad del Ejercicio" },
+        ];
+        for (var _i = 0, _a = this.integrales; _i < _a.length; _i++) {
+            var inte = _a[_i];
+            data[1]["periodo" + inte.numeroPeriodo] = "Periodo " + inte.numeroPeriodo;
+            data[1]["periodo" + inte.numeroPeriodo + "p"] = "";
+            data[2]["periodo" + inte.numeroPeriodo] = this.cp.transform(inte.ventasNetas, 'USD', true, '1.0-0');
+            data[2]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.pventasNetas, '1.0-0') + "%";
+            data[3]["periodo" + inte.numeroPeriodo] = this.cp.transform(inte.costoVentas, 'USD', true, '1.0-0');
+            data[3]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.pcostoVentas, '1.0-0') + "%";
+            data[4]["periodo" + inte.numeroPeriodo] = this.cp.transform(inte.utilidadBruta, 'USD', true, '1.0-0');
+            data[4]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.putilidadBruta, '1.0-0') + "%";
+            data[6]["periodo" + inte.numeroPeriodo] = this.cp.transform(inte.cDist, 'USD', true, '1.0-0');
+            data[6]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.pcDist, '1.0-0') + "%";
+            data[7]["periodo" + inte.numeroPeriodo] = this.cp.transform(inte.oGastos, 'USD', true, '1.0-0');
+            data[7]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.poGastos, '1.0-0') + "%";
+            data[8]["periodo" + inte.numeroPeriodo] = this.cp.transform(inte.cAdmin, 'USD', true, '1.0-0');
+            data[8]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.pcAdmin, '1.0-0') + "%";
+            data[9]["periodo" + inte.numeroPeriodo] = this.cp.transform(inte.cDist + inte.oGastos + inte.cAdmin, 'USD', true, '1.0-0');
+            data[9]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform((inte.cDist + inte.oGastos + inte.cAdmin) / inte.ventasNetas * 100, '1.0-0') + "%";
+            data[11]["periodo" + inte.numeroPeriodo] = this.cp.transform(inte.utilidadOperacion, 'USD', true, '1.0-0');
+            data[11]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.putilidadOperacion, '1.0-0') + "%";
+            data[12]["periodo" + inte.numeroPeriodo] = this.cp.transform(inte.intereses, 'USD', true, '1.0-0');
+            data[12]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.pintereses, '1.0-0') + "%";
+            data[13]["periodo" + inte.numeroPeriodo] = this.cp.transform(inte.utilidadAntesImptos, 'USD', true, '1.0-0');
+            data[13]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.putilidadAntesImptos, '1.0-0') + "%";
+            data[14]["periodo" + inte.numeroPeriodo] = this.cp.transform(inte.ISR, 'USD', true, '1.0-0');
+            data[14]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.pISR, '1.0-0') + "%";
+            data[15]["periodo" + inte.numeroPeriodo] = this.cp.transform(inte.PTU, 'USD', true, '1.0-0');
+            data[15]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.pPTU, '1.0-0') + "%";
+            data[16]["periodo" + inte.numeroPeriodo] = this.cp.transform(inte.utilidadEjercicio, 'USD', true, '1.0-0');
+            data[16]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.putilidadEjercicio, '1.0-0') + "%";
+        }
+        new __WEBPACK_IMPORTED_MODULE_3_angular2_csv_Angular2_csv__["Angular2Csv"](data, 'Integrales');
+    };
+    IntegralesComponent.prototype.CSVintegrales2 = function () {
+        var data = [
+            { cara: "Integrales del Proyecto " + this.proyectoActual },
+            { cara: "" },
+            { cara: "Ventas Netas" },
+            { cara: "Costo de Ventas" },
+            { cara: "Utilidad Bruta" },
+            { cara: "" },
+            { cara: "Costo de Distribución" },
+            { cara: "Otros Gastos" },
+            { cara: "Costo de Administración" },
+            { cara: "" },
+            { cara: "" },
+            { cara: "Utilidad en Operación" },
+            { cara: "Intereses" },
+            { cara: "Utilidad Antes de Impuestos" },
+            { cara: "ISR" },
+            { cara: "PTU" },
+            { cara: "Utilidad del Ejercicio" },
+        ];
+        for (var _i = 0, _a = this.integrales; _i < _a.length; _i++) {
+            var inte = _a[_i];
+            data[1]["periodo" + inte.numeroPeriodo + "p"] = "Periodo " + inte.numeroPeriodo;
+            data[2]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.pventasNetas, '1.0-0') + "%";
+            data[3]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.pcostoVentas, '1.0-0') + "%";
+            data[4]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.putilidadBruta, '1.0-0') + "%";
+            data[6]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.pcDist, '1.0-0') + "%";
+            data[7]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.poGastos, '1.0-0') + "%";
+            data[8]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.pcAdmin, '1.0-0') + "%";
+            data[9]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform((inte.cDist + inte.oGastos + inte.cAdmin) / inte.ventasNetas * 100, '1.0-0') + "%";
+            data[11]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.putilidadOperacion, '1.0-0') + "%";
+            data[12]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.pintereses, '1.0-0') + "%";
+            data[13]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.putilidadAntesImptos, '1.0-0') + "%";
+            data[14]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.pISR, '1.0-0') + "%";
+            data[15]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.pPTU, '1.0-0') + "%";
+            data[16]["periodo" + inte.numeroPeriodo + "p"] = this.dc.transform(inte.putilidadEjercicio, '1.0-0') + "%";
+        }
+        new __WEBPACK_IMPORTED_MODULE_3_angular2_csv_Angular2_csv__["Angular2Csv"](data, 'Integrales2');
+    };
+    IntegralesComponent.prototype.getNameById = function (idProyecto) {
+        for (var _i = 0, _a = this.proyectos; _i < _a.length; _i++) {
+            var proyecto = _a[_i];
+            if (proyecto.idProyecto == idProyecto)
+                return proyecto.nombreProyecto;
+        }
+        return "id NO encontrado";
+    };
     return IntegralesComponent;
 }());
 IntegralesComponent = __decorate([
@@ -6832,10 +6942,10 @@ IntegralesComponent = __decorate([
         selector: 'app-integrales',
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/integrales/integrales.component.html")
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["DecimalPipe"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common__["DecimalPipe"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["CurrencyPipe"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common__["CurrencyPipe"]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["DecimalPipe"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common__["DecimalPipe"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["CurrencyPipe"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common__["CurrencyPipe"]) === "function" && _d || Object])
 ], IntegralesComponent);
 
-var _a, _b, _c;
+var _a, _b, _c, _d;
 //# sourceMappingURL=integrales.component.js.map
 
 /***/ }),
@@ -8938,7 +9048,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div style=\"height:100%\">\r\n\r\n  <div class=\"nav-side-menu\">\r\n      <div class=\"brand\">\r\n        <div class=\"row\" >\r\n          <div class=\"col-12 text-center\">\r\n            <h6 style=\"margin-top:20px\">Proyecto {{proyectoActual}}</h6>\r\n          </div>\r\n        </div>\r\n\r\n\r\n\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-12 text-center\" style=\"margin-bottom:5px\">\r\n          <button type=\"button\" class=\"btn btn-info\" style=\"font-size:10px\" (click)=\"verDecisiones()\">Decisiones</button>\r\n        </div>\r\n\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-12 text-center\">\r\n          <button type=\"button\" class=\"btn btn-danger\" style=\"font-size:10px\" (click)=\"verProyectos()\">Salir de Proyecto</button>\r\n        </div>\r\n      </div>\r\n      </div>\r\n      <i class=\"fa fa-bars fa-2x toggle-btn\" data-toggle=\"collapse\" data-target=\"#menu-content\"></i>\r\n\r\n          <div class=\"menu-list\">\r\n              <ul id=\"menu-content\" class=\"menu-content collapse out\">\r\n\r\n                  <li [routerLink]=\"['home']\" routerLinkActive=\"active\">\r\n                    <a >\r\n                    <i class=\"fa fa-tachometer fa-lg\"></i> Dash Board\r\n                    </a>\r\n                  </li>\r\n\r\n                  <li [routerLink]=\"['demandaPotencial']\" routerLinkActive=\"active\">\r\n                    <a >\r\n                    <i class=\"fa fa-area-chart fa-lg\"></i> Demanda potencial\r\n                    </a>\r\n                  </li>\r\n\r\n                  <li [routerLink]=\"['produccion']\" routerLinkActive=\"active\">\r\n                     <a>\r\n                      <i class=\"fa fa-pie-chart fa-lg\"></i>  Decisiones de Producción y Venta\r\n                     </a>\r\n                  </li>\r\n\r\n                  <li data-toggle=\"collapse\" data-target=\"#service\" class=\"collapsed\">\r\n                    <a href=\"#\"><i class=\"fa fa-line-chart fa-lg\"></i> Decisiones de Crecimiento<span class=\"arrow\"></span></a>\r\n                  </li>\r\n                  <ul class=\"sub-menu collapse\" id=\"service\">\r\n\r\n                    <li [routerLink]=\"['compraMaquinaria']\" routerLinkActive=\"active\">\r\n                       <a >\r\n                       <i class=\"fa fa-cogs fa-lg\"></i> Compra de Maquinaria\r\n                       </a>\r\n                     </li>\r\n                     <li [routerLink]=\"['desarrolloProducto']\" routerLinkActive=\"active\">\r\n                        <a >\r\n                        <i class=\"fa fa-flask fa-lg\"></i> Desarrollo de Productos\r\n                        </a>\r\n                      </li>\r\n                     <li [routerLink]=\"['desarrolloMercado']\" routerLinkActive=\"active\">\r\n                        <a >\r\n                        <i class=\"fa fa-map-marker fa-lg\"></i> Desarrollo de mercados\r\n                        </a>\r\n                      </li>\r\n                  </ul>\r\n\r\n                  <li [routerLink]=\"['financiamiento']\" routerLinkActive=\"active\">\r\n                     <a>\r\n                      <i class=\"fa fa-credit-card fa-lg\"></i>  Decisiones de Finaciamiento\r\n                     </a>\r\n                  </li>\r\n\r\n                  <li data-toggle=\"collapse\" data-target=\"#service2\" class=\"collapsed\">\r\n                    <a href=\"#\"><i class=\"fa fa-list-alt fa-lg\"></i> Resultados del periodo<span class=\"arrow\"></span></a>\r\n                  </li>\r\n                  <ul class=\"sub-menu collapse\" id=\"service2\">\r\n                    <li [routerLink]=\"['balance_inicial']\" routerLinkActive=\"active\">Balance Inicial</li>\r\n                    <li [routerLink]=\"['operacion']\" routerLinkActive=\"active\">Resultados Operacion</li>\r\n                    <li [routerLink]=\"['estadoResultados']\" routerLinkActive=\"active\">Estado de Resultados</li>\r\n                    <li [routerLink]=\"['balance_final']\" routerLinkActive=\"active\">Balance Final</li>\r\n                    <li [routerLink]=\"['flujo']\" routerLinkActive=\"active\">Flujo de Efectivo</li>\r\n                  </ul>\r\n\r\n                  <li data-toggle=\"collapse\" data-target=\"#service3\" class=\"collapsed\">\r\n                    <a href=\"#\"><i class=\"fa fa-flag-checkered fa-lg\"></i> Analisis Final<span class=\"arrow\"></span></a>\r\n                  </li>\r\n                  <ul class=\"sub-menu collapse\" id=\"service3\">\r\n                    <li [routerLink]=\"['comparativa']\" routerLinkActive=\"active\">Posición Comparativa</li>\r\n                    <li [routerLink]=\"['analisis']\" routerLinkActive=\"active\">Analisis de Rentabilidad</li>\r\n                    <li [routerLink]=\"['puntoEquilibrio']\" routerLinkActive=\"active\">Punto de Equilibrio</li>\r\n                    <li [routerLink]=\"['integrales']\" routerLinkActive=\"active\">Integrales</li>\r\n                    <li [routerLink]=\"['tendencias']\" routerLinkActive=\"active\">Tendencias</li>\r\n                  </ul>\r\n              </ul>\r\n       </div>\r\n  </div>\r\n\r\n\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n<ngl-modal header=\"Reporte de Decisiones\"  [(open)]=\"openDes\" size=\"large\" directional=\"false\">\r\n    <div body>\r\n\r\n      <div class=\"card\" *ngFor=\"let prod of DProductos;let i=index\">\r\n        <div class=\"card-header\">\r\n          <h4 class=\"col-12 text-center\">Periodo {{i+1}}</h4>\r\n        </div>\r\n        <div class=\"card-block\">\r\n\r\n                    <div class=\"row\">\r\n                      <h5 class=\"col-4 text-center\">Venta de Productos</h5>\r\n                      <h5 class=\"col-3 text-center\">Maquinaria Adquirida</h5>\r\n                      <h5 class=\"col-5 text-center\">Desarrollo  de Productos y Zonas</h5>\r\n                    </div>\r\n\r\n\r\n                    <div class=\"row\">\r\n                      <div class=\"col-4\">\r\n                        <table class=\"table table-hover\">\r\n                            <tr>\r\n                              <th class=\"text-center\">Producto</th>\r\n                              <th class=\"text-center\">Unidades Vendidas</th>\r\n                              <th class=\"text-center\">Unidades Almacenadas</th>\r\n                            </tr>\r\n                            <tr *ngFor=\"let v of ventas[i].ventas\">\r\n                              <td class=\"text-center\">{{getNameByIdProducto(v.idProducto)}}</td>\r\n                              <td class=\"text-right\">{{v.unidadesVendidas|number:'1.0-0'}}</td>\r\n                              <td class=\"text-right\">{{v.unidadesAlmacenadas|number:'1.0-0'}}</td>\r\n                            </tr>\r\n                        </table>\r\n                      </div>\r\n\r\n                        <div class=\"col-3\">\r\n                          <table class=\"table table-hover\">\r\n                            <tr>\r\n                              <th class=\"text-center\">Maquinaria</th>\r\n                              <th class=\"text-center\">Cantidad</th>\r\n                            </tr>\r\n\r\n                            <tr *ngFor=\"let maquina of maquinas[i].maquinarias\">\r\n                              <td class=\"text-center\">{{getNameByIdMaquinaria(maquina.idMaquinaria)}}</td>\r\n                              <td class=\"text-right\">{{maquina.Cantidad}}</td>\r\n                            </tr>\r\n                          </table>\r\n                        </div>\r\n\r\n\r\n\r\n                        <div class=\"col-2\">\r\n                          <table class=\"table table-hover\">\r\n                            <tr>\r\n                              <th class=\"text-center\">Productos Desarrollados</th>\r\n                            </tr>\r\n                            <tr *ngFor=\"let producto of this.DProductos[i].productos\">\r\n                              <td class=\"text-center\">{{getNameByIdProducto(producto.idProducto)}}</td>\r\n                            </tr>\r\n                          </table>\r\n                        </div>\r\n\r\n\r\n\r\n                        <div class=\"col-3\">\r\n                          <table class=\"table table-hover\">\r\n                            <tr>\r\n                              <th class=\"text-center\">Producto</th>\r\n                              <th class=\"text-center\">Zona de Mercado Desarrollada</th>\r\n                            </tr>\r\n\r\n                            <tr *ngFor=\"let producto of this.DZonas[i].productos\">\r\n                              <td class=\"text-center\">{{getNameByIdProducto(producto.idProducto)}}</td>\r\n                              <td class=\"text-center\">{{getNameByIdZona(producto.idZona)}}</td>\r\n                            </tr>\r\n                          </table>\r\n                        </div>\r\n\r\n                    </div>\r\n                </div>\r\n\r\n\r\n        </div>\r\n      </div>\r\n\r\n    <ng-template ngl-modal-footer>\r\n      <span>Exportar:</span>\r\n      <button type=\"button\" (click)=\"CSVdecisiones()\" class=\"btn btn-success\">CSV</button>\r\n      <button type=\"button\" (click)=\"PDFdecisiones()\" class=\"btn btn-danger\">PDF</button>\r\n\r\n    </ng-template>\r\n  </ngl-modal>\r\n\r\n\r\n\r\n  <ngl-modal  [(open)]=\"openLoad\" size=\"small\" directional=\"false\">\r\n    <div body>\r\n          <h2 class=\"col-12 text-center\">Abriendo Reporte</h2>\r\n      <h6 class=\"col-12 text-center\">Realizando Operación</h6>\r\n      <div style=\"position:relative; height:6.25rem; z-index:0;\">\r\n        <ngl-spinner size=\"large\" type=\"brand\"></ngl-spinner>\r\n      </div>\r\n\r\n    </div>\r\n    </ngl-modal>\r\n"
+module.exports = "\r\n<div style=\"height:100%\">\r\n\r\n  <div class=\"nav-side-menu\">\r\n      <div class=\"brand\">\r\n        <div class=\"row\" >\r\n          <div class=\"col-12 text-center\">\r\n            <h6 style=\"margin-top:20px\">Proyecto {{proyectoActual}}</h6>\r\n          </div>\r\n        </div>\r\n\r\n\r\n\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-12 text-center\" style=\"margin-bottom:5px\">\r\n          <button type=\"button\" class=\"btn btn-info\" style=\"font-size:10px\" (click)=\"verDecisiones()\">Decisiones</button>\r\n        </div>\r\n\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-12 text-center\">\r\n          <button type=\"button\" class=\"btn btn-danger\" style=\"font-size:10px\" (click)=\"verProyectos()\">Salir de Proyecto</button>\r\n        </div>\r\n      </div>\r\n      </div>\r\n      <i class=\"fa fa-bars fa-2x toggle-btn\" data-toggle=\"collapse\" data-target=\"#menu-content\"></i>\r\n\r\n          <div class=\"menu-list\">\r\n              <ul id=\"menu-content\" class=\"menu-content collapse out\">\r\n\r\n                  <li [routerLink]=\"['home']\" routerLinkActive=\"active\">\r\n                    <a >\r\n                    <i class=\"fa fa-tachometer fa-lg\"></i> Dash Board\r\n                    </a>\r\n                  </li>\r\n\r\n                  <li [routerLink]=\"['demandaPotencial']\" routerLinkActive=\"active\">\r\n                    <a >\r\n                    <i class=\"fa fa-area-chart fa-lg\"></i> Demanda potencial\r\n                    </a>\r\n                  </li>\r\n\r\n                  <li [routerLink]=\"['produccion']\" routerLinkActive=\"active\">\r\n                     <a>\r\n                      <i class=\"fa fa-pie-chart fa-lg\"></i>  Decisiones de Producción y Venta\r\n                     </a>\r\n                  </li>\r\n\r\n                  <li data-toggle=\"collapse\" data-target=\"#service\" class=\"collapsed\">\r\n                    <a href=\"#\"><i class=\"fa fa-line-chart fa-lg\"></i> Decisiones de Crecimiento<span class=\"arrow\"></span></a>\r\n                  </li>\r\n                  <ul class=\"sub-menu collapse\" id=\"service\">\r\n\r\n                    <li [routerLink]=\"['compraMaquinaria']\" routerLinkActive=\"active\">\r\n                       <a >\r\n                       <i class=\"fa fa-cogs fa-lg\"></i> Compra de Maquinaria\r\n                       </a>\r\n                     </li>\r\n                     <li [routerLink]=\"['desarrolloProducto']\" routerLinkActive=\"active\">\r\n                        <a >\r\n                        <i class=\"fa fa-flask fa-lg\"></i> Desarrollo de Productos\r\n                        </a>\r\n                      </li>\r\n                     <li [routerLink]=\"['desarrolloMercado']\" routerLinkActive=\"active\">\r\n                        <a >\r\n                        <i class=\"fa fa-map-marker fa-lg\"></i> Desarrollo de mercados\r\n                        </a>\r\n                      </li>\r\n                  </ul>\r\n\r\n                  <li [routerLink]=\"['financiamiento']\" routerLinkActive=\"active\">\r\n                     <a>\r\n                      <i class=\"fa fa-credit-card fa-lg\"></i>  Decisiones de Finaciamiento\r\n                     </a>\r\n                  </li>\r\n\r\n                  <li data-toggle=\"collapse\" data-target=\"#service2\" class=\"collapsed\">\r\n                    <a href=\"#\"><i class=\"fa fa-list-alt fa-lg\"></i> Resultados del periodo<span class=\"arrow\"></span></a>\r\n                  </li>\r\n                  <ul class=\"sub-menu collapse\" id=\"service2\">\r\n                    <li [routerLink]=\"['balance_inicial']\" routerLinkActive=\"active\">Balance Inicial</li>\r\n                    <li [routerLink]=\"['operacion']\" routerLinkActive=\"active\">Resultados Operacion</li>\r\n                    <li [routerLink]=\"['estadoResultados']\" routerLinkActive=\"active\">Estado de Resultados</li>\r\n                    <li [routerLink]=\"['balance_final']\" routerLinkActive=\"active\">Balance Final</li>\r\n                    <li [routerLink]=\"['flujo']\" routerLinkActive=\"active\">Flujo de Efectivo</li>\r\n                  </ul>\r\n\r\n                  <li data-toggle=\"collapse\" data-target=\"#service3\" class=\"collapsed\">\r\n                    <a href=\"#\"><i class=\"fa fa-flag-checkered fa-lg\"></i> Analisis Final<span class=\"arrow\"></span></a>\r\n                  </li>\r\n                  <ul class=\"sub-menu collapse\" id=\"service3\">\r\n                    <li [routerLink]=\"['comparativa']\" routerLinkActive=\"active\">Posición Comparativa</li>\r\n                    <li [routerLink]=\"['analisis']\" routerLinkActive=\"active\">Analisis de Rentabilidad</li>\r\n                    <li [routerLink]=\"['puntoEquilibrio']\" routerLinkActive=\"active\">Punto de Equilibrio</li>\r\n                    <li [routerLink]=\"['integrales']\" routerLinkActive=\"active\">Integrales</li>\r\n                    <li [routerLink]=\"['tendencias']\" routerLinkActive=\"active\">Tendencias</li>\r\n                  </ul>\r\n              </ul>\r\n       </div>\r\n  </div>\r\n\r\n\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n<ngl-modal header=\"Reporte de Decisiones\"  [(open)]=\"openDes\" size=\"large\" directional=\"false\">\r\n    <div body>\r\n\r\n      <div class=\"card\" *ngFor=\"let prod of DProductos;let i=index\">\r\n        <div class=\"card-header\">\r\n          <h4 class=\"col-12 text-center\">Periodo {{i+1}}</h4>\r\n        </div>\r\n        <div class=\"card-block\">\r\n\r\n                    <div class=\"row\">\r\n                      <h5 class=\"col-3 text-center\">Venta de Productos(unidades)</h5>\r\n                      <h5 class=\"col-2 text-center\">Maquinaria Adquirida</h5>\r\n                      <h5 class=\"col-5 text-center\">Desarrollo  de Productos y Zonas</h5>\r\n                      <h5 class=\"col-2 text-center\">Créditos Pedidios</h5>\r\n                    </div>\r\n\r\n\r\n                    <div class=\"row\">\r\n                      <div class=\"col-3\">\r\n                        <table class=\"table table-hover\">\r\n                            <tr>\r\n                              <th class=\"text-center\">Producto</th>\r\n                              <th class=\"text-center\">Vendidas</th>\r\n                              <th class=\"text-center\">Almacenadas</th>\r\n                            </tr>\r\n                            <tr *ngFor=\"let v of ventas[i].ventas\">\r\n                              <td class=\"text-center\">{{getNameByIdProducto(v.idProducto)}}</td>\r\n                              <td class=\"text-right\">{{v.unidadesVendidas|number:'1.0-0'}}</td>\r\n                              <td class=\"text-right\">{{v.unidadesAlmacenadas|number:'1.0-0'}}</td>\r\n                            </tr>\r\n                        </table>\r\n                      </div>\r\n\r\n                        <div class=\"col-2\">\r\n                          <table class=\"table table-hover\">\r\n                            <tr>\r\n                              <th class=\"text-center\">Maquinaria</th>\r\n                              <th class=\"text-center\">Cantidad</th>\r\n                            </tr>\r\n\r\n                            <tr *ngFor=\"let maquina of maquinas[i].maquinarias\">\r\n                              <td class=\"text-center\">{{getNameByIdMaquinaria(maquina.idMaquinaria)}}</td>\r\n                              <td class=\"text-right\">{{maquina.Cantidad}}</td>\r\n                            </tr>\r\n                          </table>\r\n                        </div>\r\n\r\n\r\n\r\n                        <div class=\"col-2\">\r\n                          <table class=\"table table-hover\">\r\n                            <tr>\r\n                              <th class=\"text-center\">Productos Desarrollados</th>\r\n                            </tr>\r\n                            <tr *ngFor=\"let producto of this.DProductos[i].productos\">\r\n                              <td class=\"text-center\">{{getNameByIdProducto(producto.idProducto)}}</td>\r\n                            </tr>\r\n                          </table>\r\n                        </div>\r\n\r\n\r\n\r\n                        <div class=\"col-3\">\r\n                          <table class=\"table table-hover\">\r\n                            <tr>\r\n                              <th class=\"text-center\">Producto</th>\r\n                              <th class=\"text-center\">Zona de Mercado Desarrollada</th>\r\n                            </tr>\r\n\r\n                            <tr *ngFor=\"let producto of this.DZonas[i].productos\">\r\n                              <td class=\"text-center\">{{getNameByIdProducto(producto.idProducto)}}</td>\r\n                              <td class=\"text-center\">{{getNameByIdZona(producto.idZona)}}</td>\r\n                            </tr>\r\n                          </table>\r\n                        </div>\r\n\r\n                        <div class=\"col-2\">\r\n                          <table class=\"table table-hover\">\r\n                            <tr>\r\n                              <th class=\"text-center\">Crédito</th>\r\n                              <th class=\"text-center\">Monto</th>\r\n                            </tr>\r\n\r\n                            <tr *ngFor=\"let credito of creditos[i].creditos\">\r\n                              <td class=\"text-center\">{{credito.nombreCredito}}</td>\r\n                              <td class=\"text-right\">{{credito.monto|currency:'USD':true:'1.0-0'}}</td>\r\n                            </tr>\r\n                          </table>\r\n                        </div>\r\n\r\n\r\n                    </div>\r\n                </div>\r\n\r\n\r\n        </div>\r\n      </div>\r\n\r\n    <ng-template ngl-modal-footer>\r\n      <span>Exportar:</span>\r\n      <button type=\"button\" (click)=\"CSVdecisiones()\" class=\"btn btn-success\">CSV</button>\r\n      <button type=\"button\" (click)=\"PDFdecisiones()\" class=\"btn btn-danger\">PDF</button>\r\n\r\n    </ng-template>\r\n  </ngl-modal>\r\n\r\n\r\n\r\n  <ngl-modal  [(open)]=\"openLoad\" size=\"small\" directional=\"false\">\r\n    <div body>\r\n          <h2 class=\"col-12 text-center\">Abriendo Reporte</h2>\r\n      <h6 class=\"col-12 text-center\">Realizando Operación</h6>\r\n      <div style=\"position:relative; height:6.25rem; z-index:0;\">\r\n        <ngl-spinner size=\"large\" type=\"brand\"></ngl-spinner>\r\n      </div>\r\n\r\n    </div>\r\n    </ngl-modal>\r\n"
 
 /***/ }),
 
@@ -8975,14 +9085,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var SidenavPComponent = (function () {
-    function SidenavPComponent(router, _productoService, _operacionService, _proyectosS, _maquinariaService, dc, _zonasService) {
+    function SidenavPComponent(router, _productoService, _operacionService, _proyectosS, _maquinariaService, dc, cp, _zonasService) {
         this.router = router;
         this._productoService = _productoService;
         this._operacionService = _operacionService;
         this._proyectosS = _proyectosS;
         this._maquinariaService = _maquinariaService;
         this.dc = dc;
+        this.cp = cp;
         this._zonasService = _zonasService;
         this.openLoad = false;
         this.totalPer = 1;
@@ -9028,6 +9140,13 @@ var SidenavPComponent = (function () {
         this.ceditos = [];
         this.openDes = false;
         this.zonas = [];
+        this.creditos = [{
+                numeroPeriodo: null,
+                creditos: [
+                    { nombreCredito: null,
+                        monto: null }
+                ]
+            }];
         this.proyectoActual = localStorage.getItem('nombreProyecto');
         this.productos = this._productoService.returnProductos();
         this.maquinaria = this._maquinariaService.returnMaquinas();
@@ -9092,6 +9211,8 @@ var SidenavPComponent = (function () {
         console.log("Creditos", this.ceditos);
         this.openLoad = true;
         setTimeout(function () {
+            _this.creditos = _this.acomodaCredito();
+            console.log(_this.creditos);
             _this.openLoad = false;
             _this.openDes = true;
             _this.totalPer = _this.ventas.length * 10;
@@ -9102,8 +9223,8 @@ var SidenavPComponent = (function () {
         var rowVentas = [];
         var colsVentas = [
             { title: "Producto", dataKey: "producto" },
-            { title: "Unidades Vendidas", dataKey: "uVendidas" },
-            { title: "Unidades Almacenadas", dataKey: "uAlmacenadas" }
+            { title: "Vendidas", dataKey: "uVendidas" },
+            { title: "Almacenadas", dataKey: "uAlmacenadas" }
         ];
         var colsMaquinaria = [
             { title: "Maquinaria", dataKey: "maquinaria" },
@@ -9115,6 +9236,10 @@ var SidenavPComponent = (function () {
         var colsMercados = [
             { title: "Producto", dataKey: "producto" },
             { title: "Zonas de Mercado Desarrolladas", dataKey: "zona" }
+        ];
+        var colsCreditos = [
+            { title: "Credito", dataKey: "credito" },
+            { title: "Monto", dataKey: "monto" }
         ];
         var doc = new jsPDF({
             orientation: 'landscape',
@@ -9134,9 +9259,10 @@ var SidenavPComponent = (function () {
             doc.setFontType("bold");
             doc.text(30, 35 + (x * 55), 'Periodo' + (i + 1), null, null, 'center');
             doc.line(10, 38 + (x * 55), 269, 38 + (x * 55));
-            doc.text(52, 44 + (x * 55), 'Ventas de Productos', null, null, 'center');
-            doc.text(130, 44 + (x * 55), 'Maquinaria Adquirida', null, null, 'center');
-            doc.text(217, 44 + (x * 55), 'Productos y Zonas de Mercado Desarrollados', null, null, 'center');
+            doc.text(43, 44 + (x * 55), 'Ventas de Productos(unidades)', null, null, 'center');
+            doc.text(102, 44 + (x * 55), 'Maquinaria Adquirida', null, null, 'center');
+            doc.text(173, 44 + (x * 55), 'Productos y Mercados Desarrollados', null, null, 'center');
+            doc.text(246, 44 + (x * 55), 'Créditos Pedidos', null, null, 'center');
             rowVentas = [];
             for (var _i = 0, _a = this.ventas[i].ventas; _i < _a.length; _i++) {
                 var venta = _a[_i];
@@ -9149,7 +9275,7 @@ var SidenavPComponent = (function () {
             doc.autoTable(colsVentas, rowVentas, {
                 margin: { top: 47 + (x * 55),
                     left: 10 },
-                tableWidth: 85,
+                tableWidth: 65,
                 headerStyles: { fillColor: 0, halign: 'center', fontSize: 6 },
                 columnStyles: {
                     producto: { halign: 'center' },
@@ -9170,8 +9296,8 @@ var SidenavPComponent = (function () {
             }
             doc.autoTable(colsMaquinaria, rowMaquinaria, {
                 margin: { top: 47 + (x * 55),
-                    left: 100 },
-                tableWidth: 60,
+                    left: 80 },
+                tableWidth: 45,
                 headerStyles: { fillColor: 0, halign: 'center', fontSize: 6 },
                 columnStyles: {
                     maquinaria: { halign: 'center' },
@@ -9190,7 +9316,7 @@ var SidenavPComponent = (function () {
             }
             doc.autoTable(colsProductos, rowProductos, {
                 margin: { top: 47 + (x * 55),
-                    left: 165 },
+                    left: 130 },
                 tableWidth: 30,
                 headerStyles: { fillColor: 0, halign: 'center', fontSize: 6 },
                 columnStyles: {
@@ -9210,12 +9336,33 @@ var SidenavPComponent = (function () {
             }
             doc.autoTable(colsMercados, rowMercados, {
                 margin: { top: 47 + (x * 55),
-                    left: 200 },
-                tableWidth: 70,
+                    left: 165 },
+                tableWidth: 55,
                 headerStyles: { fillColor: 0, halign: 'center', fontSize: 6 },
                 columnStyles: {
                     producto: { halign: 'center' },
                     zona: { halign: 'center' }
+                },
+                bodyStyles: {
+                    fontSize: 6
+                }
+            });
+            var rowCreditos = [];
+            for (var _h = 0, _j = this.creditos[i].creditos; _h < _j.length; _h++) {
+                var credito = _j[_h];
+                rowCreditos.push({
+                    credito: credito.nombreCredito,
+                    monto: this.cp.transform(credito.monto, 'USD', true, '1.0-0')
+                });
+            }
+            doc.autoTable(colsCreditos, rowCreditos, {
+                margin: { top: 47 + (x * 55),
+                    left: 225 },
+                tableWidth: 43,
+                headerStyles: { fillColor: 0, halign: 'center', fontSize: 6 },
+                columnStyles: {
+                    credito: { halign: 'center' },
+                    monto: { halign: 'right' }
                 },
                 bodyStyles: {
                     fontSize: 6
@@ -9243,18 +9390,18 @@ var SidenavPComponent = (function () {
         ];
         for (var i in this.ventas) {
             var space = [
-                { productoV: "", cVendida: "", cAlmacenada: "", es1: "", maquina: "", cMaquina: "", sp2: "", pDesarrollado: "", esp3: "", pZonas: "", zDesarrolladas: "" },
-                { productoV: "Periodo " + this.ventas[i].numeroPeriodo, cVendida: "", cAlmacenada: "", es1: "", maquina: "", cMaquina: "", sp2: "", pDesarrollado: "", esp3: "", pZonas: "", zDesarrolladas: "" },
-                { productoV: "", cVendida: "", cAlmacenada: "", es1: "", maquina: "", cMaquina: "", sp2: "", pDesarrollado: "", esp3: "", pZonas: "", zDesarrolladas: "" },
-                { productoV: "Venta de Productos", cVendida: "", cAlmacenada: "", es1: "", maquina: "Maquinaria Adquirida", cMaquina: "", sp2: "", pDesarrollado: " Productos y Zona de Mercado Desarrolladas", esp3: "", pZonas: "", zDesarrolladas: "" },
-                { productoV: "Producto", cVendida: "Unidades Vendidas", cAlmacenada: "Unidades Almacenadas", es1: "", maquina: "Maquina", cMaquina: "Cantidad", sp2: "", pDesarrollado: "Producto Desarrollado", esp3: "", pZonas: "Producto", zDesarrolladas: "Zona de Mercado Desarrollada" },
-                { productoV: "", cVendida: "", cAlmacenada: "", es1: "", maquina: "", cMaquina: "", sp2: "", pDesarrollado: "", esp3: "", pZonas: "", zDesarrolladas: "" },
-                { productoV: "", cVendida: "", cAlmacenada: "", es1: "", maquina: "", cMaquina: "", sp2: "", pDesarrollado: "", esp3: "", pZonas: "", zDesarrolladas: "" },
-                { productoV: "", cVendida: "", cAlmacenada: "", es1: "", maquina: "", cMaquina: "", sp2: "", pDesarrollado: "", esp3: "", pZonas: "", zDesarrolladas: "" },
-                { productoV: "", cVendida: "", cAlmacenada: "", es1: "", maquina: "", cMaquina: "", sp2: "", pDesarrollado: "", esp3: "", pZonas: "", zDesarrolladas: "" },
-                { productoV: "", cVendida: "", cAlmacenada: "", es1: "", maquina: "", cMaquina: "", sp2: "", pDesarrollado: "", esp3: "", pZonas: "", zDesarrolladas: "" },
-                { productoV: "", cVendida: "", cAlmacenada: "", es1: "", maquina: "", cMaquina: "", sp2: "", pDesarrollado: "", esp3: "", pZonas: "", zDesarrolladas: "" },
-                { productoV: "", cVendida: "", cAlmacenada: "", es1: "", maquina: "", cMaquina: "", sp2: "", pDesarrollado: "", esp3: "", pZonas: "", zDesarrolladas: "" },
+                { productoV: "", cVendida: "", cAlmacenada: "", es1: "", maquina: "", cMaquina: "", sp2: "", pDesarrollado: "", esp3: "", pZonas: "", zDesarrolladas: "", esp4: "", credito: "", montoCredito: "" },
+                { productoV: "Periodo " + this.ventas[i].numeroPeriodo, cVendida: "", cAlmacenada: "", es1: "", maquina: "", cMaquina: "", sp2: "", pDesarrollado: "", esp3: "", pZonas: "", zDesarrolladas: "", esp4: "", credito: "", montoCredito: "" },
+                { productoV: "", cVendida: "", cAlmacenada: "", es1: "", maquina: "", cMaquina: "", sp2: "", pDesarrollado: "", esp3: "", pZonas: "", zDesarrolladas: "", esp4: "", credito: "", montoCredito: "" },
+                { productoV: "Venta de Productos", cVendida: "", cAlmacenada: "", es1: "", maquina: "Maquinaria Adquirida", cMaquina: "", sp2: "", pDesarrollado: " Productos y Zona de Mercado Desarrolladas", esp3: "", pZonas: "", zDesarrolladas: "", esp4: "", credito: "Creditos Pedidos", montoCredito: "" },
+                { productoV: "Producto", cVendida: "Unidades Vendidas", cAlmacenada: "Unidades Almacenadas", es1: "", maquina: "Maquina", cMaquina: "Cantidad", sp2: "", pDesarrollado: "Producto Desarrollado", esp3: "", pZonas: "Producto", zDesarrolladas: "Zona de Mercado Desarrollada", esp4: "", credito: "Credito", montoCredito: "Monto" },
+                { productoV: "", cVendida: "", cAlmacenada: "", es1: "", maquina: "", cMaquina: "", sp2: "", pDesarrollado: "", esp3: "", pZonas: "", zDesarrolladas: "", esp4: "", credito: "", montoCredito: "" },
+                { productoV: "", cVendida: "", cAlmacenada: "", es1: "", maquina: "", cMaquina: "", sp2: "", pDesarrollado: "", esp3: "", pZonas: "", zDesarrolladas: "", esp4: "", credito: "", montoCredito: "" },
+                { productoV: "", cVendida: "", cAlmacenada: "", es1: "", maquina: "", cMaquina: "", sp2: "", pDesarrollado: "", esp3: "", pZonas: "", zDesarrolladas: "", esp4: "", credito: "", montoCredito: "" },
+                { productoV: "", cVendida: "", cAlmacenada: "", es1: "", maquina: "", cMaquina: "", sp2: "", pDesarrollado: "", esp3: "", pZonas: "", zDesarrolladas: "", esp4: "", credito: "", montoCredito: "" },
+                { productoV: "", cVendida: "", cAlmacenada: "", es1: "", maquina: "", cMaquina: "", sp2: "", pDesarrollado: "", esp3: "", pZonas: "", zDesarrolladas: "", esp4: "", credito: "", montoCredito: "" },
+                { productoV: "", cVendida: "", cAlmacenada: "", es1: "", maquina: "", cMaquina: "", sp2: "", pDesarrollado: "", esp3: "", pZonas: "", zDesarrolladas: "", esp4: "", credito: "", montoCredito: "" },
+                { productoV: "", cVendida: "", cAlmacenada: "", es1: "", maquina: "", cMaquina: "", sp2: "", pDesarrollado: "", esp3: "", pZonas: "", zDesarrolladas: "", esp4: "", credito: "", montoCredito: "" },
             ];
             for (var x = 0; x < this.ventas[i].ventas.length; x++) {
                 console.log(x);
@@ -9273,12 +9420,33 @@ var SidenavPComponent = (function () {
                 space[x + 5].pZonas = this.getNameByIdProducto(this.DZonas[i].productos[x].idProducto);
                 space[x + 5].zDesarrolladas = this.getNameByIdZona(this.DZonas[i].productos[x].idZona);
             }
+            for (var x = 0; x < this.creditos[i].creditos.length; x++) {
+                space[x + 5].credito = this.creditos[i].creditos[x].nombreCredito;
+                space[x + 5].montoCredito = this.creditos[i].creditos[x].monto;
+            }
             for (var _i = 0, space_1 = space; _i < space_1.length; _i++) {
                 var sp = space_1[_i];
                 data.push(sp);
             }
         }
         new __WEBPACK_IMPORTED_MODULE_8_angular2_csv_Angular2_csv__["Angular2Csv"](data, 'Desiciones');
+    };
+    SidenavPComponent.prototype.acomodaCredito = function () {
+        var creditos = [];
+        for (var i = 0; i < this.DProductos.length; i++) {
+            var objCred = { numeroPeriodo: i + 1, creditos: [] };
+            for (var _i = 0, _a = this.ceditos; _i < _a.length; _i++) {
+                var cred = _a[_i];
+                if (cred.numeroPeriodo == i + 1) {
+                    objCred.creditos.push({
+                        nombreCredito: cred.nombreCredito,
+                        monto: cred.monto
+                    });
+                }
+            }
+            creditos.push(objCred);
+        }
+        return creditos;
     };
     return SidenavPComponent;
 }());
@@ -9288,10 +9456,10 @@ SidenavPComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_producto_service__["a" /* ProductoService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_operacion_service__["a" /* OperacionService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__services_maquinaria_service__["a" /* MaquinariaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_maquinaria_service__["a" /* MaquinariaService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7__angular_common__["DecimalPipe"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__angular_common__["DecimalPipe"]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_6__services_zonas_service__["a" /* ZonasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_zonas_service__["a" /* ZonasService */]) === "function" && _g || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__services_producto_service__["a" /* ProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_producto_service__["a" /* ProductoService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_operacion_service__["a" /* OperacionService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__services_maquinaria_service__["a" /* MaquinariaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_maquinaria_service__["a" /* MaquinariaService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7__angular_common__["DecimalPipe"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__angular_common__["DecimalPipe"]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_7__angular_common__["CurrencyPipe"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__angular_common__["CurrencyPipe"]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_6__services_zonas_service__["a" /* ZonasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_zonas_service__["a" /* ZonasService */]) === "function" && _h || Object])
 ], SidenavPComponent);
 
-var _a, _b, _c, _d, _e, _f, _g;
+var _a, _b, _c, _d, _e, _f, _g, _h;
 //# sourceMappingURL=sidenav-p.component.js.map
 
 /***/ }),
@@ -9299,7 +9467,7 @@ var _a, _b, _c, _d, _e, _f, _g;
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/tendencias/tendencias.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" style=\"margin-bottom:10px\">\r\n  <h2 class=\"col-12 text-center\">Tendencias</h2>\r\n</div>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-12\">\r\n    <table class=\"table table-hover\">\r\n      <thead>\r\n        <th></th>\r\n        <th *ngFor=\"let periodo of tendencias\" class=\"text-center\">Periodo {{periodo.numeroPeriodo}}</th>\r\n      </thead>\r\n\r\n\r\n      <tr>\r\n        <td>Efectivo</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.efectivo|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Cuentas Por Cobrar</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.cuentasPCobrar|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Almacén de Materia Prima</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">$0</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Almacén de P.T.</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.almacenPT|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Activo Circulante</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.activoCirculante|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Activo Fijo</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.activoFijo|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Pasivo a Corto Plazo</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pasivoCortoPlazo|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Pasivo Total</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pasivoTotal|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Capital Contable</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.capitalContable|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Ventas</td>\r\n        <td class=\"text-right\"  *ngFor=\"let periodo of tendencias\">{{periodo.ventasNetas|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Costo de Ventas</td>\r\n          <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.costoVentas|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Utilidad Bruta</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.utilidadBruta|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Gastos de Distribución</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.cDist|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Gastos de Administración</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.cAdmin|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Otros Gastos</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.oGastos|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Total de Gastos de Operación</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.cDist+periodo.cAdmin+periodo.oGastos|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Utilidad Neta</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.utilidadNeta|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n    </table>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n  <div class=\"row align-items-center\" style=\"margin-bottom:20px\">\r\n    <div class=\"offset-6 col-1\">\r\n      Exportar:\r\n    </div>\r\n    <div class=\"col-1\">\r\n      <ngl-icon icon=\"pdf\" category=\"doctype\" (click)=\"PDFpresupuestoGlobalCostoTrans()\" size=\"large\" style=\"cursor:pointer\"></ngl-icon>\r\n    </div>\r\n\r\n    <div class=\"col-1\">\r\n      <ngl-icon icon=\"csv\" category=\"doctype\" (click)=\"CSVpresupuestoGlobalCostoTrans()\" size=\"large\" style=\"cursor:pointer\"></ngl-icon>\r\n    </div>\r\n  </div>\r\n\r\n\r\n\r\n\r\n<div class=\"row\" style=\"margin-top:20px\">\r\n  <div class=\"col-12\">\r\n    <table class=\"table table-hover\">\r\n      <thead>\r\n        <th></th>\r\n        <th *ngFor=\"let periodo of tendencias\" class=\"text-center\">Periodo {{periodo.numeroPeriodo}}</th>\r\n      </thead>\r\n\r\n\r\n      <tr>\r\n        <td>Efectivo</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pefectivo|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Cuentas Por Cobrar</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pcuentasPCobrar|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Almacén de Materia Prima</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">0</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Almacén de P.T.</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.palmacenPT|number:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Activo Circulante</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pactivoCirculante|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Activo Fijo</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pactivoFijo|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Pasivo a Corto Plazo</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.ppasivoCortoPlazo|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Pasivo Total</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.ppasivoTotal|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Capital Contable</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pcapitalContable|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Ventas</td>\r\n        <td class=\"text-right\"  *ngFor=\"let periodo of tendencias\">{{periodo.pventasNetas|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Costo de Ventas</td>\r\n          <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pcostoVentas|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Utilidad Bruta</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.putilidadBruta|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Gastos de Distribución</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pcDist|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Gastos de Administración</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pcAdmin|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Otros Gastos</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.poGastos|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Total de Gastos de Operación</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{getTotal(periodo.numeroPeriodo,periodo.pcDist+periodo.pcAdmin+periodo.poGastos)|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Utilidad Neta</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.putilidadNeta|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n    </table>\r\n  </div>\r\n</div>\r\n\r\n\r\n  <div class=\"row align-items-center\" style=\"margin-bottom:20px\">\r\n    <div class=\"offset-6 col-1\">\r\n      Exportar:\r\n    </div>\r\n    <div class=\"col-1\">\r\n      <ngl-icon icon=\"pdf\" category=\"doctype\" (click)=\"PDFpresupuestoGlobalCostoTrans()\" size=\"large\" style=\"cursor:pointer\"></ngl-icon>\r\n    </div>\r\n\r\n    <div class=\"col-1\">\r\n      <ngl-icon icon=\"csv\" category=\"doctype\" (click)=\"CSVpresupuestoGlobalCostoTrans()\" size=\"large\" style=\"cursor:pointer\"></ngl-icon>\r\n    </div>\r\n  </div>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-12\">\r\n    <h2 class=\"text-center\">Indices</h2>\r\n  </div>\r\n\r\n\r\n  <div class=\"offset-1 col-10\" style=\"height:400px;\">\r\n    <ngx-charts-bar-vertical-2d\r\n       [results]=\"graf1\"\r\n       [scheme]=\"colorScheme\"\r\n       xAxis=\"true\"\r\n       legendTitle=\"Indices\"\r\n       yAxis=\"true\"\r\n       legend=\"true\"\r\n       showXAxisLabel=\"true\"\r\n       showYAxisLabel=\"true\"\r\n       xAxisLabel=\"Periodos\"\r\n       yAxisLabel=\"Indices\"\r\n       autoScale=\"true\"\r\n       >\r\n     </ngx-charts-bar-vertical-2d>\r\n  </div>\r\n\r\n\r\n  <div class=\"offset-1 col-10\" style=\"height:400px;\">\r\n    <ngx-charts-bar-vertical-2d\r\n       [results]=\"graf2\"\r\n       [scheme]=\"colorScheme\"\r\n       xAxis=\"true\"\r\n       legendTitle=\"Indices\"\r\n       yAxis=\"true\"\r\n       legend=\"true\"\r\n       showXAxisLabel=\"true\"\r\n       showYAxisLabel=\"true\"\r\n       xAxisLabel=\"Periodos\"\r\n       yAxisLabel=\"Indices\"\r\n       autoScale=\"true\"\r\n       >\r\n     </ngx-charts-bar-vertical-2d>\r\n  </div>\r\n\r\n\r\n  <div class=\"offset-1 col-10\" style=\"height:400px;\">\r\n    <ngx-charts-bar-vertical-2d\r\n       [results]=\"graf3\"\r\n       [scheme]=\"colorScheme\"\r\n       xAxis=\"true\"\r\n       legendTitle=\"Indices\"\r\n       yAxis=\"true\"\r\n       legend=\"true\"\r\n       showXAxisLabel=\"true\"\r\n       showYAxisLabel=\"true\"\r\n       xAxisLabel=\"Periodos\"\r\n       yAxisLabel=\"Indices\"\r\n       autoScale=\"true\"\r\n       >\r\n     </ngx-charts-bar-vertical-2d>\r\n  </div>\r\n\r\n\r\n  <div class=\"offset-1 col-10\" style=\"height:400px;\">\r\n    <ngx-charts-bar-vertical-2d\r\n       [results]=\"graf4\"\r\n       [scheme]=\"colorScheme\"\r\n       xAxis=\"true\"\r\n       legendTitle=\"Indices\"\r\n       yAxis=\"true\"\r\n       legend=\"true\"\r\n       showXAxisLabel=\"true\"\r\n       showYAxisLabel=\"true\"\r\n       xAxisLabel=\"Periodos\"\r\n       yAxisLabel=\"Indices\"\r\n       autoScale=\"true\"\r\n       >\r\n     </ngx-charts-bar-vertical-2d>\r\n  </div>\r\n\r\n\r\n  <div class=\"offset-1 col-10\" style=\"height:400px;\">\r\n    <ngx-charts-bar-vertical-2d\r\n       [results]=\"graf5\"\r\n       [scheme]=\"colorScheme\"\r\n       xAxis=\"true\"\r\n       legendTitle=\"Indices\"\r\n       yAxis=\"true\"\r\n       legend=\"true\"\r\n       showXAxisLabel=\"true\"\r\n       showYAxisLabel=\"true\"\r\n       xAxisLabel=\"Periodos\"\r\n       yAxisLabel=\"Indices\"\r\n       autoScale=\"true\"\r\n       >\r\n     </ngx-charts-bar-vertical-2d>\r\n  </div>\r\n\r\n\r\n\r\n  <div class=\"offset-1 col-10\" style=\"height:400px;\">\r\n    <ngx-charts-bar-vertical-2d\r\n       [results]=\"graf6\"\r\n       [scheme]=\"colorScheme\"\r\n       xAxis=\"true\"\r\n       legendTitle=\"Indices\"\r\n       yAxis=\"true\"\r\n       legend=\"true\"\r\n       showXAxisLabel=\"true\"\r\n       showYAxisLabel=\"true\"\r\n       xAxisLabel=\"Periodos\"\r\n       yAxisLabel=\"Indices\"\r\n       autoScale=\"true\"\r\n       >\r\n     </ngx-charts-bar-vertical-2d>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"row\" style=\"margin-bottom:10px\">\r\n  <h2 class=\"col-12 text-center\">Tendencias</h2>\r\n</div>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-12\">\r\n    <table class=\"table table-hover\">\r\n      <thead>\r\n        <th></th>\r\n        <th *ngFor=\"let periodo of tendencias\" class=\"text-center\">Periodo {{periodo.numeroPeriodo}}</th>\r\n      </thead>\r\n\r\n\r\n      <tr>\r\n        <td>Efectivo</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.efectivo|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Cuentas Por Cobrar</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.cuentasPCobrar|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Almacén de Materia Prima</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">$0</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Almacén de P.T.</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.almacenPT|currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Activo Circulante</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.activoCirculante|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Activo Fijo</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.activoFijo|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Pasivo a Corto Plazo</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pasivoCortoPlazo|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Pasivo Total</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pasivoTotal|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Capital Contable</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.capitalContable|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Ventas</td>\r\n        <td class=\"text-right\"  *ngFor=\"let periodo of tendencias\">{{periodo.ventasNetas|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Costo de Ventas</td>\r\n          <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.costoVentas|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Utilidad Bruta</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.utilidadBruta|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Gastos de Distribución</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.cDist|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Gastos de Administración</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.cAdmin|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Otros Gastos</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.oGastos|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Total de Gastos de Operación</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.cDist+periodo.cAdmin+periodo.oGastos|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Utilidad Neta</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.utilidadNeta|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n    </table>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n  <div class=\"row align-items-center\" style=\"margin-bottom:20px\">\r\n    <div class=\"offset-6 col-1\">\r\n      Exportar:\r\n    </div>\r\n    <div class=\"col-1\">\r\n      <ngl-icon icon=\"pdf\" category=\"doctype\" (click)=\"PDFtendencias()\" size=\"large\" style=\"cursor:pointer\"></ngl-icon>\r\n    </div>\r\n\r\n    <div class=\"col-1\">\r\n      <ngl-icon icon=\"csv\" category=\"doctype\" (click)=\"CSVtendencias()\" size=\"large\" style=\"cursor:pointer\"></ngl-icon>\r\n    </div>\r\n  </div>\r\n\r\n\r\n\r\n\r\n<div class=\"row\" style=\"margin-top:20px\">\r\n  <div class=\"col-12\">\r\n    <table class=\"table table-hover\">\r\n      <thead>\r\n        <th></th>\r\n        <th *ngFor=\"let periodo of tendencias\" class=\"text-center\">Periodo {{periodo.numeroPeriodo}}</th>\r\n      </thead>\r\n\r\n\r\n      <tr>\r\n        <td>Efectivo</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pefectivo|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Cuentas Por Cobrar</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pcuentasPCobrar|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Almacén de Materia Prima</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">0</td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Almacén de P.T.</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.palmacenPT|number:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Activo Circulante</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pactivoCirculante|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Activo Fijo</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pactivoFijo|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Pasivo a Corto Plazo</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.ppasivoCortoPlazo|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Pasivo Total</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.ppasivoTotal|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Capital Contable</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pcapitalContable|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Ventas</td>\r\n        <td class=\"text-right\"  *ngFor=\"let periodo of tendencias\">{{periodo.pventasNetas|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Costo de Ventas</td>\r\n          <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pcostoVentas|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Utilidad Bruta</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.putilidadBruta|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Gastos de Distribución</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pcDist|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Gastos de Administración</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.pcAdmin|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Otros Gastos</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.poGastos|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Total de Gastos de Operación</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{getTotal(periodo.numeroPeriodo,periodo.pcDist+periodo.pcAdmin+periodo.poGastos)|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Utilidad Neta</td>\r\n        <td class=\"text-right\" *ngFor=\"let periodo of tendencias\">{{periodo.putilidadNeta|number:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n    </table>\r\n  </div>\r\n</div>\r\n\r\n\r\n  <div class=\"row align-items-center\" style=\"margin-bottom:20px\">\r\n    <div class=\"offset-6 col-1\">\r\n      Exportar:\r\n    </div>\r\n    <div class=\"col-1\">\r\n      <ngl-icon icon=\"pdf\" category=\"doctype\" (click)=\"PDFtendenciasIndices()\" size=\"large\" style=\"cursor:pointer\"></ngl-icon>\r\n    </div>\r\n\r\n    <div class=\"col-1\">\r\n      <ngl-icon icon=\"csv\" category=\"doctype\" (click)=\"CSVtendenciasIndices()\" size=\"large\" style=\"cursor:pointer\"></ngl-icon>\r\n    </div>\r\n  </div>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-12\">\r\n    <h2 class=\"text-center\">Indices</h2>\r\n  </div>\r\n\r\n\r\n  <div class=\"offset-1 col-10\" style=\"height:400px;\">\r\n    <ngx-charts-bar-vertical-2d\r\n       [results]=\"graf1\"\r\n       [scheme]=\"colorScheme\"\r\n       xAxis=\"true\"\r\n       legendTitle=\"Indices\"\r\n       yAxis=\"true\"\r\n       legend=\"true\"\r\n       showXAxisLabel=\"true\"\r\n       showYAxisLabel=\"true\"\r\n       xAxisLabel=\"Periodos\"\r\n       yAxisLabel=\"Indices\"\r\n       autoScale=\"true\"\r\n       >\r\n     </ngx-charts-bar-vertical-2d>\r\n  </div>\r\n\r\n\r\n  <div class=\"offset-1 col-10\" style=\"height:400px;\">\r\n    <ngx-charts-bar-vertical-2d\r\n       [results]=\"graf2\"\r\n       [scheme]=\"colorScheme\"\r\n       xAxis=\"true\"\r\n       legendTitle=\"Indices\"\r\n       yAxis=\"true\"\r\n       legend=\"true\"\r\n       showXAxisLabel=\"true\"\r\n       showYAxisLabel=\"true\"\r\n       xAxisLabel=\"Periodos\"\r\n       yAxisLabel=\"Indices\"\r\n       autoScale=\"true\"\r\n       >\r\n     </ngx-charts-bar-vertical-2d>\r\n  </div>\r\n\r\n\r\n  <div class=\"offset-1 col-10\" style=\"height:400px;\">\r\n    <ngx-charts-bar-vertical-2d\r\n       [results]=\"graf3\"\r\n       [scheme]=\"colorScheme\"\r\n       xAxis=\"true\"\r\n       legendTitle=\"Indices\"\r\n       yAxis=\"true\"\r\n       legend=\"true\"\r\n       showXAxisLabel=\"true\"\r\n       showYAxisLabel=\"true\"\r\n       xAxisLabel=\"Periodos\"\r\n       yAxisLabel=\"Indices\"\r\n       autoScale=\"true\"\r\n       >\r\n     </ngx-charts-bar-vertical-2d>\r\n  </div>\r\n\r\n\r\n  <div class=\"offset-1 col-10\" style=\"height:400px;\">\r\n    <ngx-charts-bar-vertical-2d\r\n       [results]=\"graf4\"\r\n       [scheme]=\"colorScheme\"\r\n       xAxis=\"true\"\r\n       legendTitle=\"Indices\"\r\n       yAxis=\"true\"\r\n       legend=\"true\"\r\n       showXAxisLabel=\"true\"\r\n       showYAxisLabel=\"true\"\r\n       xAxisLabel=\"Periodos\"\r\n       yAxisLabel=\"Indices\"\r\n       autoScale=\"true\"\r\n       >\r\n     </ngx-charts-bar-vertical-2d>\r\n  </div>\r\n\r\n\r\n  <div class=\"offset-1 col-10\" style=\"height:400px;\">\r\n    <ngx-charts-bar-vertical-2d\r\n       [results]=\"graf5\"\r\n       [scheme]=\"colorScheme\"\r\n       xAxis=\"true\"\r\n       legendTitle=\"Indices\"\r\n       yAxis=\"true\"\r\n       legend=\"true\"\r\n       showXAxisLabel=\"true\"\r\n       showYAxisLabel=\"true\"\r\n       xAxisLabel=\"Periodos\"\r\n       yAxisLabel=\"Indices\"\r\n       autoScale=\"true\"\r\n       >\r\n     </ngx-charts-bar-vertical-2d>\r\n  </div>\r\n\r\n\r\n\r\n  <div class=\"offset-1 col-10\" style=\"height:400px;\">\r\n    <ngx-charts-bar-vertical-2d\r\n       [results]=\"graf6\"\r\n       [scheme]=\"colorScheme\"\r\n       xAxis=\"true\"\r\n       legendTitle=\"Indices\"\r\n       yAxis=\"true\"\r\n       legend=\"true\"\r\n       showXAxisLabel=\"true\"\r\n       showYAxisLabel=\"true\"\r\n       xAxisLabel=\"Periodos\"\r\n       yAxisLabel=\"Indices\"\r\n       autoScale=\"true\"\r\n       >\r\n     </ngx-charts-bar-vertical-2d>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -9309,6 +9477,10 @@ module.exports = "<div class=\"row\" style=\"margin-bottom:10px\">\r\n  <h2 clas
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__ = __webpack_require__("../../../../../src/app/services/operacion.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_csv_Angular2_csv__ = __webpack_require__("../../../../angular2-csv/Angular2-csv.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_csv_Angular2_csv___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angular2_csv_Angular2_csv__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_proyectos_service__ = __webpack_require__("../../../../../src/app/services/proyectos.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TendenciasComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -9321,10 +9493,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
+
+
 var TendenciasComponent = (function () {
-    function TendenciasComponent(_operacionService) {
+    function TendenciasComponent(_operacionService, dc, _proyectoService, cp) {
         var _this = this;
         this._operacionService = _operacionService;
+        this.dc = dc;
+        this._proyectoService = _proyectoService;
+        this.cp = cp;
         this.tendencias = [];
         this.graf1 = [];
         this.graf2 = [];
@@ -9337,7 +9516,9 @@ var TendenciasComponent = (function () {
         };
         this.tendencias = this._operacionService.returnTendencias();
         console.log(this.tendencias);
+        this.proyectos = this._proyectoService.returnUsuarios();
         setTimeout(function () {
+            _this.proyectoActual = _this.getNameById(localStorage.getItem('idProyecto'));
             _this.graf1 = _this.getGraf1();
             _this.graf2 = _this.getGraf2();
             _this.graf3 = _this.getGraf3();
@@ -9373,6 +9554,14 @@ var TendenciasComponent = (function () {
             data.push(gTemp);
         }
         return data;
+    };
+    TendenciasComponent.prototype.getNameById = function (idProyecto) {
+        for (var _i = 0, _a = this.proyectos; _i < _a.length; _i++) {
+            var proyecto = _a[_i];
+            if (proyecto.idProyecto == idProyecto)
+                return proyecto.nombreProyecto;
+        }
+        return "id NO encontrado";
     };
     TendenciasComponent.prototype.getGraf2 = function () {
         var data = [];
@@ -9473,6 +9662,246 @@ var TendenciasComponent = (function () {
         }
         return data;
     };
+    TendenciasComponent.prototype.PDFtendencias = function () {
+        var proyecto = this.proyectoActual;
+        var doc = new jsPDF({
+            orientation: 'landscape',
+            unit: 'mm',
+            format: [215.9, 279]
+        });
+        var cols = [
+            { title: "", dataKey: "cara" },
+        ];
+        var options = {
+            margin: { top: 40,
+                left: 10 },
+            tableWidth: 259,
+            headerStyles: { fillColor: 0, halign: 'center', fontSize: 6 },
+            bodyStyles: {
+                fontSize: 5
+            },
+            columnStyles: {},
+            addPageContent: function (data) {
+                doc.setFontSize(15);
+                doc.setFontType("bold");
+                doc.text(139.5, 15, 'Proyecto ' + proyecto, null, null, 'center');
+                doc.setFontSize(13);
+                doc.text(139.5, 23, 'Tendencias', null, null, 'center');
+                doc.line(50, 27, 228, 27);
+            },
+        };
+        var rows = [
+            { cara: "Efectivo" },
+            { cara: "Cuentas Por Cobrar" },
+            { cara: "Almacen de Material Prima" },
+            { cara: "Almacen de P.T." },
+            { cara: "Activo Criculante" },
+            { cara: "Acrivo Fijo" },
+            { cara: "Pasivo A Corto Plazo" },
+            { cara: "Pasivo Total" },
+            { cara: "Capital Contable" },
+            { cara: "Ventas" },
+            { cara: "Costo de Ventas" },
+            { cara: "Utilidad Bruta" },
+            { cara: "Gastos de Distribución" },
+            { cara: "Gastos de Administración" },
+            { cara: "Otros Gastos" },
+            { cara: "Total de Gastos de Operación" },
+            { cara: "Utilidad Neta" }
+        ];
+        for (var _i = 0, _a = this.tendencias; _i < _a.length; _i++) {
+            var ten = _a[_i];
+            cols.push({
+                dataKey: "periodo" + ten.numeroPeriodo,
+                title: "Periodo " + ten.numeroPeriodo
+            });
+            rows[0]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.efectivo, 'USD', true, '1.0-0');
+            rows[1]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.cuentasPCobrar, 'USD', true, '1.0-0');
+            rows[2]["periodo" + ten.numeroPeriodo] = this.cp.transform(0, 'USD', true, '1.0-0');
+            rows[3]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.almacenPT, 'USD', true, '1.0-0');
+            rows[4]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.activoCirculante, 'USD', true, '1.0-0');
+            rows[5]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.activoFijo, 'USD', true, '1.0-0');
+            rows[6]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.pasivoCortoPlazo, 'USD', true, '1.0-0');
+            rows[7]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.pasivoTotal, 'USD', true, '1.0-0');
+            rows[8]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.capitalContable, 'USD', true, '1.0-0');
+            rows[9]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.ventasNetas, 'USD', true, '1.0-0');
+            rows[10]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.costoVentas, 'USD', true, '1.0-0');
+            rows[11]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.utilidadBruta, 'USD', true, '1.0-0');
+            rows[12]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.cDist, 'USD', true, '1.0-0');
+            rows[13]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.cAdmin, 'USD', true, '1.0-0');
+            rows[14]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.oGastos, 'USD', true, '1.0-0');
+            rows[15]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.cDist + ten.cAdmin + ten.oGastos, 'USD', true, '1.0-0');
+            rows[16]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.utilidadNeta, 'USD', true, '1.0-0');
+            options.columnStyles["periodo" + ten.numeroPeriodo] = { halign: "right" };
+        }
+        doc.autoTable(cols, rows, options);
+        doc.save("Tendencias.pdf");
+    };
+    TendenciasComponent.prototype.CSVtendencias = function () {
+        var rows = [
+            { cara: "Tendencias del Proyecto " + this.proyectoActual },
+            { cara: "" },
+            { cara: "Efectivo" },
+            { cara: "Cuentas Por Cobrar" },
+            { cara: "Almacen de Material Prima" },
+            { cara: "Almacen de P.T." },
+            { cara: "Activo Criculante" },
+            { cara: "Acrivo Fijo" },
+            { cara: "Pasivo A Corto Plazo" },
+            { cara: "Pasivo Total" },
+            { cara: "Capital Contable" },
+            { cara: "Ventas" },
+            { cara: "Costo de Ventas" },
+            { cara: "Utilidad Bruta" },
+            { cara: "Gastos de Distribución" },
+            { cara: "Gastos de Administración" },
+            { cara: "Otros Gastos" },
+            { cara: "Total de Gastos de Operación" },
+            { cara: "Utilidad Neta" }
+        ];
+        for (var _i = 0, _a = this.tendencias; _i < _a.length; _i++) {
+            var ten = _a[_i];
+            rows[1]["periodo" + ten.numeroPeriodo] = "Periodo " + ten.numeroPeriodo;
+            rows[2]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.efectivo, 'USD', true, '1.0-0');
+            rows[3]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.cuentasPCobrar, 'USD', true, '1.0-0');
+            rows[4]["periodo" + ten.numeroPeriodo] = this.cp.transform(0, 'USD', true, '1.0-0');
+            rows[5]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.almacenPT, 'USD', true, '1.0-0');
+            rows[6]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.activoCirculante, 'USD', true, '1.0-0');
+            rows[7]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.activoFijo, 'USD', true, '1.0-0');
+            rows[8]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.pasivoCortoPlazo, 'USD', true, '1.0-0');
+            rows[9]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.pasivoTotal, 'USD', true, '1.0-0');
+            rows[10]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.capitalContable, 'USD', true, '1.0-0');
+            rows[11]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.ventasNetas, 'USD', true, '1.0-0');
+            rows[12]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.costoVentas, 'USD', true, '1.0-0');
+            rows[13]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.utilidadBruta, 'USD', true, '1.0-0');
+            rows[14]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.cDist, 'USD', true, '1.0-0');
+            rows[15]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.cAdmin, 'USD', true, '1.0-0');
+            rows[16]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.oGastos, 'USD', true, '1.0-0');
+            rows[17]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.cDist + ten.cAdmin + ten.oGastos, 'USD', true, '1.0-0');
+            rows[18]["periodo" + ten.numeroPeriodo] = this.cp.transform(ten.utilidadNeta, 'USD', true, '1.0-0');
+        }
+        new __WEBPACK_IMPORTED_MODULE_3_angular2_csv_Angular2_csv__["Angular2Csv"](rows, 'Tendencias');
+    };
+    TendenciasComponent.prototype.CSVtendenciasIndices = function () {
+        var rows = [
+            { cara: "Tendencias del Proyecto " + this.proyectoActual },
+            { cara: "" },
+            { cara: "Efectivo" },
+            { cara: "Cuentas Por Cobrar" },
+            { cara: "Almacen de Material Prima" },
+            { cara: "Almacen de P.T." },
+            { cara: "Activo Criculante" },
+            { cara: "Acrivo Fijo" },
+            { cara: "Pasivo A Corto Plazo" },
+            { cara: "Pasivo Total" },
+            { cara: "Capital Contable" },
+            { cara: "Ventas" },
+            { cara: "Costo de Ventas" },
+            { cara: "Utilidad Bruta" },
+            { cara: "Gastos de Distribución" },
+            { cara: "Gastos de Administración" },
+            { cara: "Otros Gastos" },
+            { cara: "Total de Gastos de Operación" },
+            { cara: "Utilidad Neta" }
+        ];
+        for (var _i = 0, _a = this.tendencias; _i < _a.length; _i++) {
+            var ten = _a[_i];
+            rows[1]["periodo" + ten.numeroPeriodo] = "Periodo " + ten.numeroPeriodo;
+            rows[2]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.pefectivo, '1.0-0');
+            rows[3]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.pcuentasPCobrar, '1.0-0');
+            rows[4]["periodo" + ten.numeroPeriodo] = this.dc.transform(0, '1.0-0');
+            rows[5]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.palmacenPT, '1.0-0');
+            rows[6]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.pactivoCirculante, '1.0-0');
+            rows[7]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.pactivoFijo, '1.0-0');
+            rows[8]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.ppasivoCortoPlazo, '1.0-0');
+            rows[9]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.ppasivoTotal, '1.0-0');
+            rows[10]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.pcapitalContable, '1.0-0');
+            rows[11]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.pventasNetas, '1.0-0');
+            rows[12]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.pcostoVentas, '1.0-0');
+            rows[13]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.putilidadBruta, '1.0-0');
+            rows[14]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.pcDist, '1.0-0');
+            rows[15]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.pcAdmin, '1.0-0');
+            rows[16]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.poGastos, '1.0-0');
+            rows[17]["periodo" + ten.numeroPeriodo] = this.dc.transform(this.getTotal(ten.numeroPeriodo, ten.pcDist + ten.pcAdmin + ten.poGastos), '1.0-0');
+            rows[18]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.putilidadNeta, '1.0-0');
+        }
+        new __WEBPACK_IMPORTED_MODULE_3_angular2_csv_Angular2_csv__["Angular2Csv"](rows, 'Tendencias Indices');
+    };
+    TendenciasComponent.prototype.PDFtendenciasIndices = function () {
+        var proyecto = this.proyectoActual;
+        var doc = new jsPDF({
+            orientation: 'landscape',
+            unit: 'mm',
+            format: [215.9, 279]
+        });
+        var cols = [
+            { title: "", dataKey: "cara" },
+        ];
+        var options = {
+            margin: { top: 40,
+                left: 10 },
+            tableWidth: 259,
+            headerStyles: { fillColor: 0, halign: 'center', fontSize: 6 },
+            bodyStyles: {
+                fontSize: 5
+            },
+            columnStyles: {},
+            addPageContent: function (data) {
+                doc.setFontSize(15);
+                doc.setFontType("bold");
+                doc.text(139.5, 15, 'Proyecto ' + proyecto, null, null, 'center');
+                doc.setFontSize(13);
+                doc.text(139.5, 23, 'Tendencias Indices', null, null, 'center');
+                doc.line(50, 27, 228, 27);
+            },
+        };
+        var rows = [
+            { cara: "Efectivo" },
+            { cara: "Cuentas Por Cobrar" },
+            { cara: "Almacen de Material Prima" },
+            { cara: "Almacen de P.T." },
+            { cara: "Activo Criculante" },
+            { cara: "Acrivo Fijo" },
+            { cara: "Pasivo A Corto Plazo" },
+            { cara: "Pasivo Total" },
+            { cara: "Capital Contable" },
+            { cara: "Ventas" },
+            { cara: "Costo de Ventas" },
+            { cara: "Utilidad Bruta" },
+            { cara: "Gastos de Distribución" },
+            { cara: "Gastos de Administración" },
+            { cara: "Otros Gastos" },
+            { cara: "Total de Gastos de Operación" },
+            { cara: "Utilidad Neta" }
+        ];
+        for (var _i = 0, _a = this.tendencias; _i < _a.length; _i++) {
+            var ten = _a[_i];
+            cols.push({
+                dataKey: "periodo" + ten.numeroPeriodo,
+                title: "Periodo " + ten.numeroPeriodo
+            });
+            rows[0]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.pefectivo, '1.0-0');
+            rows[1]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.pcuentasPCobrar, '.0-0');
+            rows[2]["periodo" + ten.numeroPeriodo] = this.dc.transform(0, '1.0-0');
+            rows[3]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.palmacenPT, '1.0-0');
+            rows[4]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.pactivoCirculante, '1.0-0');
+            rows[5]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.pactivoFijo, '1.0-0');
+            rows[6]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.ppasivoCortoPlazo, '1.0-0');
+            rows[7]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.ppasivoTotal, '1.0-0');
+            rows[8]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.pcapitalContable, '1.0-0');
+            rows[9]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.pventasNetas, '1.0-0');
+            rows[10]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.pcostoVentas, '1.0-0');
+            rows[11]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.putilidadBruta, '1.0-0');
+            rows[12]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.pcDist, '1.0-0');
+            rows[13]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.pcAdmin, '1.0-0');
+            rows[14]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.poGastos, '1.0-0');
+            rows[15]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.pcDist + ten.pcAdmin + ten.poGastos, '1.0-0');
+            rows[16]["periodo" + ten.numeroPeriodo] = this.dc.transform(ten.putilidadNeta, '1.0-0');
+            options.columnStyles["periodo" + ten.numeroPeriodo] = { halign: "right" };
+        }
+        doc.autoTable(cols, rows, options);
+        doc.save("Tendencias.pdf");
+    };
     return TendenciasComponent;
 }());
 TendenciasComponent = __decorate([
@@ -9480,10 +9909,10 @@ TendenciasComponent = __decorate([
         selector: 'app-tendencias',
         template: __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/tendencias/tendencias.component.html")
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_operacion_service__["a" /* OperacionService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["DecimalPipe"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common__["DecimalPipe"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["CurrencyPipe"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common__["CurrencyPipe"]) === "function" && _d || Object])
 ], TendenciasComponent);
 
-var _a;
+var _a, _b, _c, _d;
 //# sourceMappingURL=tendencias.component.js.map
 
 /***/ }),

@@ -7,6 +7,7 @@ import { MaquinariaService } from '../../../../services/maquinaria.service';
 import {ZonasService} from '../../../../services/zonas.service';
 import {DecimalPipe} from '@angular/common'
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
+import {CurrencyPipe} from '@angular/common'
 declare var jsPDF: any;
 
 
@@ -71,12 +72,20 @@ export class SidenavPComponent implements OnInit {
   ceditos=[];
   openDes:boolean=false;
   zonas=[];
+  creditos=[{
+    numeroPeriodo:null,
+    creditos:[
+      {nombreCredito:null,
+      monto:null}
+    ]
+  }];
   constructor(private router:Router,
               private _productoService:ProductoService,
               private _operacionService:OperacionService,
               private _proyectosS:ProyectosService,
               private _maquinariaService:MaquinariaService,
               private dc: DecimalPipe,
+              private cp: CurrencyPipe,
               private _zonasService: ZonasService) {
 
     this.proyectoActual=localStorage.getItem('nombreProyecto');
@@ -87,6 +96,8 @@ export class SidenavPComponent implements OnInit {
 
   ngOnInit() {
   }
+
+
 
   verProyectos(){
     this._proyectosS.ocultaCierrePeriodo();
@@ -141,6 +152,7 @@ export class SidenavPComponent implements OnInit {
   }
 
   verDecisiones(){
+
     this.ventas = this._operacionService.returnVentas();
     this.maquinas = this._operacionService.returnMaquinas();
     this.DProductos = this._operacionService.returnDProductos();
@@ -157,6 +169,8 @@ export class SidenavPComponent implements OnInit {
 
     this.openLoad=true;
     setTimeout(() => {
+      this.creditos=this.acomodaCredito();
+      console.log(this.creditos);
       this.openLoad=false;
       this.openDes=true;
       this.totalPer=this.ventas.length*10;
@@ -172,8 +186,8 @@ export class SidenavPComponent implements OnInit {
     let rowVentas=[];
     let colsVentas=[
     {title: "Producto", dataKey: "producto"},
-    {title: "Unidades Vendidas", dataKey: "uVendidas"},
-    {title: "Unidades Almacenadas", dataKey: "uAlmacenadas"}];
+    {title: "Vendidas", dataKey: "uVendidas"},
+    {title: "Almacenadas", dataKey: "uAlmacenadas"}];
 
     let colsMaquinaria=[
     {title: "Maquinaria", dataKey: "maquinaria"},
@@ -187,6 +201,10 @@ export class SidenavPComponent implements OnInit {
     {title: "Producto", dataKey: "producto"},
     {title: "Zonas de Mercado Desarrolladas", dataKey: "zona"}];
 
+
+    let colsCreditos=[
+    {title: "Credito", dataKey: "credito"},
+    {title: "Monto", dataKey: "monto"}];
 
 
     var doc= new jsPDF({
@@ -212,9 +230,11 @@ for(let i=0,x=0;i<this.ventas.length;i++,x++){
     doc.text(30, 35+(x*55), 'Periodo'+(i+1), null, null, 'center');
     doc.line(10, 38+(x*55), 269, 38+(x*55));
 
-      doc.text(52, 44 +(x*55), 'Ventas de Productos', null, null, 'center');
-      doc.text(130, 44+(x*55), 'Maquinaria Adquirida', null, null, 'center');
-      doc.text(217, 44+(x*55), 'Productos y Zonas de Mercado Desarrollados', null, null, 'center');
+      doc.text(43, 44+(x*55), 'Ventas de Productos(unidades)', null, null, 'center');
+      doc.text(102, 44+(x*55), 'Maquinaria Adquirida', null, null, 'center');
+      doc.text(173, 44+(x*55), 'Productos y Mercados Desarrollados', null, null, 'center');
+      doc.text(246, 44+(x*55), 'Créditos Pedidos', null, null, 'center');
+
       rowVentas=[];
             for(let venta of this.ventas[i].ventas){
 
@@ -228,8 +248,7 @@ for(let i=0,x=0;i<this.ventas.length;i++,x++){
             doc.autoTable(colsVentas, rowVentas, {
             margin: {top:47+(x*55),
               left:10},
-
-              tableWidth:85,
+              tableWidth:65,
             headerStyles: {fillColor:0,halign:'center',fontSize:6},
             columnStyles: {
               producto:{halign:'center'},
@@ -251,10 +270,10 @@ for(let i=0,x=0;i<this.ventas.length;i++,x++){
               })
             }
 
-            doc.autoTable(colsMaquinaria, rowMaquinaria, {
+            doc.autoTable(colsMaquinaria, rowMaquinaria,{
             margin: {top:47+(x*55),
-                 left:100},
-            tableWidth:60,
+                 left:80},
+            tableWidth:45,
             headerStyles: {fillColor:0,halign:'center',fontSize:6},
             columnStyles: {
               maquinaria:{halign:'center'},
@@ -276,7 +295,7 @@ for(let i=0,x=0;i<this.ventas.length;i++,x++){
 
             doc.autoTable(colsProductos,rowProductos, {
             margin: {top:47+(x*55),
-                 left:165},
+                 left:130},
             tableWidth:30,
             headerStyles: {fillColor:0,halign:'center',fontSize:6},
             columnStyles: {
@@ -298,12 +317,36 @@ for(let i=0,x=0;i<this.ventas.length;i++,x++){
 
             doc.autoTable(colsMercados, rowMercados, {
             margin: {top:47+(x*55),
-                 left:200},
-            tableWidth:70,
+                 left:165},
+            tableWidth:55,
             headerStyles: {fillColor:0,halign:'center',fontSize:6},
             columnStyles: {
               producto:{halign:'center'},
               zona:{halign:'center'}
+            },
+            bodyStyles:{
+              fontSize:6
+            }
+            });
+
+            let rowCreditos=[];
+            for(let credito of this.creditos[i].creditos){
+              rowCreditos.push({
+                credito:credito.nombreCredito,
+                monto:this.cp.transform(credito.monto,'USD',true,'1.0-0')
+              })
+            }
+
+
+
+            doc.autoTable(colsCreditos, rowCreditos, {
+            margin: {top:47+(x*55),
+                 left:225},
+            tableWidth:43,
+            headerStyles: {fillColor:0,halign:'center',fontSize:6},
+            columnStyles: {
+              credito:{halign:'center'},
+              monto:{halign:'right'}
             },
             bodyStyles:{
               fontSize:6
@@ -339,18 +382,18 @@ for(let i=0,x=0;i<this.ventas.length;i++,x++){
 
   for(let i in this.ventas){
     var space=[
-      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:""},
-      {productoV:"Periodo "+this.ventas[i].numeroPeriodo,cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:""},
-      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:""},
-      {productoV:"Venta de Productos",cVendida:"",cAlmacenada:"",es1:"",maquina:"Maquinaria Adquirida",cMaquina:"",sp2:"",pDesarrollado:" Productos y Zona de Mercado Desarrolladas",esp3:"",pZonas:"",zDesarrolladas:""},
-      {productoV:"Producto",cVendida:"Unidades Vendidas",cAlmacenada:"Unidades Almacenadas",es1:"",maquina:"Maquina",cMaquina:"Cantidad",sp2:"",pDesarrollado:"Producto Desarrollado",esp3:"",pZonas:"Producto",zDesarrolladas:"Zona de Mercado Desarrollada"},
-      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:""},
-      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:""},
-      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:""},
-      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:""},
-      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:""},
-      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:""},
-      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:""},
+      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+      {productoV:"Periodo "+this.ventas[i].numeroPeriodo,cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"",esp4:"",credito:"",montoCredito:""},
+      {productoV:"Venta de Productos",cVendida:"",cAlmacenada:"",es1:"",maquina:"Maquinaria Adquirida",cMaquina:"",sp2:"",pDesarrollado:" Productos y Zona de Mercado Desarrolladas",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"Creditos Pedidos",montoCredito:""},
+      {productoV:"Producto",cVendida:"Unidades Vendidas",cAlmacenada:"Unidades Almacenadas",es1:"",maquina:"Maquina",cMaquina:"Cantidad",sp2:"",pDesarrollado:"Producto Desarrollado",esp3:"",pZonas:"Producto",zDesarrolladas:"Zona de Mercado Desarrollada", esp4:"",credito:"Credito",montoCredito:"Monto"},
+      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
     ];
 
     for(let x=0;x<this.ventas[i].ventas.length;x++){
@@ -375,6 +418,12 @@ for(let i=0,x=0;i<this.ventas.length;i++,x++){
       space[x+5].zDesarrolladas=this.getNameByIdZona(this.DZonas[i].productos[x].idZona)
     }
 
+    for(let x=0;x<this.creditos[i].creditos.length;x++){
+      space[x+5].credito=this.creditos[i].creditos[x].nombreCredito;
+      space[x+5].montoCredito=this.creditos[i].creditos[x].monto;
+    }
+
+
 
     for(let sp of space){
       data.push(sp);
@@ -386,6 +435,26 @@ for(let i=0,x=0;i<this.ventas.length;i++,x++){
 
 new Angular2Csv(data, 'Desiciones');
 
+  }
+
+
+  acomodaCredito(){
+    let creditos=[];
+    for(let i=0;i<this.DProductos.length;i++){
+      let objCred={numeroPeriodo:i+1,creditos:[]}
+
+      for(let cred of this.ceditos){
+        if(cred.numeroPeriodo==i+1){
+          objCred.creditos.push({
+            nombreCredito:cred.nombreCredito,
+            monto:cred.monto
+          })
+        }
+      }
+      creditos.push(objCred)
+    }
+
+    return creditos;
   }
 
 
