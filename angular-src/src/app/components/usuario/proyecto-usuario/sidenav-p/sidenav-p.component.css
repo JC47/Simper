@@ -7,9 +7,9 @@
   background-color: #004581 ;
   position: fixed;
   width:350px;
-  height: 97%;
+  height: 1000px;
   color: #e1ffff;
-  padding-top:4%;
+  margin-top: 85px;
 }
 .nav-side-menu .brand {
   background-color: #001b48;
