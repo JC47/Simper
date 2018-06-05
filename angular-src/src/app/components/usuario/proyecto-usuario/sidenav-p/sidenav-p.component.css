@@ -7,8 +7,10 @@
   background-color: #004581 ;
   position: fixed;
   width:350px;
-  height: 1000px;
+  height: auto;
   color: #e1ffff;
+  bottom: 0;
+  top:10px;
   margin-top: 85px;
 }
 .nav-side-menu .brand {
