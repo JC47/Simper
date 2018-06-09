@@ -29,6 +29,7 @@ export class FlujoComponent implements OnInit {
   balanceFinal = [];
   auxiliaresAnteriores = [];
   prestamos = [];
+  rescate = [];
 
 
   constructor(private _operacionService:OperacionService,
@@ -53,6 +54,7 @@ export class FlujoComponent implements OnInit {
         this.balanceFinal = this._resultadosService.getBalanceFinal();
         this.prestamos = this._operacionService.returnPrestamosActuales();
         this.pagos = this._operacionService.returnPagos();
+        this.rescate = this._operacionService.returnRescate();
     }, 500);
   }
 
@@ -79,6 +81,14 @@ export class FlujoComponent implements OnInit {
     return r;
   }
 
+  getRescates(){
+    var r = 0;
+    for(let b of this.rescate){
+      r += b.monto;
+    }
+    return r;
+  }
+
   getPAcuales(){
     var r = 0;
     for(let p of this.prestamos){
@@ -89,7 +99,7 @@ export class FlujoComponent implements OnInit {
 
   getDisponible(){
     var d = 0;
-    d = this.getCajaBancos() + this.getCobroVentas() + this.getPAcuales();
+    d = this.getCajaBancos() + this.getCobroVentas() + this.getPAcuales() +this.getRescates();
     return d;
   }
 

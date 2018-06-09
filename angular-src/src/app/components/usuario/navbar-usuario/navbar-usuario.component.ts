@@ -339,7 +339,7 @@ export class NavbarUsuarioComponent implements OnInit {
         this._proyectoService.rescatarProyecto(resc.cantidadRescate).subscribe(data => {
           if(data.success){
             this.openRescate=false;
-            this.pasarPeriodo();
+            this.router.navigate(['Usuario/proyecto/financiamiento']);
           }
         });
       }else{

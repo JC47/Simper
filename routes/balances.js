@@ -85,7 +85,7 @@ router.post('/final', (req, res, next) => {
               prestamo.getPagos(idProyecto,numeroPeriodoActual),
               auxiliar.getAuxiliares(numeroPeriodoActual,idProyecto),
               auxiliar.getAuxiliaresVenta(numeroPeriodoActual,idProyecto),
-              variable.getPTU(),variable.getISR(),balance.getCS(idProyecto,numeroPeriodoActual),
+              variable.getPTU(),variable.getISR(),balance.getMontoRescate(idProyecto,numeroPeriodoActual),
               function(balanceBase,prestamos,pagos,auxCompleto,auxesVentas,ptu,isr,cs){
 
     //ISR Y PTU
@@ -201,13 +201,13 @@ router.post('/final', (req, res, next) => {
     var depT = balanceBase[0].depEqTrans + getDepTrans(auxesVentas);
 
     var cajaBancos = balanceBase[0].cajaBancos + (cantidadPrestada+cantidadPrestadaAmenosAnio-interesesAnticipo)- PPagar -PPagarAmenosAnio - interesesPago - ISRCajaBancos - balanceBase[0].PTUPorPagar - balanceBase[0].imptosPorPagar + balanceBase[0].cuentasPorCobrar - balanceBase[0].proveedores - balanceBase[0].IVAPorEnterar + cobroPorVentasCajaBancos - IVACajaBancos - comprasCajaBancos - maqYdesarrollos - salidas;
+    var capitalSocial = balanceBase[0].capitalSocial;
 
-    var excedente = 0;
-    if(balanceBase[0].capitalSocial != cs[0].capitalSocial){
-      excedente = cs[0].capitalSocial - balanceBase[0].capitalSocial;
+    if(cs.length > 0){
+      cajaBancos += cs[0].monto;
+      capitalSocial += cs[0].monto;
     }
 
-    cajaBancos += excedente;
 
     var x = {
       imptosPorPagar:imptsPorPagar,
@@ -226,7 +226,8 @@ router.post('/final', (req, res, next) => {
       depEdif:depE,
       depMueblesEnseres:depME,
       depEqTrans:depT,
-      porAmortizar:xAmortizar
+      porAmortizar:xAmortizar,
+      capitalSocial:capitalSocial
     }
     balance.updateBalance(numeroPeriodoActual, idProyecto, x);
   }).then( function () {
@@ -268,22 +269,17 @@ router.get('/:id', (req,res,next) => {
 
 //Rutas Rescate
 
-router.post('/validarescate', (req,res,next) => {
+router.post('/getRescate', (req,res,next) => {
 
-  var montoRescate = req.body.montoRescate;
-  var idUsuario = req.body.idUsuario;
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
 
   Promise.resolve()
   .then( function () {
-    return balance.getRescate(idUsuario);
+    return balance.getMontoRescate(idProyecto,numeroPeriodo);
   })
-  .then(function (rescate) {
-
-    if (rescate[0].minRescate>=montoRescate && rescate[1].maxRescate<=montoRescate) {
-        res.json({success: true, msg:"Estás dentro del rango"});
-    }else {
-        res.json({success: true, msg:"Estás fuera del rango"});
-    }
+  .then(function (data) {
+    res.json({success:true, msg:"Operacion completa",datos:data});
   })
   .catch(function (err) {
     console.log(err);
@@ -291,27 +287,29 @@ router.post('/validarescate', (req,res,next) => {
   });
 });
 
-router.post('/rescatecontable', (req,res,next) => {
+router.post('/addRescate', (req,res,next) => {
 
   var montoRescate = req.body.montoRescate;
-  var idProyecto = req.body.idProyecto;
-  var numeroPeriodo = req.body.numeroPeriodo;
+  var idProyectoR = req.body.idProyecto;
+  var numeroPeriodoR = req.body.numeroPeriodo;
 
   Promise.resolve()
   .then( function () {
-    return balance.getBalanceById(idProyecto,numeroPeriodo);
+    return balance.getMontoRescate(idProyectoR,numeroPeriodoR);
   })
   .then(function (balanceX) {
-    var n = balanceX[0].cajaBancos + montoRescate;
-    var n2 = balanceX[0].capitalSocial + montoRescate;
-    var x = {
-      cajaBancos:n,
-      capitalSocial:n2
+    if(balanceX.length == 0){
+      var x = {
+        numeroPeriodo:numeroPeriodoR,
+        idProyecto:idProyectoR,
+        monto:montoRescate
+      }
+      balance.addRescate(x);
+      res.json({success:true, msg:"Operacion completa"});
     }
-    balance.updateBalance(numeroPeriodo,idProyecto,x);
-  })
-  .then(function () {
-    return res.json({success:true, msg:"Operacion completa"});
+    else{
+       res.json({success:false, msg:"Operacion incompleta"});;
+    }
   })
   .catch(function (err) {
     console.log(err);

@@ -49,7 +49,6 @@ export class TendenciasComponent implements OnInit {
               private cp: CurrencyPipe) {
     this.tendencias = this._operacionService.returnTendencias();
     console.log(this.tendencias);
-    this.proyectos=this._proyectoService.returnUsuarios();
     setTimeout(() => {
     this.proyectoActual=this.getNameById(localStorage.getItem('idProyecto'));
     this.graf1=this.getGraf1();
@@ -94,11 +93,7 @@ export class TendenciasComponent implements OnInit {
 
 
   getNameById(idProyecto){
-    for(let proyecto of this.proyectos){
-      if(proyecto.idProyecto==idProyecto)
-        return proyecto.nombreProyecto
-    }
-      return "id NO encontrado"
+    return localStorage.getItem('nombreProyecto');
 
   }
 
@@ -159,7 +154,7 @@ export class TendenciasComponent implements OnInit {
               {name:"Utilidad Neta",
               value:Math.trunc(periodo.putilidadNeta)},
               {name:"Total de Gastos de Operación",
-              value:Math.trunc(periodo.pcDist+periodo.pcAdmin+periodo.poGastos)}
+              value:Math.trunc(periodo.ptotalGastos)}
             ]
           }
           data.push(gTemp)
@@ -175,7 +170,7 @@ export class TendenciasComponent implements OnInit {
             name:"Periodo "+periodo.numeroPeriodo,
             series:[
               {name:"Total de Gastos de Operación",
-              value:Math.trunc(periodo.pcDist+periodo.pcAdmin+periodo.poGastos)},
+              value:Math.trunc(periodo.ptotalGastos)},
               {name:"Gastos de Distribución",
               value:Math.trunc(periodo.pcDist)},
               {name:"Gastos de Administración",

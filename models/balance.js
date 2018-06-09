@@ -57,3 +57,13 @@ module.exports.getRescate = function (idUsuario) {
   var query = "select minRescate,maxRescate from usuario where idUsuario = "+idUsuario+" ";
   return querySql(query);
 }
+
+module.exports.getMontoRescate = function(idProyecto,numeroPeriodo){
+  var query = "select monto from rescate where idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+"";
+  return querySql(query);
+}
+
+module.exports.addRescate = function(data) {
+  var query = "insert into rescate set ?";
+  return querySql(query,data);
+}
