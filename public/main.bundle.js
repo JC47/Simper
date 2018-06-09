@@ -10430,6 +10430,11 @@ var ProyectosComponent = (function () {
         this.confModalDelete.show();
     };
     ProyectosComponent.prototype.openEdit = function (proyecto) {
+        console.log(proyecto);
+        this.editForm.controls['idProyecto'].setValue(proyecto.idProyecto);
+        this.editForm.controls['nombreProyecto'].setValue(proyecto.nombreProyecto);
+        this.editForm.controls['fechaCreacion'].setValue(proyecto.fechaCreacion);
+        this.editForm.controls['Usuario_idUsuario'].setValue(proyecto.Usuario_idUsuario);
         this.editForm.setValue(proyecto);
         console.log("hola", proyecto);
         this.modalEdit.show();
