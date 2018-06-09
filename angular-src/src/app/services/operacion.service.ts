@@ -403,6 +403,28 @@ export class OperacionService {
     return this.http.post('decisiones/getCreditos/',x,{headers}).map(res => res.json());
   }
 
+  rescate(){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:localStorage.getItem('numeroPeriodo')
+    }
+    return this.http.post('balance/getRescate/',x,{headers}).map(res => res.json());
+  }
+
+  returnRescate(){
+    var x = [];
+    this.rescate().subscribe(data => {
+      for(let key in data.datos){
+        x.push(data.datos[key]);
+      }
+    });
+    return x;
+  }
+
+
   returnVentas(){
     var x = [];
     this.ventas().subscribe(data => {

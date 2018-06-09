@@ -81,7 +81,7 @@ export class ProyectosComponent implements OnInit {
 
   }
 
-  agregaProyecto(proyecto:proyecto){
+  agregaProyecto(proyecto){
     this._proyectosService.agregaProyecto(proyecto);
     this.modalNew.hide();
     this.alerts.push({
@@ -92,7 +92,7 @@ export class ProyectosComponent implements OnInit {
 
   }
 
-  modificaProyecto(proyecto:proyecto){
+  modificaProyecto(proyecto){
     this.modalEdit.hide()
 
     console.log(this.alerts);
@@ -105,15 +105,17 @@ export class ProyectosComponent implements OnInit {
 
   }
 
-  confDelete(proyecto:proyecto){
+  confDelete(proyecto){
     this.proyectoDelete=proyecto;
     this.confModalDelete.show();
 
   }
 
-  openEdit(proyecto:proyecto){
-    this.editForm.setValue(proyecto);
+  openEdit(proyecto){
     console.log("hola",proyecto)
+    this.editForm.controls['idProyecto'].setValue(proyecto.idProyecto);
+    this.editForm.controls['nombreProyecto'].setValue(proyecto.nombreProyecto);
+    this.editForm.controls['fechaCreacion'].setValue(proyecto.fechaCreacion);
     this.modalEdit.show();
 
 

@@ -115,10 +115,6 @@ export class AnalisisComponent implements OnInit {
     var T = 0;
 
     T += this.getUtilidadOperacion();
-
-    for(let i of this.auxiliarT){
-      T -= i
-    }
     for(let i2 of this.intereses){
       T -= i2;
     }

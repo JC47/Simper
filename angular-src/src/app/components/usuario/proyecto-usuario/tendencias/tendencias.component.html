@@ -92,7 +92,7 @@
 
       <tr>
         <td>Total de Gastos de Operación</td>
-        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.cDist+periodo.cAdmin+periodo.oGastos|currency:'USD':true:'1.0-0'}}</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.totalGastos|currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
       <tr>
@@ -213,7 +213,7 @@
 
       <tr>
         <td>Total de Gastos de Operación</td>
-        <td class="text-right" *ngFor="let periodo of tendencias">{{getTotal(periodo.numeroPeriodo,periodo.pcDist+periodo.pcAdmin+periodo.poGastos)|number:'1.0-0'}}</td>
+        <td class="text-right" *ngFor="let periodo of tendencias">{{periodo.ptotalGastos|number:'1.0-0'}}</td>
       </tr>
 
       <tr>

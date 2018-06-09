@@ -19,8 +19,9 @@ var pool = mysql.createPool({
 //     database: 'basesimv1'
 // });
 
-//-w=J2vS5&Y?7@-
-//ssh simulado@52.52.49.94 -p 333
+//ssh root@138.68.56.0
+//mysqldump -u root -p basesimv1 > basesimv1.sql
+//cornelio96
 
 function getSqlConnection() {
     return pool.getConnectionAsync().disposer(function (connection) {

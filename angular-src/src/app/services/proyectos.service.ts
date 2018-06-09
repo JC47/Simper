@@ -401,7 +401,7 @@ returnUsuarios(){
       idProyecto:localStorage.getItem('idProyecto'),
       numeroPeriodo:localStorage.getItem('numeroPeriodo')
     }
-    return this.http.post('balance/rescatecontable/', x, {headers}).map( res => res.json());
+    return this.http.post('balance/addRescate/', x, {headers}).map( res => res.json());
   }
 
 
