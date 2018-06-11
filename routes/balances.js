@@ -295,7 +295,7 @@ router.post('/addRescate', (req,res,next) => {
 
   Promise.resolve()
   .then( function () {
-    return balance.getMontoRescate(idProyectoR,numeroPeriodoR);
+    return balance.validaRescate(idProyectoR);
   })
   .then(function (balanceX) {
     if(balanceX.length == 0){

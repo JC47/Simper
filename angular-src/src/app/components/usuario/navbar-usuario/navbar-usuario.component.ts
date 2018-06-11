@@ -28,6 +28,7 @@ export class NavbarUsuarioComponent implements OnInit {
   confZonas:boolean=false;
   openBien:boolean=false;
   openLoad:boolean=false;
+  sobreRescate:boolean=false;
   openLoadDatos:boolean=false;
   alert:boolean=false;
   numeroPeriodoSelected:any;
@@ -340,6 +341,10 @@ export class NavbarUsuarioComponent implements OnInit {
           if(data.success){
             this.openRescate=false;
             this.router.navigate(['Usuario/proyecto/financiamiento']);
+          }
+          else{
+            this.openRescate=false;
+            this.sobreRescate=true;
           }
         });
       }else{
