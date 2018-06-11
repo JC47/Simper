@@ -3,7 +3,6 @@ import {CreditosService} from '../../services/creditos.service';
 import {NgbModal, ModalDismissReasons,NgbActiveModal,NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {FormControl, FormGroup, Validators,FormArray,FormBuilder} from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-creditos',
@@ -19,6 +18,7 @@ export class CreditosComponent implements OnInit {
   creditos = [];
   closeResult:string;
   newForm:FormGroup;
+  pagoAForm:boolean=false;
   editForm:FormGroup;
   public alerts: any = [];
   creditoDelete={
@@ -35,6 +35,8 @@ export class CreditosComponent implements OnInit {
   constructor(private _creditosService:CreditosService,
               private modalService: NgbModal,
               private _fb:FormBuilder) {
+
+
 
                 this.newForm = this._fb.group({
                         nombreCredito:['',Validators.required],
@@ -62,6 +64,13 @@ export class CreditosComponent implements OnInit {
 
   ngOnInit() {
 
+                    this.newForm.valueChanges.subscribe(val=>{
+                      if(val.tipo==1|| val.tipo==3){
+                        this.pagoAForm=true;
+                      }else{
+                        this.pagoAForm=false;
+                      }
+                    })
 
   }
 
@@ -127,6 +136,13 @@ export class CreditosComponent implements OnInit {
     });
 
     this.editForm.controls['pagosCredito']=this._fb.array([]);
+  }
+
+
+  onChange(){
+    this.newForm.valueChanges.subscribe(val=>{
+      console.log(val)
+    })
   }
 
   eliminaCredito(id){

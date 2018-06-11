@@ -544,7 +544,7 @@ export class AnalisisComponent implements OnInit {
       {"signo":"=","concepto":"Margen Neto(%)","cantidad":this.dc.transform(this.getMargenNeto()*10,'1.2-2')+"%"},
       {"signo":"*","concepto":"Rotación de Activos","cantidad":this.dc.transform(this.getRotacionActivos(),'1.2-2')},
       {"signo":"=","concepto":"Rentabilidad de Activos(%)","cantidad":this.dc.transform(this.getRentabilidadSobreActivos()*100,'1.2-2')+"%"},
-      {"signo":"*","concepto":"Placa Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.2-2')},
+      {"signo":"*","concepto":"Palanca Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.2-2')},
       {"signo":"=","concepto":"Rentabilidad s/Capital Contable","cantidad":this.dc.transform(this.getRentabilidadSobreCapital(),'1.2-2')}
 
       ];
@@ -609,7 +609,7 @@ export class AnalisisComponent implements OnInit {
        {"signo":"=","concepto":"Margen Neto(%)","cantidad":this.dc.transform(this.getMargenNeto()*10,'1.2-2')},
        {"signo":"*","concepto":"Rotación de Activos","cantidad":this.dc.transform(this.getRotacionActivos(),'1.2-2')},
        {"signo":"=","concepto":"Rentabilidad de Activos(%)","cantidad":this.dc.transform(this.getRentabilidadSobreActivos()*100,'1.2-2')},
-       {"signo":"*","concepto":"Placa Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.2-2')},
+       {"signo":"*","concepto":"Palanca Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.2-2')},
        {"signo":"=","concepto":"Rentabilidad s/Capital Contable","cantidad":this.dc.transform(this.getRentabilidadSobreCapital(),'1.2-2')}
 
       ];
@@ -650,7 +650,7 @@ export class AnalisisComponent implements OnInit {
           {"signo":"-","concepto":"Pasivo Total","cantidad":this.dc.transform(this.getPasivoTotal(),'1.0-0')},
           {"signo":"/","concepto":"Capital Contable","cantidad":this.dc.transform(this.getCapitalContable(),'1.0-0')},
           {"signo":"","concepto":"","cantidad":""},
-          {"signo":"=","concepto":"Placa Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.2-2')}
+          {"signo":"=","concepto":"Palanca Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.2-2')}
 
           ];
 
@@ -717,7 +717,7 @@ export class AnalisisComponent implements OnInit {
              {"signo":"-","concepto":"Pasivo Total","cantidad":this.dc.transform(this.getPasivoTotal(),'1.0-0')},
              {"signo":"/","concepto":"Capital Contable","cantidad":this.dc.transform(this.getCapitalContable(),'1.0-0')},
              {"signo":"","concepto":"","cantidad":""},
-             {"signo":"=","concepto":"Placa Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.2-2')}
+             {"signo":"=","concepto":"Palanca Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.2-2')}
 
             ];
 
@@ -754,7 +754,7 @@ export class AnalisisComponent implements OnInit {
                       {"grupo":"Días Promedio de c x p","concepto":"Días del Periodo","cantidad":365,"numero": this.dc.transform(this.getDiasPPromedio(),'1.2-2')},
                       {"grupo":"","concepto":"Rotación de c x p","cantidad":this.cp.transform(this.getRotacionCP(),'USD',true,'1.0-0'),"numero":""},
                       {"grupo":"Rotación de I.A.T.","concepto":"Costo de lo Vendido","cantidad":this.cp.transform(this.getTotalCostosVentas(),'USD',true,'1.0-0'),"numero":this.dc.transform(this.getRotacionIAT(),'1.2-2')},
-                      {"grupo":"","concepto":"Promedio de inv art term","cantidad":this.cp.transform(this.getPromedioInvArtTerm(),'USD',true,'1.0-0') ,"numero":""},
+                      {"grupo":"","concepto":"Promedio de Inversión de Artículo Terminado","cantidad":this.cp.transform(this.getPromedioInvArtTerm(),'USD',true,'1.0-0') ,"numero":""},
                       {"grupo":"Días promedio I.A.T.","concepto":"Días del Periodo","cantidad":365,"numero":this.dc.transform(this.getDiasPromedioIAT(),'1.2-2')},
                       {"grupo":"","concepto":"Rotación I.A.T.","cantidad":this.cp.transform(this.getRotacionIAT(),'USD',true,'1.0-0'),"numero":""},
                       {"grupo":"Rotación de Materia Prima","concepto":"Costo de M.P. empleada","cantidad":this.cp.transform(this.getCostoMPEmpleada(),'USD',true,'1.0-0'),"numero":this.dc.transform(this.getRotacionMP(),'1.2-2')},
@@ -845,11 +845,11 @@ export class AnalisisComponent implements OnInit {
                         {"grupo":"Días Promedio de c x p","concepto":"Días del Periodo","cantidad":365,"numero":this.getDiasPPromedio()},
                         {"grupo":"","concepto":"Rotación de c x p","cantidad":this.getRotacionCP(),"numero":""},
                         {"grupo":"Rotación de I.A.T.","concepto":"Costo de lo Vendido","cantidad":this.getTotalCostosVentas(),"numero":this.getRotacionIAT()},
-                        {"grupo":"","concepto":"Promedio de inv art term","cantidad":this.getPromedioInvArtTerm(),"numero":""},
+                        {"grupo":"","concepto":"Promedio de Inversión de Artículo Terminado","cantidad":this.getPromedioInvArtTerm(),"numero":""},
                         {"grupo":"Días promedio I.A.T.","concepto":"Días del Periodo","cantidad":365,"numero":this.getDiasPromedioIAT()},
                         {"grupo":"","concepto":"Rotación I.A.T.","cantidad":this.getRotacionIAT(),"numero":""},
                         {"grupo":"Rotación de Materia Prima","concepto":"Costo de M.P. empleada","cantidad":this.getCostoMPEmpleada(),"numero":this.getRotacionMP()},
-                        {"grupo":"","concepto":"Prom in mat primas","cantidad":this.getPromIMP(),"numero":""},
+                        {"grupo":"","concepto":"Promedio de Inversión de Materias Primas","cantidad":this.getPromIMP(),"numero":""},
                         {"grupo":"Días Promedio I.M.P.","concepto":"Días del Periodo","cantidad":365,"numero":this.getDiasPromedioIMP()},
                         {"grupo":"","concepto":"Rotación I.M.P.","cantidad":this.getRotacionMP(),"numero":""},
                         {"grupo":"Margen Neto de Utilidad","concepto":"Utilidad Neta","cantidad":this.getUtilidadNeta(),"numero":this.getMargenNetoUtilidad()},

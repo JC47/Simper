@@ -152,14 +152,14 @@
    </fieldset> -->
 
 
-            <div class="form-group row text-center ">
+            <div class="form-group row text-center " *ngIf="pagoAForm">
             <label class="col-5 col-form-label">Pago Anticipado</label>
 
             <div class="input-group col-6 has-success"
             [ngClass]="{'has-danger': !newForm.get('pagoAnticipado').valid}">
               <span class="input-group-addon">$</span>
               <input type="number" class="form-control"
-              formControlName="pagoAnticipado">
+              formControlName="pagoAForm">
 
             </div>
 

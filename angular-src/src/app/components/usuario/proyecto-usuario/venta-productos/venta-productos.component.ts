@@ -251,6 +251,7 @@ openModalVenta(idZona,idProducto){
 
 
       setTimeout(()=>{this.almacen=this._operacionService.returnAlmacen()}, 1000);
+      this.almacenForm.controls['cantidadAlmacen'].reset();
 
   }
 

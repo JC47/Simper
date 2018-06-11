@@ -777,29 +777,27 @@
               </tr>
 
               <tr>
-                <td class="text-center">Costo Fijo</td>
+                <td class="text-center">Costos Fijos De Fabricación</td>
                 <td class="text-right">{{producto.costosFijosFabri|currency:'USD':true:'1.0-0'}}</td>
               </tr>
 
               <tr>
-                <td class="text-center">Depreciación por Administración</td>
-                <td class="text-right">{{producto.depAdmon|currency:'USD':true:'1.0-0'}}</td>
+                <td class="text-center">Costo Variable Unitario de Fabricación</td>
+                <td class="text-right">{{producto.costoVarUniFabri|currency:'USD':true:'1.0-0'}}</td>
               </tr>
 
-              <tr>
-                <td class="text-center">Deprecicación por Distribución</td>
-                <td class="text-right">{{producto.depDistribucion|currency:'USD':true:'1.0-0'}}</td>
-              </tr>
 
               <tr>
                 <td class="text-center">Gastos Fijos de Distribución</td>
                 <td class="text-right">{{producto.gastosFijosDist|currency:'USD':true:'1.0-0'}}</td>
               </tr>
 
+
               <tr>
-                <td class="text-center">Costo Variable de Fabricación</td>
-                <td class="text-right">{{producto.costoVarUniFabri|currency:'USD':true:'1.0-0'}}</td>
+                <td class="text-center">Incluye Deprecicación por:</td>
+                <td class="text-right">{{producto.depDistribucion|currency:'USD':true:'1.0-0'}}</td>
               </tr>
+
 
               <tr>
                 <td class="text-center">Costo Variable Unitario de Distribución</td>
@@ -810,6 +808,12 @@
                 <td class="text-center">Gastos Fijos de Administración</td>
                 <td class="text-right">{{producto.gastosFijosAdmon|currency:'USD':true:'1.0-0'}}</td>
               </tr>
+
+              <tr>
+                <td class="text-right">Incluye Depreciación por:</td>
+                <td class="text-right">{{producto.depAdmon|currency:'USD':true:'1.0-0'}}</td>
+              </tr>
+
 
               <tr>
                 <td class="text-center">Costo MP por unidad</td>

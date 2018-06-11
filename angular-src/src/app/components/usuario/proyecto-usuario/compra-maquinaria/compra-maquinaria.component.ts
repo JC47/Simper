@@ -17,6 +17,8 @@ export class CompraMaquinariaComponent implements OnInit {
   maquinas = new Array();
   directional: boolean = false;
   openLoad: boolean;
+  maqOrden:any;
+  maqOrdenC:any;
   openConf:boolean;
   productos = new Array();
   maquinasCompradas:any[]=[];
@@ -63,6 +65,9 @@ export class CompraMaquinariaComponent implements OnInit {
     setTimeout(() => {
      this.maqSelectedAdd=this.maquinas[0];
      console.log(this.maqSelectedAdd)
+     this.maqOrden=this.agrupaMaq(this.maquinas);
+     this.maqOrdenC=this.agrupaMaq(this.maquinasCompradas)
+     console.log(this.maqOrdenC)
    }, 500);
 
    setTimeout(() => {
@@ -73,6 +78,24 @@ export class CompraMaquinariaComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  agrupaMaq(maquinas){
+    let maq=[];
+
+    for(let p of this.productos){
+      let prodG={
+        producto:p.idProducto,
+        maquinas:[]
+      };
+      for(let m of maquinas){
+        if(m.Producto_idProducto==p.idProducto){
+          prodG.maquinas.push(m)
+        }
+      }
+      maq.push(prodG);
+    }
+    return maq
   }
 
 

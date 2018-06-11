@@ -229,81 +229,85 @@
                   [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
                 </div>
 
-                    <table class="table table-hover text-center">
-                      <thead class="text-center">
-                        <tr>
-                          <th class="text-center">Concepto</th>
-                          <th class="text-center">Cantidad</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td class="text-center">Costo de Desarrollo</td>
-                          <td class="text-right">{{producto.costoDes|currency:'USD':true:'1.0-0'}}</td>
-                        </tr>
+                <table class="table table-hover text-center">
+                  <thead class="text-center">
+                    <tr>
+                      <th class="text-center">Concepto</th>
+                      <th class="text-center">Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center">Costo de Desarrollo</td>
+                      <td class="text-right">{{producto.costoDes|currency:'USD':true:'1.0-0'}}</td>
+                    </tr>
 
-                        <tr>
-                          <td class="text-center">Tiempo de Desarrollo</td>
-                          <td class="text-right">{{producto.tiempoDes|number:'1.0-0'}}</td>
-                        </tr>
+                    <tr>
+                      <td class="text-center">Tiempo de Desarrollo</td>
+                      <td class="text-right">{{producto.tiempoDes|number:'1.0-0'}}</td>
+                    </tr>
 
-                        <tr>
-                          <td class="text-center">Precio de Venta</td>
-                          <td class="text-right">{{producto.precioVenta|currency:'USD':true:'1.0-0'}}</td>
-                        </tr>
+                    <tr>
+                      <td class="text-center">Precio de Venta</td>
+                      <td class="text-right">{{producto.precioVenta|currency:'USD':true:'1.0-0'}}</td>
+                    </tr>
 
-                        <tr>
-                          <td class="text-center">Costo Fijo</td>
-                          <td class="text-right">{{producto.costosFijosFabri|currency:'USD':true:'1.0-0'}}</td>
-                        </tr>
+                    <tr>
+                      <td class="text-center">Costos Fijos De Fabricación</td>
+                      <td class="text-right">{{producto.costosFijosFabri|currency:'USD':true:'1.0-0'}}</td>
+                    </tr>
 
-                        <tr>
-                          <td class="text-center">Depreciación por Administración</td>
-                          <td class="text-right">{{producto.depAdmon|currency:'USD':true:'1.0-0'}}</td>
-                        </tr>
+                    <tr>
+                      <td class="text-center">Costo Variable Unitario de Fabricación</td>
+                      <td class="text-right">{{producto.costoVarUniFabri|currency:'USD':true:'1.0-0'}}</td>
+                    </tr>
 
-                        <tr>
-                          <td class="text-center">Deprecicación por Distribución</td>
-                          <td class="text-right">{{producto.depDistribucion|currency:'USD':true:'1.0-0'}}</td>
-                        </tr>
 
-                        <tr>
-                          <td class="text-center">Gastos Fijos de Distribución</td>
-                          <td class="text-right">{{producto.gastosFijosDist|currency:'USD':true:'1.0-0'}}</td>
-                        </tr>
+                    <tr>
+                      <td class="text-center">Gastos Fijos de Distribución</td>
+                      <td class="text-right">{{producto.gastosFijosDist|currency:'USD':true:'1.0-0'}}</td>
+                    </tr>
 
-                        <tr>
-                          <td class="text-center">Costo Variable de Fabricación</td>
-                          <td class="text-right">{{producto.costoVarUniFabri|currency:'USD':true:'1.0-0'}}</td>
-                        </tr>
 
-                        <tr>
-                          <td class="text-center">Costo Variable Unitario de Distribución</td>
-                          <td class="text-right">{{producto.costoVarUniDist|currency:'USD':true:'1.0-0'}}</td>
-                        </tr>
+                    <tr style="font-size:15px">
+                      <td class="text-right">Incluye Deprecicación por:</td>
+                      <td class="text-right">{{producto.depDistribucion|currency:'USD':true:'1.0-0'}}</td>
+                    </tr>
 
-                        <tr>
-                          <td class="text-center">Gastos Fijos de Administración</td>
-                          <td class="text-right">{{producto.gastosFijosAdmon|currency:'USD':true:'1.0-0'}}</td>
-                        </tr>
 
-                        <tr>
-                          <td class="text-center">Costo MP por unidad</td>
-                          <td class="text-right">{{producto.costosMPPUniProd|currency:'USD':true:'1.0-0'}}</td>
-                        </tr>
+                    <tr>
+                      <td class="text-center">Costo Variable Unitario de Distribución</td>
+                      <td class="text-right">{{producto.costoVarUniDist|currency:'USD':true:'1.0-0'}}</td>
+                    </tr>
 
-                        <tr>
-                          <td class="text-center">Unidades MP por unidad producida</td>
-                          <td class="text-right">{{producto.uniMP|number:'1.0-0'}}</td>
-                        </tr>
+                    <tr>
+                      <td class="text-center">Gastos Fijos de Administración</td>
+                      <td class="text-right">{{producto.gastosFijosAdmon|currency:'USD':true:'1.0-0'}}</td>
+                    </tr>
 
-                        <tr>
-                          <td class="text-center">Costo Unitario</td>
-                          <td class="text-right">{{producto.costoUni|currency:'USD':true:'1.0-0'}}</td>
-                        </tr>
-                      </tbody>
+                    <tr>
+                      <td class="text-right">Incluye Depreciación por:</td>
+                      <td class="text-right">{{producto.depAdmon|currency:'USD':true:'1.0-0'}}</td>
+                    </tr>
 
-                    </table>
+
+                    <tr>
+                      <td class="text-center">Costo MP por unidad</td>
+                      <td class="text-right">{{producto.costosMPPUniProd|currency:'USD':true:'1.0-0'}}</td>
+                    </tr>
+
+                    <tr>
+                      <td class="text-center">Unidades MP por unidad producida</td>
+                      <td class="text-right">{{producto.uniMP|number:'1.0-0'}}</td>
+                    </tr>
+
+                    <tr>
+                      <td class="text-center">Costo Unitario</td>
+                      <td class="text-right">{{producto.costoUni|currency:'USD':true:'1.0-0'}}</td>
+                    </tr>
+                  </tbody>
+
+                </table>
         </accordion-group>
       </accordion>
 

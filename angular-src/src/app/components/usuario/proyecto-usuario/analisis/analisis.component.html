@@ -96,7 +96,7 @@
 
       <tr bgcolor="DF060A" style="color:white">
         <td>*</td>
-        <td>Placa Financiera</td>
+        <td>Palanca Financiera</td>
         <td class="text-right">{{getActivoCapitalTotal()|number:'1.2-2'}}</td>
       </tr>
 
@@ -251,7 +251,7 @@
 
       <tr bgcolor="DF060A" style="color:white">
         <td>=</td>
-        <td>Palanaca Financiera</td>
+        <td>Palanca Financiera</td>
         <td class="text-right">{{getActivoCapitalTotal() |number:'1.2-2'}}</td>
 
       </tr>
@@ -319,7 +319,7 @@
 
 
         <tr>
-          <td bgcolor="DF060A" style="color:white">Rotación de Cuentas x Cobrar</td>
+          <td bgcolor="DF060A" style="color:white">Rotación de Cuentas por Cobrar</td>
           <td>Ventas de Créditos</td>
           <td class="text-right">{{getVentasACredito()|currency:'USD':true:'1.0-0'}}</td>
           <td class="text-right" bgcolor="DF060A" style="color:white">{{getRotacionCC()|number:'1.2-2'}}</td>
@@ -338,7 +338,7 @@
         <tr>
           <td bgcolor="DF060A" style="color:white">Días promedio de Cartera</td>
           <td>Días del Periodo</td>
-          <td class="text-center">365</td>
+          <td class="text-right">365</td>
           <td class="text-right" bgcolor="DF060A" style="color:white">{{getDiasPPromedioDeCartera()|number:'1.2-2'}}</td>
         </tr>
 
@@ -377,7 +377,7 @@
         <tr>
           <td bgcolor="DF060A" style="color:white">Días promedio de c x p</td>
           <td>Días del Periodo</td>
-          <td class="text-center">365</td>
+          <td class="text-right">365</td>
           <td class="text-right" bgcolor="DF060A" style="color:white">{{getDiasPPromedio()|number:'1.2-2'}}</td>
         </tr>
 
@@ -401,7 +401,7 @@
 
         <tr>
           <td></td>
-          <td>Promedio de inv art term</td>
+          <td>Promedio de Inverción de Articulo Términado</td>
           <td class="text-right">{{getPromedioInvArtTerm()|currency:'USD':true:'1.0-0'}}</td>
           <td></td>
         </tr>
@@ -409,9 +409,9 @@
 
 
         <tr>
-          <td bgcolor="DF060A" style="color:white">Días primedio I.A.T.</td>
+          <td bgcolor="DF060A" style="color:white">Días Promedio I.A.T.</td>
           <td>Días del Periodo</td>
-          <td class="text-center">365</td>
+          <td class="text-right">365</td>
           <td  class="text-right" bgcolor="DF060A" style="color:white">{{getDiasPromedioIAT()|number:'1.2-2'}}</td>
         </tr>
 
@@ -434,7 +434,7 @@
 
         <tr>
           <td></td>
-          <td>Prom in mat primas </td>
+          <td>Promedio de Inversión de Materia Prima </td>
           <td class="text-right">{{getPromIMP()|currency:'USD':true:'1.0-0'}}</td>
           <td></td>
         </tr>
@@ -444,7 +444,7 @@
         <tr>
           <td bgcolor="DF060A" style="color:white">Días Promedio I.M.P.</td>
           <td>Días del Periodo</td>
-          <td class="text-center">365</td>
+          <td class="text-right">365</td>
           <td class="text-right" bgcolor="DF060A" style="color:white">{{getDiasPromedioIMP()|number:'1.2-2'}}</td>
         </tr>
 
@@ -477,7 +477,7 @@
 
         <tr>
           <td bgcolor="DF060A" style="color:white">Margen Bruto de Utilidad</td>
-          <td>Utilidad antes int. e imptos</td>
+          <td>Utilidad antes Int e Impuestos</td>
           <td class="text-right">{{getUtilidadOperacion()|currency:'USD':true:'1.0-0'}}</td>
           <td class="text-right" bgcolor="DF060A" style="color:white">{{getMargenBrutoUtilidad()|number:'1.2-2'}}</td>
         </tr>
@@ -500,7 +500,7 @@
 
         <tr>
           <td></td>
-          <td>Capital Contable</td>c
+          <td>Capital Contable</td>
           <td class="text-right">{{getCapitalContable()|currency:'USD':true:'1.0-0'}}</td>
           <td></td>
         </tr>
@@ -552,8 +552,8 @@
         </tr>
 
         <tr>
-          <td bgcolor="DF060A" style="color:white">Coobertura de Intereses</td>
-          <td>Utilidad antes int e imptos</td>
+          <td bgcolor="DF060A" style="color:white">Cobertura de Intereses</td>
+          <td>Utilidad Antes Int e Impuestos</td>
           <td class="text-right">{{getUtilidadOperacion()|currency:'USD':true:'1.0-0'}}</td>
           <td class="text-right" bgcolor="DF060A" style="color:white">{{getCoberturaIntereses()|number:'1.2-2'}}</td>
         </tr>

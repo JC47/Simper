@@ -287,3 +287,311 @@
   </div>
 
 </div>
+
+
+
+
+
+
+
+<div class="row" style="margin-bottom:20px">
+  <div class="col-12">
+    <h2 class="col-12 text-center">Integrales Balance General</h2>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-10 offset-1">
+    <table class="table table-responsive table-hover" id="tabla1">
+
+      <tr>
+        <th class="table-active"></th>
+        <th colspan="2" class="text-center" *ngFor="let periodo of integrales">Periodo {{periodo.numeroPeriodo}}</th>
+      </tr>
+
+
+            <tr>
+              <th class="table-active">Derechos</th>
+              <td class="table-active" *ngFor="let per of balanceTable[1]"></td>
+            </tr>
+
+            <tr>
+              <td class="table-active" nowrap>A Menos de un Año</td>
+              <td class="table-active" *ngFor="let per of balanceTable[0]"></td>
+            </tr>
+
+            <tr>
+              <td>Caja Bancos</td>
+              <td class="text-right" *ngFor="let per of balanceTable[0]">{{per}}</td>
+            </tr>
+
+            <tr>
+              <td>Cuentas por Cobrar</td>
+              <td class="text-right" *ngFor="let per of balanceTable[1]">{{per}}</td>
+            </tr>
+
+            <tr>
+              <td>IVA Acreditable</td>
+              <td class="text-right" *ngFor="let per of balanceTable[2]">{{per}}</td>
+            </tr>
+
+
+            <tr>
+              <td>Almacén de Artículo Terminado</td>
+              <td class="text-right" *ngFor="let per of balanceTable[3]">{{per}}</td>
+
+            </tr>
+
+
+            <tr>
+              <td>Almacén de Materiales</td>
+              <td class="text-right" *ngFor="let per of balanceTable[4]">{{per}}</td>
+
+            </tr>
+
+
+
+            <tr>
+              <td></td>
+              <td class="text-right" *ngFor="let per of balanceTable[5]">{{per}}</td>
+
+            </tr>
+
+            <tr>
+              <td></td>
+            </tr>
+
+
+
+            <tr>
+              <td class="table-active">A más de un año</td>
+              <td class="table-active" *ngFor="let per of balanceTable[5]"></td>
+            </tr>
+
+
+            <tr>
+              <td>Terreno</td>
+              <td class="text-right" *ngFor="let per of balanceTable[6]">{{per}}</td>
+
+            </tr>
+
+
+            <tr>
+              <td>Edificio e Instalaciones</td>
+              <td class="text-right" *ngFor="let per of balanceTable[7]">{{per}}</td>
+
+            </tr>
+
+
+            <tr>
+              <td>Depreciación Acumulada</td>
+              <td class="text-right" *ngFor="let per of balanceTable[8]">{{per}}</td>
+
+            </tr>
+
+            <tr>
+              <td>Maquinaria y Equipo</td>
+              <td class="text-right" *ngFor="let per of balanceTable[9]">{{per}}</td>
+
+            </tr>
+
+
+            <tr>
+              <td>Depreciación Acumulada</td>
+              <td class="text-right" *ngFor="let per of balanceTable[10]">{{per}}</td>
+
+            </tr>
+
+
+            <tr>
+              <td>Muebles y Enseres</td>
+              <td class="text-right" *ngFor="let per of balanceTable[11]">{{per}}</td>
+
+            </tr>
+
+
+            <tr>
+              <td>Depreciación Acumulada</td>
+              <td class="text-right" *ngFor="let per of balanceTable[12]">{{per}}</td>
+
+            </tr>
+
+            <tr>
+              <td>Equipo de Transporte</td>
+              <td class="text-right" *ngFor="let per of balanceTable[13]">{{per}}</td>
+
+            </tr>
+
+
+            <tr>
+              <td>Depreciación Acumulada</td>
+              <td class="text-right" *ngFor="let per of balanceTable[14]">{{per}}</td>
+
+            </tr>
+
+
+            <tr>
+              <td></td>
+              <td class="text-right" *ngFor="let per of balanceTable[15]">{{per}}</td>
+
+            </tr>
+
+
+            <tr>
+              <td class="table-active">De Aplicación Diferida</td>
+              <td class="table-active" *ngFor="let per of balanceTable[5]"></td>
+            </tr>
+
+            <tr>
+              <td>Pagos hechos por anticipado</td>
+              <td class="text-right" *ngFor="let per of balanceTable[16]">{{per}}</td>
+
+            </tr>
+
+
+            <tr>
+              <td>Gastos por Amortizar</td>
+              <td class="text-right" *ngFor="let per of balanceTable[17]">{{per}}</td>
+
+            </tr>
+
+
+            <tr>
+              <td></td>
+              <td class="text-right" *ngFor="let per of balanceTable[18]">{{per}}</td>
+
+            </tr>
+
+            <tr>
+              <td>Suma Activo</td>
+              <td class="text-right" *ngFor="let per of balanceTable[19]">{{per}}</td>
+
+            </tr>
+
+
+            <tr>
+              <th class="table-active">Obligaciones</th>
+              <th class="table-active" *ngFor="let per of balanceTable[5]"></th>
+            </tr>
+
+            <tr>
+              <td class="table-active">A Menos de un Año</td>
+              <td class="table-active" *ngFor="let per of balanceTable[5]"></td>
+            </tr>
+
+            <tr>
+              <td>IVA por entrar</td>
+              <td class="text-right" *ngFor="let per of balanceTable[20]">{{per}}</td>
+
+            </tr>
+
+            <tr>
+              <td>Impuestos por Pagar</td>
+              <td class="text-right" *ngFor="let per of balanceTable[21]">{{per}}</td>
+
+            </tr>
+
+
+
+            <tr>
+              <td>Proveedor</td>
+              <td class="text-right" *ngFor="let per of balanceTable[22]">{{per}}</td>
+
+            </tr>
+
+
+            <tr>
+              <td>PTU por Pagar</td>
+              <td class="text-right" *ngFor="let per of balanceTable[23]">{{per}}</td>
+
+            </tr>
+
+
+            <tr>
+              <td>Prestamos bancarios</td>
+              <td class="text-right" *ngFor="let per of balanceTable[24]">{{per}}</td>
+
+            </tr>
+
+            <tr>
+              <td></td>
+              <td class="text-right" *ngFor="let per of balanceTable[25]">{{per}}</td>
+
+            </tr>
+
+            <tr>
+              <td class="table-active">A más de un Año</td>
+              <td class="table-active" *ngFor="let per of balanceTable[5]"></td>
+            </tr>
+
+
+            <tr>
+              <td>Préstamos bancarios</td>
+              <td class="text-right" *ngFor="let per of balanceTable[26]">{{per}}</td>
+
+            </tr>
+
+            <tr>
+              <td class="table-active">Con los Accionistas</td>
+              <td class="text-right" class="table-active" *ngFor="let per of balanceTable[5]"></td>
+            </tr>
+
+
+            <tr>
+              <td>Capital Social</td>
+              <td class="text-right" *ngFor="let per of balanceTable[27]">{{per}}</td>
+
+            </tr>
+
+            <tr>
+              <td>Reserva Legal</td>
+              <td class="text-right" *ngFor="let per of balanceTable[28]">{{per}}</td>
+
+            </tr>
+
+            <tr>
+              <td>Utilidad Acumulada</td>
+              <td class="text-right" *ngFor="let per of balanceTable[29]">{{per}}</td>
+
+            </tr>
+
+
+            <tr>
+              <td>Utilidad del Ejercicio</td>
+              <td class="text-right" *ngFor="let per of balanceTable[30]">{{per}}</td>
+
+            </tr>
+
+            <tr>
+              <td></td>
+              <td class="text-right" *ngFor="let per of balanceTable[31]">{{per}}</td>
+
+            </tr>
+
+
+            <tr>
+              <td class="table-active" nowrap>Suma de Pasivo y Capital</td>
+              <td class="text-right" *ngFor="let per of balanceTable[32]">{{per}}</td>
+
+            </tr>
+
+
+    </table>
+  </div>
+</div>
+
+
+<div class="row align-items-center" style="margin-bottom:20px">
+  <div class="offset-6 col-1">
+    Exportar:
+  </div>
+  <div class="col-1">
+    <ngl-icon icon="pdf" category="doctype" (click)="PDFintegrales3()" size="large" style="cursor:pointer"></ngl-icon>
+  </div>
+
+  <div class="col-1">
+    <ngl-icon icon="csv" category="doctype" (click)="CSVintegrales3()" size="large" style="cursor:pointer" ></ngl-icon>
+  </div>
+
+</div>

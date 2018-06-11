@@ -368,7 +368,19 @@ for(let i=0,x=0;i<this.ventas.length;i++,x++){
             }
 
 
+
+
+
 }
+                doc.addPage()
+
+                doc.setFontSize(15);
+                doc.setFontType("bold");
+                doc.text(139.5, 15, 'Proyecto ' +this.proyectoActual , null, null, 'center');
+                doc.setFontSize(13);
+                doc.text(139.5, 23, 'Resumen de Decisiones de Producción', null, null, 'center');
+                doc.setFontSize(12);
+                doc.setFontType("bold");
 
           doc.save("Reporte de decisiones.pdf");
   }
