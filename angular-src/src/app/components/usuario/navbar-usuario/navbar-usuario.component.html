@@ -84,7 +84,7 @@
           <img src="assets/img/graph.png" class="img-fluid" alt="">
         </div>
         <div class="col-12">
-          <h4 class="text-center" style="margin-top:10px">Puedes solicitar un monto de inversión para rescatar tu proyecto de {{rescMin|currency:'USD':true:'1.0-0'}} hasta {{rescMax|currency:'USD':true:'1.0-0'}} </h4>
+          <h4 class="text-center" style="margin-top:10px">Si ya verificaste que los bancos no te pueden prestar más, puedes solicitar un monto de inversión a los accionistas para rescatar tu proyecto de {{rescMin|currency:'USD':true:'1.0-0'}} hasta {{rescMax|currency:'USD':true:'1.0-0'}} </h4>
         </div>
 
 
@@ -118,6 +118,19 @@
             <button type="submit" class="btn btn-primary col-5"  (click)="openFalloRescate=false;openRescate=true">Aceptar</button>
         </ng-template>
       </ngl-modal>
+
+
+      <ngl-modal header="Alerta"  [(open)]="sobreRescate" size="x-small" directional="false">
+          <div body>
+            <div class="col-12 text-center container">
+              <h3 style="margin-bottom:10px">El límite de rescates ha sido excedido</h3>
+            </div>
+            </div>
+
+            <ng-template ngl-modal-footer>
+                <button type="submit" class="btn btn-primary col-5 offset-1" (click)="sobreRescate=false">Aceptar</button>
+          </ng-template>
+        </ngl-modal>
 
 
 

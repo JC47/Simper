@@ -53,6 +53,11 @@ module.exports.editTerminado = function(idProyecto) {
 
 //Models rescate
 
+module.exports.validaRescate = function(idProyecto) {
+  var r = "select monto from rescate where idProyecto= "+idProyecto+"";
+  return querySql(r);
+}
+
 module.exports.getRescate = function (idUsuario) {
   var query = "select minRescate,maxRescate from usuario where idUsuario = "+idUsuario+" ";
   return querySql(query);
