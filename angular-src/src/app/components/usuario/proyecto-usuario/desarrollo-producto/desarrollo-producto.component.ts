@@ -18,6 +18,7 @@ export class DesarrolloProductoComponent implements OnInit {
   productosEnDesarrollo:any[] = [];
   productosSinDesarrollar:any[] = [];
   productoDeleted:any;
+  openLoadRegresa:boolean=false;
   productos:any;
   productoSelectedAdd:any={
     costoDes:null,
@@ -112,12 +113,14 @@ export class DesarrolloProductoComponent implements OnInit {
   }
 
   deshacer(producto){
+    this.openLoadRegresa=true;
     var z = this._desarrolloProducto.deshacerDesarrollo(producto.Productos_idProducto,producto.costoDes);
     setTimeout(()=>{
       if(z){
         this.actualizar();
       }
-    }, 500);
+      this.openLoadRegresa=false;
+    }, 1000);
   }
 
 

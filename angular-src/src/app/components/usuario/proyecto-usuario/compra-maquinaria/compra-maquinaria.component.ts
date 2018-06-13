@@ -17,9 +17,11 @@ export class CompraMaquinariaComponent implements OnInit {
   maquinas = new Array();
   directional: boolean = false;
   openLoad: boolean;
+  openNoPuedes:boolean=false;
   maqOrden:any;
   maqOrdenC:any;
   openConf:boolean;
+  openLoadRegresa:boolean=false;
   productos = new Array();
   maquinasCompradas:any[]=[];
   maqSelectedAdd:any={
@@ -122,7 +124,7 @@ export class CompraMaquinariaComponent implements OnInit {
 comprar(){
     this.openConf=false;
     this.openLoad=true;
-    setTimeout(()=>{this.openLoad=false;this.maqSelectedLess=this.maqSelectedAdd}, 2000);
+    setTimeout(()=>{this.openLoad=false;this.maqSelectedLess=this.maqSelectedAdd;this.maqOrdenC=this.agrupaMaq(this.maquinasCompradas)}, 2000);
     var x = {
       Balance_numeroPeriodo:localStorage.getItem('numeroPeriodo'),
       Maquinaria_idMaquinaria:this.maqSelectedAdd.idMaquinaria,
@@ -159,10 +161,12 @@ comprar(){
 
     this._CompraMaquinariaService.validar(x).subscribe(data => {
       if(data.success){
+        this.openLoadRegresa=true;
         this.maquinasCompradas = this._CompraMaquinariaService.regresarMaquinaria(x,y);
+        setTimeout(()=>{this.maqOrdenC=this.agrupaMaq(this.maquinasCompradas);this.openLoadRegresa=false;},1000);
       }
       else{
-        alert(data.msg);
+        this.openNoPuedes=true;
       }
     });
   }

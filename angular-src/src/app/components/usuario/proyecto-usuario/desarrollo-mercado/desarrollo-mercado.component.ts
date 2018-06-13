@@ -31,6 +31,8 @@ export class DesarrolloMercadoComponent implements OnInit {
   openConf:boolean=false;
   openPago:boolean=false;
   openLoad:boolean=false;
+  openLoadRegresa:boolean=false;
+
 
   constructor(private _zonasService: ZonasService,
               private _desarrolloZonaService:DesarrolloZonaService,
@@ -156,12 +158,13 @@ this._proyectoService.ocultaCierrePeriodo()
     }
 
     var z = this._desarrolloZonaService.undoTotal(x);
-
+    this.openLoadRegresa=true;
     setTimeout(()=>{
+      this.openLoadRegresa=false;
       if(z){
         this.actualizar();
       }
-    }, 500);
+    }, 1000);
   }
 
   desarrollaZona(producto){
