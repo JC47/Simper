@@ -141,7 +141,7 @@ export class AnalisisComponent implements OnInit {
     var i = 0;
     var x = this.getUtilidadNeta();
     var y = this.getTotalVentas();
-    if(y > 0){
+    if(y != 0){
       i = x / y;
     }
     return i;
@@ -226,7 +226,7 @@ export class AnalisisComponent implements OnInit {
     var i = 0;
     var x = this.getActivoCirculante();
     var y = this.getPasivoCirculante();
-    if(y > 0){
+    if(y != 0){
       i = x/y;
     }
     return i;
@@ -244,7 +244,7 @@ export class AnalisisComponent implements OnInit {
     var i = 0;
     var x = this.getActivoDisponible();
     var y = this.getPasivoCirculante();
-    if(y > 0){
+    if(y != 0){
       i = x/y;
     }
     return i;
@@ -271,7 +271,7 @@ export class AnalisisComponent implements OnInit {
     var i = 0;
     var x = this.getVentasACredito();
     var y = this.getPromedioCC();
-    if(y > 0){
+    if(y != 0){
       i = x/y;
     }
     return i;
@@ -307,7 +307,7 @@ export class AnalisisComponent implements OnInit {
     var i = 0;
     var x = this.getComprasNetasCredito();
     var y = this.getPromedioCP();
-    if(y > 0){
+    if(y != 0){
       i = x/y;
     }
     return i;
@@ -334,7 +334,7 @@ export class AnalisisComponent implements OnInit {
     var i = 0;
     var x = this.getTotalCostosVentas();
     var y = this.getPromedioInvArtTerm();
-    if(y > 0){
+    if(y != 0){
       i = x/y;
     }
     return i;
@@ -343,7 +343,7 @@ export class AnalisisComponent implements OnInit {
   getDiasPromedioIAT(){
     var i = 0;
     var y = this.getRotacionIAT();
-    if(y > 0){
+    if(y != 0){
       i = 365/y;
     }
     return i;
@@ -373,7 +373,7 @@ export class AnalisisComponent implements OnInit {
     var i = 0;
     var x = this.getCostoMPEmpleada();
     var y = this.getPromIMP();
-    if(y > 0){
+    if(y != 0){
       i = x/y;
     }
     return i;
@@ -382,7 +382,7 @@ export class AnalisisComponent implements OnInit {
   getDiasPromedioIMP(){
     var i = 0;
     var y = this.getRotacionMP();
-    if(y > 0){
+    if(y != 0){
       i = 365/y;
     }
     return i;
@@ -392,7 +392,7 @@ export class AnalisisComponent implements OnInit {
     var i = 0;
     var x = this.getUtilidadNeta();
     var y = this.getTotalVentas();
-    if(y > 0){
+    if(y != 0){
       i = x/y;
     }
     return i;
@@ -402,7 +402,7 @@ export class AnalisisComponent implements OnInit {
     var i = 0;
     var x = this.getUtilidadOperacion();
     var y = this.getTotalVentas();
-    if(y > 0){
+    if(y != 0){
       i = x/y;
     }
     return i;
@@ -418,9 +418,9 @@ export class AnalisisComponent implements OnInit {
 
   getEndeudamiento(){
     var i = 0;
-    var x = this.getPasivoTotal();
+    var x = this.getPasivoCirculante();
     var y = this.getCapitalContable();
-    if(y > 0){
+    if(y != 0){
       i = x/y;
     }
     return i;
@@ -428,9 +428,9 @@ export class AnalisisComponent implements OnInit {
 
   getPasivoActivoTotal(){
     var i = 0;
-    var x = this.getPasivoTotal();
+    var x = this.getPasivoCirculante();
     var y = this.getActivoTotal();
-    if(y > 0){
+    if(y != 0){
       i = x/y;
     }
     return i;
@@ -440,7 +440,7 @@ export class AnalisisComponent implements OnInit {
     var i = 0;
     var x = this.getActivoTotal();
     var y = this.getCapitalContable();
-    if(y > 0){
+    if(y != 0){
       i = x/y;
     }
     return i;
@@ -450,7 +450,7 @@ export class AnalisisComponent implements OnInit {
     var i = 0;
     var x = this.getUtilidadOperacion();
     var y = this.getIntereses();
-    if(y > 0){
+    if(y != 0){
       i = x/y;
     }
     return i;
