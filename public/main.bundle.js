@@ -6091,7 +6091,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/flujo/flujo.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <h3 class=\"col-12 text-center\">Presupuesto de Caja y Bancos</h3>\r\n</div>\r\n\r\n<div class=\"col-8 offset-2\">\r\n  <table class=\"table table-striped \" >\r\n\r\n    <tbody>\r\n        <tr>\r\n        <td>Saldo Inicial</td>\r\n        <td class=\"text-right\" *ngFor=\"let balance of balanceInicial\">{{getCajaBancos() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th colspan=\"2\" class=\"text-center\">Entradas </th>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n              <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Cobro por Ventas</td>\r\n        <td class=\"text-right\">{{getCobroVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Préstamos</td>\r\n        <td class=\"text-right\">{{getPAcuales() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Intereses</td>\r\n        <td class=\"text-right\">$0</td>\r\n\r\n\r\n\r\n\r\n      </tr>\r\n\r\n\r\n\r\n      <tr>\r\n        <td>Incremento de Capital</td>\r\n        <td class=\"text-right\">{{getRescates() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n              <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <th>Disponible</th>\r\n        <th class=\"text-right\">{{getDisponible() |currency:'USD':true:'1.0-0'}}</th>\r\n\r\n      </tr>\r\n      <tr>\r\n              <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th colspan=\"2\" class=\"text-center\">Salidas</th>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Costo de Transformación</td>\r\n        <td class=\"text-right\">{{getCostoDeTransformacion() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Gasto de Distribución</td>\r\n        <td class=\"text-right\">{{getCostoDeDistribucion() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Gasto de Administración</td>\r\n        <td class=\"text-right\">{{getCostoAdministrativo() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Gastos de Venta</td>\r\n        <td class=\"text-right\">{{getGastosVenta() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n\r\n      <tr>\r\n        <td>Compra de Maquinaria</td>\r\n        <td class=\"text-right\">{{getCompraMaquinaria() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Compras</td>\r\n        <td class=\"text-right\">{{getCompras() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Intereses</td>\r\n        <td class=\"text-right\">{{getIntereses() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Pago de Préstamos</td>\r\n        <td class=\"text-right\">{{getPagos() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Dividendos</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>PTU</td>\r\n        <td class=\"text-right\">{{getPTU() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>ISR</td>\r\n        <td class=\"text-right\">{{getISR() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>IVA</td>\r\n        <td class=\"text-right\">{{getIVA() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td colspan=\"2\"></td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Total de Salidas</td>\r\n        <td class=\"text-right\">{{getSalidas() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Saldo Final</th>\r\n        <th class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.cajaBancos |currency:'USD':true:'1.0-0'}}</th>\r\n      </tr>\r\n\r\n    </tbody>\r\n  </table>\r\n\r\n</div>\r\n\r\n\r\n<div class=\"row align-items-center\" style=\"margin-bottom:20px\">\r\n  <div class=\"offset-9 col-1\">\r\n    Exportar:\r\n  </div>\r\n  <div class=\"col-1\">\r\n    <ngl-icon icon=\"pdf\" category=\"doctype\" (click)=\"PDFflujo()\" size=\"large\"></ngl-icon>\r\n  </div>\r\n\r\n  <div class=\"col-1\">\r\n    <ngl-icon icon=\"csv\" category=\"doctype\" (click)=\"descargaCSV()\" size=\"large\"></ngl-icon>\r\n  </div>\r\n\r\n</div>\r\n"
+module.exports = "<div class=\"row\">\r\n  <h3 class=\"col-12 text-center\">Presupuesto de Caja y Bancos</h3>\r\n</div>\r\n\r\n<div class=\"col-8 offset-2\">\r\n  <table class=\"table table-striped \" >\r\n\r\n    <tbody>\r\n        <tr>\r\n        <td>Saldo Inicial</td>\r\n        <td class=\"text-right\" *ngFor=\"let balance of balanceInicial\">{{getCajaBancos() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th colspan=\"2\" class=\"text-center\">Entradas </th>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n              <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Cobro por Ventas</td>\r\n        <td class=\"text-right\">{{getCobroVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Préstamos</td>\r\n        <td class=\"text-right\">{{getPAcuales() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Intereses</td>\r\n        <td class=\"text-right\">$0</td>\r\n\r\n\r\n\r\n\r\n      </tr>\r\n\r\n\r\n\r\n      <tr>\r\n        <td>Incremento de Capital</td>\r\n        <td class=\"text-right\">{{getRescates() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n              <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <th>Disponible</th>\r\n        <th class=\"text-right\">{{getDisponible() |currency:'USD':true:'1.0-0'}}</th>\r\n\r\n      </tr>\r\n      <tr>\r\n              <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th colspan=\"2\" class=\"text-center\">Salidas</th>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Costo de Transformación</td>\r\n        <td class=\"text-right\">{{getCostoDeTransformacion() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Gasto de Distribución</td>\r\n        <td class=\"text-right\">{{getCostoDeDistribucion() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Gasto de Administración</td>\r\n        <td class=\"text-right\">{{getCostoAdministrativo() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Otros Gastos</td>\r\n        <td class=\"text-right\">{{getGastosVenta() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n\r\n      <tr>\r\n        <td>Compra de Maquinaria</td>\r\n        <td class=\"text-right\">{{getCompraMaquinaria() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Compras</td>\r\n        <td class=\"text-right\">{{getCompras() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Intereses</td>\r\n        <td class=\"text-right\">{{getIntereses() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Pago de Préstamos</td>\r\n        <td class=\"text-right\">{{getPagos() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Dividendos</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>PTU</td>\r\n        <td class=\"text-right\">{{getPTU() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>ISR</td>\r\n        <td class=\"text-right\">{{getISR() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>IVA</td>\r\n        <td class=\"text-right\">{{getIVA() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td colspan=\"2\"></td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Total de Salidas</td>\r\n        <td class=\"text-right\">{{getSalidas() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Saldo Final</th>\r\n        <th class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.cajaBancos |currency:'USD':true:'1.0-0'}}</th>\r\n      </tr>\r\n\r\n    </tbody>\r\n  </table>\r\n\r\n</div>\r\n\r\n\r\n<div class=\"row align-items-center\" style=\"margin-bottom:20px\">\r\n  <div class=\"offset-9 col-1\">\r\n    Exportar:\r\n  </div>\r\n  <div class=\"col-1\">\r\n    <ngl-icon icon=\"pdf\" category=\"doctype\" (click)=\"PDFflujo()\" size=\"large\"></ngl-icon>\r\n  </div>\r\n\r\n  <div class=\"col-1\">\r\n    <ngl-icon icon=\"csv\" category=\"doctype\" (click)=\"descargaCSV()\" size=\"large\"></ngl-icon>\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -6750,15 +6750,15 @@ var IntegralesComponent = (function () {
             + balance.almacenMateriales
             + balance.terreno
             + balance.edifInsta
-            + balance.depEdif
+            - balance.depEdif
             + balance.maqEquipo
-            + balance.depMaqEquipo
+            - balance.depMaqEquipo
             + balance.mueblesEnseres
-            + balance.depMueblesEnseres
+            - balance.depMueblesEnseres
             + balance.eqTrans
-            + balance.depEqTrans
+            - balance.depEqTrans
             + balance.pagosAnticipado
-            + balance.porAmortizar;
+            + balance.gastosAmortizacion;
     };
     IntegralesComponent.prototype.getSumaPasivo = function (balance) {
         return balance.IVAPorEnterar
@@ -6836,8 +6836,8 @@ var IntegralesComponent = (function () {
         sec = [];
         for (var _r = 0, _s = this.balances; _r < _s.length; _r++) {
             var balance = _s[_r];
-            sec.push(this.cp.transform(balance.depEdif, 'USD', true, '1.0-0'));
-            sec.push(this.cp.transform(balance.depEdif / this.getTotalActivo(balance) * 100, 'USD', true, '1.0-0') + "%");
+            sec.push(this.cp.transform(-balance.depEdif, 'USD', true, '1.0-0'));
+            sec.push(this.cp.transform(-balance.depEdif / this.getTotalActivo(balance) * 100, 'USD', true, '1.0-0') + "%");
         }
         balanceAcomodado.push(sec);
         sec = [];
@@ -6850,8 +6850,8 @@ var IntegralesComponent = (function () {
         sec = [];
         for (var _v = 0, _w = this.balances; _v < _w.length; _v++) {
             var balance = _w[_v];
-            sec.push(this.cp.transform(balance.depMaqEquipo, 'USD', true, '1.0-0'));
-            sec.push(this.cp.transform(balance.depMaqEquipo / this.getTotalActivo(balance) * 100, 'USD', true, '1.0-0') + "%");
+            sec.push(this.cp.transform(-balance.depMaqEquipo, 'USD', true, '1.0-0'));
+            sec.push(this.cp.transform(-balance.depMaqEquipo / this.getTotalActivo(balance) * 100, 'USD', true, '1.0-0') + "%");
         }
         balanceAcomodado.push(sec);
         sec = [];
@@ -6864,8 +6864,8 @@ var IntegralesComponent = (function () {
         sec = [];
         for (var _z = 0, _0 = this.balances; _z < _0.length; _z++) {
             var balance = _0[_z];
-            sec.push(this.cp.transform(balance.depMueblesEnseres, 'USD', true, '1.0-0'));
-            sec.push(this.cp.transform(balance.depMueblesEnseres / this.getTotalActivo(balance) * 100, 'USD', true, '1.0-0') + "%");
+            sec.push(this.cp.transform(-balance.depMueblesEnseres, 'USD', true, '1.0-0'));
+            sec.push(this.cp.transform(-balance.depMueblesEnseres / this.getTotalActivo(balance) * 100, 'USD', true, '1.0-0') + "%");
         }
         balanceAcomodado.push(sec);
         sec = [];
@@ -6878,15 +6878,15 @@ var IntegralesComponent = (function () {
         sec = [];
         for (var _3 = 0, _4 = this.balances; _3 < _4.length; _3++) {
             var balance = _4[_3];
-            sec.push(this.cp.transform(balance.depEqTrans, 'USD', true, '1.0-0'));
-            sec.push(this.cp.transform(balance.depEqTrans / this.getTotalActivo(balance) * 100, 'USD', true, '1.0-0') + "%");
+            sec.push(this.cp.transform(-balance.depEqTrans, 'USD', true, '1.0-0'));
+            sec.push(this.cp.transform(-balance.depEqTrans / this.getTotalActivo(balance) * 100, 'USD', true, '1.0-0') + "%");
         }
         balanceAcomodado.push(sec);
         sec = [];
         for (var _5 = 0, _6 = this.balances; _5 < _6.length; _5++) {
             var balance = _6[_5];
-            sec.push(this.cp.transform(balance.terreno + balance.edifInsta + balance.depEdif + balance.maqEquipo + balance.depMaqEquipo + balance.mueblesEnseres + balance.depMueblesEnseres + balance.eqTrans + balance.depEqTrans, 'USD', true, '1.0-0'));
-            sec.push(this.cp.transform((balance.terreno + balance.edifInsta + balance.depEdif + balance.maqEquipo + balance.depMaqEquipo + balance.mueblesEnseres + balance.depMueblesEnseres + balance.eqTrans + balance.depEqTrans) / this.getTotalActivo(balance) * 100, 'USD', true, '1.0-0') + "%");
+            sec.push(this.cp.transform(balance.terreno + balance.edifInsta - balance.depEdif + balance.maqEquipo - balance.depMaqEquipo + balance.mueblesEnseres - balance.depMueblesEnseres + balance.eqTrans - balance.depEqTrans, 'USD', true, '1.0-0'));
+            sec.push(this.cp.transform((balance.terreno + balance.edifInsta - balance.depEdif + balance.maqEquipo - balance.depMaqEquipo + balance.mueblesEnseres - balance.depMueblesEnseres + balance.eqTrans - balance.depEqTrans) / this.getTotalActivo(balance) * 100, 'USD', true, '1.0-0') + "%");
         }
         balanceAcomodado.push(sec);
         sec = [];
@@ -6899,15 +6899,15 @@ var IntegralesComponent = (function () {
         sec = [];
         for (var _9 = 0, _10 = this.balances; _9 < _10.length; _9++) {
             var balance = _10[_9];
-            sec.push(this.cp.transform(balance.porAmortizar, 'USD', true, '1.0-0'));
-            sec.push(this.cp.transform(balance.porAmortizar / this.getTotalActivo(balance) * 100, 'USD', true, '1.0-0') + "%");
+            sec.push(this.cp.transform(balance.gastosAmortizacion, 'USD', true, '1.0-0'));
+            sec.push(this.cp.transform(balance.gastosAmortizacionr / this.getTotalActivo(balance) * 100, 'USD', true, '1.0-0') + "%");
         }
         balanceAcomodado.push(sec);
         sec = [];
         for (var _11 = 0, _12 = this.balances; _11 < _12.length; _11++) {
             var balance = _12[_11];
-            sec.push(this.cp.transform(balance.porAmortizar + balance.pagosAnticipado, 'USD', true, '1.0-0'));
-            sec.push(this.cp.transform(balance.porAmortizar + balance.pagosAnticipado / this.getTotalActivo(balance) * 100, 'USD', true, '1.0-0') + "%");
+            sec.push(this.cp.transform(balance.gastosAmortizacion + balance.pagosAnticipado, 'USD', true, '1.0-0'));
+            sec.push(this.cp.transform(balance.gastosAmortizacion + balance.pagosAnticipado / this.getTotalActivo(balance) * 100, 'USD', true, '1.0-0') + "%");
         }
         balanceAcomodado.push(sec);
         sec = [];
@@ -7073,28 +7073,28 @@ var IntegralesComponent = (function () {
             rows[10]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].terreno / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
             rows[11]["periodo" + inte] = this.cp.transform(this.balances[inte].edifInsta, 'USD', true, '1.0-0');
             rows[11]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].edifInsta / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
-            rows[12]["periodo" + inte] = this.cp.transform(this.balances[inte].depEdif, 'USD', true, '1.0-0');
-            rows[12]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].depEdif / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
+            rows[12]["periodo" + inte] = this.cp.transform(-this.balances[inte].depEdif, 'USD', true, '1.0-0');
+            rows[12]["periodo" + inte + "p"] = this.dc.transform(-this.balances[inte].depEdif / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
             rows[13]["periodo" + inte] = this.cp.transform(this.balances[inte].maqEquipo, 'USD', true, '1.0-0');
             rows[13]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].maqEquipo / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
-            rows[14]["periodo" + inte] = this.cp.transform(this.balances[inte].depMaqEquipo, 'USD', true, '1.0-0');
-            rows[14]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].depMaqEquipo / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
+            rows[14]["periodo" + inte] = this.cp.transform(-this.balances[inte].depMaqEquipo, 'USD', true, '1.0-0');
+            rows[14]["periodo" + inte + "p"] = this.dc.transform(-this.balances[inte].depMaqEquipo / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
             rows[15]["periodo" + inte] = this.cp.transform(this.balances[inte].mueblesEnseres, 'USD', true, '1.0-0');
             rows[15]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].mueblesEnseres / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
-            rows[16]["periodo" + inte] = this.cp.transform(this.balances[inte].depMueblesEnseres, 'USD', true, '1.0-0');
-            rows[16]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].depMueblesEnseres / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
+            rows[16]["periodo" + inte] = this.cp.transform(-this.balances[inte].depMueblesEnseres, 'USD', true, '1.0-0');
+            rows[16]["periodo" + inte + "p"] = this.dc.transform(-this.balances[inte].depMueblesEnseres / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
             rows[17]["periodo" + inte] = this.cp.transform(this.balances[inte].eqTrans, 'USD', true, '1.0-0');
             rows[17]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].eqTrans / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
-            rows[18]["periodo" + inte] = this.cp.transform(this.balances[inte].depEqTrans, 'USD', true, '1.0-0');
-            rows[18]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].depEqTrans / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
+            rows[18]["periodo" + inte] = this.cp.transform(-this.balances[inte].depEqTrans, 'USD', true, '1.0-0');
+            rows[18]["periodo" + inte + "p"] = this.dc.transform(-this.balances[inte].depEqTrans / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
             rows[19]["periodo" + inte] = this.cp.transform(this.balances[inte].terreno + this.balances[inte].edifInsta + this.balances[inte].depEdif + this.balances[inte].maqEquipo + this.balances[inte].depMaqEquipo + this.balances[inte].mueblesEnseres + this.balances[inte].mueblesEnseres + this.balances[inte].depMueblesEnseres + this.balances[inte].eqTrans + this.balances[inte].depEqTrans, 'USD', true, '1.0-0');
             rows[19]["periodo" + inte + "p"] = this.dc.transform((this.balances[inte].terreno + this.balances[inte].edifInsta + this.balances[inte].depEdif + this.balances[inte].maqEquipo + this.balances[inte].depMaqEquipo + this.balances[inte].mueblesEnseres + this.balances[inte].mueblesEnseres + this.balances[inte].depMueblesEnseres + this.balances[inte].eqTrans + this.balances[inte].depEqTrans) / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
             rows[21]["periodo" + inte] = this.cp.transform(this.balances[inte].pagosAnticipado, 'USD', true, '1.0-0');
             rows[21]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].pagosAnticipado / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
-            rows[22]["periodo" + inte] = this.cp.transform(this.balances[inte].porAmortizar, 'USD', true, '1.0-0');
-            rows[22]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].porAmortizar / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
-            rows[23]["periodo" + inte] = this.cp.transform(this.balances[inte].pagosAnticipado + this.balances[inte].porAmortizar, 'USD', true, '1.0-0');
-            rows[23]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].pagosAnticipado + this.balances[inte].porAmortizar / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
+            rows[22]["periodo" + inte] = this.cp.transform(this.balances[inte].gastosAmortizacion, 'USD', true, '1.0-0');
+            rows[22]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].gastosAmortizacion / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
+            rows[23]["periodo" + inte] = this.cp.transform(this.balances[inte].pagosAnticipado + this.balances[inte].gastosAmortizacion, 'USD', true, '1.0-0');
+            rows[23]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].pagosAnticipado + this.balances[inte].gastosAmortizacion / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
             rows[24]["periodo" + inte] = this.cp.transform(this.getTotalActivo(this.balances[inte]), 'USD', true, '1.0-0');
             rows[24]["periodo" + inte + "p"] = this.dc.transform(this.getTotalActivo(this.balances[inte]) / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
             rows[28]["periodo" + inte] = this.cp.transform(this.balances[inte].IVAPorEnterar, 'USD', true, '1.0-0');
@@ -7248,28 +7248,28 @@ var IntegralesComponent = (function () {
             rows[8]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].terreno / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
             rows[9]["periodo" + inte] = this.cp.transform(this.balances[inte].edifInsta, 'USD', true, '1.0-0');
             rows[9]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].edifInsta / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
-            rows[10]["periodo" + inte] = this.cp.transform(this.balances[inte].depEdif, 'USD', true, '1.0-0');
-            rows[10]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].depEdif / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
+            rows[10]["periodo" + inte] = this.cp.transform(-this.balances[inte].depEdif, 'USD', true, '1.0-0');
+            rows[10]["periodo" + inte + "p"] = this.dc.transform(-this.balances[inte].depEdif / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
             rows[11]["periodo" + inte] = this.cp.transform(this.balances[inte].maqEquipo, 'USD', true, '1.0-0');
             rows[11]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].maqEquipo / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
-            rows[12]["periodo" + inte] = this.cp.transform(this.balances[inte].depMaqEquipo, 'USD', true, '1.0-0');
-            rows[12]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].depMaqEquipo / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
+            rows[12]["periodo" + inte] = this.cp.transform(-this.balances[inte].depMaqEquipo, 'USD', true, '1.0-0');
+            rows[12]["periodo" + inte + "p"] = this.dc.transform(-this.balances[inte].depMaqEquipo / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
             rows[13]["periodo" + inte] = this.cp.transform(this.balances[inte].mueblesEnseres, 'USD', true, '1.0-0');
             rows[13]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].mueblesEnseres / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
-            rows[14]["periodo" + inte] = this.cp.transform(this.balances[inte].depMueblesEnseres, 'USD', true, '1.0-0');
-            rows[14]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].depMueblesEnseres / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
+            rows[14]["periodo" + inte] = this.cp.transform(-this.balances[inte].depMueblesEnseres, 'USD', true, '1.0-0');
+            rows[14]["periodo" + inte + "p"] = this.dc.transform(-this.balances[inte].depMueblesEnseres / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
             rows[15]["periodo" + inte] = this.cp.transform(this.balances[inte].eqTrans, 'USD', true, '1.0-0');
             rows[15]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].eqTrans / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
-            rows[16]["periodo" + inte] = this.cp.transform(this.balances[inte].depEqTrans, 'USD', true, '1.0-0');
-            rows[16]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].depEqTrans / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
+            rows[16]["periodo" + inte] = this.cp.transform(-this.balances[inte].depEqTrans, 'USD', true, '1.0-0');
+            rows[16]["periodo" + inte + "p"] = this.dc.transform(-this.balances[inte].depEqTrans / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
             rows[17]["periodo" + inte] = this.cp.transform(this.balances[inte].terreno + this.balances[inte].edifInsta + this.balances[inte].depEdif + this.balances[inte].maqEquipo + this.balances[inte].depMaqEquipo + this.balances[inte].mueblesEnseres + this.balances[inte].mueblesEnseres + this.balances[inte].depMueblesEnseres + this.balances[inte].eqTrans + this.balances[inte].depEqTrans, 'USD', true, '1.0-0');
             rows[17]["periodo" + inte + "p"] = this.dc.transform((this.balances[inte].terreno + this.balances[inte].edifInsta + this.balances[inte].depEdif + this.balances[inte].maqEquipo + this.balances[inte].depMaqEquipo + this.balances[inte].mueblesEnseres + this.balances[inte].mueblesEnseres + this.balances[inte].depMueblesEnseres + this.balances[inte].eqTrans + this.balances[inte].depEqTrans) / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
             rows[19]["periodo" + inte] = this.cp.transform(this.balances[inte].pagosAnticipado, 'USD', true, '1.0-0');
             rows[19]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].pagosAnticipado / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
-            rows[20]["periodo" + inte] = this.cp.transform(this.balances[inte].porAmortizar, 'USD', true, '1.0-0');
-            rows[20]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].porAmortizar / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
-            rows[21]["periodo" + inte] = this.cp.transform(this.balances[inte].pagosAnticipado + this.balances[inte].porAmortizar, 'USD', true, '1.0-0');
-            rows[21]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].pagosAnticipado + this.balances[inte].porAmortizar / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
+            rows[20]["periodo" + inte] = this.cp.transform(this.balances[inte].gastosAmortizacion, 'USD', true, '1.0-0');
+            rows[20]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].gastosAmortizacion / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
+            rows[21]["periodo" + inte] = this.cp.transform(this.balances[inte].pagosAnticipado + this.balances[inte].gastosAmortizacion, 'USD', true, '1.0-0');
+            rows[21]["periodo" + inte + "p"] = this.dc.transform(this.balances[inte].pagosAnticipado + this.balances[inte].gastosAmortizacion / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
             rows[22]["periodo" + inte] = this.cp.transform(this.getTotalActivo(this.balances[inte]), 'USD', true, '1.0-0');
             rows[22]["periodo" + inte + "p"] = this.dc.transform(this.getTotalActivo(this.balances[inte]) / this.getTotalActivo(this.balances[inte]) * 100, '1.0-0') + "%";
             rows[26]["periodo" + inte] = this.cp.transform(this.balances[inte].IVAPorEnterar, 'USD', true, '1.0-0');
