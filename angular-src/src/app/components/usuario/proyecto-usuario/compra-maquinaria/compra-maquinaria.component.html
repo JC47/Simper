@@ -184,6 +184,20 @@
   </ngl-modal>
 
 
+
+
+  <ngl-modal  [(open)]="openLoadRegresa" size="small" directional="false">
+    <div body>
+          <h2 class="col-12 text-center">Devolviendo Maquinaria</h2>
+      <h6 class="col-12 text-center">Realizando Operación</h6>
+      <div style="position:relative; height:6.25rem; z-index:0;">
+        <ngl-spinner size="large" type="brand"></ngl-spinner>
+      </div>
+
+    </div>
+    </ngl-modal>
+
+
   <ngl-modal header="Confirmación"  [(open)]="openConf" size="x-small" directional="false">
 
     <div body>
@@ -214,3 +228,18 @@
     <button class="btn btn-primary" (click)="comprar()">Comprar</button>
   </ng-template>
     </ngl-modal>
+
+
+
+
+    <ngl-modal header="Alerta"  [(open)]="openNoPuedes" size="x-small" directional="false">
+
+      <div body>
+        <h2 class="text-center">Solo puedes devolver maquinarias compradas en este periodo</h2>
+      </div>
+
+      <ng-template ngl-modal-footer>
+
+      <button class="btn btn-primary" (click)="openNoPuedes=false;">Aceptar</button>
+    </ng-template>
+      </ngl-modal>

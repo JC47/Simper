@@ -172,15 +172,15 @@ getTotalActivo(balance){
                 +balance.almacenMateriales
                 +balance.terreno
                 +balance.edifInsta
-                +balance.depEdif
+                -balance.depEdif
                 +balance.maqEquipo
-                +balance.depMaqEquipo
+                -balance.depMaqEquipo
                 +balance.mueblesEnseres
-                +balance.depMueblesEnseres
+                -balance.depMueblesEnseres
                 +balance.eqTrans
-                +balance.depEqTrans
+                -balance.depEqTrans
                 +balance.pagosAnticipado
-                +balance.porAmortizar
+                +balance.gastosAmortizacion
 }
 
 
@@ -281,8 +281,8 @@ acomodaBalance(){
 
   sec=[];
   for(let balance of this.balances){
-    sec.push(this.cp.transform(balance.depEdif,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.depEdif/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.cp.transform(-balance.depEdif,'USD',true,'1.0-0'))
+    sec.push(this.cp.transform(-balance.depEdif/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -297,8 +297,8 @@ acomodaBalance(){
 
   sec=[];
   for(let balance of this.balances){
-    sec.push(this.cp.transform(balance.depMaqEquipo,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.depMaqEquipo/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.cp.transform(-balance.depMaqEquipo,'USD',true,'1.0-0'))
+    sec.push(this.cp.transform(-balance.depMaqEquipo/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -313,8 +313,8 @@ acomodaBalance(){
 
   sec=[];
   for(let balance of this.balances){
-    sec.push(this.cp.transform(balance.depMueblesEnseres,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.depMueblesEnseres/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.cp.transform(-balance.depMueblesEnseres,'USD',true,'1.0-0'))
+    sec.push(this.cp.transform(-balance.depMueblesEnseres/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -330,16 +330,16 @@ acomodaBalance(){
 
   sec=[];
   for(let balance of this.balances){
-    sec.push(this.cp.transform(balance.depEqTrans,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.depEqTrans/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.cp.transform(-balance.depEqTrans,'USD',true,'1.0-0'))
+    sec.push(this.cp.transform(-balance.depEqTrans/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
 
   sec=[];
   for(let balance of this.balances){
-    sec.push(this.cp.transform(balance.terreno+balance.edifInsta+balance.depEdif+balance.maqEquipo+balance.depMaqEquipo+balance.mueblesEnseres+balance.depMueblesEnseres+balance.eqTrans+balance.depEqTrans,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform((balance.terreno+balance.edifInsta+balance.depEdif+balance.maqEquipo+balance.depMaqEquipo+balance.mueblesEnseres+balance.depMueblesEnseres+balance.eqTrans+balance.depEqTrans)/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.cp.transform(balance.terreno+balance.edifInsta-balance.depEdif+balance.maqEquipo-balance.depMaqEquipo+balance.mueblesEnseres-balance.depMueblesEnseres+balance.eqTrans-balance.depEqTrans,'USD',true,'1.0-0'))
+    sec.push(this.cp.transform((balance.terreno+balance.edifInsta-balance.depEdif+balance.maqEquipo-balance.depMaqEquipo+balance.mueblesEnseres-balance.depMueblesEnseres+balance.eqTrans-balance.depEqTrans)/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -354,16 +354,16 @@ acomodaBalance(){
 
   sec=[];
   for(let balance of this.balances){
-    sec.push(this.cp.transform(balance.porAmortizar,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.porAmortizar/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.cp.transform(balance.gastosAmortizacion,'USD',true,'1.0-0'))
+    sec.push(this.cp.transform(balance.gastosAmortizacionr/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
 
   sec=[];
   for(let balance of this.balances){
-    sec.push(this.cp.transform(balance.porAmortizar+balance.pagosAnticipado,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.porAmortizar+balance.pagosAnticipado/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.cp.transform(balance.gastosAmortizacion+balance.pagosAnticipado,'USD',true,'1.0-0'))
+    sec.push(this.cp.transform(balance.gastosAmortizacion+balance.pagosAnticipado/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -572,31 +572,31 @@ CSVintegrales3(){
        rows[11]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].edifInsta /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
 
-       rows[12]["periodo"+inte]=this.cp.transform(this.balances[inte].depEdif ,'USD',true,'1.0-0');
-       rows[12]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].depEdif /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
+       rows[12]["periodo"+inte]=this.cp.transform(-this.balances[inte].depEdif ,'USD',true,'1.0-0');
+       rows[12]["periodo"+inte+"p"]=this.dc.transform(-this.balances[inte].depEdif /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
 
        rows[13]["periodo"+inte]=this.cp.transform(this.balances[inte].maqEquipo ,'USD',true,'1.0-0');
        rows[13]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].maqEquipo /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
 
-       rows[14]["periodo"+inte]=this.cp.transform(this.balances[inte].depMaqEquipo ,'USD',true,'1.0-0');
-       rows[14]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].depMaqEquipo /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
+       rows[14]["periodo"+inte]=this.cp.transform(-this.balances[inte].depMaqEquipo ,'USD',true,'1.0-0');
+       rows[14]["periodo"+inte+"p"]=this.dc.transform(-this.balances[inte].depMaqEquipo /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
 
        rows[15]["periodo"+inte]=this.cp.transform(this.balances[inte].mueblesEnseres ,'USD',true,'1.0-0');
        rows[15]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].mueblesEnseres /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
-       rows[16]["periodo"+inte]=this.cp.transform(this.balances[inte].depMueblesEnseres ,'USD',true,'1.0-0');
-       rows[16]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].depMueblesEnseres /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
+       rows[16]["periodo"+inte]=this.cp.transform(-this.balances[inte].depMueblesEnseres ,'USD',true,'1.0-0');
+       rows[16]["periodo"+inte+"p"]=this.dc.transform(-this.balances[inte].depMueblesEnseres /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
 
        rows[17]["periodo"+inte]=this.cp.transform(this.balances[inte].eqTrans ,'USD',true,'1.0-0');
        rows[17]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].eqTrans /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
 
-       rows[18]["periodo"+inte]=this.cp.transform(this.balances[inte].depEqTrans ,'USD',true,'1.0-0');
-       rows[18]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].depEqTrans /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
+       rows[18]["periodo"+inte]=this.cp.transform(-this.balances[inte].depEqTrans ,'USD',true,'1.0-0');
+       rows[18]["periodo"+inte+"p"]=this.dc.transform(-this.balances[inte].depEqTrans /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
 
        rows[19]["periodo"+inte]=this.cp.transform(this.balances[inte].terreno+this.balances[inte].edifInsta+this.balances[inte].depEdif+this.balances[inte].maqEquipo+this.balances[inte].depMaqEquipo+this.balances[inte].mueblesEnseres+this.balances[inte].mueblesEnseres+this.balances[inte].depMueblesEnseres+this.balances[inte].eqTrans+this.balances[inte].depEqTrans,'USD',true,'1.0-0');
@@ -607,12 +607,12 @@ CSVintegrales3(){
        rows[21]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].pagosAnticipado /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
 
-       rows[22]["periodo"+inte]=this.cp.transform(this.balances[inte].porAmortizar ,'USD',true,'1.0-0');
-       rows[22]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].porAmortizar /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
+       rows[22]["periodo"+inte]=this.cp.transform(this.balances[inte].gastosAmortizacion ,'USD',true,'1.0-0');
+       rows[22]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].gastosAmortizacion /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
 
-       rows[23]["periodo"+inte]=this.cp.transform(this.balances[inte].pagosAnticipado+this.balances[inte].porAmortizar ,'USD',true,'1.0-0');
-       rows[23]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].pagosAnticipado+this.balances[inte].porAmortizar/this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
+       rows[23]["periodo"+inte]=this.cp.transform(this.balances[inte].pagosAnticipado+this.balances[inte].gastosAmortizacion ,'USD',true,'1.0-0');
+       rows[23]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].pagosAnticipado+this.balances[inte].gastosAmortizacion/this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
        rows[24]["periodo"+inte]=this.cp.transform(this.getTotalActivo(this.balances[inte]) ,'USD',true,'1.0-0');
        rows[24]["periodo"+inte+"p"]=this.dc.transform(this.getTotalActivo(this.balances[inte]) /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
@@ -819,31 +819,31 @@ PDFintegrales3(){
     rows[9]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].edifInsta /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
 
-    rows[10]["periodo"+inte]=this.cp.transform(this.balances[inte].depEdif ,'USD',true,'1.0-0');
-    rows[10]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].depEdif /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
+    rows[10]["periodo"+inte]=this.cp.transform(-this.balances[inte].depEdif ,'USD',true,'1.0-0');
+    rows[10]["periodo"+inte+"p"]=this.dc.transform(-this.balances[inte].depEdif /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
 
     rows[11]["periodo"+inte]=this.cp.transform(this.balances[inte].maqEquipo ,'USD',true,'1.0-0');
     rows[11]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].maqEquipo /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
 
-    rows[12]["periodo"+inte]=this.cp.transform(this.balances[inte].depMaqEquipo ,'USD',true,'1.0-0');
-    rows[12]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].depMaqEquipo /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
+    rows[12]["periodo"+inte]=this.cp.transform(-this.balances[inte].depMaqEquipo ,'USD',true,'1.0-0');
+    rows[12]["periodo"+inte+"p"]=this.dc.transform(-this.balances[inte].depMaqEquipo /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
 
     rows[13]["periodo"+inte]=this.cp.transform(this.balances[inte].mueblesEnseres ,'USD',true,'1.0-0');
     rows[13]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].mueblesEnseres /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
-    rows[14]["periodo"+inte]=this.cp.transform(this.balances[inte].depMueblesEnseres ,'USD',true,'1.0-0');
-    rows[14]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].depMueblesEnseres /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
+    rows[14]["periodo"+inte]=this.cp.transform(-this.balances[inte].depMueblesEnseres ,'USD',true,'1.0-0');
+    rows[14]["periodo"+inte+"p"]=this.dc.transform(-this.balances[inte].depMueblesEnseres /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
 
     rows[15]["periodo"+inte]=this.cp.transform(this.balances[inte].eqTrans ,'USD',true,'1.0-0');
     rows[15]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].eqTrans /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
 
-    rows[16]["periodo"+inte]=this.cp.transform(this.balances[inte].depEqTrans ,'USD',true,'1.0-0');
-    rows[16]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].depEqTrans /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
+    rows[16]["periodo"+inte]=this.cp.transform(-this.balances[inte].depEqTrans ,'USD',true,'1.0-0');
+    rows[16]["periodo"+inte+"p"]=this.dc.transform(-this.balances[inte].depEqTrans /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
 
     rows[17]["periodo"+inte]=this.cp.transform(this.balances[inte].terreno+this.balances[inte].edifInsta+this.balances[inte].depEdif+this.balances[inte].maqEquipo+this.balances[inte].depMaqEquipo+this.balances[inte].mueblesEnseres+this.balances[inte].mueblesEnseres+this.balances[inte].depMueblesEnseres+this.balances[inte].eqTrans+this.balances[inte].depEqTrans,'USD',true,'1.0-0');
@@ -854,12 +854,12 @@ PDFintegrales3(){
     rows[19]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].pagosAnticipado /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
 
-    rows[20]["periodo"+inte]=this.cp.transform(this.balances[inte].porAmortizar ,'USD',true,'1.0-0');
-    rows[20]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].porAmortizar /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
+    rows[20]["periodo"+inte]=this.cp.transform(this.balances[inte].gastosAmortizacion ,'USD',true,'1.0-0');
+    rows[20]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].gastosAmortizacion /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
 
-    rows[21]["periodo"+inte]=this.cp.transform(this.balances[inte].pagosAnticipado+this.balances[inte].porAmortizar ,'USD',true,'1.0-0');
-    rows[21]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].pagosAnticipado+this.balances[inte].porAmortizar/this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
+    rows[21]["periodo"+inte]=this.cp.transform(this.balances[inte].pagosAnticipado+this.balances[inte].gastosAmortizacion ,'USD',true,'1.0-0');
+    rows[21]["periodo"+inte+"p"]=this.dc.transform(this.balances[inte].pagosAnticipado+this.balances[inte].gastosAmortizacion/this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
 
     rows[22]["periodo"+inte]=this.cp.transform(this.getTotalActivo(this.balances[inte]) ,'USD',true,'1.0-0');
     rows[22]["periodo"+inte+"p"]=this.dc.transform(this.getTotalActivo(this.balances[inte]) /this.getTotalActivo(this.balances[inte])*100,'1.0-0')+"%" ;
