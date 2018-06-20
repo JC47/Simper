@@ -22,6 +22,22 @@ module.exports.getAllNumeroBalanceAuxiliarCuenta = function (idProyecto,numeroPe
   return querySql(query);
 }
 
+//Ventas Especificas
+module.exports.getAuxiliarCuentaVenta = function (idProyecto,numeroPeriodo) {
+  var query = "select Producto_idProducto,Zona_idZonas,numeroPeriodo,unidadesVendidas from operacion where Proyecto_idProyecto = "+idProyecto+" and numeroPeriodo <= "+numeroPeriodo+" order by Producto_idProducto,Zona_idZonas";
+  return querySql(query);
+}
+
+module.exports.getProductosName = function () {
+  let query = "select idProducto,nombreProd from producto";
+  return querySql(query);
+}
+
+module.exports.getZonasName = function () {
+  let query = "select idZona,nombreZona from zona";
+  return querySql(query);
+}
+
 //getMaquinarias
 module.exports.getMaquinariaProyecto = function (idProyecto,numeroPeriodo) {
     var query = "select * from maquinariaproyecto where Balance_numeroPeriodo > 0 and Proyectos_idProyecto = "+idProyecto+" and Balance_numeroPeriodo <= "+numeroPeriodo+" order by Balance_numeroPeriodo";

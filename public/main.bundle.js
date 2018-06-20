@@ -9742,6 +9742,7 @@ var SidenavPComponent = (function () {
                 ]
             }
         ];
+        this.ventasZonas = [];
         this.DProductos = [
             { numeroPeriodo: null,
                 productos: [
@@ -9824,11 +9825,13 @@ var SidenavPComponent = (function () {
     SidenavPComponent.prototype.verDecisiones = function () {
         var _this = this;
         this.ventas = this._operacionService.returnVentas();
+        this.ventasZonas = this._operacionService.returnVentasZonas();
         this.maquinas = this._operacionService.returnMaquinas();
         this.DProductos = this._operacionService.returnDProductos();
         this.DZonas = this._operacionService.returnDZonas();
         this.ceditos = this._operacionService.returnCreditos();
         console.log("Ventas", this.ventas);
+        console.log("VentasZonas", this.ventasZonas);
         console.log("Maquinas", this.maquinas);
         console.log("Productos", this.DProductos);
         console.log("Zonas", this.DZonas);
@@ -13789,6 +13792,16 @@ var OperacionService = (function () {
         };
         return this.http.post('decisiones/getVentas/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
+    OperacionService.prototype.ventaszonas = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        var x = {
+            idProyecto: localStorage.getItem('idProyecto'),
+            numeroPeriodo: localStorage.getItem('numeroPeriodo')
+        };
+        return this.http.post('decisiones/getVentasZonas/', x, { headers: headers }).map(function (res) { return res.json(); });
+    };
     OperacionService.prototype.maquinas = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
             'Content-Type': 'application/json'
@@ -13851,6 +13864,15 @@ var OperacionService = (function () {
     OperacionService.prototype.returnVentas = function () {
         var x = [];
         this.ventas().subscribe(function (data) {
+            for (var key in data.datos) {
+                x.push(data.datos[key]);
+            }
+        });
+        return x;
+    };
+    OperacionService.prototype.returnVentasZonas = function () {
+        var x = [];
+        this.ventaszonas().subscribe(function (data) {
             for (var key in data.datos) {
                 x.push(data.datos[key]);
             }
