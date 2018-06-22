@@ -25,6 +25,26 @@ router.post('/getVentas/', (req,res,next) => {
   });
 });
 
+router.post('/getVentasZonas/', (req,res,next) => {
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+
+  Promise.join(
+    decision.getAuxiliarCuentaVenta(idProyecto,numeroPeriodo),
+    decision.getNumeroPeriodoBalance(idProyecto,numeroPeriodo),
+    decision.getProductosName(),decision.getZonasName(),
+    function(auxcuentaventa,numeroperiodobalance,productos,zonas) {
+      return jsonDecisionesVentasZonas(auxcuentaventa,numeroperiodobalance,productos,zonas);
+    })
+  .then( function (data) {
+    res.json({success: true, datos:data, msg:"Operacion exitosa"});
+  })
+  .catch(function (err) {
+    console.log(err);
+    res.json({success:false, msg:"Operacion incompleta"});
+  });
+});
+
 router.post('/getMaquinarias/', (req,res,next) => {
 
   var idProyecto = req.body.idProyecto;
@@ -109,6 +129,40 @@ router.post('/getCreditos/', (req,res,next) => {
     res.json({success:false, msg:"Operacion incompleta"});
   });
 });
+
+function jsonDecisionesVentasZonas(auxcuentaventa,numeroperiodobalance,productos,zonas) {
+  let x = [];
+  for(let i = 0;i<numeroperiodobalance.length;i++){
+    let y = {numeroPeriodo:0}
+    let z = [];
+    y.numeroPeriodo=numeroperiodobalance[i].numeroPeriodo;
+    for(let j=0;j<auxcuentaventa.length;j++){
+      if(auxcuentaventa[j].numeroPeriodo == y.numeroPeriodo){
+        let np;
+        let nz;
+        for(let k=0;k<productos.length;k++){
+          if(productos[k].idProducto == auxcuentaventa[j].Producto_idProducto){
+            np=productos[k].nombreProd;
+            break;
+          }
+        }
+        for(let l=0;l<zonas.length;l++){
+          if(zonas[l].idZona == auxcuentaventa[j].Zona_idZonas){
+            nz=zonas[l].nombreZona;
+            break;
+          }
+        }
+        let w = {producto:np,
+                zona:nz,
+                unidadesVendidas:auxcuentaventa[j].unidadesVendidas}
+        z.push(w);
+      }
+    }
+    y['ventas']=z;
+    x.push(y);
+  }
+  return x;
+}
 
 function jsonDecisionesVentas(auxcuenta,numeroperiodoauxcuenta, numeroperiodobalance) {
 var arrayRepNumeroPeriodo = [];

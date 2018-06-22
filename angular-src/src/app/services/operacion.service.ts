@@ -359,6 +359,17 @@ export class OperacionService {
     return this.http.post('decisiones/getVentas/',x,{headers}).map(res => res.json());
   }
 
+  ventaszonas(){
+    let headers = new Headers({
+      'Content-Type':'application/json'
+    });
+    var x = {
+      idProyecto:localStorage.getItem('idProyecto'),
+      numeroPeriodo:localStorage.getItem('numeroPeriodo')
+    }
+    return this.http.post('decisiones/getVentasZonas/',x,{headers}).map(res => res.json());
+  }
+
   maquinas(){
     let headers = new Headers({
       'Content-Type':'application/json'
@@ -428,6 +439,16 @@ export class OperacionService {
   returnVentas(){
     var x = [];
     this.ventas().subscribe(data => {
+      for(let key in data.datos){
+        x.push(data.datos[key]);
+      }
+    });
+    return x;
+  }
+
+  returnVentasZonas(){
+    var x = [];
+    this.ventaszonas().subscribe(data => {
       for(let key in data.datos){
         x.push(data.datos[key]);
       }

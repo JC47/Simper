@@ -92,7 +92,8 @@ this._proyectoService.ocultaCierrePeriodo()
 
 
   validaPago(producto){
-    if(producto.numeroPeriodo==localStorage.getItem('numeroPeriodo')){
+    console.log("Perro",producto);
+    if(producto==localStorage.getItem('numeroPeriodo')){
       return true
     }
     else{

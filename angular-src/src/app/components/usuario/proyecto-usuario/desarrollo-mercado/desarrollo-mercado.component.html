@@ -161,9 +161,9 @@
           <div class="row align-items-center" >
 
               <button [disabled]="validaVi()" type="button" (click)="confPagoF(zona.idZona,producto.idProducto,zona.nombreZona)"
-              class="btn btn-primary col-4" *ngIf="!validaPago(producto)">Pagar</button>
+              class="btn btn-primary col-4" *ngIf="!validaPago(producto.numeroPeriodo)">Pagar</button>
               <button [disabled]="validaVi()" type="button" (click)="deshacer(zona.idZona,producto.idProducto)"
-              class="btn btn-secondary col-4" *ngIf="validaPago(producto)">Cancelar</button>
+              class="btn btn-secondary col-4" *ngIf="validaPago(producto.numeroPeriodo)">Cancelar</button>
 
             <div class="col-8" style="margin-top:14px">
               <h6>{{getNameById(producto.idProducto)}}</h6>
