@@ -14151,6 +14151,7 @@ var ProyectosService = (function () {
         var _this = this;
         this.periodo = numero;
         this.deletePeriodos(numero).subscribe();
+        this.eliminarRescate().subscribe();
         setTimeout(function () {
             _this.buscarPeriodos(localStorage.getItem('idProyecto')).subscribe(function (data) {
                 _this.periodos.length = 0;
@@ -14414,6 +14415,16 @@ var ProyectosService = (function () {
             numeroPeriodo: localStorage.getItem('numeroPeriodo')
         };
         return this.http.post('balance/addRescate/', x, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    ProyectosService.prototype.eliminarRescate = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_10__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json'
+        });
+        var x = {
+            idProyecto: localStorage.getItem('idProyecto'),
+            numeroPeriodo: localStorage.getItem('numeroPeriodo')
+        };
+        return this.http.post('balance/deleteRescate/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
     ProyectosService.prototype.getProyectos = function () {
         return this.http.get('proyecto/' + localStorage.getItem('idUsuario')).map(function (res) { return res.json(); });
