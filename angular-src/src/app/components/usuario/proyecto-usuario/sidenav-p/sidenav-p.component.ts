@@ -382,6 +382,60 @@ for(let i=0,x=0;i<this.ventas.length;i++,x++){
                 doc.setFontSize(12);
                 doc.setFontType("bold");
 
+                let rowVentas2=[
+                  {producto:"Producto X",zona:"Guanajuato",uVendidas:"100,000"}
+                ];
+
+                let colsVentas2=[
+                {title: "Producto", dataKey: "producto"},
+                {title: "Zona", dataKey: "zona"},
+                {title: "Unidades Vendidas", dataKey: "uVendidas"}];
+
+                doc.autoTable(colsVentas2,rowVentas2, {
+                margin: {top:30,
+                     left:30},
+                tableWidth:110,
+                headerStyles: {fillColor:0,halign:'center'},
+                columnStyles: {
+                  producto:{halign:'center'},
+                  zona:{halign:'center'},
+                  uVendidas:{halign:'right'}
+                },
+                bodyStyles:{
+                },
+                drawCell: function (cell, data) {
+                    // Rowspan
+                    var rows = data.table.rows;
+                    if (data.row.index == 0) {
+                      doc.setFillColor(176, 176, 176);
+                      doc.setFontType("bold")
+                    }
+                }
+                });
+
+
+                let rowAlmacen=[
+                  {producto:"Producto X",zona:"Guanajuato",uVendidas:"100,000"}
+                ];
+
+                let colsAlmacen=[
+                {title: "Producto", dataKey: "producto"},
+                {title: "Unidades Almacenadas", dataKey: "almacen"}];
+
+                doc.autoTable(colsAlmacen,rowAlmacen, {
+                margin: {top:30,
+                     left:150},
+                tableWidth:80,
+                headerStyles: {fillColor:0,halign:'center'},
+                columnStyles: {
+                  producto:{halign:'center'},
+                  almacen:{halign:'center'}
+                },
+                bodyStyles:{
+                }
+                });
+
+
           doc.save("Reporte de decisiones.pdf");
   }
 
