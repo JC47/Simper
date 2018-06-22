@@ -169,6 +169,7 @@ export class SidenavPComponent implements OnInit {
 
     this.openLoad=true;
     setTimeout(() => {
+      
       this.creditos=this.acomodaCredito();
       console.log(this.creditos);
       this.openLoad=false;
