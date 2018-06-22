@@ -115,14 +115,14 @@
         <div class="card-block">
 
                     <div class="row">
-                      <h5 class="col-5 text-center">Venta de Productos(unidades)</h5>
-                      <h5 class="col-6 offset-1 text-center">Desarrollo  de Productos y Zonas</h5>
+                      <h5 class="col-3 text-center">Venta de Productos(unidades)</h5>
+                      <h5 class="col-2 text-center">Maquinaria Adquirida</h5>
+                      <h5 class="col-3 text-center">Desarrollo  de Productos y Zonas</h5>
+                      <h5 class="col-2 text-center">Créditos Pedidos</h5>
                     </div>
 
 
                     <div class="row">
-
-
                       <div class="col-3">
                         <table class="table table-hover table-sm">
                             <tr>
@@ -138,20 +138,23 @@
                         </table>
                       </div>
 
-                      <div class="col-2">
-                        <table class="table table-hover table-sm">
-                          <tr>
-                            <th class="text-center">Producto</th>
-                            <th class="text-enter">Almacenadas</th>
+                        <div class="col-2">
+                          <table class="table table-hover table-sm">
+                            <tr>
+                              <th class="text-center">Maquinaria</th>
+                              <th class="text-center">Cantidad</th>
+                            </tr>
 
-                          </tr>
-                        </table>
-                      </div>
+                            <tr *ngFor="let maquina of maquinas[i].maquinarias">
+                              <td class="text-center">{{getNameByIdMaquinaria(maquina.idMaquinaria)}}</td>
+                              <td class="text-right">{{maquina.Cantidad}}</td>
+                            </tr>
+                          </table>
+                        </div>
 
 
 
-
-                        <div class="col-2 offset-1">
+                        <div class="col-1">
                           <table class="table table-hover table-sm">
                             <tr>
                               <th class="text-center">Productos Desarrollados</th>
@@ -164,7 +167,7 @@
 
 
 
-                        <div class="col-4">
+                        <div class="col-3">
                           <table class="table table-hover table-sm">
                             <tr>
                               <th class="text-center">Producto</th>
@@ -178,45 +181,19 @@
                           </table>
                         </div>
 
+                        <div class="col-2">
+                          <table class="table table-hover table-sm">
+                            <tr>
+                              <th class="text-center">Crédito</th>
+                              <th class="text-center">Monto</th>
+                            </tr>
 
-
-
-                    </div>
-
-                    <div class="row">
-                      <h5 class="col-3 offset-2 text-center">Maquinaria Adquirida</h5>
-                      <h5 class="col-3 offset-1 text-center">Créditos Pedidos</h5>
-                    </div>
-
-                    <div class="row">
-
-                      <div class="col-3 offset-2">
-                        <table class="table table-hover table-sm">
-                          <tr>
-                            <th class="text-center">Maquinaria</th>
-                            <th class="text-center">Cantidad</th>
-                          </tr>
-
-                          <tr *ngFor="let maquina of maquinas[i].maquinarias">
-                            <td class="text-center">{{getNameByIdMaquinaria(maquina.idMaquinaria)}}</td>
-                            <td class="text-right">{{maquina.Cantidad}}</td>
-                          </tr>
-                        </table>
-                      </div>
-
-                      <div class="col-3 offset-1">
-                        <table class="table table-hover table-sm">
-                          <tr>
-                            <th class="text-center">Crédito</th>
-                            <th class="text-center">Monto</th>
-                          </tr>
-
-                          <tr *ngFor="let credito of creditos[i].creditos">
-                            <td class="text-center">{{credito.nombreCredito}}</td>
-                            <td class="text-right">{{credito.monto|currency:'USD':true:'1.0-0'}}</td>
-                          </tr>
-                        </table>
-                      </div>
+                            <tr *ngFor="let credito of creditos[i].creditos">
+                              <td class="text-center">{{credito.nombreCredito}}</td>
+                              <td class="text-right">{{credito.monto|currency:'USD':true:'1.0-0'}}</td>
+                            </tr>
+                          </table>
+                        </div>
 
 
                     </div>
