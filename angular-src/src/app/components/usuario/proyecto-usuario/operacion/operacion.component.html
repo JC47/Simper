@@ -1,0 +1,780 @@
+<div class="row container">
+  <h3 class="text-center  col-4 offset-4">Resultados de Operación</h3>
+  <div class="col-4">
+    <div class="row">
+      <button type="button" class="btn btn-primary offset-1 col-5 " (click)="abrirTodo()" >Abrir Todo</button>
+      <button type="button" class="btn btn-primary offset-1 col-5" (click)="cerrarTodo()">Cerrar Todo</button>
+    </div>
+  </div>
+
+
+</div>
+
+
+<div class="row container">
+  <hr style="margin-bottom:20px">
+</div>
+
+
+
+
+
+
+
+<div class="col-10 offset-1" style="margin-bottom:20px">
+  <ngl-section [(open)]="almacenArticuloTerm" title="Almacén de Artículo Terminado">
+    <div class="row">
+      <div class="offset-2 col-8  ">
+        <table class="table table-bordered ">
+
+          <tbody>
+            <tr>
+              <th class="text-center">Producto</th>
+              <th class="text-center">Unidades</th>
+              <th class="text-center" style="width:100px">Costo de Producción</th>
+              <th class="text-center">TOTAL</th>
+            </tr>
+
+
+
+            <tr *ngFor="let producto of auxiliaresAnteriores">
+              <td>{{getNameByIdProducto(producto.Producto_idProducto)}}</td>
+              <td class="text-right">{{producto.unidadesAlmacenadas|number:'1.0-0'}}</td>
+              <td class="text-right" style="width:100px">{{getCostoAlmacen(producto.Producto_idProducto) |currency:'USD':true:'1.0-0'}}</td>
+              <td class="text-right">{{producto.inventarioFinal |currency:'USD':true:'1.0-0'}}</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row align-items-center" style="margin-bottom:20px">
+      <div class="offset-6 col-1">
+        Exportar:
+      </div>
+      <div class="col-1">
+        <ngl-icon icon="pdf" category="doctype" (click)="PDFalmacenArticuloTerminado()" size="large" style="cursor:pointer"></ngl-icon>
+      </div>
+
+      <div class="col-1">
+        <ngl-icon icon="csv" category="doctype" (click)="CSValmacenArticuloTerminado()" size="large" style="cursor:pointer" ></ngl-icon>
+      </div>
+
+    </div>
+
+
+  </ngl-section>
+</div>
+
+
+<div class="col-10 offset-1" style="margin-bottom:20px">
+  <ngl-section [(open)]="presGlobalVentas" title="Presupuesto Global de Ventas e IVA">
+    <div class="row">
+      <div class="col-10 offset-1">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <th class="text-center">Producto</th>
+              <th class="text-center">Unidades a Vender</th>
+              <th class="text-center">Precio de Venta</th>
+              <th class="text-center">Ventas en $</th>
+              <th class="text-center">IVA (15%)</th>
+              <th class="text-center">Importe</th>
+            </tr>
+
+            <tr *ngFor="let producto of auxiliares">
+              <td>{{getNameByIdProducto(producto.Producto_idProducto) }}</td>
+              <td class="text-right">{{producto.unidadesVendidas|number:'1.0-0'}}</td>
+              <td class="text-right">{{getPrecioVenta(producto.Producto_idProducto) |currency:'USD':true:'1.0-0'}}</td>
+              <td class="text-right">{{producto.Ventas - producto.IVAxVentas |currency:'USD':true:'1.0-0'}}</td>
+              <td class="text-right">{{producto.IVAxVentas |currency:'USD':true:'1.0-0'}}</td>
+              <td class="text-right">{{producto.Ventas |currency:'USD':true:'1.0-0'}}</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+
+    <div class="row align-items-center" style="margin-bottom:20px">
+      <div class="offset-6 col-1">
+        Exportar:
+      </div>
+
+      <div class="col-1">
+        <ngl-icon icon="pdf" category="doctype" (click)=" PDFpresupuestoGlobalVentasIVA()" size="large" style="cursor:pointer"></ngl-icon>
+      </div>
+
+
+      <div class="col-1">
+        <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalVentasIVA()" size="large" style="cursor:pointer"></ngl-icon>
+      </div>
+    </div>
+
+
+
+
+  </ngl-section>
+</div>
+
+
+<div class="col-10 offset-1" style="margin-bottom:20px">
+  <ngl-section [(open)]="presGlobalProduccion" title="Presupuesto Global de Producción">
+    <div class="">
+      <table class="table table-bordered table-responsive">
+
+        <tbody>
+          <tr>
+            <th class="text-left align-middle" >Producto</th>
+            <td *ngFor="let producto of auxiliares">{{getNameByIdProducto(producto.Producto_idProducto) }}</td>
+          </tr>
+
+          <tr>
+            <th class="text-left align-middle" >Unidades a Vender (+)</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{producto.unidadesVendidas|number:'1.0-0'}}</td>
+
+          </tr>
+
+
+          <tr>
+            <th class="text-left align-middle" >Inventario Final (+)</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{producto.unidadesAlmacenadas|number:'1.0-0'}}</td>
+          </tr>
+
+          <tr>
+            <th class="text-left align-middle" >Inventario Inicial (-)</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{getUnidadesAlmacenadasAnterior(producto.Producto_idProducto)|number:'1.0-0'}}</td>
+          </tr>
+
+          <tr>
+            <th class="text-left align-middle" >Unidades a Producir</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{producto.unidadesProducidas |number:'1.0-0'}}</td>
+          </tr>
+
+          <tr>
+            <th class="text-left align-middle" >Costo Unitario (MP)</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{getMPPuniProd(producto.Producto_idProducto) |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+          <tr>
+            <th class="text-left align-middle" >Costo Total (MP)</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{producto.materiaCosumida |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+          <tr>
+            <th class="text-left align-middle" >Costo Unitario (Transformación)</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{(producto.costoTransformacionVentas + producto.costoTransformacionMaq)/producto.unidadesProducidas |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+          <tr>
+            <th class="text-left align-middle" >Costo Total (Transformación)</th>
+            <td class="text-right" *ngFor="let producto of auxiliares"> {{producto.costoTransformacionVentas + producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+          <tr>
+            <th class="text-left align-middle" >Costo de Producción Unitario</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{getMPPuniProd(producto.Producto_idProducto) + (producto.costoTransformacionVentas + producto.costoTransformacionMaq)/producto.unidadesProducidas|currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+          <tr>
+            <th class="text-left align-middle" >Costo de Producción Total</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoTransformacionVentas + producto.costoTransformacionMaq + producto.materiaCosumida |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+
+
+        <div class="row align-items-center" style="margin-bottom:20px" >
+          <div class="offset-6 col-1">
+            Exportar:
+          </div>
+
+          <div class="col-1">
+            <ngl-icon icon="pdf" category="doctype" (click)=" PDFpresupuestoGlobalProduccion()" size="large" style="cursor:pointer"></ngl-icon>
+          </div>
+
+
+          <div class="col-1">
+            <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalProduccion()" size="large" style="cursor:pointer"></ngl-icon>
+          </div>
+
+        </div>
+
+
+
+  </ngl-section>
+</div>
+
+
+
+
+
+<div class="col-10 offset-1" style="margin-bottom:20px">
+  <ngl-section [(open)]="presGlobalConsumoMP" title="Presupuesto Global de Consumo de Materias Primas">
+    <div class="offset-1 col-10">
+      <table class="table table-bordered ">
+
+        <tbody>
+          <tr>
+            <th class="text-center align-middle" >Producto</th>
+            <th class="text-center align-middle" >Cantidad Unitaria</th>
+            <th class="text-center align-middle" >Costo Unitario</th>
+            <th class="text-center align-middle" >Unidades a Producir</th>
+            <th class="text-center align-middle" >Cantidad</th>
+            <th class="text-center align-middle" >Importe</th>
+
+          </tr>
+
+          <tr *ngFor="let producto of auxiliares">
+            <td>{{getNameByIdProducto(producto.Producto_idProducto) }}</td>
+            <td class="text-right">{{getUniMP(producto.Producto_idProducto)}}</td>
+            <td class="text-right">{{getCostoUni(producto.Producto_idProducto) |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{producto.unidadesProducidas |number:'1.0-0' }}</td>
+            <td class="text-right">{{getUniMP(producto.Producto_idProducto) * producto.unidadesProducidas|number:'1.0-0'}}</td>
+            <td class="text-right">{{getCostoUni(producto.Producto_idProducto) * (getUniMP(producto.Producto_idProducto) * producto.unidadesProducidas) |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+
+
+        <div class="row align-items-center" style="margin-bottom:20px">
+          <div class="offset-6 col-1">
+            Exportar:
+          </div>
+          <div class="col-1">
+            <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalConsumoMP()" size="large" style="cursor:pointer"></ngl-icon>
+          </div>
+          <div class="col-1">
+            <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalConsumoMP()" size="large" style="cursor:pointer"></ngl-icon>
+          </div>
+
+        </div>
+
+
+
+  </ngl-section>
+</div>
+
+
+
+<div class="col-10 offset-1" style="margin-bottom:20px">
+  <ngl-section [(open)]="presGlobalComprasMP" title="Presupuesto Global Compras de Materias Primas e IVA">
+    <div class="row">
+      <div class="offset-2 col-8">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <th class="text-center align-middle" >Materiales </th>
+              <th class="text-center align-middle" >Cantidad a Comprar</th>
+              <th class="text-center align-middle"  >Costo Unitario</th>
+              <th class="text-center align-middle" >Importe</th>
+              <th class="text-center align-middle" >IVA Acreditable</th>
+              <th class="text-center align-middle" >Total a Pagar</th>
+            </tr>
+
+
+            <tr>
+              <td class="text-right">1</td>
+              <td class="text-right">{{getUniMPTotal() | number:'1.0-0' }}</td>
+              <td class="text-right">$69</td>
+              <td class="text-right">{{getUniMPTotalCash() |currency:'USD':true:'1.0-0'}}</td>
+              <td class="text-right">{{getIVAMP() |currency:'USD':true:'1.0-0'}}</td>
+              <td class="text-right">{{getTotalMP() |currency:'USD':true:'1.0-0'}}</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+
+
+
+      </div>
+    </div>
+
+    <div class="row align-items-center" style="margin-bottom:20px">
+      <div class="offset-6 col-1">
+        Exportar:
+      </div>
+      <div class="col-1">
+        <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalComprasMP()" size="large" style="cursor:pointer"></ngl-icon>
+      </div>
+
+      <div class="col-1">
+        <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalComprasMP()" size="large" style="cursor:pointer"></ngl-icon>
+      </div>
+    </div>
+
+  </ngl-section>
+</div>
+
+
+
+
+
+<div class="col-10 offset-1" style="margin-bottom:20px">
+  <ngl-section [(open)]="presGlobalCostoTrans" title="Presupuesto Global de Costos de Transformación">
+  <!-- <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered table-responsive">
+
+        <tbody>
+          <tr>
+            <th class="text-center align-middle" rowspan="2">Producto</th>
+            <th class="text-center align-middle" rowspan="2">Unidades a Producir</th>
+            <th class="text-center align-middle" rowspan="2">Costo Unitario Total</th>
+            <th class="text-center align-middle" rowspan="2">Costos de Transformacion</th>
+            <th class="text-center align-middle" colspan="2">Menos</th>
+            <th class="text-center align-middle" colspan="2">Menos partidas que no incluyen IVA</th>
+            <th class="text-center align-middle" rowspan="2" >Neto</th>
+            <th class="text-center align-middle" rowspan="2">IVA</th>
+            <th class="text-center align-middle" rowspan="2">Total a Pagar</th>
+          </tr>
+          <tr>
+            <th class="text-center align-middle">Depreciaciones</th>
+            <th class="text-center align-middle">Neto</th>
+            <th class="text-center align-middle">Sueldos y Salarios</th>
+            <th class="text-center align-middle">Prevención Social</th>
+          </tr>
+
+          <tr *ngFor="let producto of auxiliares">
+            <td>{{getNameByIdProducto(producto.Producto_idProducto) }}</td>
+            <td class="text-right">{{producto.unidadesProducidas}}</td>
+            <td class="text-right">{{(producto.costoTransformacionVentas + producto.costoTransformacionMaq )/ producto.unidadesProducidas |currency:'USD':true:'1.0-0' }}</td>
+            <td class="text-right">{{producto.costoTransformacionVentas + producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{producto.costoTransformacionVentas |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{0}}</td>
+            <td class="text-right">{{0}}</td>
+            <td class="text-right">{{producto.costoTransformacionVentas |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{-producto.IVATrans |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{producto.costoTransformacionVentas - producto.IVATrans |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+
+        </tbody>
+      </table>
+    </div>
+  </div> -->
+
+
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered">
+        <tr class="">
+          <th colspan="2"></th>
+          <th class="text-center" class="text-center align-middle" *ngFor="let producto of auxiliares">{{getNameByIdProducto(producto.Producto_idProducto)}}</th>
+        </tr>
+
+        <tr>
+          <td colspan="2">Unidades a Producir</td>
+          <td class="text-right" *ngFor="let producto of auxiliares">{{producto.unidadesProducidas|number:'1.0-0'}}</td>
+        </tr>
+
+        <tr>
+          <td colspan="2">Costo Unitario Total</td>
+          <td class="text-right" *ngFor="let producto of auxiliares">{{(producto.costoTransformacionVentas + producto.costoTransformacionMaq )/ producto.unidadesProducidas |currency:'USD':true:'1.0-0' }}</td>
+        </tr>
+
+
+        <tr>
+          <td colspan="2">Costos de Transformación</td>
+          <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoTransformacionVentas + producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>
+        </tr>
+
+        <tr>
+          <td class="align-middle" rowspan="2">Menos</td>
+          <td>Depreciaciones</td>
+          <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>
+        </tr>
+
+        <tr>
+          <td>Neto</td>
+          <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoTransformacionVentas |currency:'USD':true:'1.0-0'}}</td>
+        </tr>
+
+        <tr>
+          <td rowspan="2" class="align-middle">Menos partidas que no incluyen IVA</td>
+          <td>Sueldos y Salarios</td>
+          <td class="text-right">$0</td>
+        </tr>
+
+        <tr>
+          <td>Prevención Social</td>
+          <td class="text-right">$0</td>
+        </tr>
+
+        <tr>
+          <td colspan="2">Neto</td>
+          <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoTransformacionVentas |currency:'USD':true:'1.0-0'}}</td>
+        </tr>
+
+        <tr>
+          <td colspan="2">IVA</td>
+          <td class="text-right" *ngFor="let producto of auxiliares">{{-producto.IVATrans |currency:'USD':true:'1.0-0'}}</td>
+        </tr>
+
+        <tr>
+          <td colspan="2">Total</td>
+          <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoTransformacionVentas - producto.IVATrans |currency:'USD':true:'1.0-0'}}</td>
+        </tr>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="row align-items-center" style="margin-bottom:20px">
+    <div class="offset-6 col-1">
+      Exportar:
+    </div>
+    <div class="col-1">
+      <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalCostoTrans()" size="large" style="cursor:pointer"></ngl-icon>
+    </div>
+
+    <div class="col-1">
+      <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalCostoTrans()" size="large" style="cursor:pointer"></ngl-icon>
+    </div>
+  </div>
+
+
+
+  </ngl-section>
+</div>
+
+
+
+<div class="col-10 offset-1" style="margin-bottom:20px">
+  <ngl-section [(open)]="presGlobalCostoDist" title="Presupuesto Global de Gasto de Distribución">
+    <div class="offset-2">
+      <table class="table table-bordered table-responsive ">
+        <thead>
+          <tr>
+            <th></th>
+            <th *ngFor="let producto of auxiliares">{{getNameByIdProducto(producto.Producto_idProducto) }}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th>Unidades  a Vender</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{producto.unidadesVendidas|number:'1.0-0' }}</td>
+          </tr>
+
+          <tr>
+            <th>Costo Unitario Total</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoDistribucion / producto.unidadesVendidas |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+          <tr>
+            <th>Gasto de Distribución</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoDistribucion |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+          <tr>
+            <th>Menos</th>
+            <td class="text-right" *ngFor="let producto of auxiliares"></td>
+          </tr>
+
+          <tr>
+            <th>Depreciaciones</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoDistribucion - producto.costoDistDep |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+          <tr>
+            <th>Neto</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoDistDep |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+          <tr>
+            <th>Menos partidas que no Incluyen IVA</th>
+            <td class="text-right" *ngFor="let producto of auxiliares"></td>
+          </tr>
+
+          <tr>
+            <th>Sueldos y salarios</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">$0</td>
+          </tr>
+
+          <tr>
+            <th>Prevención Social</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">$0</td>
+          </tr>
+
+          <tr>
+            <th>Neto</th>
+            <td  class="text-right" *ngFor="let producto of auxiliares">{{producto.costoDistDep |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+          <tr>
+            <th>IVA</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{-producto.IVADist |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+          <tr>
+            <th>Total a Pagar</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoDistDep - producto.IVADist |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+
+        </tbody>
+      </table>
+
+    </div>
+
+
+    <div class="row align-items-center" style="margin-bottom:20px">
+      <div class="offset-6 col-1">
+        Exportar:
+      </div>
+
+      <div class="col-1">
+        <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalCostoDist()" size="large" style="cursor:pointer"></ngl-icon>
+      </div>
+
+
+
+
+      <div class="col-1">
+        <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalCostoDist()" size="large" style="cursor:pointer"></ngl-icon>
+      </div>
+
+
+
+
+    </div>
+
+  </ngl-section>
+</div>
+
+<div class="col-10 offset-1" style="margin-bottom:20px">
+  <ngl-section [(open)]="presGlobalCostoAdmon" title="Presupuesto Global de Gasto de Administración">
+    <div class="offset-2">
+
+          <table class="table table-bordered table-responsive ">
+            <thead>
+              <tr>
+                <th></th>
+                <th *ngFor="let producto of auxiliares">{{getNameByIdProducto(producto.Producto_idProducto) }}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <th>Unidades  a Vender</th>
+                <td class="text-right" *ngFor="let producto of auxiliares">{{producto.unidadesVendidas|number:'1.0-0' }}</td>
+              </tr>
+
+              <tr>
+                <th>Cto Unitario Total</th>
+                <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoAdministrativo/producto.unidadesVendidas |currency:'USD':true:'1.0-0'}}</td>
+              </tr>
+
+              <tr>
+                <th>Gasto de  Administración</th>
+                <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoAdministrativo |currency:'USD':true:'1.0-0'}}</td>
+              </tr>
+
+              <tr>
+                <th>Menos</th>
+                <td class="text-right" *ngFor="let producto of auxiliares"></td>
+              </tr>
+
+              <tr>
+                <th>Depreciaciones</th>
+                <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoAdministrativo - producto.costoAdminDep |currency:'USD':true:'1.0-0'}}</td>
+              </tr>
+
+              <tr>
+                <th>Neto</th>
+                <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoAdminDep |currency:'USD':true:'1.0-0'}}</td>
+              </tr>
+
+              <tr>
+                <th>Menos partidas que no Incluyen IVA</th>
+                <td class="text-right" *ngFor="let producto of auxiliares"></td>
+              </tr>
+
+              <tr>
+                <th>Sueldos y salarios</th>
+                <td class="text-right" *ngFor="let producto of auxiliares">$0</td>
+              </tr>
+
+              <tr>
+                <th>Prevención Social</th>
+                <td class="text-right" *ngFor="let producto of auxiliares">$0</td>
+              </tr>
+
+              <tr>
+                <th>Neto</th>
+                <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoAdminDep |currency:'USD':true:'1.0-0'}}</td>
+              </tr>
+
+              <tr>
+                <th>IVA</th>
+                <td class="text-right" *ngFor="let producto of auxiliares">{{-producto.IVAAdmon |currency:'USD':true:'1.0-0'}}</td>
+              </tr>
+
+              <tr>
+                <th>Total a Pagar</th>
+                <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoAdminDep - producto.IVAAdmon |currency:'USD':true:'1.0-0'}}</td>
+              </tr>
+
+
+            </tbody>
+          </table>
+    </div>
+
+
+
+    <div class="row align-items-center" style="margin-bottom:20px">
+      <div class="offset-6 col-1">
+        Exportar:
+      </div>
+
+      <div class="col-1">
+        <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalCostoAdmin()" size="large" style="cursor:pointer"></ngl-icon>
+      </div>
+
+
+      <div class="col-1">
+        <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalCostoAdmin()" size="large" style="cursor:pointer"></ngl-icon>
+      </div>
+
+    </div>
+
+  </ngl-section>
+</div>
+
+<div class="col-10 offset-1" style="margin-bottom:20px">
+  <ngl-section [(open)]="presOtrosGastos" title="Presupuesto Global de Otros Gastos">
+    <div class="offset-2">
+      <table class="table table-bordered table-responsive ">
+        <thead>
+          <tr>
+            <th></th>
+            <th *ngFor="let producto of auxiliarC">{{getNameByIdProducto(producto.Producto_idProducto) }}</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th>Desarrollo de Producto</th>
+            <td class="text-right" *ngFor="let producto of auxiliarC">{{producto.desarrolloProducto |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{getTotalProducto() |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+          <tr>
+            <th>Desarrollo de Mercado</th>
+            <td class="text-right" *ngFor="let producto of auxiliarC">{{producto.desarrolloMercado |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{getTotalMercado() |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+    <div class="row align-items-center" style="margin-bottom:20px">
+      <div class="offset-8 col-1">
+        Exportar:
+      </div>
+
+      <div class="col-1">
+        <ngl-icon icon="pdf" category="doctype" (click)="PDFpresupuestoGlobalOtrosGastos()" size="large" style="cursor:pointer"></ngl-icon>
+      </div>
+
+
+      <div class="col-1">
+        <ngl-icon icon="csv" category="doctype" (click)="CSVpresupuestoGlobalOtrosGastos()" size="large" style="cursor:pointer"></ngl-icon>
+      </div>
+
+    </div>
+
+
+  </ngl-section>
+</div>
+
+
+<div class="col-10 offset-1" style="margin-bottom:20px">
+  <ngl-section [(open)]="presGlobalCostoVenta" title="Costo de Producción y Ventas">
+    <div class="offset-2">
+      <table class="table table-bordered table-responsive ">
+        <thead>
+          <tr>
+            <th></th>
+            <th *ngFor="let producto of auxiliares">{{getNameByIdProducto(producto.Producto_idProducto) }}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th>Materia Prima Consumida</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{producto.materiaCosumida |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+
+          <tr>
+            <th>Mano de Obra y Gastos I. P.</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoTransformacionVentas + producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+          <tr>
+            <th>Costo de Producción</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{producto.materiaCosumida + producto.costoTransformacionVentas + producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+          <tr>
+            <th>I.I. de Producto terminado</th>
+            <td class="text-right" *ngFor="let producto of auxiliaresAnteriores">{{producto.inventarioFinal |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+
+          <tr>
+            <th>I.F. de Producto terminado</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{producto.inventarioFinal |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+          <tr>
+            <th>Costo de Ventas</th>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoVentas |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+
+        <div class="row align-items-center" style="margin-bottom:20px">
+          <div class="offset-8 col-1">
+            Exportar:
+          </div>
+
+
+          <div class="col-1">
+            <ngl-icon icon="pdf" category="doctype" (click)="PDFcostoProduccionVentas()" size="large" style="cursor:pointer" ></ngl-icon>
+          </div>
+
+
+          <div class="col-1">
+            <ngl-icon icon="csv" category="doctype" (click)="CSVcostoProduccionVentas()" size="large" style="cursor:pointer"></ngl-icon>
+          </div>
+        </div>
+
+  </ngl-section>
+</div>
