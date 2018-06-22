@@ -47,6 +47,8 @@ export class SidenavPComponent implements OnInit {
           }
   ];
 
+  ventasZonas = [];
+
 
   DProductos=[
     {numeroPeriodo:null,
@@ -154,12 +156,14 @@ export class SidenavPComponent implements OnInit {
   verDecisiones(){
 
     this.ventas = this._operacionService.returnVentas();
+    this.ventasZonas = this._operacionService.returnVentasZonas();
     this.maquinas = this._operacionService.returnMaquinas();
     this.DProductos = this._operacionService.returnDProductos();
     this.DZonas = this._operacionService.returnDZonas();
     this.ceditos = this._operacionService.returnCreditos();
 
     console.log("Ventas",this.ventas);
+    console.log("VentasZonas",this.ventasZonas);
     console.log("Maquinas",this.maquinas);
     console.log("Productos",this.DProductos);
     console.log("Zonas",this.DZonas);
