@@ -127,10 +127,10 @@
                         <table class="table table-hover table-sm">
                             <tr>
                               <th class="text-center">Producto</th>
+                              <th class="text-center">Zonas</th>
                               <th class="text-center">Vendidas</th>
-                              <th class="text-center">Almacenadas</th>
                             </tr>
-                            <tr *ngFor="let v of ventas[i].ventas">
+                            <tr *ngFor="let v of ventasZonas[i].ventas">
                               <td class="text-center">{{getNameByIdProducto(v.idProducto)}}</td>
                               <td class="text-right">{{v.unidadesVendidas|number:'1.0-0'}}</td>
                               <td class="text-right">{{v.unidadesAlmacenadas|number:'1.0-0'}}</td>
