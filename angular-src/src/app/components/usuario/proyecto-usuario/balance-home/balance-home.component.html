@@ -30,7 +30,7 @@
     </table>
   </div>
 
-  <div class="col-lg-6 col-sm-12 " style="height:235px;">
+  <div class="col-lg-6 col-sm-12 mb-3" style="height:235px;">
 
         <table class="table table-sm" *ngFor= "let balance of balanceFinal">
           <tr>
@@ -67,7 +67,7 @@
 
 
 
-  <div class="card card-outline-primary col-7 text-center" style="height:300px">
+  <div class="card card-outline-primary col-6 text-center" style="height:300px">
     <div class="card-block">
       <blockquote class="card-blockquote">
         <div class="card-header">
@@ -99,7 +99,7 @@
                     </tr>
                     <tr *ngFor="let zona of producto.zonas">
                       <td class="text-center">{{getNameByIdZona(zona.idZona)}}</td>
-                      <td class="text-center">{{zona.demanda}}u</td>
+                      <td class="text-center">{{zona.demanda|number:'1.0-0'}}u</td>
                     </tr>
                   </table>
                 </div>
@@ -118,34 +118,58 @@
 
 
 
-          <div class="col-lg-5">
+          <div class="col-lg-6">
             <div class="card card-outline-secondary mb-3 text-center" style="height:300px">
   <div class="card-block">
     <blockquote class="card-blockquote">
       <div class="card-header">
             <h5 class="col-12 text-center">Capacidad Instalada</h5>
       </div>
+      <div class="row">
 
-<div class="col-12" style="height:200px">
-  <ngx-charts-bar-horizontal
 
-        [scheme]="colorScheme2"
-        [results]="maquinariasGraf"
-        gradient="false"
-        xAxis="true"
-        yAxis="true"
-        showXAxisLabel="true"
-        showYAxisLabel="true"
-        xAxisLabel="Capacidad de Producción(unidades)"
-        yAxisLabel="Productos">
-      </ngx-charts-bar-horizontal>
-</div>
+        <div class="col-7" style="height:200px">
+
+          <ngx-charts-bar-horizontal
+
+                [scheme]="colorScheme2"
+                [results]="maquinariasGraf"
+                gradient="false"
+                xAxis="true"
+                yAxis="true"
+                showXAxisLabel="true"
+                showYAxisLabel="true"
+                xAxisLabel="Capacidad de Producción(unidades)"
+                yAxisLabel="Productos">
+              </ngx-charts-bar-horizontal>
+        </div>
+
+
+        <div class="col-lg-5 col-sm-8 " style="height:200px; overflow-y:scroll">
+                <table class="table" >
+                  <tr>
+                    <th class="text-center">Producto</th>
+                    <th class="text-center">Producción</th>
+                  </tr>
+                  <tr *ngFor="let maquina of maquinariasGraf">
+                    <td class="text-center">{{maquina.name}}</td>
+                    <td class="text-center">{{maquina.value|number:'1.0-0'}}u</td>
+                  </tr>
+                </table>
+
+        </div>
+
+
+      </div>
+
 
 
 
     </blockquote>
   </div>
 </div>
+
+
           </div>
 
 

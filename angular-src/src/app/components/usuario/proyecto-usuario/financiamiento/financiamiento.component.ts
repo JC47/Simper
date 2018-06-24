@@ -85,6 +85,7 @@ return true
   }
 
   selectCredito(credito){
+    this.solicitudForm.reset()
     this.solicitudForm.controls['idCredito'].setValue(credito.idCredito)
     this.openModalConf=true;
     this.creditoSelected=credito;

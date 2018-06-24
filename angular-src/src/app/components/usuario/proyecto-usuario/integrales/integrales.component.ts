@@ -214,7 +214,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.cajaBancos,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.cajaBancos/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.cajaBancos/this.getTotalActivo(balance)*100,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -222,7 +222,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.cuentasPorCobrar,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.cuentasPorCobrar/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.cuentasPorCobrar/this.getTotalActivo(balance)*100,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -231,7 +231,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.IVAAcreditable,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.IVAAcreditable/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.IVAAcreditable/this.getTotalActivo(balance)*100,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -240,7 +240,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.almacenArtTerm,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.almacenArtTerm/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.almacenArtTerm/this.getTotalActivo(balance)*100,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -249,14 +249,14 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.almacenMateriales,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.almacenMateriales/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.almacenMateriales/this.getTotalActivo(balance)*100,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.almacenMateriales+balance.cajaBancos+balance.cuentasPorCobrar+balance.IVAAcreditable+balance.almacenArtTerm,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform((balance.almacenMateriales+balance.cajaBancos+balance.cuentasPorCobrar+balance.IVAAcreditable+balance.almacenArtTerm)/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform((balance.almacenMateriales+balance.cajaBancos+balance.cuentasPorCobrar+balance.IVAAcreditable+balance.almacenArtTerm)/this.getTotalActivo(balance)*100,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -265,7 +265,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.terreno,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.terreno/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.terreno/this.getTotalActivo(balance)*100,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -274,7 +274,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.edifInsta,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.edifInsta/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.edifInsta/this.getTotalActivo(balance)*100,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -282,7 +282,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(-balance.depEdif,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(-balance.depEdif/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(-balance.depEdif/this.getTotalActivo(balance)*100,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -290,7 +290,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.maqEquipo,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.maqEquipo/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.maqEquipo/this.getTotalActivo(balance)*100,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -298,7 +298,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(-balance.depMaqEquipo,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(-balance.depMaqEquipo/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(-balance.depMaqEquipo/this.getTotalActivo(balance)*100,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -306,7 +306,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.mueblesEnseres,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.mueblesEnseres/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.mueblesEnseres/this.getTotalActivo(balance)*100,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -314,7 +314,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(-balance.depMueblesEnseres,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(-balance.depMueblesEnseres/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(-balance.depMueblesEnseres/this.getTotalActivo(balance)*100,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -323,7 +323,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.eqTrans,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.eqTrans/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.eqTrans/this.getTotalActivo(balance)*100,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -331,7 +331,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(-balance.depEqTrans,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(-balance.depEqTrans/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(-balance.depEqTrans/this.getTotalActivo(balance)*100,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -339,7 +339,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.terreno+balance.edifInsta-balance.depEdif+balance.maqEquipo-balance.depMaqEquipo+balance.mueblesEnseres-balance.depMueblesEnseres+balance.eqTrans-balance.depEqTrans,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform((balance.terreno+balance.edifInsta-balance.depEdif+balance.maqEquipo-balance.depMaqEquipo+balance.mueblesEnseres-balance.depMueblesEnseres+balance.eqTrans-balance.depEqTrans)/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform((balance.terreno+balance.edifInsta-balance.depEdif+balance.maqEquipo-balance.depMaqEquipo+balance.mueblesEnseres-balance.depMueblesEnseres+balance.eqTrans-balance.depEqTrans)/this.getTotalActivo(balance)*100,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -347,7 +347,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.pagosAnticipado,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.pagosAnticipado/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.pagosAnticipado/this.getTotalActivo(balance)*100,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -355,7 +355,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.gastosAmortizacion,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.gastosAmortizacionr/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.gastosAmortizacionr/this.getTotalActivo(balance)*100,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -363,14 +363,14 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.gastosAmortizacion+balance.pagosAnticipado,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.gastosAmortizacion+balance.pagosAnticipado/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.gastosAmortizacion+balance.pagosAnticipado/this.getTotalActivo(balance)*100,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(this.getTotalActivo(balance),'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(this.getTotalActivo(balance)/this.getTotalActivo(balance)*100,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(this.getTotalActivo(balance)/this.getTotalActivo(balance)*100,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -378,7 +378,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.IVAPorEnterar,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.IVAPorEnterar/this.getSumaPasivo(balance)*100 ,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.IVAPorEnterar/this.getSumaPasivo(balance)*100 ,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -386,21 +386,21 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.imptosPorPagar,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.imptosPorPagar/this.getSumaPasivo(balance)*100 ,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.imptosPorPagar/this.getSumaPasivo(balance)*100 ,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.proveedores,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.proveedores/this.getSumaPasivo(balance)*100 ,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.proveedores/this.getSumaPasivo(balance)*100 ,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.PTUPorPagar,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.PTUPorPagar/this.getSumaPasivo(balance)*100 ,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.PTUPorPagar/this.getSumaPasivo(balance)*100 ,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -408,7 +408,7 @@ acomodaBalance(){
     sec=[];
     for(let balance of this.balances){
       sec.push(this.cp.transform(balance.prestamosMenosAnio,'USD',true,'1.0-0'))
-      sec.push(this.cp.transform(balance.prestamosMenosAnio/this.getSumaPasivo(balance)*100 ,'USD',true,'1.0-0')+"%")
+      sec.push(this.dc.transform(balance.prestamosMenosAnio/this.getSumaPasivo(balance)*100 ,'1.0-0')+"%")
     }
     balanceAcomodado.push(sec);
 
@@ -416,7 +416,7 @@ acomodaBalance(){
       sec=[];
       for(let balance of this.balances){
         sec.push(this.cp.transform(balance.IVAPorEnterar+balance.imptosPorPagar+balance.proveedores+balance.PTUPorPagar+balance.prestamosMenosAnio,'USD',true,'1.0-0'))
-        sec.push(this.cp.transform((balance.IVAPorEnterar+balance.imptosPorPagar+balance.proveedores+balance.PTUPorPagar+balance.prestamosMenosAnio)/this.getSumaPasivo(balance)*100 ,'USD',true,'1.0-0')+"%")
+        sec.push(this.dc.transform((balance.IVAPorEnterar+balance.imptosPorPagar+balance.proveedores+balance.PTUPorPagar+balance.prestamosMenosAnio)/this.getSumaPasivo(balance)*100 ,'1.0-0')+"%")
       }
       balanceAcomodado.push(sec);
 
@@ -425,7 +425,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.prestamosMasAnio,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.prestamosMasAnio/this.getSumaPasivo(balance)*100 ,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.prestamosMasAnio/this.getSumaPasivo(balance)*100 ,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -433,7 +433,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.capitalSocial,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.capitalSocial/this.getSumaPasivo(balance)*100 ,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.capitalSocial/this.getSumaPasivo(balance)*100 ,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -441,7 +441,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.reservaLegal,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.reservaLegal/this.getSumaPasivo(balance)*100 ,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.reservaLegal/this.getSumaPasivo(balance)*100 ,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -449,7 +449,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.utilidadAcum,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.utilidadAcum/this.getSumaPasivo(balance)*100 ,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.utilidadAcum/this.getSumaPasivo(balance)*100 ,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -457,7 +457,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.utilidadEjercicio,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform(balance.utilidadEjercicio/this.getSumaPasivo(balance)*100 ,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.utilidadEjercicio/this.getSumaPasivo(balance)*100 ,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -465,7 +465,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.capitalSocial+balance.reservaLegal+balance.utilidadAcum+balance.utilidadEjercicio,'USD',true,'1.0-0'))
-    sec.push(this.cp.transform((balance.capitalSocial+balance.reservaLegal+balance.utilidadAcum+balance.utilidadEjercicio)/this.getSumaPasivo(balance)*100 ,'USD',true,'1.0-0')+"%")
+    sec.push(this.dc.transform((balance.capitalSocial+balance.reservaLegal+balance.utilidadAcum+balance.utilidadEjercicio)/this.getSumaPasivo(balance)*100 ,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 
@@ -473,7 +473,7 @@ acomodaBalance(){
     sec=[];
     for(let balance of this.balances){
       sec.push(this.cp.transform(this.getSumaPasivo(balance),'USD',true,'1.0-0'))
-      sec.push(this.cp.transform(this.getSumaPasivo(balance)/this.getSumaPasivo(balance)*100 ,'USD',true,'1.0-0')+"%")
+      sec.push(this.dc.transform(this.getSumaPasivo(balance)/this.getSumaPasivo(balance)*100 ,'1.0-0')+"%")
     }
     balanceAcomodado.push(sec);
 

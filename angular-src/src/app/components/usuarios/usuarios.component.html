@@ -220,7 +220,7 @@
 
 
                 <input class="form-control"
-                       type="number"
+                       currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }"
                        formControlName="proyectos" >
                        <div class="form-control-feedback" style="font-size:10px;"
                        *ngIf="!newForm.controls['proyectos'].valid">
@@ -236,7 +236,7 @@
 
 
                 <input class="form-control"
-                       type="number"
+                       currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }"
                        formControlName="periodos" >
                        <div class="form-control-feedback" style="font-size:10px;"
                        *ngIf="!newForm.controls['periodos'].valid">
@@ -252,7 +252,7 @@
 
 
                 <input class="form-control"
-                       type="number"
+                       currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }"
                        formControlName="regresion" >
                        <div class="form-control-feedback" style="font-size:10px;"
                        *ngIf="!newForm.controls['regresion'].valid">
@@ -308,7 +308,7 @@
 
 
                        <input class="form-control"
-                              type="number"
+                              currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }"
                               formControlName="minRescate" >
                               <div class="form-control-feedback" style="font-size:10px;"
                               *ngIf="!newForm.controls['minRescate'].valid">
@@ -324,7 +324,7 @@
 
 
                        <input class="form-control"
-                              type="number"
+                              currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }"
                               formControlName="maxRescate" >
                               <div class="form-control-feedback" style="font-size:10px;"
                               *ngIf="!newForm.controls['maxRescate'].valid">
@@ -515,7 +515,7 @@
 
 
               <input class="form-control"
-                     type="number"
+                     currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }"
                      formControlName="proyectos" >
                      <div class="form-control-feedback" style="font-size:10px;"
                      *ngIf="!editForm.controls['proyectos'].valid">
@@ -531,7 +531,7 @@
 
 
               <input class="form-control"
-                     type="number"
+                     currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }"
                      formControlName="periodos" >
                      <div class="form-control-feedback" style="font-size:10px;"
                      *ngIf="!editForm.controls['periodos'].valid">
@@ -583,7 +583,7 @@
 
 
                    <input class="form-control"
-                          type="number"
+                          currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }"
                           formControlName="minRescate" >
                           <div class="form-control-feedback" style="font-size:10px;"
                           *ngIf="!editForm.controls['minRescate'].valid">
@@ -599,7 +599,7 @@
 
 
                    <input class="form-control"
-                          type="number"
+                          currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }"
                           formControlName="maxRescate" >
                           <div class="form-control-feedback" style="font-size:10px;"
                           *ngIf="!editForm.controls['maxRescate'].valid">
@@ -1525,7 +1525,7 @@
 
           <div class="input-group col-6 has-success " [ngClass]="{'has-danger': !varsForm.get('valor').valid}">
               <span class="input-group-addon">%</span>
-              <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
+              <input currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }" class="form-control" aria-label="Amount (to the nearest dollar)"
               formControlName="valor">
 
 

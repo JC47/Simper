@@ -186,7 +186,7 @@
 
                       <div class="input-group col-6 has-success"
                       [ngClass]="{'has-danger': validaCampo(i,'tiempoDes')}">
-                        <span class="input-group-addon">$</span>
+                        <span class="input-group-addon">P</span>
                         <input currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }"
                         class="form-control"
                         formControlName="tiempoDes">
@@ -407,8 +407,9 @@
 
             <div class="input-group col-4 has-success " [ngClass]="{'has-danger': !productoZona.get('costoDes').valid}">
                 <span class="input-group-addon">$</span>
-                <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
-                formControlName="costoDes">
+                <input  class="form-control" aria-label="Amount (to the nearest dollar)"
+                formControlName="costoDes"
+                currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }">
 
 
 
@@ -427,9 +428,10 @@
             <label class="col-7 col-form-label">Tiempo Desarrollo</label>
 
             <div class="input-group col-4 has-success " [ngClass]="{'has-danger': !productoZona.get('tiempoDes').valid}">
-                <span class="input-group-addon">$</span>
-                <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
-                formControlName="tiempoDes">
+                <span class="input-group-addon">P</span>
+                <input  class="form-control" aria-label="Amount (to the nearest dollar)"
+                formControlName="tiempoDes"
+                currencyMask [options]="{ prefix: '', thousands: ',', precision:'0' }">
 
 
 
@@ -437,7 +439,7 @@
             <div class="form-control-feedback offset-7 text-center col-4" style="font-size:10px;"
             [ngClass]="{'has-danger': !productoZona.get('costoDes').valid}"
             *ngIf="!productoZona.controls['tiempoDes'].valid">
-              El costo es requerido
+              El tiempo es requerido
             </div>
 
 

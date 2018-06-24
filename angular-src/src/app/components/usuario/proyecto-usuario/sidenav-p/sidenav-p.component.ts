@@ -21,7 +21,7 @@ declare var jsPDF: any;
 })
 export class SidenavPComponent implements OnInit {
 
-  proyectos:any;
+  proyectos:any=[];
   openLoad:boolean=false;
   proyectoActual:any;
   totalPer:number=1;
@@ -47,7 +47,13 @@ export class SidenavPComponent implements OnInit {
           }
   ];
 
-  ventasZonas = [];
+  ventasZonas = [
+    {numeroPeriodo:null,
+     ventas:[
+       { producto:null,
+         unidadesVendidas:null,
+        zona:null}]}
+     ];
 
 
   DProductos=[
@@ -94,6 +100,8 @@ export class SidenavPComponent implements OnInit {
     this.productos=this._productoService.returnProductos();
     this.maquinaria=this._maquinariaService.returnMaquinas();
     this.zonas=this._zonasService.returnZonasNormales();
+
+
   }
 
   ngOnInit() {
@@ -173,7 +181,7 @@ export class SidenavPComponent implements OnInit {
 
     this.openLoad=true;
     setTimeout(() => {
-      
+
       this.creditos=this.acomodaCredito();
       console.log(this.creditos);
       this.openLoad=false;
@@ -188,6 +196,8 @@ export class SidenavPComponent implements OnInit {
 
 
   PDFdecisiones(){
+    let ventasZonas=this.ventasZonas;
+    let ventas=this.ventas;
     let rowVentas=[];
     let colsVentas=[
     {title: "Producto", dataKey: "producto"},
@@ -205,6 +215,15 @@ export class SidenavPComponent implements OnInit {
     let colsMercados=[
     {title: "Producto", dataKey: "producto"},
     {title: "Zonas de Mercado Desarrolladas", dataKey: "zona"}];
+
+    let colsAlmacen=[
+    {title: "Producto", dataKey: "producto"},
+    {title: "Unidades Almacenadas", dataKey: "unidades"}];
+
+    let colsVentasZona=[
+    {title: "Producto", dataKey: "producto"},
+    {title: "Zonas de Venta", dataKey: "zona"},
+    {title: "Unidades Vendidas", dataKey: "unidades"}];
 
 
     let colsCreditos=[
@@ -387,7 +406,122 @@ for(let i=0,x=0;i<this.ventas.length;i++,x++){
                 doc.setFontSize(12);
                 doc.setFontType("bold");
 
-          doc.save("Reporte de decisiones.pdf");
+
+
+
+
+                          let rowAlmacen=[];
+
+                          for(let per of ventas){
+                            rowAlmacen.push({
+                              producto:"Periodo "+per.numeroPeriodo,
+                              unidades:""
+                            })
+
+                            for(let venta of per.ventas){
+                            if(!(venta.unidadesAlmacenadas==0)){
+                              rowAlmacen.push({
+                                producto:this.getNameByIdProducto(venta.idProducto),
+                                unidades:this.dc.transform( venta.unidadesAlmacenadas,'1.0-0')
+                              })
+                            }
+                            }
+
+
+                          }
+
+                          doc.autoTable(colsAlmacen, rowAlmacen, {
+                          margin: {top:35,
+                            left:150},
+                            tableWidth:100,
+                          headerStyles: {fillColor:0,halign:'center'},
+                          columnStyles: {
+                            producto:{halign:'center'},
+                            zona:{halign:'center'},
+                            unidades:{halign:'right'},
+                          },
+                          bodyStyles:{
+                          },
+
+                          drawCell: function (cell, data) {
+                              var rows = data.row.index+1
+                              console.log(rows)
+                              for(let col of ventas){
+                                if(rowAlmacen[data.row.index].producto=="Periodo "+(col.numeroPeriodo)){
+                                  doc.setFillColor(176, 176, 176);
+                                  doc.setFontType("bold")
+                                }
+
+                              }
+
+
+                          }
+                          });
+
+
+
+
+
+          let rowVentasZona=[];
+
+          for(let per of ventasZonas){
+            rowVentasZona.push({
+              producto:"Periodo "+per.numeroPeriodo,
+              zona:"",
+              unidades:""
+            })
+
+            for(let venta of per.ventas){
+              rowVentasZona.push({
+                producto:venta.producto,
+                zona:venta.zona,
+                unidades:this.dc.transform( venta.unidadesVendidas,'1.0-0')
+              })
+            }
+
+            rowVentasZona.push({
+              producto:"",
+              zona:"",
+              unidades:""
+            })
+          }
+
+          doc.autoTable(colsVentasZona, rowVentasZona, {
+          margin: {top:35,
+            left:10},
+            tableWidth:130,
+          headerStyles: {fillColor:0,halign:'center'},
+          columnStyles: {
+            producto:{halign:'center'},
+            zona:{halign:'center'},
+            unidades:{halign:'right'},
+          },
+          bodyStyles:{
+          },
+          drawCell: function (cell, data) {
+              var rows = data.row.index+1
+              console.log(rows)
+              for(let col of ventasZonas){
+                if(rowVentasZona[data.row.index].producto=="Periodo "+(col.numeroPeriodo)){
+                  doc.setFillColor(176, 176, 176);
+                  doc.setFontType("bold")
+                }
+
+              }
+
+
+          }
+          });
+
+
+
+
+            doc.save("Reporte de decisiones.pdf")
+
+
+
+
+
   }
 
 
@@ -398,20 +532,26 @@ for(let i=0,x=0;i<this.ventas.length;i++,x++){
   ];
 
   for(let i in this.ventas){
-    var space=[
-      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
-      {productoV:"Periodo "+this.ventas[i].numeroPeriodo,cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
-      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"",esp4:"",credito:"",montoCredito:""},
-      {productoV:"Venta de Productos",cVendida:"",cAlmacenada:"",es1:"",maquina:"Maquinaria Adquirida",cMaquina:"",sp2:"",pDesarrollado:" Productos y Zona de Mercado Desarrolladas",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"Creditos Pedidos",montoCredito:""},
-      {productoV:"Producto",cVendida:"Unidades Vendidas",cAlmacenada:"Unidades Almacenadas",es1:"",maquina:"Maquina",cMaquina:"Cantidad",sp2:"",pDesarrollado:"Producto Desarrollado",esp3:"",pZonas:"Producto",zDesarrolladas:"Zona de Mercado Desarrollada", esp4:"",credito:"Credito",montoCredito:"Monto"},
-      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
-      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
-      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
-      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
-      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
-      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
-      {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
-    ];
+
+
+        var space=[
+          {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+          {productoV:"Periodo "+this.ventas[i].numeroPeriodo,cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+          {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"",esp4:"",credito:"",montoCredito:""},
+          {productoV:"Venta de Productos",cVendida:"",cAlmacenada:"",es1:"",maquina:"Maquinaria Adquirida",cMaquina:"",sp2:"",pDesarrollado:" Productos y Zona de Mercado Desarrolladas",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"Creditos Pedidos",montoCredito:""},
+          {productoV:"Producto",cVendida:"Unidades Vendidas",cAlmacenada:"Unidades Almacenadas",es1:"",maquina:"Maquina",cMaquina:"Cantidad",sp2:"",pDesarrollado:"Producto Desarrollado",esp3:"",pZonas:"Producto",zDesarrolladas:"Zona de Mercado Desarrollada", esp4:"",credito:"Credito",montoCredito:"Monto"},
+          {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+          {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+          {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+          {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+          {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+          {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+          {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+        ];
+
+
+
+
 
     for(let x=0;x<this.ventas[i].ventas.length;x++){
       console.log(x)
@@ -442,9 +582,47 @@ for(let i=0,x=0;i<this.ventas.length;i++,x++){
 
 
 
+        var space2=[
+          {productoV:"Resumen de Decisiones de Producción ",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"",esp4:"",credito:"",montoCredito:""},
+          {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"",esp4:"",credito:"",montoCredito:""},
+          {productoV:"Ventas de Productos",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"",esp4:"",credito:"",montoCredito:""},
+          {productoV:"Producto",cVendida:"Zona",cAlmacenada:"Unidades ",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+          {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+          {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+          {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+          {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+          {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+          {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+          {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+          {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+          {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+          {productoV:"",cVendida:"",cAlmacenada:"",es1:"",maquina:"",cMaquina:"",sp2:"",pDesarrollado:"",esp3:"",pZonas:"",zDesarrolladas:"", esp4:"",credito:"",montoCredito:""},
+        ];
+
+        for(let x=0;x<this.ventasZonas[i].ventas.length;x++){
+          space2[x+3].productoV=this.ventasZonas[i].ventas[x].producto;
+          space2[x+3].cVendida=this.ventasZonas[i].ventas[x].zona;
+          space2[x+3].cAlmacenada=this.ventasZonas[i].ventas[x].unidadesVendidas;
+        }
+
+        
+
+
     for(let sp of space){
       data.push(sp);
     }
+
+    for(let sp2 of space2){
+      data.push(sp2)
+    }
+
+
+
+
+
+
+
+
 
 
 

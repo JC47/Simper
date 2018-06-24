@@ -69,6 +69,7 @@ export class CreditosComponent implements OnInit {
                         this.pagoAForm=true;
                       }else{
                         this.pagoAForm=false;
+                        //this.newForm.controls['pagoAnticipado'].setValue('1');
                       }
                     })
 
@@ -182,6 +183,7 @@ export class CreditosComponent implements OnInit {
       (<FormArray>this.newForm.controls['pagosCredito']).removeAt(0);
     }
     this.newForm.reset();
+    this.newForm.controls['pagoAnticipado'].setValue(1)
     this.modalNew.show()
 
 

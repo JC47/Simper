@@ -98,22 +98,17 @@ productosZonaSinDesGraf:any;
     this.zonas=this._demandaService.returnZonasNormales();
 
     setTimeout(()=>{
-      console.log("Maquinarias y demanda",this.maquinarias,this.demandas)
-      console.log("prod des zONA",this.productosZonaEnDesarrollo)
-      console.log("Des prod",this.productosEnDesarrollo)
+
       this.productosEnDesGraf=this.grafProd(this.productosEnDesarrollo);
-      console.log( this.productosDesGraf);
       this.productosSinDesGraf=this.grafProdSin(this.productosSinDesarrollar);
-      console.log("Productos SIn DesGraf",this.productosSinDesGraf);
       this.productosDesGraf=this.grafProdDes(this.productosDesarollados);
       this.demandasGraf=this.getGrafDemanda(this.demandas);
       this.maquinariasGraf=this.getGrafMaquinaria(this.maquinarias);
+      console.log(this.maquinariasGraf)
       this.productosZonaSinDesGraf=this.grafZonaSinDes(this.productosZonaSinDesarrollar);
       this.productosZonaEnDesGraf=this.grafZonaEnDes(this.productosZonaEnDesarrollo);
       this.productosZonaDesGraf=this.grafZonaDes(this.productosZonaDesarrollados);
-      console.log("graf",this.productosZonaEnDesarrollo);
-      console.log("Prtoductos2",this.productosDesarollados,this.productosEnDesarrollo)
-      console.log(this.balanceFinal)
+
 
       this._balanceService.getBalanceFinal().subscribe( data => {
         if(data.success){
