@@ -6,6 +6,11 @@ module.exports.addBalance = function (data) {
   return querySql(sql,data);
 }
 
+module.exports.deleteRescate = function(idProyecto, numeroPeriodo) {
+  let query = "delete from rescate where idProyecto = "+idProyecto+" and numeroPeriodo = "+numeroPeriodo+"";
+  return querySql(query);
+}
+
 module.exports.updateBalance = function (numeroPeriodo, idProyecto,data) {
   const sql = "update balance set ? where numeroPeriodo = "+numeroPeriodo+" and Proyectos_idProyecto = " +idProyecto+ " ";
   return querySql(sql, data);

@@ -287,6 +287,22 @@ router.post('/getRescate', (req,res,next) => {
   });
 });
 
+router.post('/deleteRescate', (req,res,next) => {
+  var idProyecto = req.body.idProyecto;
+  var numeroPeriodo = req.body.numeroPeriodo;
+  Promise.resolve()
+  .then( function () {
+    return balance.deleteRescate(idProyecto,numeroPeriodo);
+  })
+  .then(function () {
+    res.json({success:true, msg:"Operacion completa"});
+  })
+  .catch(function (err) {
+    console.log(err);
+    res.json({success:false, msg:"Operacion incompleta"});
+  });
+});
+
 router.post('/addRescate', (req,res,next) => {
 
   var montoRescate = req.body.montoRescate;
