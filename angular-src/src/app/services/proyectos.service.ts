@@ -127,7 +127,7 @@ returnUsuarios(){
   editar(numero){
     this.periodo = numero;
     this.deletePeriodos(numero).subscribe();
-    this.eliminarRescate().subscribe();
+    this.eliminarRescate(numero).subscribe();
     setTimeout(() => {
       this.buscarPeriodos(localStorage.getItem('idProyecto')).subscribe(data =>{
         this.periodos.length = 0;
@@ -405,13 +405,13 @@ returnUsuarios(){
     return this.http.post('balance/addRescate/', x, {headers}).map( res => res.json());
   }
 
-  eliminarRescate(){
+  eliminarRescate(numero){
     let headers = new Headers({
       'Content-Type':'application/json'
     });
     var x = {
       idProyecto:localStorage.getItem('idProyecto'),
-      numeroPeriodo:localStorage.getItem('numeroPeriodo')
+      numeroPeriodo:numero
     }
     return this.http.post('balance/deleteRescate/', x, {headers}).map( res => res.json());
   }

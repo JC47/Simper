@@ -2329,7 +2329,7 @@ var NavbarUsuarioComponent = (function () {
             this._proyectoService.rescatarProyecto(resc.cantidadRescate).subscribe(function (data) {
                 if (data.success) {
                     _this.openRescate = false;
-                    _this.router.navigate(['Usuario/proyecto/financiamiento']);
+                    _this.router.navigate(['Usuario/proyecto/home']);
                 }
                 else {
                     _this.openRescate = false;
@@ -14276,7 +14276,7 @@ var ProyectosService = (function () {
         var _this = this;
         this.periodo = numero;
         this.deletePeriodos(numero).subscribe();
-        this.eliminarRescate().subscribe();
+        this.eliminarRescate(numero).subscribe();
         setTimeout(function () {
             _this.buscarPeriodos(localStorage.getItem('idProyecto')).subscribe(function (data) {
                 _this.periodos.length = 0;
@@ -14541,13 +14541,13 @@ var ProyectosService = (function () {
         };
         return this.http.post('balance/addRescate/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
-    ProyectosService.prototype.eliminarRescate = function () {
+    ProyectosService.prototype.eliminarRescate = function (numero) {
         var headers = new __WEBPACK_IMPORTED_MODULE_10__angular_http__["b" /* Headers */]({
             'Content-Type': 'application/json'
         });
         var x = {
             idProyecto: localStorage.getItem('idProyecto'),
-            numeroPeriodo: localStorage.getItem('numeroPeriodo')
+            numeroPeriodo: numero
         };
         return this.http.post('balance/deleteRescate/', x, { headers: headers }).map(function (res) { return res.json(); });
     };
