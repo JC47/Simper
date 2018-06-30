@@ -64,9 +64,214 @@ export class OperacionComponent implements OnInit {
           this.auxiliarC=this._operacionService.returnAuxiliarC();
           this.productos=this._productoService.returnProductos();
           console.log("Aux",this.auxiliares)
+          console.log("Aux",this.auxiliarC);
         }
       });
     }, 1500);
+  }
+
+  getTotalCostoProduccion(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=producto.materiaCosumida + producto.costoTransformacionVentas + producto.costoTransformacionMaq;
+    }
+    return r;
+  }
+
+  getTotalCV(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=producto.costoVentas;
+    }
+    return r;
+  }
+
+  getTotaInventarioFinal(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=producto.inventarioFinal;
+    }
+    return r;
+  }
+
+  getInventarioInicialParcial(id){
+    let r =0;
+    for(let producto of this.auxiliaresAnteriores) {
+      if(producto.Producto_idProducto == id){
+        r+=producto.inventarioFinal;
+      }
+    }
+    return r;
+  }
+
+  getTotaInventarioInicial(){
+    let r =0;
+    for(let producto of this.auxiliaresAnteriores) {
+      r+=producto.inventarioFinal;
+    }
+    return r;
+  }
+
+  getTotalMOGIP(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=producto.costoTransformacionVentas + producto.costoTransformacionMaq;
+    }
+    return r;
+  }
+
+  getTotalMPC(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=producto.materiaCosumida;
+    }
+    return r;
+  }
+
+  getTotalAdmin(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=producto.costoAdminDep - producto.IVAAdmon;
+    }
+    return r;
+  }
+
+  getTotalIVAAdmin(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=-producto.IVAAdmon;
+    }
+    return r;
+  }
+
+  getTotalNetoAdmin(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=producto.costoAdminDep;
+    }
+    return r;
+  }
+
+  getTotalDepreAdmin(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=producto.costoAdministrativo - producto.costoAdminDep;
+    }
+    return r;
+  }
+
+  getTotalGastoAdmin(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=producto.costoAdministrativo;
+    }
+    return r;
+  }
+
+  getTotalDist(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=producto.costoDistDep - producto.IVADist;
+    }
+    return r;
+  }
+
+  getTotalIVADist(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=-producto.IVADist;
+    }
+    return r;
+  }
+
+  getTotalNetoDist(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=producto.costoDistDep;
+    }
+    return r;
+  }
+
+  getTotalDepreDist(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=producto.costoDistribucion - producto.costoDistDep;
+    }
+    return r;
+  }
+
+  getTotalGastosDist(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=producto.costoDistribucion;
+    }
+    return r;
+  }
+
+  getTotalVendidas(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=producto.unidadesVendidas;
+    }
+    return r;
+  }
+
+  getTotalTrans(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=producto.costoTransformacionVentas - producto.IVATrans;
+    }
+    return r;
+  }
+
+  getTotalIVA(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=-producto.IVATrans;
+    }
+    return r;
+  }
+
+  getTotalNeto(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=producto.costoTransformacionVentas;
+    }
+    return r;
+  }
+
+  getTotalDep(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=producto.costoTransformacionMaq;
+    }
+    return r;
+  }
+
+  getTotalCostosTrans(){
+    let r =0;
+    for(let a of this.auxiliares) {
+      r+=a.costoTransformacionVentas + a.costoTransformacionMaq;
+    }
+    return r;
+  }
+
+  getTotalProducidas(){
+    let r =0;
+    for(let a of this.auxiliares) {
+      r+=a.unidadesProducidas;
+    }
+    return r;
+  }
+
+  getTotalPProducto(id){
+    let r = 0;
+    for(let a of this.auxiliarC){
+      if(a.Producto_idProducto == id){
+        r += a.desarrolloMercado + a.desarrolloProducto;
+      }
+    }
+    return r;
   }
 
   getNameByIdProducto(id:number){

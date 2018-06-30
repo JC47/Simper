@@ -372,59 +372,70 @@
         <tr class="">
           <th colspan="2"></th>
           <th class="text-center" class="text-center align-middle" *ngFor="let producto of auxiliares">{{getNameByIdProducto(producto.Producto_idProducto)}}</th>
+          <th class="text-center" class="text-center align-middle">Total</th>
         </tr>
 
         <tr>
           <td colspan="2">Unidades a Producir</td>
           <td class="text-right" *ngFor="let producto of auxiliares">{{producto.unidadesProducidas|number:'1.0-0'}}</td>
+          <td class="text-right">{{getTotalProducidas() |number:'1.0-0'}}</td>
         </tr>
 
         <tr>
           <td colspan="2">Costo Unitario Total</td>
           <td class="text-right" *ngFor="let producto of auxiliares">{{(producto.costoTransformacionVentas + producto.costoTransformacionMaq )/ producto.unidadesProducidas |currency:'USD':true:'1.0-0' }}</td>
+          <td class="text-right"></td>
         </tr>
 
 
         <tr>
           <td colspan="2">Costos de Transformación</td>
           <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoTransformacionVentas + producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>
+          <td class="text-right">{{getTotalCostosTrans() |currency:'USD':true:'1.0-0'}}</td>
         </tr>
 
         <tr>
           <td class="align-middle" rowspan="2">Menos</td>
           <td>Depreciaciones</td>
           <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>
+          <td class="text-right">{{getTotalDep() |currency:'USD':true:'1.0-0'}}</td>
         </tr>
 
         <tr>
           <td>Neto</td>
           <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoTransformacionVentas |currency:'USD':true:'1.0-0'}}</td>
+          <td class="text-right">{{getTotalNeto() |currency:'USD':true:'1.0-0'}}</td>
         </tr>
 
         <tr>
           <td rowspan="2" class="align-middle">Menos partidas que no incluyen IVA</td>
           <td>Sueldos y Salarios</td>
+          <td class="text-right" *ngFor="let producto of auxiliares">$0</td>
           <td class="text-right">$0</td>
         </tr>
 
         <tr>
           <td>Prevención Social</td>
+          <td class="text-right" *ngFor="let producto of auxiliares">$0</td>
           <td class="text-right">$0</td>
         </tr>
 
         <tr>
           <td colspan="2">Neto</td>
           <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoTransformacionVentas |currency:'USD':true:'1.0-0'}}</td>
+          <td class="text-right">{{getTotalNeto() |currency:'USD':true:'1.0-0'}}</td>
         </tr>
 
         <tr>
           <td colspan="2">IVA</td>
           <td class="text-right" *ngFor="let producto of auxiliares">{{-producto.IVATrans |currency:'USD':true:'1.0-0'}}</td>
+          <td class="text-right">{{getTotalIVA() |currency:'USD':true:'1.0-0'}}</td>
         </tr>
 
         <tr>
           <td colspan="2">Total</td>
           <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoTransformacionVentas - producto.IVATrans |currency:'USD':true:'1.0-0'}}</td>
+          <td class="text-right">{{getTotalTrans() |currency:'USD':true:'1.0-0'}}</td>
         </tr>
 
       </table>
@@ -463,6 +474,7 @@
           <tr>
             <th></th>
             <th *ngFor="let producto of auxiliares">{{getNameByIdProducto(producto.Producto_idProducto) }}</th>
+            <th>Total</th>
           </tr>
         </thead>
 
@@ -470,61 +482,73 @@
           <tr>
             <th>Unidades  a Vender</th>
             <td class="text-right" *ngFor="let producto of auxiliares">{{producto.unidadesVendidas|number:'1.0-0' }}</td>
+            <td class="text-right">{{getTotalVendidas()|number:'1.0-0' }}</td>
           </tr>
 
           <tr>
             <th>Costo Unitario Total</th>
             <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoDistribucion / producto.unidadesVendidas |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{0|currency:'USD':true:'1.0-0'}}</td>
           </tr>
 
           <tr>
             <th>Gasto de Distribución</th>
             <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoDistribucion |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{getTotalGastosDist()|currency:'USD':true:'1.0-0'}}</td>
           </tr>
 
           <tr>
             <th>Menos</th>
             <td class="text-right" *ngFor="let producto of auxiliares"></td>
+            <td></td>
           </tr>
 
           <tr>
             <th>Depreciaciones</th>
             <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoDistribucion - producto.costoDistDep |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{getTotalDepreDist()|currency:'USD':true:'1.0-0'}}</td>
           </tr>
 
           <tr>
             <th>Neto</th>
             <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoDistDep |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{getTotalNetoDist()|currency:'USD':true:'1.0-0'}}</td>
           </tr>
 
           <tr>
             <th>Menos partidas que no Incluyen IVA</th>
             <td class="text-right" *ngFor="let producto of auxiliares"></td>
+            <td class="text-right">$0</td>
           </tr>
 
           <tr>
             <th>Sueldos y salarios</th>
-            <td class="text-right" *ngFor="let producto of auxiliares">$0</td>
+            <td class="text-right" *ngFor="let producto of auxiliares"></td>
+            <td class="text-right">$0</td>
           </tr>
 
           <tr>
             <th>Prevención Social</th>
-            <td class="text-right" *ngFor="let producto of auxiliares">$0</td>
+            <td class="text-right" *ngFor="let producto of auxiliares"></td>
+            <td class="text-right">$0</td>
           </tr>
 
           <tr>
             <th>Neto</th>
             <td  class="text-right" *ngFor="let producto of auxiliares">{{producto.costoDistDep |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{getTotalNetoDist()|currency:'USD':true:'1.0-0'}}</td>
           </tr>
 
           <tr>
             <th>IVA</th>
             <td class="text-right" *ngFor="let producto of auxiliares">{{-producto.IVADist |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{getTotalIVADist()|currency:'USD':true:'1.0-0'}}</td>
           </tr>
 
           <tr>
             <th>Total a Pagar</th>
             <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoDistDep - producto.IVADist |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{getTotalDist()|currency:'USD':true:'1.0-0'}}</td>
           </tr>
 
 
@@ -567,6 +591,7 @@
               <tr>
                 <th></th>
                 <th *ngFor="let producto of auxiliares">{{getNameByIdProducto(producto.Producto_idProducto) }}</th>
+                <th>Total</th>
               </tr>
             </thead>
 
@@ -574,61 +599,73 @@
               <tr>
                 <th>Unidades  a Vender</th>
                 <td class="text-right" *ngFor="let producto of auxiliares">{{producto.unidadesVendidas|number:'1.0-0' }}</td>
+                <td class="text-right">{{getTotalVendidas()|number:'1.0-0' }}</td>
               </tr>
 
               <tr>
                 <th>Cto Unitario Total</th>
                 <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoAdministrativo/producto.unidadesVendidas |currency:'USD':true:'1.0-0'}}</td>
+                <td></td>
               </tr>
 
               <tr>
                 <th>Gasto de  Administración</th>
                 <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoAdministrativo |currency:'USD':true:'1.0-0'}}</td>
+                <td class="text-right">{{getTotalGastoAdmin() |currency:'USD':true:'1.0-0'}}</td>
               </tr>
 
               <tr>
                 <th>Menos</th>
                 <td class="text-right" *ngFor="let producto of auxiliares"></td>
+                <td></td>
               </tr>
 
               <tr>
                 <th>Depreciaciones</th>
                 <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoAdministrativo - producto.costoAdminDep |currency:'USD':true:'1.0-0'}}</td>
+                <td class="text-right">{{getTotalDepreAdmin() |currency:'USD':true:'1.0-0'}}</td>
               </tr>
 
               <tr>
                 <th>Neto</th>
                 <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoAdminDep |currency:'USD':true:'1.0-0'}}</td>
+                <td class="text-right">{{getTotalNetoAdmin() |currency:'USD':true:'1.0-0'}}</td>
               </tr>
 
               <tr>
                 <th>Menos partidas que no Incluyen IVA</th>
                 <td class="text-right" *ngFor="let producto of auxiliares"></td>
+                <td class="text-right"></td>
               </tr>
 
               <tr>
                 <th>Sueldos y salarios</th>
                 <td class="text-right" *ngFor="let producto of auxiliares">$0</td>
+                <td class="text-right">$0</td>
               </tr>
 
               <tr>
                 <th>Prevención Social</th>
                 <td class="text-right" *ngFor="let producto of auxiliares">$0</td>
+                <td class="text-right">$0</td>
               </tr>
 
               <tr>
                 <th>Neto</th>
                 <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoAdminDep |currency:'USD':true:'1.0-0'}}</td>
+                <td class="text-right">{{getTotalNetoAdmin() |currency:'USD':true:'1.0-0'}}</td>
               </tr>
 
               <tr>
                 <th>IVA</th>
                 <td class="text-right" *ngFor="let producto of auxiliares">{{-producto.IVAAdmon |currency:'USD':true:'1.0-0'}}</td>
+                <td class="text-right">{{getTotalIVAAdmin() |currency:'USD':true:'1.0-0'}}</td>
               </tr>
 
               <tr>
                 <th>Total a Pagar</th>
                 <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoAdminDep - producto.IVAAdmon |currency:'USD':true:'1.0-0'}}</td>
+                <td class="text-right">{{getTotalAdmin() |currency:'USD':true:'1.0-0'}}</td>
               </tr>
 
 
@@ -681,6 +718,11 @@
             <td class="text-right" *ngFor="let producto of auxiliarC">{{producto.desarrolloMercado |currency:'USD':true:'1.0-0'}}</td>
             <td class="text-right">{{getTotalMercado() |currency:'USD':true:'1.0-0'}}</td>
           </tr>
+          <tr>
+            <th>Total</th>
+            <td class="text-right" *ngFor="let producto of auxiliarC">{{getTotalPProducto(producto.Producto_idProducto) |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{getTotalMercado() + getTotalProducto() |currency:'USD':true:'1.0-0'}}</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -716,6 +758,7 @@
           <tr>
             <th></th>
             <th *ngFor="let producto of auxiliares">{{getNameByIdProducto(producto.Producto_idProducto) }}</th>
+            <th>Total</th>
           </tr>
         </thead>
 
@@ -723,33 +766,39 @@
           <tr>
             <th>Materia Prima Consumida</th>
             <td class="text-right" *ngFor="let producto of auxiliares">{{producto.materiaCosumida |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{getTotalMPC() |currency:'USD':true:'1.0-0'}}</td>
           </tr>
 
 
           <tr>
             <th>Mano de Obra y Gastos I. P.</th>
             <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoTransformacionVentas + producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{getTotalMOGIP() |currency:'USD':true:'1.0-0'}}</td>
           </tr>
 
           <tr>
             <th>Costo de Producción</th>
             <td class="text-right" *ngFor="let producto of auxiliares">{{producto.materiaCosumida + producto.costoTransformacionVentas + producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{getTotalCostoProduccion() |currency:'USD':true:'1.0-0'}}</td>
           </tr>
 
           <tr>
             <th>I.I. de Producto terminado</th>
-            <td class="text-right" *ngFor="let producto of auxiliaresAnteriores">{{producto.inventarioFinal |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right" *ngFor="let producto of auxiliares">{{getInventarioInicialParcial(producto.Producto_idProducto) |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{getTotaInventarioInicial() |currency:'USD':true:'1.0-0'}}</td>
           </tr>
 
 
           <tr>
             <th>I.F. de Producto terminado</th>
             <td class="text-right" *ngFor="let producto of auxiliares">{{producto.inventarioFinal |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{getTotaInventarioFinal() |currency:'USD':true:'1.0-0'}}</td>
           </tr>
 
           <tr>
             <th>Costo de Ventas</th>
             <td class="text-right" *ngFor="let producto of auxiliares">{{producto.costoVentas |currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right">{{getTotalCV() |currency:'USD':true:'1.0-0'}}</td>
           </tr>
 
         </tbody>
