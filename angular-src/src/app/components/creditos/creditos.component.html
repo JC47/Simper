@@ -1,5 +1,5 @@
 <div class="container">
-  <h2 class="text-center">Creditos</h2>
+  <h2 class="text-center">Créditos</h2>
   <hr>
   <div class="text-center" *ngFor="let alert of alerts" style="z-index:10000;width:100%; ">
     <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout"><h3>{{ alert.msg }}</h3></alert>
@@ -19,9 +19,9 @@
           <div class="col-7">
             <h4 class="card-title">{{credito.nombreCredito}}</h4>
             <p class="card-text">
-              Monto minimo: {{credito.montoMax | currency:'USD':true }}<br>
-              Monto máximo: {{credito.montoMinb | currency:'USD':true }}<br>
-              Plazo: {{credito.plazo}} años
+              Monto mínimo: <b>{{credito.montoMin | currency:'USD':true }} </b> <br>
+              Monto máximo: <b>{{credito.montoMax | currency:'USD':true }} </b><br>
+              Plazo: <b>{{credito.plazo}} años  </b>
             </p>
 
           </div>
@@ -48,7 +48,7 @@
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title col-12 text-center">Agregar Credito</h4>
+        <h4 class="modal-title col-12 text-center">Agregar Crédito</h4>
       </div>
       <div class="modal-body">
 
@@ -56,7 +56,7 @@
 
 
             <div class="form-group row text-center" >
-              <label class="col-5 col-form-label">Nombre Prestamo</label>
+              <label class="col-5 col-form-label">Nombre Crédito</label>
               <div class="col-6 has-success"  [ngClass]="{'has-danger': !newForm.get('nombreCredito').valid}">
 
 
@@ -87,7 +87,7 @@
             style="font-size:10px;"
             [ngClass]="{'has-danger': !newForm.get('montoMin').valid}"
             *ngIf="!newForm.controls['montoMin'].valid">
-              El monto es reuqerido
+              El monto es requerido
             </div>
 
 
@@ -118,7 +118,7 @@
 
         <div class="" style="margin-bottom:20px">
           <div class="offset-1">
-            <fieldset ngl-form-group label="Tipo de Credito"  class="slds-m-top--small">
+            <fieldset ngl-form-group label="Tipo de Crédito"  class="slds-m-top--small">
               <ngl-form-group-element label="Intereses Inicial"><input nglFormControl type="radio" formControlName="tipo" value="1" /></ngl-form-group-element>
               <ngl-form-group-element label="Intereses en Periodo"><input nglFormControl type="radio" formControlName="tipo" value="2" /></ngl-form-group-element>
               <ngl-form-group-element label="Intereses Inicial y en Periodos"><input nglFormControl type="radio" formControlName="tipo" value="3" /></ngl-form-group-element>
@@ -197,7 +197,7 @@
           <div class="container row" style="margin-top:20px">
             <div class="col-12">
                 <div class="row" style="margin-top:10px">
-                  <h6 class="col-12 text-left">Pagos de Credito:</h6>
+                  <h6 class="col-12 text-left">Pagos de Crédito:</h6>
                 </div>
                 <div class="row" style="margin-top:10px">
                   <div formArrayName="pagosCredito" >
@@ -288,7 +288,7 @@
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title col-12 text-center">Editar Prestamos</h4>
+        <h4 class="modal-title col-12 text-center">Editar Crédito</h4>
       </div>
       <div class="modal-body">
 
@@ -297,7 +297,7 @@
             <input type="number" formControlName="idCredito" hidden="true">
 
             <div class="form-group row text-center" >
-              <label class="col-5 col-form-label">Nombre Prestamo</label>
+              <label class="col-5 col-form-label">Nombre de Crédito</label>
               <div class="col-6 has-success"  [ngClass]="{'has-danger': !editForm.get('nombreCredito').valid}">
 
 
@@ -313,7 +313,7 @@
 
 
             <div class="form-group row text-center ">
-            <label class="col-5 col-form-label">Monto Minimo</label>
+            <label class="col-5 col-form-label">Monto Mínimo</label>
 
             <div class="input-group col-6 has-success"
             [ngClass]="{'has-danger': !editForm.get('montoMin').valid}">
@@ -477,7 +477,7 @@
 
 
         <div class="row text-center">
-          ¿Estas seguro que deseas eliminar el credito "{{creditoDelete.nombreCredito}}" ?
+          ¿Estas seguro que deseas eliminar el crédito "{{creditoDelete.nombreCredito}}" ?
           <br>
         </div>
         <br>

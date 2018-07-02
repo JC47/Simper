@@ -1,4 +1,4 @@
-import { Component, OnInit,Pipe, ViewChild } from '@angular/core';
+import {Component, OnInit, Pipe, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
 import {maquinaria} from '../../../../app.interfaces';
 import { CompraMaquinariaService } from '../../../../services/compra-maquinaria.service';
 import { MaquinariaService } from '../../../../services/maquinaria.service';
@@ -13,7 +13,9 @@ import {ProyectosService} from '../../../../services/proyectos.service';
   templateUrl: './compra-maquinaria.component.html',
   styleUrls: ['./compra-maquinaria.component.css']
 })
-export class CompraMaquinariaComponent implements OnInit {
+export class CompraMaquinariaComponent implements OnInit, AfterViewInit{
+  @ViewChild('contenedor') contenedor: ElementRef;
+
   maquinas = new Array();
   directional: boolean = false;
   openLoad: boolean;
@@ -82,6 +84,11 @@ export class CompraMaquinariaComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngAfterViewInit(){
+    console.log(this.contenedor)
+
+  }
+
   agrupaMaq(maquinas){
     let maq=[];
 
@@ -124,7 +131,15 @@ export class CompraMaquinariaComponent implements OnInit {
 comprar(){
     this.openConf=false;
     this.openLoad=true;
-    setTimeout(()=>{this.openLoad=false;this.maqSelectedLess=this.maqSelectedAdd;this.maqOrdenC=this.agrupaMaq(this.maquinasCompradas)}, 2000);
+    setTimeout(()=>{this.openLoad=false;this.maqSelectedLess=this.maqSelectedAdd;this.maqOrdenC=this.agrupaMaq(this.maquinasCompradas)
+      for(let val in this.maquinasCompradas){
+        if(this.maquinasCompradas[val].idMaquinaria==this.maqSelectedLess.idMaquinaria){
+
+          this.contenedor.nativeElement.scrollTop=(180*parseInt(val));
+        }
+      }
+
+    }, 2000);
     var x = {
       Balance_numeroPeriodo:localStorage.getItem('numeroPeriodo'),
       Maquinaria_idMaquinaria:this.maqSelectedAdd.idMaquinaria,
@@ -140,6 +155,7 @@ comprar(){
       dep:this.maqSelectedAdd.depAcum
     }
     this.maquinasCompradas = this._CompraMaquinariaService.compraMaquinaria(x,y);
+
 
 
   }

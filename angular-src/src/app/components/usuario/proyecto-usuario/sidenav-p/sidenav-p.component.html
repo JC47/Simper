@@ -189,7 +189,7 @@
                               <th class="text-center">Unidades Almacenadas</th>
                             </tr>
                             <tr *ngFor="let v of ventas[i].ventas">
-                              <td class="text-center">{{v.producto}}</td>
+                              <td class="text-center">{{getNameByIdProducto(v.idProducto)}}</td>
                               <td class="text-right">{{v.unidadesAlmacenadas|number:'1.0-0'}}</td>
                             </tr>
                         </table>
@@ -200,11 +200,8 @@
                       <div class="col-3 offset-1">
                         <table class="table table-hover table-sm">
                           <tr>
-                            <th class="text-center">Maquinas Adquiridas</th>
+                            <th class="text-center">Máquinas Adquiridas</th>
                             <th class="text-center">Cantidad</th>
-                          </tr>
-                          <tr>
-                            <td></td>
                           </tr>
 
                           <tr *ngFor="let maquina of maquinas[i].maquinarias">

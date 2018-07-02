@@ -20,7 +20,7 @@
                 <h4 class="card-title">{{maquina.nombreMaq}}</h4>
                 <h6 class="card-subtitle" style="margin-bottom:8px">Costo Total: {{ maquina.costo | currency:'USD':true }} </h6>
                 <h6 class="card-subtitle" style="margin-bottom:8px">Producción p/p: {{maquina.cantidadProd|number:'1.0-0'}}u</h6>
-                <h6 class="card-subtitle" style="margin-bottom:8px">Deprciación: {{maquina.depAcum}}% </h6>
+                <h6 class="card-subtitle" style="margin-bottom:8px">Depreciación: {{maquina.depAcum}}% </h6>
 
               </div>
               <!-- <div class=" col-3 ">
@@ -65,7 +65,7 @@
     <h2 class="col-12 text-center">Maquinas Compradas</h2>
     <hr>
 
-    <div class="col-12" style="overflow-y:scroll;height:550px">
+    <div class="col-12" #contenedor style="overflow-y:scroll;height:550px">
       <div class="card" *ngFor="let prod of maqOrdenC" style="margin-bottom:20px">
         <h5 class="text-center" style="margin-top:10px">{{getNameById(prod.producto)}}</h5>
         <div class="card col-12" *ngFor="let maquina of prod.maquinas" (click)="selectMaquinariaLess(maquina)"
