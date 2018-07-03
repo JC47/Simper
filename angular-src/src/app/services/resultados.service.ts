@@ -42,7 +42,6 @@ export class ResultadosService {
 
   vender(){
     this._operacionService.getProductosV().subscribe( data => {
-      console.log(data)
       for(let key$ in data.datos){
         this._operacionService.sell(data.datos[key$]).subscribe();
       }

@@ -48,6 +48,10 @@ export class ProyectosComponent implements OnInit {
       'Usuario_idUsuario': new FormControl(localStorage.getItem('idUsuario'))
     });
 
+    this._proyectosService.getProyectos().subscribe(data => {
+      this.proyectos = data;
+    });
+
    }
 
    entrarProyecto(idProyecto,np,t){
@@ -65,9 +69,9 @@ export class ProyectosComponent implements OnInit {
      this._proyectosService.entrar();
    }
 
-  ngOnInit() {
-    this.proyectos = this._proyectosService.returnUsuarios();
-  }
+   ngOnInit(){
+     
+   }
 
   eliminaProyecto(id:number){
     this.confModalDelete.hide();

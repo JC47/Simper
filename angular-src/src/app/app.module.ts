@@ -189,6 +189,7 @@ import { TendenciasComponent } from './components/usuario/proyecto-usuario/tende
               AdministradoresService,
               MaquinariaService,
               ProductoService,
+              BalanceFinalComponent,
               CreditosService,
               NgbActiveModal,
               NgbModalRef

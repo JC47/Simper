@@ -354,6 +354,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_23__services_administradores_service__["a" /* AdministradoresService */],
             __WEBPACK_IMPORTED_MODULE_33__services_maquinaria_service__["a" /* MaquinariaService */],
             __WEBPACK_IMPORTED_MODULE_34__services_producto_service__["a" /* ProductoService */],
+            __WEBPACK_IMPORTED_MODULE_68__components_usuario_proyecto_usuario_balance_final_balance_final_component__["a" /* BalanceFinalComponent */],
             __WEBPACK_IMPORTED_MODULE_36__services_creditos_service__["a" /* CreditosService */],
             __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__["b" /* NgbActiveModal */],
             __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__["c" /* NgbModalRef */]
@@ -2043,6 +2044,7 @@ module.exports = "\r\n\r\n<div *ngIf=\"usuario\" style=\"height:100%\">\r\n\r\n<
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_usuario_credito_service__ = __webpack_require__("../../../../../src/app/services/usuario-credito.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_auxiliar_service__ = __webpack_require__("../../../../../src/app/services/auxiliar.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__proyecto_usuario_balance_final_balance_final_component__ = __webpack_require__("../../../../../src/app/components/usuario/proyecto-usuario/balance-final/balance-final.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NavbarUsuarioComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2064,10 +2066,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var NavbarUsuarioComponent = (function () {
-    function NavbarUsuarioComponent(authService, router, _resultadosService, _proyectoService, _balanceService, _auxiliarService, _desarrolloZona, _desarrolloProducto, _creditoService) {
+    function NavbarUsuarioComponent(authService, router, bf, _resultadosService, _proyectoService, _balanceService, _auxiliarService, _desarrolloZona, _desarrolloProducto, _creditoService) {
         this.authService = authService;
         this.router = router;
+        this.bf = bf;
         this._resultadosService = _resultadosService;
         this._proyectoService = _proyectoService;
         this._balanceService = _balanceService;
@@ -2328,8 +2332,9 @@ var NavbarUsuarioComponent = (function () {
         if (resc.cantidadRescate <= parseInt(localStorage.getItem('maxRescate')) && resc.cantidadRescate >= parseInt(localStorage.getItem('minRescate'))) {
             this._proyectoService.rescatarProyecto(resc.cantidadRescate).subscribe(function (data) {
                 if (data.success) {
+                    _this.bf.ngOnInit();
                     _this.openRescate = false;
-                    _this.router.navigate(['Usuario/proyecto/home']);
+                    _this.router.navigate(['Usuario/proyecto/balance_final']);
                 }
                 else {
                     _this.openRescate = false;
@@ -2350,10 +2355,10 @@ NavbarUsuarioComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/usuario/navbar-usuario/navbar-usuario.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/usuario/navbar-usuario/navbar-usuario.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_resultados_service__["a" /* ResultadosService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_balance_service__["a" /* BalanceService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_9__services_auxiliar_service__["a" /* AuxiliarService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__services_auxiliar_service__["a" /* AuxiliarService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_7__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_8__services_usuario_credito_service__["a" /* UsuarioCreditoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__services_usuario_credito_service__["a" /* UsuarioCreditoService */]) === "function" && _j || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_11__proyecto_usuario_balance_final_balance_final_component__["a" /* BalanceFinalComponent */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_11__proyecto_usuario_balance_final_balance_final_component__["a" /* BalanceFinalComponent */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__services_resultados_service__["a" /* ResultadosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_resultados_service__["a" /* ResultadosService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__services_proyectos_service__["a" /* ProyectosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_proyectos_service__["a" /* ProyectosService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_3__services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_balance_service__["a" /* BalanceService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_9__services_auxiliar_service__["a" /* AuxiliarService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__services_auxiliar_service__["a" /* AuxiliarService */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_7__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__services_desarrollo_zona_service__["a" /* DesarrolloZonaService */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_desarrollo_producto_service__["a" /* DesarrolloProductoService */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_8__services_usuario_credito_service__["a" /* UsuarioCreditoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__services_usuario_credito_service__["a" /* UsuarioCreditoService */]) === "function" && _k || Object])
 ], NavbarUsuarioComponent);
 
-var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
 //# sourceMappingURL=navbar-usuario.component.js.map
 
 /***/ }),
@@ -11332,6 +11337,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var ProyectosComponent = (function () {
     function ProyectosComponent(_proyectosService, datePipe) {
+        var _this = this;
         this._proyectosService = _proyectosService;
         this.datePipe = datePipe;
         this.alerts = [];
@@ -11354,6 +11360,9 @@ var ProyectosComponent = (function () {
             'fechaCreacion': new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["FormControl"](this.datePipe.transform(Date.now())),
             'Usuario_idUsuario': new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["FormControl"](localStorage.getItem('idUsuario'))
         });
+        this._proyectosService.getProyectos().subscribe(function (data) {
+            _this.proyectos = data;
+        });
     }
     ProyectosComponent.prototype.entrarProyecto = function (idProyecto, np, t) {
         var _this = this;
@@ -11371,7 +11380,6 @@ var ProyectosComponent = (function () {
         this._proyectosService.entrar();
     };
     ProyectosComponent.prototype.ngOnInit = function () {
-        this.proyectos = this._proyectosService.returnUsuarios();
     };
     ProyectosComponent.prototype.eliminaProyecto = function (id) {
         this.confModalDelete.hide();
@@ -13883,8 +13891,12 @@ var OperacionService = (function () {
         return operaciones;
     };
     OperacionService.prototype.getProductosV = function () {
+        var w = 0;
+        if (localStorage.getItem('numeroPeriodo')) {
+            w = parseInt(localStorage.getItem('numeroPeriodo'));
+        }
         var x = {
-            "numeroPeriodo": localStorage.getItem('numeroPeriodo'),
+            "numeroPeriodo": w,
             "idProyecto": localStorage.getItem('idProyecto'),
             "idUsuario": localStorage.getItem('idUsuario')
         };
@@ -14996,7 +15008,6 @@ var ResultadosService = (function () {
     ResultadosService.prototype.vender = function () {
         var _this = this;
         this._operacionService.getProductosV().subscribe(function (data) {
-            console.log(data);
             for (var key$ in data.datos) {
                 _this._operacionService.sell(data.datos[key$]).subscribe();
             }

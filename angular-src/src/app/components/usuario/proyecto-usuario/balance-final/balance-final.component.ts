@@ -1,4 +1,4 @@
-import { Component, OnInit,ElementRef, ViewChild,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit,ElementRef, ViewChild,Output,EventEmitter} from '@angular/core';
 import {BalanceService} from '../../../../services/balance.service';
 import {ResultadosService} from '../../../../services/resultados.service';
 import { CurrencyPipe } from '@angular/common';

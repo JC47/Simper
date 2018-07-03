@@ -74,8 +74,13 @@ export class OperacionService {
   }
 
   getProductosV(){
+    var w = 0;
+
+    if(localStorage.getItem('numeroPeriodo')){
+      w=parseInt(localStorage.getItem('numeroPeriodo'));
+    }
     var x = {
-      "numeroPeriodo":localStorage.getItem('numeroPeriodo'),
+      "numeroPeriodo":w,
       "idProyecto":localStorage.getItem('idProyecto'),
       "idUsuario":localStorage.getItem('idUsuario')
     }

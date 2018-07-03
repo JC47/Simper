@@ -10,6 +10,7 @@ import {DesarrolloZonaService} from '../../../services/desarrollo-zona.service';
 import { UsuarioCreditoService} from '../../../services/usuario-credito.service';
 import {AuxiliarService} from '../../../services/auxiliar.service';
 import {FormControl, FormGroup, Validators,FormArray} from '@angular/forms';
+import {BalanceFinalComponent} from '../proyecto-usuario/balance-final/balance-final.component';
 
 
 @Component({
@@ -47,7 +48,7 @@ export class NavbarUsuarioComponent implements OnInit {
   rescateForm:FormGroup;
 
 
-  constructor(private authService: AuthService, private router:Router,
+  constructor(private authService: AuthService, private router:Router, private bf:BalanceFinalComponent,
     private _resultadosService:ResultadosService,
     private _proyectoService:ProyectosService,
     private _balanceService:BalanceService,
@@ -339,8 +340,9 @@ export class NavbarUsuarioComponent implements OnInit {
       if(resc.cantidadRescate<=parseInt(localStorage.getItem('maxRescate')) && resc.cantidadRescate>=parseInt(localStorage.getItem('minRescate'))){
         this._proyectoService.rescatarProyecto(resc.cantidadRescate).subscribe(data => {
           if(data.success){
+            this.bf.ngOnInit();
             this.openRescate=false;
-            this.router.navigate(['Usuario/proyecto/home']);
+            this.router.navigate(['Usuario/proyecto/balance_final']);
           }
           else{
             this.openRescate=false;
