@@ -355,7 +355,7 @@ acomodaBalance(){
   sec=[];
   for(let balance of this.balances){
     sec.push(this.cp.transform(balance.gastosAmortizacion,'USD',true,'1.0-0'))
-    sec.push(this.dc.transform(balance.gastosAmortizacionr/this.getTotalActivo(balance)*100,'1.0-0')+"%")
+    sec.push(this.dc.transform(balance.gastosAmortizacion/this.getTotalActivo(balance)*100,'1.0-0')+"%")
   }
   balanceAcomodado.push(sec);
 

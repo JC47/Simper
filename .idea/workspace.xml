@@ -2,20 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96a85c0b-8488-4e27-a181-5d40c76c21ac" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/creditos/creditos.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/creditos/creditos.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/sidenav/sidenav.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/sidenav/sidenav.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/compra-maquinaria/compra-maquinaria.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/compra-maquinaria/compra-maquinaria.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/db.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/integrales/integrales.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/integrales/integrales.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/inline.bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/inline.bundle.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/main.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/main.bundle.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/main.bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/main.bundle.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/polyfills.bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/polyfills.bundle.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scripts.bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/scripts.bundle.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/styles.bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/styles.bundle.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor.bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor.bundle.js.map" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -29,11 +20,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="sidenav.component.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/sidenav/sidenav.component.html">
+      <file leaf-file-name="integrales.component.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/integrales/integrales.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="41" column="65" selection-start-line="41" selection-start-column="65" selection-end-line="41" selection-end-column="65" />
+            <state relative-caret-position="190">
+              <caret line="454" column="57" selection-start-line="454" selection-start-column="57" selection-end-line="454" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="integrales.component.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/integrales/integrales.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="429">
+              <caret line="368" selection-start-line="368" selection-end-line="368" />
+              <folding>
+                <element signature="e#0#50#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="creditos.component.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/creditos/creditos.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="173">
+              <caret line="421" column="47" selection-start-line="421" selection-start-column="47" selection-end-line="421" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -52,12 +64,13 @@
       <find>suma</find>
       <find>de</find>
       <find>credito</find>
-      <find>reu</find>
       <find>Credito</find>
       <find>monto</find>
       <find>maquinas</find>
       <find>maquinas</find>
       <find>credi</find>
+      <find>gastos po</find>
+      <find>reu</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -71,10 +84,11 @@
         <option value="$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/compra-maquinaria/compra-maquinaria.component.ts" />
         <option value="$PROJECT_DIR$/config/db.js" />
         <option value="$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/compra-maquinaria/compra-maquinaria.component.html" />
-        <option value="$PROJECT_DIR$/angular-src/src/app/components/creditos/creditos.component.html" />
         <option value="$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.html" />
         <option value="$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.html" />
         <option value="$PROJECT_DIR$/angular-src/src/app/components/sidenav/sidenav.component.html" />
+        <option value="$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/integrales/integrales.component.ts" />
+        <option value="$PROJECT_DIR$/angular-src/src/app/components/creditos/creditos.component.html" />
       </list>
     </option>
   </component>
@@ -148,6 +162,15 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="creditos" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Simper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Simper" type="462c0819:PsiDirectoryNode" />
+              <item name="angular-src" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="sidenav" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -168,6 +191,17 @@
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="usuario" type="462c0819:PsiDirectoryNode" />
               <item name="proyecto-usuario" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Simper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Simper" type="462c0819:PsiDirectoryNode" />
+              <item name="angular-src" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="usuario" type="462c0819:PsiDirectoryNode" />
+              <item name="proyecto-usuario" type="462c0819:PsiDirectoryNode" />
+              <item name="integrales" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Simper" type="b2602c69:ProjectViewProjectNode" />
@@ -212,12 +246,12 @@
       <updated>1530318375280</updated>
       <workItem from="1530318383079" duration="14702000" />
       <workItem from="1530561937580" duration="1253000" />
-      <workItem from="1530646433360" duration="1824000" />
+      <workItem from="1530646433360" duration="2724000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17779000" />
+    <option name="totallyTimeSpent" value="18679000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -424,13 +458,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/integrales/integrales.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="575" lean-forward="true" selection-start-line="575" selection-end-line="575" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/sidenav-p/sidenav-p.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
@@ -476,13 +503,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/creditos/creditos.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/financiamiento/financiamiento.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="884">
@@ -501,6 +521,33 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
           <caret line="41" column="65" selection-start-line="41" selection-start-column="65" selection-end-line="41" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/balance-final/balance-final.component.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/integrales/integrales.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="454" column="57" selection-start-line="454" selection-start-column="57" selection-end-line="454" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/integrales/integrales.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="429">
+          <caret line="368" selection-start-line="368" selection-end-line="368" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/creditos/creditos.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="421" column="47" selection-start-line="421" selection-start-column="47" selection-end-line="421" selection-end-column="47" />
         </state>
       </provider>
     </entry>
