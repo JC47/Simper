@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96a85c0b-8488-4e27-a181-5d40c76c21ac" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/creditos/creditos.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/creditos/creditos.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/integrales/integrales.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/integrales/integrales.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/inline.bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/inline.bundle.js.map" afterDir="false" />
@@ -44,8 +45,8 @@
       <file leaf-file-name="creditos.component.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/creditos/creditos.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="421" column="47" selection-start-line="421" selection-start-column="47" selection-end-line="421" selection-end-column="47" />
+            <state relative-caret-position="377">
+              <caret line="433" selection-start-line="433" selection-end-line="433" />
             </state>
           </provider>
         </entry>
@@ -246,12 +247,12 @@
       <updated>1530318375280</updated>
       <workItem from="1530318383079" duration="14702000" />
       <workItem from="1530561937580" duration="1253000" />
-      <workItem from="1530646433360" duration="2724000" />
+      <workItem from="1530646433360" duration="3287000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18679000" />
+    <option name="totallyTimeSpent" value="19242000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -546,8 +547,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/creditos/creditos.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="421" column="47" selection-start-line="421" selection-start-column="47" selection-end-line="421" selection-end-column="47" />
+        <state relative-caret-position="377">
+          <caret line="433" selection-start-line="433" selection-end-line="433" />
         </state>
       </provider>
     </entry>
