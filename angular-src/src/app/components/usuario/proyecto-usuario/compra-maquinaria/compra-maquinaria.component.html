@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="offset-1 col-4" >
-    <h2 class="col-12 text-center">Maquinas para Comprar</h2>
+    <h2 class="col-12 text-center">Máquinas para Comprar</h2>
     <hr>
     <div class="col-12"  style="overflow-y:scroll;height:550px">
       <div class="card" *ngFor="let prod of maqOrden" style="margin-bottom:20px">
@@ -62,7 +62,7 @@
   </div>
 
   <div class="col-4">
-    <h2 class="col-12 text-center">Maquinas Compradas</h2>
+    <h2 class="col-12 text-center">Máquinas Compradas</h2>
     <hr>
 
     <div class="col-12" #contenedor style="overflow-y:scroll;height:550px">
@@ -81,7 +81,7 @@
                 <h4 class="card-title">{{maquina.nombreMaq}}</h4>
                 <h6 class="card-subtitle" style="margin-bottom:8px">Cantidad: {{ maquina.Cantidad }} </h6>
                 <h6 class="card-subtitle" style="margin-bottom:8px">Producción Total: {{maquina.cantidadProd*maquina.Cantidad|number:'1.0-0'}}u</h6>
-                <h6 class="card-subtitle" style="margin-bottom:8px">Deprciación: {{maquina.depAcum}}% </h6>
+                <h6 class="card-subtitle" style="margin-bottom:8px">Depreciación: {{maquina.depAcum}}% </h6>
 
               </div>
               <!-- <div class=" col-3 ">
