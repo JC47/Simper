@@ -70,6 +70,54 @@ export class OperacionComponent implements OnInit {
     }, 1500);
   }
 
+  getTotalIVAVentas(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=producto.IVAxVentas;
+    }
+    return r;
+  }
+
+  getTotalCostoUnitarioProduccion(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=this.getMPPuniProd(producto.Producto_idProducto) + (producto.costoTransformacionVentas + producto.costoTransformacionMaq)/producto.unidadesProducidas;
+    }
+    return r;
+  }
+
+  getTotalCostoUnitarioTrans(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=(producto.costoTransformacionVentas + producto.costoTransformacionMaq)/producto.unidadesProducidas;
+    }
+    return r;
+  }
+
+  getTotalCostoMP(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=producto.materiaCosumida;
+    }
+    return r;
+  }
+
+  getTotalCostoUnitarioMP(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=this.getMPPuniProd(producto.Producto_idProducto);
+    }
+    return r;
+  }
+
+  getTotalInventarioFinal(){
+    let r =0;
+    for(let producto of this.auxiliares) {
+      r+=producto.unidadesAlmacenadas;
+    }
+    return r;
+  }
+
   getTotalCostoProduccion(){
     let r =0;
     for(let producto of this.auxiliares) {
@@ -290,6 +338,14 @@ export class OperacionComponent implements OnInit {
     return 0;
   }
 
+  getTotalPrecioVenta(){
+    let r =0;
+    for(let producto of this.productos){
+       r+=producto.precioVenta;
+    }
+    return r;
+  }
+
 
 
 
@@ -338,6 +394,14 @@ export class OperacionComponent implements OnInit {
       }
     }
     return 0;
+  }
+
+  getTotalInventarioInicial(){
+    var r = 0;
+    for(let aux of this.auxiliaresAnteriores){
+        r+=aux.unidadesAlmacenadas;
+    }
+    return r;
   }
 
   getUniMP(id){
