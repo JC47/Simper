@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="96a85c0b-8488-4e27-a181-5d40c76c21ac" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/creditos/creditos.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/creditos/creditos.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/integrales/integrales.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/integrales/integrales.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/inline.bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/inline.bundle.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/main.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/main.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/main.bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/main.bundle.js.map" afterDir="false" />
-    </list>
+    <list default="true" id="96a85c0b-8488-4e27-a181-5d40c76c21ac" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -111,7 +104,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-6" />
     <option name="y" value="-11" />
     <option name="width" value="1346" />
@@ -247,15 +240,15 @@
       <updated>1530318375280</updated>
       <workItem from="1530318383079" duration="14702000" />
       <workItem from="1530561937580" duration="1253000" />
-      <workItem from="1530646433360" duration="3287000" />
+      <workItem from="1530646433360" duration="3885000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19242000" />
+    <option name="totallyTimeSpent" value="19840000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TypeScript" order="7" />

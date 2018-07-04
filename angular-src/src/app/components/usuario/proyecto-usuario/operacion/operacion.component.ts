@@ -1180,15 +1180,36 @@ export class OperacionComponent implements OnInit {
     rows[4][x.dataKey] =  this.cp.transform( producto.costoDistribucion ,'USD',true,'1.0-0');
     rows[7][x.dataKey] =  this.cp.transform( (producto.costoDistribucion - producto.costoDistDep),'USD',true,'1.0-0')
     rows[8][x.dataKey] = this.cp.transform( producto.costoDistDep ,'USD',true,'1.0-0')
+    rows[11][x.dataKey] = "$0";
     rows[12][x.dataKey] = "$0";
-    rows[13][x.dataKey] = "$0";
-    rows[15][x.dataKey] =  this.cp.transform(producto.costoDistDep ,'USD',true,'1.0-0')
-    rows[16][x.dataKey] =  this.cp.transform(-producto.IVADist ,'USD',true,'1.0-0')
-    rows[17][x.dataKey] = this.cp.transform( (producto.costoDistDep - producto.IVADist) ,'USD',true,'1.0-0')
+    rows[14][x.dataKey] =  this.cp.transform(producto.costoDistDep ,'USD',true,'1.0-0')
+    rows[15][x.dataKey] =  this.cp.transform(-producto.IVADist ,'USD',true,'1.0-0')
+    rows[16][x.dataKey] = this.cp.transform( (producto.costoDistDep - producto.IVADist) ,'USD',true,'1.0-0')
 
     options.columnStyles[this.getNameByIdProducto(producto.Producto_idProducto)]={halign:'right'};
 
   }
+
+
+
+  var x = {
+    title:"Total",
+    dataKey:"total"
+  }
+  columns.push(x);
+  rows[0][x.dataKey] = this.dc.transform( this.getTotalVendidas(),'1.0-0')
+  rows[2][x.dataKey] = this.cp.transform(0 ,'USD',true,'1.0-0')
+  rows[4][x.dataKey] =  this.cp.transform(this.getTotalGastosDist() ,'USD',true,'1.0-0');
+  rows[7][x.dataKey] =  this.cp.transform(this.getTotalDepreDist(),'USD',true,'1.0-0')
+  rows[8][x.dataKey] = this.cp.transform(this.getTotalNetoDist() ,'USD',true,'1.0-0')
+  rows[11][x.dataKey] = "$0";
+  rows[12][x.dataKey] = "$0";
+  rows[14][x.dataKey] =  this.cp.transform(this.getTotalNetoDist() ,'USD',true,'1.0-0')
+  rows[15][x.dataKey] =  this.cp.transform(this.getTotalIVADist() ,'USD',true,'1.0-0')
+  rows[16][x.dataKey] = this.cp.transform( this.getTotalDist() ,'USD',true,'1.0-0')
+
+  options.columnStyles[this.getNameByIdProducto(producto.Producto_idProducto)]={halign:'right'};
+
 
 
 

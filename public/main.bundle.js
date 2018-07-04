@@ -8661,11 +8661,11 @@ var OperacionComponent = (function () {
             rows[4][x.dataKey] = this.cp.transform(producto.costoDistribucion, 'USD', true, '1.0-0');
             rows[7][x.dataKey] = this.cp.transform((producto.costoDistribucion - producto.costoDistDep), 'USD', true, '1.0-0');
             rows[8][x.dataKey] = this.cp.transform(producto.costoDistDep, 'USD', true, '1.0-0');
+            rows[11][x.dataKey] = "$0";
             rows[12][x.dataKey] = "$0";
-            rows[13][x.dataKey] = "$0";
-            rows[15][x.dataKey] = this.cp.transform(producto.costoDistDep, 'USD', true, '1.0-0');
-            rows[16][x.dataKey] = this.cp.transform(-producto.IVADist, 'USD', true, '1.0-0');
-            rows[17][x.dataKey] = this.cp.transform((producto.costoDistDep - producto.IVADist), 'USD', true, '1.0-0');
+            rows[14][x.dataKey] = this.cp.transform(producto.costoDistDep, 'USD', true, '1.0-0');
+            rows[15][x.dataKey] = this.cp.transform(-producto.IVADist, 'USD', true, '1.0-0');
+            rows[16][x.dataKey] = this.cp.transform((producto.costoDistDep - producto.IVADist), 'USD', true, '1.0-0');
             options.columnStyles[this.getNameByIdProducto(producto.Producto_idProducto)] = { halign: 'right' };
         }
         doc.autoTable(columns, rows, options);
