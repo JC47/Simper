@@ -617,7 +617,7 @@ export class OperacionComponent implements OnInit {
 
   CSValmacenArticuloTerminado(){
     let data:any=[
-      {producto:"Almacén de Artículo Terminado del Periodo"+localStorage.getItem('numeroPeriodo')},
+      {producto:"Almacén de Artículo Terminado del Periodo "+localStorage.getItem('numeroPeriodo')},
       {producto:"Proyecto "+this.proyectoActual},
       {prodcuto:"Producto",
        unidades:"Unidades",
@@ -706,7 +706,7 @@ export class OperacionComponent implements OnInit {
 
     CSVpresupuestoGlobalComprasMP(){
       let data=[
-        {material:"Presupuesto Global de Compras del Periodo"+ localStorage.getItem('numeroPeriodo')},
+        {material:"Presupuesto Global de Compras del Periodo "+ localStorage.getItem('numeroPeriodo')},
         {material:"Proyecto "+this.proyectoActual,},
         {
           material:"Material",
@@ -959,19 +959,7 @@ export class OperacionComponent implements OnInit {
         {"init":"Costo Producción Total"}
       ]
 
-      var columns = [
-      {title: "Producto", dataKey: "producto"},
-      {title: "Unidades A Vender (+)", dataKey: "unidadesVender"},
-      {title: "Inventario Final (+)", dataKey: "invFinal"},
-      {title: "Inventario Inicial(-)", dataKey: "invInicial"},
-      {title: "Unidades a Producir", dataKey: "unidadesProducir"},
-      {title: "Costo Unitario (M.P.)", dataKey: "costUnitMP"},
-      {title: "Costo Total (M.P.)", dataKey: "cosTotalMP"},
-      {title: "Costo Unitario (Trasnformación)", dataKey: "costUnitTrans"},
-      {title: "Costo Total (Transformación)", dataKey: "cosTotalTrans"},
-      {title: "Costo de Producción Unitario", dataKey: "costProdUnit"},
-      {title: "Costo de Producción Total", dataKey: "costProdTot"}
-      ];
+
 
       let conf= {
       margin: {top: 40,
@@ -1011,6 +999,25 @@ export class OperacionComponent implements OnInit {
       }
 
 
+      let x={
+          title:"Total",
+          dataKey:"total"
+      }
+      columns2.push(x)
+
+        rows2[0][x.dataKey] =this.dc.transform(this.getTotalVendidas(),'1.0-0');
+        rows2[1][x.dataKey] =this.dc.transform(this.getTotalInventarioFinal(),'1.0-0')
+        rows2[2][x.dataKey] = this.dc.transform(this.getTotalInventarioInicial(),'1.0-0')
+        rows2[3][x.dataKey] = this.dc.transform(this.getTotalProducidas(),'1.0-0')
+        rows2[4][x.dataKey] =""
+        rows2[5][x.dataKey] = this.cp.transform(this.getTotalCostoMP(),'USD',true,'1.0-0')
+        rows2[6][x.dataKey] = ""
+        rows2[7][x.dataKey] =this.cp.transform(this.getTotalCostosTrans(),'USD',true,'1.0-0')
+        rows2[8][x.dataKey] =""
+        rows2[9][x.dataKey] = this.cp.transform(this.getTotalCostoProduccion(),'USD',true,'1.0-0')
+        conf.columnStyles[x.dataKey]={halign:'right'};
+
+
       let actual=this.proyectoActual
 
       doc.autoTable(columns2, rows2, conf);
@@ -1042,7 +1049,6 @@ export class OperacionComponent implements OnInit {
 
 
         for(let producto of this.auxiliares){
-
           data[1][this.getNameByIdProducto(producto.Producto_idProducto)]=this.getNameByIdProducto(producto.Producto_idProducto);
           data[2][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.unidadesVendidas
           data[3][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.unidadesAlmacenadas
@@ -1055,6 +1061,23 @@ export class OperacionComponent implements OnInit {
           data[10][this.getNameByIdProducto(producto.Producto_idProducto)]=(this.getMPPuniProd(producto.Producto_idProducto) + (producto.costoTransformacionVentas + producto.costoTransformacionMaq)/producto.unidadesProducidas)
           data[11][this.getNameByIdProducto(producto.Producto_idProducto)]=(producto.costoTransformacionVentas + producto.costoTransformacionMaq + producto.materiaCosumida);
         }
+
+        data[1]["total"]="Total"
+        data[2]["total"]=this.getTotalVendidas()
+        data[3]["total"]=this.getTotalInventarioFinal()
+        data[4]["total"]=this.getTotalInventarioInicial()
+        data[5]["total"]=this.getTotalProducidas()
+        data[6]["total"]=""
+        data[7]["total"]=this.getTotalCostoMP()
+        data[8]["total"]=""
+        data[9]["total"]=this.getTotalCostosTrans()
+        data[10]["total"]=""
+        data[11]["total"]=this.getTotalCostoProduccion()
+
+
+
+
+
         new Angular2Csv(data, 'Presupuesto Global de Producción');
       }
 
@@ -1112,7 +1135,7 @@ export class OperacionComponent implements OnInit {
 
 
   for(let producto of this.auxiliares){
-    var x = {
+    let x = {
       title:this.getNameByIdProducto(producto.Producto_idProducto),
       dataKey:this.getNameByIdProducto(producto.Producto_idProducto)
     }
@@ -1130,8 +1153,26 @@ export class OperacionComponent implements OnInit {
 
 
     options.columnStyles[this.getNameByIdProducto(producto.Producto_idProducto)]={halign:'right'};
-    console.log(options)
   }
+
+  let x = {
+    title:"Total",
+    dataKey:"total"
+  }
+  columns.push(x);
+  rows[0][x.dataKey] = this.dc.transform(this.getTotalProducidas(),'1.0-0');
+  rows[1][x.dataKey] = ""
+  rows[2][x.dataKey] = this.cp.transform(this.getTotalCostosTrans(),'USD',true,'1.0-0');
+  rows[5][x.dataKey] =this.cp.transform(this.getTotalDep() ,'USD',true,'1.0-0');
+  rows[6][x.dataKey] = this.cp.transform( this.getTotalNeto() ,'USD',true,'1.0-0');
+  rows[10][x.dataKey] = "$0";
+  rows[11][x.dataKey] = "$0";
+  rows[13][x.dataKey] = this.cp.transform(this.getTotalNeto(),'USD',true,'1.0-0');
+  rows[14][x.dataKey] =  this.cp.transform(this.getTotalIVA(),'USD',true,'1.0-0');
+  rows[15][x.dataKey] = this.cp.transform(this.getTotalTrans() ,'USD',true,'1.0-0')
+  options.columnStyles["total"]={halign:'right'};
+
+
 
 //this.cp.transform(  ,'USD',true,'1.0-0')
 
@@ -1177,6 +1218,17 @@ export class OperacionComponent implements OnInit {
       data[13][this.getNameByIdProducto(producto.Producto_idProducto)]=(producto.costoTransformacionVentas - producto.IVATrans);
     }
 
+    data[2]["total"]=this.getTotalProducidas()
+    data[3]["total"]=""
+    data[4]["total"]=this.getTotalCostosTrans()
+    data[6]["total"]=this.getTotalDep()
+    data[7]["total"]=this.getTotalNeto()
+    data[9]["total"]="$0"
+    data[10] ["total"]="$0"
+    data[11]["total"]=this.getTotalNeto()
+    data[12]["total"]=this.getTotalIVA()
+    data[13]["total"]=this.getTotalTrans()
+
     new Angular2Csv(data, 'Presupuesto Global de Costos de Trasnformación');
 
   }
@@ -1218,7 +1270,7 @@ export class OperacionComponent implements OnInit {
  margin: {top: 40,
           left:40},
   tableWidth: 200,
- headerStyles: {fillColor:0},
+ headerStyles: {fillColor:0,halign:'center'},
  columnStyles: {
    cara: {halign:'left',columnWidth:65}
  },
@@ -1234,7 +1286,7 @@ export class OperacionComponent implements OnInit {
 
 
   for(let producto of this.auxiliares){
-    var x = {
+    let x = {
       title:this.getNameByIdProducto(producto.Producto_idProducto),
       dataKey:this.getNameByIdProducto(producto.Producto_idProducto)
     }
@@ -1256,13 +1308,13 @@ export class OperacionComponent implements OnInit {
 
 
 
-  var x = {
+  let x = {
     title:"Total",
     dataKey:"total"
   }
   columns.push(x);
   rows[0][x.dataKey] = this.dc.transform( this.getTotalVendidas(),'1.0-0')
-  rows[2][x.dataKey] = this.cp.transform(0 ,'USD',true,'1.0-0')
+  rows[2][x.dataKey] =""
   rows[4][x.dataKey] =  this.cp.transform(this.getTotalGastosDist() ,'USD',true,'1.0-0');
   rows[7][x.dataKey] =  this.cp.transform(this.getTotalDepreDist(),'USD',true,'1.0-0')
   rows[8][x.dataKey] = this.cp.transform(this.getTotalNetoDist() ,'USD',true,'1.0-0')
@@ -1272,7 +1324,7 @@ export class OperacionComponent implements OnInit {
   rows[15][x.dataKey] =  this.cp.transform(this.getTotalIVADist() ,'USD',true,'1.0-0')
   rows[16][x.dataKey] = this.cp.transform( this.getTotalDist() ,'USD',true,'1.0-0')
 
-  options.columnStyles[this.getNameByIdProducto(producto.Producto_idProducto)]={halign:'right'};
+  options.columnStyles["total"]={halign:'right'};
 
 
 
@@ -1319,6 +1371,19 @@ export class OperacionComponent implements OnInit {
         data[13][this.getNameByIdProducto(producto.Producto_idProducto)]=-producto.IVADist;
         data[14][this.getNameByIdProducto(producto.Producto_idProducto)]=(producto.costoDistDep - producto.IVADist)
       }
+
+      data[2]["total"]="Total";
+      data[3]["total"]=this.getTotalVendidas();
+      data[5]["total"]=this.getTotalGastosDist();
+      data[7]["total"]=this.getTotalDepreDist();
+      data[8]["total"]=this.getTotalNeto();
+      data[10]["total"]=0;
+      data[11]["total"]=0;
+      data[12]["total"]=this.getTotalNeto();
+      data[13]["total"]=this.getTotalIVADist();
+      data[14]["total"]=this.getTotalDist();
+
+
 
       new Angular2Csv(data, 'Presupuesto Global de Gasto de Distribución');
 
@@ -1378,7 +1443,7 @@ export class OperacionComponent implements OnInit {
 
 
     for(let producto of this.auxiliares){
-      var x = {
+      let x = {
         title:this.getNameByIdProducto(producto.Producto_idProducto),
         dataKey:this.getNameByIdProducto(producto.Producto_idProducto)
       }
@@ -1397,6 +1462,25 @@ export class OperacionComponent implements OnInit {
         options.columnStyles[this.getNameByIdProducto(producto.Producto_idProducto)]={halign:'right'};
 
     }
+
+    let x = {
+      title:"Total",
+      dataKey:"total"
+    }
+    columns.push(x);
+    rows[0][x.dataKey] =  this.cp.transform(this.getTotalVendidas(),'USD',true,'1.0-0')
+    rows[2][x.dataKey] = ""
+    rows[4][x.dataKey] =  this.cp.transform(this.getTotalGastoAdmin() ,'USD',true,'1.0-0')
+    rows[7][x.dataKey] =  this.cp.transform(this.getTotalDepreAdmin() ,'USD',true,'1.0-0')
+    rows[8][x.dataKey] =  this.cp.transform(this.getTotalNetoAdmin() ,'USD',true,'1.0-0')
+    rows[12][x.dataKey] = "$0";
+    rows[13][x.dataKey] = "$0";
+    rows[15][x.dataKey] =  this.cp.transform(this.getTotalNetoAdmin() ,'USD',true,'1.0-0')
+    rows[16][x.dataKey] =  this.cp.transform(this.getTotalIVAAdmin() ,'USD',true,'1.0-0')
+    rows[17][x.dataKey] =  this.cp.transform(this.getTotalAdmin(),'USD',true,'1.0-0')
+
+      options.columnStyles["total"]={halign:'right'};
+
 
 
       doc.autoTable(columns, rows, options);
@@ -1440,10 +1524,23 @@ export class OperacionComponent implements OnInit {
           data[8][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.costoAdminDep
           data[10][this.getNameByIdProducto(producto.Producto_idProducto)]=0
           data[11][this.getNameByIdProducto(producto.Producto_idProducto)]=0
-          data[11][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.costoAdminDep;
-          data[12][this.getNameByIdProducto(producto.Producto_idProducto)]=-producto.IVAAdmon;
-          data[13][this.getNameByIdProducto(producto.Producto_idProducto)]=(producto.costoAdminDep - producto.IVAAdmon);
+          data[12][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.costoAdminDep;
+          data[13][this.getNameByIdProducto(producto.Producto_idProducto)]=-producto.IVAAdmon;
+          data[14][this.getNameByIdProducto(producto.Producto_idProducto)]=(producto.costoAdminDep - producto.IVAAdmon);
         }
+
+        data[2]["total"]="Total"
+        data[3]["total"]=this.getTotalVendidas()
+        data[4]["total"]=""
+        data[5]["total"]=this.getTotalGastoAdmin()
+        data[7]["total"]=this.getTotalDepreAdmin()
+        data[8]["total"]=this.getTotalNetoAdmin()
+        data[10]["total"]="$0"
+        data[11]["total"]="$0"
+        data[12]["total"]=this.getTotalNetoAdmin()
+        data[13]["total"]=this.getTotalIVAAdmin()
+        data[14]["total"]=this.getTotalAdmin()
+
 
         new Angular2Csv(data, 'Presupuesto Global de Gasto de Administración');
 
@@ -1463,8 +1560,8 @@ export class OperacionComponent implements OnInit {
 
         var rows = [
         {"cara":"Desarrollo de Producto"},
-        {"cara":"Desarrollo de Mercado"}
-
+        {"cara":"Desarrollo de Mercado"},
+        {"cara":"Total"}
       ];
 
 
@@ -1500,6 +1597,7 @@ export class OperacionComponent implements OnInit {
         columns.push(x);
         rows[0][x.dataKey] =  this.cp.transform( producto.desarrolloProducto ,'USD',true,'1.0-0')
         rows[1][x.dataKey] =  this.cp.transform( producto.desarrolloMercado ,'USD',true,'1.0-0')
+        rows[2][x.dataKey] =  this.cp.transform( producto.desarrolloMercado+producto.desarrolloProducto ,'USD',true,'1.0-0')
 
         options.columnStyles[this.getNameByIdProducto(producto.Producto_idProducto)]={halign:'right'};
 
@@ -1517,6 +1615,7 @@ export class OperacionComponent implements OnInit {
 
       rows[0]["t"] =   this.cp.transform(this.getTotalProducto() ,'USD',true,'1.0-0')
       rows[1]["t"] =  this.cp.transform( this.getTotalMercado() ,'USD',true,'1.0-0')
+      rows[2]["t"] =  this.cp.transform( this.getTotalMercado()+this.getTotalProducto() ,'USD',true,'1.0-0')
       options.columnStyles["t"]={halign:'right'};
 
 
@@ -1535,7 +1634,8 @@ export class OperacionComponent implements OnInit {
           {cara:"Proyecto: "+this.proyectoActual,prod:"Periodo: "+localStorage.getItem('numeroPeriodo')},
           {cara:""},
           {cara:"Desarrollo de Producto"},
-          {cara:"Desarrollo de Mercado"}
+          {cara:"Desarrollo de Mercado"},
+          {cara:"Total"}
         ];
 
 
@@ -1547,12 +1647,16 @@ export class OperacionComponent implements OnInit {
 
           data[2][this.getNameByIdProducto(producto.Producto_idProducto)] =  producto.desarrolloProducto
           data[3][this.getNameByIdProducto(producto.Producto_idProducto)] =  producto.desarrolloMercado
+          data[4][this.getNameByIdProducto(producto.Producto_idProducto)] =  producto.desarrolloMercado+producto.desarrolloProducto
+
+
         }
 
 
         data[1]["total"]="Total";
         data[2]["total"]=this.getTotalProducto();
         data[3]["total"]=this.getTotalMercado();
+        data[4]["total"]=this.getTotalMercado()+this.getTotalProducto();
 
         new Angular2Csv(data, 'Presupuesto Global de Gasto de Administración');
 
@@ -1602,7 +1706,7 @@ export class OperacionComponent implements OnInit {
 
 
         for(let producto of this.auxiliares){
-          var x = {
+          let x = {
             title:this.getNameByIdProducto(producto.Producto_idProducto),
             dataKey:this.getNameByIdProducto(producto.Producto_idProducto)
           }
@@ -1617,9 +1721,27 @@ export class OperacionComponent implements OnInit {
 
         }
 
+        let x = {
+          title:"Total",
+          dataKey:"total"
+        }
+
         for(let producto of this.auxiliares){
           rows[6][x.dataKey] = this.cp.transform( producto.inventarioFinal ,'USD',true,'1.0-0')
         }
+
+        columns.push(x);
+        rows[0][x.dataKey] =  this.cp.transform(this.getTotalMPC(),'USD',true,'1.0-0')
+        rows[2][x.dataKey] =  this.cp.transform(this.getTotalMOGIP() ,'USD',true,'1.0-0')
+        rows[4][x.dataKey] =  this.cp.transform(this.getTotalCostoProduccion(),'USD',true,'1.0-0')
+        rows[6][x.dataKey] =  this.cp.transform(this.getTotalInventarioInicial(),'USD',true,'1.0-0')
+        rows[7][x.dataKey] =  this.cp.transform( this.getTotalInventarioFinal() ,'USD',true,'1.0-0')
+        rows[9][x.dataKey] =  this.cp.transform( this.getTotalCV(),'USD',true,'1.0-0')
+
+        options.columnStyles["total"]={halign:'right'};
+
+
+
 
         //this.cp.transform( ,'USD',true,'1.0-0')
 
@@ -1661,6 +1783,18 @@ export class OperacionComponent implements OnInit {
             for(let producto of this.auxiliaresAnteriores){
               data[6][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.inventarioInicial;
             }
+
+            data[2]["total"]="Total"
+            data[3]["total"]=this.getTotalMPC()
+            data[4]["total"]=this.getTotalMOGIP()
+            data[5]["total"]=this.getTotalCostoProduccion()
+            data[6]["total"]=this.getTotalInventarioInicial()
+            data[7]["total"]=this.getTotalInventarioFinal()
+            data[8]["total"]= this.getTotalCV()
+
+
+
+
             new Angular2Csv(data, 'Presupuesto Global de Producion y Ventas');
 
 

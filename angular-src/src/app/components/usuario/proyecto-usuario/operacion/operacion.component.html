@@ -138,13 +138,10 @@
         <tbody>
           <tr>
             <th class="text-left align-middle" >Producto</th>
-            <td *ngFor="let producto of auxiliares">{{getNameByIdProducto(producto.Producto_idProducto) }}</td>
-<<<<<<< HEAD
-          </tr>.
-=======
-            <td class="text-left align-middle">Total</td>
+            <th *ngFor="let producto of auxiliares">{{getNameByIdProducto(producto.Producto_idProducto) }}</th>
+            <th class="text-center">Total</th>
           </tr>
->>>>>>> b2c18779c2ea54fc80882152dc4a02350ee8e4bc
+
 
           <tr>
             <th class="text-left align-middle" >Unidades a Vender (+)</th>
@@ -174,7 +171,7 @@
           <tr>
             <th class="text-left align-middle" >Costo Unitario (MP)</th>
             <td class="text-right" *ngFor="let producto of auxiliares">{{getMPPuniProd(producto.Producto_idProducto) |currency:'USD':true:'1.0-0'}}</td>
-            <td class="text-right">{{0|currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right"></td>
           </tr>
 
           <tr>
@@ -186,7 +183,7 @@
           <tr>
             <th class="text-left align-middle" >Costo Unitario (Transformación)</th>
             <td class="text-right" *ngFor="let producto of auxiliares">{{(producto.costoTransformacionVentas + producto.costoTransformacionMaq)/producto.unidadesProducidas |currency:'USD':true:'1.0-0'}}</td>
-            <td class="text-right">{{0|currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right"></td>
           </tr>
 
           <tr>
@@ -198,7 +195,7 @@
           <tr>
             <th class="text-left align-middle" >Costo de Producción Unitario</th>
             <td class="text-right" *ngFor="let producto of auxiliares">{{getMPPuniProd(producto.Producto_idProducto) + (producto.costoTransformacionVentas + producto.costoTransformacionMaq)/producto.unidadesProducidas|currency:'USD':true:'1.0-0'}}</td>
-            <td class="text-right">{{0|currency:'USD':true:'1.0-0'}}</td>
+            <td class="text-right"></td>
           </tr>
 
           <tr>
@@ -345,49 +342,6 @@
 
 <div class="col-10 offset-1" style="margin-bottom:20px">
   <ngl-section [(open)]="presGlobalCostoTrans" title="Presupuesto Global de Costos de Transformación">
-  <!-- <div class="row">
-    <div class="col-12">
-      <table class="table table-bordered table-responsive">
-
-        <tbody>
-          <tr>
-            <th class="text-center align-middle" rowspan="2">Producto</th>
-            <th class="text-center align-middle" rowspan="2">Unidades a Producir</th>
-            <th class="text-center align-middle" rowspan="2">Costo Unitario Total</th>
-            <th class="text-center align-middle" rowspan="2">Costos de Transformacion</th>
-            <th class="text-center align-middle" colspan="2">Menos</th>
-            <th class="text-center align-middle" colspan="2">Menos partidas que no incluyen IVA</th>
-            <th class="text-center align-middle" rowspan="2" >Neto</th>
-            <th class="text-center align-middle" rowspan="2">IVA</th>
-            <th class="text-center align-middle" rowspan="2">Total a Pagar</th>
-          </tr>
-          <tr>
-            <th class="text-center align-middle">Depreciaciones</th>
-            <th class="text-center align-middle">Neto</th>
-            <th class="text-center align-middle">Sueldos y Salarios</th>
-            <th class="text-center align-middle">Prevención Social</th>
-          </tr>
-
-          <tr *ngFor="let producto of auxiliares">
-            <td>{{getNameByIdProducto(producto.Producto_idProducto) }}</td>
-            <td class="text-right">{{producto.unidadesProducidas}}</td>
-            <td class="text-right">{{(producto.costoTransformacionVentas + producto.costoTransformacionMaq )/ producto.unidadesProducidas |currency:'USD':true:'1.0-0' }}</td>
-            <td class="text-right">{{producto.costoTransformacionVentas + producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>
-            <td class="text-right">{{producto.costoTransformacionMaq |currency:'USD':true:'1.0-0'}}</td>
-            <td class="text-right">{{producto.costoTransformacionVentas |currency:'USD':true:'1.0-0'}}</td>
-            <td class="text-right">{{0}}</td>
-            <td class="text-right">{{0}}</td>
-            <td class="text-right">{{producto.costoTransformacionVentas |currency:'USD':true:'1.0-0'}}</td>
-            <td class="text-right">{{-producto.IVATrans |currency:'USD':true:'1.0-0'}}</td>
-            <td class="text-right">{{producto.costoTransformacionVentas - producto.IVATrans |currency:'USD':true:'1.0-0'}}</td>
-          </tr>
-
-
-        </tbody>
-      </table>
-    </div>
-  </div> -->
-
 
   <div class="row">
     <div class="col-12">
@@ -780,8 +734,8 @@
         <thead>
           <tr>
             <th></th>
-            <th *ngFor="let producto of auxiliares">{{getNameByIdProducto(producto.Producto_idProducto) }}</th>
-            <th>Total</th>
+            <th class="text-center" *ngFor="let producto of auxiliares">{{getNameByIdProducto(producto.Producto_idProducto) }}</th>
+            <th class="text-center">Total</th>
           </tr>
         </thead>
 
