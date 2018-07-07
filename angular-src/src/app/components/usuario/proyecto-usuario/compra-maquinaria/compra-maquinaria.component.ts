@@ -82,6 +82,7 @@ export class CompraMaquinariaComponent implements OnInit, AfterViewInit{
   }
 
   ngOnInit() {
+    console.log(this.contenedor)
   }
 
   ngAfterViewInit(){
@@ -128,18 +129,64 @@ export class CompraMaquinariaComponent implements OnInit, AfterViewInit{
 
   }
 
+
+  isOnList(){
+    let sumaIndex=0;
+    for(let val in this.maqOrdenC){
+      for(let val2 of this.maqOrdenC[val].maquinas){
+        sumaIndex=sumaIndex+1;
+        if(val2.idMaquinaria==this.maqSelectedAdd.idMaquinaria){
+          return sumaIndex;
+        }
+      }
+    }
+    return null;
+  }
+
+
+  getIndexProd(){
+   let containers:any;
+   containers=this.contenedor.nativeElement;
+   let sumaProd=0;
+   let children=[].slice.call(containers.children)
+
+
+   for(let child of children){
+     let cl=[].slice.call(child.children)
+     console.log(cl.length)
+      sumaProd=sumaProd+cl.length-2;
+      if(parseInt(child.id)==this.maqSelectedAdd.Producto_idProducto){
+        console.log(sumaProd)
+          return sumaProd
+      }
+   }
+   return 0
+
+  }
+
+
+
 comprar(){
     this.openConf=false;
     this.openLoad=true;
-    setTimeout(()=>{this.openLoad=false;this.maqSelectedLess=this.maqSelectedAdd;this.maqOrdenC=this.agrupaMaq(this.maquinasCompradas)
-      for(let val in this.maquinasCompradas){
-        if(this.maquinasCompradas[val].idMaquinaria==this.maqSelectedLess.idMaquinaria){
-
-          this.contenedor.nativeElement.scrollTop=(180*parseInt(val));
+    setTimeout(()=>{this.openLoad=false;this.maqSelectedLess=this.maqSelectedAdd;
+        if(this.isOnList()){
+          console.log("is in list")
+            this.contenedor.nativeElement.scrollTop=(this.isOnList()-1)*180
         }
-      }
+
+        else{
+          console.log("is not in list")
+          setTimeout(()=>this.contenedor.nativeElement.scrollTop=this.getIndexProd()*180,100)
+        }
+
+
+        this.maqOrdenC=this.agrupaMaq(this.maquinasCompradas);
 
     }, 2000);
+
+
+
     var x = {
       Balance_numeroPeriodo:localStorage.getItem('numeroPeriodo'),
       Maquinaria_idMaquinaria:this.maqSelectedAdd.idMaquinaria,

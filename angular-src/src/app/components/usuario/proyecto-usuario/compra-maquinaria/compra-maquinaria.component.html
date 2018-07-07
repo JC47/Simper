@@ -66,7 +66,7 @@
     <hr>
 
     <div class="col-12" #contenedor style="overflow-y:scroll;height:550px">
-      <div class="card" *ngFor="let prod of maqOrdenC" style="margin-bottom:20px">
+      <div class="card" *ngFor="let prod of maqOrdenC;let i=index" style="margin-bottom:20px" [id]="prod.producto">
         <h5 class="text-center" style="margin-top:10px">{{getNameById(prod.producto)}}</h5>
         <div class="card col-12" *ngFor="let maquina of prod.maquinas" (click)="selectMaquinariaLess(maquina)"
         [ngClass]="{'resaltarLess':maquina.idMaquinaria==this.maqSelectedLess.idMaquinaria}">
