@@ -98,7 +98,7 @@
               <td class="text-right"></td>
               <td class="text-right">{{getTotalVentas() |currency:'USD':true:'1.0-0'}}</td>
               <td class="text-right">{{getTotalIVAVentas() |currency:'USD':true:'1.0-0'}}</td>
-              <td class="text-right">{{getTotalVentas() - getTotalIVAVentas()|currency:'USD':true:'1.0-0'}}</td>
+              <td class="text-right">{{getTotalVentas() + getTotalIVAVentas()|currency:'USD':true:'1.0-0'}}</td>
             </tr>
 
           </tbody>

@@ -900,7 +900,7 @@ export class OperacionComponent implements OnInit {
       "precioVenta":"",
       "venta":this.cp.transform(this.getTotalVentas(),'USD',true,'1.0-0'),
       "iva":this.cp.transform(this.getTotalIVAVentas(),'USD',true,'1.0-0'),
-      "importe":this.cp.transform(this.getTotalVentas()-this.getTotalIVAVentas(),'USD',true,'1.0-0')
+      "importe":this.cp.transform(this.getTotalVentas()+this.getTotalIVAVentas(),'USD',true,'1.0-0')
     })
 
 
@@ -942,7 +942,7 @@ export class OperacionComponent implements OnInit {
         "precioVenta":"",
         "venta":this.cp.transform(this.getTotalVentas(),'USD',true,'1.0-0'),
         "IVA":this.cp.transform(this.getTotalIVAVentas(),'USD',true,'1.0-0'),
-        "importe":this.cp.transform(this.getTotalVentas()-this.getTotalIVAVentas(),'USD',true,'1.0-0')
+        "importe":this.cp.transform(this.getTotalVentas()+this.getTotalIVAVentas(),'USD',true,'1.0-0')
       })
 
       new Angular2Csv(data, 'Presupuesto Global de Ventas e IVA');
