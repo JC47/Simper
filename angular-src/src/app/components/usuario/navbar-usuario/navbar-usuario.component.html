@@ -176,15 +176,15 @@
     <ngl-modal header="Confirmación"  [(open)]="confZona" size="x-small" directional="false">
         <div body>
           <div class="col-12 text-center container">
-            <h2 style="margin-bottom:30px">>Tienes pagos pendientes de Desarrollo de Mercados ¿Aún así deseas cerrar el periodo??</h2>
+            <h2 style="margin-bottom:30px">Tienes pagos pendientes de Desarrollo de Mercados ¿Aún así deseas cerrar el periodo?</h2>
           </div>
         </div>
 
         <ng-template ngl-modal-footer>
-
+        <button class="btn btn-secondary" (click)="confZona=false">Cancelar</button>
         <button class="btn btn-primary" (click)="pasaDesZona()">Ir a Desarrollos de Zonas</button>
         <button class="btn btn-primary" (click)="pasarPeriodo()">Cerrar Periodo</button>
-        <button class="btn btn-secondary" (click)="confZona=false">Cancelar</button>
+
         </ng-template>
       </ngl-modal>
 

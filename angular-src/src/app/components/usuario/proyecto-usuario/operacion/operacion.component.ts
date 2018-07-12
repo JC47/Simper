@@ -1740,21 +1740,23 @@ export class OperacionComponent implements OnInit {
 
         }
 
+        for(let producto of this.auxiliaresAnteriores){
+          rows[6][this.getNameByIdProducto(producto.Producto_idProducto)]=this.getInventarioInicialParcial(producto.Producto_idProducto);
+        }
+
+
         let x = {
           title:"Total",
           dataKey:"total"
         }
 
-        for(let producto of this.auxiliares){
-          rows[6][x.dataKey] = this.cp.transform( producto.inventarioFinal ,'USD',true,'1.0-0')
-        }
 
         columns.push(x);
         rows[0][x.dataKey] =  this.cp.transform(this.getTotalMPC(),'USD',true,'1.0-0')
         rows[2][x.dataKey] =  this.cp.transform(this.getTotalMOGIP() ,'USD',true,'1.0-0')
         rows[4][x.dataKey] =  this.cp.transform(this.getTotalCostoProduccion(),'USD',true,'1.0-0')
-        rows[6][x.dataKey] =  this.cp.transform(this.getTotalInventarioInicial(),'USD',true,'1.0-0')
-        rows[7][x.dataKey] =  this.cp.transform( this.getTotalInventarioFinal() ,'USD',true,'1.0-0')
+        rows[6][x.dataKey] =  this.cp.transform(this.getTotaInventarioInicial(),'USD',true,'1.0-0')
+        rows[7][x.dataKey] =  this.cp.transform( this.getTotaInventarioFinal(),'USD',true,'1.0-0')
         rows[9][x.dataKey] =  this.cp.transform( this.getTotalCV(),'USD',true,'1.0-0')
 
         options.columnStyles["total"]={halign:'right'};
@@ -1794,21 +1796,19 @@ export class OperacionComponent implements OnInit {
               data[3][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.materiaCosumida
               data[4][this.getNameByIdProducto(producto.Producto_idProducto)]=(producto.costoTransformacionVentas + producto.costoTransformacionMaq)
               data[5][this.getNameByIdProducto(producto.Producto_idProducto)]= (producto.materiaCosumida + producto.costoTransformacionVentas + producto.costoTransformacionMaq)
-
+                  data[6][this.getNameByIdProducto(producto.Producto_idProducto)]=this.getInventarioInicialParcial(producto.Producto_idProducto);
               data[7][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.inventarioFinal
               data[8][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.costoVentas
             }
 
-            for(let producto of this.auxiliaresAnteriores){
-              data[6][this.getNameByIdProducto(producto.Producto_idProducto)]=producto.inventarioInicial;
-            }
+      
 
             data[2]["total"]="Total"
             data[3]["total"]=this.getTotalMPC()
             data[4]["total"]=this.getTotalMOGIP()
             data[5]["total"]=this.getTotalCostoProduccion()
-            data[6]["total"]=this.getTotalInventarioInicial()
-            data[7]["total"]=this.getTotalInventarioFinal()
+            data[6]["total"]=this.getTotaInventarioInicial()
+            data[7]["total"]=this.getTotaInventarioFinal()
             data[8]["total"]= this.getTotalCV()
 
 
