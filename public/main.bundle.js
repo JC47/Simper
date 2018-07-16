@@ -11569,6 +11569,7 @@ var ProyectosComponent = (function () {
         this._proyectosService = _proyectosService;
         this.datePipe = datePipe;
         this.alerts = [];
+        this.proyectos = [];
         this.proyectoDelete = {
             idProyecto: 1,
             Usuario_idUsuario: 0,
@@ -11611,7 +11612,7 @@ var ProyectosComponent = (function () {
     };
     ProyectosComponent.prototype.eliminaProyecto = function (id) {
         this.confModalDelete.hide();
-        this._proyectosService.eliminaProyecto(id).subscribe();
+        this.proyectos = this._proyectosService.borrarProyecto(id);
         this.alerts.push({
             type: 'danger',
             msg: "Proyecto Eliminado",
@@ -11619,7 +11620,7 @@ var ProyectosComponent = (function () {
         });
     };
     ProyectosComponent.prototype.agregaProyecto = function (proyecto) {
-        this._proyectosService.agregaProyecto(proyecto);
+        this.proyectos = this._proyectosService.agregaProyecto(proyecto);
         this.modalNew.hide();
         this.alerts.push({
             type: 'success',
@@ -14684,12 +14685,21 @@ var ProyectosService = (function () {
         return this.http.post('proyecto/modify/' + proyecto.idProyecto, proyecto, { headers: headers }).map(function (res) { return res.json(); });
     };
     ProyectosService.prototype.eliminaProyecto = function (id) {
-        for (var i = 0; this.proyectos.length > i; i++) {
-            if (this.proyectos[i].idProyecto == id) {
-                this.proyectos.splice(i, 1);
-            }
-        }
         return this.http.get('proyecto/delete/' + id).map(function (res) { return res.json(); });
+    };
+    ProyectosService.prototype.borrarProyecto = function (id) {
+        var _this = this;
+        var x = [];
+        this.eliminaProyecto(id).subscribe(function (data) {
+            if (data.success) {
+                _this.getProyectos().subscribe(function (data2) {
+                    for (var key in data2) {
+                        x.push(data2[key]);
+                    }
+                });
+            }
+        });
+        return x;
     };
     ProyectosService.prototype.buscarPeriodos = function (idProyecto) {
         return this.http.get('balance/' + idProyecto).map(function (res) { return res.json(); });
@@ -14984,12 +14994,13 @@ var ProyectosService = (function () {
         return this.http.post('proyecto/register/' + localStorage.getItem('idUsuario'), proyecto, { headers: headers }).map(function (res) { return res.json(); });
     };
     ProyectosService.prototype.agregaProyecto = function (proyecto) {
-        var _this = this;
+        var x = [];
         this.addProyecto(proyecto).subscribe(function (data) {
             for (var key$ in data.datos) {
-                _this.proyectos[key$] = data.datos[key$];
+                x.push(data.datos[key$]);
             }
         });
+        return x;
     };
     ProyectosService.prototype.rescatarProyecto = function (cantidad) {
         var headers = new __WEBPACK_IMPORTED_MODULE_10__angular_http__["b" /* Headers */]({

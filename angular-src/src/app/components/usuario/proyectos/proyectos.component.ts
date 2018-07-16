@@ -21,8 +21,8 @@ export class ProyectosComponent implements OnInit {
 
 
   public alerts: any = [];
-  proyectos:proyecto[];
-  proyectoDelete:proyecto={
+  proyectos = [];
+  proyectoDelete={
     idProyecto:1,
     Usuario_idUsuario:0,
     nombreProyecto:"",
@@ -70,23 +70,21 @@ export class ProyectosComponent implements OnInit {
    }
 
    ngOnInit(){
-     
+
    }
 
   eliminaProyecto(id:number){
     this.confModalDelete.hide();
-    this._proyectosService.eliminaProyecto(id).subscribe();
+    this.proyectos = this._proyectosService.borrarProyecto(id);
     this.alerts.push({
       type: 'danger',
       msg: `Proyecto Eliminado`,
       timeout: 1000
     });
-
-
   }
 
-  agregaProyecto(proyecto:proyecto){
-    this._proyectosService.agregaProyecto(proyecto);
+  agregaProyecto(proyecto){
+    this.proyectos = this._proyectosService.agregaProyecto(proyecto);
     this.modalNew.hide();
     this.alerts.push({
       type: 'success',

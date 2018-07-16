@@ -66,13 +66,22 @@ returnUsuarios(){
   }
 
   eliminaProyecto(id:number){
-    for(let i=0;this.proyectos.length>i;i++){
-      if(this.proyectos[i].idProyecto==id){
-        this.proyectos.splice(i,1);
-      }
-    }
     return this.http.get('proyecto/delete/'+id).map(res => res.json());
 
+  }
+
+  borrarProyecto(id){
+    var x = [];
+    this.eliminaProyecto(id).subscribe(data => {
+      if(data.success){
+        this.getProyectos().subscribe(data2 => {
+          for(let key in data2){
+            x.push(data2[key]);
+          }
+        });
+      }
+    });
+    return x;
   }
 
   buscarPeriodos(idProyecto){
@@ -386,11 +395,13 @@ returnUsuarios(){
   }
 
   agregaProyecto(proyecto){
+    var x = [];
     this.addProyecto(proyecto).subscribe( data => {
       for(let key$ in data.datos){
-          this.proyectos[key$] = data.datos[key$];
+          x.push(data.datos[key$]);
       }
     });
+    return x;
   }
 
   rescatarProyecto(cantidad){
