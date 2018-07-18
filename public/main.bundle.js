@@ -9653,7 +9653,7 @@ var PruebaComponent = (function () {
             anterior['depMaqEquipo'] = balance.depMaqEquipo;
             anterior['mueblesEnseres'] = balance.mueblesEnseres;
             anterior['depMueblesEnseres'] = balance.depMueblesEnseres;
-            anterior['equipoTrans'] = balance.eqTrans;
+            anterior['eqTrans'] = balance.eqTrans;
             anterior['depEqTrans'] = balance.depEqTrans;
             anterior['pagosAnticipado'] = balance.pagosAnticipado;
             anterior['gastosAmortizacion'] = balance.gastosAmortizacion;
@@ -9745,8 +9745,8 @@ var PruebaComponent = (function () {
                 "aplicacion": this.cp.transform(this.getAplicacionCB(actual.edificios, anterior.edificios), 'USD', true, '1.0-0'),
                 "origen": this.cp.transform(this.getOrigenCB(actual.edificios, anterior.edificios), 'USD', true, '1.0-0') },
             { "cara": "Deprecicaicón Acumulada",
-                "actual": this.cp.transform(actual.depEdif, 'USD', true, '1.0-0'),
-                "anterior": this.cp.transform(anterior.depEdif, 'USD', true, '1.0-0'),
+                "actual": this.cp.transform(-actual.depEdif, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(-anterior.depEdif, 'USD', true, '1.0-0'),
                 "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.depEdif, -anterior.depEdif), 'USD', true, '1.0-0'),
                 "origen": this.cp.transform(this.getOrigenCB(-actual.depEdif, -anterior.depEdif), 'USD', true, '1.0-0') },
             { "cara": "Maquinaria y  Equipo",
@@ -9755,8 +9755,8 @@ var PruebaComponent = (function () {
                 "aplicacion": this.cp.transform(this.getAplicacionCB(actual.maqEquipo, anterior.maqEquipo), 'USD', true, '1.0-0'),
                 "origen": this.cp.transform(this.getOrigenCB(actual.maqEquipo, anterior.maqEquipo), 'USD', true, '1.0-0') },
             { "cara": "Depreciación Acumulada",
-                "actual": this.cp.transform(actual.depMaqEquipo, 'USD', true, '1.0-0'),
-                "anterior": this.cp.transform(anterior.depMaqEquipo, 'USD', true, '1.0-0'),
+                "actual": this.cp.transform(-actual.depMaqEquipo, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(-anterior.depMaqEquipo, 'USD', true, '1.0-0'),
                 "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.depMaqEquipo, -anterior.depMaqEquipo), 'USD', true, '1.0-0'),
                 "origen": this.cp.transform(this.getOrigenCB(-actual.depMaqEquipo, -anterior.depMaqEquipo), 'USD', true, '1.0-0') },
             { "cara": "Muebles y Enseres",
@@ -9765,8 +9765,8 @@ var PruebaComponent = (function () {
                 "aplicacion": this.cp.transform(this.getAplicacionCB(actual.mueblesEnseres, anterior.mueblesEnseres), 'USD', true, '1.0-0'),
                 "origen": this.cp.transform(this.getOrigenCB(actual.mueblesEnseres, anterior.mueblesEnseres), 'USD', true, '1.0-0') },
             { "cara": "Depreciación Acumulada",
-                "actual": this.cp.transform(actual.depMueblesEnseres, 'USD', true, '1.0-0'),
-                "anterior": this.cp.transform(anterior.depMueblesEnseres, 'USD', true, '1.0-0'),
+                "actual": this.cp.transform(-actual.depMueblesEnseres, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(-anterior.depMueblesEnseres, 'USD', true, '1.0-0'),
                 "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.depMueblesEnseres, -anterior.depMueblesEnseres), 'USD', true, '1.0-0'),
                 "origen": this.cp.transform(this.getOrigenCB(-actual.depMueblesEnseres, -anterior.depMueblesEnseres), 'USD', true, '1.0-0') },
             { "cara": "Equipo de Transporte",
@@ -9775,8 +9775,8 @@ var PruebaComponent = (function () {
                 "aplicacion": this.cp.transform(this.getAplicacionCB(actual.eqTrans, anterior.eqTrans), 'USD', true, '1.0-0'),
                 "origen": this.cp.transform(this.getOrigenCB(actual.eqTrans, anterior.eqTrans), 'USD', true, '1.0-0') },
             { "cara": "Depreciación Acumulada",
-                "actual": this.cp.transform(actual.depEqTrans, 'USD', true, '1.0-0'),
-                "anterior": this.cp.transform(anterior.depEqTrans, 'USD', true, '1.0-0'),
+                "actual": this.cp.transform(-actual.depEqTrans, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(-anterior.depEqTrans, 'USD', true, '1.0-0'),
                 "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.depEqTrans, -anterior.depEqTrans), 'USD', true, '1.0-0'),
                 "origen": this.cp.transform(this.getOrigenCB(-actual.depEqTrans, -anterior.depEqTrans), 'USD', true, '1.0-0') },
             { "cara": "De Aplicación Diferida", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
@@ -9807,10 +9807,10 @@ var PruebaComponent = (function () {
                 "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.proveedores, -anterior.proveedores), 'USD', true, '1.0-0'),
                 "origen": this.cp.transform(this.getOrigenCB(-actual.proveedores, -anterior.proveedores), 'USD', true, '1.0-0') },
             { "cara": "PTU por Pagar",
-                "actual": this.cp.transform(-actual.proveedores, 'USD', true, '1.0-0'),
-                "anterior": this.cp.transform(-anterior.proveedores, 'USD', true, '1.0-0'),
-                "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.proveedores, -anterior.proveedores), 'USD', true, '1.0-0'),
-                "origen": this.cp.transform(this.getOrigenCB(-actual.proveedores, -anterior.proveedores), 'USD', true, '1.0-0') },
+                "actual": this.cp.transform(-actual.PTUPorPagar, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(-anterior.PTUPorPagar, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.PTUPorPagar, -anterior.PTUPorPagar), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(-actual.PTUPorPagar, -anterior.PTUPorPagar), 'USD', true, '1.0-0') },
             { "cara": "Prestamos Bancarios",
                 "actual": this.cp.transform(-actual.prestamosMenosAnio, 'USD', true, '1.0-0'),
                 "anterior": this.cp.transform(-anterior.prestamosMenosAnio, 'USD', true, '1.0-0'),
@@ -9823,12 +9823,12 @@ var PruebaComponent = (function () {
                 "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.prestamosMasAnio, -anterior.prestamosMasAnio), 'USD', true, '1.0-0'),
                 "origen": this.cp.transform(this.getOrigenCB(-actual.prestamosMasAnio, -anterior.prestamosMasAnio), 'USD', true, '1.0-0') },
             { "cara": "Capital Social",
-                "actual": this.cp.transform(actual.capitalSocial, 'USD', true, '1.0-0'),
-                "anterior": this.cp.transform(anterior.capitalSocial, 'USD', true, '1.0-0'),
+                "actual": this.cp.transform(-actual.capitalSocial, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(-anterior.capitalSocial, 'USD', true, '1.0-0'),
                 "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.capitalSocial, -anterior.capitalSocial), 'USD', true, '1.0-0'),
                 "origen": this.cp.transform(this.getOrigenCB(-actual.capitalSocial, -anterior.capitalSocial), 'USD', true, '1.0-0') },
             { "cara": "Reserva Legal",
-                "actual": this.cp.transform(actual.reservaLegal, 'USD', true, '1.0-0'),
+                "actual": this.cp.transform(-actual.reservaLegal, 'USD', true, '1.0-0'),
                 "anterior": this.cp.transform(-anterior.reservaLegal, 'USD', true, '1.0-0'),
                 "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.reservaLegal, -anterior.reservaLegal), 'USD', true, '1.0-0'),
                 "origen": this.cp.transform(this.getOrigenCB(-actual.reservaLegal, -anterior.reservaLegal), 'USD', true, '1.0-0') },
@@ -9946,7 +9946,7 @@ var PruebaComponent = (function () {
                 }
             }
         });
-        doc.save("Estado de Resultados.pdf");
+        doc.save("Posición Comparativa.pdf");
     };
     PruebaComponent.prototype.descargaCSV = function () {
         var actualP = this.proyectoActual;

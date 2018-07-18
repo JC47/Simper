@@ -146,62 +146,62 @@ export class PruebaComponent implements OnInit {
 
       for(let balance of this.balanceInicial){
         anterior["cajaBancos"]=balance.cajaBancos;
-        anterior['cuentasPorCobrar']=balance.cuentasPorCobrar
-        anterior['IVAAcreditable']=balance.IVAAcreditable
-        anterior['almacenArtTerm']=balance.almacenArtTerm
-        anterior['almacenMateriales']=balance.almacenMateriales
-        anterior['terrenos']=balance.terreno
-        anterior['edificios']=balance.edifInsta
-        anterior['depEdif']=balance.depEdif
-        anterior['maqEquipo']=balance.maqEquipo
-        anterior['depMaqEquipo']=balance.depMaqEquipo
-        anterior['mueblesEnseres']=balance.mueblesEnseres
-        anterior['depMueblesEnseres']=balance.depMueblesEnseres
-        anterior['equipoTrans']=balance.eqTrans
-        anterior['depEqTrans']=balance.depEqTrans
-        anterior['pagosAnticipado']=balance.pagosAnticipado
-        anterior['gastosAmortizacion']=balance.gastosAmortizacion
-        anterior['IVAPorEnterar']=balance.IVAPorEnterar
-        anterior['imptosPorPagar']=balance.imptosPorPagar
-        anterior['proveedores']=balance.proveedores
-        anterior['PTUPorPagar']=balance.PTUPorPagar
-        anterior['prestamosMenosAnio']=balance.prestamosMenosAnio
-        anterior['prestamosMasAnio']=balance.prestamosMasAnio
-        anterior['capitalSocial']=balance.capitalSocial
-        anterior['reservaLegal']=balance.reservaLegal
-        anterior['utilidadAcum']=balance.utilidadAcum
-        anterior['utilidadEjercicio']=balance.utilidadEjercicio
-        anterior['total']=0
+        anterior['cuentasPorCobrar']=balance.cuentasPorCobrar;
+        anterior['IVAAcreditable']=balance.IVAAcreditable;
+        anterior['almacenArtTerm']=balance.almacenArtTerm;
+        anterior['almacenMateriales']=balance.almacenMateriales;
+        anterior['terrenos']=balance.terreno;
+        anterior['edificios']=balance.edifInsta;
+        anterior['depEdif']=balance.depEdif;
+        anterior['maqEquipo']=balance.maqEquipo;
+        anterior['depMaqEquipo']=balance.depMaqEquipo;
+        anterior['mueblesEnseres']=balance.mueblesEnseres;
+        anterior['depMueblesEnseres']=balance.depMueblesEnseres;
+        anterior['eqTrans']=balance.eqTrans;
+        anterior['depEqTrans']=balance.depEqTrans;
+        anterior['pagosAnticipado']=balance.pagosAnticipado;
+        anterior['gastosAmortizacion']=balance.gastosAmortizacion;
+        anterior['IVAPorEnterar']=balance.IVAPorEnterar;
+        anterior['imptosPorPagar']=balance.imptosPorPagar;
+        anterior['proveedores']=balance.proveedores;
+        anterior['PTUPorPagar']=balance.PTUPorPagar;
+        anterior['prestamosMenosAnio']=balance.prestamosMenosAnio;
+        anterior['prestamosMasAnio']=balance.prestamosMasAnio;
+        anterior['capitalSocial']=balance.capitalSocial;
+        anterior['reservaLegal']=balance.reservaLegal;
+        anterior['utilidadAcum']=balance.utilidadAcum;
+        anterior['utilidadEjercicio']=balance.utilidadEjercicio;
+        anterior['total']=0;
       }
 
       for(let balance of this.balanceFinal){
         actual['cajaBancos']=balance.cajaBancos;
-        actual['cuentasPorCobrar']=balance.cuentasPorCobrar
-        actual['IVAAcreditable']=balance.IVAAcreditable
-        actual['almacenArtTerm']=balance.almacenArtTerm
-        actual['almacenMateriales']=balance.almacenMateriales
-        actual['terrenos']=balance.terreno
-        actual['edificios']=balance.edifInsta
-        actual['depEdif']=balance.depEdif
-        actual['maqEquipo']=balance.maqEquipo
-        actual['depMaqEquipo']=balance.depMaqEquipo
-        actual['mueblesEnseres']=balance.mueblesEnseres
-        actual['depMueblesEnseres']=balance.depMueblesEnseres
-        actual['eqTrans']=balance.eqTrans
-        actual['depEqTrans']=balance.depEqTrans
-        actual['pagosAnticipado']=balance.pagosAnticipado
-        actual['gastosAmortizacion']=balance.gastosAmortizacion
-        actual['IVAPorEnterar']=balance.IVAPorEnterar
-        actual['imptosPorPagar']=balance.imptosPorPagar
-        actual['proveedores']=balance.proveedores
-        actual['PTUPorPagar']=balance.PTUPorPagar
-        actual['prestamosMenosAnio']=balance.prestamosMenosAnio
-        actual['prestamosMasAnio']=balance.prestamosMasAnio
-        actual['capitalSocial']=balance.capitalSocial
-        actual['reservaLegal']=balance.reservaLegal
-        actual['utilidadAcum']=balance.utilidadAcum
-        actual['utilidadEjercicio']=balance.utilidadEjercicio
-        actual['total']=0
+        actual['cuentasPorCobrar']=balance.cuentasPorCobrar;
+        actual['IVAAcreditable']=balance.IVAAcreditable;
+        actual['almacenArtTerm']=balance.almacenArtTerm;
+        actual['almacenMateriales']=balance.almacenMateriales;
+        actual['terrenos']=balance.terreno;
+        actual['edificios']=balance.edifInsta;
+        actual['depEdif']=balance.depEdif;
+        actual['maqEquipo']=balance.maqEquipo;
+        actual['depMaqEquipo']=balance.depMaqEquipo;
+        actual['mueblesEnseres']=balance.mueblesEnseres;
+        actual['depMueblesEnseres']=balance.depMueblesEnseres;
+        actual['eqTrans']=balance.eqTrans;
+        actual['depEqTrans']=balance.depEqTrans;
+        actual['pagosAnticipado']=balance.pagosAnticipado;
+        actual['gastosAmortizacion']=balance.gastosAmortizacion;
+        actual['IVAPorEnterar']=balance.IVAPorEnterar;
+        actual['imptosPorPagar']=balance.imptosPorPagar;
+        actual['proveedores']=balance.proveedores;
+        actual['PTUPorPagar']=balance.PTUPorPagar;
+        actual['prestamosMenosAnio']=balance.prestamosMenosAnio;
+        actual['prestamosMasAnio']=balance.prestamosMasAnio;
+        actual['capitalSocial']=balance.capitalSocial;
+        actual['reservaLegal']=balance.reservaLegal;
+        actual['utilidadAcum']=balance.utilidadAcum;
+        actual['utilidadEjercicio']=balance.utilidadEjercicio;
+        actual['total']=0;
       }
 
 
@@ -265,8 +265,8 @@ export class PruebaComponent implements OnInit {
         "origen": this.cp.transform(this.getOrigenCB(actual.edificios,anterior.edificios),'USD',true,'1.0-0')},
 
       {"cara":"Deprecicaicón Acumulada",
-        "actual": this.cp.transform(actual.depEdif,'USD',true,'1.0-0'),
-        "anterior": this.cp.transform(anterior.depEdif,'USD',true,'1.0-0'),
+        "actual": this.cp.transform(-actual.depEdif,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(-anterior.depEdif,'USD',true,'1.0-0'),
         "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.depEdif,-anterior.depEdif),'USD',true,'1.0-0'),
         "origen": this.cp.transform(this.getOrigenCB(-actual.depEdif,-anterior.depEdif),'USD',true,'1.0-0')},
 
@@ -277,8 +277,8 @@ export class PruebaComponent implements OnInit {
         "origen": this.cp.transform(this.getOrigenCB(actual.maqEquipo,anterior.maqEquipo) ,'USD',true,'1.0-0')},
 
       {"cara":"Depreciación Acumulada",
-        "actual": this.cp.transform(actual.depMaqEquipo,'USD',true,'1.0-0'),
-        "anterior": this.cp.transform(anterior.depMaqEquipo,'USD',true,'1.0-0'),
+        "actual": this.cp.transform(-actual.depMaqEquipo,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(-anterior.depMaqEquipo,'USD',true,'1.0-0'),
         "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.depMaqEquipo,-anterior.depMaqEquipo),'USD',true,'1.0-0'),
         "origen": this.cp.transform(this.getOrigenCB(-actual.depMaqEquipo,-anterior.depMaqEquipo),'USD',true,'1.0-0')},
 
@@ -289,8 +289,8 @@ export class PruebaComponent implements OnInit {
         "origen": this.cp.transform(this.getOrigenCB(actual.mueblesEnseres,anterior.mueblesEnseres),'USD',true,'1.0-0')},
 
       {"cara":"Depreciación Acumulada",
-        "actual": this.cp.transform(actual.depMueblesEnseres,'USD',true,'1.0-0'),
-        "anterior": this.cp.transform(anterior.depMueblesEnseres,'USD',true,'1.0-0'),
+        "actual": this.cp.transform(-actual.depMueblesEnseres,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(-anterior.depMueblesEnseres,'USD',true,'1.0-0'),
         "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.depMueblesEnseres,-anterior.depMueblesEnseres),'USD',true,'1.0-0'),
         "origen": this.cp.transform(this.getOrigenCB(-actual.depMueblesEnseres,-anterior.depMueblesEnseres),'USD',true,'1.0-0')},
 
@@ -301,8 +301,8 @@ export class PruebaComponent implements OnInit {
         "origen": this.cp.transform(this.getOrigenCB(actual.eqTrans,anterior.eqTrans),'USD',true,'1.0-0')},
 
       {"cara":"Depreciación Acumulada",
-        "actual": this.cp.transform(actual.depEqTrans,'USD',true,'1.0-0'),
-        "anterior": this.cp.transform(anterior.depEqTrans,'USD',true,'1.0-0'),
+        "actual": this.cp.transform(-actual.depEqTrans,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(-anterior.depEqTrans,'USD',true,'1.0-0'),
         "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.depEqTrans,-anterior.depEqTrans),'USD',true,'1.0-0'),
         "origen": this.cp.transform(this.getOrigenCB(-actual.depEqTrans,-anterior.depEqTrans),'USD',true,'1.0-0')},
 
@@ -341,10 +341,10 @@ export class PruebaComponent implements OnInit {
         "origen": this.cp.transform(this.getOrigenCB(-actual.proveedores,-anterior.proveedores),'USD',true,'1.0-0')},
 
       {"cara":"PTU por Pagar",
-        "actual": this.cp.transform(-actual.proveedores,'USD',true,'1.0-0'),
-        "anterior": this.cp.transform(-anterior.proveedores,'USD',true,'1.0-0'),
-        "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.proveedores,-anterior.proveedores),'USD',true,'1.0-0'),
-        "origen": this.cp.transform(this.getOrigenCB(-actual.proveedores,-anterior.proveedores),'USD',true,'1.0-0')},
+        "actual": this.cp.transform(-actual.PTUPorPagar,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(-anterior.PTUPorPagar,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.PTUPorPagar,-anterior.PTUPorPagar),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(-actual.PTUPorPagar,-anterior.PTUPorPagar),'USD',true,'1.0-0')},
 
       {"cara":"Prestamos Bancarios",
         "actual": this.cp.transform(-actual.prestamosMenosAnio,'USD',true,'1.0-0'),
@@ -361,13 +361,13 @@ export class PruebaComponent implements OnInit {
         "origen": this.cp.transform(this.getOrigenCB(-actual.prestamosMasAnio,-anterior.prestamosMasAnio),'USD',true,'1.0-0')},
 
       {"cara":"Capital Social",
-        "actual": this.cp.transform(actual.capitalSocial,'USD',true,'1.0-0'),
-        "anterior": this.cp.transform(anterior.capitalSocial,'USD',true,'1.0-0'),
+        "actual": this.cp.transform(-actual.capitalSocial,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(-anterior.capitalSocial,'USD',true,'1.0-0'),
         "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.capitalSocial,-anterior.capitalSocial),'USD',true,'1.0-0'),
         "origen": this.cp.transform(this.getOrigenCB(-actual.capitalSocial,-anterior.capitalSocial),'USD',true,'1.0-0')},
 
       {"cara":"Reserva Legal",
-        "actual": this.cp.transform(actual.reservaLegal,'USD',true,'1.0-0'),
+        "actual": this.cp.transform(-actual.reservaLegal,'USD',true,'1.0-0'),
         "anterior": this.cp.transform(-anterior.reservaLegal,'USD',true,'1.0-0'),
         "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.reservaLegal,-anterior.reservaLegal),'USD',true,'1.0-0'),
         "origen": this.cp.transform(this.getOrigenCB(-actual.reservaLegal,-anterior.reservaLegal),'USD',true,'1.0-0')},
@@ -500,7 +500,7 @@ export class PruebaComponent implements OnInit {
 
     });
 
-    doc.save("Estado de Resultados.pdf");
+    doc.save("Posición Comparativa.pdf");
 
 
 

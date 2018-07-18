@@ -8,7 +8,7 @@ Promise.promisifyAll(require("mysql/lib/Pool").prototype);
 var pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: 'cornelio96',
   database: 'basesimv1'
 });
 
