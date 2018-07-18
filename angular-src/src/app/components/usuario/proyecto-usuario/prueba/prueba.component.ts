@@ -530,7 +530,7 @@ export class PruebaComponent implements OnInit {
         anterior['depMaqEquipo']=balance.depMaqEquipo
         anterior['mueblesEnseres']=balance.mueblesEnseres
         anterior['depMueblesEnseres']=balance.depMueblesEnseres
-        anterior['equipoTrans']=balance.eqTrans
+        anterior['eqTrans']=balance.eqTrans
         anterior['depEqTrans']=balance.depEqTrans
         anterior['pagosAnticipado']=balance.pagosAnticipado
         anterior['gastosAmortizacion']=balance.gastosAmortizacion
