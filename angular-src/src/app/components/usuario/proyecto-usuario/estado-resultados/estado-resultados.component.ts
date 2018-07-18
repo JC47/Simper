@@ -387,10 +387,15 @@ export class EstadoResultadosComponent implements OnInit {
   }
   rows[14][t.dataKey] =  this.cp.transform(this.getUtilidad2(),'USD',true,'1.0-0')
   rows[16][t.dataKey] =  this.cp.transform(this.getISR(),'USD',true,'1.0-0')
-  rows[17][t.dataKey] =  this.cp.transform(this.getPTU(),'USD',true,'1.0-0')
+
+
   rows[19][t.dataKey] = this.cp.transform((this.getUtilidad2() - this.getISR() - this.getPTU()),'USD',true,'1.0-0')
 
+  for(let balance of this.balanceFinal){
+    rows[17][t.dataKey] =  this.cp.transform(balance.PTUPorPagar,'USD',true,'1.0-0')
+    rows[19][t.dataKey] = this.cp.transform(balance.utilidadEjercicio,'USD',true,'1.0-0')
 
+  }
 
 
 
@@ -467,10 +472,14 @@ export class EstadoResultadosComponent implements OnInit {
     for(let aux of this.intereses){
       data[13]["total"] = aux.toString();
     }
+
+    for(let balance of this.balanceFinal){
+      data[19]["total"] = balance.PTUPorPagar;
+      data[21]["total"] = balance.utilidadEjercicio;
+    }
     data[16]["total"] = this.getUtilidad2()
     data[18]["total"] = this.getISR()
-    data[19]["total"] = this.getPTU()
-    data[21]["total"] = (this.getUtilidad2() - this.getISR() - this.getPTU())
+
 
 
 

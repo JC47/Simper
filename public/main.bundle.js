@@ -2878,11 +2878,11 @@ var AnalisisComponent = (function () {
             { "signo": "-", "concepto": "Impuestos", "cantidad": this.cp.transform(this.getImpuestos(), 'USD', true, '1.0-0') },
             { "signo": "=", "concepto": "Utilidad Neta", "cantidad": this.cp.transform(this.getUtilidadNeta(), 'USD', true, '1.0-0') },
             { "signo": "/", "concepto": "Ventas", "cantidad": this.cp.transform(this.getTotalVentas(), 'USD', true, '1.0-0') },
-            { "signo": "=", "concepto": "Margen Neto(%)", "cantidad": this.dc.transform(this.getMargenNeto() * 10, '1.2-2') + "%" },
+            { "signo": "=", "concepto": "Margen Neto(%)", "cantidad": this.dc.transform(this.getMargenNeto() * 100, '1.2-2') + "%" },
             { "signo": "*", "concepto": "Rotación de Activos", "cantidad": this.dc.transform(this.getRotacionActivos(), '1.2-2') },
             { "signo": "=", "concepto": "Rentabilidad de Activos(%)", "cantidad": this.dc.transform(this.getRentabilidadSobreActivos() * 100, '1.2-2') + "%" },
             { "signo": "*", "concepto": "Palanca Financiera", "cantidad": this.dc.transform(this.getActivoCapitalTotal(), '1.2-2') },
-            { "signo": "=", "concepto": "Rentabilidad s/Capital Contable", "cantidad": this.dc.transform(this.getRentabilidadSobreCapital(), '1.2-2') }
+            { "signo": "=", "concepto": "Rentabilidad s/Capital Contable", "cantidad": this.dc.transform((this.getRentabilidadSobreCapital() * 100), '1.2-2') + "%" }
         ];
         doc.autoTable(columns, rows, {
             drawRow: function (row) {
@@ -2899,6 +2899,34 @@ var AnalisisComponent = (function () {
                 signo: { halign: 'center', columnWidth: 20 },
                 concepto: { halign: 'left' },
                 cantidad: { halign: 'right' },
+            },
+            drawCell: function (cell, data) {
+                var rows = data.table.rows;
+                if (data.row.index == 10) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
+                else if (data.row.index == 11) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
+                else if (data.row.index == 12) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
+                else if (data.row.index == 13) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
+                else if (data.row.index == 14) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
             },
             addPageContent: function (data) {
                 doc.setFontSize(15);
@@ -2926,11 +2954,11 @@ var AnalisisComponent = (function () {
             { "signo": "-", "concepto": "Impuestos", "cantidad": this.cp.transform(this.getImpuestos(), 'USD', true, '1.0-0') },
             { "signo": "=", "concepto": "Utilidad Neta", "cantidad": this.cp.transform(this.getUtilidadNeta(), 'USD', true, '1.0-0') },
             { "signo": "/", "concepto": "Ventas", "cantidad": this.cp.transform(this.getTotalVentas(), 'USD', true, '1.0-0') },
-            { "signo": "=", "concepto": "Margen Neto(%)", "cantidad": this.dc.transform(this.getMargenNeto() * 10, '1.2-2') },
+            { "signo": "=", "concepto": "Margen Neto(%)", "cantidad": this.dc.transform((this.getMargenNeto() * 100) + "%", '1.2-2') },
             { "signo": "*", "concepto": "Rotación de Activos", "cantidad": this.dc.transform(this.getRotacionActivos(), '1.2-2') },
-            { "signo": "=", "concepto": "Rentabilidad de Activos(%)", "cantidad": this.dc.transform(this.getRentabilidadSobreActivos() * 100, '1.2-2') },
+            { "signo": "=", "concepto": "Rentabilidad de Activos(%)", "cantidad": this.dc.transform((this.getRentabilidadSobreActivos() * 100) + "%", '1.2-2') },
             { "signo": "*", "concepto": "Palanca Financiera", "cantidad": this.dc.transform(this.getActivoCapitalTotal(), '1.2-2') },
-            { "signo": "=", "concepto": "Rentabilidad s/Capital Contable", "cantidad": this.dc.transform(this.getRentabilidadSobreCapital(), '1.2-2') }
+            { "signo": "=", "concepto": "Rentabilidad s/Capital Contable", "cantidad": this.dc.transform((this.getRentabilidadSobreCapital() * 100) + "%", '1.2-2') }
         ];
         new __WEBPACK_IMPORTED_MODULE_4_angular2_csv_Angular2_csv__["Angular2Csv"](data, ' Analisis Estado de Resultados');
     };
@@ -2981,6 +3009,19 @@ var AnalisisComponent = (function () {
                 signo: { halign: 'center', columnWidth: 20 },
                 concepto: { halign: 'left' },
                 cantidad: { halign: 'right' },
+            },
+            drawCell: function (cell, data) {
+                var rows = data.table.rows;
+                if (data.row.index == 7) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
+                else if (data.row.index == 17) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
             },
             addPageContent: function (data) {
                 doc.setFontSize(15);
@@ -3061,7 +3102,7 @@ var AnalisisComponent = (function () {
             { "grupo": "", "concepto": "Capital Contable", "cantidad": this.cp.transform(this.getCapitalContable(), 'USD', true, '1.0-0'), "numero": "" },
             { "grupo": "", "concepto": "", "cantidad": "", "numero": "" },
             { "grupo": "", "concepto": "Pasivo Total", "cantidad": this.cp.transform(this.getPasivoTotal(), 'USD', true, '1.0-0'), "numero": this.dc.transform(this.getPasivoActivoTotal(), '1.2-2') },
-            { "grupo": "", "concepto": "Activo Total", "cantidad": this.cp.transform(this.getActivoTotal(), 'USD', true, '1.0-0'), "numero": this.dc.transform(this.getPasivoActivoTotal(), '1.2-2') },
+            { "grupo": "", "concepto": "Activo Total", "cantidad": this.cp.transform(this.getActivoTotal(), 'USD', true, '1.0-0'), "numero": "" },
             { "grupo": "", "concepto": "", "cantidad": "", "numero": "" },
             { "grupo": "", "concepto": "Total Activo", "cantidad": this.cp.transform(this.getActivoTotal(), 'USD', true, '1.0-0'), "numero": this.dc.transform(this.getActivoCapitalTotal(), '1.2-2') },
             { "grupo": "", "concepto": "Capital Contable", "cantidad": this.cp.transform(this.getCapitalContable(), 'USD', true, '1.0-0'), "numero": "" },
@@ -3092,6 +3133,89 @@ var AnalisisComponent = (function () {
                 doc.text(139.5, 23, 'Análisis de la Rentabilidad Sobre el Capital Contable del Periodo ' + localStorage.getItem('numeroPeriodo'), null, null, 'center');
                 doc.line(50, 27, 228, 27);
             },
+            drawCell: function (cell, data) {
+                var rows = data.table.rows;
+                if (data.row.index == 0) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
+                else if (data.row.index == 2) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
+                else if (data.row.index == 4) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
+                else if (data.row.index == 6) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
+                else if (data.row.index == 8) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
+                else if (data.row.index == 10) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
+                else if (data.row.index == 12) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
+                else if (data.row.index == 14) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
+                else if (data.row.index == 16) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
+                else if (data.row.index == 18) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
+                else if (data.row.index == 20) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
+                else if (data.row.index == 22) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
+                else if (data.row.index == 24) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
+                else if (data.row.index == 27) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
+                else if (data.row.index == 30) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
+                else if (data.row.index == 32) {
+                    doc.setFillColor(200, 0, 0);
+                    doc.setTextColor(255, 255, 255);
+                    doc.setDrawColor(255, 255, 255);
+                }
+            }
         });
         doc.save("Analisis Balance General.pdf");
     };
@@ -3128,12 +3252,12 @@ var AnalisisComponent = (function () {
             { "grupo": "", "concepto": "Capital Contable", "cantidad": this.getCapitalContable(), "numero": "" },
             { "grupo": "", "concepto": "", "cantidad": "", "numero": "" },
             { "grupo": "", "concepto": "Pasivo Total", "cantidad": this.getPasivoTotal(), "numero": this.getPasivoActivoTotal() },
-            { "grupo": "", "concepto": "Activo Total", "cantidad": this.getActivoTotal(), "numero": this.getPasivoActivoTotal() },
+            { "grupo": "", "concepto": "Activo Total", "cantidad": this.getActivoTotal(), "numero": "" },
             { "grupo": "", "concepto": "", "cantidad": "", "numero": "" },
             { "grupo": "", "concepto": "Total Activo", "cantidad": this.getActivoTotal(), "numero": this.getActivoCapitalTotal() },
             { "grupo": "", "concepto": "Capital Contable", "cantidad": this.getCapitalContable(), "numero": "" },
             { "grupo": "Cobertura de Intereses", "concepto": "Utilidad antes int e imptos", "cantidad": this.getUtilidadOperacion(), "numero": this.getCoberturaIntereses() },
-            { "grupo": "", "concepto": "Intereses Pagados", "cantidad": this.getIntereses(), "numero": this.getCoberturaIntereses() },
+            { "grupo": "", "concepto": "Intereses Pagados", "cantidad": this.getIntereses(), "numero": "" },
         ];
         new __WEBPACK_IMPORTED_MODULE_4_angular2_csv_Angular2_csv__["Angular2Csv"](data, ' Analisis Ratios');
     };
@@ -5426,7 +5550,7 @@ var _a, _b, _c, _d;
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/estado-resultados/estado-resultados.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <h4 class=\"text-center col-12\">Estado de Resultados</h4>\r\n</div>\r\n\r\n\r\n\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <table class=\"table table-bordered\">\r\n    <thead>\r\n      <tr class=\"thead-inverse\">\r\n        <th></th>\r\n        <th *ngFor=\"let producto of resultados\" class=\"text-center\">{{getNameByIdProducto(producto) }}</th>\r\n        <th class=\"text-center\">Total</th>\r\n      </tr>\r\n    </thead>\r\n\r\n    <tbody>\r\n      <tr>\r\n        <th>Ventas Netas</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getVentasNetas(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" >{{getTotalVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Costo de Ventas</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getCostoVentas(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" >{{getTotalCostosVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Utilidad Bruta</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" >{{getUtilidadBruta() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Gasto de Distribucion</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getDistParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{getDistTotal() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Otros Gastos</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\"> {{getOtrosGastosParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" *ngFor=\"let item of auxiliarT\">{{item |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Gasto de Administración</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getAdminParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{getAdminTotal() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Utilidad en Operación</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadAntesParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" *ngFor=\"let item of auxiliarT\">{{getUtilidadAntes() - item |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Intereses</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n        <td class=\"text-right\" *ngFor=\"let aux of intereses\">{{aux |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Utilidad antes de Impuestos</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadAntesParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{getUtilidad2() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>ISR</th>\r\n        <td  class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n        <td  class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.imptosPorPagar * 12 |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>PTU</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n        <td class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.PTUPorPagar|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Utilidad del Ejercicio</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n        <td class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.utilidadEjercicio|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n    </tbody>\r\n  </table>\r\n\r\n</div>\r\n\r\n<div class=\"row align-items-center\" style=\"margin-bottom:20px\">\r\n  <div class=\"offset-9 col-1\">\r\n    Exportar:\r\n  </div>\r\n  <div class=\"col-1\">\r\n    <ngl-icon icon=\"pdf\" category=\"doctype\" (click)=\"PDFestadoDeResultados()\" size=\"large\"></ngl-icon>\r\n  </div>\r\n\r\n  <div class=\"col-1\">\r\n    <ngl-icon icon=\"csv\" category=\"doctype\" (click)=\"CSVestado()\" size=\"large\"></ngl-icon>\r\n  </div>\r\n\r\n</div>\r\n"
+module.exports = "<div class=\"row\">\r\n  <h4 class=\"text-center col-12\">Estado de Resultados</h4>\r\n</div>\r\n\r\n\r\n\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <table class=\"table table-hover\">\r\n    <thead class=\"thead-dark\">\r\n      <tr class=\"thead-inverse\">\r\n        <th></th>\r\n        <th *ngFor=\"let producto of resultados\" class=\"text-center\">{{getNameByIdProducto(producto) }}</th>\r\n        <th class=\"text-center\">Total</th>\r\n      </tr>\r\n    </thead>\r\n\r\n    <tbody>\r\n      <tr>\r\n        <th>Ventas Netas</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getVentasNetas(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" >{{getTotalVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Costo de Ventas</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getCostoVentas(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" >{{getTotalCostosVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td></td>\r\n        <td *ngFor=\"let producto of resultados\"></td>\r\n        <td></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Utilidad Bruta</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" >{{getUtilidadBruta() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <td></td>\r\n      <td *ngFor=\"let producto of resultados\"></td>\r\n      <td></td>\r\n\r\n      <tr>\r\n        <th>Gasto de Distribucion</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getDistParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{getDistTotal() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Otros Gastos</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\"> {{getOtrosGastosParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" *ngFor=\"let item of auxiliarT\">{{item |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Gasto de Administración</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getAdminParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{getAdminTotal() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <td></td>\r\n      <td *ngFor=\"let producto of resultados\"></td>\r\n      <td></td>\r\n\r\n      <tr>\r\n        <th>Utilidad en Operación</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadAntesParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" *ngFor=\"let item of auxiliarT\">{{getUtilidadAntes() - item |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <td></td>\r\n      <td *ngFor=\"let producto of resultados\"></td>\r\n      <td></td>\r\n\r\n      <tr>\r\n        <th>Intereses</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n        <td class=\"text-right\" *ngFor=\"let aux of intereses\">{{aux |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <td></td>\r\n      <td *ngFor=\"let producto of resultados\"></td>\r\n      <td></td>\r\n\r\n      <tr>\r\n        <th>Utilidad antes de Impuestos</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">{{getUtilidadAntesParcial(producto) |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{getUtilidad2() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <td></td>\r\n      <td *ngFor=\"let producto of resultados\"></td>\r\n      <td></td>\r\n\r\n      <tr>\r\n        <th>ISR</th>\r\n        <td  class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n        <td  class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.imptosPorPagar * 12 |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>PTU</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n        <td class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.PTUPorPagar|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <td></td>\r\n      <td *ngFor=\"let producto of resultados\"></td>\r\n      <td></td>\r\n\r\n      <tr>\r\n        <th>Utilidad del Ejercicio</th>\r\n        <td class=\"text-right\" *ngFor=\"let producto of resultados\">-</td>\r\n        <td class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.utilidadEjercicio|currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n    </tbody>\r\n  </table>\r\n\r\n</div>\r\n\r\n<div class=\"row align-items-center\" style=\"margin-bottom:20px\">\r\n  <div class=\"offset-9 col-1\">\r\n    Exportar:\r\n  </div>\r\n  <div class=\"col-1\">\r\n    <ngl-icon icon=\"pdf\" category=\"doctype\" (click)=\"PDFestadoDeResultados()\" size=\"large\"></ngl-icon>\r\n  </div>\r\n\r\n  <div class=\"col-1\">\r\n    <ngl-icon icon=\"csv\" category=\"doctype\" (click)=\"CSVestado()\" size=\"large\"></ngl-icon>\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -5822,8 +5946,12 @@ var EstadoResultadosComponent = (function () {
         }
         rows[14][t.dataKey] = this.cp.transform(this.getUtilidad2(), 'USD', true, '1.0-0');
         rows[16][t.dataKey] = this.cp.transform(this.getISR(), 'USD', true, '1.0-0');
-        rows[17][t.dataKey] = this.cp.transform(this.getPTU(), 'USD', true, '1.0-0');
         rows[19][t.dataKey] = this.cp.transform((this.getUtilidad2() - this.getISR() - this.getPTU()), 'USD', true, '1.0-0');
+        for (var _f = 0, _g = this.balanceFinal; _f < _g.length; _f++) {
+            var balance = _g[_f];
+            rows[17][t.dataKey] = this.cp.transform(balance.PTUPorPagar, 'USD', true, '1.0-0');
+            rows[19][t.dataKey] = this.cp.transform(balance.utilidadEjercicio, 'USD', true, '1.0-0');
+        }
         doc.autoTable(columns, rows, conf);
         doc.save("Estado de Resultados.pdf");
     };
@@ -5889,10 +6017,13 @@ var EstadoResultadosComponent = (function () {
             var aux = _g[_f];
             data[13]["total"] = aux.toString();
         }
+        for (var _h = 0, _j = this.balanceFinal; _h < _j.length; _h++) {
+            var balance = _j[_h];
+            data[19]["total"] = balance.PTUPorPagar;
+            data[21]["total"] = balance.utilidadEjercicio;
+        }
         data[16]["total"] = this.getUtilidad2();
         data[18]["total"] = this.getISR();
-        data[19]["total"] = this.getPTU();
-        data[21]["total"] = (this.getUtilidad2() - this.getISR() - this.getPTU());
         new __WEBPACK_IMPORTED_MODULE_8_angular2_csv_Angular2_csv__["Angular2Csv"](data, 'Estado de Resultados');
     };
     return EstadoResultadosComponent;
@@ -6143,7 +6274,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/flujo/flujo.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <h3 class=\"col-12 text-center\">Presupuesto de Caja y Bancos</h3>\r\n</div>\r\n\r\n<div class=\"col-8 offset-2\">\r\n  <table class=\"table table-striped \" >\r\n\r\n    <tbody>\r\n        <tr>\r\n        <td>Saldo Inicial</td>\r\n        <td class=\"text-right\" *ngFor=\"let balance of balanceInicial\">{{getCajaBancos() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th colspan=\"2\" class=\"text-center\">Entradas </th>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n              <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Cobro por Ventas</td>\r\n        <td class=\"text-right\">{{getCobroVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Préstamos</td>\r\n        <td class=\"text-right\">{{getPAcuales() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Intereses</td>\r\n        <td class=\"text-right\">$0</td>\r\n\r\n\r\n\r\n\r\n      </tr>\r\n\r\n\r\n\r\n      <tr>\r\n        <td>Incremento de Capital</td>\r\n        <td class=\"text-right\">{{getRescates() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n              <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <th>Disponible</th>\r\n        <th class=\"text-right\">{{getDisponible() |currency:'USD':true:'1.0-0'}}</th>\r\n\r\n      </tr>\r\n      <tr>\r\n              <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <th colspan=\"2\" class=\"text-center\">Salidas</th>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Costo de Transformación</td>\r\n        <td class=\"text-right\">{{getCostoDeTransformacion() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Gasto de Distribución</td>\r\n        <td class=\"text-right\">{{getCostoDeDistribucion() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Gasto de Administración</td>\r\n        <td class=\"text-right\">{{getCostoAdministrativo() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Otros Gastos</td>\r\n        <td class=\"text-right\">{{getGastosVenta() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n\r\n      <tr>\r\n        <td>Compra de Maquinaria</td>\r\n        <td class=\"text-right\">{{getCompraMaquinaria() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Compras</td>\r\n        <td class=\"text-right\">{{getCompras() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Intereses</td>\r\n        <td class=\"text-right\">{{getIntereses() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Pago de Préstamos</td>\r\n        <td class=\"text-right\">{{getPagos() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Dividendos</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>PTU</td>\r\n        <td class=\"text-right\">{{getPTU() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>ISR</td>\r\n        <td class=\"text-right\">{{getISR() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>IVA</td>\r\n        <td class=\"text-right\">{{getIVA() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td colspan=\"2\"></td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Total de Salidas</td>\r\n        <td class=\"text-right\">{{getSalidas() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <th>Saldo Final</th>\r\n        <th class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.cajaBancos |currency:'USD':true:'1.0-0'}}</th>\r\n      </tr>\r\n\r\n    </tbody>\r\n  </table>\r\n\r\n</div>\r\n\r\n\r\n<div class=\"row align-items-center\" style=\"margin-bottom:20px\">\r\n  <div class=\"offset-9 col-1\">\r\n    Exportar:\r\n  </div>\r\n  <div class=\"col-1\">\r\n    <ngl-icon icon=\"pdf\" category=\"doctype\" (click)=\"PDFflujo()\" size=\"large\"></ngl-icon>\r\n  </div>\r\n\r\n  <div class=\"col-1\">\r\n    <ngl-icon icon=\"csv\" category=\"doctype\" (click)=\"descargaCSV()\" size=\"large\"></ngl-icon>\r\n  </div>\r\n\r\n</div>\r\n"
+module.exports = "<div class=\"row\">\r\n  <h3 class=\"col-12 text-center\">Presupuesto de Caja y Bancos</h3>\r\n</div>\r\n\r\n<div class=\"col-8 offset-2\">\r\n  <table class=\"table table-striped \" >\r\n\r\n    <thead>\r\n      <th>Concepto</th>\r\n      <th>Saldo</th>\r\n    </thead>\r\n\r\n    <tbody>\r\n\r\n        <tr class=\"table-active\">\r\n        <th>Saldo Inicial</th>\r\n        <th class=\"text-right\" *ngFor=\"let balance of balanceInicial\">{{getCajaBancos() |currency:'USD':true:'1.0-0'}}</th>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr class=\"table-active\" style=\"border: 2px solid dimgray\">\r\n        <th colspan=\"2\" class=\"text-center\">Entradas </th>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n              <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Cobro por Ventas</td>\r\n        <td class=\"text-right\">{{getCobroVentas() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Préstamos</td>\r\n        <td class=\"text-right\">{{getPAcuales() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Intereses</td>\r\n        <td class=\"text-right\">$0</td>\r\n\r\n\r\n\r\n\r\n      </tr>\r\n\r\n\r\n\r\n      <tr>\r\n        <td>Incremento de Capital</td>\r\n        <td class=\"text-right\">{{getRescates() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n              <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n\r\n      <tr class=\"table-active\">\r\n        <th >Disponible</th>\r\n        <th class=\"text-right\">{{getDisponible() |currency:'USD':true:'1.0-0'}}</th>\r\n\r\n      </tr>\r\n      <tr>\r\n              <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr class=\" table-active\" style=\"border: 2px solid dimgray\">\r\n        <th colspan=\"2\" class=\"text-center\" >Salidas</th>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Costo de Transformación</td>\r\n        <td class=\"text-right\">{{getCostoDeTransformacion() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Gasto de Distribución</td>\r\n        <td class=\"text-right\">{{getCostoDeDistribucion() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n\r\n      <tr>\r\n        <td>Gasto de Administración</td>\r\n        <td class=\"text-right\">{{getCostoAdministrativo() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Otros Gastos</td>\r\n        <td class=\"text-right\">{{getGastosVenta() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n\r\n\r\n      <tr>\r\n        <td>Compra de Maquinaria</td>\r\n        <td class=\"text-right\">{{getCompraMaquinaria() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Compras</td>\r\n        <td class=\"text-right\">{{getCompras() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Intereses</td>\r\n        <td class=\"text-right\">{{getIntereses() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Pago de Préstamos</td>\r\n        <td class=\"text-right\">{{getPagos() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>Dividendos</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td colspan=\"2\"></td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>PTU</td>\r\n        <td class=\"text-right\">{{getPTU() |currency:'USD':true:'1.0-0'}}</td>\r\n\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>ISR</td>\r\n        <td class=\"text-right\">{{getISR() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td>IVA</td>\r\n        <td class=\"text-right\">{{getIVA() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n\r\n      <tr>\r\n        <td colspan=\"2\"></td>\r\n\r\n      </tr>\r\n\r\n      <tr class=\"table-active\">\r\n        <th>Total de Salidas</th>\r\n        <th class=\"text-right\">{{getSalidas() |currency:'USD':true:'1.0-0'}}</th>\r\n      </tr>\r\n\r\n\r\n\r\n      <tr class=\"table-active\">\r\n        <th>Saldo Final</th>\r\n        <th class=\"text-right\" *ngFor=\"let balance of balanceFinal\">{{balance.cajaBancos |currency:'USD':true:'1.0-0'}}</th>\r\n      </tr>\r\n\r\n    </tbody>\r\n  </table>\r\n\r\n</div>\r\n\r\n\r\n<div class=\"row align-items-center\" style=\"margin-bottom:20px\">\r\n  <div class=\"offset-9 col-1\">\r\n    Exportar:\r\n  </div>\r\n  <div class=\"col-1\">\r\n    <ngl-icon icon=\"pdf\" category=\"doctype\" (click)=\"PDFflujo()\" size=\"large\"></ngl-icon>\r\n  </div>\r\n\r\n  <div class=\"col-1\">\r\n    <ngl-icon icon=\"csv\" category=\"doctype\" (click)=\"descargaCSV()\" size=\"large\"></ngl-icon>\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -6400,8 +6531,8 @@ var FlujoComponent = (function () {
             { "cara": "", "saldo": "" },
             { "cara": "Cobros por venta", "saldo": this.cp.transform(this.getCobroVentas(), 'USD', true, '1.0-0') },
             { "cara": "Préstamos", "saldo": this.cp.transform(this.getPAcuales(), 'USD', true, '1.0-0') },
-            { "cara": "Intereses", "saldo": this.cp.transform(this.getIntereses(), 'USD', true, '1.0-0') },
-            { "cara": "Incremento de Capital", "saldo": "" },
+            { "cara": "Intereses", "saldo": this.cp.transform(0, 'USD', true, '1.0-0') },
+            { "cara": "Incremento de Capital", "saldo": this.cp.transform(this.getRescates(), 'USD', true, '1.0-0') },
             { "cara": "", "saldo": "" },
             { "cara": "Disponible", "saldo": this.cp.transform(this.getDisponible(), 'USD', true, '1.0-0') },
             { "cara": "", "saldo": "" },
@@ -6524,11 +6655,11 @@ var FlujoComponent = (function () {
             },
             {
                 concepto: "Intereses",
-                cantidad: "",
+                cantidad: "0",
             },
             {
                 concepto: "Incremento de Capital",
-                cantidad: "",
+                cantidad: this.getRescates(),
             },
             {
                 concepto: "",
@@ -9582,36 +9713,140 @@ var PruebaComponent = (function () {
         var rows = [
             { "cara": "Amenos de un Año", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
             { "cara": "Caja Bancos", "actual": this.cp.transform(actual.cajaBancos, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.cajaBancos, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.cajaBancos, anterior.cajaBancos), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.cajaBancos, anterior.cajaBancos), 'USD', true, '1.0-0') },
-            { "cara": "Cuentas por Cobrar", "actual": this.cp.transform(actual.cuentasPorCobrar, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.cuentasPorCobrar, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.cuentasPorCobrar, anterior.cuentasPorCobrar), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.cuentasPorCobrar, anterior.cuentasPorCobrar), 'USD', true, '1.0-0') },
-            { "cara": "IVA Acreditable", "actual": this.cp.transform(actual.IVAAcreditable, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.IVAAcreditable, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.IVAAcreditable, anterior.IVAAcreditable), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.IVAAcreditable, anterior.IVAAcreditable), 'USD', true, '1.0-0') },
-            { "cara": "Almacen de Articulo Terminado", "actual": this.cp.transform(actual.almacenArtTerm, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.almacenArtTerm, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.almacenArtTerm, anterior.almacenArtTerm), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.almacenArtTerm, anterior.almacenArtTerm), 'USD', true, '1.0-0') },
-            { "cara": "Almacen de Materiales", "actual": this.cp.transform(actual.almacenMateriales, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.almacenMateriales, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.almacenMateriales, anterior.almacenMateriales), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.almacenMateriales, anterior.almacenMateriales), 'USD', true, '1.0-0') },
+            { "cara": "Cuentas por Cobrar",
+                "actual": this.cp.transform(actual.cuentasPorCobrar, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(anterior.cuentasPorCobrar, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(actual.cuentasPorCobrar, anterior.cuentasPorCobrar), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(actual.cuentasPorCobrar, anterior.cuentasPorCobrar), 'USD', true, '1.0-0') },
+            { "cara": "IVA Acreditable",
+                "actual": this.cp.transform(actual.IVAAcreditable, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(anterior.IVAAcreditable, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(actual.IVAAcreditable, anterior.IVAAcreditable), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(actual.IVAAcreditable, anterior.IVAAcreditable), 'USD', true, '1.0-0') },
+            { "cara": "Almacen de Articulo Terminado",
+                "actual": this.cp.transform(actual.almacenArtTerm, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(anterior.almacenArtTerm, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(actual.almacenArtTerm, anterior.almacenArtTerm), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(actual.almacenArtTerm, anterior.almacenArtTerm), 'USD', true, '1.0-0') },
+            { "cara": "Almacen de Materiales",
+                "actual": this.cp.transform(actual.almacenMateriales, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(anterior.almacenMateriales, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(actual.almacenMateriales, anterior.almacenMateriales), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(actual.almacenMateriales, anterior.almacenMateriales), 'USD', true, '1.0-0') },
             { "cara": "A más de un año", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Terrenos", "actual": this.cp.transform(actual.terrenos, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.terrenos, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.terrenos, anterior.terrenos), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.terrenos, anterior.terrenos), 'USD', true, '1.0-0') },
-            { "cara": "Edificios e Instalaciones", "actual": this.cp.transform(actual.edificios, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.edificios, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.edificios, anterior.edificios), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.edificios, anterior.edificios), 'USD', true, '1.0-0') },
-            { "cara": "Deprecicaicón Acumulada", "actual": this.cp.transform(actual.depEdif, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.depEdif, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.depEdif, anterior.depEdif), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.depEdif, anterior.depEdif), 'USD', true, '1.0-0') },
-            { "cara": "Maquinaria y  Equipo", "actual": this.cp.transform(actual.maqEquipo, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.maqEquipo, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.maqEquipo, anterior.maqEquipo), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.maqEquipo, anterior.maqEquipo), 'USD', true, '1.0-0') },
-            { "cara": "Depreciación Acumulada", "actual": this.cp.transform(actual.depMaqEquipo, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.depMaqEquipo, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.depMaqEquipo, anterior.depMaqEquipo), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.depMaqEquipo, anterior.depMaqEquipo), 'USD', true, '1.0-0') },
-            { "cara": "Muebles y Enseres", "actual": this.cp.transform(actual.mueblesEnseres, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.mueblesEnseres, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.mueblesEnseres, anterior.mueblesEnseres), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.mueblesEnseres, anterior.mueblesEnseres), 'USD', true, '1.0-0') },
-            { "cara": "Depreciación Acumulada", "actual": this.cp.transform(actual.depMueblesEnseres, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.depMueblesEnseres, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.depMueblesEnseres, anterior.depMueblesEnseres), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.depMueblesEnseres, anterior.depMueblesEnseres), 'USD', true, '1.0-0') },
-            { "cara": "Equipo de Transporte", "actual": this.cp.transform(actual.eqTrans, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.eqTrans, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.eqTrans, anterior.eqTrans), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.eqTrans, anterior.eqTrans), 'USD', true, '1.0-0') },
-            { "cara": "Depreciación Acumulada", "actual": this.cp.transform(actual.depEqTrans, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.depEqTrans, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.depEqTrans, anterior.depEqTrans), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.depEqTrans, anterior.depEqTrans), 'USD', true, '1.0-0') },
+            { "cara": "Terrenos",
+                "actual": this.cp.transform(actual.terrenos, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(anterior.terrenos, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(actual.terrenos, anterior.terrenos), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(actual.terrenos, anterior.terrenos), 'USD', true, '1.0-0') },
+            { "cara": "Edificios e Instalaciones",
+                "actual": this.cp.transform(actual.edificios, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(anterior.edificios, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(actual.edificios, anterior.edificios), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(actual.edificios, anterior.edificios), 'USD', true, '1.0-0') },
+            { "cara": "Deprecicaicón Acumulada",
+                "actual": this.cp.transform(actual.depEdif, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(anterior.depEdif, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.depEdif, -anterior.depEdif), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(-actual.depEdif, -anterior.depEdif), 'USD', true, '1.0-0') },
+            { "cara": "Maquinaria y  Equipo",
+                "actual": this.cp.transform(actual.maqEquipo, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(anterior.maqEquipo, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(actual.maqEquipo, anterior.maqEquipo), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(actual.maqEquipo, anterior.maqEquipo), 'USD', true, '1.0-0') },
+            { "cara": "Depreciación Acumulada",
+                "actual": this.cp.transform(actual.depMaqEquipo, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(anterior.depMaqEquipo, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.depMaqEquipo, -anterior.depMaqEquipo), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(-actual.depMaqEquipo, -anterior.depMaqEquipo), 'USD', true, '1.0-0') },
+            { "cara": "Muebles y Enseres",
+                "actual": this.cp.transform(actual.mueblesEnseres, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(anterior.mueblesEnseres, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(actual.mueblesEnseres, anterior.mueblesEnseres), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(actual.mueblesEnseres, anterior.mueblesEnseres), 'USD', true, '1.0-0') },
+            { "cara": "Depreciación Acumulada",
+                "actual": this.cp.transform(actual.depMueblesEnseres, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(anterior.depMueblesEnseres, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.depMueblesEnseres, -anterior.depMueblesEnseres), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(-actual.depMueblesEnseres, -anterior.depMueblesEnseres), 'USD', true, '1.0-0') },
+            { "cara": "Equipo de Transporte",
+                "actual": this.cp.transform(actual.eqTrans, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(anterior.eqTrans, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(actual.eqTrans, anterior.eqTrans), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(actual.eqTrans, anterior.eqTrans), 'USD', true, '1.0-0') },
+            { "cara": "Depreciación Acumulada",
+                "actual": this.cp.transform(actual.depEqTrans, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(anterior.depEqTrans, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.depEqTrans, -anterior.depEqTrans), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(-actual.depEqTrans, -anterior.depEqTrans), 'USD', true, '1.0-0') },
             { "cara": "De Aplicación Diferida", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Pagos hechos por anticipado", "actual": this.cp.transform(actual.pagosAnticipado, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.pagosAnticipado, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.pagosAnticipado, anterior.pagosAnticipado), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.pagosAnticipado, anterior.pagosAnticipado), 'USD', true, '1.0-0') },
-            { "cara": "Gastos por Amortizar", "actual": this.cp.transform(actual.gastosAmortizacion, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.gastosAmortizacion, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.gastosAmortizacion, anterior.gastosAmortizacion), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.gastosAmortizacion, anterior.gastosAmortizacion), 'USD', true, '1.0-0') },
+            { "cara": "Pagos hechos por anticipado",
+                "actual": this.cp.transform(actual.pagosAnticipado, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(anterior.pagosAnticipado, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(actual.pagosAnticipado, anterior.pagosAnticipado), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(actual.pagosAnticipado, anterior.pagosAnticipado), 'USD', true, '1.0-0') },
+            { "cara": "Gastos por Amortizar",
+                "actual": this.cp.transform(actual.gastosAmortizacion, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(anterior.gastosAmortizacion, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(actual.gastosAmortizacion, anterior.gastosAmortizacion), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(actual.gastosAmortizacion, anterior.gastosAmortizacion), 'USD', true, '1.0-0') },
             { "cara": "A menos de un año", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "IVA por Enterar", "actual": this.cp.transform(actual.IVAPorEnterar, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.IVAPorEnterar, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.IVAPorEnterar, anterior.IVAPorEnterar), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.IVAPorEnterar, anterior.IVAPorEnterar), 'USD', true, '1.0-0') },
-            { "cara": "Impuestos por Pagar", "actual": this.cp.transform(actual.imptosPorPagar, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.imptosPorPagar, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.imptosPorPagar, anterior.imptosPorPagar), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.imptosPorPagar, anterior.imptosPorPagar), 'USD', true, '1.0-0') },
-            { "cara": "Poveedores", "actual": this.cp.transform(actual.proveedores, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.proveedores, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.proveedores, anterior.proveedores), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.proveedores, anterior.proveedores), 'USD', true, '1.0-0') },
-            { "cara": "PTU por Pagar", "actual": this.cp.transform(actual.proveedores, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.proveedores, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.proveedores, anterior.proveedores), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.proveedores, anterior.proveedores), 'USD', true, '1.0-0') },
-            { "cara": "Prestamos Bancarios", "actual": this.cp.transform(actual.prestamosMenosAnio, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.prestamosMenosAnio, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.prestamosMenosAnio, anterior.prestamosMenosAnio), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.prestamosMenosAnio, anterior.prestamosMenosAnio), 'USD', true, '1.0-0') },
+            { "cara": "IVA por Enterar",
+                "actual": this.cp.transform(-actual.IVAPorEnterar, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(-anterior.IVAPorEnterar, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.IVAPorEnterar, -anterior.IVAPorEnterar), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(-actual.IVAPorEnterar, -anterior.IVAPorEnterar), 'USD', true, '1.0-0') },
+            { "cara": "Impuestos por Pagar",
+                "actual": this.cp.transform(-actual.imptosPorPagar, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(-anterior.imptosPorPagar, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.imptosPorPagar, -anterior.imptosPorPagar), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(-actual.imptosPorPagar, -anterior.imptosPorPagar), 'USD', true, '1.0-0') },
+            { "cara": "Poveedores",
+                "actual": this.cp.transform(-actual.proveedores, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(-anterior.proveedores, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.proveedores, -anterior.proveedores), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(-actual.proveedores, -anterior.proveedores), 'USD', true, '1.0-0') },
+            { "cara": "PTU por Pagar",
+                "actual": this.cp.transform(-actual.proveedores, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(-anterior.proveedores, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.proveedores, -anterior.proveedores), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(-actual.proveedores, -anterior.proveedores), 'USD', true, '1.0-0') },
+            { "cara": "Prestamos Bancarios",
+                "actual": this.cp.transform(-actual.prestamosMenosAnio, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(-anterior.prestamosMenosAnio, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.prestamosMenosAnio, -anterior.prestamosMenosAnio), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(-actual.prestamosMenosAnio, -anterior.prestamosMenosAnio), 'USD', true, '1.0-0') },
             { "cara": "A más de un año", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Prestamos Totales", "actual": this.cp.transform(actual.prestamosMasAnio, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.prestamosMasAnio, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.prestamosMasAnio, anterior.prestamosMasAnio), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.prestamosMasAnio, anterior.prestamosMasAnio), 'USD', true, '1.0-0') },
-            { "cara": "Capital Social", "actual": this.cp.transform(actual.capitalSocial, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.capitalSocial, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.capitalSocial, anterior.capitalSocial), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.capitalSocial, anterior.capitalSocial), 'USD', true, '1.0-0') },
-            { "cara": "Reserva Legal", "actual": this.cp.transform(actual.reservaLegal, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.reservaLegal, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.reservaLegal, anterior.reservaLegal), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.reservaLegal, anterior.reservaLegal), 'USD', true, '1.0-0') },
-            { "cara": "Utilidad Acumulada", "actual": this.cp.transform(actual.utilidadAcum, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.utilidadAcum, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.utilidadAcum, anterior.utilidadAcum), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.utilidadAcum, anterior.utilidadAcum), 'USD', true, '1.0-0') },
-            { "cara": "Utilidad del Ejercicio", "actual": this.cp.transform(actual.utilidadEjercicio, 'USD', true, '1.0-0'), "anterior": this.cp.transform(anterior.utilidadEjercicio, 'USD', true, '1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.utilidadEjercicio, anterior.utilidadEjercicio), 'USD', true, '1.0-0'), "origen": this.cp.transform(this.getOrigenCB(actual.utilidadEjercicio, anterior.utilidadEjercicio), 'USD', true, '1.0-0') },
-            { "cara": "Total", "actual": "$0", "anterior": "0", "aplicacion": this.cp.transform(this.origen, 'USD', true, '1.0-0'), "origen": this.cp.transform(this.origen, 'USD', true, '1.0-0') },
+            { "cara": "Prestamos Totales",
+                "actual": this.cp.transform(-actual.prestamosMasAnio, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(-anterior.prestamosMasAnio, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.prestamosMasAnio, -anterior.prestamosMasAnio), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(-actual.prestamosMasAnio, -anterior.prestamosMasAnio), 'USD', true, '1.0-0') },
+            { "cara": "Capital Social",
+                "actual": this.cp.transform(actual.capitalSocial, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(anterior.capitalSocial, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.capitalSocial, -anterior.capitalSocial), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(-actual.capitalSocial, -anterior.capitalSocial), 'USD', true, '1.0-0') },
+            { "cara": "Reserva Legal",
+                "actual": this.cp.transform(actual.reservaLegal, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(-anterior.reservaLegal, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.reservaLegal, -anterior.reservaLegal), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(-actual.reservaLegal, -anterior.reservaLegal), 'USD', true, '1.0-0') },
+            { "cara": "Utilidad Acumulada",
+                "actual": this.cp.transform(-actual.utilidadAcum, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(-anterior.utilidadAcum - anterior.utilidadEjercicio, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.utilidadAcum, anterior.utilidadAcum + anterior.utilidadAcum), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(-actual.utilidadAcum, -anterior.utilidadAcum - anterior.utilidadEjercicio), 'USD', true, '1.0-0') },
+            { "cara": "Utilidad del Ejercicio",
+                "actual": this.cp.transform(-actual.utilidadEjercicio, 'USD', true, '1.0-0'),
+                "anterior": this.cp.transform(0, 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.utilidadEjercicio, 0), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenCB(-actual.utilidadEjercicio, 0), 'USD', true, '1.0-0') },
+            { "cara": "Total",
+                "actual": "$0",
+                "anterior": "0",
+                "aplicacion": this.cp.transform(this.getAplicacionTotal(anterior, actual), 'USD', true, '1.0-0'),
+                "origen": this.cp.transform(this.getOrigenTotal(anterior, actual), 'USD', true, '1.0-0') },
         ];
         var t = {
             title: "Total",
@@ -9705,6 +9940,10 @@ var PruebaComponent = (function () {
                     doc.setFillColor(176, 176, 176);
                     doc.setFontType("bold");
                 }
+                else if (data.row.index == 31) {
+                    doc.setFillColor(176, 176, 176);
+                    doc.setFontType("bold");
+                }
             }
         });
         doc.save("Estado de Resultados.pdf");
@@ -9719,7 +9958,7 @@ var PruebaComponent = (function () {
         };
         var origen;
         var aplicacion;
-        for (var _i = 0, _a = this.balanceFinal; _i < _a.length; _i++) {
+        for (var _i = 0, _a = this.balanceInicial; _i < _a.length; _i++) {
             var balance = _a[_i];
             anterior["cajaBancos"] = balance.cajaBancos;
             anterior['cuentasPorCobrar'] = balance.cuentasPorCobrar;
@@ -9749,7 +9988,7 @@ var PruebaComponent = (function () {
             anterior['utilidadEjercicio'] = balance.utilidadEjercicio;
             anterior['total'] = 0;
         }
-        for (var _b = 0, _c = this.balanceInicial; _b < _c.length; _b++) {
+        for (var _b = 0, _c = this.balanceFinal; _b < _c.length; _b++) {
             var balance = _c[_b];
             actual['cajaBancos'] = balance.cajaBancos;
             actual['cuentasPorCobrar'] = balance.cuentasPorCobrar;
@@ -9785,35 +10024,87 @@ var PruebaComponent = (function () {
             { "cara": "Amenos de un Año", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
             { "cara": "Caja Bancos", "actual": actual.cajaBancos, "anterior": anterior.cajaBancos, "aplicacion": this.getAplicacionCB(actual.cajaBancos, anterior.cajaBancos), "origen": this.getOrigenCB(actual.cajaBancos, anterior.cajaBancos) },
             { "cara": "Cuentas por Cobrar", "actual": actual.cuentasPorCobrar, "anterior": anterior.cuentasPorCobrar, "aplicacion": this.getAplicacionCB(actual.cuentasPorCobrar, anterior.cuentasPorCobrar), "origen": this.getOrigenCB(actual.cuentasPorCobrar, anterior.cuentasPorCobrar) },
-            { "cara": "IVA Acreditable", "actual": actual.IVAAcredita, "anterior": anterior.IVAAcreditable, "aplicacion": this.getAplicacionCB(actual.IVAAcreditable, anterior.IVAAcreditable), "origen": this.getOrigenCB(actual.IVAAcreditable, anterior.IVAAcreditable) },
+            { "cara": "IVA Acreditable",
+                "actual": actual.IVAAcreditable,
+                "anterior": anterior.IVAAcreditable,
+                "aplicacion": this.getAplicacionCB(actual.IVAAcreditable, anterior.IVAAcreditable),
+                "origen": this.getOrigenCB(actual.IVAAcreditable, anterior.IVAAcreditable) },
             { "cara": "Almacen de Articulo Terminado", "actual": actual.almacenArtTerm, "anterior": anterior.almacenArtTerm, "aplicacion": this.getAplicacionCB(actual.almacenArtTerm, anterior.almacenArtTerm), "origen": this.getOrigenCB(actual.almacenArtTerm, anterior.almacenArtTerm) },
             { "cara": "Almacen de Materiales", "actual": actual.almacenMateriales, "anterior": anterior.almacenMateriales, "aplicacion": this.getAplicacionCB(actual.almacenMateriales, anterior.almacenMateriales), "origen": this.getOrigenCB(actual.almacenMateriales, anterior.almacenMateriales) },
             { "cara": "A más de un año", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
             { "cara": "Terrenos", "actual": actual.terrenos, "anterior": anterior.terrenos, "aplicacion": this.getAplicacionCB(actual.terrenos, anterior.terrenos), "origen": this.getOrigenCB(actual.terrenos, anterior.terrenos) },
             { "cara": "Edificios e Instalaciones", "actual": actual.edificios, "anterior": anterior.edificios, "aplicacion": this.getAplicacionCB(actual.edificios, anterior.edificios), "origen": this.getOrigenCB(actual.edificios, anterior.edificios) },
-            { "cara": "Deprecicaicón Acumulada", "actual": actual.depEdif, "anterior": anterior.depEdif, "aplicacion": this.getAplicacionCB(actual.depEdif, anterior.depEdif), "origen": this.getOrigenCB(actual.depEdif, anterior.depEdif) },
+            { "cara": "Deprecicaicón Acumulada", "actual": -actual.depEdif, "anterior": -anterior.depEdif,
+                "aplicacion": this.getAplicacionCB(-actual.depEdif, -anterior.depEdif),
+                "origen": this.getOrigenCB(-actual.depEdif, -anterior.depEdif) },
             { "cara": "Maquinaria y  Equipo", "actual": actual.maqEquipo, "anterior": anterior.maqEquipo, "aplicacion": this.getAplicacionCB(actual.maqEquipo, anterior.maqEquipo), "origen": this.getOrigenCB(actual.maqEquipo, anterior.maqEquipo) },
-            { "cara": "Depreciación Acumulada", "actual": actual.depMaqEquipo, "anterior": anterior.depMaqEquipo, "aplicacion": this.getAplicacionCB(actual.depMaqEquipo, anterior.depMaqEquipo), "origen": this.getOrigenCB(actual.depMaqEquipo, anterior.depMaqEquipo) },
+            { "cara": "Depreciación Acumulada", "actual": -actual.depMaqEquipo,
+                "anterior": -anterior.depMaqEquipo, "aplicacion": this.getAplicacionCB(-actual.depMaqEquipo, -anterior.depMaqEquipo),
+                "origen": this.getOrigenCB(-actual.depMaqEquipo, -anterior.depMaqEquipo) },
             { "cara": "Muebles y Enseres", "actual": actual.mueblesEnseres, "anterior": anterior.mueblesEnseres, "aplicacion": this.getAplicacionCB(actual.mueblesEnseres, anterior.mueblesEnseres), "origen": this.getOrigenCB(actual.mueblesEnseres, anterior.mueblesEnseres) },
-            { "cara": "Depreciación Acumulada", "actual": actual.depMueblesEnseres, "anterior": anterior.depMueblesEnseres, "aplicacion": this.getAplicacionCB(actual.depMueblesEnseres, anterior.depMueblesEnseres), "origen": this.getOrigenCB(actual.depMueblesEnseres, anterior.depMueblesEnseres) },
+            { "cara": "Depreciación Acumulada", "actual": -actual.depMueblesEnseres,
+                "anterior": -anterior.depMueblesEnseres, "aplicacion": this.getAplicacionCB(-actual.depMueblesEnseres, -anterior.depMueblesEnseres),
+                "origen": this.getOrigenCB(-actual.depMueblesEnseres, -anterior.depMueblesEnseres) },
             { "cara": "Equipo de Transporte", "actual": actual.eqTrans, "anterior": anterior.eqTrans, "aplicacion": this.getAplicacionCB(actual.eqTrans, anterior.eqTrans), "origen": this.getOrigenCB(actual.eqTrans, anterior.eqTrans) },
-            { "cara": "Depreciación Acumulada", "actual": actual.depEqTrans, "anterior": anterior.depEqTrans, "aplicacion": this.getAplicacionCB(actual.depEqTrans, anterior.depEqTrans), "origen": this.getOrigenCB(actual.depEqTrans, anterior.depEqTrans) },
+            { "cara": "Depreciación Acumulada",
+                "actual": -actual.depEqTrans, "anterior": -anterior.depEqTrans,
+                "aplicacion": this.getAplicacionCB(-actual.depEqTrans, -anterior.depEqTrans),
+                "origen": this.getOrigenCB(-actual.depEqTrans, -anterior.depEqTrans) },
             { "cara": "De Aplicación Diferida", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
             { "cara": "Pagos hechos por anticipado", "actual": actual.pagosAnticipado, "anterior": anterior.pagosAnticipado, "aplicacion": this.getAplicacionCB(actual.pagosAnticipado, anterior.pagosAnticipado), "origen": this.getOrigenCB(actual.pagosAnticipado, anterior.pagosAnticipado) },
             { "cara": "Gastos por Amortizar", "actual": actual.gastosAmortizacion, "anterior": anterior.gastosAmortizacion, "aplicacion": this.getAplicacionCB(actual.gastosAmortizacion, anterior.gastosAmortizacion), "origen": this.getOrigenCB(actual.gastosAmortizacion, anterior.gastosAmortizacion) },
+            { "cara": "Obligaciones", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
             { "cara": "A menos de un año", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "IVA por Enterar", "actual": actual.IVAPorEnterar, "anterior": anterior.IVAPorEnterar, "aplicacion": this.getAplicacionCB(actual.IVAPorEnterar, anterior.IVAPorEnterar), "origen": this.getOrigenCB(actual.IVAPorEnterar, anterior.IVAPorEnterar) },
-            { "cara": "Impuestos por Pagar", "actual": actual.imptosPorPagar, "anterior": anterior.imptosPorPagar, "aplicacion": this.getAplicacionCB(actual.imptosPorPagar, anterior.imptosPorPagar), "origen": this.getOrigenCB(actual.imptosPorPagar, anterior.imptosPorPagar) },
-            { "cara": "Poveedores", "actual": actual.proveedores, "anterior": anterior.proveedores, "aplicacion": this.getAplicacionCB(actual.proveedores, anterior.proveedores), "origen": this.getOrigenCB(actual.proveedores, anterior.proveedores) },
-            { "cara": "PTU por Pagar", "actual": actual.proveedores, "anterior": anterior.proveedores, "aplicacion": this.getAplicacionCB(actual.proveedores, anterior.proveedores), "origen": this.getOrigenCB(actual.proveedores, anterior.proveedores) },
-            { "cara": "Prestamos Bancarios", "actual": actual.prestamosMenosAnio, "anterior": anterior.prestamosMenosAnio, "aplicacion": this.getAplicacionCB(actual.prestamosMenosAnio, anterior.prestamosMenosAnio), "origen": this.getOrigenCB(actual.prestamosMenosAnio, anterior.prestamosMenosAnio) },
+            { "cara": "IVA por Enterar",
+                "actual": -actual.IVAPorEnterar,
+                "anterior": -anterior.IVAPorEnterar,
+                "aplicacion": this.getAplicacionCB(-actual.IVAPorEnterar, -anterior.IVAPorEnterar),
+                "origen": this.getOrigenCB(-actual.IVAPorEnterar, -anterior.IVAPorEnterar) },
+            { "cara": "Impuestos por Pagar",
+                "actual": -actual.imptosPorPagar,
+                "anterior": -anterior.imptosPorPagar,
+                "aplicacion": this.getAplicacionCB(-actual.imptosPorPagar, -anterior.imptosPorPagar),
+                "origen": this.getOrigenCB(-actual.imptosPorPagar, -anterior.imptosPorPagar) },
+            { "cara": "Poveedores",
+                "actual": -actual.proveedores,
+                "anterior": -anterior.proveedores,
+                "aplicacion": this.getAplicacionCB(-actual.proveedores, -anterior.proveedores),
+                "origen": this.getOrigenCB(-actual.proveedores, -anterior.proveedores) },
+            { "cara": "PTU por Pagar",
+                "actual": -actual.PTUPorPagar,
+                "anterior": -anterior.PTUPorPagar,
+                "aplicacion": this.getAplicacionCB(-actual.PTUPorPagar, -anterior.PTUPorPagar),
+                "origen": this.getOrigenCB(-actual.PTUPorPagar, -anterior.PTUPorPagar) },
+            { "cara": "Prestamos Bancarios",
+                "actual": -actual.prestamosMenosAnio,
+                "anterior": -anterior.prestamosMenosAnio,
+                "aplicacion": this.getAplicacionCB(-actual.prestamosMenosAnio, -anterior.prestamosMenosAnio),
+                "origen": this.getOrigenCB(-actual.prestamosMenosAnio, -anterior.prestamosMenosAnio) },
             { "cara": "A más de un año", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
-            { "cara": "Prestamos Totales", "actual": actual.prestamosMasAnio, "anterior": anterior.prestamosMasAnio, "aplicacion": this.getAplicacionCB(actual.prestamosMasAnio, anterior.prestamosMasAnio), "origen": this.getOrigenCB(actual.prestamosMasAnio, anterior.prestamosMasAnio) },
-            { "cara": "Capital Social", "actual": actual.capitalSocial, "anterior": anterior.capitalSocial, "aplicacion": this.getAplicacionCB(actual.capitalSocial, anterior.capitalSocial), "origen": this.getOrigenCB(actual.capitalSocial, anterior.capitalSocial) },
-            { "cara": "Reserva Legal", "actual": actual.reservaLegal, "anterior": anterior.reservaLegal, "aplicacion": this.getAplicacionCB(actual.reservaLegal, anterior.reservaLegal), "origen": this.getOrigenCB(actual.reservaLegal, anterior.reservaLegal) },
-            { "cara": "Utilidad Acumulada", "actual": actual.utilidadAcum, "anterior": anterior.utilidadAcum, "aplicacion": this.getAplicacionCB(actual.utilidadAcum, anterior.utilidadAcum), "origen": this.getOrigenCB(actual.utilidadAcum, anterior.utilidadAcum) },
-            { "cara": "Utilidad del Ejercicio", "actual": actual.utilidadEjercicio, "anterior": anterior.utilidadEjercicio, "aplicacion": this.getAplicacionCB(actual.utilidadEjercicio, anterior.utilidadEjercicio), "origen": this.getOrigenCB(actual.utilidadEjercicio, anterior.utilidadEjercicio) },
-            { "cara": "Total", "actual": 0, "anterior": 0, "aplicacion": this.origen, "origen": this.origen },
+            { "cara": "Prestamos Totales",
+                "actual": -actual.prestamosMasAnio,
+                "anterior": -anterior.prestamosMasAnio,
+                "aplicacion": this.getAplicacionCB(-actual.prestamosMasAnio, -anterior.prestamosMasAnio),
+                "origen": this.getOrigenCB(-actual.prestamosMasAnio, -anterior.prestamosMasAnio) },
+            { "cara": "Con los Accionistas", "actual": "", "anterior": "", "aplicacion": "", "origen": "" },
+            { "cara": "Capital Social", "actual": -actual.capitalSocial, "anterior": -anterior.capitalSocial,
+                "aplicacion": this.getAplicacionCB(-actual.capitalSocial, -anterior.capitalSocial),
+                "origen": this.getOrigenCB(-actual.capitalSocial, -anterior.capitalSocial) },
+            { "cara": "Reserva Legal",
+                "actual": actual.reservaLegal,
+                "anterior": anterior.reservaLegal,
+                "aplicacion": this.getAplicacionCB(actual.reservaLegal, anterior.reservaLegal),
+                "origen": this.getOrigenCB(actual.reservaLegal, anterior.reservaLegal) },
+            { "cara": "Utilidad Acumulada",
+                "actual": -actual.utilidadAcum, "anterior": -anterior.utilidadAcum - anterior.utilidadEjercicio,
+                "aplicacion": this.getAplicacionCB(-actual.utilidadAcum, -anterior.utilidadAcum - anterior.utilidadEjercicio),
+                "origen": this.getOrigenCB(-actual.utilidadAcum, -anterior.utilidadAcum - anterior.utilidadEjercicio) },
+            { "cara": "Utilidad del Ejercicio",
+                "actual": -actual.utilidadEjercicio,
+                "anterior": 0,
+                "aplicacion": this.getAplicacionCB(actual.utilidadEjercicio, 0),
+                "origen": this.getOrigenCB(actual.utilidadEjercicio, 0) },
+            { "cara": "Total", "actual": 0, "anterior": 0, "aplicacion": this.getAplicacionTotal(anterior, actual), "origen": this.getOrigenTotal(anterior, actual) },
         ];
         new __WEBPACK_IMPORTED_MODULE_5_angular2_csv_Angular2_csv__["Angular2Csv"](data, 'Posición Comparativa');
     };
@@ -9836,7 +10127,7 @@ var _a, _b, _c, _d;
 /***/ "../../../../../src/app/components/usuario/proyecto-usuario/punto-equilibrio/punto-equilibrio.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <h4 class=\"text-center col-12\">Punto de Equilibrio</h4>\r\n</div>\r\n\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <table class=\"table table-bordered\">\r\n    <thead>\r\n      <tr class=\"thead-inverse\">\r\n        <th></th>\r\n        <th class=\"text-center\">Costos Fijos</th>\r\n        <th class=\"text-center\">Costos Variables</th>\r\n      </tr>\r\n    </thead>\r\n\r\n    <tbody>\r\n      <tr>\r\n        <th>MP</th>\r\n        <td class=\"text-right\" >-</td>\r\n        <td class=\"text-right\" *ngFor=\"let aux of equilibrio\">{{aux.MP |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Costo de Fabricación</th>\r\n        <td class=\"text-right\" *ngFor=\"let aux of equilibrio\">{{aux.CFF |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" *ngFor=\"let aux of equilibrio\">{{aux.CFV |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Gastos de Distribución</th>\r\n        <td class=\"text-right\" *ngFor=\"let aux of equilibrio\">{{aux.GDF |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" *ngFor=\"let aux of equilibrio\">{{aux.GDV |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Gastos de Administración</th>\r\n        <td class=\"text-right\" *ngFor=\"let aux of equilibrio\">{{aux.GAF |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Depreciaciones</th>\r\n        <td class=\"text-right\" *ngFor=\"let aux of equilibrio\">{{aux.DEP |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Intereses</th>\r\n        <td class=\"text-right\" *ngFor=\"let aux of intereses\">{{aux |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Desarrollo de Mercado</th>\r\n        <td class=\"text-right\">{{getMercado() |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Desarrollo de Producto</th>\r\n        <td class=\"text-right\">{{getProducto() |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Participación de Mercado</th>\r\n        <td class=\"text-right\">-</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Totales</th>\r\n        <td class=\"text-right\">{{getTotales1() |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{getTotales2() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <th></th>\r\n        <td class=\"text-right\"></td>\r\n        <td class=\"text-right\"></td>\r\n      </tr>\r\n      <tr>\r\n        <th>Ventas Totales</th>\r\n        <td class=\"text-right\">-</td>\r\n        <td class=\"text-right\" *ngFor=\"let aux of equilibrio\">{{aux.ventasTotales |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Contribución Marginal</th>\r\n        <td class=\"text-right\">{{getMarginal() |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n      <tr>\r\n        <th>% Contribución Marginal</th>\r\n        <td class=\"text-right\">{{getMarginalP() * 100 |number:'1.2-2'}}</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Costos Fijos</th>\r\n        <td class=\"text-right\">{{getTotales1() |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Punto de Equilibrio en ventas</th>\r\n        <td class=\"text-right\">-</td>\r\n        <td class=\"text-right\">{{getPE() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Punto de Equilibrio</th>\r\n        <td class=\"text-right\">-</td>\r\n        <td class=\"text-right\">{{getTotales1() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Costos Fijos</th>\r\n        <td class=\"text-right\">-</td>\r\n        <td class=\"text-right\">{{getTotales1() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Utilidad</th>\r\n        <td class=\"text-right\">-</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n\r\n\r\n\r\n\r\n\r\n\r\n          <div class=\"row align-items-center\" style=\"margin-bottom:20px\">\r\n            <div class=\"offset-8 col-1\">\r\n              Exportar:\r\n            </div>\r\n\r\n\r\n            <div class=\"col-1\">\r\n              <ngl-icon icon=\"pdf\" category=\"doctype\" (click)=\"PDFequilibrio()\" size=\"large\" style=\"cursor:pointer\" ></ngl-icon>\r\n            </div>\r\n\r\n\r\n            <div class=\"col-1\">\r\n              <ngl-icon icon=\"csv\" category=\"doctype\" (click)=\"CSVequilibrio()\" size=\"large\" style=\"cursor:pointer\"></ngl-icon>\r\n            </div>\r\n          </div>\r\n"
+module.exports = "<div class=\"row\">\r\n  <h4 class=\"text-center col-12\">Punto de Equilibrio</h4>\r\n</div>\r\n\r\n\r\n<div class=\"col-10 offset-1\">\r\n  <table class=\"table table-bordered\">\r\n    <thead>\r\n      <tr class=\"thead-inverse\">\r\n        <th></th>\r\n        <th class=\"text-center\">Costos Fijos</th>\r\n        <th class=\"text-center\">Costos Variables</th>\r\n      </tr>\r\n    </thead>\r\n\r\n    <tbody>\r\n      <tr>\r\n        <th>MP</th>\r\n        <td class=\"text-right\" >-</td>\r\n        <td class=\"text-right\" *ngFor=\"let aux of equilibrio\">{{aux.MP |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Costo de Fabricación</th>\r\n        <td class=\"text-right\" *ngFor=\"let aux of equilibrio\">{{aux.CFF |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" *ngFor=\"let aux of equilibrio\">{{aux.CFV |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Gastos de Distribución</th>\r\n        <td class=\"text-right\" *ngFor=\"let aux of equilibrio\">{{aux.GDF |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\" *ngFor=\"let aux of equilibrio\">{{aux.GDV |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Gastos de Administración</th>\r\n        <td class=\"text-right\" *ngFor=\"let aux of equilibrio\">{{aux.GAF |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Depreciaciones</th>\r\n        <td class=\"text-right\" *ngFor=\"let aux of equilibrio\">{{aux.DEP |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Intereses</th>\r\n        <td class=\"text-right\" *ngFor=\"let aux of intereses\">{{aux |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Desarrollo de Mercado</th>\r\n        <td class=\"text-right\">{{getMercado() |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Desarrollo de Producto</th>\r\n        <td class=\"text-right\">{{getProducto() |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Participación de Mercado</th>\r\n        <td class=\"text-right\">-</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Totales</th>\r\n        <td class=\"text-right\">{{getTotales1() |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">{{getTotales2() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <th></th>\r\n        <td class=\"text-right\"></td>\r\n        <td class=\"text-right\"></td>\r\n      </tr>\r\n      <tr>\r\n        <th>Ventas Totales</th>\r\n        <td class=\"text-right\">-</td>\r\n        <td class=\"text-right\" *ngFor=\"let aux of equilibrio\">{{aux.ventasTotales |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Contribución Marginal</th>\r\n        <td class=\"text-right\">{{getMarginal() |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n      <tr>\r\n        <th>% Contribución Marginal</th>\r\n        <td class=\"text-right\">{{getMarginalP() * 100 |number:'1.2-2'}}%</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Costos Fijos</th>\r\n        <td class=\"text-right\">{{getTotales1() |currency:'USD':true:'1.0-0'}}</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Punto de Equilibrio en ventas</th>\r\n        <td class=\"text-right\">-</td>\r\n        <td class=\"text-right\">{{getPE() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Punto de Equilibrio</th>\r\n        <td class=\"text-right\">-</td>\r\n        <td class=\"text-right\">{{getTotales1() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Costos Fijos</th>\r\n        <td class=\"text-right\">-</td>\r\n        <td class=\"text-right\">{{getTotales1() |currency:'USD':true:'1.0-0'}}</td>\r\n      </tr>\r\n      <tr>\r\n        <th>Utilidad</th>\r\n        <td class=\"text-right\">-</td>\r\n        <td class=\"text-right\">-</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n\r\n\r\n\r\n\r\n\r\n\r\n          <div class=\"row align-items-center\" style=\"margin-bottom:20px\">\r\n            <div class=\"offset-8 col-1\">\r\n              Exportar:\r\n            </div>\r\n\r\n\r\n            <div class=\"col-1\">\r\n              <ngl-icon icon=\"pdf\" category=\"doctype\" (click)=\"PDFequilibrio()\" size=\"large\" style=\"cursor:pointer\" ></ngl-icon>\r\n            </div>\r\n\r\n\r\n            <div class=\"col-1\">\r\n              <ngl-icon icon=\"csv\" category=\"doctype\" (click)=\"CSVequilibrio()\" size=\"large\" style=\"cursor:pointer\"></ngl-icon>\r\n            </div>\r\n          </div>\r\n"
 
 /***/ }),
 
@@ -9993,7 +10284,7 @@ var PuntoEquilibrioComponent = (function () {
                 { "cara": "", "cFijos": "", "cVariables": "" },
                 { "cara": "Ventas Totales", "cFijos": "-", "cVariables": this.cp.transform(aux.ventasTotales, 'USD', true, '1.0-0') },
                 { "cara": "Contribución Marginal", "cFijos": this.cp.transform(this.getMarginal(), 'USD', true, '1.0-0'), "cVariables": "" },
-                { "cara": "% de Contribución Marginal", "cFijos": this.dc.transform(this.getMarginalP() * 100, '1.2-2'), "cVariables": "" },
+                { "cara": "% de Contribución Marginal", "cFijos": this.dc.transform(this.getMarginalP() * 100, '1.2-2') + "%", "cVariables": "" },
                 { "cara": "Costos Fijos", "cFijos": this.cp.transform(this.getTotales1(), 'USD', true, '1.0-0'), "cVariables": "" },
                 { "cara": "Puntos de Equilibrio en Ventas", "cFijos": "-", "cVariables": this.cp.transform(this.getPE(), 'USD', true, '1.0-0') },
                 { "cara": "Punto de Equilibrio", "cFijos": "-", "cVariables": this.cp.transform(this.getTotales1(), 'USD', true, '1.0-0') },
@@ -10064,7 +10355,7 @@ var PuntoEquilibrioComponent = (function () {
                 { "cara": "", "cFijos": "", "cVariables": "" },
                 { "cara": "Ventas Totales", "cFijos": "-", "cVariables": this.cp.transform(aux.ventasTotales, 'USD', true, '1.0-0') },
                 { "cara": "Contribución Marginal", "cFijos": this.cp.transform(this.getMarginal(), 'USD', true, '1.0-0'), "cVariables": "" },
-                { "cara": "% de Contribución Marginal", "cFijos": this.dc.transform(this.getMarginalP(), '1.2-2'), "cVariables": "" },
+                { "cara": "% de Contribución Marginal", "cFijos": this.dc.transform(this.getMarginalP() * 100, '1.2-2') + "%", "cVariables": "" },
                 { "cara": "Costos Fijos", "cFijos": this.cp.transform(this.getTotales1(), 'USD', true, '1.0-0'), "cVariables": "" },
                 { "cara": "Puntos de Equilibrio en Ventas", "cFijos": "-", "cVariables": this.cp.transform(this.getPE(), 'USD', true, '1.0-0') },
                 { "cara": "Punto de Equilibrio", "cFijos": "-", "cVariables": this.cp.transform(this.getTotales1(), 'USD', true, '1.0-0') },

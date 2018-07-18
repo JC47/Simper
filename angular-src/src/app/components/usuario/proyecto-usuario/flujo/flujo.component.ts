@@ -249,8 +249,8 @@ export class FlujoComponent implements OnInit {
       {"cara":"","saldo":""},
       {"cara":"Cobros por venta","saldo":this.cp.transform(this.getCobroVentas(),'USD',true,'1.0-0')},
       {"cara":"Préstamos","saldo":this.cp.transform(this.getPAcuales(),'USD',true,'1.0-0')},
-      {"cara":"Intereses","saldo":this.cp.transform(this.getIntereses(),'USD',true,'1.0-0')},
-      {"cara":"Incremento de Capital","saldo":""},
+      {"cara":"Intereses","saldo":this.cp.transform(0,'USD',true,'1.0-0')},
+      {"cara":"Incremento de Capital","saldo":this.cp.transform(this.getRescates(),'USD',true,'1.0-0')},
       {"cara":"","saldo":""},
       {"cara":"Disponible","saldo":this.cp.transform(this.getDisponible(),'USD',true,'1.0-0')},
       {"cara":"","saldo":""},
@@ -395,12 +395,12 @@ export class FlujoComponent implements OnInit {
         },
         {
           concepto: "Intereses",
-          cantidad:"",
+          cantidad:"0",
 
         },
         {
           concepto: "Incremento de Capital",
-          cantidad:"",
+          cantidad:this.getRescates(),
 
         },
         {

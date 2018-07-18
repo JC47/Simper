@@ -223,36 +223,172 @@ export class PruebaComponent implements OnInit {
     var rows = [
       {"cara":"Amenos de un Año", "actual":"", "anterior":"", "aplicacion":"","origen":""},
       {"cara":"Caja Bancos", "actual": this.cp.transform(actual.cajaBancos,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.cajaBancos,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.cajaBancos,anterior.cajaBancos),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.cajaBancos,anterior.cajaBancos),'USD',true,'1.0-0')},
-      {"cara":"Cuentas por Cobrar", "actual": this.cp.transform(actual.cuentasPorCobrar,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.cuentasPorCobrar,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.cuentasPorCobrar,anterior.cuentasPorCobrar),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.cuentasPorCobrar,anterior.cuentasPorCobrar),'USD',true,'1.0-0')},
-      {"cara":"IVA Acreditable", "actual": this.cp.transform(actual.IVAAcreditable,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.IVAAcreditable,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.IVAAcreditable,anterior.IVAAcreditable),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.IVAAcreditable,anterior.IVAAcreditable),'USD',true,'1.0-0')},
-      {"cara":"Almacen de Articulo Terminado", "actual": this.cp.transform(actual.almacenArtTerm,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.almacenArtTerm,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.almacenArtTerm,anterior.almacenArtTerm),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.almacenArtTerm,anterior.almacenArtTerm),'USD',true,'1.0-0')},
-      {"cara":"Almacen de Materiales", "actual": this.cp.transform(actual.almacenMateriales,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.almacenMateriales,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.almacenMateriales,anterior.almacenMateriales),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.almacenMateriales,anterior.almacenMateriales),'USD',true,'1.0-0')},
+
+      {"cara":"Cuentas por Cobrar",
+        "actual": this.cp.transform(actual.cuentasPorCobrar,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(anterior.cuentasPorCobrar,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(actual.cuentasPorCobrar,anterior.cuentasPorCobrar),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(actual.cuentasPorCobrar,anterior.cuentasPorCobrar),'USD',true,'1.0-0')},
+
+      {"cara":"IVA Acreditable",
+        "actual": this.cp.transform(actual.IVAAcreditable,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(anterior.IVAAcreditable,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(actual.IVAAcreditable,anterior.IVAAcreditable),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(actual.IVAAcreditable,anterior.IVAAcreditable),'USD',true,'1.0-0')},
+
+      {"cara":"Almacen de Articulo Terminado",
+        "actual": this.cp.transform(actual.almacenArtTerm,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(anterior.almacenArtTerm,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(actual.almacenArtTerm,anterior.almacenArtTerm),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(actual.almacenArtTerm,anterior.almacenArtTerm),'USD',true,'1.0-0')},
+
+      {"cara":"Almacen de Materiales",
+        "actual": this.cp.transform(actual.almacenMateriales,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(anterior.almacenMateriales,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(actual.almacenMateriales,anterior.almacenMateriales),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(actual.almacenMateriales,anterior.almacenMateriales),'USD',true,'1.0-0')},
+
       {"cara":"A más de un año", "actual":"", "anterior":"", "aplicacion":"","origen":""},
-      {"cara":"Terrenos", "actual": this.cp.transform(actual.terrenos,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.terrenos,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.terrenos,anterior.terrenos),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.terrenos,anterior.terrenos),'USD',true,'1.0-0')},
-      {"cara":"Edificios e Instalaciones", "actual": this.cp.transform(actual.edificios,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.edificios,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.edificios,anterior.edificios),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.edificios,anterior.edificios),'USD',true,'1.0-0')},
-      {"cara":"Deprecicaicón Acumulada", "actual": this.cp.transform(actual.depEdif,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.depEdif,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.depEdif,anterior.depEdif),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.depEdif,anterior.depEdif),'USD',true,'1.0-0')},
-      {"cara":"Maquinaria y  Equipo", "actual": this.cp.transform(actual.maqEquipo,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.maqEquipo,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.maqEquipo,anterior.maqEquipo),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.maqEquipo,anterior.maqEquipo) ,'USD',true,'1.0-0')},
-      {"cara":"Depreciación Acumulada", "actual": this.cp.transform(actual.depMaqEquipo,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.depMaqEquipo,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.depMaqEquipo,anterior.depMaqEquipo),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.depMaqEquipo,anterior.depMaqEquipo),'USD',true,'1.0-0')},
-      {"cara":"Muebles y Enseres", "actual": this.cp.transform(actual.mueblesEnseres,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.mueblesEnseres,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.mueblesEnseres,anterior.mueblesEnseres),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.mueblesEnseres,anterior.mueblesEnseres),'USD',true,'1.0-0')},
-      {"cara":"Depreciación Acumulada", "actual": this.cp.transform(actual.depMueblesEnseres,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.depMueblesEnseres,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.depMueblesEnseres,anterior.depMueblesEnseres),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.depMueblesEnseres,anterior.depMueblesEnseres),'USD',true,'1.0-0')},
-      {"cara":"Equipo de Transporte", "actual": this.cp.transform(actual.eqTrans,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.eqTrans,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.eqTrans,anterior.eqTrans),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.eqTrans,anterior.eqTrans),'USD',true,'1.0-0')},
-      {"cara":"Depreciación Acumulada", "actual": this.cp.transform(actual.depEqTrans,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.depEqTrans,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.depEqTrans,anterior.depEqTrans),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.depEqTrans,anterior.depEqTrans),'USD',true,'1.0-0')},
-      {"cara":"De Aplicación Diferida", "actual":"", "anterior":"", "aplicacion":"","origen":""},
-      {"cara":"Pagos hechos por anticipado", "actual": this.cp.transform(actual.pagosAnticipado,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.pagosAnticipado,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.pagosAnticipado,anterior.pagosAnticipado),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.pagosAnticipado,anterior.pagosAnticipado),'USD',true,'1.0-0')},
-      {"cara":"Gastos por Amortizar", "actual": this.cp.transform(actual.gastosAmortizacion,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.gastosAmortizacion,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.gastosAmortizacion,anterior.gastosAmortizacion),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.gastosAmortizacion,anterior.gastosAmortizacion),'USD',true,'1.0-0')},
+
+
+      {"cara":"Terrenos",
+        "actual": this.cp.transform(actual.terrenos,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(anterior.terrenos,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(actual.terrenos,anterior.terrenos),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(actual.terrenos,anterior.terrenos),'USD',true,'1.0-0')},
+
+
+      {"cara":"Edificios e Instalaciones",
+        "actual": this.cp.transform(actual.edificios,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(anterior.edificios,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(actual.edificios,anterior.edificios),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(actual.edificios,anterior.edificios),'USD',true,'1.0-0')},
+
+      {"cara":"Deprecicaicón Acumulada",
+        "actual": this.cp.transform(actual.depEdif,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(anterior.depEdif,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.depEdif,-anterior.depEdif),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(-actual.depEdif,-anterior.depEdif),'USD',true,'1.0-0')},
+
+      {"cara":"Maquinaria y  Equipo",
+        "actual": this.cp.transform(actual.maqEquipo,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(anterior.maqEquipo,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(actual.maqEquipo,anterior.maqEquipo),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(actual.maqEquipo,anterior.maqEquipo) ,'USD',true,'1.0-0')},
+
+      {"cara":"Depreciación Acumulada",
+        "actual": this.cp.transform(actual.depMaqEquipo,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(anterior.depMaqEquipo,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.depMaqEquipo,-anterior.depMaqEquipo),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(-actual.depMaqEquipo,-anterior.depMaqEquipo),'USD',true,'1.0-0')},
+
+      {"cara":"Muebles y Enseres",
+        "actual": this.cp.transform(actual.mueblesEnseres,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(anterior.mueblesEnseres,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(actual.mueblesEnseres,anterior.mueblesEnseres),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(actual.mueblesEnseres,anterior.mueblesEnseres),'USD',true,'1.0-0')},
+
+      {"cara":"Depreciación Acumulada",
+        "actual": this.cp.transform(actual.depMueblesEnseres,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(anterior.depMueblesEnseres,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.depMueblesEnseres,-anterior.depMueblesEnseres),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(-actual.depMueblesEnseres,-anterior.depMueblesEnseres),'USD',true,'1.0-0')},
+
+      {"cara":"Equipo de Transporte",
+        "actual": this.cp.transform(actual.eqTrans,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(anterior.eqTrans,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(actual.eqTrans,anterior.eqTrans),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(actual.eqTrans,anterior.eqTrans),'USD',true,'1.0-0')},
+
+      {"cara":"Depreciación Acumulada",
+        "actual": this.cp.transform(actual.depEqTrans,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(anterior.depEqTrans,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.depEqTrans,-anterior.depEqTrans),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(-actual.depEqTrans,-anterior.depEqTrans),'USD',true,'1.0-0')},
+
+      {"cara":"De Aplicación Diferida","actual":"", "anterior":"", "aplicacion":"","origen":""},
+
+      {"cara":"Pagos hechos por anticipado",
+        "actual": this.cp.transform(actual.pagosAnticipado,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(anterior.pagosAnticipado,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(actual.pagosAnticipado,anterior.pagosAnticipado),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(actual.pagosAnticipado,anterior.pagosAnticipado),'USD',true,'1.0-0')},
+
+      {"cara":"Gastos por Amortizar",
+        "actual": this.cp.transform(actual.gastosAmortizacion,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(anterior.gastosAmortizacion,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(actual.gastosAmortizacion,anterior.gastosAmortizacion),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(actual.gastosAmortizacion,anterior.gastosAmortizacion),'USD',true,'1.0-0')},
+
       {"cara":"A menos de un año", "actual":"", "anterior":"", "aplicacion":"","origen":""},
-      {"cara":"IVA por Enterar", "actual": this.cp.transform(actual.IVAPorEnterar,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.IVAPorEnterar,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.IVAPorEnterar,anterior.IVAPorEnterar),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.IVAPorEnterar,anterior.IVAPorEnterar),'USD',true,'1.0-0')},
-      {"cara":"Impuestos por Pagar", "actual": this.cp.transform(actual.imptosPorPagar,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.imptosPorPagar,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.imptosPorPagar,anterior.imptosPorPagar),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.imptosPorPagar,anterior.imptosPorPagar),'USD',true,'1.0-0')},
-      {"cara":"Poveedores", "actual": this.cp.transform(actual.proveedores,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.proveedores,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.proveedores,anterior.proveedores),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.proveedores,anterior.proveedores),'USD',true,'1.0-0')},
-      {"cara":"PTU por Pagar", "actual": this.cp.transform(actual.proveedores,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.proveedores,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.proveedores,anterior.proveedores),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.proveedores,anterior.proveedores),'USD',true,'1.0-0')},
-      {"cara":"Prestamos Bancarios", "actual": this.cp.transform(actual.prestamosMenosAnio,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.prestamosMenosAnio,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.prestamosMenosAnio,anterior.prestamosMenosAnio),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.prestamosMenosAnio,anterior.prestamosMenosAnio),'USD',true,'1.0-0')},
+
+      {"cara":"IVA por Enterar",
+        "actual": this.cp.transform(-actual.IVAPorEnterar,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(-anterior.IVAPorEnterar,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.IVAPorEnterar,-anterior.IVAPorEnterar),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(-actual.IVAPorEnterar,-anterior.IVAPorEnterar),'USD',true,'1.0-0')},
+
+      {"cara":"Impuestos por Pagar",
+        "actual": this.cp.transform(-actual.imptosPorPagar,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(-anterior.imptosPorPagar,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.imptosPorPagar,-anterior.imptosPorPagar),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(-actual.imptosPorPagar,-anterior.imptosPorPagar),'USD',true,'1.0-0')},
+
+      {"cara":"Poveedores",
+        "actual": this.cp.transform(-actual.proveedores,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(-anterior.proveedores,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.proveedores,-anterior.proveedores),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(-actual.proveedores,-anterior.proveedores),'USD',true,'1.0-0')},
+
+      {"cara":"PTU por Pagar",
+        "actual": this.cp.transform(-actual.proveedores,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(-anterior.proveedores,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.proveedores,-anterior.proveedores),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(-actual.proveedores,-anterior.proveedores),'USD',true,'1.0-0')},
+
+      {"cara":"Prestamos Bancarios",
+        "actual": this.cp.transform(-actual.prestamosMenosAnio,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(-anterior.prestamosMenosAnio,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.prestamosMenosAnio,-anterior.prestamosMenosAnio),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(-actual.prestamosMenosAnio,-anterior.prestamosMenosAnio),'USD',true,'1.0-0')},
+
       {"cara":"A más de un año", "actual":"", "anterior":"", "aplicacion":"","origen":""},
-      {"cara":"Prestamos Totales", "actual": this.cp.transform(actual.prestamosMasAnio,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.prestamosMasAnio,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.prestamosMasAnio,anterior.prestamosMasAnio),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.prestamosMasAnio,anterior.prestamosMasAnio),'USD',true,'1.0-0')},
-      {"cara":"Capital Social", "actual": this.cp.transform(actual.capitalSocial,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.capitalSocial,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.capitalSocial,anterior.capitalSocial),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.capitalSocial,anterior.capitalSocial),'USD',true,'1.0-0')},
-      {"cara":"Reserva Legal", "actual": this.cp.transform(actual.reservaLegal,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.reservaLegal,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.reservaLegal,anterior.reservaLegal),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.reservaLegal,anterior.reservaLegal),'USD',true,'1.0-0')},
-      {"cara":"Utilidad Acumulada", "actual": this.cp.transform(actual.utilidadAcum,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.utilidadAcum,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.utilidadAcum,anterior.utilidadAcum),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.utilidadAcum,anterior.utilidadAcum),'USD',true,'1.0-0')},
-      {"cara":"Utilidad del Ejercicio", "actual": this.cp.transform(actual.utilidadEjercicio,'USD',true,'1.0-0'), "anterior": this.cp.transform(anterior.utilidadEjercicio,'USD',true,'1.0-0'), "aplicacion": this.cp.transform(this.getAplicacionCB(actual.utilidadEjercicio,anterior.utilidadEjercicio),'USD',true,'1.0-0'),"origen": this.cp.transform(this.getOrigenCB(actual.utilidadEjercicio,anterior.utilidadEjercicio),'USD',true,'1.0-0')},
-      {"cara":"Total", "actual":"$0", "anterior":"0", "aplicacion": this.cp.transform(this.origen,'USD',true,'1.0-0'),"origen": this.cp.transform(this.origen,'USD',true,'1.0-0')},
+
+      {"cara":"Prestamos Totales",
+        "actual": this.cp.transform(-actual.prestamosMasAnio,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(-anterior.prestamosMasAnio,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.prestamosMasAnio,-anterior.prestamosMasAnio),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(-actual.prestamosMasAnio,-anterior.prestamosMasAnio),'USD',true,'1.0-0')},
+
+      {"cara":"Capital Social",
+        "actual": this.cp.transform(actual.capitalSocial,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(anterior.capitalSocial,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.capitalSocial,-anterior.capitalSocial),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(-actual.capitalSocial,-anterior.capitalSocial),'USD',true,'1.0-0')},
+
+      {"cara":"Reserva Legal",
+        "actual": this.cp.transform(actual.reservaLegal,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(-anterior.reservaLegal,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.reservaLegal,-anterior.reservaLegal),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(-actual.reservaLegal,-anterior.reservaLegal),'USD',true,'1.0-0')},
+
+      {"cara":"Utilidad Acumulada",
+        "actual": this.cp.transform(-actual.utilidadAcum,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(-anterior.utilidadAcum-anterior.utilidadEjercicio,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.utilidadAcum,anterior.utilidadAcum+anterior.utilidadAcum),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(-actual.utilidadAcum,-anterior.utilidadAcum-anterior.utilidadEjercicio),'USD',true,'1.0-0')},
+
+      {"cara":"Utilidad del Ejercicio",
+        "actual": this.cp.transform(-actual.utilidadEjercicio,'USD',true,'1.0-0'),
+        "anterior": this.cp.transform(0,'USD',true,'1.0-0'),
+        "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.utilidadEjercicio,0),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenCB(-actual.utilidadEjercicio,0),'USD',true,'1.0-0')},
+
+      {"cara":"Total",
+        "actual":"$0",
+        "anterior":"0",
+        "aplicacion": this.cp.transform(this.getAplicacionTotal(anterior,actual),'USD',true,'1.0-0'),
+        "origen": this.cp.transform(this.getOrigenTotal(anterior,actual),'USD',true,'1.0-0')},
 
     ];
 
@@ -350,6 +486,9 @@ export class PruebaComponent implements OnInit {
            }else if (data.row.index == 25) {
              doc.setFillColor(176, 176, 176);
              doc.setFontType("bold");
+           }else if (data.row.index == 31) {
+             doc.setFillColor(176, 176, 176);
+             doc.setFontType("bold");
            }
 
        }
@@ -378,7 +517,7 @@ export class PruebaComponent implements OnInit {
       let origen:any;
       let aplicacion:any
 
-      for(let balance of this.balanceFinal){
+      for(let balance of this.balanceInicial){
         anterior["cajaBancos"]=balance.cajaBancos;
         anterior['cuentasPorCobrar']=balance.cuentasPorCobrar
         anterior['IVAAcreditable']=balance.IVAAcreditable
@@ -408,7 +547,7 @@ export class PruebaComponent implements OnInit {
         anterior['total']=0
       }
 
-      for(let balance of this.balanceInicial){
+      for(let balance of this.balanceFinal){
         actual['cajaBancos']=balance.cajaBancos;
         actual['cuentasPorCobrar']=balance.cuentasPorCobrar
         actual['IVAAcreditable']=balance.IVAAcreditable
@@ -444,35 +583,103 @@ export class PruebaComponent implements OnInit {
         {"cara":"Amenos de un Año", "actual":"", "anterior":"", "aplicacion":"","origen":""},
         {"cara":"Caja Bancos", "actual":actual.cajaBancos, "anterior":anterior.cajaBancos, "aplicacion":this.getAplicacionCB(actual.cajaBancos,anterior.cajaBancos),"origen":this.getOrigenCB(actual.cajaBancos,anterior.cajaBancos)},
         {"cara":"Cuentas por Cobrar", "actual":actual.cuentasPorCobrar, "anterior":anterior.cuentasPorCobrar, "aplicacion":this.getAplicacionCB(actual.cuentasPorCobrar,anterior.cuentasPorCobrar),"origen":this.getOrigenCB(actual.cuentasPorCobrar,anterior.cuentasPorCobrar)},
-        {"cara":"IVA Acreditable", "actual":actual.IVAAcredita, "anterior":anterior.IVAAcreditable, "aplicacion":this.getAplicacionCB(actual.IVAAcreditable,anterior.IVAAcreditable),"origen":this.getOrigenCB(actual.IVAAcreditable,anterior.IVAAcreditable)},
+        {"cara":"IVA Acreditable",
+          "actual":actual.IVAAcreditable,
+          "anterior":anterior.IVAAcreditable,
+          "aplicacion":this.getAplicacionCB(actual.IVAAcreditable,anterior.IVAAcreditable),
+          "origen":this.getOrigenCB(actual.IVAAcreditable,anterior.IVAAcreditable)},
+
         {"cara":"Almacen de Articulo Terminado", "actual":actual.almacenArtTerm, "anterior":anterior.almacenArtTerm, "aplicacion":this.getAplicacionCB(actual.almacenArtTerm,anterior.almacenArtTerm),"origen":this.getOrigenCB(actual.almacenArtTerm,anterior.almacenArtTerm)},
         {"cara":"Almacen de Materiales", "actual":actual.almacenMateriales, "anterior":anterior.almacenMateriales, "aplicacion":this.getAplicacionCB(actual.almacenMateriales,anterior.almacenMateriales),"origen":this.getOrigenCB(actual.almacenMateriales,anterior.almacenMateriales)},
         {"cara":"A más de un año", "actual":"", "anterior":"", "aplicacion":"","origen":""},
         {"cara":"Terrenos", "actual":actual.terrenos, "anterior":anterior.terrenos, "aplicacion":this.getAplicacionCB(actual.terrenos,anterior.terrenos),"origen":this.getOrigenCB(actual.terrenos,anterior.terrenos)},
         {"cara":"Edificios e Instalaciones", "actual":actual.edificios, "anterior":anterior.edificios, "aplicacion":this.getAplicacionCB(actual.edificios,anterior.edificios),"origen":this.getOrigenCB(actual.edificios,anterior.edificios)},
-        {"cara":"Deprecicaicón Acumulada", "actual":actual.depEdif, "anterior":anterior.depEdif, "aplicacion":this.getAplicacionCB(actual.depEdif,anterior.depEdif),"origen":this.getOrigenCB(actual.depEdif,anterior.depEdif)},
+        {"cara":"Deprecicaicón Acumulada", "actual":-actual.depEdif, "anterior":-anterior.depEdif,
+          "aplicacion":this.getAplicacionCB(-actual.depEdif,-anterior.depEdif),
+          "origen":this.getOrigenCB(-actual.depEdif,-anterior.depEdif)},
+
         {"cara":"Maquinaria y  Equipo", "actual":actual.maqEquipo, "anterior":anterior.maqEquipo, "aplicacion":this.getAplicacionCB(actual.maqEquipo,anterior.maqEquipo),"origen":this.getOrigenCB(actual.maqEquipo,anterior.maqEquipo) },
-        {"cara":"Depreciación Acumulada", "actual":actual.depMaqEquipo, "anterior":anterior.depMaqEquipo, "aplicacion":this.getAplicacionCB(actual.depMaqEquipo,anterior.depMaqEquipo),"origen":this.getOrigenCB(actual.depMaqEquipo,anterior.depMaqEquipo)},
+        {"cara":"Depreciación Acumulada", "actual":-actual.depMaqEquipo,
+          "anterior":-anterior.depMaqEquipo, "aplicacion":this.getAplicacionCB(-actual.depMaqEquipo,-anterior.depMaqEquipo),
+          "origen":this.getOrigenCB(-actual.depMaqEquipo,-anterior.depMaqEquipo)},
         {"cara":"Muebles y Enseres", "actual":actual.mueblesEnseres, "anterior":anterior.mueblesEnseres, "aplicacion":this.getAplicacionCB(actual.mueblesEnseres,anterior.mueblesEnseres),"origen":this.getOrigenCB(actual.mueblesEnseres,anterior.mueblesEnseres)},
-        {"cara":"Depreciación Acumulada", "actual":actual.depMueblesEnseres, "anterior":anterior.depMueblesEnseres, "aplicacion":this.getAplicacionCB(actual.depMueblesEnseres,anterior.depMueblesEnseres),"origen":this.getOrigenCB(actual.depMueblesEnseres,anterior.depMueblesEnseres)},
+        {"cara":"Depreciación Acumulada", "actual":-actual.depMueblesEnseres,
+          "anterior":-anterior.depMueblesEnseres, "aplicacion":this.getAplicacionCB(-actual.depMueblesEnseres,-anterior.depMueblesEnseres),
+          "origen":this.getOrigenCB(-actual.depMueblesEnseres,-anterior.depMueblesEnseres)},
         {"cara":"Equipo de Transporte", "actual":actual.eqTrans, "anterior":anterior.eqTrans, "aplicacion":this.getAplicacionCB(actual.eqTrans,anterior.eqTrans),"origen":this.getOrigenCB(actual.eqTrans,anterior.eqTrans)},
-        {"cara":"Depreciación Acumulada", "actual":actual.depEqTrans, "anterior":anterior.depEqTrans, "aplicacion":this.getAplicacionCB(actual.depEqTrans,anterior.depEqTrans),"origen":this.getOrigenCB(actual.depEqTrans,anterior.depEqTrans)},
+        {"cara":"Depreciación Acumulada",
+          "actual":-actual.depEqTrans, "anterior":-anterior.depEqTrans,
+          "aplicacion":this.getAplicacionCB(-actual.depEqTrans,-anterior.depEqTrans),
+          "origen":this.getOrigenCB(-actual.depEqTrans,-anterior.depEqTrans)},
+
         {"cara":"De Aplicación Diferida", "actual":"", "anterior":"", "aplicacion":"","origen":""},
         {"cara":"Pagos hechos por anticipado", "actual":actual.pagosAnticipado, "anterior":anterior.pagosAnticipado, "aplicacion":this.getAplicacionCB(actual.pagosAnticipado,anterior.pagosAnticipado),"origen":this.getOrigenCB(actual.pagosAnticipado,anterior.pagosAnticipado)},
         {"cara":"Gastos por Amortizar", "actual":actual.gastosAmortizacion, "anterior":anterior.gastosAmortizacion, "aplicacion":this.getAplicacionCB(actual.gastosAmortizacion,anterior.gastosAmortizacion),"origen":this.getOrigenCB(actual.gastosAmortizacion,anterior.gastosAmortizacion)},
+        {"cara":"Obligaciones", "actual":"", "anterior":"", "aplicacion":"","origen":""},
         {"cara":"A menos de un año", "actual":"", "anterior":"", "aplicacion":"","origen":""},
-        {"cara":"IVA por Enterar", "actual":actual.IVAPorEnterar, "anterior":anterior.IVAPorEnterar, "aplicacion":this.getAplicacionCB(actual.IVAPorEnterar,anterior.IVAPorEnterar),"origen":this.getOrigenCB(actual.IVAPorEnterar,anterior.IVAPorEnterar)},
-        {"cara":"Impuestos por Pagar", "actual":actual.imptosPorPagar, "anterior":anterior.imptosPorPagar, "aplicacion":this.getAplicacionCB(actual.imptosPorPagar,anterior.imptosPorPagar),"origen":this.getOrigenCB(actual.imptosPorPagar,anterior.imptosPorPagar)},
-        {"cara":"Poveedores", "actual":actual.proveedores, "anterior":anterior.proveedores, "aplicacion":this.getAplicacionCB(actual.proveedores,anterior.proveedores),"origen":this.getOrigenCB(actual.proveedores,anterior.proveedores)},
-        {"cara":"PTU por Pagar", "actual":actual.proveedores, "anterior":anterior.proveedores, "aplicacion":this.getAplicacionCB(actual.proveedores,anterior.proveedores),"origen":this.getOrigenCB(actual.proveedores,anterior.proveedores)},
-        {"cara":"Prestamos Bancarios", "actual":actual.prestamosMenosAnio, "anterior":anterior.prestamosMenosAnio, "aplicacion":this.getAplicacionCB(actual.prestamosMenosAnio,anterior.prestamosMenosAnio),"origen":this.getOrigenCB(actual.prestamosMenosAnio,anterior.prestamosMenosAnio)},
+        {"cara":"IVA por Enterar",
+          "actual":-actual.IVAPorEnterar,
+          "anterior":-anterior.IVAPorEnterar,
+          "aplicacion":this.getAplicacionCB(-actual.IVAPorEnterar,-anterior.IVAPorEnterar),
+          "origen":this.getOrigenCB(-actual.IVAPorEnterar,-anterior.IVAPorEnterar)},
+
+        {"cara":"Impuestos por Pagar",
+          "actual":-actual.imptosPorPagar,
+          "anterior":-anterior.imptosPorPagar,
+          "aplicacion":this.getAplicacionCB(-actual.imptosPorPagar,-anterior.imptosPorPagar),
+          "origen":this.getOrigenCB(-actual.imptosPorPagar,-anterior.imptosPorPagar)},
+
+        {"cara":"Poveedores",
+          "actual":-actual.proveedores,
+          "anterior":-anterior.proveedores,
+          "aplicacion":this.getAplicacionCB(-actual.proveedores,-anterior.proveedores),
+          "origen":this.getOrigenCB(-actual.proveedores,-anterior.proveedores)},
+
+        {"cara":"PTU por Pagar",
+          "actual":-actual.PTUPorPagar,
+          "anterior":-anterior.PTUPorPagar,
+          "aplicacion":this.getAplicacionCB(-actual.PTUPorPagar,-anterior.PTUPorPagar),
+          "origen":this.getOrigenCB(-actual.PTUPorPagar,-anterior.PTUPorPagar)},
+
+        {"cara":"Prestamos Bancarios",
+          "actual":-actual.prestamosMenosAnio,
+          "anterior":-anterior.prestamosMenosAnio,
+          "aplicacion":this.getAplicacionCB(-actual.prestamosMenosAnio,-anterior.prestamosMenosAnio),
+          "origen":this.getOrigenCB(-actual.prestamosMenosAnio,-anterior.prestamosMenosAnio)},
+
         {"cara":"A más de un año", "actual":"", "anterior":"", "aplicacion":"","origen":""},
-        {"cara":"Prestamos Totales", "actual":actual.prestamosMasAnio, "anterior":anterior.prestamosMasAnio, "aplicacion":this.getAplicacionCB(actual.prestamosMasAnio,anterior.prestamosMasAnio),"origen":this.getOrigenCB(actual.prestamosMasAnio,anterior.prestamosMasAnio)},
-        {"cara":"Capital Social", "actual":actual.capitalSocial, "anterior":anterior.capitalSocial, "aplicacion":this.getAplicacionCB(actual.capitalSocial,anterior.capitalSocial),"origen":this.getOrigenCB(actual.capitalSocial,anterior.capitalSocial)},
-        {"cara":"Reserva Legal", "actual":actual.reservaLegal, "anterior":anterior.reservaLegal, "aplicacion":this.getAplicacionCB(actual.reservaLegal,anterior.reservaLegal),"origen":this.getOrigenCB(actual.reservaLegal,anterior.reservaLegal)},
-        {"cara":"Utilidad Acumulada", "actual":actual.utilidadAcum, "anterior":anterior.utilidadAcum, "aplicacion":this.getAplicacionCB(actual.utilidadAcum,anterior.utilidadAcum),"origen":this.getOrigenCB(actual.utilidadAcum,anterior.utilidadAcum)},
-        {"cara":"Utilidad del Ejercicio", "actual":actual.utilidadEjercicio, "anterior":anterior.utilidadEjercicio, "aplicacion":this.getAplicacionCB(actual.utilidadEjercicio,anterior.utilidadEjercicio),"origen":this.getOrigenCB(actual.utilidadEjercicio,anterior.utilidadEjercicio)},
-        {"cara":"Total", "actual":0, "anterior":0, "aplicacion":this.origen,"origen":this.origen},
+
+        {"cara":"Prestamos Totales",
+          "actual":-actual.prestamosMasAnio,
+          "anterior":-anterior.prestamosMasAnio,
+          "aplicacion":this.getAplicacionCB(-actual.prestamosMasAnio,-anterior.prestamosMasAnio),
+          "origen":this.getOrigenCB(-actual.prestamosMasAnio,-anterior.prestamosMasAnio)},
+
+
+        {"cara":"Con los Accionistas", "actual":"", "anterior":"", "aplicacion":"","origen":""},
+
+        {"cara":"Capital Social", "actual":-actual.capitalSocial, "anterior":-anterior.capitalSocial,
+          "aplicacion":this.getAplicacionCB(-actual.capitalSocial,-anterior.capitalSocial),
+          "origen":this.getOrigenCB(-actual.capitalSocial,-anterior.capitalSocial)},
+
+        {"cara":"Reserva Legal",
+          "actual":actual.reservaLegal,
+          "anterior":anterior.reservaLegal,
+          "aplicacion":this.getAplicacionCB(actual.reservaLegal,anterior.reservaLegal),
+          "origen":this.getOrigenCB(actual.reservaLegal,anterior.reservaLegal)},
+
+        {"cara":"Utilidad Acumulada",
+          "actual":-actual.utilidadAcum, "anterior":-anterior.utilidadAcum-anterior.utilidadEjercicio,
+          "aplicacion":this.getAplicacionCB(-actual.utilidadAcum,-anterior.utilidadAcum-anterior.utilidadEjercicio),
+          "origen":this.getOrigenCB(-actual.utilidadAcum,-anterior.utilidadAcum-anterior.utilidadEjercicio)},
+
+        {"cara":"Utilidad del Ejercicio",
+          "actual":-actual.utilidadEjercicio,
+          "anterior":0,
+          "aplicacion":this.getAplicacionCB(actual.utilidadEjercicio,0),
+          "origen":this.getOrigenCB(actual.utilidadEjercicio,0)},
+
+        {"cara":"Total", "actual":0, "anterior":0, "aplicacion":this.getAplicacionTotal(anterior,actual),"origen":this.getOrigenTotal(anterior,actual)},
       ]
         new Angular2Csv(data, 'Posición Comparativa');
     }

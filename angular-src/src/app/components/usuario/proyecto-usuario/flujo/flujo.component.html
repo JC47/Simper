@@ -5,17 +5,23 @@
 <div class="col-8 offset-2">
   <table class="table table-striped " >
 
+    <thead>
+      <th>Concepto</th>
+      <th>Saldo</th>
+    </thead>
+
     <tbody>
-        <tr>
-        <td>Saldo Inicial</td>
-        <td class="text-right" *ngFor="let balance of balanceInicial">{{getCajaBancos() |currency:'USD':true:'1.0-0'}}</td>
+
+        <tr class="table-active">
+        <th>Saldo Inicial</th>
+        <th class="text-right" *ngFor="let balance of balanceInicial">{{getCajaBancos() |currency:'USD':true:'1.0-0'}}</th>
       </tr>
 
       <tr>
         <td colspan="2"></td>
       </tr>
 
-      <tr>
+      <tr class="table-active" style="border: 2px solid dimgray">
         <th colspan="2" class="text-center">Entradas </th>
 
       </tr>
@@ -61,8 +67,8 @@
       </tr>
 
 
-      <tr>
-        <th>Disponible</th>
+      <tr class="table-active">
+        <th >Disponible</th>
         <th class="text-right">{{getDisponible() |currency:'USD':true:'1.0-0'}}</th>
 
       </tr>
@@ -70,8 +76,8 @@
               <td colspan="2"></td>
       </tr>
 
-      <tr>
-        <th colspan="2" class="text-center">Salidas</th>
+      <tr class=" table-active" style="border: 2px solid dimgray">
+        <th colspan="2" class="text-center" >Salidas</th>
       </tr>
 
       <tr>
@@ -150,16 +156,14 @@
 
       </tr>
 
-      <tr>
-        <td>Total de Salidas</td>
-        <td class="text-right">{{getSalidas() |currency:'USD':true:'1.0-0'}}</td>
+      <tr class="table-active">
+        <th>Total de Salidas</th>
+        <th class="text-right">{{getSalidas() |currency:'USD':true:'1.0-0'}}</th>
       </tr>
 
-      <tr>
 
-      </tr>
 
-      <tr>
+      <tr class="table-active">
         <th>Saldo Final</th>
         <th class="text-right" *ngFor="let balance of balanceFinal">{{balance.cajaBancos |currency:'USD':true:'1.0-0'}}</th>
       </tr>

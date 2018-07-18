@@ -541,11 +541,11 @@ export class AnalisisComponent implements OnInit {
       {"signo":"-","concepto":"Impuestos","cantidad":this.cp.transform(this.getImpuestos(),'USD',true,'1.0-0')},
       {"signo":"=","concepto":"Utilidad Neta","cantidad":this.cp.transform(this.getUtilidadNeta(),'USD',true,'1.0-0')},
       {"signo":"/","concepto":"Ventas","cantidad":this.cp.transform(this.getTotalVentas(),'USD',true,'1.0-0')},
-      {"signo":"=","concepto":"Margen Neto(%)","cantidad":this.dc.transform(this.getMargenNeto()*10,'1.2-2')+"%"},
+      {"signo":"=","concepto":"Margen Neto(%)","cantidad":this.dc.transform(this.getMargenNeto()*100,'1.2-2')+"%"},
       {"signo":"*","concepto":"Rotación de Activos","cantidad":this.dc.transform(this.getRotacionActivos(),'1.2-2')},
       {"signo":"=","concepto":"Rentabilidad de Activos(%)","cantidad":this.dc.transform(this.getRentabilidadSobreActivos()*100,'1.2-2')+"%"},
       {"signo":"*","concepto":"Palanca Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.2-2')},
-      {"signo":"=","concepto":"Rentabilidad s/Capital Contable","cantidad":this.dc.transform(this.getRentabilidadSobreCapital(),'1.2-2')}
+      {"signo":"=","concepto":"Rentabilidad s/Capital Contable","cantidad":this.dc.transform((this.getRentabilidadSobreCapital()*100),'1.2-2')+"%"}
 
       ];
 
@@ -568,6 +568,33 @@ export class AnalisisComponent implements OnInit {
         cantidad:{halign:'right'},
 
       },
+
+        drawCell: function (cell, data) {
+          var rows = data.table.rows;
+          if (data.row.index == 10) {
+            doc.setFillColor(200, 0, 0);
+            doc.setTextColor(255,255,255);
+            doc.setDrawColor(255,255,255)
+
+          }else if (data.row.index == 11) {
+            doc.setFillColor(200, 0, 0);
+            doc.setTextColor(255,255,255);
+            doc.setDrawColor(255,255,255)
+          }else if (data.row.index == 12) {
+            doc.setFillColor(200, 0, 0);
+            doc.setTextColor(255,255,255);
+            doc.setDrawColor(255,255,255)
+          }else if (data.row.index == 13) {
+            doc.setFillColor(200, 0, 0);
+            doc.setTextColor(255,255,255);
+            doc.setDrawColor(255,255,255)
+          }else if (data.row.index == 14) {
+            doc.setFillColor(200, 0, 0);
+            doc.setTextColor(255,255,255);
+            doc.setDrawColor(255,255,255)
+          }
+        },
+
       addPageContent: function(data) {
         doc.setFontSize(15);
         doc.setFontType("bold");
@@ -606,11 +633,11 @@ export class AnalisisComponent implements OnInit {
        {"signo":"-","concepto":"Impuestos","cantidad":this.cp.transform(this.getImpuestos(),'USD',true,'1.0-0')},
        {"signo":"=","concepto":"Utilidad Neta","cantidad":this.cp.transform(this.getUtilidadNeta(),'USD',true,'1.0-0')},
        {"signo":"/","concepto":"Ventas","cantidad":this.cp.transform(this.getTotalVentas(),'USD',true,'1.0-0')},
-       {"signo":"=","concepto":"Margen Neto(%)","cantidad":this.dc.transform(this.getMargenNeto()*10,'1.2-2')},
+       {"signo":"=","concepto":"Margen Neto(%)","cantidad":this.dc.transform((this.getMargenNeto()*100)+"%",'1.2-2')},
        {"signo":"*","concepto":"Rotación de Activos","cantidad":this.dc.transform(this.getRotacionActivos(),'1.2-2')},
-       {"signo":"=","concepto":"Rentabilidad de Activos(%)","cantidad":this.dc.transform(this.getRentabilidadSobreActivos()*100,'1.2-2')},
+       {"signo":"=","concepto":"Rentabilidad de Activos(%)","cantidad":this.dc.transform((this.getRentabilidadSobreActivos()*100)+"%",'1.2-2')},
        {"signo":"*","concepto":"Palanca Financiera","cantidad":this.dc.transform(this.getActivoCapitalTotal(),'1.2-2')},
-       {"signo":"=","concepto":"Rentabilidad s/Capital Contable","cantidad":this.dc.transform(this.getRentabilidadSobreCapital(),'1.2-2')}
+       {"signo":"=","concepto":"Rentabilidad s/Capital Contable","cantidad":this.dc.transform((this.getRentabilidadSobreCapital()*100)+"%",'1.2-2')}
 
       ];
 
@@ -673,6 +700,19 @@ export class AnalisisComponent implements OnInit {
             cantidad:{halign:'right'},
 
           },
+
+            drawCell: function (cell, data) {
+              var rows = data.table.rows;
+              if (data.row.index == 7) {
+                doc.setFillColor(200, 0, 0);
+                doc.setTextColor(255,255,255);
+                doc.setDrawColor(255,255,255)
+
+              }else if (data.row.index == 17) {
+                doc.setFillColor(200, 0, 0);
+                doc.setTextColor(255,255,255);
+                doc.setDrawColor(255,255,255)
+              }},
           addPageContent: function(data) {
             doc.setFontSize(15);
             doc.setFontType("bold");
@@ -769,7 +809,7 @@ export class AnalisisComponent implements OnInit {
                       {"grupo":"","concepto":"Capital Contable","cantidad":this.cp.transform(this.getCapitalContable(),'USD',true,'1.0-0'),"numero":""},
                       {"grupo":"","concepto":"","cantidad":"","numero":""},
                       {"grupo":"","concepto":"Pasivo Total","cantidad":this.cp.transform(this.getPasivoTotal(),'USD',true,'1.0-0'),"numero":this.dc.transform(this.getPasivoActivoTotal(),'1.2-2')},
-                      {"grupo":"","concepto":"Activo Total","cantidad":this.cp.transform(this.getActivoTotal(),'USD',true,'1.0-0'),"numero":this.dc.transform(this.getPasivoActivoTotal(),'1.2-2')},
+                      {"grupo":"","concepto":"Activo Total","cantidad":this.cp.transform(this.getActivoTotal(),'USD',true,'1.0-0'),"numero":""},
                       {"grupo":"","concepto":"","cantidad":"","numero":""},
                       {"grupo":"","concepto":"Total Activo","cantidad":this.cp.transform(this.getActivoTotal(),'USD',true,'1.0-0') ,"numero":this.dc.transform(this.getActivoCapitalTotal(),'1.2-2') },
                       {"grupo":"","concepto":"Capital Contable","cantidad":this.cp.transform(this.getCapitalContable(),'USD',true,'1.0-0'),"numero":""},
@@ -813,12 +853,81 @@ export class AnalisisComponent implements OnInit {
                       doc.line(50, 27, 228, 27);
                     },
 
+                      drawCell: function (cell, data) {
+                        var rows = data.table.rows;
+                        if (data.row.index == 0) {
+                          doc.setFillColor(200, 0, 0);
+                          doc.setTextColor(255,255,255);
+                          doc.setDrawColor(255,255,255)
+
+                        }else if (data.row.index == 2) {
+                          doc.setFillColor(200, 0, 0);
+                          doc.setTextColor(255,255,255);
+                          doc.setDrawColor(255,255,255)
+                        }else if (data.row.index == 4) {
+                          doc.setFillColor(200, 0, 0);
+                          doc.setTextColor(255,255,255);
+                          doc.setDrawColor(255,255,255)
+                        }else if (data.row.index == 6) {
+                          doc.setFillColor(200, 0, 0);
+                          doc.setTextColor(255,255,255);
+                          doc.setDrawColor(255,255,255)
+                        }else if (data.row.index == 8) {
+                          doc.setFillColor(200, 0, 0);
+                          doc.setTextColor(255,255,255);
+                          doc.setDrawColor(255,255,255)
+                        }else if (data.row.index == 10) {
+                          doc.setFillColor(200, 0, 0);
+                          doc.setTextColor(255,255,255);
+                          doc.setDrawColor(255,255,255)
+                        }else if (data.row.index == 12) {
+                          doc.setFillColor(200, 0, 0);
+                          doc.setTextColor(255,255,255);
+                          doc.setDrawColor(255,255,255)
+                        }else if (data.row.index == 14) {
+                          doc.setFillColor(200, 0, 0);
+                          doc.setTextColor(255,255,255);
+                          doc.setDrawColor(255,255,255)
+                        }else if (data.row.index == 16) {
+                          doc.setFillColor(200, 0, 0);
+                          doc.setTextColor(255,255,255);
+                          doc.setDrawColor(255,255,255)
+                        }else if (data.row.index == 18) {
+                          doc.setFillColor(200, 0, 0);
+                          doc.setTextColor(255,255,255);
+                          doc.setDrawColor(255,255,255)
+                        }else if (data.row.index == 20) {
+                          doc.setFillColor(200, 0, 0);
+                          doc.setTextColor(255,255,255);
+                          doc.setDrawColor(255,255,255)
+                        }else if (data.row.index == 22) {
+                          doc.setFillColor(200, 0, 0);
+                          doc.setTextColor(255,255,255);
+                          doc.setDrawColor(255,255,255)
+                        }else if (data.row.index == 24) {
+                          doc.setFillColor(200, 0, 0);
+                          doc.setTextColor(255,255,255);
+                          doc.setDrawColor(255,255,255)
+                        }else if (data.row.index == 27) {
+                          doc.setFillColor(200, 0, 0);
+                          doc.setTextColor(255,255,255);
+                          doc.setDrawColor(255,255,255)
+                        }else if (data.row.index == 30) {
+                          doc.setFillColor(200, 0, 0);
+                          doc.setTextColor(255,255,255);
+                          doc.setDrawColor(255,255,255)
+                        }else if (data.row.index == 32) {
+                          doc.setFillColor(200, 0, 0);
+                          doc.setTextColor(255,255,255);
+                          doc.setDrawColor(255,255,255)
+                        }
 
 
 
 
 
-                    });
+
+                    }});
 
                     doc.save("Analisis Balance General.pdf");
 
@@ -860,12 +969,12 @@ export class AnalisisComponent implements OnInit {
                         {"grupo":"","concepto":"Capital Contable","cantidad":this.getCapitalContable(),"numero":""},
                         {"grupo":"","concepto":"","cantidad":"","numero":""},
                         {"grupo":"","concepto":"Pasivo Total","cantidad":this.getPasivoTotal(),"numero":this.getPasivoActivoTotal()},
-                        {"grupo":"","concepto":"Activo Total","cantidad":this.getActivoTotal(),"numero":this.getPasivoActivoTotal()},
+                        {"grupo":"","concepto":"Activo Total","cantidad":this.getActivoTotal(),"numero":""},
                         {"grupo":"","concepto":"","cantidad":"","numero":""},
                         {"grupo":"","concepto":"Total Activo","cantidad":this.getActivoTotal(),"numero":this.getActivoCapitalTotal()},
                         {"grupo":"","concepto":"Capital Contable","cantidad":this.getCapitalContable(),"numero":""},
                         {"grupo":"Cobertura de Intereses","concepto":"Utilidad antes int e imptos","cantidad":this.getUtilidadOperacion(),"numero":this.getCoberturaIntereses()},
-                        {"grupo":"","concepto":"Intereses Pagados","cantidad":this.getIntereses(),"numero":this.getCoberturaIntereses()},
+                        {"grupo":"","concepto":"Intereses Pagados","cantidad":this.getIntereses(),"numero":""},
 ]
 
                         new Angular2Csv(data, ' Analisis Ratios');

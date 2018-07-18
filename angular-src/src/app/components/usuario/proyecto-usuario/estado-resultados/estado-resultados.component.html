@@ -6,8 +6,8 @@
 
 
 <div class="col-10 offset-1">
-  <table class="table table-bordered">
-    <thead>
+  <table class="table table-hover">
+    <thead class="thead-dark">
       <tr class="thead-inverse">
         <th></th>
         <th *ngFor="let producto of resultados" class="text-center">{{getNameByIdProducto(producto) }}</th>
@@ -29,10 +29,20 @@
       </tr>
 
       <tr>
+        <td></td>
+        <td *ngFor="let producto of resultados"></td>
+        <td></td>
+      </tr>
+
+      <tr>
         <th>Utilidad Bruta</th>
         <td class="text-right" *ngFor="let producto of resultados">{{getUtilidadParcial(producto) |currency:'USD':true:'1.0-0'}}</td>
         <td class="text-right" >{{getUtilidadBruta() |currency:'USD':true:'1.0-0'}}</td>
       </tr>
+
+      <td></td>
+      <td *ngFor="let producto of resultados"></td>
+      <td></td>
 
       <tr>
         <th>Gasto de Distribucion</th>
@@ -52,11 +62,19 @@
         <td class="text-right">{{getAdminTotal() |currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
+      <td></td>
+      <td *ngFor="let producto of resultados"></td>
+      <td></td>
+
       <tr>
         <th>Utilidad en Operación</th>
         <td class="text-right" *ngFor="let producto of resultados">{{getUtilidadAntesParcial(producto) |currency:'USD':true:'1.0-0'}}</td>
         <td class="text-right" *ngFor="let item of auxiliarT">{{getUtilidadAntes() - item |currency:'USD':true:'1.0-0'}}</td>
       </tr>
+
+      <td></td>
+      <td *ngFor="let producto of resultados"></td>
+      <td></td>
 
       <tr>
         <th>Intereses</th>
@@ -64,11 +82,19 @@
         <td class="text-right" *ngFor="let aux of intereses">{{aux |currency:'USD':true:'1.0-0'}}</td>
       </tr>
 
+      <td></td>
+      <td *ngFor="let producto of resultados"></td>
+      <td></td>
+
       <tr>
         <th>Utilidad antes de Impuestos</th>
         <td class="text-right" *ngFor="let producto of resultados">{{getUtilidadAntesParcial(producto) |currency:'USD':true:'1.0-0'}}</td>
         <td class="text-right">{{getUtilidad2() |currency:'USD':true:'1.0-0'}}</td>
       </tr>
+
+      <td></td>
+      <td *ngFor="let producto of resultados"></td>
+      <td></td>
 
       <tr>
         <th>ISR</th>
@@ -81,6 +107,10 @@
         <td class="text-right" *ngFor="let producto of resultados">-</td>
         <td class="text-right" *ngFor="let balance of balanceFinal">{{balance.PTUPorPagar|currency:'USD':true:'1.0-0'}}</td>
       </tr>
+
+      <td></td>
+      <td *ngFor="let producto of resultados"></td>
+      <td></td>
 
       <tr>
         <th>Utilidad del Ejercicio</th>
