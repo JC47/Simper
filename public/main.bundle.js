@@ -9835,7 +9835,7 @@ var PruebaComponent = (function () {
             { "cara": "Utilidad Acumulada",
                 "actual": this.cp.transform(-actual.utilidadAcum, 'USD', true, '1.0-0'),
                 "anterior": this.cp.transform(-anterior.utilidadAcum - anterior.utilidadEjercicio, 'USD', true, '1.0-0'),
-                "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.utilidadAcum, anterior.utilidadAcum + anterior.utilidadAcum), 'USD', true, '1.0-0'),
+                "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.utilidadAcum, -anterior.utilidadAcum - anterior.utilidadEjercicio), 'USD', true, '1.0-0'),
                 "origen": this.cp.transform(this.getOrigenCB(-actual.utilidadAcum, -anterior.utilidadAcum - anterior.utilidadEjercicio), 'USD', true, '1.0-0') },
             { "cara": "Utilidad del Ejercicio",
                 "actual": this.cp.transform(-actual.utilidadEjercicio, 'USD', true, '1.0-0'),
@@ -10102,8 +10102,8 @@ var PruebaComponent = (function () {
             { "cara": "Utilidad del Ejercicio",
                 "actual": -actual.utilidadEjercicio,
                 "anterior": 0,
-                "aplicacion": this.getAplicacionCB(actual.utilidadEjercicio, 0),
-                "origen": this.getOrigenCB(actual.utilidadEjercicio, 0) },
+                "aplicacion": this.getAplicacionCB(-actual.utilidadEjercicio, 0),
+                "origen": this.getOrigenCB(-actual.utilidadEjercicio, 0) },
             { "cara": "Total", "actual": 0, "anterior": 0, "aplicacion": this.getAplicacionTotal(anterior, actual), "origen": this.getOrigenTotal(anterior, actual) },
         ];
         new __WEBPACK_IMPORTED_MODULE_5_angular2_csv_Angular2_csv__["Angular2Csv"](data, 'Posición Comparativa');
