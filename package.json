@@ -23,7 +23,7 @@
     "passport": "0.3.2",
     "passport-jwt": "2.2.1"
   },
-  "author": "Alfredo Esquivel & Javier Calette & Carlos Melo",
+  "author": "Javier Calette & Carlos Melo",
   "license": "ISC",
   "devDependencies": {
     "@angular/cli": "1.4.3"

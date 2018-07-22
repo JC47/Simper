@@ -3,15 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="96a85c0b-8488-4e27-a181-5d40c76c21ac" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/prueba/prueba.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/prueba/prueba.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/inline.bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/inline.bundle.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/main.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/main.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/main.bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/main.bundle.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/polyfills.bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/polyfills.bundle.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scripts.bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/scripts.bundle.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/styles.bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/styles.bundle.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor.bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor.bundle.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -24,38 +16,49 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="punto-equilibrio.component.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/punto-equilibrio/punto-equilibrio.component.html">
+    <leaf>
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="83" column="72" selection-start-line="83" selection-start-column="72" selection-end-line="83" selection-end-column="72" />
+            <state relative-caret-position="17">
+              <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.interfaces.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/angular-src/src/app/app.interfaces.ts">
+      <file leaf-file-name="LICENSE" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/LICENSE">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file leaf-file-name="prueba.component.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/prueba/prueba.component.html">
+      <file leaf-file-name="basesimv1.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/basesimv1.sql">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="91">
-              <caret line="276" column="45" selection-start-line="276" selection-start-column="45" selection-end-line="276" selection-end-column="45" />
-            </state>
+            <state relative-caret-position="-1065" />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="prueba.component.ts" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/prueba/prueba.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="379" column="131" selection-start-line="379" selection-start-column="131" selection-end-line="379" selection-end-column="131" />
-              <folding>
-                <element signature="e#0#50#0" expanded="true" />
-              </folding>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="vim.exe.stackdump" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vim.exe.stackdump">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor />
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -112,6 +115,7 @@
         <option value="$PROJECT_DIR$/config/db.js" />
         <option value="$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/prueba/prueba.component.html" />
         <option value="$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/prueba/prueba.component.ts" />
+        <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
   </component>
@@ -133,7 +137,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-6" />
     <option name="y" value="-11" />
     <option name="width" value="1346" />
@@ -145,7 +149,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -153,76 +156,16 @@
               <item name="Simper" type="b2602c69:ProjectViewProjectNode" />
               <item name="Simper" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Simper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Simper" type="462c0819:PsiDirectoryNode" />
-              <item name="angular-src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Simper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Simper" type="462c0819:PsiDirectoryNode" />
-              <item name="angular-src" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Simper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Simper" type="462c0819:PsiDirectoryNode" />
-              <item name="angular-src" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Simper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Simper" type="462c0819:PsiDirectoryNode" />
-              <item name="angular-src" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Simper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Simper" type="462c0819:PsiDirectoryNode" />
-              <item name="angular-src" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="usuario" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Simper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Simper" type="462c0819:PsiDirectoryNode" />
-              <item name="angular-src" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="usuario" type="462c0819:PsiDirectoryNode" />
-              <item name="proyecto-usuario" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Simper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Simper" type="462c0819:PsiDirectoryNode" />
-              <item name="angular-src" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="usuario" type="462c0819:PsiDirectoryNode" />
-              <item name="proyecto-usuario" type="462c0819:PsiDirectoryNode" />
-              <item name="prueba" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Simper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Simper" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/SoftCloud/SC-webpage" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -256,29 +199,31 @@
       <workItem from="1531865900245" duration="20703000" />
       <workItem from="1531912490489" duration="41000" />
       <workItem from="1531971018142" duration="34000" />
-      <workItem from="1532134375654" duration="3201000" />
+      <workItem from="1532134375654" duration="4215000" />
+      <workItem from="1532178075365" duration="157000" />
+      <workItem from="1532179000541" duration="636000" />
+      <workItem from="1532293753300" duration="1387000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43819000" />
+    <option name="totallyTimeSpent" value="47013000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <layout>
-      <window_info anchor="bottom" id="TypeScript" order="11" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22693998" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22693998" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="2" />
+      <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.28664497" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.10749186" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="TypeScript" order="11" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -517,10 +462,35 @@
           <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="18" />
+      <option name="time" value="19" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/angular-src/src/app/app.interfaces.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/prueba/prueba.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4692">
+          <caret line="276" column="45" selection-start-line="276" selection-start-column="45" selection-end-line="276" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/prueba/prueba.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6460">
+          <caret line="380" selection-start-line="380" selection-end-line="380" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+            <element signature="n#!!block;n#getAplicacionTotal#0;n#PruebaComponent#0" />
+            <element signature="n#!!block;n#getOrigenTotal#0;n#PruebaComponent#0" />
+            <element signature="n#!!block;n#getNameById#0;n#PruebaComponent#0" />
+            <element signature="n#!!block;n#descargaPDF#0;n#PruebaComponent#0" />
+            <element signature="n#!!block;n#descargaCSV#0;n#PruebaComponent#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/punto-equilibrio/punto-equilibrio.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1411">
@@ -545,9 +515,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1173">
           <caret line="154" column="48" lean-forward="true" selection-start-line="154" selection-start-column="33" selection-end-line="154" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -765,9 +732,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="117">
           <caret line="154" column="48" selection-start-line="154" selection-start-column="33" selection-end-line="154" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -776,25 +740,67 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/punto-equilibrio/punto-equilibrio.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
+        <state relative-caret-position="1411">
           <caret line="83" column="72" selection-start-line="83" selection-start-column="72" selection-end-line="83" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/prueba/prueba.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="276" column="45" selection-start-line="276" selection-start-column="45" selection-end-line="276" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/prueba/prueba.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="379" column="131" selection-start-line="379" selection-start-column="131" selection-end-line="379" selection-end-column="131" />
+        <state relative-caret-position="1241">
+          <caret line="136" column="17" selection-start-line="136" selection-start-column="17" selection-end-line="136" selection-end-column="17" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
+            <element signature="n#!!block;n#getAplicacionTotal#0;n#PruebaComponent#0" />
+            <element signature="n#!!block;n#getOrigenTotal#0;n#PruebaComponent#0" />
+            <element signature="n#!!block;n#getNameById#0;n#PruebaComponent#0" />
+            <element signature="n#!!block;n#descargaPDF#0;n#PruebaComponent#0" />
+            <element signature="n#!!block;n#descargaCSV#0;n#PruebaComponent#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/angular-src/src/app/components/usuario/proyecto-usuario/prueba/prueba.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="276" column="45" selection-start-line="276" selection-start-column="45" selection-end-line="276" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/angular-src/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-731" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/basesimv1.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1065" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vim.exe.stackdump">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LICENSE">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
         </state>
       </provider>
     </entry>
