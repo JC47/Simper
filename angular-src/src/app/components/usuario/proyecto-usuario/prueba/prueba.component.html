@@ -242,7 +242,7 @@
       </tr>
 
       <tr>
-        <td>Prestamos Totales</td>
+        <td>Prestamos Bancarios</td>
         <td class="text-right">{{-balance.prestamosMasAnio|currency:'USD':true:'1.0-0'}}</td>
         <td class="text-right" *ngFor="let balanceI of balanceInicial">{{-balanceI.prestamosMasAnio|currency:'USD':true:'1.0-0'}}</td>
         <td class="text-right" *ngFor="let balanceI of balanceInicial">{{getAplicacionCB(-balance.prestamosMasAnio,-balanceI.prestamosMasAnio)|currency:'USD':true:'1.0-0'}}</td>

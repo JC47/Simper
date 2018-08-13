@@ -129,7 +129,7 @@
       <div class="row">
 
 
-        <div class="col-7" style="height:200px">
+        <div class="col-11" style="height:200px">
 
           <ngx-charts-bar-horizontal
 
@@ -142,23 +142,10 @@
                 showYAxisLabel="true"
                 xAxisLabel="Capacidad de Producción(unidades)"
                 yAxisLabel="Productos">
-              </ngx-charts-bar-horizontal>
+
+          </ngx-charts-bar-horizontal>
         </div>
 
-
-        <div class="col-lg-5 col-sm-8 " style="height:200px; overflow-y:scroll">
-                <table class="table" >
-                  <tr>
-                    <th class="text-center">Producto</th>
-                    <th class="text-center">Producción</th>
-                  </tr>
-                  <tr *ngFor="let maquina of maquinariasGraf">
-                    <td class="text-center">{{maquina.name}}</td>
-                    <td class="text-center">{{maquina.value|number:'1.0-0'}}u</td>
-                  </tr>
-                </table>
-
-        </div>
 
 
       </div>
@@ -308,7 +295,7 @@
                   designatedTotal="2">
                   </ngx-charts-pie-grid>
                 </div>
-                <div class="col-6">
+                <div class="col-6" style="margin-top:20px">
                   <div class="row">
 
                     <div class="text-left col-12" style="font-size:13px; margin-top:5px">Periodos  desarrollados: {{producto.graf[0].value}} de {{producto.max}} <br></div>
@@ -374,10 +361,11 @@
               <div class="row">
                 <div class="col-12">
                   <h5 class="text-center" style="margin-top:10px;margin-bottom:10px">{{zona.nombreZona}}</h5>
+                  <hr>
                 </div>
 
               </div>
-              <div class="row">
+              <div class="row" style="margin-bottom: 10px;">
                 <div class="col-4" *ngFor="let producto of zona.productosDes">
                   <div class="card">
                     <div class="row">

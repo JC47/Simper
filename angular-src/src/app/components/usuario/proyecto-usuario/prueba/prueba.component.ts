@@ -356,7 +356,7 @@ export class PruebaComponent implements OnInit {
 
       {"cara":"A más de un año", "actual":"", "anterior":"", "aplicacion":"","origen":""},
 
-      {"cara":"Prestamos Totales",
+      {"cara":"Prestamos Bancarios",
         "actual": this.cp.transform(-actual.prestamosMasAnio,'USD',true,'1.0-0'),
         "anterior": this.cp.transform(-anterior.prestamosMasAnio,'USD',true,'1.0-0'),
         "aplicacion": this.cp.transform(this.getAplicacionCB(-actual.prestamosMasAnio,-anterior.prestamosMasAnio),'USD',true,'1.0-0'),
@@ -651,7 +651,7 @@ export class PruebaComponent implements OnInit {
 
         {"cara":"A más de un año", "actual":"", "anterior":"", "aplicacion":"","origen":""},
 
-        {"cara":"Prestamos Totales",
+        {"cara":"Prestamos Bancarios",
           "actual":-actual.prestamosMasAnio,
           "anterior":-anterior.prestamosMasAnio,
           "aplicacion":this.getAplicacionCB(-actual.prestamosMasAnio,-anterior.prestamosMasAnio),
