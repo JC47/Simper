@@ -1216,7 +1216,7 @@
 
 
       <div class="modal-footer">
-        <button  type="button" class="btn btn-outline-secondary" (click)="modalMaqInit.hide()">
+        <button  type="button" class="btn btn-outline-secondary" (click)="validarCambios()">
         Salir
         </button>
 
@@ -1491,6 +1491,33 @@
         <br>
         <div class="row">
           <button type="button" class="btn btn-secondary offset-4 col-4"  (click)="modalErrBalance.hide()">Ok</button>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal ngDraggable #modalConfMaquinaria="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="col-12 text-center ">Atención</h4>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="row offset-1">
+          <div class="">
+            El valor de las maquinarias agregadas/removidas debe estar reflejado en el Balance Incial.
+
+          </div>
+          <br>
+        </div>
+        <br>
+        <div class="row">
+          <button type="button" class="btn btn-secondary offset-4 col-4"  (click)="cerrarModalesMaquinarias()">Ok</button>
         </div>
 
 

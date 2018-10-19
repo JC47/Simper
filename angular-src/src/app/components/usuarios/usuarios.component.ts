@@ -41,6 +41,7 @@ export class UsuariosComponent implements OnInit {
   @ViewChild('modalZonaInit') public modalZonaInit:ModalDirective;
   @ViewChild('modalCopia') public modalCopia:ModalDirective;
   @ViewChild('modalErrBalance') public modalErrBalance:ModalDirective;
+  @ViewChild('modalConfMaquinaria') public modalConfMaquinaria:ModalDirective;
 
 
   idAdmin;
@@ -490,6 +491,12 @@ export class UsuariosComponent implements OnInit {
     this._usuarioZonaService.deleteZona(zona).subscribe();
   }
 
+  cerrarModalesMaquinarias(){
+    this.modalMaqInit.hide();
+    this.modalConfMaquinaria.hide();
+    //this.modalVariables.show();
+  }
+
   eliminaProducto(producto){
     this._usuarioProductoService.eliminar(producto);
   }
@@ -544,6 +551,15 @@ export class UsuariosComponent implements OnInit {
     this.variables = this._variablesService.editarVariable(x,id);
     this.openVarUnit=false;
     this.openVarsGen=true;
+  }
+
+  validarCambios(){
+    if(this._usuarioMaquinariaService.validateCambios()){
+      this.modalMaqInit.hide();
+    }
+    else{
+      this.modalConfMaquinaria.show();
+    }
   }
 
   }
