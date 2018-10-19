@@ -50,4 +50,16 @@ export class UsuarioMaquinariaService {
     return this.http.post('usuariosmaquinarias/register/',x,headers).map(res => res.json());
   }
 
+
+  validateCambios(){
+    let response = false;
+    if(this.maquinariaU.length == 1){
+      for(let maquina of this.maquinariaU){
+        if(maquina.Producto_idProducto == 4 && maquina.cantidad == 2){
+          response = true;
+        }
+      }
+    }
+    return response;
+  }
 }

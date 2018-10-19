@@ -189,7 +189,7 @@ openModalVenta(idZona,idProducto){
   selectVenta(venta){
     console.log(venta)
 
-    if (venta.cantidadVenta   ) {
+    if (venta.cantidadVenta  >= 0 ) {
       this.openConf=true;
       this.openVenta=false;
     }else{
