@@ -19,7 +19,7 @@ var pool = mysql.createPool({
 //     database: 'basesimv1'
 // });
 
-//ssh root@138.68.56.0
+//ssh root@142.93.91.79
 //mysqldump -u root -p basesimv1 > basesimv1.sql
 //cornelio96
 
